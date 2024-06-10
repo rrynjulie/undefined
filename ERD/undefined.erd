@@ -4,8 +4,8 @@
   "settings": {
     "width": 5000,
     "height": 5000,
-    "scrollTop": -1100.8673,
-    "scrollLeft": -993.2421,
+    "scrollTop": -1379.1404,
+    "scrollLeft": -1135.3845,
     "zoomLevel": 1,
     "show": 511,
     "database": 4,
@@ -514,7 +514,8 @@
           "r6Saa0S63MLVtsATh-SdD",
           "U1Pys0XQya7dNQ6ziykEz",
           "ZUT-uaNGhrE6cnOI7DtFz",
-          "ltBTvr40jriBhuZ-DGQmh"
+          "ltBTvr40jriBhuZ-DGQmh",
+          "02IrUaY7EVMch5r6u7R4v"
         ],
         "seqColumnIds": [
           "2CePOSE9tlhk__MUcZW6-",
@@ -524,7 +525,9 @@
           "r6Saa0S63MLVtsATh-SdD",
           "U1Pys0XQya7dNQ6ziykEz",
           "ZUT-uaNGhrE6cnOI7DtFz",
-          "ltBTvr40jriBhuZ-DGQmh"
+          "ltBTvr40jriBhuZ-DGQmh",
+          "v18WV8UhMUn1isNVti5iN",
+          "02IrUaY7EVMch5r6u7R4v"
         ],
         "ui": {
           "x": 1235.5407,
@@ -535,7 +538,7 @@
           "color": ""
         },
         "meta": {
-          "updateAt": 1717922630730,
+          "updateAt": 1718003377003,
           "createAt": 1717918508632
         }
       },
@@ -2805,6 +2808,46 @@
           "updateAt": 1717922694434,
           "createAt": 1717922630730
         }
+      },
+      "v18WV8UhMUn1isNVti5iN": {
+        "id": "v18WV8UhMUn1isNVti5iN",
+        "tableId": "KPle8mVnPy90_qrpVBT7e",
+        "name": "coupon_use",
+        "comment": "쿠폰 사용 여부",
+        "dataType": "",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 65,
+          "widthComment": 81,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1718001894572,
+          "createAt": 1718001880077
+        }
+      },
+      "02IrUaY7EVMch5r6u7R4v": {
+        "id": "02IrUaY7EVMch5r6u7R4v",
+        "tableId": "KPle8mVnPy90_qrpVBT7e",
+        "name": "123123",
+        "comment": "",
+        "dataType": "",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1718003379578,
+          "createAt": 1718003377002
+        }
       }
     },
     "relationshipEntities": {
@@ -3276,7 +3319,7 @@
             "1o4NsYOozkjYNk5j1_jyk"
           ],
           "x": 1235.5407,
-          "y": 1523.3684,
+          "y": 1535.3684,
           "direction": 1
         },
         "meta": {
@@ -4713,6 +4756,23 @@
         "comment": 1717922658962,
         "dataType": 1717922660218,
         "options(notNull)": 1717922668990
+      }
+    ],
+    "v18WV8UhMUn1isNVti5iN": [
+      "tableColumnEntities",
+      1718001880074,
+      1718002046128,
+      {
+        "name": 1718001885910,
+        "comment": 1718001894572
+      }
+    ],
+    "02IrUaY7EVMch5r6u7R4v": [
+      "tableColumnEntities",
+      1718003376998,
+      -1,
+      {
+        "name": 1718003379577
       }
     ]
   }
