@@ -1,7 +1,7 @@
 
 CREATE TABLE authority
 (
-    authority_id   int          NOT NULL COMMENT '권한에 대한 id (권한 3개 만들예정)',
+    authority_id   INT          NOT NULL COMMENT '권한에 대한 id (권한 3개 만들예정)',
     authority_name VARCHAR(100) NOT NULL COMMENT '권한에 대한 이름',
     PRIMARY KEY (authority_id)
 ) COMMENT '권한';
@@ -11,10 +11,10 @@ ALTER TABLE authority
 
 CREATE TABLE comment
 (
-    comment_id      LONG         NOT NULL AUTO_INCREMENT COMMENT '댓글 고유 id',
+    comment_id      INT          NOT NULL AUTO_INCREMENT COMMENT '댓글 고유 id',
     comment_text    LONGTEXT     NOT NULL COMMENT '댓글내용',
     comment_regdate DATETIME     NOT NULL DEFAULT now() COMMENT '댓글 작성 시간',
-    post_id         LONG         NOT NULL COMMENT '후기 교유 id',
+    post_id         INT         NOT NULL COMMENT '후기 교유 id',
     user_id         VARCHAR(100) NOT NULL COMMENT '아이디',
     PRIMARY KEY (comment_id)
 ) COMMENT '댓글';
@@ -28,23 +28,23 @@ CREATE TABLE coupon
     coupon_max       INT               NOT NULL COMMENT '쿠폰 사용 최소 구매 가격',
     coupon_use       ENUM('YES', 'NO') NOT NULL COMMENT '쿠폰 사용 여부',
     user_id          VARCHAR(100)      NOT NULL COMMENT '아이디',
-    reservation_id   LONG              NOT NULL COMMENT '예약 고유 id값',
+    reservation_id   INT              NOT NULL COMMENT '예약 고유 id값',
     PRIMARY KEY (coupon_code)
 ) COMMENT '쿠폰';
 
 ALTER TABLE coupon
     ADD CONSTRAINT UQ_coupon_code UNIQUE (coupon_code);
 
-CREATE TABLE like
+CREATE TABLE `like`
 (
-    lodging_id LONG         NOT NULL COMMENT '숙소고유 id값',
+    lodging_id INT          NOT NULL COMMENT '숙소고유 id값',
     user_id    VARCHAR(100) NOT NULL COMMENT '아이디',
     PRIMARY KEY (lodging_id, user_id)
 ) COMMENT '숙소 좋아요';
 
 CREATE TABLE lodging
 (
-    lodging_id           LONG                            NOT NULL AUTO_INCREMENT COMMENT '숙소고유 id값',
+    lodging_id           INT                             NOT NULL AUTO_INCREMENT COMMENT '숙소고유 id값',
     lodging_picture_1    LONGTEXT                        NOT NULL COMMENT '숙소 사진 1',
     lodging_picture_2    LONGTEXT                        NULL     COMMENT '숙소 사진 2',
     lodging_picture_3    LONGTEXT                        NULL     COMMENT '숙소 사진 3',
@@ -64,7 +64,7 @@ CREATE TABLE lodging
     lodging_owner_name   VARCHAR(100)                    NOT NULL COMMENT '숙소 담당자 이름',
     lodging_owner_number VARCHAR(100)                    NOT NULL COMMENT '숙소 담당자 전화번호',
     lodging_owner_email  VARCHAR(100)                    NOT NULL COMMENT '숙소 담당자 이메일',
-    lodging_owner_id     LONG                            NOT NULL COMMENT '숙소 담당자 사업자 등록 번호',
+    lodging_owner_id     INT                             NOT NULL COMMENT '숙소 담당자 사업자 등록 번호',
     user_id              VARCHAR(100)                    NOT NULL COMMENT '아이디',
     PRIMARY KEY (lodging_id)
 ) COMMENT '숙소정보';
@@ -74,18 +74,18 @@ ALTER TABLE lodging
 
 CREATE TABLE post
 (
-    post_id        LONG         NOT NULL AUTO_INCREMENT COMMENT '후기 교유 id',
+    post_id        INT          NOT NULL AUTO_INCREMENT COMMENT '후기 교유 id',
     post_picture   LONGTEXT     NULL     COMMENT '후기 사진',
     post_text      LONGTEXT     NOT NULL COMMENT '후기 내용',
     post_grade     INT          NOT NULL COMMENT '평점 (1~5)',
     user_id        VARCHAR(100) NOT NULL COMMENT '아이디',
-    reservation_id LONG         NOT NULL COMMENT '예약 고유 id값',
+    reservation_id INT         NOT NULL COMMENT '예약 고유 id값',
     PRIMARY KEY (post_id)
 ) COMMENT '후기';
 
 CREATE TABLE reservation
 (
-    reservation_id        LONG                NOT NULL AUTO_INCREMENT COMMENT '예약 고유 id값',
+    reservation_id        INT                 NOT NULL AUTO_INCREMENT COMMENT '예약 고유 id값',
     reservation_time      DATETIME            NOT NULL DEFAULT now() COMMENT '예약한 시간',
     reservation_adult     INT                 NOT NULL DEFAULT 0 COMMENT '성인 예약 인원',
     reservation_child     INT                 NOT NULL DEFAULT 0 COMMENT '아동 예약 인원',
@@ -96,14 +96,14 @@ CREATE TABLE reservation
     reservation_finalpay  LONG                NOT NULL COMMENT '최종 결제 금액',
     reservation_startdate DATETIME            NOT NULL COMMENT '체크인 날짜',
     reservation_enddate   DATETIME            NOT NULL COMMENT '체크아웃 날짜',
-    room_id               LONG                NOT NULL COMMENT '객실고유 id 값',
+    room_id               INT                NOT NULL COMMENT '객실고유 id 값',
     user_id               VARCHAR(100)        NOT NULL COMMENT '아이디',
     PRIMARY KEY (reservation_id)
 ) COMMENT '예약';
 
 CREATE TABLE room
 (
-    room_id           LONG              NOT NULL AUTO_INCREMENT COMMENT '객실 예약 id값',
+    room_id           INT               NOT NULL AUTO_INCREMENT COMMENT '객실 예약 id값',
     room_picture_1    LONGTEXT          NOT NULL COMMENT '객실 사진1',
     room_picture_2    LONGTEXT          NULL     COMMENT '객실 사진2',
     room_picture_3    LONGTEXT          NULL     COMMENT '객실 사진3',
@@ -117,7 +117,7 @@ CREATE TABLE room
     room_bed_garde    VARCHAR(100)      NULL     COMMENT '객실 침대 유형',
     room_bathroom     INT               NULL     DEFAULT 1 COMMENT '객실 욕실 개수',
     room_smoke        ENUM('YES', 'NO') NOT NULL DEFAULT 'NO' COMMENT '객실 흡연가능여부',
-    lodging_id        LONG              NOT NULL COMMENT '숙소고유 id값',
+    lodging_id        INT              NOT NULL COMMENT '숙소고유 id값',
     PRIMARY KEY (room_id)
 ) COMMENT '객실정보';
 
@@ -154,7 +154,7 @@ ALTER TABLE user_authority
         FOREIGN KEY (authority_id)
             REFERENCES authority (authority_id);
 
-ALTER TABLE like
+ALTER TABLE `like`
     ADD CONSTRAINT FK_lodging_TO_like
         FOREIGN KEY (lodging_id)
             REFERENCES lodging (lodging_id);
@@ -194,7 +194,7 @@ ALTER TABLE user_authority
         FOREIGN KEY (user_id)
             REFERENCES user (user_id);
 
-ALTER TABLE like
+ALTER TABLE `like`
     ADD CONSTRAINT FK_user_TO_like
         FOREIGN KEY (user_id)
             REFERENCES user (user_id);
