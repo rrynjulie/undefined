@@ -15,7 +15,7 @@ values
 
 INSERT INTO lodging
 VALUES
-    (DEFAULT,
+    ('11',
      'https://yaimg.yanolja.com/v5/2024/04/09/10/1280/661519ad732a15.32768999.jpg',
      '2',
      '3',
@@ -41,7 +41,7 @@ VALUES
 
 INSERT INTO lodging
 VALUES
-    (DEFAULT,
+    ('12',
      'https://yaimg.yanolja.com/v5/2022/10/17/12/1280/634d4e96570f63.25807760.png',
      '2',
      '3',
@@ -68,7 +68,7 @@ VALUES
 
 INSERT INTO lodging
 VALUES
-    (DEFAULT,
+    ('13',
      'https://yaimg.yanolja.com/v5/2022/11/01/18/1280/63616bb31efb72.51653799.jpg',
      '2',
      '3',
@@ -104,7 +104,7 @@ VALUES
 
 INSERT INTO lodging
 VALUES
-    (DEFAULT,
+    ('14',
      'https://yaimg.yanolja.com/v5/2023/10/25/14/1280/6539273e594015.73457519.jpg',
      '2',
      '3',
@@ -138,7 +138,7 @@ VALUES
 
 INSERT INTO lodging
 VALUES
-    (DEFAULT,
+    ('15',
      'https://yaimg.yanolja.com/v5/2023/03/23/15/1280/641c69899fa8b2.39469953.jpg',
      '2',
      '3',
@@ -210,7 +210,7 @@ VALUES
 
 INSERT INTO lodging
 VALUES
-    (DEFAULT,
+    ('16',
      'https://yaimg.yanolja.com/v5/2022/06/02/15/1280/6298d6de222858.78336441.jpg',
      '2',
      '3',
@@ -237,7 +237,7 @@ VALUES
 
 INSERT INTO lodging
 VALUES
-    (DEFAULT,
+    ('17',
      'https://yaimg.yanolja.com/v5/2022/12/14/13/1280/6399d07a7fb5e7.22942736.jpg',
      '2',
      '3',
@@ -269,7 +269,7 @@ O8
 
 INSERT INTO lodging
 VALUES
-    (DEFAULT,
+    ('18',
      '	https://yaimg.yanolja.com/v5/2022/09/07/14/1280/6318a767a22358.84626439.jpg',
      '2',
      '3',
@@ -296,7 +296,7 @@ VALUES
 
 INSERT INTO lodging
 VALUES
-    (DEFAULT,
+    ('19',
      'https://yaimg.yanolja.com/v5/2022/08/26/14/1280/6308ddf0c529f3.76910071.jpg',
      '2',
      '3',
@@ -323,7 +323,7 @@ VALUES
 
 INSERT INTO lodging
 VALUES
-    (DEFAULT,
+    ('20',
      'https://yaimg.yanolja.com/v5/2024/05/28/19/1280/66562a5d501fa7.31395616.jpg',
      '2',
      '3',
@@ -351,83 +351,83 @@ VALUES
 
 INSERT INTO room
 VALUES
-    (DEFAULT,'https://yaimg.yanolja.com/v5/2024/05/08/16/640/663ba40aa37a21.87876507.jpg','2','3','비즈니스 스탠다드 룸','2','2','580000','','14','1','더블 (킹 사이즈)','1','NO','1');
+    (DEFAULT,'https://yaimg.yanolja.com/v5/2024/05/08/16/640/663ba40aa37a21.87876507.jpg','2','3','비즈니스 스탠다드 룸','2','2','580000','','14','1','더블 (킹 사이즈)','1','NO','11');
 
 INSERT INTO room
 VALUES
-    (DEFAULT,'https://yaimg.yanolja.com/v5/2024/04/09/10/640/66151b313c4b74.84477012.jpg','2','3','이그제큐티브 그랜드 디럭스 더블','2','2','1149500','','12','1','킹베드','1','NO','1');
+    (DEFAULT,'https://yaimg.yanolja.com/v5/2024/04/09/10/640/66151b313c4b74.84477012.jpg','2','3','이그제큐티브 그랜드 디럭스 더블','2','2','1149500','','12','1','킹베드','1','NO','11');
 
 INSERT INTO room
 VALUES
-    (DEFAULT,'https://yaimg.yanolja.com/v5/2024/06/07/15/640/666322604dff73.81014807.png','2','3','그랜드 디럭스 미포 하버뷰 룸','2','3','300507','','15','1','패밀리트윈','1','NO','2');
+    (DEFAULT,'https://yaimg.yanolja.com/v5/2024/06/07/15/640/666322604dff73.81014807.png','2','3','그랜드 디럭스 미포 하버뷰 룸','2','3','300507','','15','1','패밀리트윈','1','NO','12');
 
 INSERT INTO room
 VALUES
-    (DEFAULT,'https://yaimg.yanolja.com/v5/2022/10/17/12/640/634d4eba87ce56.02745166.png','2','3','시그니엘 프리미어 패밀리트윈 오션뷰 룸','2','3','423000','','17','1','패밀리트윈','1','NO','2');
+    (DEFAULT,'https://yaimg.yanolja.com/v5/2022/10/17/12/640/634d4eba87ce56.02745166.png','2','3','시그니엘 프리미어 패밀리트윈 오션뷰 룸','2','3','423000','','17','1','패밀리트윈','1','NO','12');
 
 INSERT INTO room
 VALUES
-    (DEFAULT,'https://yaimg.yanolja.com/v5/2022/10/26/17/640/63596df8386070.97619061.jpg','2','3','디럭스 트원','2','3','363000','','13','2','더블침대','1','NO','3');
+    (DEFAULT,'https://yaimg.yanolja.com/v5/2022/10/26/17/640/63596df8386070.97619061.jpg','2','3','디럭스 트원','2','3','363000','','13','2','더블침대','1','NO','13');
 
 INSERT INTO room
 VALUES
-    (DEFAULT,'https://yaimg.yanolja.com/v5/2022/10/26/17/640/63596def3db075.59942676.jpg','2','3','프리미어 디럭스 트윈','2','3','495000','','17','2','더블침대','1','NO','3');
+    (DEFAULT,'https://yaimg.yanolja.com/v5/2022/10/26/17/640/63596def3db075.59942676.jpg','2','3','프리미어 디럭스 트윈','2','3','495000','','17','2','더블침대','1','NO','13');
 
 INSERT INTO room
 VALUES
-    (DEFAULT,'https://yaimg.yanolja.com/v5/2023/10/25/14/640/6539206ee40e82.74449098.jpg','2','3','deluxe','2','3','2465000','','11','2','더블침대','1','NO','4');
+    (DEFAULT,'https://yaimg.yanolja.com/v5/2023/10/25/14/640/6539206ee40e82.74449098.jpg','2','3','deluxe','2','3','2465000','','11','2','더블침대','1','NO','14');
 
 INSERT INTO room
 VALUES
-    (DEFAULT,'https://yaimg.yanolja.com/v5/2023/10/25/14/640/653920bac9dcb9.19880808.jpg','2','3','premier family','3','3','246500','','11','2','더블침대','1','NO','4');
+    (DEFAULT,'https://yaimg.yanolja.com/v5/2023/10/25/14/640/653920bac9dcb9.19880808.jpg','2','3','premier family','3','3','246500','','11','2','더블침대','1','NO','14');
 
 INSERT INTO room
 VALUES
-    (DEFAULT,'https://yaimg.yanolja.com/v5/2023/04/25/13/640/6447d37b416a85.74765917.png','2','3','프리미어','2','2','156000','','7','1','킹베드','1','NO','5');
+    (DEFAULT,'https://yaimg.yanolja.com/v5/2023/04/25/13/640/6447d37b416a85.74765917.png','2','3','프리미어','2','2','156000','','7','1','킹베드','1','NO','15');
 
 INSERT INTO room
 VALUES
-    (DEFAULT,'https://yaimg.yanolja.com/v5/2023/04/25/13/640/6447d32b29d514.94559076.png','2','3','주니어 스위트','1','3','264000','','12','1','킹베드','1','NO','5');
+    (DEFAULT,'https://yaimg.yanolja.com/v5/2023/04/25/13/640/6447d32b29d514.94559076.png','2','3','주니어 스위트','1','3','264000','','12','1','킹베드','1','NO','15');
 
 INSERT INTO room
 VALUES
-    (DEFAULT,'https://yaimg.yanolja.com/v5/2022/09/08/22/640/631a6bb29775b7.62065129.jpg','2','3','피리미어 스탠다드','2','2','131000','','10','2','더블침대','1','NO','6');
+    (DEFAULT,'https://yaimg.yanolja.com/v5/2022/09/08/22/640/631a6bb29775b7.62065129.jpg','2','3','피리미어 스탠다드','2','2','131000','','10','2','더블침대','1','NO','16');
 
 INSERT INTO room
 VALUES
-    (DEFAULT,'https://yaimg.yanolja.com/v5/2022/09/08/22/640/631a6cc6d9ff56.54309564.jpg','2','3','디럭스 트윈','2','2','150000','','11','2','더블침대','1','NO','6');
+    (DEFAULT,'https://yaimg.yanolja.com/v5/2022/09/08/22/640/631a6cc6d9ff56.54309564.jpg','2','3','디럭스 트윈','2','2','150000','','11','2','더블침대','1','NO','16');
 
 INSERT INTO room
 VALUES
-    (DEFAULT,'https://yaimg.yanolja.com/v5/2024/06/11/15/640/6668733d707614.50672719.png','2','3','디럭스 트윈룸','2','2','124100','','6','2','싱글','1','NO','7');
+    (DEFAULT,'https://yaimg.yanolja.com/v5/2024/06/11/15/640/6668733d707614.50672719.png','2','3','디럭스 트윈룸','2','2','124100','','6','2','싱글','1','NO','17');
 
 INSERT INTO room
 VALUES
-    (DEFAULT,'https://yaimg.yanolja.com/v5/2023/04/24/15/640/64469bca53e510.78768013.jpg','2','3','파티 스위트룸','5','5','1110000','','22','3','더블','1','NO','7');
+    (DEFAULT,'https://yaimg.yanolja.com/v5/2023/04/24/15/640/64469bca53e510.78768013.jpg','2','3','파티 스위트룸','5','5','1110000','','22','3','더블','1','NO','17');
 
 INSERT INTO room
 VALUES
-    (DEFAULT,'https://yaimg.yanolja.com/v5/2023/07/14/10/640/64b123d47e77c1.59261080.jpg','2','3','온돌 스위트 룸','2','6','300000','','4','2','침구','1','NO','8');
+    (DEFAULT,'https://yaimg.yanolja.com/v5/2023/07/14/10/640/64b123d47e77c1.59261080.jpg','2','3','온돌 스위트 룸','2','6','300000','','4','2','침구','1','NO','18');
 
 INSERT INTO room
 VALUES
-    (DEFAULT,'https://yaimg.yanolja.com/v5/2023/07/14/10/640/64b123cd808a45.91537169.jpg','2','3','프레지덴 스위트 룸','2','2','450000','','9','1','킹','1','NO','8');
+    (DEFAULT,'https://yaimg.yanolja.com/v5/2023/07/14/10/640/64b123cd808a45.91537169.jpg','2','3','프레지덴 스위트 룸','2','2','450000','','9','1','킹','1','NO','18');
 
 INSERT INTO room
 VALUES
-    (DEFAULT,'https://yaimg.yanolja.com/v5/2024/02/16/12/640/65cf579968fd69.07022949.jpg','2','3','디럭스 트윈 룸','2','2','139080','','0','2','싱글','1','NO','9');
+    (DEFAULT,'https://yaimg.yanolja.com/v5/2024/02/16/12/640/65cf579968fd69.07022949.jpg','2','3','디럭스 트윈 룸','2','2','139080','','0','2','싱글','1','NO','19');
 
 INSERT INTO room
 VALUES
-    (DEFAULT,'https://yaimg.yanolja.com/v5/2022/08/26/14/640/6308de1dd058c1.13517289.JPG','2','3','디럭스 패밀리 A 룸','2','2','177020','','0','2','킹','1','NO','9');
+    (DEFAULT,'https://yaimg.yanolja.com/v5/2022/08/26/14/640/6308de1dd058c1.13517289.JPG','2','3','디럭스 패밀리 A 룸','2','2','177020','','0','2','킹','1','NO','19');
 
 INSERT INTO room
 VALUES
-    (DEFAULT,'	https://yaimg.yanolja.com/v5/2022/08/23/14/640/6304e48e7b5395.27667826.jpg','2','3','오션뷰 디럭스 트윈 룸','2','2','159000','','7','2','싱글','1','NO','10');
+    (DEFAULT,'	https://yaimg.yanolja.com/v5/2022/08/23/14/640/6304e48e7b5395.27667826.jpg','2','3','오션뷰 디럭스 트윈 룸','2','2','159000','','7','2','싱글','1','NO','20');
 
 INSERT INTO room
 VALUES
-    (DEFAULT,'	https://yaimg.yanolja.com/v5/2022/08/23/14/640/6304e48c525596.23622927.jpg','2','3','오션뷰 패밀리 스위트 룸','4','5','347000','','14','2','더블','1','NO','10');
+    (DEFAULT,'	https://yaimg.yanolja.com/v5/2022/08/23/14/640/6304e48c525596.23622927.jpg','2','3','오션뷰 패밀리 스위트 룸','4','5','347000','','14','2','더블','1','NO','20');
 
 
 
