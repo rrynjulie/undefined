@@ -64,7 +64,7 @@ CREATE TABLE lodging
     lodging_owner_name   VARCHAR(100)                    NOT NULL COMMENT '숙소 담당자 이름',
     lodging_owner_number VARCHAR(100)                    NOT NULL COMMENT '숙소 담당자 전화번호',
     lodging_owner_email  VARCHAR(100)                    NOT NULL COMMENT '숙소 담당자 이메일',
-    lodging_owner_id     INT                             NOT NULL COMMENT '숙소 담당자 사업자 등록 번호',
+    lodging_owner_id     VARCHAR(100)                    NOT NULL COMMENT '숙소 담당자 사업자 등록 번호',
     user_id              VARCHAR(100)                    NOT NULL COMMENT '아이디',
     PRIMARY KEY (lodging_id)
 ) COMMENT '숙소정보';
@@ -108,16 +108,16 @@ CREATE TABLE room
     room_picture_2    LONGTEXT          NULL     COMMENT '객실 사진2',
     room_picture_3    LONGTEXT          NULL     COMMENT '객실 사진3',
     room_name         VARCHAR(100)      NOT NULL COMMENT '객실 이름',
-    room_nomal_people INT               NOT NULL COMMENT '객실 기준 인원수',
+    room_normal_people INT               NOT NULL COMMENT '객실 기준 인원수',
     room_max_people   INT               NOT NULL COMMENT '객실 최대 인원수',
     room_price        INT               NOT NULL COMMENT '객실 가격',
     room_number       VARCHAR(100)      NULL     COMMENT '객실 호수',
     room_area         INT               NULL     COMMENT '객실 면적',
     room_bed          INT               NOT NULL COMMENT '객실 침대 개수',
-    room_bed_garde    VARCHAR(100)      NULL     COMMENT '객실 침대 유형',
+    room_bed_grade    VARCHAR(100)      NULL     COMMENT '객실 침대 유형',
     room_bathroom     INT               NULL     DEFAULT 1 COMMENT '객실 욕실 개수',
     room_smoke        ENUM('YES', 'NO') NOT NULL DEFAULT 'NO' COMMENT '객실 흡연가능여부',
-    lodging_id        INT              NOT NULL COMMENT '숙소고유 id값',
+    lodging_id        INT               NOT NULL COMMENT '숙소고유 id값',
     PRIMARY KEY (room_id)
 ) COMMENT '객실정보';
 
