@@ -211,6 +211,7 @@ URBAN SLOW
 객실 물건 파손 및 도난 시 형사 처벌 받을 수 있습니다.','최영재','010-6605-7937','dudwo0113@gmail.com','6140902547','1');
 
 
+
 SELECT * FROM room;
 INSERT INTO room
     VALUE (
