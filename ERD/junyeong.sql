@@ -12,6 +12,7 @@ values
 
 
 # lodging 등록
+
 INSERT INTO lodging
 VALUES
     (DEFAULT,
@@ -34,7 +35,9 @@ VALUES
      '임예나',
      '010-4408-0242',
      'rynjulie0917@gmail.com',
-     '19-393-939393','nejunyoung');
+     '19-393-939393',
+     'nejunyoung');
+
 
 INSERT INTO lodging
 VALUES

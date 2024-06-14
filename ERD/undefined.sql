@@ -112,7 +112,7 @@ CREATE TABLE room
     room_max_people   INT               NOT NULL COMMENT '객실 최대 인원수',
     room_price        INT               NOT NULL COMMENT '객실 가격',
     room_number       VARCHAR(100)      NULL     COMMENT '객실 호수',
-    room_area         INT               NULL     COMMENT '객실 면적',
+    room_area         VARCHAR(100)      NULL     COMMENT '객실 면적',
     room_bed          INT               NOT NULL COMMENT '객실 침대 개수',
     room_bed_grade    VARCHAR(100)      NULL     COMMENT '객실 침대 유형',
     room_bathroom     INT               NULL     DEFAULT 1 COMMENT '객실 욕실 개수',
