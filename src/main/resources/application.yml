@@ -1,0 +1,24 @@
+# 서버포트번호
+server:
+  port: 8088
+
+spring:
+  application:
+    name: undefined
+
+  # Thymeleaf 설정
+  thymeleaf:
+    cache: false
+    prefix: classpath:templates/views/
+
+  # datasource 설정
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_undefined?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: user_undefined
+    password: 1234
+
+# MyBatis 매퍼(mapper) 파일 위치 설정
+# src/main/resources 이하의 경로 지정
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
