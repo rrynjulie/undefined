@@ -5,6 +5,14 @@ VALUES (
        );
 
 
+SELECT * FROM room r
+JOIN lodging l
+ON r.lodging_id = l.lodging_id
+WHERE r.lodging_id = 65
+;
+
+
+
 SELECT * FROM lodging;
 INSERT INTO lodging
 VALUES (
@@ -214,8 +222,8 @@ URBAN SLOW
 
 SELECT * FROM room;
 INSERT INTO room
-    VALUE (
-           default,'https://yaimg.yanolja.com/v5/2022/06/08/17/640/62a0e0ae68e619.00811407.jpg','2','3','스탠다드 더블ㅣ스파','2','2','150000','','10','1','더블','1',default,'51'),
+    VALUES (
+           default,'https://yaimg.yanolja.com/v5/2022/06/08/17/640/62a0e0ae68e619.00811407.jpg','2','3','스탠다드 더블ㅣ스파','2','2','150000','','','1','더블','1',default,'51'),
     (
      default,'https://yaimg.yanolja.com/v5/2022/06/08/17/640/62a0e014bacd04.72862281.jpg','2','3',',디럭스 더블ㅣ스파','2','2','200000','','','1','더블','1',default,'51'),
     (
