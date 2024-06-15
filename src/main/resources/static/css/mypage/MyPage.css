@@ -1,13 +1,6 @@
 body {
     background-color: #F8EDE3;
     font-family: Arial, sans-serif;
-    color: #798777;
-}
-
-.header, .footer {
-    background-color: #A2B29F;
-    padding: 10px;
-    text-align: center;
 }
 
 .profile-section, .review-coupon-section, .reservations-section {
@@ -49,7 +42,7 @@ body {
 }
 
 .review, .coupon {
-    background-color: #A2B29F;
+    background-color: #798777;
     color: #F8EDE3;
     border: none;
     padding: 10px 20px;
@@ -66,7 +59,7 @@ body {
 }
 
 .reservation {
-    background-color: #A2B29F;
+    background-color: #798777;
     color: #F8EDE3;
     border: none;
     padding: 10px 20px;
