@@ -1,0 +1,79 @@
+body {
+    background-color: #F8EDE3;
+    font-family: Arial, sans-serif;
+    color: #798777;
+}
+
+.header, .footer {
+    background-color: #A2B29F;
+    padding: 10px;
+    text-align: center;
+}
+
+.profile-section, .review-coupon-section, .reservations-section {
+    margin: 20px;
+    padding: 20px;
+    background-color: #BDD2B6;
+    border-radius: 10px;
+}
+
+.profile-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nickname p {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.manage-info {
+    border-color: #798777;
+    color: #798777;
+    background-color: transparent;
+    border-width: 2px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.manage-info:hover {
+    background-color: #798777;
+    color: #F8EDE3;
+}
+
+.review-coupon {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.review, .coupon {
+    background-color: #A2B29F;
+    color: #F8EDE3;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.review:hover, .coupon:hover {
+    background-color: #798777;
+}
+
+.reservations-section h2 {
+    margin-bottom: 10px;
+}
+
+.reservation {
+    background-color: #A2B29F;
+    color: #F8EDE3;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reservation:hover {
+    background-color: #798777;
+}
