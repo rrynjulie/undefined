@@ -10,4 +10,3 @@ DROP TABLE IF EXISTS post;
 DROP TABLE IF EXISTS reservation;
 DROP TABLE IF EXISTS room;
 DROP TABLE IF EXISTS user_authority;
-
