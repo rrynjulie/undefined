@@ -2,11 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/manager/ApprovalLodgingUpdate.css}">
+    <link rel="stylesheet" type="text/css" href="../../../../static/css/mypage/manager/ApprovalLodgingUpdate.css">
     <script th:src="@{/js/mypage/manager/ApprovalLodgingUpdate.js}"></script>
     <title>Title</title>
 </head>
 <body>
-
+<header>
+    <div class="logo">LOGO</div>
+    <nav>
+        <a href="#">숙박 예약</a>
+        <a href="#">승객권 조회</a>
+    </nav>
+    <div class="profile-icon"></div>
+</header>
+<main>
+    <section class="approval-section">
+        <h2>숙소 승인</h2>
+        <div class="accommodation-card">
+            <div class="photo">사진</div>
+            <div class="details">
+                <p>숙소명: -----호텔</p>
+                <p>숙소 타입: 호텔</p>
+                <p>숙소 주소:</p>
+                <p>연락처:</p>
+                <button class="details-button">상세 보기</button>
+            </div>
+        </div>
+        <div class="accommodation-card">
+            <div class="photo">사진</div>
+            <div class="details">
+                <p>숙소명: -----모텔</p>
+                <p>숙소 타입: 모텔</p>
+                <p>숙소 주소:</p>
+                <p>연락처:</p>
+                <button class="details-button">상세 보기</button>
+            </div>
+        </div>
+        <div class="accommodation-card">
+            <div class="photo">사진</div>
+            <div class="details">
+                <p>숙소명: -----펜션</p>
+                <p>숙소 타입: 펜션</p>
+                <p>숙소 주소:</p>
+                <p>연락처:</p>
+                <button class="details-button">상세 보기</button>
+            </div>
+        </div>
+    </section>
+    <section class="delete-section">
+        <h2>숙소 삭제</h2>
+        <div class="accommodation-card">
+            <div class="photo">사진</div>
+            <div class="details">
+                <p>숙소명: -----펜션</p>
+                <p>숙소 타입: 펜션</p>
+                <p>숙소 주소:</p>
+                <p>연락처:</p>
+                <button class="details-button">상세 보기</button>
+            </div>
+        </div>
+    </section>
+</main>
 </body>
 </html>

@@ -2,11 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/manager/MemberManagement.css}">
+    <link rel="stylesheet" type="text/css" href="../../../../static/css/mypage/manager/MemberManagement.css">
     <script th:src="@{/js/mypage/manager/MemberManagement.js}"></script>
     <title>Title</title>
 </head>
 <body>
-
+<header>
+    <div class="logo">
+        <img src="../../../../static/image/Logo.png" alt="LOGO">
+    </div>
+    <div class="page-title">회원 목록</div>
+</header>
+<main>
+    <aside class="sidebar">
+        <div class="admin-info">
+            <p>관리자 (admin)</p>
+        </div>
+        <nav class="menu">
+            <form action="manage-info.html" method="get">
+                <button type="submit" class="menu-item">내 정보 관리</button>
+            </form>
+            <form action="member-list.html" method="get">
+                <button type="submit" class="menu-item">회원 목록</button>
+            </form>
+        </nav>
+    </aside>
+    <section class="content">
+        <h2>회원 목록</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>user_id</th>
+                <th>user_name</th>
+                <th>user_email</th>
+                <th>user_regdate</th>
+                <th>user_nickname</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>yeongjae</td>
+                <td>최영재</td>
+                <td>yeongjae@naver.com</td>
+                <td>2024-06-04 13:00:02</td>
+                <td>jae</td>
+            </tr>
+            <tr>
+                <td>jaehyeok</td>
+                <td>이재혁</td>
+                <td>jaehyeok@naver.com</td>
+                <td>2024-06-01 10:02:42</td>
+                <td>lee</td>
+            </tr>
+            <tr>
+                <td>yena</td>
+                <td>임예나</td>
+                <td>yena@naver.com</td>
+                <td>2024-05-29 19:20:52</td>
+                <td>na</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
 </body>
 </html>

@@ -1,22 +1,39 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/manager/ManagerMode.css}">
-    <script th:src="@{/js/mypage/manager/ManagerMode.js}"></script>
-
-
-    <title>ManagerMode</title>
+    <link rel="stylesheet" type="text/css" href="../../../../static/css/mypage/manager/ManagerMode.css">
+    <script src="../../../../static/js/mypage/manager/ManagerMode.js"></script>
+    <title>Title</title>
 </head>
-
 <body>
-
-
-<div>
-    <form>
-
-    </form>
-</div>
-
+<header>
+    <div class="logo">
+        <!-- 로고 나중에 추가하기 -->
+        <img src="../../../../static/image/Logo.png" alt="LOGO">
+    </div>
+<!--    <div class="page-title">관리자 모드</div>-->
+</header>
+<main>
+    <div class="menu-container">
+        <form action="../../mypage/ManageAccount.html" method="get">
+            <button type="submit" class="menu-item">내 정보 관리</button>
+        </form>
+    </div>
+    <div class="main-menu">
+        <form action="../../mypage/manager/MemberManagement.html" method="get">
+            <button type="submit" class="menu-item">회원 관리</button>
+        </form>
+        <form action="../../mypage/manager/ApprovalLodgingUpdate.html" method="get">
+            <button type="submit" class="menu-item">숙소 등록 승인 / 숙소 삭제 승인</button>
+        </form>
+    </div>
+    <div class="logout-container">
+        <form action="../../Home.html" method="get">
+            <button type="submit" class="menu-item">로그아웃</button>
+        </form>
+    </div>
+</main>
+<script src="script.js"></script>
 </body>
 </html>
