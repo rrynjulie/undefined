@@ -2,11 +2,75 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/Home.css}">
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/Home.css}">-->
+    <link rel="stylesheet" type="text/css" href="../../static/css/Home.css">
     <script th:src="@{/js/Home.js}"></script>
-    <title>Title</title>
+    <title>StayFind</title>
 </head>
+
 <body>
+<!-- 헤더 -->
+<header id="nav-bar"></header>
+<script src="../../static/js/LoadHeader.js"></script>
+<script src="../../static/js/Header.js"></script>
+
+<!-- 메인 -->
+<main class="container">
+    <div class="header">
+        <h1>숙소 구매 TOP</h1>
+        <p>최근 한 주간 구매 많은 순 추천</p>
+    </div>
+
+    <div class="buttons">
+        <button>전체보기</button>
+    </div>
+
+    <div class="filter">
+        <button class="active">호텔</button>
+        <button>펜션</button>
+        <button>모텔</button>
+        <button>게스트 하우스</button>
+    </div>
+
+    <div class="item-list">
+        <div class="item">
+            <img src="placeholder.png" alt="호텔 이미지">
+            <div class="item-details">
+                <p class="item-title">~~~~ 호텔</p>
+                <p class="item-rating">⭐ 4.6(512)</p>
+                <p class="item-price">61,600원~</p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="placeholder.png" alt="호텔 이미지">
+            <div class="item-details">
+                <p class="item-title">~~~~ 호텔</p>
+                <p class="item-rating">⭐ 4.6(512)</p>
+                <p class="item-price">61,600원~</p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="placeholder.png" alt="호텔 이미지">
+            <div class="item-details">
+                <p class="item-title">~~~~ 호텔</p>
+                <p class="item-rating">⭐ 4.6(512)</p>
+                <p class="item-price">61,600원~</p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="placeholder.png" alt="호텔 이미지">
+            <div class="item-details">
+                <p class="item-title">~~~~ 호텔</p>
+                <p class="item-rating">⭐ 4.6(512)</p>
+                <p class="item-price">61,600원~</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- 푸터 -->
+<footer id="footer"></footer>
+<script src="../../static/js/LoadFooter.js"></script>
 
 </body>
 </html>
