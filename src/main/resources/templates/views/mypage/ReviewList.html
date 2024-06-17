@@ -2,11 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/ReviewList.css}">
-    <script th:src="@{/js/mypage/ReviewList.js}"></script>
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/ReviewList.css}">-->
+    <link rel="stylesheet" type="text/css" href="../../../static/css/mypage/ReviewList.css">
+<!--    <script th:src="@{/js/mypage/ReviewList.js}"></script>-->
+    <script src="../../../static/js/mypage/ReviewList.js"></script>
     <title>Title</title>
 </head>
 <body>
+<header id="nav-bar"></header>
+<script src="../../../static/js/LoadHeader.js"></script>
+<script src="../../../static/js/Header.js"></script>
+
+<main>
+    <div class="profile-menu-container">
+        <div class="profile-info">
+            <div>
+                <h2>닉네임</h2>
+            </div>
+        </div>
+        <div class="menu-list">
+            <button class="menu-item" id="reservation-btn">예약 내역<img src="../../../static/image/IconRight.png" class="icon-right"></button>
+            <button class="menu-item" id="manage-info-btn">내 정보 관리<img src="../../../static/image/IconRight.png" class="icon-right"></button>
+            <button class="menu-item" id="review-btn">작성 후기<img src="../../../static/image/IconRight.png" class="icon-right"></button>
+            <button class="menu-item" id="coupon-btn">쿠폰<img src="../../../static/image/IconRight.png" class="icon-right"></button>
+        </div>
+    </div>
+    <section id="reviews">
+        <h2>작성 후기</h2>
+        <div class="reviews-content">
+            <div class="review-item">
+                <div class="review-info">
+                    <h3>호텔 이름: 서울 호텔</h3>
+                    <p>체크인 날짜: 2023-06-20</p>
+                    <p>체크아웃 날짜: 2023-06-25</p>
+                    <p>별점: ★★★★☆</p>
+                    <p>후기 내용: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+            <div class="review-item">
+                <div class="review-info">
+                    <h3>호텔 이름: 부산 호텔</h3>
+                    <p>체크인 날짜: 2023-07-15</p>
+                    <p>체크아웃 날짜: 2023-07-20</p>
+                    <p>별점: ★★★☆☆</p>
+                    <p>후기 내용: Nulla facilisi. Curabitur sit amet magna in ex feugiat.</p>
+                </div>
+            </div>
+            <!-- Additional review items -->
+        </div>
+    </section>
+
+
+</main>
+
+<!-- 푸터 -->
+<footer id="footer"></footer>
+<script src="../../../static/js/LoadFooter.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: white; /* 전체 배경색 */
+}
+
+main {
+    display: flex;
+    justify-content: space-between; /* 섹션들을 좌우로 정렬 */
+    padding: 20px  50px;
+    height: 700px;
+}
+
+.profile-menu-container {
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* 요소들 사이의 간격 설정 */
+}
+
+.profile-info {
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.profile-info h2 {
+    font-size: 24px;
+    color: #000000; /* 닉네임 텍스트 색상 */
+}
+
+.menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* 메뉴 아이템 사이의 간격 설정 */
+    width: 200px;
+    height: 280px;
+    border-radius: 10px;
+    border: 1px solid #d2d2d2;
+}
+
+.menu-item {
+    margin-top: 3px;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.icon-right {
+    width: 15px;
+    height: auto;
+    margin-left: 5px;
+}
+
+/*내 정보 관리*/
+#manage-account {
+    padding: 20px;
+    margin: 0 auto;
+    width: 50%;
+    padding: 20px; /* 안쪽 여백 설정 */
+    height: 90%;
+    margin-top: 20px; /* 위쪽 여백 설정 */
+    margin-right: 250px;
+}
+
+#manage-account h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+#manage-account-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+.form-group input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+#save-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #FC5185;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#save-btn:hover {
+    background-color: rgb(252, 81, 133);
+}
+

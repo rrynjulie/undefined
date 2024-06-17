@@ -1,72 +1,142 @@
-body {
-    background-color: #F8EDE3;
-    font-family: Arial, sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.profile-section, .review-coupon-section, .reservations-section {
-    margin: 20px;
-    padding: 20px;
-    background-color: #BDD2B6;
-    border-radius: 10px;
+body {
+    font-family: Arial, sans-serif;
+    background-color: white; /* 전체 배경색 */
+}
+
+main {
+    display: flex;
+    justify-content: space-between; /* 섹션들을 좌우로 정렬 */
+    padding: 20px  50px;
+    height: 700px;
+}
+
+/*닉네임*/
+.profile-menu-container {
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* 요소들 사이의 간격 설정 */
 }
 
 .profile-info {
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.profile-info h2 {
+    font-size: 24px;
+    color: #000000; /* 닉네임 텍스트 색상 */
+}
+
+/*메뉴리스트*/
+.menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* 메뉴 아이템 사이의 간격 설정 */
+    width: 200px;
+    height: 280px;
+    border-radius: 10px;
+    border: 1px solid #d2d2d2;
+}
+
+.menu-item {
+    margin-top: 3px;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.icon-right {
+    width: 15px;
+    height: auto;
+    margin-left: 5px;
+}
+
+/*예약내역*/
+#reservation {
+    padding: 20px; /* 안쪽 여백 설정 */
+    width: 70%;
+    height: 90%;
+    margin-top: 20px; /* 위쪽 여백 설정 */
+    margin-right: 90px;
+}
+
+#reservation h2 {
+    color: black; /* 제목 글자색 설정 */
+    margin-bottom: 40px; /* 아래쪽 여백 설정 */
+}
+
+.reservation-content {
+    background-color: rgba(255, 255, 255, 0.61);
+    height: 90%;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/*검색필터*/
+.filter-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    width: 100%;
 }
 
-.nickname p {
-    font-size: 1.2em;
-    font-weight: bold;
+.filter-container select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    background-color: rgba(239, 239, 239, 0.72);
+    color: #333;
+    width: 430px;
 }
 
-.manage-info {
-    border-color: #798777;
-    color: #798777;
-    background-color: transparent;
-    border-width: 2px;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-.manage-info:hover {
-    background-color: #798777;
-    color: #F8EDE3;
-}
-
-.review-coupon {
+/*예약내역 상세*/
+.reservation-content {
     display: flex;
-    justify-content: space-around;
-    margin-top: 10px;
+    flex-direction: column;
+    gap: 20px; /* 예약 항목 사이의 간격 */
 }
 
-.review, .coupon {
-    background-color: #798777;
-    color: #F8EDE3;
-    border: none;
-    padding: 10px 20px;
+.booking-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #FFF;
     border-radius: 5px;
-    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.review:hover, .coupon:hover {
-    background-color: #798777;
+.booking-item:last-child {
+    border-bottom: none;
 }
 
-.reservations-section h2 {
-    margin-bottom: 10px;
+.booking-info {
+    display: flex;
+    flex-direction: column;
 }
 
-.reservation {
-    background-color: #798777;
-    color: #F8EDE3;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+.booking-info h3 {
+    margin: 0 0 10px 0;
 }
 
-.reservation:hover {
-    background-color: #798777;
+.booking-info p {
+    margin: 5px 0;
 }

@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: white; /* 전체 배경색 */
+}
+
+main {
+    display: flex;
+    justify-content: space-between; /* 섹션들을 좌우로 정렬 */
+    padding: 20px  50px;
+    height: 700px;
+}
+
+.profile-menu-container {
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* 요소들 사이의 간격 설정 */
+}
+
+.profile-info {
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.profile-info h2 {
+    font-size: 24px;
+    color: #000000; /* 닉네임 텍스트 색상 */
+}
+
+.menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* 메뉴 아이템 사이의 간격 설정 */
+    width: 200px;
+    height: 280px;
+    border-radius: 10px;
+    border: 1px solid #d2d2d2;
+}
+
+.menu-item {
+    margin-top: 3px;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.icon-right {
+    width: 15px;
+    height: auto;
+    margin-left: 5px;
+}
+
+/*쿠폰*/
+#coupon {
+    margin-bottom: 20px;
+    margin: 0 auto;
+}
+
+#coupontitle {
+    color: #FC5185;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    margin-top: 40px;
+
+}
+
+.coupon-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 2열 */
+    grid-template-rows: repeat(3, auto); /* 3행 */
+    gap: 20px;
+}
+
+.coupon-item {
+    width: 300px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.coupon-item h3 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.coupon-item p {
+    margin-bottom: 5px;
+    color: #666;
+}
