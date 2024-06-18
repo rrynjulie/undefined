@@ -6,6 +6,6 @@ document.addEventListener("DOMContentLoaded",function (){
         window.location.href = "../../../../templates/views/mypage/manager/MemberManagement.html"
     });
     document.getElementById("manage-info-btn").addEventListener("click", function (){
-        window.location.href = "../../../../templates/views/mypage/ManageAccount.html"
+        window.location.href = "../../../../templates/views/mypage/customer/ManageAccount.html"
     });
 });

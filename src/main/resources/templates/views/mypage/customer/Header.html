@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!--    <link rel="stylesheet" type="text/css" th:href="@{/css/Home.css}">-->
+    <link rel="stylesheet" type="text/css" href="../../static/css/Header.css">
+<!--    <script th:src="@{/js/Header.js}"></script>-->
+    <title>Header</title>
+</head>
+
+<body>
+<!-- PC 버전 -->
+<div class="nav-bar-pc">
+    <ul class="nav-bar-pc-inner">
+        <li class="nav-bar-inner-left">
+            <a href="index.html">
+                <img src="../img/logo_small.png" alt="StayFind">
+            </a>
+        </li>
+        <li class="nav-bar-inner-right">
+            <a href="introduction.html">숙박 예약</a>
+            <a href="findParkingLot.html">승차권 조회</a>
+            <a href="login.html" id="btn-login-pc">로그인 / 회원가입</a>
+        </li>
+    </ul>
+</div>
+
+<!-- 모바일 버전 -->
+<div class="nav-bar-mobile">
+    <!-- Top Navigation Menu -->
+    <div class="nav-bar-mobile-inner">
+        <a href="index.html" class="main-logo-mobile">
+            <img src="../img/icon.png" alt="StayFind">
+        </a>
+
+        <!-- 햄버거 아이콘 -->
+        <a href="javascript:void(0);" class="icon" onclick="myFunction(this)">
+            <div class="ham-bar-1"></div>
+            <div class="ham-bar-2"></div>
+            <div class="ham-bar-3"></div>
+        </a>
+    </div>
+
+    <!-- Navigation links (hidden by default) -->
+    <div id="nav-menu">
+        <a id="btn-login-mobile" href="login.html">로그인 / 회원가입</a>
+        <a href="introduction.html">숙박 예약</a>
+        <a href="findParkingLot.html">승차권 조회</a>
+    </div>
+</div>
+</body>
+
+</html>
