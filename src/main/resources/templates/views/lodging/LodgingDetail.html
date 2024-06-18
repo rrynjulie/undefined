@@ -2,11 +2,175 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/lodging/LodgingDetail.css}">
-    <script th:src="@{/js/ticket/lodging/LodgingDetail.js}"></script>
-    <title>Title</title>
+    <link rel="stylesheet" href="../../../static/css/lodging/LodgingDetail.css">
+    <title>내 숙소 상세</title>
 </head>
 <body>
 
+    <!-- 헤더 -->
+    <header id="nav-bar"></header>
+    <script src="../../../static/js/LoadHeader.js"></script>
+    <script src="../../../static/js/Header.js"></script>
+
+    <!-- 메인 -->
+    <main>
+        <nav class="provider-menu">
+            <ul>
+                <li><a href="#">예약내역</a></li>
+                <li><a href="#">후기관리</a></li>
+                <li><a href="#">숙소정보</a></li>
+                <li><a href="#">객실정보</a></li>
+            </ul>
+        </nav>
+        <section class="lodging-info">
+            <h1>숙소 정보</h1>
+        </section>
+    </main>
+
+    <div class="container">
+
+        <div>
+            <div class="slideshow-container">
+
+                <div class="mySlides">
+                    <img class="img" src="https://yaimg.yanolja.com/v5/2021/12/29/17/1280/61cc9baf0192c8.90237210.jpg">
+                    <div class="number">1 / 3</div>
+                </div>
+
+                <div class="mySlides">
+                    <img class="img" src="https://yaimg.yanolja.com/v5/2021/12/29/17/1280/61cc9b625a05c4.02961832.jpg">
+                    <div class="number">2 / 3</div>
+                </div>
+
+                <div class="mySlides">
+                    <img class="img" src="https://yaimg.yanolja.com/v5/2021/12/29/17/1280/61cc9b62ebe628.00477093.jpg">
+                    <div class="number">3 / 3</div>
+                </div>
+
+                <div class="nav-button prev" onclick="plusSlides(-1)">❮</div>
+                <div class="nav-button next" onclick="plusSlides(1)">❯</div>
+
+            </div>
+        </div>
+
+        <div class="lodging-name">
+            <h3>undefined</h3>
+            <div><button class="like" onclick="a">♡</button></div>
+        </div>
+
+
+        <div class="review-header">
+            <div>⭐ 평균별점</div>
+            <div class="all">전체보기 ></div>
+        </div>
+
+        <div class="item-list">
+            <div class="item">
+                <div class="item-details">
+                    <p class="item-rating">⭐ 4.6(512)</p>
+                    <p class="item-title">리뷰 내용</p>
+                </div>
+                <img class="lodging-img" src="placeholder.png" alt="호텔 이미지">
+            </div>
+            <div class="item">
+                <div class="item-details">
+                    <p class="item-rating">⭐ 4.6(512)</p>
+                    <p class="item-title">리뷰 내용</p>
+                </div>
+                <img class="lodging-img" src="placeholder.png" alt="호텔 이미지">
+            </div>
+            <div class="item">
+                <div class="item-details">
+                    <p class="item-rating">⭐ 4.6(512)</p>
+                    <p class="item-title">리뷰 내용</p>
+                </div>
+                <img class="lodging-img" src="placeholder.png" alt="호텔 이미지">
+            </div>
+        </div>
+
+        <div class="room">
+            <div>
+                <h3>객실 선택</h3>
+            </div>
+            <div class="date">
+                07/04 ~ 07/05, 1박 / 성인 1, 아동 0
+            </div>
+        </div>
+
+
+        <div class="room-list">
+            <div class="room-list1">
+                <img class="room-img" src="placeholder.png" alt="호텔 이미지">
+                <div class="room-details">
+                    <div class="room-detail">
+                        <p>101호 숙박</p><button class="detail-btn">상세보기 ></button>
+                    </div>
+                    <p>체크인 00:00 ~ 체크아웃 00:00</p>
+                    <div style="display: flex; justify-content: space-between"><button>쿠폰 ></button>100,000원</div>
+                    <div><button class="reserve-btn">예약하기</button></div>
+                </div>
+            </div>
+            <div class="room-list1">
+                <img class="room-img" src="placeholder.png" alt="호텔 이미지">
+                <div class="room-details">
+                    <div class="room-detail">
+                        <p>숙박</p><button class="detail-btn">상세보기 ></button>
+                    </div>
+                    <p>체크인 00:00 ~ 체크아웃 00:00</p>
+                    <div style="display: flex; justify-content: space-between"><button>쿠폰 ></button>100,000원</div>
+                    <div><button class="reserve-btn">예약하기</button></div>
+                </div>
+            </div>
+            <div class="room-list1">
+                <img class="room-img" src="placeholder.png" alt="호텔 이미지">
+                <div class="room-details">
+                    <div class="room-detail">
+                        <p>숙박</p><button class="detail-btn">상세보기 ></button>
+                    </div>
+                    <p>체크인 00:00 ~ 체크아웃 00:00</p>
+                    <div style="display: flex; justify-content: space-between"><button>쿠폰 ></button>100,000원</div>
+                    <div><button class="reserve-btn">예약하기</button></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="lodging-location">
+            <h3>위치</h3>
+            <img class="lodging-location1" src="../지도.png" alt="숙소 위치">
+        </div>
+
+
+        <div>
+            <h3>숙소 소개</h3>
+            <textarea class="lodging-data"></textarea>
+        </div>
+        <div>
+            <h3>시설 및 서비스</h3>
+            <textarea class="lodging-data"></textarea>
+        </div>
+        <div>
+            <h3>이용 안내</h3>
+            <textarea class="lodging-data"></textarea>
+        </div>
+        <div>
+            <h3>예약 공지</h3>
+            <textarea class="lodging-data"></textarea>
+        </div>
+        <div>
+            <h3>판매자 정보</h3>
+            <textarea class="lodging-data"></textarea>
+        </div>
+
+
+
+
+    </div>
+
+    <script src="../../../static/js/lodging/LodgingDetail.js"></script>
+
+    <!-- 푸터 -->
+    <footer id="footer"></footer>
+    <script src="../../../static/js/LoadFooter.js"></script>
 </body>
 </html>
