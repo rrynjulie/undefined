@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Calendar</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/static/css/LodgingList.css">
+</head>
+
+<body>
+<main class="container">
+
+    <div id="lodging-text1">
+        <input id="lodging-text" type="text"
+               placeholder="검색어">
+    </div>
+
+    <div class="date-people1">
+        <div class="date-people2">
+            날짜: 2024.07.04 ~ 2024.07.05, 1박
+        </div>
+        <div id="people" class="date-people2">
+            인원: 성인 1, 아동 0
+        </div>
+    </div>
+
+    <div id="list-div">
+        <div class="btn-div">
+            <button class="btn" onclick="a">전체</button>
+        </div>
+        <div class="btn-div">
+            <button class="btn" onclick="a">모텔</button>
+        </div>
+        <div class="btn-div">
+            <button class="btn" onclick="a">호텔/리조트</button>
+        </div>
+        <div class="btn-div">
+            <button class="btn" onclick="a">펜션/풀빌라</button>
+        </div>
+        <div class="btn1-div">
+            <div>
+                <select class="btn1">
+                    <option value="예약가 높은 순">예약가 높은 순</option>
+                    <option value="예약가 낮은 순">예약가 낮은 순</option>
+                    <option value="찜 많은 순">찜 많은 순</option>
+                    <option value="후기 많은 순">후기 많은 순</option>
+                </select>
+            </div>
+            <div>
+                <button class="btn1" id="open-dialog">가격</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="price-range" title="가격">
+        <div id="slider-range"></div>
+        <div id="price-text">1만원 ~ 50만원</div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
+
+    <div id="result-filter">6개의 검색 결과</div>
+
+
+
+    <div class="item-list">
+        <div class="item">
+            <img src="placeholder.png" alt="호텔 이미지">
+            <div class="item-details">
+                <p class="item-title">~~~~ 호텔</p>
+                <p class="item-rating">⭐ 4.6(512)</p>
+                <p class="item-price">61,600원~</p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="placeholder.png" alt="호텔 이미지">
+            <div class="item-details">
+                <p class="item-title">~~~~ 호텔</p>
+                <p class="item-rating">⭐ 4.6(512)</p>
+                <p class="item-price">61,600원~</p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="placeholder.png" alt="호텔 이미지">
+            <div class="item-details">
+                <p class="item-title">~~~~ 호텔</p>
+                <p class="item-rating">⭐ 4.6(512)</p>
+                <p class="item-price">61,600원~</p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="placeholder.png" alt="호텔 이미지">
+            <div class="item-details">
+                <p class="item-title">~~~~ 호텔</p>
+                <p class="item-rating">⭐ 4.6(512)</p>
+                <p class="item-price">61,600원~</p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="placeholder.png" alt="호텔 이미지">
+            <div class="item-details">
+                <p class="item-title">~~~~ 호텔</p>
+                <p class="item-rating">⭐ 4.6(512)</p>
+                <p class="item-price">61,600원~</p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="placeholder.png" alt="호텔 이미지">
+            <div class="item-details">
+                <p class="item-title">~~~~ 호텔</p>
+                <p class="item-rating">⭐ 4.6(512)</p>
+                <p class="item-price">61,600원~</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="/static/js/LodgingList.js"></script>
+</body>
+</html>

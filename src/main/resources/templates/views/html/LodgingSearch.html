@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Calendar</title>
+    <link rel="stylesheet" href="/static/css/LodgingSearch.css">
+</head>
+<body>
+
+<h1 id="lodging-search">숙소 검색</h1>
+
+
+<div id="lodging-input">
+    <input id="lodging-text" type="text"
+           placeholder="숙소명 또는 지역명 검색해보세요" />
+</div>
+
+<div style="display: flex;">
+    <div id="calendar">
+        <div id="calendar-text">날짜 선택</div>
+        <div id="calendar-header">
+            <button id="prev">&lt;</button>
+            <h2 id="month-year"></h2>
+            <button id="next">&gt;</button>
+        </div>
+
+        <div style="display: flex; justify-content: space-between;">
+            <div class="days">Sun</div>
+            <div class="days">Mon</div>
+            <div class="days">Tue</div>
+            <div class="days">Wed</div>
+            <div class="days">Thu</div>
+            <div class="days">Fri</div>
+            <div class="days">Sat</div>
+        </div>
+        <table id="calendar-body">
+        </table>
+        <div style="margin-top: 10px">
+            <button style="width: 100%; height: 50px; font-size: 20px">
+                <!--                <div style="">2024.07.04 ~ 2024.07.05, 1박</div>-->
+                2024.07.04 ~ 2024.07.05, 1박
+            </button>
+        </div>
+    </div>
+
+
+    <div style="width: 50%; margin: 0 50px 0 0; border: 2px solid black; border-top: none; border-left: none;">
+
+        <div style="font-size: 25px; border: 2px solid black; border-right: none; border-left: none;">인원수 선택</div>
+        <div style="margin-top: 50px;">
+            <div style="height: 120px;">
+                <div style="display: flex; align-items: center;">
+                    <div class="adult-child">성인</div>
+                    <button id="decrease-btn1" class="btn">
+                        -
+                    </button>
+                    <div id="adult-count" class="count">
+                        1
+                    </div>
+                    <button id="increase-btn1" class="btn">
+                        +
+                    </button>
+                </div>
+            </div>
+
+            <div style="height: 190px;">
+                <div style="display: flex; align-items: center;">
+                    <div class="adult-child">아동</div>
+                    <button id="decrease-btn2" class="btn">
+                        -
+                    </button>
+                    <div id="child-count" class="count">
+                        0
+                    </div>
+                    <button id="increase-btn2" class="btn">
+                        +
+                    </button>
+                </div>
+            </div>
+
+            <div style="margin-top: 182px">
+                <button class="total" style="width: 100%; height: 50px;">
+                    성인 1, 아동 0
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="margin: 50px 50px 0 50px;">
+    <h1>최근검색</h1>
+    <div style="display: flex; gap: 30px;">
+        <div class="recently-search1">
+            <div class="recently-search2">검색어</div>
+            <div class="recently-search2">검색 날짜 검색 인원</div>
+        </div>
+        <div class="recently-search1">
+            <div class="recently-search2">검색어</div>
+            <div class="recently-search2">검색 날짜 검색 인원</div>
+        </div>
+        <div class="recently-search1">
+            <div class="recently-search2">검색어</div>
+            <div class="recently-search2">검색 날짜 검색 인원</div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/js/LodgingSearch.js"></script>
+</body>
+</html>
