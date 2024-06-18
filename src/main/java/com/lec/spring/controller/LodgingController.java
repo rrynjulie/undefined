@@ -8,16 +8,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/lodging")
+@RequestMapping("/Lodging")
 public class LodgingController {
 
 //    @Autowired
 //    private LodgingService lodgingService;
 
-    @GetMapping("/search")
-    public void search() {
+    @GetMapping("/LodgingSearch")
+    public void LodgingSearch() {}
 
-    }
+    @GetMapping("/LodgingList")
+    public void LodgingList() {}
 
 //    @GetMapping("/list")
 //    public void list() {
