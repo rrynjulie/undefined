@@ -15,16 +15,15 @@
 }
 
 .nav-bar-pc {
-    width: 100%;
     background-color: white;
 }
 
 .nav-bar-pc-inner {
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin: 0;
-    padding: 15px 0;
+    padding: 15px 20%;
 }
 
 li {
