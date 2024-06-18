@@ -45,13 +45,17 @@ main {
 
 .provider-menu-list a {
     text-decoration: none;
+    font-weight: bold;
     color: black;
+}
+
+.provider-menu-list a:active {
+    color: #FC5185;
 }
 
 .provider-menu-icon {
     height: 30px;
     width: 30px;
-    background-color: #FC5185;
     margin-right: 30px;
 }
 
