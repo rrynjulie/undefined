@@ -38,15 +38,15 @@ main {
 .menu-list {
     display: flex;
     flex-direction: column;
-    gap: 30px; /* 메뉴 아이템 사이의 간격 설정 */
+    gap: 20px; /* 메뉴 아이템 사이의 간격 설정 */
     width: 200px;
-    height: 280px;
+    height: 430px;
     border-radius: 10px;
     border: 1px solid #d2d2d2;
 }
 
 .menu-item {
-    margin-top: 3px;
+    margin-top: 10px;
     border: none;
     padding: 10px 20px;
     text-align: center;
@@ -55,7 +55,6 @@ main {
     align-items: center;
     justify-content: space-between;
     font-size: 16px;
-    border-radius: 5px;
     background-color: white;
 }
 

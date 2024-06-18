@@ -15,4 +15,9 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("coupon-btn").addEventListener("click", function() {
         window.location.href = "../../../templates/views/mypage/CouponList.html";
     });
+
+    document.getElementById("coupon-btn").addEventListener("click", function() {
+        window.location.href = "../../../templates/views/mypage/";
+    });
+
 });
