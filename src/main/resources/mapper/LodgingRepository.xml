@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lec.spring.repository.LodgingRepository">
+
+    <sql id="SELECT BASE">
+        SELECT
+            l.lodging_id "l.lodging_id",
+            l.lodging_picture_1 "l.lodging_picture1",
+            l.lodging_name "l.lodging_name",
+            l.lodging_type "l.lodging_type",
+            r.min_room_price "r.room_price"
+        FROM
+            lodging l
+                JOIN
+            (SELECT lodging_id,
+                    MIN(room_price) min_room_price
+             FROM room
+             GROUP BY
+                 lodging_id) r
+            ON l.lodging_id = r.lodging_id
+
+
+    </sql>
+
+
+
+
+</mapper>
