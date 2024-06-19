@@ -1,0 +1,63 @@
+h1 {
+    text-align: center;
+    align-items: center;
+    margin-right: 550px;
+}
+body {
+    font-family: Arial, sans-serif;
+}
+.container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+.logo img {
+    width: 100px; /* 로고 크기 조정 필요시 변경 */
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+th {
+    background-color: #f2f2f2;
+}
+.bus-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bus-info img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+.arrow {
+    margin: 0 5px;
+}
+.back-button {
+    margin-top: 20px;
+}
+.back-button a {
+    text-decoration: none;
+    color: black;
+    border: 1px solid black;
+    padding: 10px 20px;
+    display: inline-block;
+}
+.trip-type {
+    text-align: center;
+    margin-top: 20px;
+    margin-left: 500px;
+}
