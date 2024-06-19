@@ -5,7 +5,7 @@
 
 <mapper namespace="com.lec.spring.repository.LodgingRepository">
 
-    <sql id="SELECT BASE">
+    <sql id="findAllLodging">
         SELECT
             l.lodging_id "l.lodging_id",
             l.lodging_picture_1 "l.lodging_picture1",
