@@ -1,22 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../../../static/css/lodging/LodgingSearch.css">
-<!--    <script src="../../../static/js/lodging/LodgingSearch.js"></script>-->
-<!--    <script th:src="@{static/js/lodging/LodgingSearch.js}"></script>-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/lodging/LodgingSearch.css}">
     <title>Title</title>
+
 </head>
-
 <body>
-
+<main class="container">
 <h1 id="lodging-search">숙소 검색</h1>
 
-
+<form id="search-form">
 <div id="lodging-input">
-    <input id="lodging-text" type="text"
+    <div id="lodging-text">
+    <input id="lodging-text1" type="text"
            placeholder="숙소명 또는 지역명 검색해보세요" />
+    </div>
+    <div id="lodging-text2">
+        <img id="search" src="/image/search.png" alt="돋보기"/>
+    </div>
 </div>
+</form>
 
 <div style="display: flex;">
     <div id="calendar">
@@ -39,17 +44,14 @@
         <table id="calendar-body">
         </table>
         <div style="margin-top: 10px">
-            <button style="width: 100%; height: 50px; font-size: 20px">
-                <!--                <div style="">2024.07.04 ~ 2024.07.05, 1박</div>-->
-                2024.07.04 ~ 2024.07.05, 1박
-            </button>
+            <div class="selectedDate" id="selectedDate">2024.06.18</div>
         </div>
     </div>
 
 
-    <div style="width: 50%; margin: 0 50px 0 0; border: 2px solid black; border-top: none; border-left: none;">
+    <div style="width: 50%; border: 1px solid black; border-top: none; border-left: none;">
 
-        <div style="font-size: 25px; border: 2px solid black; border-right: none; border-left: none;">인원수 선택</div>
+        <div style="font-size: 25px; border: 1px solid black; border-right: none; border-left: none;">인원수 선택</div>
         <div style="margin-top: 50px;">
             <div style="height: 120px;">
                 <div style="display: flex; align-items: center;">
@@ -82,9 +84,9 @@
             </div>
 
             <div style="margin-top: 182px">
-                <button class="total" style="width: 100%; height: 50px;">
+                <div class="total selectedDate" style="width: 100%; height: 50px;">
                     성인 1, 아동 0
-                </button>
+                </div>
             </div>
         </div>
     </div>
@@ -108,6 +110,8 @@
     </div>
 </div>
 
-</body>
+</main>
 
+<script th:src="@{/js/lodging/LodgingSearch.js}"></script>
+</body>
 </html>

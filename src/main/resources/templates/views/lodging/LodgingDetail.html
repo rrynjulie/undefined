@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../../../static/css/lodging/LodgingDetail.css">
+    <link rel="stylesheet" th:href="@{/css/lodging/LodgingDetail.css}">
     <title>내 숙소 상세</title>
 </head>
 <body>
@@ -137,7 +137,7 @@
 
         <div class="lodging-location">
             <h3>위치</h3>
-            <img class="lodging-location1" src="../지도.png" alt="숙소 위치">
+            <img class="lodging-location1" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20160710_255%2Fajuaju123_1468156914193U4NWq_JPEG%2F%25BF%25AA%25BB%25EF%25BF%25AA.JPG&type=a340" alt="숙소 위치">
         </div>
 
 
@@ -167,7 +167,7 @@
 
     </div>
 
-    <script src="../../../static/js/lodging/LodgingDetail.js"></script>
+    <script th:src="@{/js/lodging/LodgingDetail.js}"></script>
 
     <!-- 푸터 -->
     <footer id="footer"></footer>

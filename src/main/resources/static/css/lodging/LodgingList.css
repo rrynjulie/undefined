@@ -1,5 +1,5 @@
 .container {
-    width: 75%;
+    width: 60%;
     margin: auto;
 }
 
@@ -9,7 +9,7 @@
     justify-content: space-between;
 }
 .item {
-    width: 48%;
+    width: 45%;
     display: flex;
     margin: 10px;
     border: 1px solid #ddd;
@@ -51,19 +51,31 @@
 }
 #lodging-text1 {
     width:80%;
-    margin: 50px auto 0 auto;
 }
 
-.date-people1 {
+.date-people {
     display: flex;
-    width: 80%;
+    width: 90%;
     margin: 10px auto;
 }
-.date-people2 {
-    font-size: 20px;
+.date {
+    background-color: #F5F5F5;
+    font-size: 18px;
+    width: 26%;
+    height: 40px;
+    border-radius: 10px;
+    align-content: center;
+    text-align: center;
 }
 #people {
-    margin-left: 50px;
+    margin-left: 10px;
+    background-color: #F5F5F5;
+    font-size: 18px;
+    width: 26%;
+    height: 40px;
+    border-radius: 10px;
+    align-content: center;
+    text-align: center;
 }
 #list-div {
     display: flex;

@@ -16,3 +16,29 @@ $(document).ready(function() {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const text = document.getElementById('lodging-text1')
+    const searchWord = sessionStorage.getItem('searchWord')
+
+    const selectedDate = document.getElementById("selectedDate");
+    const startDate = new Date(sessionStorage.getItem('startDate'));
+    const endDate = new Date(sessionStorage.getItem('endDate'));
+
+    const totalDiv = document.getElementsByClassName('total');
+    const adultCount = parseInt(sessionStorage.getItem('adultCount'));
+    const childCount = parseInt(sessionStorage.getItem('childCount'));
+
+
+    text.innerHTML = `${searchWord}`
+
+    selectedDate.innerHTML = `${startDate.getFullYear()}.${startDate.getMonth() + 1}.${startDate.getDate()} ~ ${endDate.getFullYear()}.${endDate.getMonth() + 1}.${endDate.getDate()}`
+
+    for (let i = 0; i < totalDiv.length; i++) {
+        totalDiv[i].innerHTML = `인원: 성인 ${adultCount}, 아동 ${childCount}`;
+    }
+
+});
+
+
+console.log(sessionStorage);
