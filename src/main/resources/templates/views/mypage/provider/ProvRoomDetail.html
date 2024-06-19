@@ -2,16 +2,99 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/provider/room/RoomDetail.css}">
-    <script th:src="@{/js/mypage/provider/room/RoomDetail.js}"></script>
-    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../../../../static/css/mypage/provider/ProvRoomDetail.css">
+    <title>내 객실 상세</title>
 </head>
-
 <body>
+<!-- 헤더 -->
+<header id="nav-bar"></header>
+<script src="../../../../static/js/LoadHeader.js"></script>
+<script src="../../../../static/js/Header.js"></script>
 
+<!-- 메인 -->
+<main>
+    <!-- 좌측 네비게이션 메뉴 -->
+    <nav class="provider-menu">
+        <ul>
+            <li class="provider-menu-list"><img src="../../../../static/image/Booking.png" alt="" class="provider-menu-icon"><a href="">예약내역</a></li>
+            <li class="provider-menu-list"><img src="../../../../static/image/Review.png" alt="" class="provider-menu-icon"><a href="#">후기관리</a></li>
+            <li class="provider-menu-list"><img src="../../../../static/image/Lodging.png" alt="" class="provider-menu-icon"><a href="ProvLodgingList.html" class="active">숙소정보</a></li>
+            <li class="provider-menu-list"><img src="../../../../static/image/Room.png" alt="" class="provider-menu-icon"><a href="ProvRoomList.html">객실정보</a></li>
+        </ul>
+    </nav>
 
+    <!-- 객실 정보 페이지 -->
+    <section class="lodging-info">
+        <h1>객실 상세정보</h1>
+        <div class="lodging-list">
+            <div class="slideshow-container">
+                <div class="my-slides">
+                    <img class="lodging-img" src="https://yaimg.yanolja.com/v5/2021/12/29/17/1280/61cc9baf0192c8.90237210.jpg" alt="">
+                    <img class="lodging-img" src="https://yaimg.yanolja.com/v5/2021/12/29/17/1280/61cc9b625a05c4.02961832.jpg" alt="">
+                    <img class="lodging-img" src="https://yaimg.yanolja.com/v5/2021/12/29/17/1280/61cc9b62ebe628.00477093.jpg" alt="">
+                </div>
+                <div class="nav-button prev" onclick="plusSlide(-1)">❮</div>
+                <div class="nav-button next" onclick="plusSlide(1)">❯</div>
+                <div class="dot-pagination">
+                    <span class="dot" onclick="currentSlide(0)"></span>
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                </div>
+            </div>
 
+            <label class="info-label">
+                객실명<br>
+                <input class="info-input" type="text" disabled>
+            </label>
+            <label class="info-label">
+                객실 호수<br>
+                <input class="info-input" type="text" disabled>
+            </label>
+            <label class="info-label">
+                객실 기준 인원<br>
+                <input class="info-input" type="text" disabled>
+            </label>
+            <label class="info-label">
+                객실 최대 인원<br>
+                <input class="info-input" type="text" disabled>
+            </label>
+            <label class="info-label">
+                객실 면적<br>
+                <input class="info-input" type="text" disabled>
+            </label>
+            <label class="info-label">
+                객실 가격<br>
+                <input class="info-input" type="text" disabled>
+            </label>
+            <label class="info-label">
+                객실 침대 개수<br>
+                <input class="info-input" type="text" disabled>
+            </label>
+            <label class="info-label">
+                객실 욕실 개수<br>
+                <input class="info-input" type="text" disabled>
+            </label>
+            <label class="info-label">
+                객실 흡연 가능 여부<br>
+                <input class="info-input" type="text" disabled>
+            </label>
+        </div>
+        <div class="lodging-list">
+            <label class="info-label-textarea">
+                객실 공지사항 및 소개<br>
+                <textarea class="info-textarea" disabled></textarea>
+            </label>
+        </div>
+        <div class="btn-list">
+            <button class="btn-update">정보 수정</button>
+            <button class="btn-delete">삭제 요청</button>
+        </div>
+    </section>
+    <script src="../../../../static/js/mypage/provider/ProvRoomDetail.js"></script>
+</main>
+
+<!-- 푸터 -->
+<footer id="footer"></footer>
+<script src="../../../../static/js/LoadFooter.js"></script>
 </body>
-
-
 </html>
