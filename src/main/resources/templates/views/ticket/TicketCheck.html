@@ -4,9 +4,156 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/css/ticket/TicketCheck.css}">
     <script th:src="@{/js/ticket/TicketCheck.js}"></script>
-    <title>Title</title>
+    <title>승차권 검색</title>
 </head>
 <body>
+<div class="header">
+    <img src="logo.png" alt="LOGO">
+</div>
+<div class="tab-menu">
+    <div class="tab-item active" id="one-way-tab">편도</div>
+    <div class="tab-item" id="round-trip-tab">왕복</div>
+</div>
+<div class="form-container">
+    <form action="/user/fetchBusInfo" method="get">
+        <label for="depTerminalId">출발 터미널</label>
+        <input type="text" id="depTerminalId" name="depTerminalId" placeholder="출발터미널ID 입력">
 
+        <label for="arrTerminalId">도착 터미널</label>
+        <input type="text" id="arrTerminalId" name="arrTerminalId" placeholder="도착터미널ID 입력">
+
+        <label for="depPlandTime">출발일</label>
+        <input type="text" id="depPlandTime" name="depPlandTime" placeholder="출발일(YYYYMMDD) 입력">
+
+        <!-- 돌아오는 날짜 입력란 -->
+        <div class="return-date-input" id="return-date-input">
+            <label for="returnPlandTime">도착일 (왕복일 경우)</label>
+            <input type="text" id="returnPlandTime" name="returnPlandTime" placeholder="도착일(YYYYMMDD) 입력">
+        </div>
+
+        <label for="busGradeId">버스 등급</label>
+        <input type="text" id="busGradeId" name="busGradeId" placeholder="버스등급 입력">
+
+        <button type="submit">승차권 조회</button>
+    </form>
+</div>
+<div style="text-align: center;">
+    <h1>터미널 목록</h1>
+    <table>
+        <tr>
+            <th>터미널 명</th>
+            <th>터미널 ID</th>
+            <th>터미널 명</th>
+            <th>터미널 ID</th>
+            <th>터미널 명</th>
+            <th>터미널 ID</th>
+            <th>터미널 명</th>
+            <th>터미널 ID</th>
+            <th>터미널 명</th>
+            <th>터미널 ID</th>
+        </tr>
+        <tr>
+            <td>서울경부</td>
+            <td>NAEK010</td>
+            <td>센트럴시티(서울)</td>
+            <td>NAEK020</td>
+            <td>인천</td>
+            <td>NAEK100</td>
+            <td>인천공항T1</td>
+            <td>NAEK105</td>
+            <td>인천공항T2</td>
+            <td>NAEK117</td>
+        </tr>
+        <tr>
+            <td>경주</td>
+            <td>NAEK815</td>
+            <td>부산</td>
+            <td>NAEK700</td>
+            <td>여주</td>
+            <td>NAEK140</td>
+            <td>순천</td>
+            <td>NAEK515</td>
+            <td>천안</td>
+            <td>NAEK310</td>
+        </tr>
+        <tr>
+            <td>수원</td>
+            <td>NAEK110</td>
+            <td>아산온양</td>
+            <td>NAEK340</td>
+            <td>고양화정</td>
+            <td>NAEK115</td>
+            <td>춘천</td>
+            <td>NAEK250</td>
+            <td>용인신갈</td>
+            <td>NAEK111</td>
+        </tr>
+        <tr>
+            <td>강릉</td>
+            <td>NAEK200</td>
+            <td>창원</td>
+            <td>NAEK710</td>
+            <td>대전복합</td>
+            <td>NAEK300</td>
+            <td>김해</td>
+            <td>NAEK735</td>
+            <td>동대구</td>
+            <td>NAEK801</td>
+        </tr>
+        <tr>
+            <td>포항</td>
+            <td>NAEK830</td>
+            <td>울산</td>
+            <td>NAEK715</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+        </tr>
+    </table>
+
+    <br><br>
+
+    <h1>버스 등급 목록</h1>
+    <table>
+        <tr>
+            <th>등급 ID</th>
+            <th>등급 이름</th>
+            <th>등급 ID</th>
+            <th>등급 이름</th>
+            <th>등급 ID</th>
+            <th>등급 이름</th>
+            <th>등급 ID</th>
+            <th>등급 이름</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>우등</td>
+            <td>2</td>
+            <td>고속</td>
+            <td>3</td>
+            <td>심야우등</td>
+            <td>4</td>
+            <td>심야고속</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>일반</td>
+            <td>6</td>
+            <td>일반심야</td>
+            <td>7</td>
+            <td>프리미엄</td>
+            <td>8</td>
+            <td>심야프리미엄</td>
+        </tr>
+    </table>
+</div>
+<footer>
+    <hr>
+    <h3>관리자 소개</h3>
+    <hr>
+</footer>
 </body>
 </html>
