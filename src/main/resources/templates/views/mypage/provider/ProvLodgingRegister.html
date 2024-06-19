@@ -4,9 +4,178 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/provider/ProvLodgingRegister.css}">
     <script th:src="@{/js/mypage/provider/ProvLodgingRegister.js}"></script>
-    <title>Title</title>
+    <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
+    <title>숙소 등록</title>
 </head>
 <body>
+<header>
+    <div class="container">
+        <div class="header-items">
+            <h1>숙소 등록</h1>
+            <div>
+                <img src="LOGO_URL" alt="Logo" height="40">
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <div class="header-menu">
+            <h2>숙소 오너</h2>
+            <div>
+                <button>내 정보 관리</button>
+                <button><a href="lodgingregister">숙소 등록</a></button>
+            </div>
+        </div>
+
+        <h2>숙소 이미지 업로드</h2>
+        <div class="image-uploader1">
+            <button class="image-nav left">&lt;</button>
+            <p>숙소 이미지를 등록해 주세요</p>
+            <button class="image-nav right">&gt;</button>
+        </div>
+
+        <div id="Upload1">
+            <form id="UploadForm1" enctype="multipart/form-data">
+                <input type="file" id="fileInput1" name="file1" accept="image/*" multiple>
+                <button type="button" onclick="uploadLodgingImages()">숙소 이미지 업로드</button>
+            </form>
+        </div>
+
+        <form id="registrationForm">
+            <div class="form-row1">
+                <div class="form-group1">
+                    <label for="name">숙소 이름</label>
+                    <input type="text" id="name" placeholder="숙소 이름을 입력해 주세요.">
+                </div>
+                <div class="form-group1">
+                    <label for="type">숙소 타입</label>
+                    <select id="type">
+                        <option value="">숙소 타입을 선택해 주세요.</option>
+                        <option value="펜션/풀빌라">펜션/풀빌라</option>
+                        <option value="모텔">모텔</option>
+                        <option value="호텔/리조트">호텔/리조트</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group1">
+                <label for="region">지역</label>
+                <select id="region">
+                    <option value="">지역을 선택해 주세요.</option>
+                    <option value="서울특별시">서울특별시</option>
+                    <option value="부산광역시">부산광역시</option>
+                    <option value="인천광역시">인천광역시</option>
+                    <option value="제주특별자치도">제주특별자치도</option>
+                    <option value="경기도">경기도</option>
+                    <option value="경상남도">경상남도</option>
+                    <option value="경상북도">경상북도</option>
+                    <option value="전라남도">전라남도</option>
+                    <option value="충청남도">충청남도</option>
+                    <option value="강원도">강원도</option>
+                    <option value="대전광역시">대전광역시</option>
+                    <option value="대구광역시">대구광역시</option>
+                    <option value="울산광역시">울산광역시</option>
+                </select>
+            </div>
+            <div class="form-group1">
+                <label for="sub-region">하위 지역</label>
+                <select id="sub-region">
+                    <option value="">하위 지역을 선택해 주세요.</option>
+                    <option value="중구">중구</option>
+                    <option value="해운대구">해운대구</option>
+                    <option value="강화군">강화군</option>
+                    <option value="남동구">남동구</option>
+                    <option value="제주시">제주시</option>
+                    <option value="서귀포시">서귀포시</option>
+                    <option value="수원시">수원시</option>
+                    <option value="고양시">고양시</option>
+                    <option value="용인시">용인시</option>
+                    <option value="창원시">창원시</option>
+                    <option value="김해시">김해시</option>
+                    <option value="포항시">포항시</option>
+                    <option value="경주시">경주시</option>
+                    <option value="여수시">여수시</option>
+                    <option value="여주시">여주시</option>
+                    <option value="순천시">순천시</option>
+                    <option value="천안시">천안시</option>
+                    <option value="아산시">아산시</option>
+                    <option value="춘천시">춘천시</option>
+                    <option value="강릉시">강릉시</option>
+                    <option value="서구">서구</option>
+                    <option value="북구">북구</option>
+                    <option value="울주군">울주군</option>
+                </select>
+            </div>
+            <div class="form-row1">
+                <div class="form-group1">
+                    <label for="address">숙소 주소</label>
+                    <input type="text" id="address" placeholder="숙소 주소를 입력해 주세요.">
+                </div>
+                <div class="form-group1">
+                    <label for="phone">숙소 전화번호</label>
+                    <input type="text" id="phone" placeholder="숙소 전화번호를 입력해 주세요.">
+                </div>
+            </div>
+            <div class="form-group1">
+                <label for="url">숙소 URL</label>
+                <input type="url" id="url" placeholder="숙소 URL을 입력해 주세요.">
+            </div>
+            <div class="form-row1">
+                <div class="form-group1">
+                    <label for="checkin">숙소 입실시간</label>
+                    <input type="text" id="checkin" placeholder="숙소 입실시간을 입력해 주세요.">
+                </div>
+                <div class="form-group1">
+                    <label for="checkout">숙소 퇴실시간</label>
+                    <input type="text" id="checkout" placeholder="숙소 퇴실시간을 입력해 주세요.">
+                </div>
+            </div>
+            <div class="form-group1">
+                <label for="description">숙소 소개</label>
+                <textarea id="description" placeholder="숙소 소개를 입력해 주세요."></textarea>
+            </div>
+            <div class="form-group1">
+                <label for="facilities">숙소 시설 및 서비스</label>
+                <textarea id="facilities" placeholder="숙소 시설 및 서비스를 입력해 주세요."></textarea>
+            </div>
+            <div class="form-group1">
+                <label for="notice">숙소 예약 공지</label>
+                <textarea id="notice" placeholder="숙소 예약 공지를 입력해 주세요."></textarea>
+            </div>
+            <div class="form-row1">
+                <div class="form-group1">
+                    <label for="ownername">담담자 이름</label>
+                    <input type="text" id="ownername" placeholder="담당자 이름을 입력해 주세요.">
+                </div>
+                <div class="form-group1">
+                    <label for="ownerphone">담당자 전화번호</label>
+                    <input type="text" id="ownerphone" placeholder="담당자 전화번호를 입력해 주세요.">
+                </div>
+            </div>
+            <div class="form-group1">
+                <label for="owneremail">담당자 이메일</label>
+                <input type="email" id="owneremail" placeholder="담당자 이메일을 입력해 주세요.">
+            </div>
+            <div class="form-group1">
+                <label for="ownerid">사업자등록번호</label>
+                <input type="text" id="ownerid" placeholder="사업자등록번호를 입력해 주세요.">
+            </div>
+            <div class="form-row1">
+                <div class="form-group1">
+                    <button type="submit">추가</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</main>
+
+<!-- 푸터 -->
+<footer>
+
+</footer>
+
 
 </body>
 </html>

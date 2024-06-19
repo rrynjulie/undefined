@@ -4,9 +4,139 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/provider/ProvRoomRegister.css}">
     <script th:src="@{/js/mypage/provider/ProvRoomRegister.js}"></script>
-    <title>Title</title>
+    <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
+    <title>객실 등록</title>
 </head>
 <body>
+<header>
+    <div class="container">
+        <div class="header-items">
+            <h1>객실 등록</h1>
+            <div>
+                <img src="LOGO_URL" alt="Logo" height="40">
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <div class="header-menu">
+            <h2>숙소 오너</h2>
+            <div>
+                <button>내 정보 관리</button>
+                <button><a href="roomregister">객실 등록</a></button>
+            </div>
+        </div>
+
+        <h2>객실 이미지 업로드</h2>
+        <div class="image-uploader2">
+            <button class="image-nav left">&lt;</button>
+            <p>객실 이미지를 등록해 주세요</p>
+            <button class="image-nav right">&gt;</button>
+        </div>
+
+        <div id="Upload2">
+            <form id="UploadForm2" enctype="multipart/form-data">
+                <input type="file" id="fileInput2" name="file2" accept="image/*" multiple>
+                <button type="button" onclick="uploadRoomImages()">객실 이미지 업로드</button>
+            </form>
+        </div>
+
+        <form id="registrationForm">
+
+            <div class="form-row2">
+                <div class="form-group2">
+                    <label for="roomname">객실 이름</label>
+                    <input type="text" id="roomname" placeholder="객실 이름을 입력해 주세요.">
+                </div>
+            </div>
+
+            <div class="form-row2">
+                <div class="form-group2">
+                    <label for="normal">객실 기준 인원수</label>
+                    <input type="text" id="normal" placeholder="객실 기준 인원수를 입력해 주세요.">
+                </div>
+                <div class="form-group2">
+                    <label for="max">객실 최대 인원수</label>
+                    <input type="text" id="max" placeholder="객실 최대 인원수를 입력해 주세요.">
+                </div>
+            </div>
+
+            <div class="form-row2">
+                <div class="form-group2">
+                    <label for="price">객실 가격</label>
+                    <input type="text" id="price" placeholder="객실 숙소 가격을 입력해 주세요.">
+                </div>
+            </div>
+
+            <div class="form-row2">
+                <div class="form-group2">
+                    <label for="grade">객실 등급</label>
+                    <input type="text" id="grade" placeholder="객실 등급을 입력해 주세요.">
+                </div>
+            </div>
+            <div class="form-row2">
+                <div class="form-group2">
+                    <label for="nm">객실 호수</label>
+                    <input type="text" id="nm" placeholder="객실 호수를 입력해 주세요.">
+                </div>
+                <div class="form-group2">
+                    <label for="area">객실 면적</label>
+                    <input type="text" id="area" placeholder="객실 면적을 입력해 주세요.">
+                </div>
+            </div>
+
+
+            <div class="form-row2">
+                <div class="form-group2">
+                    <label for="bedcnt">객실 침대 개수</label>
+                    <input type="text" id="bedcnt" placeholder="객실 침대 개수를 입력해 주세요.">
+                </div>
+                <div class="form-group2">
+                    <label for="roombedtype">객실 침대 유형</label>
+                    <select id="roombedtype">
+                        <option value="">침대 유형을 선택해 주세요.</option>
+                        <option value="싱글 침대">싱글 침대</option>
+                        <option value="더블 침대">더블 침대</option>
+                        <option value="퀸 침대">퀸 침대</option>
+                        <option value="킹 침대">킹 침대</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row2">
+                <div class="form-group2">
+                    <label for="bathcnt">객실 욕실 개수</label>
+                    <input type="text" id="bathcnt" placeholder="객실 욕실 개수를 입력해 주세요.">
+                </div>
+                <div class="form-group2">
+                    <label for="smoke">객실 흡연 여부</label>
+                    <input type="text" id="smoke" placeholder="객실 흡연 여부를 입력해 주세요.">
+                </div>
+            </div>
+
+
+            <div class="form-group2">
+                <label for="notion">숙소 공지사항 및 소개</label>
+                <textarea id="notion" placeholder="숙소 공지사항 및 소개를 입력해 주세요."></textarea>
+            </div>
+
+            <div class="form-row2">
+                <div class="form-group2">
+                    <button type="submit">추가</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</main>
+
+<!-- 푸터 -->
+<footer>
+
+</footer>
+
 
 </body>
 </html>
