@@ -175,7 +175,10 @@ main {
     margin-top: 20px;
 }
 
-.btn-list button {
+.btn-list button, a {
+    text-decoration: none;
+    text-align: center;
+    align-content: center;
     height: 50px;
     width: 150px;
     border: 0;
@@ -195,6 +198,6 @@ main {
     color: white;
 }
 
-.btn-list button:hover {
+.btn-update:hover, .btn-delete:hover {
     transform: scale(1.02);
 }
