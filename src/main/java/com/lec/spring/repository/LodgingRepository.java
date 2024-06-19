@@ -1,10 +1,16 @@
 package com.lec.spring.repository;
 
+
 import com.lec.spring.domain.Lodging;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
 
 import java.util.List;
 
+@Mapper
 public interface LodgingRepository {
-    List<Lodging> list();   // 검색 후 검색 결과에 맞는 숙소 리스트
+    @Select("SELECT * FROM lodging")
+    List<Lodging> findAllLodging();
 
 }
