@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/customer/BookingList.css}">-->
+    <link rel="stylesheet" type="text/css" href="../../../../static/css/mypage/customer/BookingList.css">
+<!--    <script th:src="@{/js/mypage/customer/BookingList.js}"></script>-->
+    <script src="../../../../static/js/mypage/customer/BookingList.js"></script>
+    <title>Title</title>
+</head>
+
+<body>
+<header id="nav-bar"></header>
+<script src="../../../../static/js/LoadHeader.js"></script>
+<script src="../../../../static/js/Header.js"></script>
+<main>
+    <div class="profile-menu-container">
+        <div class="profile-info">
+            <div>
+                <h2>닉네임</h2>
+            </div>
+        </div>
+        <div class="menu-list">
+            <button class="menu-item" id="reservation-btn">예약 내역<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
+            <button class="menu-item" id="manage-info-btn">내 정보 관리<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
+            <button class="menu-item" id="review-btn">작성 후기<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
+            <button class="menu-item" id="coupon-btn">쿠폰<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
+            <button class="menu-item" id="seller-btn">판매자 페이지<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
+            <button class="menu-item" id="manager-btn">관리자 페이지<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
+        </div>
+    </div>
+
+    <section id="reservation">
+        <h2>예약 내역</h2>
+        <div class="filter-container">
+            <select id="accommodation-type">
+                <option value="">전체</option>
+                <option value="호텔">호텔</option>
+                <option value="펜션/리조트">펜션/리조트</option>
+                <option value="모텔">모텔</option>
+            </select>
+            <select id="time-period">
+                <option value="3months">전체</option>
+                <option value="3months">최근 3개월</option>
+                <option value="6months">최근 6개월</option>
+                <option value="1year">최근 1년</option>
+            </select>
+            <img id="search-btn" src="../../../../static/image/IconSearch.png" class="search-icon" width="50">
+        </div>
+        <div class="reservation-content">
+            <!-- 예약 내역을 표시하는 요소들 -->
+                <div class="booking-item">
+                    <div class="booking-info">
+                        <h3>호텔 이름: 서울 호텔</h3>
+                        <p>예약 날짜: 2023-06-15</p>
+                        <p>체크인: 2023-06-20</p>
+                        <p>체크아웃: 2023-06-25</p>
+                    </div>
+                </div>
+                <div class="booking-item">
+                    <div class="booking-info">
+                        <h3>호텔 이름: 부산 호텔</h3>
+                        <p>예약 날짜: 2023-07-10</p>
+                        <p>체크인: 2023-07-15</p>
+                        <p>체크아웃: 2023-07-20</p>
+                    </div>
+                </div>
+                <!-- 추가 예약 항목들 -->
+
+        </div>
+    </section>
+</main>
+<footer id="footer"></footer>
+<script src="../../../../static/js/LoadFooter.js"></script>
+</body>
+
+</html>

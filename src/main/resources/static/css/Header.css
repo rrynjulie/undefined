@@ -84,7 +84,7 @@ li {
 
 #btn-login-pc:hover {
     border-bottom: 0 none;
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
 @media screen and (max-width: 600px) {
