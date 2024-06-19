@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/css/ticket/TicketCheck.css}">
@@ -15,7 +15,7 @@
     <div class="tab-item" id="round-trip-tab">왕복</div>
 </div>
 <div class="form-container">
-    <form action="/user/fetchBusInfo" method="get">
+    <form action="/fetchBusInfo" method="get">
         <label for="depTerminalId">출발 터미널</label>
         <input type="text" id="depTerminalId" name="depTerminalId" placeholder="출발터미널ID 입력">
 

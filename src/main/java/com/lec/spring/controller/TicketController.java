@@ -26,7 +26,7 @@ public class TicketController {
 
     @RequestMapping("/ticketcheck")
     public String ticketcheck() {
-        return "TicketCheck";
+        return "ticket/TicketCheck";
     }
 
     @RequestMapping("/fetchBusInfo")
@@ -54,7 +54,7 @@ public class TicketController {
 
         model.addAttribute("busInfoList", busInfoList);
         model.addAttribute("returnBusInfoList", returnBusInfoList);
-        return "TicketList";
+        return "ticket/TicketList";
     }
 
     private List<Map<String, String>> fetchBusInfo(RestTemplate rt, String baseUrl, String depTerminalId, String arrTerminalId, String depPlandTime, String busGradeId) {
