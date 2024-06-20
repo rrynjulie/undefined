@@ -133,6 +133,14 @@ CREATE TABLE user
     PRIMARY KEY (user_id)
 ) COMMENT '유져';
 
+CREATE TABLE cancel
+(
+    reason      VARCHAR(100) NOT NULL COMMENT '취소사유',
+    user_id     VARCHAR(100) NOT NULL COMMENT '아이디(UQ)',
+    lodging_id  INT         NOT NULL COMMENT  '숙소 고유 id값',
+    PRIMARY KEY (reason)
+) COMMENT '취소';
+
 ALTER TABLE user
     ADD CONSTRAINT UQ_user_id UNIQUE (user_id);
 
@@ -218,3 +226,13 @@ ALTER TABLE coupon
     ADD CONSTRAINT FK_user_TO_coupon
         FOREIGN KEY (user_id)
             REFERENCES user (user_id);
+
+ALTER TABLE cancel
+    ADD CONSTRAINT FK_lodging_TO_cancel
+        FOREIGN KEY (lodging_id)
+            REFERENCES lodging (lodging_id);
+
+ALTER TABLE cancel
+    ADD CONSTRAINT FK_user_TO_cancel
+        FOREIGN KEY (user_id)
+            REFERENCES user (user_id)

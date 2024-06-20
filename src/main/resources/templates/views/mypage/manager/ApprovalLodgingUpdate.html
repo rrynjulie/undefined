@@ -3,23 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../../../../static/css/mypage/manager/ApprovalLodgingUpdate.css">
+    <script th:src="@{/js/mypage/manager/ApprovalLodgingUpdate.js}"></script>
     <title>Title</title>
 </head>
 <body>
 
 <main>
-    <div class="profile-menu-container">
-        <div class="profile-info">
-            <div >
-                <h2>닉네임</h2>
-            </div>
-        </div>
-        <div class="menu-list">
-            <button class="menu-item" id="lodging-update">승인 요청<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
-            <button class="menu-item" id="member-management">회원 관리<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
-            <button class="menu-item" id="manage-info-btn">내 정보 관리<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
-        </div>
-    </div>
+    <!-- 좌측 네비게이션 메뉴 -->
+    <nav class="provider-menu">
+        <ul>
+            <li class="provider-menu-list"><img src="../../../../static/image/approval.png" alt="" class="provider-menu-icon"><a href="../manager/ApprovalLodgingUpdate.html">승인요청</a></li>
+            <li class="provider-menu-list"><img src="../../../../static/image/Member.png" alt="" class="provider-menu-icon"><a href="../manager/MemberManagement.html">회원관리</a></li>
+            <li class="provider-menu-list"><img src="../../../../static/image/privacy.png" alt="" class="provider-menu-icon"><a href="../customer/ManageAccount.html" class="active">내 정보 관리</a></li>
+        </ul>
+    </nav>
 
     <div class="reservation-content">
         <section class="approval-section">
@@ -69,6 +66,57 @@
             </div>
         </section>
     </div>
+    <script src="../../../../static/js/mypage/manager/ApprovalLodgingUpdate.js"></script>
+
+
+<!--    <div class="reservation-content">-->
+<!--        <section class="approval-section">-->
+<!--            <h2>숙소 승인</h2>-->
+<!--            <div class="accommodation-card">-->
+<!--                <div class="photo">사진</div>-->
+<!--                <div class="details">-->
+<!--                    <p>숙소명: -&#45;&#45;&#45;&#45;호텔</p>-->
+<!--                    <p>숙소 타입: 호텔</p>-->
+<!--                    <p>숙소 주소:</p>-->
+<!--                    <p>연락처:</p>-->
+<!--                    <button onclick="btnReg()" class="details-button">상세 보기</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="accommodation-card">-->
+<!--                <div class="photo">사진</div>-->
+<!--                <div class="details">-->
+<!--                    <p>숙소명: -&#45;&#45;&#45;&#45;모텔</p>-->
+<!--                    <p>숙소 타입: 모텔</p>-->
+<!--                    <p>숙소 주소:</p>-->
+<!--                    <p>연락처:</p>-->
+<!--                    <button onclick="btnReg()" class="details-button" >상세 보기</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="accommodation-card">-->
+<!--                <div class="photo">사진</div>-->
+<!--                <div class="details">-->
+<!--                    <p>숙소명: -&#45;&#45;&#45;&#45;펜션</p>-->
+<!--                    <p>숙소 타입: 펜션</p>-->
+<!--                    <p>숙소 주소:</p>-->
+<!--                    <p>연락처:</p>-->
+<!--                    <button onclick="btnReg()" class="details-button">상세 보기</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </section>-->
+<!--        <section class="delete-section">-->
+<!--            <h2>숙소 삭제</h2>-->
+<!--            <div class="accommodation-card">-->
+<!--                <div class="photo">사진</div>-->
+<!--                <div class="details">-->
+<!--                    <p>숙소명: -&#45;&#45;&#45;&#45;펜션</p>-->
+<!--                    <p>숙소 타입: 펜션</p>-->
+<!--                    <p>숙소 주소:</p>-->
+<!--                    <p>연락처:</p>-->
+<!--                    <button onclick="btnDel()" class="details-button">상세 보기</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </section>-->
+<!--    </div>-->
 </main>
 </body>
 <script src="../../../../static/js/mypage/manager/ApprovalLodgingUpdate.js"></script>

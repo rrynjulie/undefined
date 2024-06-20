@@ -3,23 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../../../../static/css/mypage/manager/MemberManagement.css">
+    <script th:src="@{/js/mypage/manager/MemberManagement.js}"></script>
     <title>Title</title>
 </head>
 <body>
 
 <main>
-    <div class="profile-menu-container">
-        <div class="profile-info">
-            <div >
-                <h2>닉네임</h2>
-            </div>
-        </div>
-        <div class="menu-list">
-            <button class="menu-item" id="lodging-update">승인 요청<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
-            <button class="menu-item" id="member-management">회원 관리<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
-            <button class="menu-item" id="manage-info-btn">내 정보 관리<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
-        </div>
-    </div>
+    <!-- 좌측 네비게이션 메뉴 -->
+    <nav class="provider-menu">
+        <ul>
+            <li class="provider-menu-list"><img src="../../../../static/image/approval.png" alt="" class="provider-menu-icon"><a href="../manager/ApprovalLodgingUpdate.html">승인요청</a></li>
+            <li class="provider-menu-list"><img src="../../../../static/image/Member.png" alt="" class="provider-menu-icon"><a href="../manager/MemberManagement.html">회원관리</a></li>
+            <li class="provider-menu-list"><img src="../../../../static/image/privacy.png" alt="" class="provider-menu-icon"><a href="../customer/ManageAccount.html" class="active">내 정보 관리</a></li>
+        </ul>
+    </nav>
 
 
     <section class="content">
