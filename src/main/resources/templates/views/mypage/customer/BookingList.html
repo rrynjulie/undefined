@@ -14,6 +14,7 @@
 <script src="../../../../static/js/LoadHeader.js"></script>
 <script src="../../../../static/js/Header.js"></script>
 <main>
+<!--    <form th:action="@{/reservations}" method="post" id="reservationForm">-->
     <div class="profile-menu-container">
         <div class="profile-info">
             <div>
@@ -56,6 +57,9 @@
                         <p>체크인: 2023-06-20</p>
                         <p>체크아웃: 2023-06-25</p>
                     </div>
+                    <div class="review">
+                        <button class="review-btn" onclick="openReviewModal('부산 호텔')">리뷰작성하기</button>
+                    </div>
                 </div>
                 <div class="booking-item">
                     <div class="booking-info">
@@ -64,12 +68,37 @@
                         <p>체크인: 2023-07-15</p>
                         <p>체크아웃: 2023-07-20</p>
                     </div>
+                    <div class="review">
+                        <button class="review-btn" onclick="openReviewModal('부산 호텔')">리뷰작성하기</button>
+                    </div>
                 </div>
-                <!-- 추가 예약 항목들 -->
-
         </div>
     </section>
+
+
+    <!-- 리뷰 작성 모달 -->
+    <div id="reviewModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeReviewModal()">&times;</span>
+            <h2 id="modalTitle">리뷰 작성하기</h2>
+            <form id="reviewForm">
+                <div class="form-group">
+                    <label for="hotelName">호텔 이름:</label>
+                    <input type="text" id="hotelName" name="hotelName" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="reviewText">리뷰 내용:</label>
+                    <textarea id="reviewText" name="reviewText" rows="4"></textarea>
+                </div>
+                <button type="submit">리뷰 작성 완료</button>
+            </form>
+        </div>
+    </div>
+
 </main>
+
+
+
 <footer id="footer"></footer>
 <script src="../../../../static/js/LoadFooter.js"></script>
 </body>

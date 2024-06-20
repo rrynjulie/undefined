@@ -27,3 +27,7 @@ mybatis:
 app:
   api-key:
     bus: U9c9flFLgpbAOylXQxuVD76YrzYZ286eeiZReWrwVT/u53GQ9Rkh/RDPUc9LGeFXdst8MVBwoyPZGwJ4W2wybw==
+
+  # 파일 업로드 경로
+  upload:
+    path: src/main/resources/static/image

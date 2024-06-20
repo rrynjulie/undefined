@@ -1,0 +1,174 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    display: flex;
+    justify-content: space-between;
+    padding: 100px;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.booking-details {
+    width: 60%;
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+h2 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.info label {
+    margin-bottom: 5px;
+}
+
+.info input {
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border-style: none;
+    background-color: #eeeeee;
+    width: 30%;
+}
+
+.radio-label {
+    display: flex;
+    cursor: pointer;
+    padding: 8px 16px; /* 라벨의 패딩 설정 */
+    border: 1px solid #ccc; /* 기본 테두리 스타일 */
+    border-radius: 4px; /* 테두리의 모서리를 둥글게 만듭니다. */
+    margin-right: 10px; /* 라벨 사이의 간격 설정 */
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.methods {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.methods button {
+    margin: 0;
+    padding: 10px;
+    font-size: 0.9em;
+}
+
+.checkbox {
+    margin: 10px 0;
+}
+
+.summary-container {
+    display: flex; /* Flexbox 사용 */
+    flex-direction: column; /* 세로 방향으로 정렬 */
+    gap: 20px; /* 요소 사이의 간격 설정 */
+    width: 50%;
+
+}
+
+
+.summary {
+    width: 60%;
+    text-align: center;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left: 100px;
+}
+
+.summary img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.price-info {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.terms {
+    margin: 20px 0;
+}
+
+.pay-button {
+    background-color: #fc5185;
+}
+
+/*.pay-button:hover {*/
+/*    background-color: rgba(252, 81, 133, 0.11);*/
+/*}*/
+
+/*Modal*/
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
