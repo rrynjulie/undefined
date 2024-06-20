@@ -4,14 +4,14 @@ document.addEventListener('DOMContentLoaded', function() {
     submitCommentButtons.forEach(button => {
         button.addEventListener('click', function() {
             const commentInputContainer = this.parentElement;
-            const commentList = commentInputContainer.previousElementSibling;
+            const commentList = commentInputContainer.parentElement.querySelector('.comment-list'); // comment-list 선택
             const input = commentInputContainer.querySelector('.comment-input');
             const comment = input.value.trim();
 
             if (comment !== '') {
                 const newComment = document.createElement('p');
                 newComment.textContent = comment;
-                commentList.appendChild(newComment);
+                commentList.appendChild(newComment); // comment-list에 추가
                 input.value = '';
 
                 // Hide input and button
