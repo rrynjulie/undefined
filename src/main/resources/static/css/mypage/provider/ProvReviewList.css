@@ -1,3 +1,388 @@
+.review-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 100%;
+}
+
+.username {
+    font-size: 18px;
+    margin: 0;
+    color: #333;
+}
+
+.review-date {
+    font-size: 14px;
+    color: #888;
+}
+
+.review-content {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.review-container-all{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.review-images {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.review-images img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.rating {
+    font-size: 20px;
+    color: #ffb400;
+    margin-bottom: 10px;
+}
+
+.review-text {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.owner-comment {
+    margin-top: 20px;
+    background-color: #eeeeee;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.comment-header {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.comment-list {
+    margin-top: 10px;
+}
+
+.comment-input-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.comment-input {
+    flex: 1;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.submit-comment {
+    padding: 8px 16px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #FC5185;
+    color: white;
+    cursor: pointer;
+}
+
+.submit-comment:hover {
+    background-color: #e04572;
+}
+
+.comment-list p {
+    margin: 5px 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 60px;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: left;
+    margin: 20px 0;
+}
+
+.header h1 {
+    font-size: 24px;
+    margin: 0;
+    color: #333;
+}
+
+.room-filter, .sort-filter {
+    display: inline-block; /* 인라인 블록 요소로 설정하여 한 줄에 표시 */
+    margin-right: 20px; /* 필터 간의 간격 설정 */
+    margin-bottom: 30px;
+}
+
+.room-filter select, .sort-filter select {
+    padding: 8px; /* 내부 여백 설정 */
+    font-size: 16px; /* 폰트 크기 설정 */
+    border: 1px solid #ccc; /* 테두리 설정 */
+    border-radius: 4px; /* 테두리 둥글기 설정 */
+    background-color: #fff; /* 배경색 설정 */
+    width: 150px; /* 너비 설정 */
+    max-width: 100%; /* 최대 너비 설정 */
+}
+
+.room-filter select:focus, .sort-filter select:focus {
+    outline: none; /* 포커스 시 테두리 제거 */
+    border-color: #66afe9; /* 포커스 시 테두리 색상 변경 */
+    box-shadow: 0 0 5px rgba(102, 175, 233, 0.5); /* 포커스 시 그림자 효과 추가 */
+}
+
+
+.review {
+    background-color: #fff;
+    padding: 20px;
+    /*margin-bottom: 20px;*/
+    border-top: 1px solid #d5d5d5;
+    /*border-bottom: 1px solid #d5d5d5;*/
+}
+
+
+.review-header {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    font-size: 18px;
+    margin: 0;
+    color: #333;
+}
+
+.review-date {
+    font-size: 14px;
+    color: #888;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 400;
+    src:
+            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'),
+            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'),
+            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');
+}
+
+.nav-bar-pc {
+    background-color: white;
+}
+
+.nav-bar-pc-inner {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 15px 20%;
+}
+
+li {
+    list-style-type: none; /* 마커나 불릿 제거 */
+}
+
+.nav-bar-inner-right {
+    font-family: 'Noto Sans KR', sans-serif;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-bar-inner-right a {
+    margin-left: 50px;
+    color: black;
+    align-content: center;
+    text-decoration: none;
+}
+
+.nav-bar-inner-right a:hover {
+    color: #FC5185;
+    border-bottom: 2px solid #FC5185;
+    transition: border-bottom 0.1s ease-in-out;
+}
+
+.nav-bar-pc img {
+    height: 40px;
+}
+
+.main-logo-mobile {
+    margin-left: 10px;
+}
+
+.main-logo-mobile img {
+    height: 30px;
+    width: 40px;
+}
+
+.nav-bar-pc {
+    color: black;
+}
+
+.nav-bar a {
+    flex: 1;
+    /* 화면 크기에 따라 버튼 크기가 조절됨 */
+    text-align: center;
+}
+
+#btn-login-pc {
+    height: 40px;
+    width: 140px;
+    text-align: center;
+    align-content: center;
+    background-color: #FC5185;
+    color: white;
+    border-radius: 7px;
+}
+
+#btn-login-pc:hover {
+    border-bottom: 0 none;
+    transform: scale(1.02);
+}
+
+@media screen and (max-width: 600px) {
+    /* 600 이하일때 */
+    /* 줌인 200% 부터 navbar 중지 */
+    .nav-bar-pc {display: none;}
+
+    .nav-bar-mobile {
+        width: 100%;
+    }
+
+    .nav-bar-mobile-inner {
+        overflow: hidden;
+        background-color: white;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        transition: 0.3s ease-in-out;
+    }
+
+    /* Hide the links inside the navigation menu (except for logo/home) */
+    #nav-menu {
+        display: none;
+        flex-direction: column;
+    }
+
+    .nav-bar-mobile-inner .icon img {
+        width: 30px;
+        height: 30px;
+        float: right;
+    }
+
+    .nav-bar-mobile-inner a {
+        font-family: 'Noto Sans KR', sans-serif;
+        padding: 15px 15px;
+        text-decoration: none;
+        font-size: 13px;
+        display: block;
+    }
+
+    /* Style the hamburger menu */
+    .nav-bar-mobile-inner a.icon {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: absolute;
+        margin-right: 10px;
+        right: 0;
+        top: 0;
+        height: 100%;
+    }
+
+    #nav-menu a {
+        width: 100%;
+        height: 50px;
+        padding: 0 10px;
+        align-content: center;
+        text-decoration: none;
+        font-family: 'Noto Sans KR', sans-serif;
+        background-color: white;
+        color: black;
+    }
+
+    /* Add a grey background color on mouse-over */
+    #nav-menu a:hover {
+        background-color: #F5F5F5;
+        color: black;
+    }
+
+    #btn-login-mobile {
+        background-color: #FC5185 !important;
+        color: white !important;
+    }
+
+    #btn-login-mobile:hover {
+        background-color: #F5F5F5 !important;
+        color: #FC5185 !important;
+    }
+}
+
+@media screen and (min-width: 601px) {
+    /* 600 이상일 때 */
+    /* 줌인 200 부터 navbar2 실행 */
+    .nav-bar-mobile {display: none;}
+}
+
+.ham-bar-1, .ham-bar-2, .ham-bar-3 {
+    width: 20px;
+    height: 2px;
+    background-color: black;
+    margin: 2px 0;
+    transition: 0.4s;
+    border-radius: 10px;
+}
+
+.change .ham-bar-1 {transform: translate(0, 6px) rotate(-45deg);}
+
+.change .ham-bar-2 {opacity: 0;}
+
+.change .ham-bar-3 {transform: translate(0, -6px) rotate(45deg);}
+
+
 @font-face {
     font-family: 'Noto Sans KR';
     font-style: normal;
@@ -37,6 +422,11 @@ main {
     align-items: center;
     padding-left: 20px;
     border: 1px solid #F5F5F5;
+}
+
+.provider-menu-list p {
+    display: block;
+    /* 추가적인 스타일링 */
 }
 
 .provider-menu-list:hover {

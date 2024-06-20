@@ -2,11 +2,92 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/provider/ProvRoomUpdate.css}">
-    <script th:src="@{/js/mypage/provider/ProvRoomUpdate.js}"></script>
-    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../../../../static/css/mypage/provider/ProvRoomUpdate.css">
+    <title>숙소 정보 수정</title>
 </head>
 <body>
+<!-- 헤더 -->
+<header id="nav-bar"></header>
+<script src="../../../../static/js/LoadHeader.js"></script>
+<script src="../../../../static/js/Header.js"></script>
 
+<!-- 메인 -->
+<main>
+    <!-- 좌측 네비게이션 메뉴 -->
+    <nav class="provider-menu">
+        <ul>
+            <li class="provider-menu-list"><img src="../../../../static/image/BookingActive.png" alt="" class="provider-menu-icon"><a href="#">예약 내역</a></li>
+            <li class="provider-menu-list"><img src="../../../../static/image/ReviewActive.png" alt="" class="provider-menu-icon"><a href="#">후기 관리</a></li>
+            <li class="provider-menu-list"><img src="../../../../static/image/LodgingActive.png" alt="" class="provider-menu-icon"><a href="ProvLodgingList.html" class="active">숙소 정보</a></li>
+            <li class="provider-menu-list"><img src="../../../../static/image/RoomActive.png" alt="" class="provider-menu-icon"><a href="ProvRoomList.html">객실  정보</a></li>
+        </ul>
+    </nav>
+
+    <!-- 숙소 정보 페이지 -->
+    <section class="lodging-info">
+        <h1>객실 정보 수정</h1>
+        <form>
+            <div class="lodging-list">
+                <label class="image-upload">
+                    사진 첨부<br>
+                    <div class="image-upload-input">
+                        <input class="image-url" type="text" disabled>
+                        <button class="btn-upload">찾아보기</button>
+                    </div>
+                </label>
+                <label class="info-label">
+                    객실명<br>
+                    <input class="info-input" type="text">
+                </label>
+                <label class="info-label">
+                    객실 호수<br>
+                    <input class="info-input" type="text">
+                </label>
+                <label class="info-label">
+                    객실 기준 인원<br>
+                    <input class="info-input" type="text">
+                </label>
+                <label class="info-label">
+                    객실 최대 인원<br>
+                    <input class="info-input" type="text">
+                </label>
+                <label class="info-label">
+                    객실 면적<br>
+                    <input class="info-input" type="time">
+                </label>
+                <label class="info-label">
+                    객실 가격<br>
+                    <input class="info-input" type="time">
+                </label>
+                <label class="info-label">
+                    객실 침대 개수<br>
+                    <input class="info-input" type="text">
+                </label>
+                <label class="info-label">
+                    객실 욕실 개수<br>
+                    <input class="info-input" type="text">
+                </label>
+                <label class="info-label">
+                    객실 흡연 가능 여부<br>
+                    <input class="info-input" type="text">
+                </label>
+            </div>
+            <div class="lodging-list">
+                <label class="info-label-textarea">
+                    객실 공지사항 및 소개<br>
+                    <textarea class="info-textarea"></textarea>
+                </label>
+            </div>
+        </form>
+        <div class="btn-list">
+            <button class="btn-update-complete">수정 완료</button>
+        </div>
+    </section>
+    <script src="../../../../static/js/mypage/provider/ProvRoomUpdate.js"></script>
+</main>
+
+<!-- 푸터 -->
+<footer id="footer"></footer>
+<script src="../../../../static/js/LoadFooter.js"></script>
 </body>
 </html>

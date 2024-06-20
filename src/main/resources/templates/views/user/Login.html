@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
     <link rel="stylesheet" type="text/css" href="../../../static/css/user/Login.css">
 
-    <script src="../../../static/js/user/Login.js"></script>
+    <script src="../../../../resources/static/js/user/Login.js"></script>
 
 
     <title> login</title>
@@ -22,16 +22,16 @@
 
 <body>
 <header id="nav-bar"></header>
-<script src="../../../static/js/LoadHeader.js"></script>
-<script src="../../../static/js/Header.js"></script>
+<!--<script src="../../../../../../src/main/resources/static/js/LoadHeader.js"></script>-->
+<!--<script src="../../../../../../src/main/resources/static/js/Header.js"></script>-->
 
 <!-- 좌측 네비게이션 메뉴 -->
 <nav class="provider-menu">
     <ul>
-        <li class="provider-menu-list"><img src="../../../static/image/Booking.png" alt="" class="provider-menu-icon"><a href="">예약내역</a></li>
-        <li class="provider-menu-list"><img src="../../../static/image/Review.png" alt="" class="provider-menu-icon"><a href="#">후기관리</a></li>
-        <li class="provider-menu-list"><img src="../../../static/image/Lodging.png" alt="" class="provider-menu-icon"><a href="ProvLodgingList.html" class="active">숙소정보</a></li>
-        <li class="provider-menu-list"><img src="../../../static/image/Room.png" alt="" class="provider-menu-icon"><a href="ProvRoomList.html">객실정보</a></li>
+        <li class="provider-menu-list"><img src="../../../../../../src/main/resources/static/image/BookingActive.png" alt="" class="provider-menu-icon"><a href="#">예약 내역</a></li>
+        <li class="provider-menu-list"><img src="../../../../../../src/main/resources/static/image/ReviewActive.png" alt="" class="provider-menu-icon"><a href="#">후기 관리</a></li>
+        <li class="provider-menu-list"><img src="../../../../../../src/main/resources/static/image/LodgingActive.png" alt="" class="provider-menu-icon"><a href="ProvLodgingList.html" class="active">숙소 정보</a></li>
+        <li class="provider-menu-list"><img src="../../../../../../src/main/resources/static/image/RoomActive.png" alt="" class="provider-menu-icon"><a href="ProvRoomList.html">객실  정보</a></li>
     </ul>
 </nav>
 <img id="logo" src="../../../static/image/logo.png">
@@ -44,12 +44,14 @@
         </div>
         <form id="login-form" action="../../../templates/views/Home.html" method="POST">
             <div class="form-floating">
-                <input type="text" class="form-control" name="email" id="email" value="email" placeholder="example@mail.com" required>
+                <input type="text" class="form-control" name="email" id="email" placeholder="example@mail.com" required>
                 <label for="email">Email</label>
+                <div id="emailError" class="text-danger d-none">이메일을 입력해 주세요.</div>
             </div>
             <div class="form-floating mt-1">
-                <input type="password" class="form-control" name="password" id="password" value="" placeholder="Password" required>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
                 <label for="password">Password</label>
+                <div id="passwordError" class="text-danger d-none">비밀번호를 입력해 주세요.</div>
             </div>
             <br>
             <button class="w-100 btn btn-lg btn-primary my-1 custom-btn" type="submit" id="loginButton" style="border: none !important; background-color:#FC5185">로그인</button>
@@ -166,6 +168,6 @@
 
 <!-- 푸터 -->
 <footer id="footer"></footer>
-<script src="../../../static/js/LoadFooter.js"></script>
+<!--<script src="../../../../../../src/main/resources/static/js/LoadFooter.js"></script>-->
 </body>
 </html>
