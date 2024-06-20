@@ -1,135 +1,193 @@
-@font-face {
-    font-family: 'Noto Sans KR';
-    font-style: normal;
-    font-weight: 400;
-    src:
-            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'),
-            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'),
-            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');
-}
-
-* {
-    font-family: 'Noto Sans KR', sans-serif;
-}
-
-main {
+.review-container {
     display: flex;
-    padding: 40px 20%;
-    height: fit-content;
     justify-content: space-between;
-    border-top: 1px solid #F5F5F5;
 }
 
-.provider-menu {
-    background-color: white;
-    height: fit-content;
-    margin-right: 50px;
-    width: 25%;
-    border: 1px solid #F5F5F5;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.provider-menu-list {
-    width: 100%;
-    height: 70px;
+.review-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding-left: 20px;
-    border: 1px solid #F5F5F5;
+    margin-bottom: 10px;
 }
 
-.provider-menu-list:hover {
-    background-color: #F5F5F5;
-}
-
-.provider-menu-list a {
-    text-decoration: none;
-    font-weight: bold;
-    color: black;
-}
-
-.provider-menu-list a:active {
-    color: #FC5185;
-}
-
-.provider-menu-icon {
-    height: 30px;
-    width: 30px;
-    margin-right: 30px;
-}
-
-.lodging-info {
-    background-color: white;
-    width: 75%;
-}
-
-.lodging-list {
+.user-info {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 100%;
-    margin-top: 20px;
+    flex-direction: column;
 }
 
-.info-label, .info-label-textarea {
-    width: 48%;
+.username {
+    font-size: 18px;
+    margin: 0;
+    color: #333;
+}
+
+.review-date {
+    font-size: 14px;
+    color: #888;
+}
+
+.review-content {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.review-container-all{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.review-images {
+    display: flex;
+    gap: 10px;
     margin: 10px 0;
-    font-size: 12px;
-    font-weight: bold;
-    color: dimgray;
 }
 
-.info-label-textarea {
-    width: 100%;
+.review-images img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
-.info-input, .info-textarea {
-    width: 100%;
-    height: 50px;
-    border: 0;
-    border-radius: 7px;
-    background-color: #F5F5F5;
-    margin-top: 5px;
-    padding: 0 15px;
-    font-size: 17px;
+.rating {
+    font-size: 20px;
+    color: #ffb400;
+    margin-bottom: 10px;
 }
 
-.info-textarea {
-    padding: 15px;
-    height: 150px;
-    resize: none;
+.review-text {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
 }
 
-.btn-list {
-    display: flex;
-    justify-content: end;
+.owner-comment {
     margin-top: 20px;
+    background-color: #eeeeee;
+    border-radius: 8px;
+    padding: 10px;
 }
 
-.btn-list button, a {
-    text-decoration: none;
-    text-align: center;
-    align-content: center;
-    height: 50px;
-    width: 150px;
-    border: 0;
-    border-radius: 7px;
-    margin-left: 20px;
-    font-size: 17px;
-    font-weight: bold;
+.comment-header {
+    font-size: 16px;
+    margin-bottom: 10px;
 }
 
-.btn-update {
-    background-color: #FFEBEF;
-    color: #FC5185;
+.comment-list {
+    margin-top: 10px;
 }
 
-.btn-delete {
+.comment-input-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.comment-input {
+    flex: 1;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.submit-comment {
+    padding: 8px 16px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
     background-color: #FC5185;
     color: white;
+    cursor: pointer;
 }
 
-.btn-update:hover, .btn-delete:hover {
-    transform: scale(1.02);
+.submit-comment:hover {
+    background-color: #e04572;
+}
+
+.comment-list p {
+    margin: 5px 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 60px;
+    padding: 0;
+}
+
+.container {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: left;
+    margin: 20px 0;
+}
+
+.header h1 {
+    font-size: 24px;
+    margin: 0;
+    color: #333;
+}
+
+.room-filter, .sort-filter {
+    display: inline-block; /* 인라인 블록 요소로 설정하여 한 줄에 표시 */
+    margin-right: 20px; /* 필터 간의 간격 설정 */
+    margin-bottom: 30px;
+}
+
+.room-filter select, .sort-filter select {
+    padding: 8px; /* 내부 여백 설정 */
+    font-size: 16px; /* 폰트 크기 설정 */
+    border: 1px solid #ccc; /* 테두리 설정 */
+    border-radius: 4px; /* 테두리 둥글기 설정 */
+    background-color: #fff; /* 배경색 설정 */
+    width: 150px; /* 너비 설정 */
+    max-width: 100%; /* 최대 너비 설정 */
+}
+
+.room-filter select:focus, .sort-filter select:focus {
+    outline: none; /* 포커스 시 테두리 제거 */
+    border-color: #66afe9; /* 포커스 시 테두리 색상 변경 */
+    box-shadow: 0 0 5px rgba(102, 175, 233, 0.5); /* 포커스 시 그림자 효과 추가 */
+}
+
+
+.review {
+    background-color: #fff;
+    padding: 20px;
+    /*margin-bottom: 20px;*/
+    border-top: 1px solid #d5d5d5;
+    /*border-bottom: 1px solid #d5d5d5;*/
+}
+
+
+.review-header {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    font-size: 18px;
+    margin: 0;
+    color: #333;
+}
+
+.review-date {
+    font-size: 14px;
+    color: #888;
 }
