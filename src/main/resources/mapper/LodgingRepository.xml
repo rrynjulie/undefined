@@ -5,25 +5,48 @@
 
 <mapper namespace="com.lec.spring.repository.LodgingRepository">
 
-    <sql id="findAllLodging">
-        SELECT
-            l.lodging_id "l.lodging_id",
-            l.lodging_picture_1 "l.lodging_picture1",
-            l.lodging_name "l.lodging_name",
-            l.lodging_type "l.lodging_type",
-            r.min_room_price "r.room_price"
-        FROM
-            lodging l
-                JOIN
-            (SELECT lodging_id,
-                    MIN(room_price) min_room_price
-             FROM room
-             GROUP BY
-                 lodging_id) r
-            ON l.lodging_id = r.lodging_id
+    <resultMap id="LodgingResultMap" type="com.lec.spring.domain.Lodging">
+        <id property="lodgingId" column="lodging_id"/>
+        <result property="lodgingPicture1" column="lodging_picture_1"/>
+        <result property="lodgingPicture2" column="lodging_picture_2"/>
+        <result property="lodgingPicture3" column="lodging_picture_3"/>
+        <result property="lodgingName" column="lodging_name"/>
+        <result property="lodgingLocation1" column="lodging_location1"/>
+        <result property="lodgingLocation2" column="lodging_location2"/>
+        <result property="lodgingAddress" column="lodging_address"/>
+        <result property="lodgingNumber" column="lodging_number"/>
+        <result property="lodgingUrl" column="lodging_url"/>
+        <result property="lodgingOpen" column="lodging_open"/>
+        <result property="lodgingClose" column="lodging_close"/>
+        <result property="lodgingIntroduce" column="lodging_introduce"/>
+        <result property="lodgingService" column="lodging_service"/>
+        <result property="lodgingUsingInfo" column="lodging_usingInfo"/>
+        <result property="lodgingNotice" column="lodging_notice"/>
+        <result property="lodgingOwnerName" column="lodging_owner_name"/>
+        <result property="lodgingOwnerNumber" column="lodging_owner_number"/>
+        <result property="lodgingOwnerEmail" column="lodging_owner_email"/>
+        <result property="lodgingOwnerId" column="lodging_owner_id"/>
+        <result property="userId" column="user_id"/>
+    </resultMap>
 
 
-    </sql>
+<!--    <select id="findById" resultType="com.lec.spring.domain.Lodging">-->
+<!--        SELECT * FROM lodging WHERE lodging_id-->
+<!--#                                         = #{lodgingId}-->
+<!--    </select>-->
+
+<!--    <select id="findById" resultType="com.lec.spring.domain.Lodging">-->
+<!--        SELECT * FROM lodging-->
+<!--        WHERE lodging_id = #{lodging_id}-->
+<!--    </select>-->
+
+    <select id="findAllDetails" resultType="com.lec.spring.domain.Lodging">
+        SELECT lodging_name as lodgingName,
+               lodging_location1 as lodgingLocation1
+#                ,lodging_location2 as lodgingLocation2
+        FROM lodging
+    </select>
+
 
 
 
