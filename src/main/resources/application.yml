@@ -28,4 +28,6 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
 
-
+app:
+  api-key:
+    bus: U9c9flFLgpbAOylXQxuVD76YrzYZ286eeiZReWrwVT/u53GQ9Rkh/RDPUc9LGeFXdst8MVBwoyPZGwJ4W2wybw==
