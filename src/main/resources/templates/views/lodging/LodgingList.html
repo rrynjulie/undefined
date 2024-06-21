@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/lodging/LodgingList.css}">
@@ -11,6 +11,42 @@
 <body>
 <main class="container">
 
+<!--    <table>-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>숙소 ID</th>-->
+<!--            <th>사진</th>-->
+<!--            <th>숙소 이름</th>-->
+<!--            <th>숙소 유형</th>-->
+<!--            <th>최소 객실 가격</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+        <!-- lodgings 리스트 순회 -->
+<!--        <th:block th:each="lodging : ${lodgings}">-->
+<!--            <tr>-->
+<!--                <td th:text="${lodging.lodgingId}"></td>-->
+<!--                <td th:text="${lodging.lodgingPicture1}"></td>-->
+<!--                <td th:text="${lodging.lodgingName}"></td>-->
+<!--                <td th:text="${lodging.lodgingType}"></td>-->
+<!--                <td th:text="${lodging.roomPrice}"></td>-->
+<!--            </tr>-->
+<!--        </th:block>-->
+<!--    </table>-->
+
+<!--    <ul>-->
+<!--        &lt;!&ndash; 숙소 목록을 반복하며 이름을 리스트로 출력 &ndash;&gt;-->
+<!--        <li th:each="lodging : ${lodgingLocation1}" th:text="${lodging.lodgingLocation1}"></li>-->
+<!--        <li th:each="lodging : ${lodgingNames}" th:text="${lodging.lodgingName}"></li>-->
+<!--    </ul>-->
+
+<!--    <ul>-->
+<!--        &lt;!&ndash; 숙소 목록을 반복하며 이름과 위치를 리스트로 출력 &ndash;&gt;-->
+<!--        <li th:each="lodging : ${lodgingList}">-->
+<!--            <span th:text="${lodging.lodgingName}">Lodging Name</span> - -->
+<!--            <span th:text="${lodging.roomPrice}">Room Price</span>-->
+<!--        </li>-->
+<!--    </ul>-->
     <div style="padding: 0 0 0 20px; display: flex; justify-content: space-between; height: 50px; background-color: #F5F5F5; border-radius: 10px;">
         <div id="lodging-text1" style="width: 80%; height: 100%; font-size: 25px; padding-left: 10px; align-content: center;">
             <input id="lodging-text" disabled/>
@@ -69,59 +105,21 @@
 
 
 
-    <div id="result-filter">6개의 검색 결과</div>
+    <div id="result-filter">
+        <span th:text="${#lists.size(lodgings)} + '개의 검색 결과'"></span>
+    </div>
+
+        <div class="item-list">
+            <div class="item" th:each="lodging : ${lodgings}">
+                <img th:src="${lodging.lodgingPicture1}" alt="Lodging Picture" style="width: 40%; height: 100%;"/>
+                <div class="item-details">
+                    <p class="item-title" th:text="${lodging.lodgingName}">~~~~ 호텔</p>
+                    <p class="item-rating">⭐ 4.6(512)</p>
+                    <p class="item-price" th:text="${lodging.formattedRoomPrice} + '원 ~'">Room Price</p>
+                </div>
+            </div>
 
 
-
-    <div class="item-list">
-        <div class="item">
-            <img src="placeholder.png" alt="호텔 이미지">
-            <div class="item-details">
-                <p class="item-title">~~~~ 호텔</p>
-                <p class="item-rating">⭐ 4.6(512)</p>
-                <p class="item-price">61,600원~</p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="placeholder.png" alt="호텔 이미지">
-            <div class="item-details">
-                <p class="item-title">~~~~ 호텔</p>
-                <p class="item-rating">⭐ 4.6(512)</p>
-                <p class="item-price">61,600원~</p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="placeholder.png" alt="호텔 이미지">
-            <div class="item-details">
-                <p class="item-title">~~~~ 호텔</p>
-                <p class="item-rating">⭐ 4.6(512)</p>
-                <p class="item-price">61,600원~</p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="placeholder.png" alt="호텔 이미지">
-            <div class="item-details">
-                <p class="item-title">~~~~ 호텔</p>
-                <p class="item-rating">⭐ 4.6(512)</p>
-                <p class="item-price">61,600원~</p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="placeholder.png" alt="호텔 이미지">
-            <div class="item-details">
-                <p class="item-title">~~~~ 호텔</p>
-                <p class="item-rating">⭐ 4.6(512)</p>
-                <p class="item-price">61,600원~</p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="placeholder.png" alt="호텔 이미지">
-            <div class="item-details">
-                <p class="item-title">~~~~ 호텔</p>
-                <p class="item-rating">⭐ 4.6(512)</p>
-                <p class="item-price">61,600원~</p>
-            </div>
-        </div>
     </div>
 </main>
 

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lec.spring.repository.ProviderRepository">
+
+    <select id="findAllDetails" resultType="com.lec.spring.domain.ProvLodging">
+        SELECT
+            lodging_id as lodgingId,
+            lodging_picture_1 as lodgingPicture1,
+            lodging_name as lodgingName,
+            lodging_type as lodgingType,
+            lodging_address as lodgingAddress,
+            lodging_number as lodgingNumber
+        FROM lodging
+        WHERE lodging_type = '모텔'
+    </select>
+
+    <select id="findLodgingById" parameterType="int" resultType="com.lec.spring.domain.ProvLodging">
+        SELECT
+            lodging_id as lodgingId,
+            lodging_picture_1 as lodgingPicture1,
+            lodging_picture_2 as lodgingPicture2,
+            lodging_picture_3 as lodgingPicture3,
+            lodging_name as lodgingName,
+            lodging_type as lodgingType,
+            lodging_location1 as lodgingLocation1,
+            lodging_location2 as lodgingLocation2,
+            lodging_address as lodgingAddress,
+            lodging_number as lodgingNumber,
+            lodging_url as lodgingUrl,
+            lodging_open as lodgingOpen,
+            lodging_close as lodgingClose,
+            lodging_introduce as lodgingIntroduce,
+            lodging_service as lodgingService,
+            lodging_usinginfo as lodgingUsingInfo,
+            lodging_notice as lodgingNotice,
+            lodging_owner_name as lodgingOwnerName,
+            lodging_owner_number as lodgingOwnerNumber,
+            lodging_owner_email as lodgingOwnerEmail,
+            lodging_owner_id as lodgingOwnerId
+        FROM
+            lodging
+        WHERE
+            lodging_id = #{lodgingId}
+    </select>
+
+</mapper>
+
+

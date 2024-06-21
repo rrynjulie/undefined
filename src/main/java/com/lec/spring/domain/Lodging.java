@@ -1,11 +1,21 @@
 package com.lec.spring.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.text.NumberFormat;
+import java.util.Locale;
+
+@Getter
+@Setter
 public class Lodging {
-    private Long lodgingId;
-    private String lodgingPicture1;
+
     private String lodgingName;
-    private String lodgingType;
+    private String lodgingPicture1;
     private int roomPrice;
 
-    // Getter와 Setter 메소드
+    public String getFormattedRoomPrice() {
+        NumberFormat numberFormat = NumberFormat.getInstance(Locale.KOREA);
+        return numberFormat.format(roomPrice);
+    }
 }

@@ -1,36 +1,40 @@
-let currentIndex = 0;
-showSlides(currentIndex);
+document.addEventListener("DOMContentLoaded", function() {
+    // 숙소 사진들 배열
+    var lodgingPictures = [
+        /* ${lodging.lodgingPicture1}, ${lodging.lodgingPicture2}, ${lodging.lodgingPicture3} 등 */
+        /* 숙소 사진 URL들을 순서대로 배열에 넣어주세요 */
+        "${lodging.lodgingPicture1}",
+        "${lodging.lodgingPicture2}",
+        "${lodging.lodgingPicture3}"
+    ];
 
-// 3초마다 페이지가
-setInterval(function() {
-    plusSlide(0);
-}, 3000);
+    var currentImageIndex = 0; // 현재 보여지고 있는 사진의 인덱스
 
-function plusSlide(idx) {
-    showSlides(currentIndex += idx);
-}
+    // 초기화: 첫 번째 사진 보이기
+    updateDisplayedImage();
 
-function currentSlide(idx) {
-    showSlides(currentIndex = idx);
-}
-
-function showSlides(idx) {
-    const slides= document.querySelectorAll('.lodging-img');
-    const dots= document.querySelectorAll('.dot');
-
-    if (idx >= slides.length) {
-        currentIndex = 0;
-    } else if (idx < 0) {
-        currentIndex = slides.length - 1;
-    } else {
-        currentIndex = idx;
-    }
-
-    slides.forEach((slide, i) => {
-        slide.style.display = 'none';
-        dots[i].classList.remove('active');
+    // 이전 버튼 클릭 시
+    document.getElementById("prevButton").addEventListener("click", function() {
+        currentImageIndex--;
+        if (currentImageIndex < 0) {
+            currentImageIndex = lodgingPictures.length - 1; // 마지막 사진으로 이동
+        }
+        updateDisplayedImage();
     });
 
-    slides[currentIndex].style.display = 'block';
-    dots[currentIndex].classList.add('active');
-}
+    // 다음 버튼 클릭 시
+    document.getElementById("nextButton").addEventListener("click", function() {
+        currentImageIndex++;
+        if (currentImageIndex >= lodgingPictures.length) {
+            currentImageIndex = 0; // 첫 번째 사진으로 이동
+        }
+        updateDisplayedImage();
+    });
+
+    // 사진 업데이트 함수
+    function updateDisplayedImage() {
+        var currentImageUrl = lodgingPictures[currentImageIndex];
+        var imageElement = document.getElementById("lodgingImage");
+        imageElement.src = currentImageUrl;
+    }
+});

@@ -2,19 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!--    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/provider/ProvReviewList.css}">-->
     <link rel="stylesheet" type="text/css" href="../../../../static/css/mypage/provider/ProvReviewList.css">
-    <!--    <script th:src="@{/js/mypage/provider/ProvReviewList.js}"></script>-->
     <script src="../../../../static/js/mypage/provider/ProvReviewList.js"></script>
-    <title>후기 관리</title>
+
+    <title>Title</title>
 </head>
 <body>
 <!-- 헤더 -->
 <header id="nav-bar"></header>
-<script src="../../../../static/js/LoadHeader.js"></script>
-<script src="../../../../static/js/Header.js"></script>
+<script src="../../../../../../../src/main/resources/static/js/LoadHeader.js"></script>
+<script src="../../../../../../../src/main/resources/static/js/Header.js"></script>
 
-<!-- 메인 -->
 <main>
     <!-- 좌측 네비게이션 메뉴 -->
     <nav class="provider-menu">
@@ -26,85 +24,95 @@
         </ul>
     </nav>
 
-    <!-- 숙소 정보 페이지 -->
-    <section class="lodging-info">
-        <h1>후기 관리</h1>
-        <div class="lodging-list">
-            <label class="info-label">
-                숙소명<br>
-                <input class="info-input" type="text" disabled>
-            </label>
-            <label class="info-label">
-                숙소 분류<br>
-                <input class="info-input" type="text" disabled>
-            </label>
-            <label class="info-label">
-                숙소 주소<br>
-                <input class="info-input" type="text" disabled>
-            </label>
-            <label class="info-label">
-                숙소 연락처<br>
-                <input class="info-input" type="text" disabled>
-            </label>
-            <label class="info-label">
-                숙소 입실시간<br>
-                <input class="info-input" type="time" disabled>
-            </label>
-            <label class="info-label">
-                숙소 퇴실시간<br>
-                <input class="info-input" type="time" disabled>
-            </label>
-            <label class="info-label">
-                숙소 URL<br>
-                <input class="info-input" type="text" disabled>
-            </label>
+<!-- 메인 -->
+    <div class="container">
+        <div class="header">
+            <h1>후기 목록</h1>
         </div>
-        <div class="lodging-list">
-            <label class="info-label-textarea">
-                숙소 소개<br>
-                <textarea class="info-textarea" disabled></textarea>
-            </label>
-            <label class="info-label-textarea">
-                숙소 시설 및 서비스<br>
-                <textarea class="info-textarea" disabled></textarea>
-            </label>
-            <label class="info-label-textarea">
-                숙소 이용 안내<br>
-                <textarea class="info-textarea" disabled></textarea>
-            </label>
-            <label class="info-label-textarea">
-                숙소 예약 공지<br>
-                <textarea class="info-textarea" disabled></textarea>
-            </label>
+        <div class="room-filter">
+            <select id="room-type-filter">
+                <option value="all">객실전체</option>
+                <option value="single">싱글룸</option>
+                <option value="double">더블룸</option>
+                <option value="suite">스위트룸</option>
+            </select>
         </div>
-        <div class="lodging-list">
-            <label class="info-label">
-                대표자명<br>
-                <input class="info-input" type="text" disabled>
-            </label>
-            <label class="info-label">
-                대표자 연락처<br>
-                <input class="info-input" type="text" disabled>
-            </label>
-            <label class="info-label">
-                대표자 이메일<br>
-                <input class="info-input" type="text" disabled>
-            </label>
-            <label class="info-label">
-                사업자 등록번호<br>
-                <input class="info-input" type="text" disabled>
-            </label>
+        <div class="sort-filter">
+            <select id="sort-type-filter">
+                <option value="date">날짜순</option>
+                <option value="average">평균별점순</option>
+            </select>
         </div>
-        <div class="btn-list">
-            <a class="btn-update" href="ProvLodgingUpdate.html">정보 수정</a>
-            <button class="btn-delete">삭제 요청</button>
+
+        <!-- 다수의 후기 표시 -->
+        <div th:each="post : ${posts}" class="review">
+            <div class="review-container">
+                <div class="review-header">
+                    <div class="user-info">
+                        <h3 class="username" th:text="${post.userId}">사용자 이름</h3>
+                        <p class="review-date" th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}">리뷰
+                            날짜</p>
+                    </div>
+                </div>
+                <duv class="review-container-all">
+                    <div class="review-content">
+                        <div class="review-images" th:if="${post.postPicture}">
+                            <img th:src="@{${post.postPicture}}" alt="Room Image">
+                        </div>
+                        <div>
+                            <div class="rating"
+                                 th:text="'★'.repeat(${post.postGrade}) + '☆'.repeat(5 - ${post.postGrade})"></div>
+                            <p class="review-text" th:text="${post.postText}">후기 내용</p>
+                        </div>
+                    </div>
+                    <div class="owner-comment">
+                        <p class="comment-header">숙소 오너의 댓글 내용</p>
+                        <div class="comment-list"></div>
+                        <div class="comment-input-container">
+                            <input type="text" class="comment-input" placeholder="댓글을 작성하세요...">
+                            <button class="submit-comment">작성 완료</button>
+                        </div>
+                    </div>
+                </duv>
+            </div>
+            <br>
+            <hr>
+            <br>
+            <div class="review-container">
+                <div class="review-header">
+                    <div class="user-info">
+                        <h3 class="username" th:text="${post.userId}">사용자 이름</h3>
+                        <p class="review-date" th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}">리뷰
+                            날짜</p>
+                    </div>
+                </div>
+                <div class="review-container-all">
+                    <div class="review-content">
+                        <div class="review-images" th:if="${post.postPicture}">
+                            <img th:src="@{${post.postPicture}}" alt="Room Image">
+                        </div>
+                        <div>
+                            <div class="rating"
+                                 th:text="'★'.repeat(${post.postGrade}) + '☆'.repeat(5 - ${post.postGrade})"></div>
+                            <p class="review-text" th:text="${post.postText}">후기 내용</p>
+                        </div>
+                    </div>
+                    <div class="owner-comment">
+                        <p class="comment-header">숙소 오너의 댓글 내용</p>
+                        <div class="comment-list"></div>
+                        <div class="comment-input-container">
+                            <input type="text" class="comment-input" placeholder="댓글을 작성하세요...">
+                            <button class="submit-comment">작성 완료</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
-    <script src="../../../../static/js/mypage/provider/ProvLodgingDetail.js"></script>
+
+    </div>
 </main>
 
 <!-- 푸터 -->
-<footer id="footer"></footer>
-<script src="../../../../static/js/LoadFooter.js"></script>
+<footer></footer>
 </body>
 </html>
