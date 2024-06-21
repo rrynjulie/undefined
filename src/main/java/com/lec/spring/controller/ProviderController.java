@@ -1,9 +1,13 @@
 package com.lec.spring.controller;
 
+import com.lec.spring.domain.ProvLodging;
+import com.lec.spring.service.ProviderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -13,6 +17,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -20,12 +25,34 @@ import java.util.UUID;
 @Controller
 public class ProviderController {
     // 파일 업로드 디렉토리 설정 (application.yml에 설정한 경로)
-    // 파일 업로드 디렉토리 설정 (application.yml에 설정한 경로)
     @Value("${spring.upload.path}")
     private String uploadPath;
 
-    @GetMapping("/lodgingregister")
-    public String lodgingregister() {
+    private final ProviderService providerService;
+
+    @Autowired
+    public ProviderController(ProviderService providerService) {
+        this.providerService = providerService;
+    }
+
+
+    @GetMapping("/provlodinglist")
+    public String provlodinglist(Model model) {
+        List<ProvLodging> lodgings = providerService.getAllLodgingDetails();
+        model.addAttribute("lodgings", lodgings);
+        return "mypage/provider/ProvLodgingList";
+    }
+
+    @GetMapping("/provlodingdetail/{lodgingId}")
+    public String provlodingdetail(@PathVariable int lodgingId, Model model) {
+        ProvLodging lodging = providerService.getLodgingById(lodgingId);
+        model.addAttribute("lodging", lodging);
+        return "mypage/provider/ProvLodgingDetail";
+    }
+
+
+    @GetMapping("/provlodgingregister")
+    public String provlodgingregister() {
         return "mypage/provider/ProvLodgingRegister";
     }
 
@@ -36,8 +63,8 @@ public class ProviderController {
     }
 
 
-    @GetMapping("/roomregister")
-    public String roomregister() {
+    @GetMapping("/provroomregister")
+    public String provroomregister() {
         return "mypage/provider/ProvRoomRegister";
     }
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lec.spring.repository.ProviderRepository">
+
+<!--    <select id="findAllDetails" resultType="com.lec.spring.domain.Room">-->
+<!--        SELECT-->
+<!--            room_id AS roomId,-->
+<!--            room_picture_1 AS roomPicture1,-->
+<!--            room_picture_2 AS roomPicture2,-->
+<!--            room_picture_3 AS roomPicture3,-->
+<!--            room_name AS roomName,-->
+<!--            room_normal_people AS roomNormalPeople,-->
+<!--            room_max_people AS roomMaxPeople,-->
+<!--            room_price AS price,-->
+<!--            room_number AS roomNumber,-->
+<!--            room_area AS roomArea,-->
+<!--            room_bed AS roomBed,-->
+<!--            room_bed_grade AS roomBedGrade,-->
+<!--            room_bathroom AS roomBathroom,-->
+<!--            room_smoke AS roomSmoke-->
+<!--        FROM-->
+<!--            room-->
+<!--    </select>-->
+
+</mapper>

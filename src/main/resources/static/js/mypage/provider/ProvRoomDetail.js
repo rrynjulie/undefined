@@ -15,15 +15,13 @@ function currentSlide(idx) {
 }
 
 function showSlides(idx) {
-    const slides= document.querySelectorAll('.lodging-img');
-    const dots= document.querySelectorAll('.dot');
+    const slides = document.querySelectorAll('.my-slides');
+    const dots = document.querySelectorAll('.dot');
 
     if (idx >= slides.length) {
         currentIndex = 0;
     } else if (idx < 0) {
         currentIndex = slides.length - 1;
-    } else {
-        currentIndex = idx;
     }
 
     slides.forEach((slide, i) => {

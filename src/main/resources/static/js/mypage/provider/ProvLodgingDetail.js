@@ -1,36 +1,28 @@
-let currentIndex = 0;
-showSlides(currentIndex);
+let slideIndex = 0;
+showSlides();
 
-// 3초마다 페이지가
-setInterval(function() {
-    plusSlide(0);
-}, 3000);
-
-function plusSlide(idx) {
-    showSlides(currentIndex += idx);
+function plusSlide(n) {
+    showSlides(slideIndex += n);
 }
 
-function currentSlide(idx) {
-    showSlides(currentIndex = idx);
+function currentSlide(n) {
+    showSlides(slideIndex = n);
 }
 
-function showSlides(idx) {
-    const slides= document.querySelectorAll('.lodging-img');
-    const dots= document.querySelectorAll('.dot');
-
-    if (idx >= slides.length) {
-        currentIndex = 0;
-    } else if (idx < 0) {
-        currentIndex = slides.length - 1;
-    } else {
-        currentIndex = idx;
+function showSlides() {
+    let i;
+    let slides = document.getElementsByClassName("my-slides");
+    let dots = document.getElementsByClassName("dot");
+    if (slides.length === 0) return;
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
     }
-
-    slides.forEach((slide, i) => {
-        slide.style.display = 'none';
-        dots[i].classList.remove('active');
-    });
-
-    slides[currentIndex].style.display = 'block';
-    dots[currentIndex].classList.add('active');
+    slideIndex++;
+    if (slideIndex > slides.length) {slideIndex = 1}
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += " active";
+    setTimeout(showSlides, 2000); // Change image every 2 seconds
 }

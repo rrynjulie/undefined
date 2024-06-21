@@ -1,124 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <!--    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/provider/ProvLodgingDetail.css}">-->
-    <link rel="stylesheet" type="text/css" href="../../../../static/css/mypage/provider/ProvLodgingDetail.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/provider/ProvLodgingDetail.css}">
     <script th:src="@{/js/mypage/provider/ProvLodgingDetail.js}"></script>
-    <title>내 숙소 상세</title>
+    <title>숙소 상세 정보</title>
 </head>
 <body>
-<!-- 헤더 -->
-<header id="nav-bar"></header>
-<script src="../../../../static/js/LoadHeader.js"></script>
-<script src="../../../../static/js/Header.js"></script>
-
-<!-- 메인 -->
-<main>
-    <!-- 좌측 네비게이션 메뉴 -->
-    <nav class="provider-menu">
-        <ul>
-            <li class="provider-menu-list"><img src="../../../../static/image/BookingActive.png" alt="" class="provider-menu-icon"><a href="ProvBookingList.html">예약 관리</a></li>
-            <li class="provider-menu-list"><img src="../../../../static/image/ReviewActive.png" alt="" class="provider-menu-icon"><a href="ProvReviewList.html">후기 관리</a></li>
-            <li class="provider-menu-list"><img src="../../../../static/image/LodgingActive.png" alt="" class="provider-menu-icon"><a href="ProvLodgingList.html">숙소 정보</a></li>
-            <li class="provider-menu-list"><img src="../../../../static/image/RoomActive.png" alt="" class="provider-menu-icon"><a href="ProvRoomList.html">객실 정보</a></li>
-        </ul>
+<header>
+    <img src="logo.png" alt="Logo">
+    <nav>
+        <a href="#">숙박 예약</a>
+        <a href="/ticketcheck">승차권 조회</a>
     </nav>
-
-    <!-- 숙소 정보 페이지 -->
-    <section class="lodging-info">
-        <h1>숙소 상세정보</h1>
-        <div class="lodging-list">
-            <div class="slideshow-container">
-                <div class="my-slides">
-                    <img class="lodging-img" src="https://yaimg.yanolja.com/v5/2021/12/29/17/1280/61cc9baf0192c8.90237210.jpg" alt="">
-                    <img class="lodging-img" src="https://yaimg.yanolja.com/v5/2021/12/29/17/1280/61cc9b625a05c4.02961832.jpg" alt="">
-                    <img class="lodging-img" src="https://yaimg.yanolja.com/v5/2021/12/29/17/1280/61cc9b62ebe628.00477093.jpg" alt="">
-                </div>
-                <div class="nav-button prev" onclick="plusSlide(-1)">❮</div>
-                <div class="nav-button next" onclick="plusSlide(1)">❯</div>
-                <div class="dot-pagination">
-                    <span class="dot" onclick="currentSlide(0)"></span>
-                    <span class="dot" onclick="currentSlide(1)"></span>
-                    <span class="dot" onclick="currentSlide(2)"></span>
-                </div>
-            </div>
-
-            <label class="info-label">
-                숙소명<br>
-                <input class="info-input" type="text" disabled>
-            </label>
-            <label class="info-label">
-                숙소 분류<br>
-                <input class="info-input" type="text" disabled>
-            </label>
-            <label class="info-label">
-                숙소 주소<br>
-                <input class="info-input" type="text" disabled>
-            </label>
-            <label class="info-label">
-                숙소 연락처<br>
-                <input class="info-input" type="text" disabled>
-            </label>
-            <label class="info-label">
-                숙소 입실시간<br>
-                <input class="info-input" type="time" disabled>
-            </label>
-            <label class="info-label">
-                숙소 퇴실시간<br>
-                <input class="info-input" type="time" disabled>
-            </label>
-            <label class="info-label">
-                숙소 URL<br>
-                <input class="info-input" type="text" disabled>
-            </label>
+</header>
+<main>
+    <h1>숙소 상세 정보</h1>
+    <div class="lodging-detail">
+        <img th:src="@{${lodging.lodgingPicture1}}" alt="숙소 이미지">
+        <div class="lodging-info">
+            <p>숙소 이름: <span th:text="${lodging.lodgingName}"></span></p>
+            <p>숙소 타입: <span th:text="${lodging.lodgingType}"></span></p>
+            <p>위치1: <span th:text="${lodging.lodgingLocation1}"></span></p>
+            <p>위치2: <span th:text="${lodging.lodgingLocation2}"></span></p>
+            <p>주소: <span th:text="${lodging.lodgingAddress}"></span></p>
+            <p>전화번호: <span th:text="${lodging.lodgingNumber}"></span></p>
+            <p>URL: <span th:text="${lodging.lodgingUrl}"></span></p>
+            <p>입실 시간: <span th:text="${lodging.lodgingOpen}"></span></p>
+            <p>퇴실 시간: <span th:text="${lodging.lodgingClose}"></span></p>
+            <p>숙소 소개: <span th:text="${lodging.lodgingIntroduce}"></span></p>
+            <p>시설 및 서비스: <span th:text="${lodging.lodgingService}"></span></p>
+            <p>이용 안내: <span th:text="${lodging.lodgingUsingInfo}"></span></p>
+            <p>예약 공지: <span th:text="${lodging.lodgingNotice}"></span></p>
+            <p>담당자 이름: <span th:text="${lodging.lodgingOwnerName}"></span></p>
+            <p>담당자 전화번호: <span th:text="${lodging.lodgingOwnerNumber}"></span></p>
+            <p>담당자 이메일: <span th:text="${lodging.lodgingOwnerEmail}"></span></p>
+            <p>담당자 ID: <span th:text="${lodging.lodgingOwnerId}"></span></p>
         </div>
-        <div class="lodging-list">
-            <label class="info-label-textarea">
-                숙소 소개<br>
-                <textarea class="info-textarea" disabled></textarea>
-            </label>
-            <label class="info-label-textarea">
-                숙소 시설 및 서비스<br>
-                <textarea class="info-textarea" disabled></textarea>
-            </label>
-            <label class="info-label-textarea">
-                숙소 이용 안내<br>
-                <textarea class="info-textarea" disabled></textarea>
-            </label>
-            <label class="info-label-textarea">
-                숙소 예약 공지<br>
-                <textarea class="info-textarea" disabled></textarea>
-            </label>
-        </div>
-        <div class="lodging-list">
-            <label class="info-label">
-                대표자명<br>
-                <input class="info-input" type="text" disabled>
-            </label>
-            <label class="info-label">
-                대표자 연락처<br>
-                <input class="info-input" type="text" disabled>
-            </label>
-            <label class="info-label">
-                대표자 이메일<br>
-                <input class="info-input" type="text" disabled>
-            </label>
-            <label class="info-label">
-                사업자 등록번호<br>
-                <input class="info-input" type="text" disabled>
-            </label>
-        </div>
-        <div class="btn-list">
-            <a class="btn-update" href="ProvLodgingUpdate.html">정보 수정</a>
-            <button class="btn-delete">삭제 요청</button>
-        </div>
-    </section>
-    <script src="../../../../static/js/mypage/provider/ProvLodgingDetail.js"></script>
+    </div>
+    <a href="/provlodinglist">목록으로 돌아가기</a>
 </main>
-
-<!-- 푸터 -->
-<footer id="footer"></footer>
-<script src="../../../../static/js/LoadFooter.js"></script>
 </body>
 </html>
