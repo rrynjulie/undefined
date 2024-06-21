@@ -18,11 +18,11 @@ public class ReservationController {
     }
 
     //모든 예약 목록을 조회
-    @GetMapping
-    public String list(Model model) {
-        model.addAttribute("reservations", reservationService.findAll());
-        return "BookingList";
-    }
+//    @GetMapping
+//    public String list(Model model) {
+//        model.addAttribute("reservations", reservationService.findAll());
+//        return "BookingList";
+//    }
 
 
     //특정 예약 ID에 해당하는 예약정보 조회하기
@@ -35,8 +35,11 @@ public class ReservationController {
     //예약하기위한 Form
     @GetMapping("/booking")
     public String showBookingForm(Model model) {
-        model.addAttribute("reservations", new Reservation());
-        return "lodging/LodgingBooking";
+        Reservation reservation = reservationService.getReservationById(1);
+        // 모델에 예약 정보 추가
+        model.addAttribute("reservation", reservation);
+
+        return "lodging/LodgingBooking"; // 템플릿의 경로와 이름
     }
 
     //제출된 예약정보를 받아서 DB에 저장하고, 목록 페이지로 리다이렉트

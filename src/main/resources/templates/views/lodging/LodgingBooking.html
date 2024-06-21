@@ -12,15 +12,15 @@
 <header></header>
 <main>
     <div class="content">
-        <form th:action="@{lodging/booking}" th:object="${reservations}" method="post">
+        <form th:action="@{lodging/booking}" th:object="${reservation}" method="post">
             <section class="booking-details">
                 <section class="booking-info">
-                    <h1>예약자 정보</h1>
+
                     <div class="info">
-                        <p th:text="'예약자 이름' + ${visitorName}"></p>
+                        <p th:text="'예약자 이름: ' + ${reservation.visitorName}"></p>
                     </div>
                     <div class="info">
-                        <p th:text="'휴대폰 번호' + ${visitorPhoneNum}"></p>
+                        <p th:text="'휴대폰 번호: ' + ${reservation.visitorPhoneNum}"></p>
                     </div>
 
                 </section>
@@ -53,19 +53,19 @@
                 <section class="summary">
                     <img th:src="@{/static/image/MainImage.jpg}" alt="Room Image">
                     <p th:text="${roomId}"></p>
-                    <p th:text="'일정: ' + ${reservationStartDate} + ' ~ ' + ${reservationEndDate}"></p>
-                    <p th:text="'성인: ' + ${reservationAdult} + '인, 어린이: ' + ${reservationChild} + '인'"></p>
+                    <p th:text="'일정: ' + ${reservation.reservationStartDate} + ' ~ ' + ${reservation.reservationEndDate}"></p>
+                    <p th:text="'성인: ' + ${reservation.reservationAdult} + '인, 어린이: ' + ${reservation.reservationChild} + '인'"></p>
                 </section>
                 <section class="summary">
                     <div class="price-info">
-                        <p th:text="'객실 가격: ' + ${reservationPay} + '원'"></p>
-                        <p th:text="'총 결제 금액: ' + ${reservationFinalPay} + '원'"></p>
+                        <p th:text="'객실 가격: ' + ${reservation.reservationPay} + '원'"></p>
+                        <p th:text="'총 결제 금액: ' + ${reservation.reservationFinalPay} + '원'"></p>
                     </div>
                     <div class="terms">
                         <input type="checkbox" id="terms" checked>
                         <label for="terms">약관 전체동의</label>
                     </div>
-                    <button class="pay-button" th:text="'결제하기 ' + ${reservationFinalPay} + '원'"></button>
+                    <button class="pay-button" th:text="'결제하기 ' + ${reservation.reservationFinalPay} + '원'"></button>
                 </section>
             </div>
         </form>

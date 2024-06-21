@@ -13,5 +13,7 @@ public interface ReservationService {
 
     void delete(int reservationId);
 
+    Reservation getReservationById(int id);
+
 
 }
