@@ -235,4 +235,7 @@ ALTER TABLE cancel
 ALTER TABLE cancel
     ADD CONSTRAINT FK_user_TO_cancel
         FOREIGN KEY (user_id)
-            REFERENCES user (user_id)
+            REFERENCES user (user_id);
+
+INSERT INTO authority
+VALUES (1, 'ROLE_USER'), (2, 'ROLE_PROVIDER'), (3, 'ROLE_MASTER');
