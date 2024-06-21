@@ -9,7 +9,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Reservation {
-    private Long reservationId; //예약 Id
+    private Integer reservationId; //예약 Id
     private Date reservationTime;
     private int reservationAdult; //성인예약인원
     private int reservationChild; //어린이예약인원

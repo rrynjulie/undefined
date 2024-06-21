@@ -2,50 +2,75 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" th:href="@{/css/lodging/LodgingBooking.css}">
-<!--    <link rel="stylesheet" type="text/css" href="../../../static/css/lodging/LodgingBooking.css">-->
-        <script th:src="@{/js/lodging/LodgingBooking}"></script>
-<!--    <script src="../../../static/js/lodging/Review.js"></script>-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/lodging/LodgingBooking.css}">
+    <!--    <link rel="stylesheet" type="text/css" href="../../../static/css/lodging/LodgingBooking.css">-->
+    <script th:src="@{/js/lodging/LodgingBooking}"></script>
+    <!--    <script src="../../../static/js/lodging/Review.js"></script>-->
     <title>Title</title>
 </head>
 <body>
-<header>
-    <h1>Reservation Form</h1>
-</header>
+<header></header>
 <main>
-    <form action="/reservations/add" th:object="${reservation}" method="post">
-        <section class="reservation-form">
-            <h2>Visitor Information</h2>
-            <div class="form-group">
-                <label for="visitorName">Visitor Name:</label>
-                <input type="text" id="visitorName" th:field="*{visitorName}" required>
+    <div class="content">
+        <form th:action="@{lodging/booking}" th:object="${reservations}" method="post">
+            <section class="booking-details">
+                <section class="booking-info">
+                    <h1>예약자 정보</h1>
+                    <div class="info">
+                        <p th:text="'예약자 이름' + ${visitorName}"></p>
+                    </div>
+                    <div class="info">
+                        <p th:text="'휴대폰 번호' + ${visitorPhoneNum}"></p>
+                    </div>
+
+                </section>
+                <section class="discount">
+                    <h2>할인 적용</h2>
+                    <div class="discount-options">
+                        <label>
+                            <input type="checkbox" id="maxDiscountCheckbox"> 최대할인적용
+                        </label>
+                        <div class="radio-label">
+                            <input type="radio" name="discount" value="none"> 선택안함
+                        </div>
+                        <div class="radio-label">
+                            <input type="radio" name="discount" value="coupon"> 쿠폰선택
+                        </div>
+                    </div>
+                </section>
+                <section class="payment-methods">
+                    <h2>결제 수단</h2>
+                    <div class="methods">
+                        <!-- 결제 수단 버튼들 추가 -->
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" id="next-time" checked>
+                        <label for="next-time"></label>
+                    </div>
+                </section>
+            </section>
+            <div class="summary-container">
+                <section class="summary">
+                    <img th:src="@{/static/image/MainImage.jpg}" alt="Room Image">
+                    <p th:text="${roomId}"></p>
+                    <p th:text="'일정: ' + ${reservationStartDate} + ' ~ ' + ${reservationEndDate}"></p>
+                    <p th:text="'성인: ' + ${reservationAdult} + '인, 어린이: ' + ${reservationChild} + '인'"></p>
+                </section>
+                <section class="summary">
+                    <div class="price-info">
+                        <p th:text="'객실 가격: ' + ${reservationPay} + '원'"></p>
+                        <p th:text="'총 결제 금액: ' + ${reservationFinalPay} + '원'"></p>
+                    </div>
+                    <div class="terms">
+                        <input type="checkbox" id="terms" checked>
+                        <label for="terms">약관 전체동의</label>
+                    </div>
+                    <button class="pay-button" th:text="'결제하기 ' + ${reservationFinalPay} + '원'"></button>
+                </section>
             </div>
-            <div class="form-group">
-                <label for="visitorPhoneNum">Visitor Phone:</label>
-                <input type="text" id="visitorPhoneNum" th:field="*{visitorPhoneNum}" required>
-            </div>
-        </section>
-        <section class="reservation-form">
-            <h2>Reservation Details</h2>
-            <!-- Add more fields for reservation details as needed -->
-            <div class="form-group">
-                <label for="roomId">Room ID:</label>
-                <input type="text" id="roomId" th:field="*{roomId}" required>
-            </div>
-            <div class="form-group">
-                <label for="reservationStartDate">Check-in Date:</label>
-                <input type="datetime-local" id="reservationStartDate" th:field="*{reservationStartDate}" required>
-            </div>
-            <div class="form-group">
-                <label for="reservationEndDate">Check-out Date:</label>
-                <input type="datetime-local" id="reservationEndDate" th:field="*{reservationEndDate}" required>
-            </div>
-        </section>
-        <button type="submit">Submit Reservation</button>
-    </form>
+        </form>
+    </div>
 </main>
-<footer>
-    <a href="/reservations">Cancel and Go Back</a>
-</footer>
+<footer></footer>
 </body>
 </html>

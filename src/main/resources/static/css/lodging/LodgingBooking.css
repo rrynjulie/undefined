@@ -1,13 +1,18 @@
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;
-    margin: 0;
-    padding: 0;
 }
 
-main {
+form {
     display: flex;
-    justify-content: space-between;
+    margin:0 auto;
     padding: 100px;
 }
 
@@ -25,16 +30,15 @@ section {
     margin-bottom: 30px;
 }
 
-h2 {
-    font-size: 1.2em;
+h1, h2 {
+    font-size: 1.5em;
     margin-bottom: 10px;
 }
 
 .info {
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
-    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .info label {
@@ -45,69 +49,59 @@ h2 {
     padding: 10px;
     font-size: 1em;
     border-radius: 5px;
-    border-style: none;
-    background-color: #eeeeee;
-    width: 30%;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.discount-options {
+    margin-top: 10px;
 }
 
 .radio-label {
     display: flex;
-    cursor: pointer;
-    padding: 8px 16px; /* 라벨의 패딩 설정 */
-    border: 1px solid #ccc; /* 기본 테두리 스타일 */
-    border-radius: 4px; /* 테두리의 모서리를 둥글게 만듭니다. */
-    margin-right: 10px; /* 라벨 사이의 간격 설정 */
-    margin-top: 10px;
+    align-items: center;
+    margin-right: 10px;
     margin-bottom: 10px;
-
 }
 
-button {
+.radio-label input[type="radio"] {
+    margin-right: 5px;
+}
+
+.methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+}
+
+.methods button {
+    padding: 10px;
+    font-size: 0.9em;
     background-color: #007bff;
     color: #fff;
-    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-button:hover {
+.methods button:hover {
     background-color: #0056b3;
 }
 
-.methods {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-}
-
-.methods button {
-    margin: 0;
-    padding: 10px;
-    font-size: 0.9em;
-}
-
-.checkbox {
-    margin: 10px 0;
-}
-
 .summary-container {
-    display: flex; /* Flexbox 사용 */
-    flex-direction: column; /* 세로 방향으로 정렬 */
-    gap: 20px; /* 요소 사이의 간격 설정 */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     width: 50%;
-
 }
-
 
 .summary {
-    width: 60%;
     text-align: center;
     background: #f9f9f9;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-left: 100px;
 }
 
 .summary img {
@@ -127,48 +121,40 @@ button:hover {
 
 .pay-button {
     background-color: #fc5185;
-}
-
-/*.pay-button:hover {*/
-/*    background-color: rgba(252, 81, 133, 0.11);*/
-/*}*/
-
-/*Modal*/
-/* Modal styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 400px;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-close:focus {
-    color: black;
-    text-decoration: none;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
 }
 
+.pay-button:hover {
+    background-color: rgba(252, 81, 133, 0.8);
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.checkbox input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+        padding: 50px;
+    }
+
+    .content {
+        flex-direction: column;
+    }
+
+    .booking-details,
+    .summary-container {
+        width: 100%;
+    }
+}
