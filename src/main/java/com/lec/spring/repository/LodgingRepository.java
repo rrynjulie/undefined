@@ -10,7 +10,5 @@ import java.util.List;
 
 //@Mapper
 public interface LodgingRepository {
-
-//    List<Lodging> findAllLodgingDetails();
     List<Lodging> findLodgingsByLocation(String location);
 }

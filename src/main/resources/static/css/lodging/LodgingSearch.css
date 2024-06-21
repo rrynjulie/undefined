@@ -162,6 +162,7 @@ td {
 #search {
     width: 70%;
     height: 40px;
+    border-radius: 15px;
 }
 
 .btn-div {
@@ -170,15 +171,32 @@ td {
 }
 
 
-.recently-search1 {
-    width: 220px;
-    height:150px;
-    border-radius: 15px;
-    padding: 15px;
-    border: none;
+#recently-search-container {
+    width: 100%;
+    height: 100%;
+}
+#recently-search {
+    width: 30%;
+    height: 100%;
+    margin: 5px 0;
+    padding: 20px 10px;
     background-color: #F5F5F5;
+    border-radius: 15px;
+}
+
+.recently-search1 {
+    width: 100%;
+    height:100%;
+    /*padding: 15px;*/
+    border: none;
+    display: flex;
 }
 
 .recently-search2 {
-    height: 50%;
+    background-color: #F5F5F5;
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+    /*padding: 10px;*/
+    margin: 0 10px;
 }

@@ -27,9 +27,10 @@ public class LodgingController {
         return "lodging/LodgingSearch";
     }
 
-    @PostMapping("/LodgingSearch")
+    @PostMapping("/LodgingList")
     public String handleSearchRequest(@RequestParam("location") String location, Model model) {
         List<Lodging> lodgings = lodgingService.getLodgingsByLocation(location);
+
         model.addAttribute("lodgings", lodgings);
         return "lodging/LodgingList";
     }
