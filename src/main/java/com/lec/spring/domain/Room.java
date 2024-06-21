@@ -17,12 +17,12 @@ public class Room {
     private String roomName;
     private int roomNormalPeople;
     private int roomMaxPeople;
-    private int price;
+    private int roomPrice;
     private String roomNumber;
-    private int roomArea;
+    private String roomArea;
     private int roomBed;
     private String roomBedGrade;
-    private String roomBathroom;
+    private int roomBathroom;
     private RoomSmoke roomSmoke;
 
     private Long lodgingId;

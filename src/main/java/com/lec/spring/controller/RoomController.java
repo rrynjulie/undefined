@@ -17,12 +17,4 @@ public class RoomController {
 
     @Autowired
     private RoomService roomService;
-
-    @GetMapping("/RoomList")
-    public void getAllLodgingDetails(Model model) {
-        List<Room> roomDetails = roomService.getAllRoomDetails();
-        model.addAttribute("roomDetails", roomDetails);
-
-        //    return "RoomList";
-    }
 }
