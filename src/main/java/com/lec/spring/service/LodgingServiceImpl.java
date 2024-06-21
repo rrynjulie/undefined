@@ -12,12 +12,23 @@ import java.util.List;
 @Service
 public class LodgingServiceImpl implements LodgingService {
 
-    @Autowired
-    private LodgingRepository lodgingRepository;
+    private final LodgingRepository lodgingRepository;
+
+    public LodgingServiceImpl(LodgingRepository lodgingRepository) {
+        this.lodgingRepository = lodgingRepository;
+    }
 
     @Override
-    public List<Lodging> getAllLodgingDetails() {
-        return lodgingRepository.findAllDetails();
+    public List<Lodging> getLodgingsByLocation(String location) {
+        return lodgingRepository.findLodgingsByLocation(location);
     }
+
+//    @Autowired
+//    private LodgingRepository lodgingRepository;
+//
+//    @Override
+//    public List<Lodging> getAllLodgingDetails() {
+//        return lodgingRepository.findAllLodgingDetails();
+//    }
 
 }

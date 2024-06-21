@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const nextButton = document.getElementById('next');         // 다음 달 버튼
     const selectedDate = document.getElementById('selectedDate');   // 입실일 퇴실일 선택 한 날짜
     let currentDate = new Date();   // 현재 날짜와 시간
-    let startDate = new Date(sessionStorage.getItem('startDate'));  // 입실일 선택 (첫번째로 선택한 것)
+    let startDate = new Date(sessionStorage.getItem('startDate')); // 입실일 선택 (첫번째로 선택한 것)
     let endDate = new Date(sessionStorage.getItem('endDate'));  // 퇴실일 선택 (두번째로 선택한 것)
     let lastClickedCells = []; // 입실일과 퇴실일을 선택한 후 또 새로운 입실일을 선택할 때 전에 선택했던 값을 초기화하기 위한 빈 배열
 
@@ -81,6 +81,23 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // 현재 날짜를 기본 형식의 문자열로 가져오기
+    // 현재 날짜를 'YYYY.MM.DD' 형식으로 변환하는 함수
+    function getCurrentDateFormatted() {
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1 필요
+        const day = String(date.getDate()).padStart(2, '0'); // 일자는 1부터 시작
+        return `${year}.${month}.${day}`;
+    }
+
+    // 현재 날짜를 포맷된 문자열로 가져오기
+    const currentDateStr = getCurrentDateFormatted();
+
+    // 'selectedDate' div 요소에 현재 날짜 설정
+    document.getElementById('selectedDate').textContent = currentDateStr;
+
+
     function saveSelectedDate() {   // 세션 스토리지에 입실일과 퇴실일을 저장하는 함수
         sessionStorage.setItem('startDate', startDate ? startDate.toString() : '');
         sessionStorage.setItem('endDate', endDate ? endDate.toString() : '');
@@ -106,11 +123,6 @@ document.addEventListener('DOMContentLoaded', function() {
         currentDate.setMonth(currentDate.getMonth() + 1);
         renderCalendar(currentDate);
     });
-
-    // 페이지 로드 시 모든 td 요소의 배경색을 초기화
-    // Array.from(document.querySelectorAll('td')).forEach(td => {
-    //     td.style.backgroundColor = 'white';
-    // });
 
     // 새로고침 시 sessionStorage 초기화 및 선택된 셀의 배경색 초기화
     startDate = null;
@@ -139,8 +151,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalDiv = document.getElementsByClassName('total'); // 총 성인 수,아동 수
 
 
-let adultCount = sessionStorage.getItem('adultCount') && 1;
-let childCount = sessionStorage.getItem('childCount') && 0;
+let adultCount = sessionStorage.getItem('adultCount') || 1;
+let childCount = sessionStorage.getItem('childCount') || 0;
+
 
 
     function updateCount() {
@@ -153,6 +166,8 @@ let childCount = sessionStorage.getItem('childCount') && 0;
         sessionStorage.setItem('childCount', childCount);   // 'childCount' => 세션 스토리지 키, childCount => childCount 값을 저장하기 위해 코드에서 사용되었던 변수명
         console.log(sessionStorage);
     }
+
+    updateCount();
 
     decreaseBtn1.addEventListener('click', () => {
         if (adultCount > 1) {
@@ -179,11 +194,13 @@ let childCount = sessionStorage.getItem('childCount') && 0;
     updateCount();
 });
 
+
+
 document.addEventListener("DOMContentLoaded", function() {
-    const inputText = document.getElementById("lodging-text1");
+    const inputText = document.getElementById("location");
     const form = document.getElementById("search-form");
 
-    form.addEventListener("submit", function(event) {
+    form.addEventListener("submit", function (event) {
         event.preventDefault(); // 폼 제출을 막음
         validateInput();
     });
@@ -193,7 +210,9 @@ document.addEventListener("DOMContentLoaded", function() {
             alert("숙소명 또는 지역명을 입력해주세요.");
         } else {
             sessionStorage.setItem('searchWord', inputText.value);
-            window.location.href = "LodgingList"; // 유효한 경우 폼 제출
+            form.action = "/lodging/LodgingList"; // 폼의 action 설정
+            form.method = "POST"; // 폼의 method 설정
+            form.submit(); // 유효한 경우 폼 제출
         }
     }
 });

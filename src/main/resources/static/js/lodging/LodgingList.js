@@ -40,5 +40,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    const text1 = document.getElementById('result-filter');
+
+
+})
+
 
 console.log(sessionStorage);

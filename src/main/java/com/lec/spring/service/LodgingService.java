@@ -6,8 +6,9 @@ import java.util.List;
 
 
 
-public interface LodgingService{
+public interface LodgingService {
 
-    List<Lodging> getAllLodgingDetails();
+//    List<Lodging> getAllLodgingDetails();
+    List<Lodging> getLodgingsByLocation(String location);
 
 }
