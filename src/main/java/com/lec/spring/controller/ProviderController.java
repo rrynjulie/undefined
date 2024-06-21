@@ -36,15 +36,15 @@ public class ProviderController {
     }
 
 
-    @GetMapping("/provlodinglist")
-    public String provlodinglist(Model model) {
+    @GetMapping("/provlodginglist")
+    public String provlodginglist(Model model) {
         List<ProvLodging> lodgings = providerService.getAllLodgingDetails();
         model.addAttribute("lodgings", lodgings);
         return "mypage/provider/ProvLodgingList";
     }
 
-    @GetMapping("/provlodingdetail/{lodgingId}")
-    public String provlodingdetail(@PathVariable int lodgingId, Model model) {
+    @GetMapping("/provlodgingdetail/{lodgingId}")
+    public String provlodgingdetail(@PathVariable int lodgingId, Model model) {
         ProvLodging lodging = providerService.getLodgingById(lodgingId);
         model.addAttribute("lodging", lodging);
         return "mypage/provider/ProvLodgingDetail";
@@ -99,5 +99,11 @@ public class ProviderController {
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(imageType + " 이미지 업로드 실패");
         }
+    }
+
+    @PostMapping("/saveLodging")
+    public String saveLodging(@ModelAttribute ProvLodging lodging) {
+        providerService.saveLodging(lodging);
+        return "redirect:/provlodginglist";
     }
 }

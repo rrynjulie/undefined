@@ -9,4 +9,6 @@ import java.util.List;
 public interface ProviderRepository {
     List<ProvLodging> findAllDetails();
     ProvLodging findLodgingById(int lodgingId);
+    void saveLodging(ProvLodging lodging);
+
 }

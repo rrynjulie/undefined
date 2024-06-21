@@ -3,9 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/provider/ProvLodgingDetail.css}">
-    <script th:src="@{/js/mypage/provider/ProvLodgingDetail.js}"></script>
     <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/js/mypage/provider/ProvLodgingDetail.js}"></script>
     <title>숙소 상세 정보</title>
+    <style>
+        .lodging-detail img {
+            display: none;
+        }
+        .lodging-detail img.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -17,11 +25,14 @@
 <main>
     <h1>숙소 상세 정보</h1>
     <div class="lodging-detail">
-        <button id="prevButton">이전</button>
-        <img th:src="@{${lodging.lodgingPicture1}}" alt="숙소 이미지1">
+
+        <img th:src="@{${lodging.lodgingPicture1}}" alt="숙소 이미지1" class="active">
         <img th:src="@{${lodging.lodgingPicture2}}" alt="숙소 이미지2">
         <img th:src="@{${lodging.lodgingPicture3}}" alt="숙소 이미지3">
-        <button id="nextButton">다음</button>
+        <div class="button-container">
+            <button id="prevButton">이전</button>
+            <button id="nextButton">다음</button>
+        </div>
         <table class="lodging-info">
             <tr>
                 <th>숙소 이름</th>
@@ -88,12 +99,12 @@
                 <td th:text="${lodging.lodgingOwnerEmail}"></td>
             </tr>
             <tr>
-                <th>담당자 ID</th>
+                <th>사업자 등록 번호</th>
                 <td th:text="${lodging.lodgingOwnerId}"></td>
             </tr>
         </table>
     </div>
-    <a href="/provlodinglist">목록으로 돌아가기</a>
+    <a href="/provlodginglist">목록으로 돌아가기</a>
 </main>
 </body>
 </html>

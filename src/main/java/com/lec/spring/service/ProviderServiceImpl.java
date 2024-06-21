@@ -26,4 +26,9 @@ public class ProviderServiceImpl implements ProviderService {
     public ProvLodging getLodgingById(int lodgingId) {
         return providerRepository.findLodgingById(lodgingId);
     }
+
+    @Override
+    public void saveLodging(ProvLodging lodging) {
+        providerRepository.saveLodging(lodging);
+    }
 }

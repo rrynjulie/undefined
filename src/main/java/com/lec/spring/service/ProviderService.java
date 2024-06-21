@@ -7,4 +7,5 @@ import java.util.List;
 public interface ProviderService {
     List<ProvLodging> getAllLodgingDetails();
     ProvLodging getLodgingById(int lodgingId);
+    void saveLodging(ProvLodging lodging);
 }
