@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 @SpringBootTest
 public class RoomRepositoryTest {
     @Autowired
@@ -15,7 +17,9 @@ public class RoomRepositoryTest {
     void roomRepoTest() {
         RoomRepository roomRepository = sqlSession.getMapper(RoomRepository.class);
 
+        System.out.println("[현재 room Table 목록]");
         roomRepository.findAll().forEach(System.out::println);
+        System.out.println();
 
         Room room = Room.builder()
                 .roomPicture1("1")
@@ -32,22 +36,31 @@ public class RoomRepositoryTest {
         System.out.println("[생성 전]" + room);
         int result = roomRepository.create(room);
         System.out.println("[생성 후]" + room);
+        System.out.println();
 
+        System.out.println("[Create 후 room Table 목록]");
         roomRepository.findAll().forEach(System.out::println);
+        System.out.println();
 
         Long roomId = room.getRoomId();
         room = roomRepository.findByRoomId(roomId);
-        System.out.println(room);
+
+        System.out.println("[roomId를 이용한 추출]" + room);
 
         Long lodgingId = room.getLodgingId();
-        room = roomRepository.findByLodgingId(lodgingId);
-        System.out.println(room);
+        List<Room> roomArr = roomRepository.findByLodgingId(lodgingId);
+        System.out.println("[lodgingId를 이용한 추출]" + roomArr);
+        System.out.println();
 
         room.setRoomName("스위트룸");
         roomRepository.update(room);
         room = roomRepository.findByRoomId(roomId);
+        System.out.println("[객실명 변경 후]");
+        roomRepository.findAll().forEach(System.out::println);
+        System.out.println();
 
         roomRepository.delete(room);
+        System.out.println("[객실 삭제 후]");
         roomRepository.findAll().forEach(System.out::println);
     }
 }

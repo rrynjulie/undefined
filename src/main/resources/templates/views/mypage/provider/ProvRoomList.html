@@ -2,9 +2,82 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../../../../static/css/mypage/provider/ProvRoomList.css">
+    <title>객실 정보</title>
 </head>
 <body>
+<!-- 헤더 -->
+<header id="nav-bar"></header>
+<script src="../../../../static/js/LoadHeader.js"></script>
+<script src="../../../../static/js/Header.js"></script>
 
+<!-- 메인 -->
+<main>
+    <!-- 좌측 네비게이션 메뉴 -->
+    <nav class="provider-menu">
+        <ul>
+            <li class="provider-menu-list"><img src="../../../../static/image/Booking.png" alt="" class="provider-menu-icon"><a href="">예약내역</a></li>
+            <li class="provider-menu-list"><img src="../../../../static/image/Review.png" alt="" class="provider-menu-icon"><a href="#">후기관리</a></li>
+            <li class="provider-menu-list"><img src="../../../../static/image/Lodging.png" alt="" class="provider-menu-icon"><a href="ProvLodgingList.html" class="active">숙소정보</a></li>
+            <li class="provider-menu-list"><img src="../../../../static/image/Room.png" alt="" class="provider-menu-icon"><a href="ProvRoomList.html">객실정보</a></li>
+        </ul>
+    </nav>
+
+    <!-- 객실 정보 페이지 -->
+    <section class="room-info">
+        <h1>객실 정보</h1>
+        <div class="lodging-list">
+            <div>♥♥펜션</div>
+            <div>펜션/풀빌라</div>
+            <div class="room-list">
+                <img class="room-img" src="https://yaimg.yanolja.com/v5/2024/02/25/17/640/65db73e01b8c85.72716229.jpg" alt="">
+                <div>
+                    <label class="room-info-label">
+                        객실명 :&nbsp
+                        <p>별빛</p>
+                    </label>
+                    <label class="room-info-label">
+                        객실 호수 :&nbsp
+                        <p>101호</p>
+                    </label>
+                </div>
+            </div>
+            <div class="room-list">
+                <img class="room-img" src="https://yaimg.yanolja.com/v5/2024/02/25/17/640/65db73e01b8c85.72716229.jpg" alt="">
+                <div>
+                    <label class="room-info-label">
+                        객실명 :&nbsp
+                        <p>별빛</p>
+                    </label>
+                    <label class="room-info-label">
+                        객실 호수 :&nbsp
+                        <p>201호</p>
+                    </label>
+                </div>
+            </div>
+            <div class="room-list">
+                <img class="room-img" src="https://yaimg.yanolja.com/v5/2024/02/25/17/640/65db73e01b8c85.72716229.jpg" alt="">
+                <div>
+                    <label class="room-info-label">
+                        객실명 :&nbsp
+                        <p>별빛</p>
+                    </label>
+                    <label class="room-info-label">
+                        객실 호수 :&nbsp
+                        <p>301호</p>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="btn-list">
+            <button class="btn-register">객실 등록</button>
+        </div>
+    </section>
+    <script src="../../../../static/js/mypage/provider/ProvRoomDetail.js"></script>
+</main>
+
+<!-- 푸터 -->
+<footer id="footer"></footer>
+<script src="../../../../static/js/LoadFooter.js"></script>
 </body>
 </html>

@@ -5,13 +5,13 @@
 
 <mapper namespace="com.lec.spring.repository.RoomRepository">
     <insert id="create" flushCache="true" parameterType="com.lec.spring.domain.Room"
-            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+            useGeneratedKeys="true" keyColumn="room_id" keyProperty="roomId">
         INSERT INTO room
-            (room_id, room_picture_1, room_picture_2, room_picture_3, room_name, room_normal_people, room_max_people
-            , room_price, room_number, room_area, room_bed, room_bed_grade, room_bathroom, room_smoke)
+            (room_picture_1, room_picture_2, room_picture_3, room_name, room_normal_people, room_max_people
+            , room_price, room_number, room_area, room_bed, room_bed_grade, room_bathroom, room_smoke, lodging_id)
         VALUES
-            (#{room_id}, #{room_picture_1}, #{room_picture_2}, #{room_picture_3}, #{room_name}, #{room_normal_people}, #{room_max_people}
-            , #{room_price}, #{room_number}, #{room_area}, #{room_bed}, #{room_bed_grade}, #{room_bathroom}, #{room_smoke})
+            (#{roomPicture1}, #{roomPicture2}, #{roomPicture3}, #{roomName}, #{roomNormalPeople}, #{roomMaxPeople}
+            , #{roomPrice}, #{roomNumber}, #{roomArea}, #{roomBed}, #{roomBedGrade}, #{roomBathroom}, #{roomSmoke}, #{lodgingId})
     </insert>
 
     <sql id="SELECT_BASE">
@@ -29,7 +29,7 @@
              , r.room_bed_grade
              , r.room_bathroom
              , r.room_smoke
-             , r.lodging_id
+             , l.lodging_id
         FROM
             room r, lodging l
         WHERE
@@ -37,21 +37,21 @@
     </sql>
 
     <resultMap id="mapRoom" type="com.lec.spring.domain.Room">
-        <id property="roomId" column="room_id"/>
-        <result property="roomPicture1" column="room_picture_1"/>
-        <result property="roomPicture2" column="room_picture_2"/>
-        <result property="roomPicture3" column="room_picture_3"/>
-        <result property="roomName" column="room_name"/>
-        <result property="roomNormalPeople" column="room_normal_people"/>
-        <result property="roomMaxPeople" column="room_max_people"/>
-        <result property="roomPrice" column="room_price"/>
-        <result property="roomNumber" column="room_number"/>
-        <result property="roomArea" column="room_area"/>
-        <result property="roomBed" column="room_bed"/>
-        <result property="roomBedGrade" column="room_bed_grade"/>
-        <result property="roomBathroom" column="room_bathroom"/>
-        <result property="roomSmoke" column="room_smoke"/>
-        <result property="lodgingId" column="lodging_id"/>
+        <id column="room_id" property="roomId"/>
+        <result column="room_picture_1" property="roomPicture1"/>
+        <result column="room_picture_2" property="roomPicture2"/>
+        <result column="room_picture_3" property="roomPicture3"/>
+        <result column="room_name" property="roomName"/>
+        <result column="room_normal_people" property="roomNormalPeople"/>
+        <result column="room_max_people" property="roomMaxPeople"/>
+        <result column="room_price" property="roomPrice"/>
+        <result column="room_number" property="roomNumber"/>
+        <result column="room_area" property="roomArea"/>
+        <result column="room_bed" property="roomBed"/>
+        <result column="room_bed_grade" property="roomBedGrade"/>
+        <result column="room_bathroom" property="roomBathroom"/>
+        <result column="room_smoke" property="roomSmoke"/>
+        <result column="lodging_id" property="lodgingId"/>
     </resultMap>
 
     <select id="findAll" resultMap="mapRoom">
@@ -61,34 +61,34 @@
 
     <select id="findByRoomId" resultMap="mapRoom">
         <include refid="SELECT_BASE"/>
-        AND r.room_id = #{room_id}
+        AND r.room_id = #{roomId}
     </select>
 
     <select id="findByLodgingId" resultMap="mapRoom">
         <include refid="SELECT_BASE"/>
-        AND r.lodging_id = #{lodging_id}
+        AND l.lodging_id = #{lodgingId}
     </select>
 
     <update id="update" flushCache="true" parameterType="com.lec.spring.domain.Room">
         UPDATE room
-        SET room_picture_1 = #{room_picture_1}
-          , room_picture_2 = #{room_picture_2}
-          , room_picture_3 = #{room_picture_3}
-          , room_name = #{room_name}
-          , room_normal_people = #{room_normal_people}
-          , room_max_people = #{room_max_people}
-          , room_price = #{room_price}
-          , room_number = #{room_number}
-          , room_area = #{room_area}
-          , room_bed = #{room_bed}
-          , room_bed_grade = #{room_bed_grade}
-          , room_bathroom = #{room_bathroom}
-          , room_smoke = #{room_smoke}
-        WHERE room_id = #{room_id}
+        SET room_picture_1 = #{roomPicture1}
+          , room_picture_2 = #{roomPicture2}
+          , room_picture_3 = #{roomPicture3}
+          , room_name = #{roomName}
+          , room_normal_people = #{roomNormalPeople}
+          , room_max_people = #{roomMaxPeople}
+          , room_price = #{roomPrice}
+          , room_number = #{roomNumber}
+          , room_area = #{roomArea}
+          , room_bed = #{roomBed}
+          , room_bed_grade = #{roomBedGrade}
+          , room_bathroom = #{roomBathroom}
+          , room_smoke = #{roomSmoke}
+        WHERE room_id = #{roomId}
     </update>
 
     <delete id="delete" flushCache="true" parameterType="com.lec.spring.domain.Room">
-        DELETE FROM room WHERE room_id = #{room_id}
+        DELETE FROM room WHERE room_id = #{roomId}
     </delete>
 
     <!--페이징 용 쿼리-->
