@@ -7,6 +7,7 @@ WHERE TABLE_SCHEMA = 'db_undefined'
 SELECT * FROM user;
 SELECT * FROM lodging;
 SELECT * FROM room;
+SELECT * FROM reservation;
 
 # user 테이블 내 데이터 삽입
 INSERT INTO user
@@ -305,3 +306,14 @@ VALUES
   , (DEFAULT, 'https://yaimg.yanolja.com/v5/2023/07/17/18/1280/64b58d37099a91.63788831.jpg', null, null, '프리미엄 스위트 룸', 2, 2, 540000, null, '17', 2, '더블', DEFAULT, DEFAULT, 80)
   , (DEFAULT, 'https://yaimg.yanolja.com/v5/2023/07/17/18/1280/64b58d37099a91.63788831.jpg', null, null, '로얄 스위트 패밀리 룸', 4, 4, 928000, null, '23', 2, '더블', DEFAULT, DEFAULT, 80)
 ;
+
+# user 테이블 내 데이터 삽입
+INSERT INTO reservation
+VALUES (1,now(), 2, 1,
+        'ㅇㅇㅇ', '010-1234-5678', '카드',
+        100000, 95000, '2024-06-21 15:00:00',
+        '2024-06-04 11:00:00', 1, 1),
+    (2, now(), 3, 2,
+     'ㅇㅈ', '010-1111-2222','무통장입금',
+     200000,75000, '2024-11-01 13:00:00',
+     '2024-06-05 11:00:00', 2, 2);
