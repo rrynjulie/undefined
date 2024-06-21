@@ -25,27 +25,7 @@ public class Room {
     private String roomBathroom;
     private RoomSmoke roomSmoke;
 
-    public enum RoomSmoke {
-        NON_SMOKING,
-        SMOKING
-    }
+    private Long lodgingId;
 
-
-    public Room(String roomPicture1, String roomPicture2, String roomPicture3, String roomName, int roomNormalPeople, int roomMaxPeople,
-                int price, String roomNumber, int roomArea, int roomBed, String roomBedGrade, String roomBathroom, RoomSmoke roomSmoke) {
-        this.roomPicture1 = roomPicture1;
-        this.roomPicture2 = roomPicture2;
-        this.roomPicture3 = roomPicture3;
-        this.roomName = roomName;
-        this.roomNormalPeople = roomNormalPeople;
-        this.roomMaxPeople = roomMaxPeople;
-        this.price = price;
-        this.roomNumber = roomNumber;
-        this.roomArea = roomArea;
-        this.roomBed = roomBed;
-        this.roomBedGrade = roomBedGrade;
-        this.roomBathroom = roomBathroom;
-        this.roomSmoke = roomSmoke;
-    }
+    public enum RoomSmoke {YES, NO}
 }
-
