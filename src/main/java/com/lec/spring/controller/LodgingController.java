@@ -14,7 +14,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/lodging")
 public class LodgingController {
-
     private final LodgingService lodgingService;
 
     @Autowired
@@ -29,32 +28,28 @@ public class LodgingController {
 
     @PostMapping("/LodgingList")
     public String handleSearchRequest(@RequestParam("location") String location, Model model) {
-        List<Lodging> lodgings = lodgingService.getLodgingsByLocation(location);
-
-        model.addAttribute("lodgings", lodgings);
+        List<Lodging> lodging = lodgingService.getLodgingsByLocation(location);
+        model.addAttribute("lodging", lodging);
+        model.addAttribute("location", location); // location 정보를 모델에 추가
         return "lodging/LodgingList";
     }
 
     @GetMapping("/LodgingList")
     public void showLodgingListPage() {
-//        return "LodgingList";
     }
 
+    @GetMapping("/LodgingDetail/{lodgingId}")
+    public String getLodgingDetail(@PathVariable("lodgingId") Long lodgingId, Model model) {
+        List<Lodging> lodging = lodgingService.lodgingDetail(lodgingId);
+        List<Lodging> lodgingName = lodgingService.lodgingName(lodgingId);
+        model.addAttribute("lodging", lodging);
+        model.addAttribute("lodgingName", lodgingName);
+        return "lodging/LodgingDetail";
+    }
 
-
-
-//    @GetMapping("/LodgingList")
-//    public void showLodgings(Model model) {
-//        List<Lodging> lodgingList = lodgingService.getAllLodgingDetails();
-//        model.addAttribute("lodgingList", lodgingList);
-//
-//    //    return "LodgingList";
-//    }
-
-    @GetMapping("/RoomDetail")
-    public void RoomDetail() {}
-
-
-
-
+    @GetMapping("/filter")
+    @ResponseBody
+    public List<Lodging> filterLodgingsByLocationAndType(@RequestParam("location") String location, @RequestParam("type") String type) {
+        return lodgingService.getLodgingsByLocationAndType(location, type);
+    }
 }

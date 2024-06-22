@@ -5,55 +5,83 @@
 
 <mapper namespace="com.lec.spring.repository.LodgingRepository">
 
-<!--    <select id="findAllLodgingDetails" resultType="com.lec.spring.domain.Lodging">-->
-<!--        SELECT l.lodging_name AS lodgingName,-->
-<!--               l.lodging_picture_1 AS lodgingPicture1,-->
-<!--               MIN(r.room_price) AS roomPrice-->
-<!--        FROM lodging l-->
-<!--                 JOIN room r-->
-<!--                     ON l.lodging_id = r.lodging_id-->
-<!--        GROUP BY l.lodging_name, l.lodging_picture_1;-->
-<!--    </select>-->
-
+    <!--    숙소 리스트    -->
     <select id="findLodgingsByLocation" resultType="com.lec.spring.domain.Lodging">
-        SELECT l.lodging_id AS id,
+        SELECT l.lodging_id AS lodgingId,
                l.lodging_name AS lodgingName,
                l.lodging_picture_1 AS lodgingPicture1,
+               l.lodging_type AS lodgingType,
                MIN(r.room_price) AS roomPrice
         FROM lodging l
                  JOIN room r
                       ON l.lodging_id = r.lodging_id
         WHERE l.lodging_location1 = #{location} OR l.lodging_location2 = #{location}
-        GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1;
+        GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type;
     </select>
 
+    <!-- 숙소 리스트 타입 필터 -->
+    <select id="findLodgingByType" resultType="com.lec.spring.domain.Lodging">
+        SELECT l.lodging_id AS lodgingId,
+               l.lodging_name AS lodgingName,
+               l.lodging_picture_1 AS lodgingPicture1,
+               l.lodging_type AS lodgingType,
+               MIN(r.room_price) AS roomPrice
+        FROM lodging l
+                 JOIN room r
+                     ON l.lodging_id = r.lodging_id
+        WHERE #{type} = '전체' OR l.lodging_type = #{type}
+        GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type, l.lodging_address;
+    </select>
+    <!-- location과 type으로 필터링하는 쿼리 추가 -->
+    <select id="findLodgingsByLocationAndType" resultType="com.lec.spring.domain.Lodging">
+        SELECT l.lodging_id AS lodgingId,
+               l.lodging_name AS lodgingName,
+               l.lodging_picture_1 AS lodgingPicture1,
+               l.lodging_type AS lodgingType,
+               MIN(r.room_price) AS roomPrice
+        FROM lodging l
+                 JOIN room r ON l.lodging_id = r.lodging_id
+        WHERE (l.lodging_location1 = #{location} OR l.lodging_location2 = #{location})
+          AND (#{type} = '전체' OR l.lodging_type = #{type})
+        GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type, l.lodging_address;
+    </select>
+
+
+
+    <!--    숙소 상세    -->
+    <select id="findLodgingById" resultType="com.lec.spring.domain.Lodging">
+        SELECT l.lodging_id AS lodgingId,
+               l.lodging_name AS lodgingName,
+               l.lodging_picture_1 AS lodgingPicture1,
+               l.lodging_open AS lodgingOpen,
+               l.lodging_close AS lodgingClose,
+               r.room_picture_1 AS roomPicture1,
+               r.room_name AS roomName,
+               r.room_price AS roomPrices,
+               r.room_id AS roomId
+        FROM lodging l
+            JOIN room r
+                ON l.lodging_id = r.lodging_id
+        WHERE l.lodging_id = #{lodgingId}
+        </select>
+
+    <!--    숙소 상세 1개만 뽑아올 것들    -->
+    <select id="findLodgingByName" resultType="com.lec.spring.domain.Lodging">
+        SELECT l.lodging_name AS lodgingName,
+               l.lodging_introduce AS lodgingIntroduce,
+               l.lodging_service AS lodgingService,
+               l.lodging_usingInfo AS lodgingUsingInfo,
+               l.lodging_notice AS lodgingNotice,
+               l.lodging_address AS lodgingAddress,
+               l.lodging_owner_name AS lodgingOwnerName,
+               l.lodging_owner_number AS lodgingOwnerNumber,
+               l.lodging_owner_email AS lodgingOwnerEmail,
+               l.lodging_owner_id AS lodgingOwnerId,
+               r.room_picture_1 AS roomPicture1,
+               r.room_picture_2 AS roomPicture2
+        FROM lodging l
+            JOIN room r ON l.lodging_id = r.lodging_id
+        WHERE l.lodging_id = #{lodgingId}
+        LIMIT 1
+    </select>
 </mapper>
-
-
-<!--    <resultMap id="LodgingResultMap" type="com.lec.spring.domain.Lodging">-->
-<!--        <id property="lodgingId" column="lodging_id"/>-->
-<!--        <result property="lodgingPicture1" column="lodging_picture_1"/>-->
-<!--        <result property="lodgingPicture2" column="lodging_picture_2"/>-->
-<!--        <result property="lodgingPicture3" column="lodging_picture_3"/>-->
-<!--        <result property="lodgingName" column="lodging_name"/>-->
-<!--        <result property="lodgingLocation1" column="lodging_location1"/>-->
-<!--        <result property="lodgingLocation2" column="lodging_location2"/>-->
-<!--        <result property="lodgingAddress" column="lodging_address"/>-->
-<!--        <result property="lodgingNumber" column="lodging_number"/>-->
-<!--        <result property="lodgingUrl" column="lodging_url"/>-->
-<!--        <result property="lodgingOpen" column="lodging_open"/>-->
-<!--        <result property="lodgingClose" column="lodging_close"/>-->
-<!--        <result property="lodgingIntroduce" column="lodging_introduce"/>-->
-<!--        <result property="lodgingService" column="lodging_service"/>-->
-<!--        <result property="lodgingUsingInfo" column="lodging_usingInfo"/>-->
-<!--        <result property="lodgingNotice" column="lodging_notice"/>-->
-<!--        <result property="lodgingOwnerName" column="lodging_owner_name"/>-->
-<!--        <result property="lodgingOwnerNumber" column="lodging_owner_number"/>-->
-<!--        <result property="lodgingOwnerEmail" column="lodging_owner_email"/>-->
-<!--        <result property="lodgingOwnerId" column="lodging_owner_id"/>-->
-<!--        <result property="userId" column="user_id"/>-->
-<!--    </resultMap>-->
-<!--<select id="aaa">-->
-<!--    SELECT * FROM lodging-->
-<!--    WHERE lodging_location1 = :search_value;-->
-<!--</select>-->

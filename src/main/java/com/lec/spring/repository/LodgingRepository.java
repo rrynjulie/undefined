@@ -11,4 +11,11 @@ import java.util.List;
 //@Mapper
 public interface LodgingRepository {
     List<Lodging> findLodgingsByLocation(String location);
+
+    List<Lodging> findLodgingByType(String type);
+    List<Lodging> findLodgingsByLocationAndType(String location, String type);
+
+    List<Lodging> findLodgingById(Long lodgingId);
+
+    List<Lodging> findLodgingByName(Long lodgingId);
 }

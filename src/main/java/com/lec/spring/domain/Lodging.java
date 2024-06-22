@@ -1,21 +1,49 @@
 package com.lec.spring.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.text.NumberFormat;
 import java.util.Locale;
 
-@Getter
-@Setter
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Lodging {
 
+    private Long lodgingId;
     private String lodgingName;
+    private String lodgingType;
     private String lodgingPicture1;
     private int roomPrice;
+    private String lodgingOpen;
+    private String lodgingClose;
+    private String lodgingIntroduce;
+    private String lodgingService;
+    private String lodgingUsingInfo;
+    private String lodgingNotice;
+    private String lodgingAddress;
+    private String lodgingOwnerName;
+    private String lodgingOwnerNumber;
+    private String lodgingOwnerEmail;
+    private String lodgingOwnerId;
+    private Long roomId;
+    private String roomName;
+    private String roomPicture1;
+    private String roomPicture2;
+    private int roomPrices;
+
+
 
     public String getFormattedRoomPrice() {
         NumberFormat numberFormat = NumberFormat.getInstance(Locale.KOREA);
         return numberFormat.format(roomPrice);
+    }
+
+
+    public String getFormattedRoomPrices() {
+        NumberFormat numberFormats = NumberFormat.getInstance(Locale.KOREA);
+        return numberFormats.format(roomPrices);
     }
 }

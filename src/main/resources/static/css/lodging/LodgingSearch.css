@@ -105,7 +105,7 @@ td {
 }
 
 .adult-child {  /* 성인 아동 문구 */
-    width: 70%;
+    width: 57%;
     font-size: 25px;
     margin-left: 35px;
 }
@@ -141,8 +141,10 @@ td {
     height: 100%;
     font-size: 20px;
     border-radius: 20px 20px 0 0;
+    background-color: white;
     border: none;
     outline: none;
+
 }
 #lodging-text1 {
     width: 100%;

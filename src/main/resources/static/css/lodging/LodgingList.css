@@ -9,15 +9,22 @@
     justify-content: space-between;
 }
 .item {
-    width: 45%;
+    width: 100%;
     display: flex;
     margin: 10px;
     border: 1px solid #ddd;
     border-radius: 10px;
+    color: inherit;         /* 텍스트 색상 상속 */
+    text-decoration: none;
+    padding: 0 20px;
+}
+.item:hover {
+    text-decoration: none;
+    text-decoration-color: white;
 }
 .item img {
-    width: 40%;
-    height: 100%;
+    width: 167px;
+    height: 180px;
     background-color: #eee;
     margin-right: 20px;
     border-radius: 10px;
@@ -28,6 +35,7 @@
     flex-direction: column;
     text-align: left;
     padding: 10px;
+    position: relative; /* position relative 추가 */
 }
 .item-title {
     font-size: 18px;
@@ -40,6 +48,9 @@
     font-size: 18px;
     font-weight: bold;
     text-align: right;
+    position: absolute; /* position absolute 추가 */
+    bottom: 10px; /* 하단에 배치 */
+    right: 10px; /* 오른쪽에 배치 */
 }
 
 
