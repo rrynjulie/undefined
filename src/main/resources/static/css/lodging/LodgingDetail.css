@@ -77,16 +77,17 @@
 .item {
     width: 32%;
     display: flex;
-    border: 1px solid #ddd;
     border-radius: 10px;
 }
 .lodging-img {
-    width: 40%;
+    width: 38%;
+    border-radius: 10px;
+    margin-left: 5px;
 }
 .item-details {
     padding: 10px;
     background-color: #eee;
-    width: 60%;
+    width: 57%;
     flex-direction: column;
     border-radius: 10px;
 }
@@ -104,7 +105,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin: 20px 0 0 0;
+    margin: 50px 0 0 0;
     font-size: 17px;
 }
 

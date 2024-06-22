@@ -9,44 +9,11 @@
 
 
 <body>
+<!--&lt;!&ndash; 헤더 &ndash;&gt;-->
+<!--<th:block th:insert="~{common/Header::header}"></th:block>-->
+
 <main class="container">
 
-<!--    <table>-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th>숙소 ID</th>-->
-<!--            <th>사진</th>-->
-<!--            <th>숙소 이름</th>-->
-<!--            <th>숙소 유형</th>-->
-<!--            <th>최소 객실 가격</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-        <!-- lodgings 리스트 순회 -->
-<!--        <th:block th:each="lodging : ${lodgings}">-->
-<!--            <tr>-->
-<!--                <td th:text="${lodging.lodgingId}"></td>-->
-<!--                <td th:text="${lodging.lodgingPicture1}"></td>-->
-<!--                <td th:text="${lodging.lodgingName}"></td>-->
-<!--                <td th:text="${lodging.lodgingType}"></td>-->
-<!--                <td th:text="${lodging.roomPrice}"></td>-->
-<!--            </tr>-->
-<!--        </th:block>-->
-<!--    </table>-->
-
-<!--    <ul>-->
-<!--        &lt;!&ndash; 숙소 목록을 반복하며 이름을 리스트로 출력 &ndash;&gt;-->
-<!--        <li th:each="lodging : ${lodgingLocation1}" th:text="${lodging.lodgingLocation1}"></li>-->
-<!--        <li th:each="lodging : ${lodgingNames}" th:text="${lodging.lodgingName}"></li>-->
-<!--    </ul>-->
-
-<!--    <ul>-->
-<!--        &lt;!&ndash; 숙소 목록을 반복하며 이름과 위치를 리스트로 출력 &ndash;&gt;-->
-<!--        <li th:each="lodging : ${lodgingList}">-->
-<!--            <span th:text="${lodging.lodgingName}">Lodging Name</span> - -->
-<!--            <span th:text="${lodging.roomPrice}">Room Price</span>-->
-<!--        </li>-->
-<!--    </ul>-->
     <div style="padding: 0 0 0 20px; display: flex; justify-content: space-between; height: 50px; background-color: #F5F5F5; border-radius: 10px;">
         <div id="lodging-text1" style="width: 80%; height: 100%; font-size: 25px; padding-left: 10px; align-content: center;">
             <input id="lodging-text" disabled/>
@@ -111,12 +78,13 @@
     <div class="item-list">
         <div style="display: flex; width: 48%; height: 100%; margin-bottom: 10px;" th:each="lodging : ${lodging}">
             <a class="item" th:href="@{'/lodging/LodgingDetail/' + ${lodging.lodgingId}}">
-                <p class="item-img"><img th:src="${lodging.lodgingPicture1}" alt="Lodging Picture"/><div class="item-details">
+                <p class="item-img"><img th:src="${lodging.lodgingPicture1}" alt="Lodging Picture"/>
+                <div class="item-details">
                 <p class="item-title" th:text="${lodging.lodgingName}">~~~~ 호텔</p>
                 <p class="item-rating">⭐ 4.6(512)</p>
                 <p class="item-type" th:text="${lodging.lodgingType}"></p>
                 <p class="item-price" th:text="${lodging.formattedRoomPrice} + '원 ~'">Room Price</p>
-            </div>
+                </div>
             </a>
         </div>
     </div>
@@ -127,6 +95,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script th:src="@{/js/lodging/LodgingList.js}"></script>
+
+<!-- 푸터 -->
+<!--<th:block th:insert="~{common/Footer::footer}"></th:block>-->
 </body>
 
 
