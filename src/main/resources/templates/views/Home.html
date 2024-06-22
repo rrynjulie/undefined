@@ -2,17 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/Home.css}">-->
-    <link rel="stylesheet" type="text/css" href="../../static/css/Home.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/Home.css}">
     <script th:src="@{/js/Home.js}"></script>
     <title>StayFind</title>
 </head>
 
 <body>
 <!-- 헤더 -->
-<header id="nav-bar"></header>
-<script src="../../static/js/LoadHeader.js"></script>
-<script src="../../static/js/Header.js"></script>
+<th:block th:insert="~{common/Header::header}"></th:block>
 
 <!-- 메인 -->
 <main class="container">
@@ -191,8 +188,7 @@
 </main>
 
 <!-- 푸터 -->
-<footer id="footer"></footer>
-<script src="../../static/js/LoadFooter.js"></script>
+<th:block th:insert="~{common/Footer::footer}"></th:block>
 
 </body>
 </html>

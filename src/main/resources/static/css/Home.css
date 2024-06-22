@@ -20,7 +20,7 @@
 }
 
 .main-image {
-    background-image: url("/static/image/MainImage.jpg");
+    background-image: url("../image/MainImage.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;

@@ -1,10 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/provider/ProvRoomList.css}">
+    <script th:src="@{/js/mypage/provider/ProvRoomList.js}"></script>
+    <title>객실 정보</title>
 </head>
 <body>
+<!-- 헤더 -->
+<th:block th:insert="~{common/Header::header}"></th:block>
 
+<!-- 메인 -->
+<main>
+    <!-- 좌측 네비게이션 메뉴 -->
+    <th:block th:insert="~{mypage/provider/ProvNavMenu::prov-nav-menu}"></th:block>
+
+    <!-- 객실 정보 페이지 -->
+    <section class="lodging-list" th:each="lodging : ${lodgingList}">
+        <h1>객실 정보</h1>
+        <div class="lodging-info">
+            <div class="lodging-type" th:text="${lodging.lodgingType}">펜션/풀빌라</div>
+            <div class="lodging-name" th:text="${lodging.lodgingName}">♥♥펜션</div>
+            <div class="room-list-frame">
+                <a class="room-list" th:href="@{/mypage/provider/ProvRoomDetail}" th:each="room : ${list}">
+                    <img class="room-img" th:src="${https://yaimg.yanolja.com/v5/2024/02/25/17/640/65db73e01b8c85.72716229.jpg}" alt="">
+                    <table class="room-info-table">
+                        <colgroup>
+                            <col style="width: 40%;">
+                            <col style="width: 60%;">
+                        </colgroup>
+                        <tr>
+                            <th>객실 이름</th>
+                            <td th:text="${room.roomName}">별빛</td>
+                        </tr>
+                        <tr>
+                            <th>객실 호수</th>
+                            <td th:text="${room.roomNumber}">101호</td>
+                        </tr>
+                        <tr>
+                            <th>객실 면적</th>
+                            <td th:text="${room.roomArea}">15평</td>
+                        </tr>
+                    </table>
+                </a>
+            </div>
+        </div>
+        <div class="btn-list">
+            <button class="btn-register">객실 등록</button>
+        </div>
+    </section>
+</main>
+
+<!-- 푸터 -->
+<th:block th:insert="~{common/Footer::footer}"></th:block>
 </body>
 </html>

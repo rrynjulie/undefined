@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/provider/ProvLodgingList.css}">
+    <link rel="stylesheet" type="text/css" href="../../../../static/css/mypage/provider/ProvLodgingList.css">
     <script th:src="@{/js/mypage/provider/ProvLodging.js}"></script>
     <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
     <title>오너 숙소 리스트</title>
@@ -28,12 +29,12 @@
                         <p>숙소 주소: <span th:text="${lodging.lodgingAddress}">서울특별시 강남구</span></p>
                         <p>숙소 연락처: <span th:text="${lodging.lodgingNumber}">02-1234-5678</span></p>
                     </div>
-                    <button><a class="view-details" th:href="@{'/provlodingdetail/' + ${lodging.lodgingId}}">상세 보기</a></button>
+                    <button><a class="view-details" th:href="@{'/mypage/provider/provlodgingdetail/' + ${lodging.lodgingId}}">상세 보기</a></button>
                 </div>
             </td>
         </tr>
     </table>
-    <a class="register-btn" href="/provlodgingregister">숙소 등록</a>
+    <a class="register-btn" href="/mypage/provider/provlodgingregister">숙소 등록</a>
 </main>
 
 

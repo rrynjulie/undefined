@@ -1,0 +1,41 @@
+.provider-menu-pc {
+    background-color: white;
+    height: fit-content;
+    margin-right: 50px;
+    width: 25%;
+    border: 1px solid #F5F5F5;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.provider-menu-pc a {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding-left: 20px;
+    border: 1px solid #F5F5F5;
+    border-radius: 0;
+}
+
+.provider-menu-pc a:hover {
+    background-color: #F5F5F5;
+}
+
+.provider-menu-pc a {
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+    text-align: start;
+}
+
+.provider-menu-pc a.active {
+    color: #FC5185;
+}
+
+.provider-menu-icon {
+    height: 30px;
+    width: 30px;
+    margin-right: 30px;
+}

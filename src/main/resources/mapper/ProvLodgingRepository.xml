@@ -46,6 +46,23 @@
             lodging_id = #{lodgingId}
     </select>
 
+    <insert id="saveLodging" parameterType="com.lec.spring.domain.ProvLodging">
+        INSERT INTO lodging (
+            lodging_picture_1, lodging_picture_2, lodging_picture_3, lodging_name,
+            lodging_type, lodging_location1, lodging_location2, lodging_address,
+            lodging_number, lodging_url, lodging_open, lodging_close,
+            lodging_introduce, lodging_service, lodging_usinginfo, lodging_notice,
+            lodging_owner_name, lodging_owner_email, lodging_owner_id
+        )
+        VALUES (
+                   #{lodgingPicture1}, #{lodgingPicture2}, #{lodgingPicture3}, #{lodgingName},
+                   #{lodgingType}, #{lodgingLocation1}, #{lodgingLocation2}, #{lodgingAddress},
+                   #{lodgingNumber}, #{lodgingUrl}, #{lodgingOpen}, #{lodgingClose},
+                   #{lodgingIntroduce}, #{lodgingService}, #{lodgingUsingInfo}, #{lodgingNotice},
+                   #{lodgingOwnerName}, #{lodgingOwnerNumber}, #{lodgingOwnerEmail}, #{lodgingOwnerId}
+               )
+    </insert>
+
 </mapper>
 
 

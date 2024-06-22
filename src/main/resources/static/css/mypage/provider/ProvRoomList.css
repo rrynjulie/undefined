@@ -1,0 +1,122 @@
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 400;
+    src:
+            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'),
+            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'),
+            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');
+}
+
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+main {
+    display: flex;
+    padding: 40px 20%;
+    height: 670px;
+    justify-content: space-between;
+    border-top: 1px solid #F5F5F5;
+}
+
+.lodging-list {
+    background-color: white;
+    width: 75%;
+}
+
+.lodging-info {
+    background-color: white;
+    border: 1px solid lightgrey;
+    border-radius: 7px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.lodging-type {
+    font-size: 15px;
+    color: dimgrey;
+}
+
+.lodging-name {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.room-list-frame {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.room-list {
+    width: 49%;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    border: 1px solid #F5F5F5;
+    border-radius: 7px;
+    margin-top: 15px;
+    overflow: hidden;
+    text-decoration: none;
+    color: black;
+}
+
+.room-list:hover {
+    box-shadow: 1px 1px 3px lightgray;
+}
+
+.room-img {
+    width: 40%;
+    height: 100px;
+    border: 2px solid white;
+    border-radius: 5px;
+}
+
+.room-info-table {
+    width: 60%;
+    height: 100%;
+}
+
+.room-info-table th, td {
+    padding-left: 15px;
+    background-color: white;
+    border-radius: 3px;
+}
+
+.room-info-table th {
+    font-weight: lighter;
+    padding: 0;
+    background-color: #F5F5F5;
+}
+
+.room-info-label {
+    display: flex;
+}
+
+.btn-list {
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
+    border-radius: 7px;
+
+}
+
+.btn-list button {
+    height: 50px;
+    width: 150px;
+    border: 0;
+    border-radius: 7px;
+    margin-left: 20px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.btn-register {
+    background-color: #FC5185;
+    color: white;
+}
+
+.btn-list button:hover {
+    transform: scale(1.02);
+}

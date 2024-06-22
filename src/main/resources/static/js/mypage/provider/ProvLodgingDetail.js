@@ -1,40 +1,47 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // 숙소 사진들 배열
-    var lodgingPictures = [
-        /* ${lodging.lodgingPicture1}, ${lodging.lodgingPicture2}, ${lodging.lodgingPicture3} 등 */
-        /* 숙소 사진 URL들을 순서대로 배열에 넣어주세요 */
-        "${lodging.lodgingPicture1}",
-        "${lodging.lodgingPicture2}",
-        "${lodging.lodgingPicture3}"
-    ];
+document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.my-slides img');
+    const totalSlides = slides.length;
 
-    var currentImageIndex = 0; // 현재 보여지고 있는 사진의 인덱스
-
-    // 초기화: 첫 번째 사진 보이기
-    updateDisplayedImage();
-
-    // 이전 버튼 클릭 시
-    document.getElementById("prevButton").addEventListener("click", function() {
-        currentImageIndex--;
-        if (currentImageIndex < 0) {
-            currentImageIndex = lodgingPictures.length - 1; // 마지막 사진으로 이동
+    // 모든 슬라이드 숨기고 첫 번째 슬라이드만 보이도록 설정
+    slides.forEach((slide, index) => {
+        if (index !== 0) {
+            slide.style.display = 'none';
         }
-        updateDisplayedImage();
     });
 
-    // 다음 버튼 클릭 시
-    document.getElementById("nextButton").addEventListener("click", function() {
-        currentImageIndex++;
-        if (currentImageIndex >= lodgingPictures.length) {
-            currentImageIndex = 0; // 첫 번째 사진으로 이동
-        }
-        updateDisplayedImage();
+    function showSlide(index) {
+        // 모든 슬라이드 숨기기
+        slides.forEach(slide => slide.style.display = 'none');
+        // 클릭된 슬라이드 보이기
+        slides[index].style.display = 'block';
+    }
+
+    document.querySelector('.nav-button.prev').addEventListener('click', function() {
+        let currentIndex = getCurrentSlideIndex();
+        let newIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        showSlide(newIndex);
     });
 
-    // 사진 업데이트 함수
-    function updateDisplayedImage() {
-        var currentImageUrl = lodgingPictures[currentImageIndex];
-        var imageElement = document.getElementById("lodgingImage");
-        imageElement.src = currentImageUrl;
+    document.querySelector('.nav-button.next').addEventListener('click', function() {
+        let currentIndex = getCurrentSlideIndex();
+        let newIndex = (currentIndex + 1) % totalSlides;
+        showSlide(newIndex);
+    });
+
+    document.querySelectorAll('.dot').forEach((dot, index) => {
+        dot.addEventListener('click', function() {
+            showSlide(index);
+        });
+    });
+
+    // 현재 활성화된 슬라이드의 인덱스를 반환하는 함수
+    function getCurrentSlideIndex() {
+        let currentIndex = 0;
+        slides.forEach((slide, index) => {
+            if (slide.style.display === 'block') {
+                currentIndex = index;
+            }
+        });
+        return currentIndex;
     }
 });

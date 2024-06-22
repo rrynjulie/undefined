@@ -1,7 +1,9 @@
 package com.lec.spring.controller;
 
 import com.lec.spring.domain.ProvLodging;
+import com.lec.spring.domain.Room;
 import com.lec.spring.service.ProviderService;
+import com.lec.spring.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -10,9 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,36 +20,36 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
-
-
 @Controller
+@RequestMapping("/mypage/provider")
 public class ProviderController {
     // 파일 업로드 디렉토리 설정 (application.yml에 설정한 경로)
     @Value("${spring.upload.path}")
     private String uploadPath;
 
-    private final ProviderService providerService;
+    @Autowired
+    private ProviderService providerService;
+    @Autowired
+    private RoomService roomService;
 
     @Autowired
     public ProviderController(ProviderService providerService) {
         this.providerService = providerService;
     }
 
-
-    @GetMapping("/provlodinglist")
-    public String provlodinglist(Model model) {
+    @GetMapping("/provlodginglist")
+    public String provlodginglist(Model model) {
         List<ProvLodging> lodgings = providerService.getAllLodgingDetails();
         model.addAttribute("lodgings", lodgings);
         return "mypage/provider/ProvLodgingList";
     }
 
-    @GetMapping("/provlodingdetail/{lodgingId}")
-    public String provlodingdetail(@PathVariable int lodgingId, Model model) {
+    @GetMapping("/provlodgingdetail/{lodgingId}")
+    public String provlodgingdetail(@PathVariable int lodgingId, Model model) {
         ProvLodging lodging = providerService.getLodgingById(lodgingId);
         model.addAttribute("lodging", lodging);
         return "mypage/provider/ProvLodgingDetail";
     }
-
 
     @GetMapping("/provlodgingregister")
     public String provlodgingregister() {
@@ -62,12 +62,10 @@ public class ProviderController {
         return uploadImages(files, "숙소");
     }
 
-
     @GetMapping("/provroomregister")
     public String provroomregister() {
         return "mypage/provider/ProvRoomRegister";
     }
-
 
     @PostMapping("/uploadRoomImages")
     @ResponseBody
@@ -99,5 +97,46 @@ public class ProviderController {
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(imageType + " 이미지 업로드 실패");
         }
+    }
+
+    @PostMapping("/saveLodging")
+    public String saveLodging(@ModelAttribute ProvLodging lodging) {
+        providerService.saveLodging(lodging);
+        return "redirect:/provlodginglist";
+    }
+
+    @GetMapping("/ProvBookingList")
+    public void provBookingList(Model model) {
+    }
+
+    @GetMapping("/ProvRoomRegister")
+    public void provRoomRegister() {}
+
+    @PostMapping("/ProvRoomRegister")
+    public String provRoomRegisterOk() {
+        return "provider/ProvRoomRegisterOk";
+    }
+
+    @GetMapping("/ProvRoomList")
+    public void provRoomList(Model model) {
+        model.addAttribute("roomList", roomService.readRoomList());
+    }
+
+    @GetMapping("/ProvRoomDetail/{roomId}")
+    public String provRoomDetail(@PathVariable Long roomId, Model model) {
+        Room room = roomService.findByRoomId(roomId);
+        model.addAttribute("room", room);
+        return "provider/ProvRoomDetail";
+    }
+
+    @GetMapping("/ProvRoomUpdate/{roomId}")
+    public String provRoomUpdate(@PathVariable Long roomId, Model model) {
+        model.addAttribute("room", roomService.findByRoomId(roomId));
+        return "provider/ProvRoomUpdate";
+    }
+
+    @PostMapping("/ProvRoomUpdate")
+    public String provRoomUpdateOk() {
+        return "provider/ProvRoomUpdateOk";
     }
 }

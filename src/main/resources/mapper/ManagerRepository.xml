@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lec.spring.repository.ManagerRepository">
+    <select id="findAll" resultType="com.lec.spring.domain.Manager">
+        SELECT
+            user_id AS userId,
+            user_name AS userName,
+            user_email AS userEmail,
+            user_regdate AS userRegdate,
+            user_nickname AS userNickname,
+            user_phonenum AS userPhonenum
+        FROM
+            user
+    </select>
+</mapper>

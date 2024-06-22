@@ -1,23 +1,24 @@
 package com.lec.spring.repository;
 
 import com.lec.spring.domain.Reservation;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
 public interface ReservationRepository {
-    Reservation findById(@Param("reservationId") int reservationId);
-
-    List<Reservation> findByUserId(@Param("userId") int userId);
-
     List<Reservation> findAll();
 
-    void insert(Reservation reservation);
+    Reservation findById(int reservationId); //예약 Id
 
-    void update(Reservation reservation);
+    void insert(Reservation reservation); //
 
-//    void delete(@Param("reservationId") int reservationId);
+    List<Reservation> findByUserId(String userId);
+
+    @Delete("DELETE FROM reservation WHERE user_id = #{userId} AND reservation_id = #{reservationId}")
+    int deleteByUserIdAndId(@Param("userId") String userId, @Param("reservationId") Long reservationId);
 
 
 }

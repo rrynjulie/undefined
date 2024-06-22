@@ -9,19 +9,12 @@
 <!-- 헤더 -->
 <header id="nav-bar"></header>
 <script src="../../../../static/js/LoadHeader.js"></script>
-<script src="../../../../static/js/Header.js"></script>
+<script src="../../../../static/js/common/Header.js"></script>
 
 <!-- 메인 -->
 <main>
     <!-- 좌측 네비게이션 메뉴 -->
-    <nav class="provider-menu">
-        <ul>
-            <li class="provider-menu-list"><img src="../../../../static/image/Booking.png" alt="" class="provider-menu-icon"><a href="">예약내역</a></li>
-            <li class="provider-menu-list"><img src="../../../../static/image/Review.png" alt="" class="provider-menu-icon"><a href="#">후기관리</a></li>
-            <li class="provider-menu-list"><img src="../../../../static/image/Lodging.png" alt="" class="provider-menu-icon"><a href="ProvLodgingList.html" class="active">숙소정보</a></li>
-            <li class="provider-menu-list"><img src="../../../../static/image/Room.png" alt="" class="provider-menu-icon"><a href="ProvRoomList.html">객실정보</a></li>
-        </ul>
-    </nav>
+    <th:block th:insert="~{mypage/provider/ProvNavMenu::prov-nav-menu}"></th:block>
 
     <!-- 객실 정보 페이지 -->
     <section class="lodging-info">

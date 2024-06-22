@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../../../../static/css/mypage/manager/MemberManagement.css">
@@ -32,26 +32,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>yeongjae</td>
-                <td>최영재</td>
-                <td>yeongjae@naver.com</td>
-                <td>2024-06-04 13:00:02</td>
-                <td>jae</td>
-            </tr>
-            <tr>
-                <td>jaehyeok</td>
-                <td>이재혁</td>
-                <td>jaehyeok@naver.com</td>
-                <td>2024-06-01 10:02:42</td>
-                <td>lee</td>
-            </tr>
-            <tr>
-                <td>yena</td>
-                <td>임예나</td>
-                <td>yena@naver.com</td>
-                <td>2024-05-29 19:20:52</td>
-                <td>na</td>
+            <tr th:each="manager : ${managers}">
+                <td th:text="${manager.userId}"></td>
+                <td th:text="${manager.userName}"></td>
+                <td th:text="${manager.userEmail}"></td>
+                <td th:text="${manager.userRegdate}"></td>
+                <td th:text="${manager.userNickname}"></td>
             </tr>
             </tbody>
         </table>

@@ -4,58 +4,53 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.lec.spring.repository.ReservationRepository">
-    <resultMap id="reservationMap" type="com.lec.spring.domain.Reservation">
-        <id property="reservationId" column="reservation_id"/>
-        <result property="reservationTime" column="reservation_time"/>
-        <result property="reservationAdult" column="reservation_adult"/>
-        <result property="reservationChild" column="reservation_child"/>
-        <result property="visitorName" column="visitor_name"/>
-        <result property="visitorPhonenum" column="visitor_phonenum"/>
-        <result property="reservationPaytype" column="reservation_paytype"/>
-        <result property="reservationPay" column="reservation_pay"/>
-        <result property="reservationFinalpay" column="reservation_finalpay"/>
-        <result property="reservationStartdate" column="reservation_startdate"/>
-        <result property="reservationEnddate" column="reservation_enddate"/>
-        <result property="roomId" column="room_id"/>
-        <result property="userId" column="user_id"/>
+    <resultMap id="reservationResultMap" type="com.lec.spring.domain.Reservation">
+        <id property="reservationId" column="reservation_id" />
+        <result property="reservationTime" column="reservation_time" />
+        <result property="reservationAdult" column="reservation_adult" />
+        <result property="reservationChild" column="reservation_child" />
+        <result property="visitorName" column="visitor_name" />
+        <result property="visitorPhoneNum" column="visitor_phonenum" />
+        <result property="reservationPayType" column="reservation_paytype" />
+        <result property="reservationPay" column="reservation_pay" />
+        <result property="reservationFinalPay" column="reservation_finalpay" />
+        <result property="reservationStartDate" column="reservation_startdate" />
+        <result property="reservationEndDate" column="reservation_enddate" />
+        <result property="roomId" column="room_id" />
+        <result property="userId" column="user_id" />
     </resultMap>
 
-    <select id="findById" resultMap="reservationMap">
-        SELECT * FROM reservation WHERE reservation_id = #{reservationId}
-    </select>
-
-    <select id="findByUserId" resultMap="reservationMap">
-        SELECT * FROM reservation WHERE user_id = #{userId}
-    </select>
-
-    <select id="findAll" resultMap="reservationMap">
+    <select id="findAll" resultMap="reservationResultMap">
         SELECT * FROM reservation
     </select>
 
+    <select id="findById" resultMap="reservationResultMap" parameterType="int">
+        SELECT * FROM reservation WHERE reservation_id = #{reservationId}
+    </select>
+
     <insert id="insert" parameterType="com.lec.spring.domain.Reservation">
-        INSERT INTO reservation(reservation_time, reservation_adult, reservation_child, visitor_name, visitor_phonenum, reservation_paytype, reservation_pay, reservation_finalpay, reservation_startdate, reservation_enddate, room_id, user_id)
-        VALUES(#{reservationTime}, #{reservationAdult}, #{reservationChild}, #{visitorName}, #{visitorPhonenum}, #{reservationPaytype}, #{reservationPay}, #{reservationFinalpay}, #{reservationStartdate}, #{reservationEnddate}, #{roomId}, #{userId})
+        INSERT INTO reservation (reservation_time, reservation_adult, reservation_child, visitor_name, visitor_phonenum, reservation_paytype, reservation_pay, reservation_finalpay, reservation_startdate, reservation_enddate, room_id, user_id)
+        VALUES (#{reservationTime}, #{reservationAdult}, #{reservationChild}, #{visitorName}, #{visitorPhoneNum}, #{reservationPayType}, #{reservationPay}, #{reservationFinalPay}, #{reservationStartDate}, #{reservationEndDate}, #{roomId}, #{userId})
     </insert>
 
     <update id="update" parameterType="com.lec.spring.domain.Reservation">
-        UPDATE reservation SET
-                               reservation_time = #{reservationTime},
-                               reservation_adult = #{reservationAdult},
-                               reservation_child = #{reservationChild},
-                               visitor_name = #{visitorName},
-                               visitor_phonenum = #{visitorPhonenum},
-                               reservation_paytype = #{reservationPaytype},
-                               reservation_pay = #{reservationPay},
-                               reservation_finalpay = #{reservationFinalpay},
-                               reservation_startdate = #{reservationStartdate},
-                               reservation_enddate = #{reservationEnddate},
-                               room_id = #{roomId},
-                               user_id = #{userId}
+        UPDATE reservation
+        SET reservation_time = #{reservationTime},
+            reservation_adult = #{reservationAdult},
+            reservation_child = #{reservationChild},
+            visitor_name = #{visitorName},
+            visitor_phonenum = #{visitorPhoneNum},
+            reservation_paytype = #{reservationPayType},
+            reservation_pay = #{reservationPay},
+            reservation_finalpay = #{reservationFinalPay},
+            reservation_startdate = #{reservationStartDate},
+            reservation_enddate = #{reservationEndDate},
+            room_id = #{roomId},
+            user_id = #{userId}
         WHERE reservation_id = #{reservationId}
     </update>
 
-    <!--    <delete id="delete" parameterType="int">-->
-    <!--        DELETE FROM reservation WHERE reservation_id = #{reservationId}-->
-    <!--    </delete>-->
-
+    <select id="findByUserId" resultMap="reservationResultMap" parameterType="java.lang.String">
+        SELECT * FROM reservation WHERE user_id = #{userId}
+    </select>
 </mapper>

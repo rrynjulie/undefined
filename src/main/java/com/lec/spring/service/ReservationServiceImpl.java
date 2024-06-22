@@ -4,11 +4,15 @@ import com.lec.spring.domain.Reservation;
 import com.lec.spring.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+
 @Service
-public class ReservationServiceImpl implements ReservationService{
+@Transactional
+public class ReservationServiceImpl implements ReservationService {
+
     private final ReservationRepository reservationRepository;
 
     @Autowired
@@ -17,36 +21,17 @@ public class ReservationServiceImpl implements ReservationService{
     }
 
     @Override
-    public Reservation createReservation(Reservation reservation) {
-        reservationRepository.insert(reservation);
-        return reservation;
+    public void saveReservation(Reservation reservation) {
+        reservationRepository.insert(reservation); // insert 메서드 호출
     }
 
     @Override
-    public Reservation getReservationById(int id) {
-        return reservationRepository.findById(id);
-    }
-
-    @Override
-    public List<Reservation> getReservationsByUserId(int userId) {
+    public List<Reservation> getReservationsByUserId(String userId) {
         return reservationRepository.findByUserId(userId);
     }
 
     @Override
-    public List<Reservation> getAllReservations() {
-        return reservationRepository.findAll();
+    public int deleteReservationByUserIdAndId(String userId, Long reservationId) {
+        return reservationRepository.deleteByUserIdAndId(userId, reservationId);
     }
-
-    @Override
-    public Reservation updateReservation(Reservation reservation) {
-        reservationRepository.update(reservation);
-        return reservationRepository.findById(reservation.getReservationId());
-    }
-
-//    @Override
-//    public boolean deleteReservation(int id) {
-//        reservationRepository.delete(id);
-//        return reservationRepository.findById(id) == null;
-//    }
-
 }
