@@ -29,12 +29,12 @@
                         <p>숙소 주소: <span th:text="${lodging.lodgingAddress}">서울특별시 강남구</span></p>
                         <p>숙소 연락처: <span th:text="${lodging.lodgingNumber}">02-1234-5678</span></p>
                     </div>
-                    <button><a class="view-details" th:href="@{'/provlodgingdetail/' + ${lodging.lodgingId}}">상세 보기</a></button>
+                    <button><a class="view-details" th:href="@{'/mypage/provider/provlodgingdetail/' + ${lodging.lodgingId}}">상세 보기</a></button>
                 </div>
             </td>
         </tr>
     </table>
-    <a class="register-btn" href="/provlodgingregister">숙소 등록</a>
+    <a class="register-btn" href="/mypage/provider/provlodgingregister">숙소 등록</a>
 </main>
 
 

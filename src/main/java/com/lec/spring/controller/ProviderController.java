@@ -27,7 +27,8 @@ public class ProviderController {
     @Value("${spring.upload.path}")
     private String uploadPath;
 
-    private final ProviderService providerService;
+    @Autowired
+    private ProviderService providerService;
     @Autowired
     private RoomService roomService;
 
