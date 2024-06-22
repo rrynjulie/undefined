@@ -113,7 +113,9 @@ public class ProviderController {
     }
 
     @GetMapping("/ProvRoomList")
-    public void provRoomList(Model model) {}
+    public void provRoomList(Model model) {
+        model.addAttribute("roomList", roomService.readRoomList());
+    }
 
     @GetMapping("/ProvRoomDetail/{roomId}")
     public String provRoomDetail(@PathVariable Long roomId, Model model) {

@@ -23,49 +23,33 @@
     </nav>
 
     <!-- 객실 정보 페이지 -->
-    <section class="room-info">
+    <section class="lodging-list" th:each="${}">
         <h1>객실 정보</h1>
-        <div class="lodging-list">
-            <div>♥♥펜션</div>
-            <div>펜션/풀빌라</div>
-            <div class="room-list">
-                <img class="room-img" src="https://yaimg.yanolja.com/v5/2024/02/25/17/640/65db73e01b8c85.72716229.jpg" alt="">
-                <div>
-                    <label class="room-info-label">
-                        객실명 :&nbsp
-                        <p>별빛</p>
-                    </label>
-                    <label class="room-info-label">
-                        객실 호수 :&nbsp
-                        <p>101호</p>
-                    </label>
-                </div>
-            </div>
-            <div class="room-list">
-                <img class="room-img" src="https://yaimg.yanolja.com/v5/2024/02/25/17/640/65db73e01b8c85.72716229.jpg" alt="">
-                <div>
-                    <label class="room-info-label">
-                        객실명 :&nbsp
-                        <p>별빛</p>
-                    </label>
-                    <label class="room-info-label">
-                        객실 호수 :&nbsp
-                        <p>201호</p>
-                    </label>
-                </div>
-            </div>
-            <div class="room-list">
-                <img class="room-img" src="https://yaimg.yanolja.com/v5/2024/02/25/17/640/65db73e01b8c85.72716229.jpg" alt="">
-                <div>
-                    <label class="room-info-label">
-                        객실명 :&nbsp
-                        <p>별빛</p>
-                    </label>
-                    <label class="room-info-label">
-                        객실 호수 :&nbsp
-                        <p>301호</p>
-                    </label>
-                </div>
+        <div class="lodging-info">
+            <div class="lodging-type" th:text="${}">펜션/풀빌라</div>
+            <div class="lodging-name" th:text="${}">♥♥펜션</div>
+            <div class="room-list-frame">
+                <a class="room-list" th:href="@{/mypage/provider/ProvRoomDetail}" th:each="room : ${list}">
+                    <img class="room-img" th:src="${https://yaimg.yanolja.com/v5/2024/02/25/17/640/65db73e01b8c85.72716229.jpg}" alt="">
+                    <table class="room-info-table">
+                        <colgroup>
+                            <col style="width: 40%;">
+                            <col style="width: 60%;">
+                        </colgroup>
+                        <tr>
+                            <th>객실 이름</th>
+                            <td th:text="${room.roomName}">별빛</td>
+                        </tr>
+                        <tr>
+                            <th>객실 호수</th>
+                            <td th:text="${room.roomNumber}">101호</td>
+                        </tr>
+                        <tr>
+                            <th>객실 면적</th>
+                            <td th:text="${room.roomArea}">15평</td>
+                        </tr>
+                    </table>
+                </a>
             </div>
         </div>
         <div class="btn-list">
