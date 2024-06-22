@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common/Header.css}">
+    <script th:src="@{/js/common/Header.js}"></script>
+    <title>Navigation Bar</title>
+</head>
+
+<body>
+    <th:block th:fragment="header">
+        <!-- PC 버전 -->
+        <nav class="nav-bar-pc">
+            <ul class="nav-bar-pc-inner">
+                <li class="nav-bar-inner-left">
+                    <a href="../Home.html">
+                        <img th:src="@{/image/MainLogo.png}" alt="StayFind">
+                    </a>
+                </li>
+                <li class="nav-bar-inner-right">
+                    <a th:href="@{/lodging/LodgingSearch.html}">숙박 예약</a>
+                    <a th:href="@{/ticket/TicketCheck.html}">승차권 조회</a>
+                    <a th:href="@{/user/Login.html}" id="btn-login-pc">로그인 / 회원가입</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 모바일 버전 -->
+        <nav class="nav-bar-mobile">
+            <!-- Top Navigation Menu -->
+            <div class="nav-bar-mobile-inner">
+                <a href="../Home.html" class="main-logo-mobile">
+                    <img th:src="@{/image/MainLogo.png}" alt="StayFind">
+                </a>
+
+                <!-- 햄버거 아이콘 -->
+                <a href="javascript:void(0);" class="icon" onclick="myFunction(this)">
+                    <div class="ham-bar-1"></div>
+                    <div class="ham-bar-2"></div>
+                    <div class="ham-bar-3"></div>
+                </a>
+            </div>
+
+            <!-- Navigation links (hidden by default) -->
+            <div id="nav-menu">
+                <a id="btn-login-mobile" th:href="@{/user/Login.html}">로그인 / 회원가입</a>
+                <a th:href="@{/lodging/LodgingSearch.html}">숙박 예약</a>
+                <a th:href="@{/ticket/TicketCheck.html}">승차권 조회</a>
+            </div>
+        </nav>
+    </th:block>
+</body>
+</html>

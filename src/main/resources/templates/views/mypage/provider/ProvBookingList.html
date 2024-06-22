@@ -12,7 +12,7 @@
 <!-- 헤더 -->
 <header id="nav-bar"></header>
 <script src="../../../../static/js/LoadHeader.js"></script>
-<script src="../../../../static/js/Header.js"></script>
+<script src="../../../../static/js/common/Header.js"></script>
 
 <!-- 메인 -->
 <main>
@@ -29,6 +29,20 @@
     <!-- 숙소 정보 페이지 -->
     <section class="lodging-info">
         <h1>예약 관리</h1>
+        <div class="slideshow-container">
+            <div class="my-slides">
+                <img class="lodging-img" src="https://yaimg.yanolja.com/v5/2021/12/29/17/1280/61cc9baf0192c8.90237210.jpg" alt="">
+                <img class="lodging-img" src="https://yaimg.yanolja.com/v5/2021/12/29/17/1280/61cc9b625a05c4.02961832.jpg" alt="">
+                <img class="lodging-img" src="https://yaimg.yanolja.com/v5/2021/12/29/17/1280/61cc9b62ebe628.00477093.jpg" alt="">
+            </div>
+            <div class="nav-button prev" onclick="plusSlide(-1)">❮</div>
+            <div class="nav-button next" onclick="plusSlide(1)">❯</div>
+            <div class="dot-pagination">
+                <span class="dot" onclick="currentSlide(0)"></span>
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+            </div>
+        </div>
         <div class="lodging-list">
             <label class="info-label">
                 숙소명<br>

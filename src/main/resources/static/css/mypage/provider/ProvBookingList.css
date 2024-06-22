@@ -64,6 +64,74 @@ main {
     width: 75%;
 }
 
+/*---------------------------------*/
+
+.slideshow-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.my-slides {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.lodging-img {
+    border-radius: 10px;
+    height: 400px;
+    width: 100%;
+}
+
+.next {
+    right: 0;
+}
+
+.prev {
+    left: 0;
+}
+
+.nav-button {
+    height: 35px;
+    width: 35px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    text-align: center;
+    align-content: center;
+    margin: 0 10px;
+}
+
+.dot-pagination {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    background-color: white;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.dot.active {
+    background-color: #717171;
+}
+
+/*---------------------------------*/
+
 .lodging-list {
     display: flex;
     justify-content: space-between;

@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../../../../static/css/mypage/provider/ProvRoomList.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/provider/ProvRoomList.css}">
+    <script th:src="@{/js/mypage/provider/ProvRoomList.js}"></script>
     <title>객실 정보</title>
 </head>
 <body>
 <!-- 헤더 -->
-<header id="nav-bar"></header>
-<script src="../../../../static/js/LoadHeader.js"></script>
-<script src="../../../../static/js/Header.js"></script>
+<th:block th:insert="~{common/Header::header}"></th:block>
 
 <!-- 메인 -->
 <main>
@@ -73,11 +72,9 @@
             <button class="btn-register">객실 등록</button>
         </div>
     </section>
-    <script src="../../../../static/js/mypage/provider/ProvRoomDetail.js"></script>
 </main>
 
 <!-- 푸터 -->
-<footer id="footer"></footer>
-<script src="../../../../static/js/LoadFooter.js"></script>
+<th:block th:insert="~{common/Footer::footer}"></th:block>
 </body>
 </html>
