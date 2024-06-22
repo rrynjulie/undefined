@@ -104,6 +104,10 @@ public class ProviderController {
         return "redirect:/provlodginglist";
     }
 
+    @GetMapping("/ProvBookingList")
+    public void provBookingList(Model model) {
+    }
+
     @GetMapping("/ProvRoomRegister")
     public void provRoomRegister() {}
 
