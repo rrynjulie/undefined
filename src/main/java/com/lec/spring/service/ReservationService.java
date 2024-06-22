@@ -9,5 +9,8 @@ public interface ReservationService {
     void saveReservation(Reservation reservation);
     List<Reservation> getReservationsByUserId(String userId);
 
+    int deleteReservationByUserIdAndId(String userId, Long reservationId);
+
+
 
 }

@@ -75,6 +75,14 @@
                 <td th:text="${reservation.reservationFinalPay}"></td>
                 <td th:text="${reservation.roomId}"></td>
                 <td th:text="${reservation.userId}"></td>
+                <td>
+                    <form th:action="@{/mypage/customer/{userId}/reservation/delete/{reservationId}(userId=${userId}, reservationId=${reservation.reservationId})}" method="post">
+                        <input type="hidden" name="userId" th:value="${userId}">
+                        <input type="hidden" name="reservationId" th:value="${reservation.reservationId}">
+                        <input type="submit" value="삭제">
+                    </form>
+                </td>
+
             </tr>
             </tbody>
         </table>

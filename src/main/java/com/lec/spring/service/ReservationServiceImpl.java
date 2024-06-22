@@ -29,4 +29,9 @@ public class ReservationServiceImpl implements ReservationService {
     public List<Reservation> getReservationsByUserId(String userId) {
         return reservationRepository.findByUserId(userId);
     }
+
+    @Override
+    public int deleteReservationByUserIdAndId(String userId, Long reservationId) {
+        return reservationRepository.deleteByUserIdAndId(userId, reservationId);
+    }
 }
