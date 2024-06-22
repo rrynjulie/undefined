@@ -2,47 +2,31 @@ package com.lec.spring.service;
 
 import com.lec.spring.domain.Reservation;
 import com.lec.spring.repository.ReservationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 
 @Service
-public class ReservationServiceImpl implements ReservationService{
+@Transactional
+public class ReservationServiceImpl implements ReservationService {
 
     private final ReservationRepository reservationRepository;
 
+    @Autowired
     public ReservationServiceImpl(ReservationRepository reservationRepository) {
         this.reservationRepository = reservationRepository;
     }
 
     @Override
-    public List<Reservation> findAll() {
-        return reservationRepository.findAll();
+    public void saveReservation(Reservation reservation) {
+        reservationRepository.insert(reservation); // insert 메서드 호출
     }
 
     @Override
-    public Reservation findById(int reservationId) {
-        return reservationRepository.findById(reservationId);
+    public List<Reservation> getReservationsByUserId(String userId) {
+        return reservationRepository.findByUserId(userId);
     }
-
-    @Override
-    public void save(Reservation reservation) {
-        if (reservation.getReservationId() == null) {
-            reservationRepository.insert(reservation);
-        } else {
-            reservationRepository.update(reservation);
-        }
-    }
-
-    @Override
-    public void delete(int reservationId) {
-        reservationRepository.delete(reservationId);
-    }
-
-    @Override
-    public Reservation getReservationById(int id) {
-        return reservationRepository.findById(id);
-    }
-
 }

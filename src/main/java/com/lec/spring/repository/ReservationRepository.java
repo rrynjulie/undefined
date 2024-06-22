@@ -2,22 +2,21 @@ package com.lec.spring.repository;
 
 import com.lec.spring.domain.Reservation;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
 public interface ReservationRepository {
-    void insert(Reservation reservation);
-
-    // 예약 ID로 예약 데이터 조회
-    Reservation findById(int reservationId);
-
-    // 모든 예약 데이터 조회
     List<Reservation> findAll();
 
-    // 예약 데이터 업데이트
+    Reservation findById(int reservationId);
+
+    void insert(Reservation reservation); // 삽입 메서드 추가
+
     void update(Reservation reservation);
 
-    // 예약 ID로 예약 데이터 삭제
     void delete(int reservationId);
+
+    List<Reservation> findByUserId(String userId);
 }

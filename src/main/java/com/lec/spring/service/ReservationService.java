@@ -5,15 +5,9 @@ import com.lec.spring.domain.Reservation;
 import java.util.List;
 
 public interface ReservationService {
-    List<Reservation> findAll();
 
-    Reservation findById(int reservationId);
-
-    void save(Reservation reservation);
-
-    void delete(int reservationId);
-
-    Reservation getReservationById(int id);
+    void saveReservation(Reservation reservation);
+    List<Reservation> getReservationsByUserId(String userId);
 
 
 }

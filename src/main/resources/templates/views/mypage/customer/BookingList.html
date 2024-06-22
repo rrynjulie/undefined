@@ -2,40 +2,92 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/customer/BookingList.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/customer/BookingList.css}">
 <!--    <link rel="stylesheet" type="text/css" href="../../../../static/css/mypage/customer/BookingList.css">-->
-    <script th:src="@{/js/mypage/customer/BookingList.js}"></script>
+        <script th:src="@{/js/mypage/customer/BookingList.js}"></script>
 <!--    <script src="../../../../static/js/mypage/customer/BookingList.js"></script>-->
     <title>Title</title>
 </head>
 
 <body>
-<header>
-    <h1>Reservation Details</h1>
-</header>
+<header id="nav-bar"></header>
+<script src="../../../../static/js/LoadHeader.js"></script>
+<script src="../../../../static/js/Header.js"></script>
 <main>
-    <section class="reservation-details">
-        <h2>Reservation Information</h2>
-        <ul>
-            <li><strong>Reservation ID:</strong> <span th:text="${reservation.reservationId}"></span></li>
-            <li><strong>Reservation Time:</strong> <span th:text="${reservation.reservationTime}"></span></li>
-            <li><strong>Adults:</strong> <span th:text="${reservation.reservationAdult}"></span></li>
-            <li><strong>Children:</strong> <span th:text="${reservation.reservationChild}"></span></li>
-            <li><strong>Visitor Name:</strong> <span th:text="${reservation.visitorName}"></span></li>
-            <li><strong>Visitor Phone:</strong> <span th:text="${reservation.visitorPhoneNum}"></span></li>
-            <li><strong>Payment Type:</strong> <span th:text="${reservation.reservationPayType}"></span></li>
-            <li><strong>Payment Amount:</strong> <span th:text="${reservation.reservationPay}"></span></li>
-            <li><strong>Final Payment Amount:</strong> <span th:text="${reservation.reservationFinalPay}"></span></li>
-            <li><strong>Check-in Date:</strong> <span th:text="${reservation.reservationStartDate}"></span></li>
-            <li><strong>Check-out Date:</strong> <span th:text="${reservation.reservationEndDate}"></span></li>
-            <li><strong>Room ID:</strong> <span th:text="${reservation.roomId}"></span></li>
-            <li><strong>User ID:</strong> <span th:text="${reservation.userId}"></span></li>
-        </ul>
+    <div class="profile-menu-container">
+        <div class="profile-info">
+            <div>
+                <h2>닉네임</h2>
+            </div>
+        </div>
+        <div class="menu-list">
+            <button class="menu-item" id="reservation-btn">예약 내역<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
+            <button class="menu-item" id="manage-info-btn">내 정보 관리<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
+            <button class="menu-item" id="review-btn">작성 후기<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
+            <button class="menu-item" id="coupon-btn">쿠폰<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
+            <button class="menu-item" id="seller-btn">판매자 페이지<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
+            <button class="menu-item" id="manager-btn">관리자 페이지<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
+        </div>
+    </div>
+
+    <section id="reservation">
+        <h2>예약 내역</h2>
+        <div class="filter-container">
+            <select id="accommodation-type">
+                <option value="">전체</option>
+                <option value="호텔">호텔</option>
+                <option value="펜션/리조트">펜션/리조트</option>
+                <option value="모텔">모텔</option>
+            </select>
+            <select id="time-period">
+                <option value="3months">전체</option>
+                <option value="3months">최근 3개월</option>
+                <option value="6months">최근 6개월</option>
+                <option value="1year">최근 1년</option>
+            </select>
+            <img id="search-btn" src="../../../../static/image/IconSearch.png" class="search-icon" width="50">
+        </div>
+        <h1>Reservation List</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Reservation ID</th>
+                <th>Visitor Name</th>
+                <th>Phone Number</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Pay Type</th>
+                <th>Pay</th>
+                <th>Final Pay</th>
+                <th>Room ID</th>
+                <th>User ID</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="reservation : ${reservations}">
+                <td th:text="${reservation.reservationId}"></td>
+                <td th:text="${reservation.visitorName}"></td>
+                <td th:text="${reservation.visitorPhoneNum}"></td>
+                <td th:text="${reservation.reservationStartDate}"></td>
+                <td th:text="${reservation.reservationEndDate}"></td>
+                <td th:text="${reservation.reservationPayType}"></td>
+                <td th:text="${reservation.reservationPay}"></td>
+                <td th:text="${reservation.reservationFinalPay}"></td>
+                <td th:text="${reservation.roomId}"></td>
+                <td th:text="${reservation.userId}"></td>
+            </tr>
+            </tbody>
+        </table>
     </section>
+
+
+
 </main>
-<footer>
-    <a href="/reservations">Back to Reservation List</a>
-</footer>
+
+
+
+<footer id="footer"></footer>
+<script src="../../../../static/js/LoadFooter.js"></script>
 </body>
 
 </html>

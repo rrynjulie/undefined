@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/lodging")
 public class ReservationController {
+
     private final ReservationService reservationService;
 
     @Autowired
@@ -17,58 +18,20 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
-    //모든 예약 목록을 조회
-//    @GetMapping
-//    public String list(Model model) {
-//        model.addAttribute("reservations", reservationService.findAll());
-//        return "BookingList";
-//    }
-
-
-    //특정 예약 ID에 해당하는 예약정보 조회하기
-//    @GetMapping("/{id}")
-//    public String view(@PathVariable("id") int reservationId, Model model) {
-//        model.addAttribute("reservation", reservationService.findById(reservationId));
-//        return "BookingList";
-//    }
-
-    //예약하기위한 Form
-    @GetMapping("/booking")
-    public String showBookingForm(Model model) {
-        Reservation reservation = reservationService.getReservationById(1);
-        // 모델에 예약 정보 추가
-        model.addAttribute("reservation", reservation);
-
-        return "lodging/LodgingBooking"; // 템플릿의 경로와 이름
+    // 예약 생성 폼 페이지
+    @GetMapping("/new")
+    public String showCreateReservationForm(Model model) {
+        model.addAttribute("reservation", new Reservation());
+        return "lodging/LodgingBooking";
     }
 
-    //제출된 예약정보를 받아서 DB에 저장하고, 목록 페이지로 리다이렉트
-//    @PostMapping("/add")
-//    public String add(@ModelAttribute Reservation reservation) {
-//        reservationService.save(reservation);
-//        return "LodgingBookingOk";
-//    }
-
-    //특정 예약Id에 해당하는 예약정보를 받아서 수정하기위한 입력Form
-//    @GetMapping("/edit/{id}")
-//    public String editForm(@PathVariable("id") int reservationId, Model model) {
-//        model.addAttribute("reservation", reservationService.findById(reservationId));
-//        return "reservations/edit";
-//    }
-
-    //제출된 수정Form 예약정보를 받아서 DB에 업데이트
-//    @PostMapping("/edit")
-//    public String edit(@ModelAttribute Reservation reservation) {
-//        reservationService.save(reservation);
-//        return "redirect:/reservations";
-//    }
-
-    //특정 예약 Id에 해당하는 예약정보 삭제
-//    @GetMapping("/delete/{id}")
-//    public String delete(@PathVariable("id") int reservationId) {
-//        reservationService.delete(reservationId);
-//        return "redirect:/reservations";
-//    }
+    // 예약 생성
+    @PostMapping
+    public String createReservation(@ModelAttribute Reservation reservation, Model model) {
+        reservationService.saveReservation(reservation);
+        model.addAttribute("reservation", reservation);
+        return "reservation/LodgingBookingOk";
+    }
 
 
 }

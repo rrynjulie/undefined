@@ -53,4 +53,8 @@
     <delete id="delete" parameterType="int">
         DELETE FROM reservation WHERE reservation_id = #{reservationId}
     </delete>
+
+    <select id="findByUserId" resultMap="reservationResultMap" parameterType="java.lang.String">
+        SELECT * FROM reservation WHERE user_id = #{userId}
+    </select>
 </mapper>
