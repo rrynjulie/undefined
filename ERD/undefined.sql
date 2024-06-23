@@ -15,7 +15,7 @@ CREATE TABLE comment
     comment_text    LONGTEXT     NOT NULL COMMENT '댓글내용',
     comment_regdate DATETIME     NOT NULL DEFAULT now() COMMENT '댓글 작성 시간',
     post_id         INT         NOT NULL COMMENT '후기 교유 id',
-    user_id         VARCHAR(100) NOT NULL COMMENT '아이디',
+    user_id         INT NOT NULL COMMENT '아이디',
     PRIMARY KEY (comment_id)
 ) COMMENT '댓글';
 
@@ -27,7 +27,7 @@ CREATE TABLE coupon
     coupon_price     INT               NOT NULL COMMENT '쿠폰 할인 가격',
     coupon_max       INT               NOT NULL COMMENT '쿠폰 사용 최소 구매 가격',
     coupon_use       ENUM('YES', 'NO') NOT NULL COMMENT '쿠폰 사용 여부',
-    user_id          VARCHAR(100)      NOT NULL COMMENT '아이디',
+    user_id          INT      NOT NULL COMMENT '아이디',
     reservation_id   INT              NOT NULL COMMENT '예약 고유 id값',
     PRIMARY KEY (coupon_code)
 ) COMMENT '쿠폰';
@@ -38,7 +38,7 @@ ALTER TABLE coupon
 CREATE TABLE `like`
 (
     lodging_id INT          NOT NULL COMMENT '숙소고유 id값',
-    user_id    VARCHAR(100) NOT NULL COMMENT '아이디',
+    user_id    INT NOT NULL COMMENT '아이디',
     PRIMARY KEY (lodging_id, user_id)
 ) COMMENT '숙소 좋아요';
 
@@ -65,7 +65,7 @@ CREATE TABLE lodging
     lodging_owner_number VARCHAR(100)                    NOT NULL COMMENT '숙소 담당자 전화번호',
     lodging_owner_email  VARCHAR(100)                    NOT NULL COMMENT '숙소 담당자 이메일',
     lodging_owner_id     VARCHAR(100)                    NOT NULL COMMENT '숙소 담당자 사업자 등록 번호',
-    user_id              VARCHAR(100)                    NOT NULL COMMENT '아이디',
+    user_id              INT                   NOT NULL COMMENT '아이디',
     PRIMARY KEY (lodging_id)
 ) COMMENT '숙소정보';
 
@@ -78,7 +78,7 @@ CREATE TABLE post
     post_picture   LONGTEXT     NULL     COMMENT '후기 사진',
     post_text      LONGTEXT     NOT NULL COMMENT '후기 내용',
     post_grade     INT          NOT NULL COMMENT '평점 (1~5)',
-    user_id        VARCHAR(100) NOT NULL COMMENT '아이디',
+    user_id        INT NOT NULL COMMENT '아이디',
     reservation_id INT         NOT NULL COMMENT '예약 고유 id값',
     PRIMARY KEY (post_id)
 ) COMMENT '후기';
@@ -97,7 +97,7 @@ CREATE TABLE reservation
     reservation_startdate DATETIME            NOT NULL COMMENT '체크인 날짜',
     reservation_enddate   DATETIME            NOT NULL COMMENT '체크아웃 날짜',
     room_id               INT                NOT NULL COMMENT '객실고유 id 값',
-    user_id               VARCHAR(100)        NOT NULL COMMENT '아이디',
+    user_id               INT        NOT NULL COMMENT '아이디',
     PRIMARY KEY (reservation_id)
 ) COMMENT '예약';
 
@@ -123,20 +123,20 @@ CREATE TABLE room
 
 CREATE TABLE user
 (
-    user_id       VARCHAR(100) NOT NULL COMMENT '아이디',
+    user_id       INT NOT NULL AUTO_INCREMENT COMMENT '아이디',
     user_password VARCHAR(100) NOT NULL COMMENT '비밀번호',
     user_name     VARCHAR(100) NOT NULL COMMENT '이름',
-    user_email    VARCHAR(100) NOT NULL COMMENT '이메일',
+    user_email    VARCHAR(100) NULL COMMENT '이메일',
     user_regdate  DATETIME     NOT NULL DEFAULT now() COMMENT '등록날짜',
     user_nickname VARCHAR(100) NOT NULL COMMENT '닉네임',
-    user_phonenum VARCHAR(100) NOT NULL COMMENT '전화번호',
+    user_phonenum VARCHAR(100) NULL COMMENT '전화번호',
     PRIMARY KEY (user_id)
 ) COMMENT '유져';
 
 CREATE TABLE cancel
 (
     reason      VARCHAR(100) NOT NULL COMMENT '취소사유',
-    user_id     VARCHAR(100) NOT NULL COMMENT '아이디(UQ)',
+    user_id     INT NOT NULL COMMENT '아이디(UQ)',
     lodging_id  INT         NOT NULL COMMENT  '숙소 고유 id값',
     PRIMARY KEY (reason)
 ) COMMENT '취소';
@@ -152,7 +152,7 @@ ALTER TABLE user
 
 CREATE TABLE user_authority
 (
-    user_id      VARCHAR(100) NOT NULL COMMENT '아이디',
+    user_id      INT NOT NULL COMMENT '아이디',
     authority_id int          NOT NULL COMMENT '권한에 대한 id (권한 3개 만들예정)',
     PRIMARY KEY (user_id, authority_id)
 ) COMMENT '유저가 가지고 있는 권한';
@@ -239,3 +239,9 @@ ALTER TABLE cancel
 
 INSERT INTO authority
 VALUES (1, 'ROLE_USER'), (2, 'ROLE_PROVIDER'), (3, 'ROLE_MASTER');
+
+ALTER TABLE user
+    ADD COLUMN provider VARCHAR(40);
+
+ALTER TABLE user
+    ADD COLUMN providerId VARCHAR(200);

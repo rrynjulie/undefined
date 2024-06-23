@@ -5,4 +5,43 @@
 
 <mapper namespace="com.lec.spring.repository.UserRepository">
 
+    <sql id="SELECT_BASE">
+        SELECT
+            user_id "id"
+             , user_password "password"
+             , user_name "username"
+             , user_email "email"
+             , user_regdate "regdate"
+             , user_nickname "nickname"
+             , user_phonenum "phonenum"
+        FROM user
+        WHERE 1 = 1
+    </sql>
+
+    <select id="findById" resultType="com.lec.spring.domain.User">
+        <include refid="SELECT_BASE"/>
+        AND id = #{id}
+    </select>
+
+    <select id="findByNickname" resultType="com.lec.spring.domain.User">
+        <include refid="SELECT_BASE"/>
+        AND user_nickname = #{nickname}
+    </select>
+
+    <select id="findByEmail" resultType="com.lec.spring.domain.User">
+        <include refid="SELECT_BASE"/>
+        AND user_email = #{email}
+    </select>
+
+    <insert id="save" flushCache="true" parameterType="com.lec.spring.domain.User"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO user(user_password, user_name, user_email, user_nickname, user_phonenum)
+            VALUE(#{password}, #{username}, #{email}, #{nickname}, #{phonenum})
+    </insert>
+
+    <update id="update" flushCache="true" parameterType="com.lec.spring.domain.User">
+        UPDATE user SET user_email = #{email}, user_password = #{password}, user_nickname = #{nickname}, user_phonenum = #{phonenum}
+        WHERE user_id = #{id}
+    </update>
+
 </mapper>

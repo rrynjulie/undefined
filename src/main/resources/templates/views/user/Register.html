@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
-    <link rel="stylesheet" type="text/css" href="../../../static/css/user/Register.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/user/Register.css}">
 
-    <script src="../../../static/js/user/Register.js"></script>
     <title>Title</title>
 </head>
 <body>
 <header id="nav-bar"></header>
 <script src="../../../static/js/LoadHeader.js"></script>
-<script src="../../../static/js/common/Header.js"></script>
+<script src="../../../static/js/Header.js"></script>
 
 <!-- 좌측 네비게이션 메뉴 -->
 <nav class="provider-menu">
@@ -44,20 +43,25 @@
 </div>
 
 <div class="modal" id="registration-modal" style="display: none;">
-    <form id="registration-form">
+    <form method="POST" th:action="@{/user/register}">
         <label for="nickname">닉네임</label>
-        <input type="text" id="nickname" required>
+        <input type="text" id="nickname" name="nickname" required>
         <label for="password">비밀번호</label>
-        <input type="password" id="password" required>
+        <input type="password" id="password" name="password" required>
         <label for="confirm-password">비밀번호 확인</label>
-        <input type="password" id="confirm-password" required>
+        <input type="password" id="confirm-password" name="re_password" required>
         <label for="phone">휴대폰 번호</label>
-        <input type="tel" id="phone" required>
-        <button type="button" onclick="completeRegistration()">회원가입 완료</button>
+        <input type="tel" id="phone" name="phonenum" required>
+        <label for="username">이름</label>
+        <input type="text" id="username" name="username" required>
+        <button type="submit">회원가입 완료</button>
     </form>
 </div>
+
+<a id="home-url" th:href="@{/Home}" style="display:none;"></a>
 <!-- 푸터 -->
 <footer id="footer"></footer>
 <script src="../../../static/js/LoadFooter.js"></script>
+<script th:src="@{/js/user/Register.js}"></script>
 </body>
 </html>
