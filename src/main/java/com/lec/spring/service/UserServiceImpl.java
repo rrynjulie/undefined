@@ -26,6 +26,7 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Autowired
     private AuthorityRepository authorityRepository;
 
 
