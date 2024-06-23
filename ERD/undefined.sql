@@ -32,8 +32,8 @@ CREATE TABLE coupon
     PRIMARY KEY (coupon_code)
 ) COMMENT '쿠폰';
 
-ALTER TABLE coupon
-    ADD CONSTRAINT UQ_coupon_code UNIQUE (coupon_code);
+# ALTER TABLE coupon
+#     ADD CONSTRAINT UQ_coupon_code UNIQUE (coupon_code);
 
 CREATE TABLE `like`
 (
@@ -46,9 +46,6 @@ CREATE TABLE lodging
 (
     lodging_id           INT                             NOT NULL AUTO_INCREMENT COMMENT '숙소고유 id값',
     lodging_picture_1    LONGTEXT                        NOT NULL COMMENT '숙소 사진 1',
-    lodging_picture_2    LONGTEXT                        NULL     COMMENT '숙소 사진 2',
-    lodging_picture_3    LONGTEXT                        NULL     COMMENT '숙소 사진 3',
-    lodging_approval     ENUM('true','false')            NOT NULL DEFAULT 'false' COMMENT '마스터의 숙소 승인여부',
     lodging_name         VARCHAR(100)                    NOT NULL COMMENT '숙소이름',
     lodging_type         ENUM('호텔/리조트' ,'펜션/풀빌라' , '모텔') NOT NULL COMMENT '숙소타입(호텔/리조트 , 펜션/ 풀빌라 , 모텔)',
     lodging_location1    VARCHAR(100)                    NOT NULL COMMENT '숙소위치(지역) - 강원도',
@@ -106,10 +103,8 @@ CREATE TABLE room
 (
     room_id           INT               NOT NULL AUTO_INCREMENT COMMENT '객실 예약 id값',
     room_picture_1    LONGTEXT          NOT NULL COMMENT '객실 사진1',
-    room_picture_2    LONGTEXT          NULL     COMMENT '객실 사진2',
-    room_picture_3    LONGTEXT          NULL     COMMENT '객실 사진3',
     room_name         VARCHAR(100)      NOT NULL COMMENT '객실 이름',
-    room_normal_people INT               NOT NULL COMMENT '객실 기준 인원수',
+    room_normal_people INT              NOT NULL COMMENT '객실 기준 인원수',
     room_max_people   INT               NOT NULL COMMENT '객실 최대 인원수',
     room_price        INT               NOT NULL COMMENT '객실 가격',
     room_number       VARCHAR(100)      NULL     COMMENT '객실 호수',
@@ -134,13 +129,13 @@ CREATE TABLE user
     PRIMARY KEY (user_id)
 ) COMMENT '유져';
 
-CREATE TABLE cancel
-(
-    reason      VARCHAR(100) NOT NULL COMMENT '취소사유',
-    user_id     INT NOT NULL COMMENT '아이디(UQ)',
-    lodging_id  INT         NOT NULL COMMENT  '숙소 고유 id값',
-    PRIMARY KEY (reason)
-) COMMENT '취소';
+# CREATE TABLE cancel
+# (
+#     reason      VARCHAR(100) NOT NULL COMMENT '취소사유',
+#     user_id     INT NOT NULL COMMENT '아이디(UQ)',
+#     lodging_id  INT         NOT NULL COMMENT  '숙소 고유 id값',
+#     PRIMARY KEY (reason)
+# ) COMMENT '취소';
 
 ALTER TABLE user
     ADD CONSTRAINT UQ_user_id UNIQUE (user_id);
@@ -183,10 +178,10 @@ ALTER TABLE comment
         FOREIGN KEY (post_id)
             REFERENCES post (post_id);
 
-ALTER TABLE coupon
-    ADD CONSTRAINT FK_reservation_TO_coupon
-        FOREIGN KEY (reservation_id)
-            REFERENCES reservation (reservation_id);
+# ALTER TABLE coupon
+#     ADD CONSTRAINT FK_reservation_TO_coupon
+#         FOREIGN KEY (reservation_id)
+#             REFERENCES reservation (reservation_id);
 
 ALTER TABLE comment
     ADD CONSTRAINT FK_user_TO_comment
@@ -223,20 +218,20 @@ ALTER TABLE lodging
         FOREIGN KEY (user_id)
             REFERENCES user (user_id);
 
-ALTER TABLE coupon
-    ADD CONSTRAINT FK_user_TO_coupon
-        FOREIGN KEY (user_id)
-            REFERENCES user (user_id);
+# ALTER TABLE coupon
+#     ADD CONSTRAINT FK_user_TO_coupon
+#         FOREIGN KEY (user_id)
+#             REFERENCES user (user_id);
 
-ALTER TABLE cancel
-    ADD CONSTRAINT FK_lodging_TO_cancel
-        FOREIGN KEY (lodging_id)
-            REFERENCES lodging (lodging_id);
-
-ALTER TABLE cancel
-    ADD CONSTRAINT FK_user_TO_cancel
-        FOREIGN KEY (user_id)
-            REFERENCES user (user_id);
+# ALTER TABLE cancel
+#     ADD CONSTRAINT FK_lodging_TO_cancel
+#         FOREIGN KEY (lodging_id)
+#             REFERENCES lodging (lodging_id);
+#
+# ALTER TABLE cancel
+#     ADD CONSTRAINT FK_user_TO_cancel
+#         FOREIGN KEY (user_id)
+#             REFERENCES user (user_id);
 
 INSERT INTO authority
 VALUES (1, 'ROLE_USER'), (2, 'ROLE_PROVIDER'), (3, 'ROLE_MASTER');
