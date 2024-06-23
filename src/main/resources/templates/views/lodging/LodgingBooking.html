@@ -1,76 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/lodging/LodgingBooking.css}">
-    <!--    <link rel="stylesheet" type="text/css" href="../../../static/css/lodging/LodgingBooking.css">-->
-    <script th:src="@{/js/lodging/LodgingBooking}"></script>
-    <!--    <script src="../../../static/js/lodging/Review.js"></script>-->
-    <title>Title</title>
+    <title>예약 상세 정보</title>
 </head>
 <body>
-<header></header>
-<main>
-    <div class="content">
-        <form th:action="@{lodging/booking}" th:object="${reservation}" method="post">
-            <section class="booking-details">
-                <section class="booking-info">
+<h2>예약 상세 정보</h2>
 
-                    <div class="info">
-                        <p th:text="'예약자 이름: ' + ${reservation.visitorName}"></p>
-                    </div>
-                    <div class="info">
-                        <p th:text="'휴대폰 번호: ' + ${reservation.visitorPhoneNum}"></p>
-                    </div>
+<div>
+    <h3>예약 정보</h3>
+    <p>예약 ID: <span th:text="${reservation.reservationId}"></span></p>
+<!--    <p>예약 시간: <span th:text="${#dates.format(reservation.reservationTime, 'yyyy-MM-dd HH:mm')}"></span></p>-->
+    <p>성인: <span th:text="${reservation.reservationAdult}"></span></p>
+    <p>어린이: <span th:text="${reservation.reservationChild}"></span></p>
+    <p>결제 유형: <span th:text="${reservation.reservationPayType}"></span></p>
+    <p>최종 결제 금액: <span th:text="${reservation.reservationFinalPay}"></span></p>
+    <p>입실: <span th:text="${#dates.format(reservation.lodging.lodgingOpen, 'yyyy-MM-dd')}"></span></p>
+    <p>퇴실: <span th:text="${#dates.format(reservation.lodging.lodgingClose, 'yyyy-MM-dd')}"></span></p>
+</div>
 
-                </section>
-                <section class="discount">
-                    <h2>할인 적용</h2>
-                    <div class="discount-options">
-                        <label>
-                            <input type="checkbox" id="maxDiscountCheckbox"> 최대할인적용
-                        </label>
-                        <div class="radio-label">
-                            <input type="radio" name="discount" value="none"> 선택안함
-                        </div>
-                        <div class="radio-label">
-                            <input type="radio" name="discount" value="coupon"> 쿠폰선택
-                        </div>
-                    </div>
-                </section>
-                <section class="payment-methods">
-                    <h2>결제 수단</h2>
-                    <div class="methods">
-                        <!-- 결제 수단 버튼들 추가 -->
-                    </div>
-                    <div class="checkbox">
-                        <input type="checkbox" id="next-time" checked>
-                        <label for="next-time"></label>
-                    </div>
-                </section>
-            </section>
-            <div class="summary-container">
-                <section class="summary">
-                    <img th:src="@{/static/image/MainImage.jpg}" alt="Room Image">
-                    <p th:text="${roomId}"></p>
-                    <p th:text="'일정: ' + ${reservation.reservationStartDate} + ' ~ ' + ${reservation.reservationEndDate}"></p>
-                    <p th:text="'성인: ' + ${reservation.reservationAdult} + '인, 어린이: ' + ${reservation.reservationChild} + '인'"></p>
-                </section>
-                <section class="summary">
-                    <div class="price-info">
-                        <p th:text="'객실 가격: ' + ${reservation.reservationPay} + '원'"></p>
-                        <p th:text="'총 결제 금액: ' + ${reservation.reservationFinalPay} + '원'"></p>
-                    </div>
-                    <div class="terms">
-                        <input type="checkbox" id="terms" checked>
-                        <label for="terms">약관 전체동의</label>
-                    </div>
-                    <button class="pay-button" th:text="'결제하기 ' + ${reservation.reservationFinalPay} + '원'"></button>
-                </section>
-            </div>
-        </form>
-    </div>
-</main>
-<footer></footer>
+<div>
+    <h3>방 정보</h3>
+    <p>객실 ID: <span th:text="${reservation.room.roomId}"></span></p>
+    <p>객실 이름: <span th:text="${reservation.room.roomName}"></span></p>
+    <p>객실 가격: <span th:text="${reservation.room.roomPrice}"></span></p>
+</div>
+
+<div>
+    <h3>숙소 정보</h3>
+    <p>숙소 이름: <span th:text="${reservation.lodging.lodgingName}"></span></p>
+</div>
+
+<div>
+    <h3>방문자 정보</h3>
+    <p>방문자 이름: <span th:text="${reservation.user.username}"></span></p>
+    <p>방문자 전화번호: <span th:text="${reservation.user.phonenum}"></span></p>
+</div>
+
 </body>
 </html>

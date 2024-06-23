@@ -10,7 +10,6 @@ import java.util.List;
 
 
 @Service
-@Transactional
 public class ReservationServiceImpl implements ReservationService {
 
     private final ReservationRepository reservationRepository;
@@ -21,17 +20,14 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public void saveReservation(Reservation reservation) {
-        reservationRepository.insert(reservation); // insert 메서드 호출
+    @Transactional
+    public Reservation makeReservation(Reservation reservation) {
+        reservationRepository.insertReservation(reservation);
+        return reservation;
     }
 
     @Override
-    public List<Reservation> getReservationsByUserId(String userId) {
-        return reservationRepository.findByUserId(userId);
-    }
-
-    @Override
-    public int deleteReservationByUserIdAndId(String userId, Long reservationId) {
-        return reservationRepository.deleteByUserIdAndId(userId, reservationId);
+    public Reservation getReservationDetails(Long reservationId) {
+        return reservationRepository.getReservationDetails(reservationId);
     }
 }
