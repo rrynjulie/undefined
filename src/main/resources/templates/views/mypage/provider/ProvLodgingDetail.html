@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/provider/ProvBookingList.css}">
-    <script th:src="@{/js/mypage/provider/ProvBookingList.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/provider/ProvLodgingDetail.css}">
+    <script th:src="@{/js/mypage/provider/ProvLodgingDetail.js}"></script>
     <title>숙소 상세 정보</title>
 </head>
 <body>
@@ -105,39 +105,6 @@
             <button class="btn-delete">삭제 요청</button>
         </div>
     </section>
-
-    <!-- 객실 정보 페이지 -->
-<!--    <section class="room-info">-->
-<!--        <h1>객실 정보</h1>-->
-<!--        <div class="room-list">-->
-<!--            <div class="room-item" th:each="room : ${rooms}">-->
-<!--                <img class="room-img" th:src="@{${room.roomPicture1}}" alt="객실 이미지1">-->
-<!--                <div class="room-details">-->
-<!--                    <label class="info-label">-->
-<!--                        객실명<br>-->
-<!--                        <input class="info-input" type="text" th:value="${room.roomName}" disabled>-->
-<!--                    </label>-->
-<!--                    <label class="info-label">-->
-<!--                        객실 번호<br>-->
-<!--                        <input class="info-input" type="text" th:value="${room.roomNumber}" disabled>-->
-<!--                    </label>-->
-<!--                    <label class="info-label">-->
-<!--                        기준 인원 / 최대 인원<br>-->
-<!--                        <input class="info-input" type="text" th:value="${room.roomNormalPeople} / ${room.roomMaxPeople}" disabled>-->
-<!--                    </label>-->
-<!--                    <label class="info-label">-->
-<!--                        침대 종류<br>-->
-<!--                        <input class="info-input" type="text" th:value="${room.roomBed}" disabled>-->
-<!--                    </label>-->
-<!--                    <label class="info-label">-->
-<!--                        가격<br>-->
-<!--                        <input class="info-input" type="text" th:value="${room.roomPrice}" disabled>-->
-<!--                    </label>-->
-<!--                </div>-->
-<!--                <button class="btn-detail">상세 보기</button>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </section>-->
 
     <script src="../../../../static/js/mypage/provider/ProvLodgingDetail.js"></script>
 </main>

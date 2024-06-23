@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProvLodging {
-    private int lodgingId;                 // 숙소 ID
+    private Long lodgingId;                 // 숙소 ID
     private String lodgingPicture1;        // 숙소 사진 1
     private String lodgingPicture2;        // 숙소 사진 2
     private String lodgingPicture3;        // 숙소 사진 3
