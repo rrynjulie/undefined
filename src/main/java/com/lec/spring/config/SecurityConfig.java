@@ -61,25 +61,17 @@ public class SecurityConfig {
                  *  만약 .loginPage(url) 가 세팅되어 있지 않으면 '디폴트 로그인' form 페이지가 활성화 된다
                  ********************************************/
                 .formLogin(form -> form
-                                .loginPage("/user/login") // 로그인 필요한 상황 발생시 매개변수의 url (로그인 폼) 으로 request 발생
-                                .loginProcessingUrl("/user/login")  // "/user/login" url 로 POST request 가 들어오면 시큐리티가 낚아채서 처리, 대신 로그인을 진행해준다(인증).
-                                // 이와 같이 하면 Controller 에서 /user/login (POST) 를 굳이 만들지 않아도 된다!
-                                // 위 요청이 오면 자동으로 UserDetailsService 타입 빈객체의 loadUserByUsername() 가 실행되어 인증여부 확인진행 <- 이를 제공해주어야 한다.
-                                .defaultSuccessUrl("/")   // '직접 /login' → /login(post) 에서 성공하면 "/" 로 이동시키기
-                                // 만약 다른 특정페이지에 진입하려다 로그인 하여 성공하면 해당 페이지로 이동 (너무 편리!)
-
-//                        .usernameParameter("aaa")   // 기본 name="username"
-//                        .passwordParameter("bbb")   // 기본 name="password"
-
-                                // 로그인 성공 직후 수행할 코드
-                                //.successHandler(AuthenticationSuccessHandler)  // 로그인 성공후 수행할 코드.
+                                .loginPage("/user/login")
+                                .loginProcessingUrl("/user/login")
+                                .defaultSuccessUrl("/")
+                                .usernameParameter("email")
+                                .passwordParameter("password")
                                 .successHandler(new CustomLoginSuccessHandler("/Home"))
-
-                                // 로그인 실패하면 수행할 코드
-                                // .failureHandler(AuthenticationFailureHandler)
                                 .failureHandler(new CustomLoginFailureHandler())
 
                 )
+
+
 
                 /********************************************
                  * ③ 로그아웃 설정
