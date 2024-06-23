@@ -76,20 +76,21 @@ public class UserController {
     public void login(){}
 
     @PostMapping("/login")
-    public String login(String email, String password, RedirectAttributes redirectAttrs) {
+    public String login(String email, String password, Model model) {
+        System.out.println("출력 확인 제발");
         try {
             Authentication authentication = userService.authenticate(email, password);
             SecurityContextHolder.getContext().setAuthentication(authentication);
+            System.out.println("-----------------------------" + email);
             return "redirect:/Home";
         } catch (UsernameNotFoundException | BadCredentialsException e) {
-            redirectAttrs.addFlashAttribute("errorMessage", "유저를 찾지 못했습니다.");
-            return "redirect:/user/login";
+            model.addAttribute("errorMessage", "이메일 또는 비밀번호가 올바르지 않습니다.");
+            return "user/login";
         }
     }
 
     @PostMapping("/loginError")
-    public String loginError(Model model) {
-        model.addAttribute("errorMessage", "이메일 또는 비밀번호가 올바르지 않습니다...");
+    public String loginError() {
         return "user/login";
     }
 

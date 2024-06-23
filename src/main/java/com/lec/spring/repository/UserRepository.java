@@ -11,7 +11,7 @@ public interface UserRepository {
     User findByNickname(String nickname);
     User findByEmail(String email);
 
-    User save(User user);
+    int save(User user);
 
     int update(User user);
 

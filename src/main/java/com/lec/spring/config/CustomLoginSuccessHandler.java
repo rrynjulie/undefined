@@ -17,6 +17,7 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
         // SavedRequestAwareAuthenticationSuccessHandler#setDefaultTargetUrl()
         // 로그인후 특별히 redirect 할 url 이 없는경우 기본적으로 redirect 할 url
 
+        System.out.println("로그인 성공");
         setDefaultTargetUrl(defaultTargetUrl);
     }
 

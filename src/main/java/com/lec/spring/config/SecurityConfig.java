@@ -73,7 +73,7 @@ public class SecurityConfig {
 
                                 // 로그인 성공 직후 수행할 코드
                                 //.successHandler(AuthenticationSuccessHandler)  // 로그인 성공후 수행할 코드.
-                                .successHandler(new CustomLoginSuccessHandler("/home"))
+                                .successHandler(new CustomLoginSuccessHandler("/Home"))
 
                                 // 로그인 실패하면 수행할 코드
                                 // .failureHandler(AuthenticationFailureHandler)
@@ -141,6 +141,7 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
 
 
 }

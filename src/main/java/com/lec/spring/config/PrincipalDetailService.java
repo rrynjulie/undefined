@@ -27,6 +27,7 @@ public class PrincipalDetailService implements UserDetailsService {
 
         // DB 조회
         User user = userService.findByEmail(email);
+        System.out.println(user.getEmail());
 
         // 해당 nickname 의 user 가 DB 에 있다면
         // UserDetails 생성해서 리턴
@@ -34,7 +35,15 @@ public class PrincipalDetailService implements UserDetailsService {
             PrincipalDetails userDetails = new PrincipalDetails(user);
             userDetails.setUserService(userService);
             return userDetails;
+
+
         }
+
+        user = userService.findByEmail(email);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with email: " + email);
+        }
+        // UserDetails 생성 및 반환
 
         // 해당 nickname 의 user 가 없다면?
         // UsernameNotFoundException 을 throw 해주어야 한다
@@ -42,6 +51,8 @@ public class PrincipalDetailService implements UserDetailsService {
 
         // 주의!  여기서 null 리턴하면 예외 발생!
     }
+
+
 }
 
 
