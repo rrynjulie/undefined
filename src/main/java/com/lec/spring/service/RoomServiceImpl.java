@@ -1,12 +1,11 @@
 package com.lec.spring.service;
 
-import com.lec.spring.domain.Lodging;
 import com.lec.spring.domain.Room;
+import com.lec.spring.repository.ProviderRepository;
 import com.lec.spring.repository.RoomRepository;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -28,13 +27,8 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<Lodging> readLodgingListByUserId() {
-        return null;
-    }
-
-    @Override
-    public List<Room> readRoomList() {
-        return roomRepository.findAll();
+    public List<Room> readRoomList(Long lodgingId) {
+        return roomRepository.findByLodgingId(lodgingId);
     }
 
     @Override

@@ -12,4 +12,6 @@ public interface ProviderRepository {
     ProvLodging findLodgingById(int lodgingId);
     void saveLodging(ProvLodging lodging);
 
+    List<ProvLodging> findByUserId(Long userId);
+
 }

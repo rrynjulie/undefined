@@ -16,14 +16,14 @@
     <th:block th:insert="~{mypage/provider/ProvNavMenu::prov-nav-menu}"></th:block>
 
     <!-- 객실 정보 페이지 -->
-    <section class="lodging-list" th:each="lodging : ${lodgingList}">
+    <section class="lodging-list">
         <h1>객실 정보</h1>
-        <div class="lodging-info">
+        <div class="lodging-info" th:each="lodging : ${rooms}">
             <div class="lodging-type" th:text="${lodging.lodgingType}">펜션/풀빌라</div>
             <div class="lodging-name" th:text="${lodging.lodgingName}">♥♥펜션</div>
             <div class="room-list-frame">
-                <a class="room-list" th:href="@{/mypage/provider/ProvRoomDetail}" th:each="room : ${list}">
-                    <img class="room-img" th:src="${https://yaimg.yanolja.com/v5/2024/02/25/17/640/65db73e01b8c85.72716229.jpg}" alt="">
+                <a class="room-list" th:href="@{/mypage/provider/ProvRoomDetail}" th:each="room : ${lodging.roomList}">
+                    <img class="room-img" th:src="${room.roomPicture1}" alt="">
                     <table class="room-info-table">
                         <colgroup>
                             <col style="width: 40%;">

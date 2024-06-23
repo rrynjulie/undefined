@@ -117,9 +117,11 @@ public class ProviderController {
         return "provider/ProvRoomRegisterOk";
     }
 
-    @GetMapping("/ProvRoomList/{userId}/{lodgingId}")
-    public void provRoomList(@PathVariable Long lodgingId, Model model) {
-        model.addAttribute("roomList", roomService.readRoomList());
+    @GetMapping("/ProvRoomList/{userId}")
+    public String provRoomList(@PathVariable("userId") Long userId, Model model) {
+        List<ProvLodging> roomList = providerService.getLodgingsAndRoomsByUserId(userId);
+        model.addAttribute("rooms", roomList);
+        return "mypage/provider/ProvRoomList";
     }
 
     @GetMapping("/ProvRoomDetail/{roomId}")

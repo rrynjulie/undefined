@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,4 +33,7 @@ public class ProvLodging {
     private String lodgingOwnerId;         // 숙소 주인 ID
 //    private boolean lodgingApproval;       // 숙소 승인 여부
 
+    private Long userId;
+
+    private List<Room> roomList;
 }

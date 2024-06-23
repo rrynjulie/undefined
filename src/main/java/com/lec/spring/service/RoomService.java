@@ -10,8 +10,7 @@ import java.util.Map;
 
 public interface RoomService {
     int createRoom(Room room, Map<String, MultipartFile> files);
-    List<Lodging> readLodgingListByUserId();
-    List<Room> readRoomList();
+    List<Room> readRoomList(Long lodgingId);
     Room readRoomDetail(Long roomId);
     Room findByRoomId(Long roomId);
     int updateRoom(Room room, Map<String, MultipartFile> files, Long[] delfile);

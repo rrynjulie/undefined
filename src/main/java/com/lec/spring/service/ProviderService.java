@@ -10,4 +10,5 @@ public interface ProviderService {
     ProvLodging getLodgingById(int lodgingId);
     void saveLodging(ProvLodging lodging);
 
+    List<ProvLodging> getLodgingsAndRoomsByUserId(Long userId);
 }
