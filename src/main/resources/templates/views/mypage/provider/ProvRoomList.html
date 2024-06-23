@@ -19,10 +19,10 @@
     <section class="lodging-list">
         <h1>객실 정보</h1>
         <div class="lodging-info" th:each="lodging : ${rooms}">
-            <div class="lodging-type" th:text="${lodging.lodgingType}">펜션/풀빌라</div>
-            <div class="lodging-name" th:text="${lodging.lodgingName}">♥♥펜션</div>
+            <div class="lodging-type" th:text="${lodging.lodgingType}"></div>
+            <div class="lodging-name" th:text="${lodging.lodgingName}"></div>
             <div class="room-list-frame">
-                <a class="room-list" th:href="@{/mypage/provider/ProvRoomDetail}" th:each="room : ${lodging.roomList}">
+                <a class="room-list" th:each="room : ${lodging.roomList}" th:href="@{'/mypage/provider/ProvRoomDetail/'+ ${room.roomId}}">
                     <img class="room-img" th:src="${room.roomPicture1}" alt="">
                     <table class="room-info-table">
                         <colgroup>
@@ -31,15 +31,15 @@
                         </colgroup>
                         <tr>
                             <th>객실 이름</th>
-                            <td th:text="${room.roomName}">별빛</td>
+                            <td th:text="${room.roomName}"></td>
                         </tr>
                         <tr>
                             <th>객실 호수</th>
-                            <td th:text="${room.roomNumber}">101호</td>
+                            <td th:text="${room.roomNumber}"></td>
                         </tr>
                         <tr>
                             <th>객실 면적</th>
-                            <td th:text="${room.roomArea}">15평</td>
+                            <td th:text="${room.roomArea}"></td>
                         </tr>
                     </table>
                 </a>

@@ -125,10 +125,10 @@ public class ProviderController {
     }
 
     @GetMapping("/ProvRoomDetail/{roomId}")
-    public String provRoomDetail(@PathVariable Long roomId, Model model) {
+    public String provRoomDetail(@PathVariable("roomId") Long roomId, Model model) {
         Room room = roomService.findByRoomId(roomId);
         model.addAttribute("room", room);
-        return "provider/ProvRoomDetail";
+        return "mypage/provider/ProvRoomDetail";
     }
 
     @GetMapping("/ProvRoomUpdate/{roomId}")

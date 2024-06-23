@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../../../../static/css/mypage/provider/ProvRoomDetail.css">
-    <title>내 객실 상세</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/provider/ProvRoomDetail.css}">
+    <script th:src="@{/js/mypage/provider/ProvRoomDetail.js}"></script>
+    <title>객실 상세</title>
 </head>
 <body>
 <!-- 헤더 -->
-<header id="nav-bar"></header>
-<script src="../../../../static/js/LoadHeader.js"></script>
-<script src="../../../../static/js/common/Header.js"></script>
+<th:block th:insert="~{common/Header::header}"></th:block>
 
 <!-- 메인 -->
 <main>
@@ -17,65 +15,51 @@
     <th:block th:insert="~{mypage/provider/ProvNavMenu::prov-nav-menu}"></th:block>
 
     <!-- 객실 정보 페이지 -->
-    <section class="lodging-info">
+    <section class="room-info" th:each="roomInfo : ${room}">
         <h1>객실 상세정보</h1>
-        <div class="lodging-list">
-            <div class="slideshow-container">
-                <div class="my-slides">
-                    <img class="lodging-img" src="https://yaimg.yanolja.com/v5/2021/12/29/17/1280/61cc9baf0192c8.90237210.jpg" alt="">
-                    <img class="lodging-img" src="https://yaimg.yanolja.com/v5/2021/12/29/17/1280/61cc9b625a05c4.02961832.jpg" alt="">
-                    <img class="lodging-img" src="https://yaimg.yanolja.com/v5/2021/12/29/17/1280/61cc9b62ebe628.00477093.jpg" alt="">
-                </div>
-                <div class="nav-button prev" onclick="plusSlide(-1)">❮</div>
-                <div class="nav-button next" onclick="plusSlide(1)">❯</div>
-                <div class="dot-pagination">
-                    <span class="dot" onclick="currentSlide(0)"></span>
-                    <span class="dot" onclick="currentSlide(1)"></span>
-                    <span class="dot" onclick="currentSlide(2)"></span>
-                </div>
-            </div>
-
+        <div class="room-list">
+            <img class="room-img" th:src="${room.roomPicture1}" alt="">
+        </div>
+        <div class="room-list">
             <label class="info-label">
                 객실명<br>
-                <input class="info-input" type="text" disabled>
+                <input class="info-input" type="text" th:value="${room.roomName}" disabled>
             </label>
             <label class="info-label">
                 객실 호수<br>
-                <input class="info-input" type="text" disabled>
+                <input class="info-input" type="text" th:value="${room.roomNumber}" disabled>
             </label>
             <label class="info-label">
                 객실 기준 인원<br>
-                <input class="info-input" type="text" disabled>
+                <input class="info-input" type="text" th:value="${room.roomNormalPeople}" disabled>
             </label>
             <label class="info-label">
                 객실 최대 인원<br>
-                <input class="info-input" type="text" disabled>
+                <input class="info-input" type="text" th:value="${room.roomMaxPeople}" disabled>
             </label>
             <label class="info-label">
                 객실 면적<br>
-                <input class="info-input" type="text" disabled>
+                <input class="info-input" type="text" th:value="${room.roomArea}" disabled>
             </label>
             <label class="info-label">
                 객실 가격<br>
-                <input class="info-input" type="text" disabled>
+                <input class="info-input" type="text" th:value="${room.roomPrice}" disabled>
             </label>
             <label class="info-label">
                 객실 침대 개수<br>
-                <input class="info-input" type="text" disabled>
+                <input class="info-input" type="text" th:value="${room.roomBed}" disabled>
+            </label>
+            <label class="info-label">
+                객실 침대 종류<br>
+                <input class="info-input" type="text" th:value="${room.roomBedGrade}" disabled>
             </label>
             <label class="info-label">
                 객실 욕실 개수<br>
-                <input class="info-input" type="text" disabled>
+                <input class="info-input" type="text" th:value="${room.roomBathroom}" disabled>
             </label>
             <label class="info-label">
                 객실 흡연 가능 여부<br>
-                <input class="info-input" type="text" disabled>
-            </label>
-        </div>
-        <div class="lodging-list">
-            <label class="info-label-textarea">
-                객실 공지사항 및 소개<br>
-                <textarea class="info-textarea" disabled></textarea>
+                <input class="info-input" type="text" th:value="${room.roomSmoke}" disabled>
             </label>
         </div>
         <div class="btn-list">
@@ -87,7 +71,6 @@
 </main>
 
 <!-- 푸터 -->
-<footer id="footer"></footer>
-<script src="../../../../static/js/LoadFooter.js"></script>
+<th:block th:insert="~{common/Footer::footer}"></th:block>
 </body>
 </html>
