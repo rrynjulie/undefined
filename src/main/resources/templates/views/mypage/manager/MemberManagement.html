@@ -2,8 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../../../../static/css/mypage/manager/MemberManagement.css">
-    <script th:src="@{/js/mypage/manager/MemberManagement.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/manager/MemberManagement.css}">
     <title>Title</title>
 </head>
 <body>
@@ -12,9 +11,14 @@
     <!-- 좌측 네비게이션 메뉴 -->
     <nav class="provider-menu">
         <ul>
-            <li class="provider-menu-list"><img src="../../../../static/image/approval.png" alt="" class="provider-menu-icon"><a href="../manager/ApprovalLodgingUpdate.html">승인요청</a></li>
-            <li class="provider-menu-list"><img src="../../../../static/image/Member.png" alt="" class="provider-menu-icon"><a href="../manager/MemberManagement.html">회원관리</a></li>
-            <li class="provider-menu-list"><img src="../../../../static/image/privacy.png" alt="" class="provider-menu-icon"><a href="../customer/ManageAccount.html" class="active">내 정보 관리</a></li>
+            <li class="provider-menu-list">
+                <img src="/image/approval.png" alt="" class="provider-menu-icon">
+                <a th:href="@{/mypage/manager/ApprovalLodgingUpdate}">승인요청</a>
+            </li>
+            <li class="provider-menu-list">
+                <img src="/image/Member.png" alt="" class="provider-menu-icon">
+                <a th:href="@{/mypage/manager/MemberManagement}">회원관리</a>
+            </li>
         </ul>
     </nav>
 
@@ -44,5 +48,5 @@
     </section>
 </main>
 </body>
-<script src="../../../../static/js/mypage/manager/MemberManagement.js"></script>
+<script th:src="@{/js/mypage/manager/MemberManagement.js}"></script>
 </html>

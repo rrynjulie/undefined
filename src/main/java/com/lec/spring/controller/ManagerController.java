@@ -27,4 +27,9 @@ public class ManagerController {
         model.addAttribute("managers", managers);
         return "mypage/manager/MemberManagement";
     }
+
+    @GetMapping("/ApprovalLodgingUpdate")
+    public String getApprovalLodgingUpdate(Model model) {
+        return "mypage/manager/ApprovalLodgingUpdate";
+    }
 }
