@@ -12,8 +12,4 @@ public interface ProviderRepository {
     ProvLodging findLodgingById(int lodgingId);
     void saveLodging(ProvLodging lodging);
 
-    // 추가된 Room 관련 메서드
-//    List<Room> findAllRooms();
-//    Room findRoomById(Long roomId);
-//    List<Room> findRoomsByLodgingId(Long lodgingId);
 }

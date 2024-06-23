@@ -33,19 +33,5 @@ public class ProviderServiceImpl implements ProviderService {
         providerRepository.saveLodging(lodging);
     }
 
-    // Room 관련 메서드 구현
-//    @Override
-//    public List<Room> getAllRoomDetails() {
-//        return providerRepository.findAllRooms();
-//    }
-//
-//    @Override
-//    public Room getRoomById(Long roomId) {
-//        return providerRepository.findRoomById(roomId);
-//    }
-//
-//    @Override
-//    public List<Room> getRoomsByLodgingId(Long lodgingId) {
-//        return providerRepository.findRoomsByLodgingId(lodgingId);
-//    }
+
 }
