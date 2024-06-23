@@ -9,16 +9,14 @@ import java.util.List;
 
 @Mapper
 public interface ReservationRepository {
-    List<Reservation> findAll();
+//    List<Reservation> findAll();
+//
+//    List<Reservation> findByUserId(String userId);
+//
+//    @Delete("DELETE FROM reservation WHERE user_id = #{userId} AND reservation_id = #{reservationId}")
+//    int deleteByUserIdAndId(@Param("userId") String userId, @Param("reservationId") Long reservationId);
 
-    Reservation findById(int reservationId); //예약 Id
+    void insertReservation(Reservation reservation);
 
-    void insert(Reservation reservation); //
-
-    List<Reservation> findByUserId(String userId);
-
-    @Delete("DELETE FROM reservation WHERE user_id = #{userId} AND reservation_id = #{reservationId}")
-    int deleteByUserIdAndId(@Param("userId") String userId, @Param("reservationId") Long reservationId);
-
-
+    Reservation getReservationDetails(@Param("reservationId") Long reservationId);
 }

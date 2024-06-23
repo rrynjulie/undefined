@@ -51,7 +51,7 @@ function completeRegistration() {
     const phone = document.getElementById('phone').value;
 
     if (nickname && password && confirmPassword && phone && password === confirmPassword) {
-        window.location.href = '../../../templates/views/Home.html';
+        window.location.href = '/Home';
     } else {
         alert('모든 입력 필드를 채우고 비밀번호를 확인해주세요.');
     }

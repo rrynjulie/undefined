@@ -5,11 +5,13 @@ import com.lec.spring.domain.Reservation;
 import java.util.List;
 
 public interface ReservationService {
+//    List<Reservation> getReservationsByUserId(String userId);
+//
+//    int deleteReservationByUserIdAndId(String userId, Long reservationId);
 
-    void saveReservation(Reservation reservation);
-    List<Reservation> getReservationsByUserId(String userId);
+    Reservation makeReservation(Reservation reservation);
 
-    int deleteReservationByUserIdAndId(String userId, Long reservationId);
+    Reservation getReservationDetails(Long reservationId);
 
 
 
