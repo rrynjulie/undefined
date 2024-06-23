@@ -15,7 +15,7 @@
         FROM lodging l
                  JOIN room r
                       ON l.lodging_id = r.lodging_id
-        WHERE l.lodging_location1 = #{location} OR l.lodging_location2 = #{location}
+        WHERE l.lodging_location1  LIKE CONCAT('%', #{location}, '%') OR l.lodging_location2  LIKE CONCAT('%', #{location}, '%')
         GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type;
     </select>
 
@@ -32,7 +32,8 @@
         WHERE #{type} = '전체' OR l.lodging_type = #{type}
         GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type, l.lodging_address;
     </select>
-    <!-- location과 type으로 필터링하는 쿼리 추가 -->
+
+    <!-- location 과 type 으로 필터링하는 쿼리 -->
     <select id="findLodgingsByLocationAndType" resultType="com.lec.spring.domain.Lodging">
         SELECT l.lodging_id AS lodgingId,
                l.lodging_name AS lodgingName,
@@ -55,6 +56,7 @@
                l.lodging_picture_1 AS lodgingPicture1,
                l.lodging_open AS lodgingOpen,
                l.lodging_close AS lodgingClose,
+               l.lodging_address AS lodgingAddress,
                r.room_picture_1 AS roomPicture1,
                r.room_name AS roomName,
                r.room_price AS roomPrices,
@@ -68,6 +70,7 @@
     <!--    숙소 상세 1개만 뽑아올 것들    -->
     <select id="findLodgingByName" resultType="com.lec.spring.domain.Lodging">
         SELECT l.lodging_name AS lodgingName,
+               l.lodging_picture_1 AS lodgingPicture1,
                l.lodging_introduce AS lodgingIntroduce,
                l.lodging_service AS lodgingService,
                l.lodging_usingInfo AS lodgingUsingInfo,
