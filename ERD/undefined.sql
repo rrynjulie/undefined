@@ -48,6 +48,7 @@ CREATE TABLE lodging
     lodging_picture_1    LONGTEXT                        NOT NULL COMMENT '숙소 사진 1',
     lodging_picture_2    LONGTEXT                        NULL     COMMENT '숙소 사진 2',
     lodging_picture_3    LONGTEXT                        NULL     COMMENT '숙소 사진 3',
+    lodging_approval     ENUM('true','false')            NOT NULL DEFAULT 'false' COMMENT '마스터의 숙소 승인여부',
     lodging_name         VARCHAR(100)                    NOT NULL COMMENT '숙소이름',
     lodging_type         ENUM('호텔/리조트' ,'펜션/풀빌라' , '모텔') NOT NULL COMMENT '숙소타입(호텔/리조트 , 펜션/ 풀빌라 , 모텔)',
     lodging_location1    VARCHAR(100)                    NOT NULL COMMENT '숙소위치(지역) - 강원도',
