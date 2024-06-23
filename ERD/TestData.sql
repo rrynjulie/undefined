@@ -8,6 +8,7 @@ SELECT * FROM user;
 SELECT * FROM lodging;
 SELECT * FROM room;
 SELECT * FROM reservation;
+SELECT * FROM comment;
 
 # user 테이블 내 데이터 삽입
 INSERT INTO user
