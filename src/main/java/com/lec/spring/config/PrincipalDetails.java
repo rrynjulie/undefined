@@ -3,6 +3,7 @@ package com.lec.spring.config;
 import com.lec.spring.domain.Authority;
 import com.lec.spring.domain.User;
 import com.lec.spring.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -13,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 public class PrincipalDetails implements UserDetails, OAuth2User {
-
 
     private UserService userService;
 
@@ -74,6 +74,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     public String getUsername() {
         return user.getNickname();
     }
+
 
     public String getEmail() {
         return user.getEmail();

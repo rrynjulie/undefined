@@ -74,3 +74,13 @@ document.getElementById('verification-code').addEventListener('focus', function(
     this.classList.remove('red-border');
     this.style.borderColor = 'black';
 });
+
+function submitEmailForm() {
+    document.getElementById("email-form").action = "/user/validate-email";
+    document.getElementById("email-form").submit();
+}
+
+function submitRegistrationForm() {
+    document.getElementById("registration-form").action = "/user/register";
+    document.getElementById("registration-form").submit();
+}

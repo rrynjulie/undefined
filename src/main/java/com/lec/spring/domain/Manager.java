@@ -37,5 +37,4 @@ public class Manager {
     //유저 번화번호
     private String userPhonenum;
 
-
 }

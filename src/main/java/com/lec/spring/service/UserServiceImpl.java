@@ -13,8 +13,12 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
@@ -22,6 +26,7 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Autowired
     private AuthorityRepository authorityRepository;
 
 
@@ -43,11 +48,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int register(User user) {
-        user.setNickname(user.getNickname());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        User savedUser = userRepository.save(user);
-        return savedUser != null ? 1 : 0;
+        return userRepository.save(user); // userRepository.save의 반환 값을 그대로 전달
     }
 
     @Override

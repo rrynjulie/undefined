@@ -5,6 +5,40 @@
 
 <mapper namespace="com.lec.spring.repository.ProviderRepository">
 
+    <sql id="SELECT_BASE">
+        SELECT l.lodging_id AS lodgingId
+             , l.lodging_picture_1 AS lodgingPicture1
+             , l.lodging_picture_2 AS lodgingPicture2
+             , l.lodging_picture_3 AS lodgingPicture3
+             , l.lodging_name AS lodgingName
+             , l.lodging_type AS lodgingType
+             , l.lodging_location1 AS lodgingLocation1
+             , l.lodging_location2 AS lodgingLocation2
+             , l.lodging_address AS lodgingAddress
+             , l.lodging_number AS lodgingNumber
+             , l.lodging_url AS lodgingUrl
+             , l.lodging_open AS lodgingOpen
+             , l.lodging_close AS lodgingClose
+             , l.lodging_introduce AS lodgingIntroduce
+             , l.lodging_service AS lodgingService
+             , l.lodging_usinginfo AS lodgingUsingInfo
+             , l.lodging_notice AS lodgingNotice
+             , l.lodging_owner_name AS lodgingOwnerName
+             , l.lodging_owner_number AS lodgingOwnerNumber
+             , l.lodging_owner_email AS lodgingOwnerEmail
+             , l.lodging_owner_id AS lodgingOwnerId
+             , u.user_id AS userId
+        FROM
+            lodging l, user u
+        WHERE
+            l.user_id = u.user_id
+    </sql>
+
+    <select id="findByUserId" resultType="com.lec.spring.domain.ProvLodging">
+        <include refid="SELECT_BASE"/>
+        AND l.user_id = #{userId}
+    </select>
+
     <select id="findAllDetails" resultType="com.lec.spring.domain.ProvLodging">
         SELECT
             lodging_id as lodgingId,
@@ -62,7 +96,6 @@
                    #{lodgingOwnerName}, #{lodgingOwnerNumber}, #{lodgingOwnerEmail}, #{lodgingOwnerId}
                )
     </insert>
-
 </mapper>
 
 
