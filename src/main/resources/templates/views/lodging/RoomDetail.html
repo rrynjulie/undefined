@@ -11,68 +11,86 @@
 <th:block th:insert="~{common/Header::header}"></th:block>
 
 <!-- 메인 -->
-<div class="container">
+<section class="container">
+
     <h1>객실 상세</h1>
+    <div class="room-info">
+        <img class="room-img" th:src="${room.roomPicture1}" alt="">
 
-    <img class="room-img" src="https://yaimg.yanolja.com/v5/2022/10/26/14/640/635942516949b7.96540689.jpg" alt="">
-
-    <div class="room-detail">
-        <h3>객실명</h3>
-
-        <h3>객실 상세정보</h3>
-        <p>기준 N인&nbsp;&nbsp;&nbsp;최대 N인</p>
-        <p>ㅁㅁ 침대 N개</p>
-        <p>금연객실</p>
-    </div>
-
-    <div class="room-reserve">
-        <h3 class="reserve-pont">숙박</h3>
-        <div class="room-reserve1">
-
-            <div class="datetime">
-                <div class="time">체크인 00:00 ~ 체크아웃 00:00</div>
-                <div class="date">07/04 ~ 07/05</div>
+        <div class="room-detail">
+            <div class="room-detail-inner">
+                <h2>객실명</h2>
+                <p th:text="${room.roomName}"></p>
             </div>
-
-            <div class="reserve">
-                <div class="pont"><p>취소 및 환불 불가</p></div>
-                <div class="price">100,000원</div>
-                <div class="reserve-div"><button class="reserve-btn">예약하기</button></div>
+            <hr class="room-detail-hr">
+            <div class="room-detail-inner">
+                <h2>객실 상세정보</h2>
+                <p th:text="'체크인 ' + ${lodging.lodgingOpen} + ' &nbsp;&nbsp; 체크아웃 ' + ${lodging.lodgingClose}"></p>
+                <p th:text="'기준' + ${room.roomNormalPeople} + '인 &nbsp;&nbsp; 최대 ' + ${room.roomMaxPeople} + '인'"></p>
+                <p th:text="${room.roomBedGrade} + '침대 ' + ${room.roomBed} + '개'"></p>
+                <P th:text="'화장실 ' + ${room.roomBathroom} + '개'"></P>
+                <p th:text="${room.roomArea} + '평'"></p>
+                <div th:if="${room.roomSmoke.toString() == 'YES'}"><p>흡연 가능 객실</p></div>
+                <div th:if="${room.roomSmoke.toString() == 'NO'}"><p>금연 객실</p></div>
             </div>
         </div>
     </div>
 
+    <h1>숙박</h1>
+    <div class="room-reserve-frame">
+        <div class="room-reserve-info">
+            <div class="room-reserve-date">
+                <div>
+                    <label>입실 날짜</label>
+                    <p id="selected-start-date"></p>
+                </div>
+                <div>
+                    <label>퇴실 날짜</label>
+                    <p id="selected-end-date"></p>
+                </div>
+                <div>
+                    <label>예약 인원</label>
+                    <p id="selected-lineup"></p>
+                </div>
+            </div>
+        </div>
 
-    <h3 style="margin-top: 40px;">객실후기</h3>
-    <div class="item-list">
-        <div class="item">
-            <div class="item-details">
-                <p class="item-rating">⭐ 4.6(512)</p>
-                <p class="item-title">리뷰 내용</p>
-            </div>
-            <img class="lodging-img" src="placeholder.png" alt="호텔 이미지">
-        </div>
-        <div class="item">
-            <div class="item-details">
-                <p class="item-rating">⭐ 4.6(512)</p>
-                <p class="item-title">리뷰 내용</p>
-            </div>
-            <img class="lodging-img" src="placeholder.png" alt="호텔 이미지">
-        </div>
-        <div class="item">
-            <div class="item-details">
-                <p class="item-rating">⭐ 4.6(512)</p>
-                <p class="item-title">리뷰 내용</p>
-            </div>
-            <img class="lodging-img" src="placeholder.png" alt="호텔 이미지">
+        <div class="reserve-confirm">
+            <div class="reserve-notice"><p>취소 및 환불 불가</p></div>
+            <div class="reserve-price" th:text="${roomPrice} + '원'"></div>
+            <a class="reserve-btn" href="#">예약하기</a>
         </div>
     </div>
 
-    <div class="review">
-        <button class="review-btn" onclick="a">(댓글 총 합)개 객실후기 보기</button>
+    <div class="post-title">
+        <h1>객실 이용 후기</h1>
+        <a class="btn-see-all" href="#">전체보기</a>
+    </div>
+    <div class="post-list">
+        <div class="post-frame">
+            <img class="post-img" src="placeholder.png" alt="호텔 이미지">
+            <div class="post-details">
+                <p class="post-rating">⭐ 4.6(512)</p>
+                <p class="post-contents">리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 </p>
+            </div>
+        </div>
+        <div class="post-frame">
+            <img class="post-img" src="placeholder.png" alt="호텔 이미지">
+            <div class="post-details">
+                <p class="post-rating">⭐ 4.6(512)</p>
+                <p class="post-contents">리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 </p>
+            </div>
+        </div>
+        <div class="post-frame">
+            <img class="post-img" src="placeholder.png" alt="호텔 이미지">
+            <div class="post-details">
+                <p class="post-rating">⭐ 4.6(512)</p>
+                <p class="post-contents">리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 </p>
+            </div>
+        </div>
     </div>
 
-</div>
+</section>
 
 <!-- 푸터 -->
 <th:block th:insert="~{common/Footer::footer}"></th:block>

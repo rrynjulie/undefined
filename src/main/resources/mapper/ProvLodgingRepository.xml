@@ -8,8 +8,6 @@
     <sql id="SELECT_BASE">
         SELECT l.lodging_id AS lodgingId
              , l.lodging_picture_1 AS lodgingPicture1
-             , l.lodging_picture_2 AS lodgingPicture2
-             , l.lodging_picture_3 AS lodgingPicture3
              , l.lodging_name AS lodgingName
              , l.lodging_type AS lodgingType
              , l.lodging_location1 AS lodgingLocation1

@@ -1,15 +1,18 @@
 package com.lec.spring.controller;
 
 
+import com.lec.spring.domain.ProvLodging;
 import com.lec.spring.domain.Room;
 import com.lec.spring.service.LodgingService;
 import com.lec.spring.domain.Lodging;
+import com.lec.spring.service.ProviderService;
 import com.lec.spring.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +20,13 @@ import java.util.List;
 @RequestMapping("/lodging")
 public class LodgingController {
     private final LodgingService lodgingService;
+    private ProviderService providerService;
     private RoomService roomService;
 
     @Autowired
-    public LodgingController(LodgingService lodgingService, RoomService roomService) {
+    public LodgingController(LodgingService lodgingService, ProviderService providerService, RoomService roomService) {
         this.lodgingService = lodgingService;
+        this.providerService = providerService;
         this.roomService = roomService;
     }
 
@@ -65,10 +70,14 @@ public class LodgingController {
         return "lodging/PostList";
     }
 
-    @GetMapping("/RoomDetail/{roomId}")
-    public String RoomDetail(@PathVariable("roomId") Long roomId, Model model) {
+    @GetMapping("/{lodgingId}/RoomDetail/{roomId}")
+    public String RoomDetail(@PathVariable("lodgingId") int lodgingId, @PathVariable("roomId") Long roomId, Model model) {
+        ProvLodging lodging = providerService.getLodgingById(lodgingId);
         Room room = roomService.findByRoomId(roomId);
+
+        model.addAttribute("lodging", lodging);
         model.addAttribute("room", room);
+        model.addAttribute("roomPrice", DecimalFormat.getInstance().format(room.getRoomPrice()));
         return "lodging/RoomDetail";
     }
 }

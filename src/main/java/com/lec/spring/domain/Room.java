@@ -12,8 +12,6 @@ import lombok.NoArgsConstructor;
 public class Room {
     private Long roomId;
     private String roomPicture1;
-    private String roomPicture2;
-    private String roomPicture3;
     private String roomName;
     private int roomNormalPeople;
     private int roomMaxPeople;
