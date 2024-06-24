@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../../../../static/css/mypage/customer/ReviewCreate.css">
+    <link rel="stylesheet" th:href="@{/css/mypage/customer/PostCreate.css}">
     <title>Title</title>
 </head>
 <body>
@@ -19,12 +19,14 @@
     </div>
     <form id="reviewForm" action="/submit_review" method="post">
         <input type="hidden" name="rating" id="rating" value="">
+        <textarea name="review" placeholder="후기를 작성해주세요"></textarea>
+        <input type="hidden" name="lodgingId" value="1"> <!-- 실제 숙소 ID를 동적으로 설정 -->
         <button type="submit">제출 하기</button>
     </form>
 
 </div>
 
 
-<script src="../../../../static/js/mypage/customer/ReviewCreate.js"></script>
+<script th:src="@{/js/mypage/customer/PostCreate.js}"></script>
 </body>
 </html>

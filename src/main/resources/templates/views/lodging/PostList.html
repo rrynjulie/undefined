@@ -8,6 +8,11 @@
 <body>
 <div class="container">
 
+        <h3>숙소 평점</h3>
+    <div id="totalDiv">
+        <div id="totalStar">&#9733;</div>
+        <div id="avgPostGrade" th:text="${avgPostGrade} + ' / 5'"></div>
+    </div>
     <div id="postList" th:each="lodgingss : ${lodgingss}">
         <div class="stars" th:attr="starCount=${lodgingss.postGrade}">
             <span class="star">&#9733;</span>

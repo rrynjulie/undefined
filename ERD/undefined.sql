@@ -75,7 +75,7 @@ CREATE TABLE post
     post_id        INT          NOT NULL AUTO_INCREMENT COMMENT '후기 교유 id',
     post_picture   LONGTEXT     NULL     COMMENT '후기 사진',
     post_text      LONGTEXT     NOT NULL COMMENT '후기 내용',
-    post_grade     INT          NOT NULL COMMENT '평점 (1~5)',
+    post_grade     DOUBLE          NOT NULL COMMENT '평점 (1.0~5.0)',
     user_id        INT NOT NULL COMMENT '아이디',
     reservation_id INT         NOT NULL COMMENT '예약 고유 id값',
     lodging_id     INT         NOT NULL COMMENT '숙소고유 id값',

@@ -55,4 +55,8 @@ public class LodgingServiceImpl implements LodgingService {
         return lodgingRepository.findLodgingById(lodgingId).stream().findFirst().orElse(null);
     }
 
+    @Override
+    public Double getAvgPostGrade(Long lodgingId) {
+        return lodgingRepository.avgPostGrade(lodgingId);
+    }
 }

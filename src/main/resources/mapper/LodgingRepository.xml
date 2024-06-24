@@ -100,4 +100,14 @@
                  JOIN room r ON p.room_id = r.room_id
         WHERE p.lodging_id = #{lodgingId}
     </select>
+
+    <select id="avgPostGrade" resultType="java.lang.Double">
+        SELECT TRUNCATE(AVG(p.post_grade), 1) AS avgPostGrade
+        FROM post p
+                 JOIN lodging l ON p.lodging_id = l.lodging_id
+                 JOIN room r ON p.room_id = r.room_id
+        WHERE p.lodging_id = #{lodgingId}
+        LIMIT 1;
+    </select>
+
 </mapper>
