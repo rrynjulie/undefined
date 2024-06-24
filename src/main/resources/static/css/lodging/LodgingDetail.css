@@ -318,6 +318,9 @@
     margin-top: 13px;
 }
 .reserve-btn {
+    text-decoration: none;
+    text-align: center;
+    align-content: center;
     width: 60%;
     height: 30px;
     border-radius: 10px;

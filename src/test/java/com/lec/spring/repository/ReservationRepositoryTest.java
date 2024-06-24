@@ -67,3 +67,104 @@
 //
 //
 //}
+//package com.lec.spring.repository;
+//import com.lec.spring.config.PrincipalDetails;
+//import com.lec.spring.controller.ReservationController;
+//import com.lec.spring.domain.Lodging;
+//import com.lec.spring.domain.Room;
+//import com.lec.spring.domain.User;
+//import com.lec.spring.service.LodgingService;
+//import com.lec.spring.service.RoomService;
+//import com.lec.spring.service.UserService;
+//import org.junit.jupiter.api.BeforeEach;
+//import org.junit.jupiter.api.Test;
+//import org.mockito.InjectMocks;
+//import org.mockito.Mock;
+//import org.mockito.MockitoAnnotations;
+//import org.springframework.security.core.Authentication;
+//import org.springframework.test.web.servlet.MockMvc;
+//import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+//import org.springframework.ui.Model;
+//
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//import static org.mockito.ArgumentMatchers.*;
+//import static org.mockito.Mockito.*;
+//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+//
+//public class ReservationControllerTest {
+//
+//    @Mock
+//    private LodgingService lodgingService;
+//
+//    @Mock
+//    private RoomService roomService;
+//
+//    @Mock
+//    private UserService userService;
+//
+//    @InjectMocks
+//    private ReservationController reservationController;
+//
+//    private MockMvc mockMvc;
+//
+//    @BeforeEach
+//    public void setup() {
+//        MockitoAnnotations.initMocks(this);
+//        mockMvc = MockMvcBuilders.standaloneSetup(reservationController).build();
+//    }
+//
+//    @Test
+//    public void testShowReservationForm() throws Exception {
+//        Long lodgingId = 1L;
+//        Long roomId = 1L;
+//
+//        // Mock PrincipalDetails
+//        PrincipalDetails principalDetails = new PrincipalDetails();
+//        principalDetails.setUser(new User("username", "password"));
+//
+//        // Mock Authentication
+//        Authentication authentication = mock(Authentication.class);
+//        when(authentication.isAuthenticated()).thenReturn(true);
+//        when(authentication.getPrincipal()).thenReturn(principalDetails);
+//
+//        // Mock Lodging
+//        Lodging lodging = new Lodging();
+//        lodging.setId(lodgingId);
+//        lodging.setName("Test Lodging");
+//
+//        // Mock Room
+//        Room room = new Room();
+//        room.setRoomId(roomId);
+//        room.setRoomName("Test Room");
+//
+//        // Mock UserService
+//        when(userService.findByUsername(anyString())).thenReturn(new User("username", "password"));
+//
+//        // Mock RoomService
+//        when(roomService.getRoomById(eq(roomId))).thenReturn(room);
+//
+//        // Mock LodgingService
+//        when(lodgingService.getLodgingById(eq(lodgingId))).thenReturn(lodging);
+//
+//        // Perform the GET request
+//        mockMvc.perform(get("/lodging/reservation/form")
+//                        .param("lodgingId", String.valueOf(lodgingId))
+//                        .param("roomId", String.valueOf(roomId))
+//                        .principal(authentication))
+//                .andExpect(status().isOk())
+//                .andExpect(view().name("lodging/LodgingBooking"))
+//                .andExpect(model().attributeExists("user", "lodging", "selectedRoom", "reservation"));
+//
+//        // Verify that userService.findByUsername() is called once with "username" argument
+//        verify(userService, times(1)).findByUsername(eq("username"));
+//
+//        // Verify that roomService.getRoomById() is called once with roomId argument
+//        verify(roomService, times(1)).getRoomById(eq(roomId));
+//
+//        // Verify that lodgingService.getLodgingById() is called once with lodgingId argument
+//        verify(lodgingService, times(1)).getLodgingById(eq(lodgingId));
+//    }
+//}

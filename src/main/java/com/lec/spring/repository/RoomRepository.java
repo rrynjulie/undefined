@@ -16,4 +16,8 @@ public interface RoomRepository {
     int update(Room room);
 
     int delete(Room room);
+
+    List<Room> findRoomsByLodgingId(Long lodgingId);
+
+    Room findById(Long roomId);
 }
