@@ -47,7 +47,7 @@
             lodging_number as lodgingNumber
 #             user_id as userId
         FROM lodging
-        WHERE lodging_type = '펜션/풀빌라'
+        WHERE lodging_type = '모텔'
     </select>
 
     <select id="findAllDetails" parameterType="int" resultType="com.lec.spring.domain.ProvLodging">
