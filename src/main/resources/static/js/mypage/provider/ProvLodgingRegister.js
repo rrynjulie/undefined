@@ -64,31 +64,3 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-// function uploadLodgingImages() {
-//     var fileInput1 = document.getElementById('fileInput1');
-//     var formData = new FormData();
-//
-//     // 모든 선택된 파일들을 FormData에 추가
-//     for (var i = 0; i < fileInput1.files.length; i++) {
-//         formData.append('files', fileInput1.files[i]);
-//     }
-//
-//     // 숙소 이미지를 업로드하는 AJAX 요청
-//     $.ajax({
-//         type: 'POST',
-//         url: '/mypage/provider/uploadRoomImages',  // 숙소 이미지 업로드 처리하는 경로에 맞게 수정
-//         data: formData,
-//         contentType: false,
-//         processData: false,
-//         success: function(response) {
-//             console.log('숙소 이미지 업로드 성공');
-//             console.log(response);  // 확인용 로그
-//
-//             alert('숙소 이미지가 성공적으로 업로드되었습니다.');
-//         },
-//         error: function(err) {
-//             console.error('숙소 이미지 업로드 에러');
-//             alert('숙소 이미지 업로드 중 오류가 발생했습니다.');
-//         }
-//     });
-// }

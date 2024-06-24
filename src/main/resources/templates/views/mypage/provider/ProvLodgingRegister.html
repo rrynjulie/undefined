@@ -31,22 +31,11 @@
         </div>
 
         <form id="registrationForm" action="/mypage/provider/saveLodging" method="post">
-            <h2>숙소 이미지 업로드</h2>
-<!--            <div class="image-uploader1">-->
-<!--                <button class="image-nav left">&lt;</button>-->
-<!--                <p>숙소 이미지를 등록해 주세요</p>-->
-<!--                <button class="image-nav right">&gt;</button>-->
-<!--            </div>-->
-
-<!--            <div id="Upload1">-->
-<!--                <input type="file" id="fileInput1" name="lodgingPicture1" accept="image/*" multiple>-->
-<!--                <button type="button" onclick="uploadLodgingImages()">숙소 이미지 업로드</button>-->
-<!--            </div>-->
+            <label for="fileInput1">숙소 이미지</label>
             <div id="Upload1">
-<!--                <input type="file" id="fileInput1" name="lodgingPicture1" accept="image/*" multiple>-->
-                <input type="text" id="fileInput1" name="lodgingPicture1">숙소 이미지 업로드</input>
+                <input type="text" id="fileInput1" name="lodgingPicture1" placeholder="숙소 이미지 url을 넣어주세요.">
             </div>
-
+            <br>
             <div class="form-row1">
                 <div class="form-group1">
                     <label for="name">숙소 이름</label>
@@ -178,5 +167,6 @@
         </form>
     </div>
 </main>
+
 </body>
 </html>
