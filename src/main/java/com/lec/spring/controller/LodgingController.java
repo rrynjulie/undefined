@@ -63,11 +63,14 @@ public class LodgingController {
         return lodgingService.getLodgingsByLocationAndType(location, type);
     }
 
-    @GetMapping("/PostList/{lodgingId}")
+    @GetMapping("/LodgingPostList/{lodgingId}")
     public String postList (@PathVariable("lodgingId") Long lodgingId, Model model) {
         List<Lodging> lodgingss = lodgingService.getPostList(lodgingId);
+        Double avgPostGrade = lodgingService.getAvgPostGrade(lodgingId);
+        String formattedAvgPostGrade = String.format("%.1f", avgPostGrade);
         model.addAttribute("lodgingss", lodgingss);
-        return "lodging/PostList";
+        model.addAttribute("avgPostGrade", formattedAvgPostGrade);
+        return "lodging/LodgingPostList";
     }
 
     @GetMapping("/{lodgingId}/RoomDetail/{roomId}")

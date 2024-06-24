@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/mypage/customer/PostCreate.css}">
@@ -21,8 +21,37 @@
         <input type="hidden" name="rating" id="rating" value="">
         <textarea name="review" placeholder="후기를 작성해주세요"></textarea>
         <input type="hidden" name="lodgingId" value="1"> <!-- 실제 숙소 ID를 동적으로 설정 -->
-        <button type="submit">제출 하기</button>
+<!--        <button type="submit">제출 하기</button>-->
     </form>
+
+<!--    <form th:action="@{/mypage/customer/PostCreate}" th:object="${post}" method="post">-->
+<!--        <label for="postPicture">Picture:</label>-->
+
+<!--&lt;!&ndash;        <label for="postId">Post ID:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input type="text" id="postId" th:field="${postId}" required />&ndash;&gt;-->
+
+<!--        <input type="text" id="postPicture" th:feild="${postPicture}"/>-->
+
+<!--        <label for="postText">Text:</label>-->
+<!--        <input id="postText" th:feild="${postText}"/>-->
+
+<!--        <label for="postGrade">Grade:</label>-->
+<!--        <input type="number" step="0.1" id="postGrade" th:feild="${postGrade}"/>-->
+
+<!--        <label for="userId">User ID:</label>-->
+<!--        <input type="text" id="userId" th:feild="${userId}"/>-->
+
+<!--        <label for="reservationId">Reservation ID:</label>-->
+<!--        <input type="text" id="reservationId" th:feild="${reservationId}"/>-->
+
+<!--        <label for="lodgingId">Lodging ID:</label>-->
+<!--        <input type="text" id="lodgingId" th:feild="${lodgingId}"/>-->
+
+<!--        <label for="roomId">Room ID:</label>-->
+<!--        <input type="text" id="roomId" th:feild="${roomId}"/>-->
+
+<!--        <button type="submit">Submit</button>-->
+<!--    </form>-->
 
 </div>
 

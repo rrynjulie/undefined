@@ -9,7 +9,6 @@ import java.util.List;
 
 @Service
 public class PostServiceImpl implements PostService {
-
     private final PostRepository postRepository;
 
     @Autowired
@@ -17,8 +16,9 @@ public class PostServiceImpl implements PostService {
         this.postRepository = postRepository;
     }
 
-    @Override
-    public void createPost(Post post) {
-        postRepository.createPost(post);
-    }
+    //    오류 때문에 잠시 주석처리
+//    @Override
+//    public void createPost(Post post) {
+//        postRepository.createPost(post);
+//    }
 }

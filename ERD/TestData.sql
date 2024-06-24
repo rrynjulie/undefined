@@ -9,6 +9,7 @@ SELECT * FROM lodging;
 SELECT * FROM room;
 SELECT * FROM authority;
 SELECT * FROM user_authority;
+SELECT * FROM post;
 
 # user 테이블 내 데이터 삽입
 INSERT INTO user

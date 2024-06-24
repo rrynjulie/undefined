@@ -1,21 +1,20 @@
 package com.lec.spring.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
 public class Post {
-    private Integer postId;
-    private Integer postGrade;
+    private Long postId;
     private String postText;
-    private Integer userId;
-    private Integer reservationId;
+    private Double postGrade;
+    private Long userId;
+    private Long reservationId;
+    private Long lodgingId;
+    private Long roomId;
     private String postPicture;
 }
+
 
