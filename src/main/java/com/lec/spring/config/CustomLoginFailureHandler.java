@@ -55,7 +55,7 @@ public class CustomLoginFailureHandler implements AuthenticationFailureHandler {
         System.out.println("로그인 시도한 이메일: " + email);
 
         String pw = request.getParameter("password");
-        System.out.println("비번" + pw);
+        System.out.println("로그인 시도한 비밀번호: " + pw);
 
         request.setAttribute("errorMessage", errorMessage);
         request.setAttribute("email", request.getParameter("email"));
