@@ -14,7 +14,7 @@ SELECT * FROM user_authority;
 INSERT INTO user
 VALUES
     (DEFAULT, '1234', '이재혁', 'jaehyeok817@gmail.com', now(), 'j_hyeok_2', '010-4678-3712', null, null)
-     , (DEFAULT, '1234', '최은정', 'eunjeong0911@naver.com', now(), 'eunjeong', '010-1234-1234', null, null)
+     , (DEFAULT, '1234', '최은정', 'eunjeong0911@naver.com', now(), 'eunjeong', '010-9114-4287', null, null)
      , (DEFAULT, '1234', '정준영', 'nejunyoung@gmail.com', now(), 'dun', '010-6572-7204', null, null)
      , (DEFAULT, '1234', '임예나', 'rynjulie0917@gmail.com', now(), 'rrynjulie', '010-4408-0242', null, null)
      , (DEFAULT, '1234', '최영재', 'dudwo0113@gmail.com', now(), 'dudwo0113', '010-6605-7937', null, null)

@@ -1,8 +1,10 @@
 package com.lec.spring.controller;
 
 
+import com.lec.spring.domain.Room;
 import com.lec.spring.service.LodgingService;
 import com.lec.spring.domain.Lodging;
+import com.lec.spring.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +17,12 @@ import java.util.List;
 @RequestMapping("/lodging")
 public class LodgingController {
     private final LodgingService lodgingService;
+    private RoomService roomService;
 
     @Autowired
-    public LodgingController(LodgingService lodgingService) {
+    public LodgingController(LodgingService lodgingService, RoomService roomService) {
         this.lodgingService = lodgingService;
+        this.roomService = roomService;
     }
 
     @GetMapping("/LodgingSearch")
@@ -61,4 +65,10 @@ public class LodgingController {
         return "lodging/PostList";
     }
 
+    @GetMapping("/RoomDetail/{roomId}")
+    public String RoomDetail(@PathVariable("roomId") Long roomId, Model model) {
+        Room room = roomService.findByRoomId(roomId);
+        model.addAttribute("room", room);
+        return "lodging/RoomDetail";
+    }
 }

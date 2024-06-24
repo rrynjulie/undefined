@@ -7,18 +7,16 @@
     <insert id="create" flushCache="true" parameterType="com.lec.spring.domain.Room"
             useGeneratedKeys="true" keyColumn="room_id" keyProperty="roomId">
         INSERT INTO room
-            (room_picture_1, room_picture_2, room_picture_3, room_name, room_normal_people, room_max_people
+            (room_picture_1, room_name, room_normal_people, room_max_people
             , room_price, room_number, room_area, room_bed, room_bed_grade, room_bathroom, room_smoke, lodging_id)
         VALUES
-            (#{roomPicture1}, #{roomPicture2}, #{roomPicture3}, #{roomName}, #{roomNormalPeople}, #{roomMaxPeople}
-            , #{roomPrice}, #{roomNumber}, #{roomArea}, #{roomBed}, #{roomBedGrade}, #{roomBathroom}, #{roomSmoke}, #{lodgingId})
+            (#{roomPicture1}, #{roomName}, #{roomNormalPeople}, #{roomMaxPeople}, #{roomPrice}, #{roomNumber}
+            , #{roomArea}, #{roomBed}, #{roomBedGrade}, #{roomBathroom}, #{roomSmoke}, #{lodgingId})
     </insert>
 
     <sql id="SELECT_BASE">
         SELECT r.room_id
              , r.room_picture_1
-             , r.room_picture_2
-             , r.room_picture_3
              , r.room_name
              , r.room_normal_people
              , r.room_max_people
@@ -39,8 +37,6 @@
     <resultMap id="mapRoom" type="com.lec.spring.domain.Room">
         <id column="room_id" property="roomId"/>
         <result column="room_picture_1" property="roomPicture1"/>
-        <result column="room_picture_2" property="roomPicture2"/>
-        <result column="room_picture_3" property="roomPicture3"/>
         <result column="room_name" property="roomName"/>
         <result column="room_normal_people" property="roomNormalPeople"/>
         <result column="room_max_people" property="roomMaxPeople"/>
@@ -72,8 +68,6 @@
     <update id="update" flushCache="true" parameterType="com.lec.spring.domain.Room">
         UPDATE room
         SET room_picture_1 = #{roomPicture1}
-          , room_picture_2 = #{roomPicture2}
-          , room_picture_3 = #{roomPicture3}
           , room_name = #{roomName}
           , room_normal_people = #{roomNormalPeople}
           , room_max_people = #{roomMaxPeople}

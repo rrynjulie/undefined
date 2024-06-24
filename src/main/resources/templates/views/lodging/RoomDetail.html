@@ -1,77 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/lodging/RoomDetail.css}">
-    <title>Title</title>
+    <script th:src="@{/js/mypage/provider/RoomDetail.js}"></script>
+    <title>객실 상세</title>
 </head>
 <body>
-
 <!-- 헤더 -->
-<header id="nav-bar"></header>
-<script src="../../../static/js/LoadHeader.js"></script>
-<script src="../../../static/js/common/Header.js"></script>
+<th:block th:insert="~{common/Header::header}"></th:block>
 
 <!-- 메인 -->
-<main>
-    <nav class="provider-menu">
-        <ul>
-            <li><a href="#">예약내역</a></li>
-            <li><a href="#">후기관리</a></li>
-            <li><a href="#">숙소정보</a></li>
-            <li><a href="#">객실정보</a></li>
-        </ul>
-    </nav>
-</main>
-
 <div class="container">
+    <h1>객실 상세</h1>
 
-    <section class="lodging-info">
-        <h1>숙소 정보</h1>
-    </section>
+    <img class="room-img" src="https://yaimg.yanolja.com/v5/2022/10/26/14/640/635942516949b7.96540689.jpg" alt="">
 
-    <div>
-        <div class="slideshow-container">
-
-            <div class="mySlides">
-                <img class="img" src="https://yaimg.yanolja.com/v5/2022/10/26/14/640/635942516949b7.96540689.jpg">
-                <div class="number">1 / 3</div>
-            </div>
-
-            <div class="mySlides">
-                <img class="img" src="https://yaimg.yanolja.com/v5/2022/10/26/14/640/63594251e8c1c0.29652521.jpg">
-                <div class="number">2 / 3</div>
-            </div>
-
-            <div class="mySlides">
-                <img class="img" src="https://yaimg.yanolja.com/v5/2022/10/26/14/640/63594252889687.15520222.jpg">
-                <div class="number">3 / 3</div>
-            </div>
-
-            <div class="nav-button prev" onclick="plusSlides(-1)">❮</div>
-            <div class="nav-button next" onclick="plusSlides(1)">❯</div>
-
-        </div>
-    </div>
-
-    <div class="room-name room">
+    <div class="room-detail">
         <h3>객실명</h3>
 
-
-    </div>
-    <div class="room-detail room">
+        <h3>객실 상세정보</h3>
         <p>기준 N인&nbsp;&nbsp;&nbsp;최대 N인</p>
         <p>ㅁㅁ 침대 N개</p>
         <p>금연객실</p>
     </div>
-    <div>
-        <h3>주요 서비스 및 편의시설</h3>
-        <div>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ <br>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        </div>
-    </div>
-
 
     <div class="room-reserve">
         <h3 class="reserve-pont">숙박</h3>
@@ -120,13 +72,9 @@
         <button class="review-btn" onclick="a">(댓글 총 합)개 객실후기 보기</button>
     </div>
 
-
 </div>
 
-<script th:src="@{/js/lodging/RoomDetail.js}"></script>
-
 <!-- 푸터 -->
-<footer id="footer"></footer>
-<script src="../../../static/js/LoadFooter.js"></script>
+<th:block th:insert="~{common/Footer::footer}"></th:block>
 </body>
 </html>
