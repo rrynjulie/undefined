@@ -1,38 +1,3 @@
-let slideIndex = 1;
-showSlides(slideIndex);
-
-// 3초마다 페이지가
-setInterval(function () {
-    plusSlides(1);
-}, 3000);
-
-function plusSlides(n) {
-    showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-    showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("mySlides");
-    let dots = document.getElementsByClassName("dot");
-    if (n > slides.length) {
-        slideIndex = 1
-    }
-    if (n < 1) {
-        slideIndex = slides.length
-    }
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
-    slides[slideIndex - 1].style.display = "block";
-}
-// 페이지가 로드되면 실행되는 이벤트
 document.addEventListener('DOMContentLoaded', function () {
     const selectedDate = document.getElementById('selectedDate');
     const total = document.getElementById('total');
@@ -258,3 +223,29 @@ document.addEventListener('DOMContentLoaded', function () {
     // 페이지 로드 시 데이터 불러오기
     loadData();
 });
+
+
+
+
+const apiKey = 'AIzaSyAes70WE_fWcC9y72SFcpItg17PDMU5Prg';
+
+function initMap() {
+    const lodgingAddress = document.getElementById('address').innerText.trim();
+    const geocoder = new google.maps.Geocoder();    // 좌표 변환하는 변수
+
+    geocoder.geocode({ address: lodgingAddress }, function(results) {   // address 주소를 geocoder 좌표로 변환
+
+        const location = results[0].geometry.location;
+        const maps = new google.maps.Map(document.getElementById('address'), {   // 페이지를 열 때 마다 maps 객체를 초기화하여 새로운 값 적용
+            zoom: 15,
+            center: location    // 지도 중심 위치
+        });
+        new google.maps.Marker({
+            position: location, // 마커 위치
+            map: maps    // 마커 추가할 지도 객체
+        });
+    });
+}
+const script = document.createElement('script');    // google API 는 외부 스크립트라서 동적으로 사용하기 위해 새로운 script 를 만듦
+script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap`;  // script 가 실행될 때 마다 initMap 함수를 호출하여 지도 초기화
+document.body.append(script);   // script 를 html body 에 선언

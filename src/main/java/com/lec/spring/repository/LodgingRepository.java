@@ -18,4 +18,8 @@ public interface LodgingRepository {
     List<Lodging> findLodgingById(Long lodgingId);
 
     List<Lodging> findLodgingByName(Long lodgingId);
+
+    List<Lodging> allPostList(Long lodgingId);
+
+    Double avgPostGrade(Long lodgingId);
 }

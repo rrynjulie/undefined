@@ -1,56 +1,33 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const couponRadio = document.querySelector('input[name="discount"][value="coupon"]');
-    const noneRadio = document.querySelector('input[name="discount"][value="none"]');
-    const couponInfo = document.querySelector('.info.coupon');
-    const maxDiscountCheckbox = document.getElementById('maxDiscountCheckbox');
-    const modal = document.getElementById('couponModal');
-    const closeModal = modal.querySelector('.close');
-    const applyCouponButton = document.getElementById('applyCoupon');
-    const couponSelect = document.getElementById('couponSelect');
+document.addEventListener('DOMContentLoaded', function () {
+    const reservationForm = document.getElementById('reservationForm'); // 예약 폼 요소 가져오기
+    const selectedDate = document.getElementById('selectedDate');
+    const total = document.getElementById('total');
+    const reservation = document.getElementById('reservation'); // 예약 폼 요소 가져오기
 
-    // 쿠폰 선택 라디오 버튼 클릭 시 모달 열기
-    couponRadio.addEventListener('change', function() {
-        if (this.checked) {
-            modal.style.display = 'block';
+    // 예약 폼에 날짜와 인원수 정보를 표시하는 함수
+    function showReservationInfo() {
+        // sessionStorage에서 데이터 가져오기
+        const storedStartDate = sessionStorage.getItem('startDate');
+        const storedEndDate = sessionStorage.getItem('endDate');
+        const storedAdultCount = parseInt(sessionStorage.getItem('adultCount')) || 1;
+        const storedChildCount = parseInt(sessionStorage.getItem('childCount')) || 0;
+
+        // 날짜 정보 표시
+        if (storedStartDate && storedEndDate) {
+            const startDate = new Date(storedStartDate);
+            const endDate = new Date(storedEndDate);
+            const nights = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+            selectedDate.innerHTML = `${startDate.getFullYear()}.${startDate.getMonth() + 1}.${startDate.getDate()} ~ ${endDate.getFullYear()}.${endDate.getMonth() + 1}.${endDate.getDate()}, ${nights}박`;
         }
-    });
 
-    // 모달 닫기 버튼 클릭 시 모달 닫기
-    closeModal.addEventListener('click', function() {
-        modal.style.display = 'none';
-    });
+        // 인원수 정보 표시
+        total.innerHTML = `성인 ${storedAdultCount}명, 아동 ${storedChildCount}명`;
+    }
 
-    // 적용 버튼 클릭 시 선택한 쿠폰 정보 적용
-    applyCouponButton.addEventListener('click', function() {
-        const selectedCoupon = couponSelect.value;
-        couponInfo.style.display = 'block';
-        couponInfo.querySelector('#coupon').textContent = selectedCoupon;
-        modal.style.display = 'none';
-    });
+    // 예약 폼 제출 시 처리
+    // reservation.addEventListener('submit', function (event) {
+    // });
 
-    // 선택 안 함 라디오 버튼 클릭 시 쿠폰 정보 숨기기 및 최대할인적용 체크 해제
-    noneRadio.addEventListener('change', function() {
-        if (this.checked) {
-            couponInfo.style.display = 'none';
-            maxDiscountCheckbox.checked = false; // 최대할인적용 체크 해제
-        }
-    });
-
-    // 최대할인적용 체크박스 처리
-    maxDiscountCheckbox.addEventListener('change', function() {
-        if (this.checked) {
-            couponRadio.checked = true;
-            modal.style.display = 'block';
-        } else {
-            noneRadio.checked = true;
-            couponInfo.style.display = 'none';
-        }
-    });
-
-    // 모달 외부 클릭 시 모달 닫기
-    window.addEventListener('click', function(event) {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
+    // 페이지 로드 시 예약 정보를 표시
+    showReservationInfo();
 });

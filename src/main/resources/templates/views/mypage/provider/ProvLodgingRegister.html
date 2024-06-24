@@ -25,34 +25,25 @@
             <h2>숙소 오너</h2>
             <div>
                 <button>내 정보 관리</button>
-                <button><a href="provlodgingregister">숙소 등록</a></button>
-                <button><a href="provlodginglist">오너 숙소 리스트</a></button>
+                <button><a href="/mypage/provider/provlodgingregister">숙소 등록</a></button>
+                <button><a href="/mypage/provider/provlodginglist">오너 숙소 리스트</a></button>
             </div>
         </div>
 
-        <h2>숙소 이미지 업로드</h2>
-        <div class="image-uploader1">
-            <button class="image-nav left">&lt;</button>
-            <p>숙소 이미지를 등록해 주세요</p>
-            <button class="image-nav right">&gt;</button>
-        </div>
-
-        <div id="Upload1">
-            <form id="UploadForm1" enctype="multipart/form-data">
-                <input type="file" id="fileInput1" name="file1" accept="image/*" multiple>
-                <button type="button" onclick="uploadLodgingImages()">숙소 이미지 업로드</button>
-            </form>
-        </div>
-
-        <form id="registrationForm">
+        <form id="registrationForm" action="/mypage/provider/saveLodging" method="post">
+            <label for="fileInput1">숙소 이미지</label>
+            <div id="Upload1">
+                <input type="text" id="fileInput1" name="lodgingPicture1" placeholder="숙소 이미지 url을 넣어주세요.">
+            </div>
+            <br>
             <div class="form-row1">
                 <div class="form-group1">
                     <label for="name">숙소 이름</label>
-                    <input type="text" id="name" placeholder="숙소 이름을 입력해 주세요.">
+                    <input type="text" id="name" name="lodgingName" placeholder="숙소 이름을 입력해 주세요.">
                 </div>
                 <div class="form-group1">
                     <label for="type">숙소 타입</label>
-                    <select id="type">
+                    <select id="type" name="lodgingType">
                         <option value="">숙소 타입을 선택해 주세요.</option>
                         <option value="펜션/풀빌라">펜션/풀빌라</option>
                         <option value="모텔">모텔</option>
@@ -62,7 +53,7 @@
             </div>
             <div class="form-group1">
                 <label for="region">지역</label>
-                <select id="region">
+                <select id="region" name="lodgingLocation1">
                     <option value="">지역을 선택해 주세요.</option>
                     <option value="서울특별시">서울특별시</option>
                     <option value="부산광역시">부산광역시</option>
@@ -81,7 +72,7 @@
             </div>
             <div class="form-group1">
                 <label for="sub-region">하위 지역</label>
-                <select id="sub-region">
+                <select id="sub-region" name="lodgingLocation2">
                     <option value="">하위 지역을 선택해 주세요.</option>
                     <option value="중구">중구</option>
                     <option value="해운대구">해운대구</option>
@@ -111,72 +102,71 @@
             <div class="form-row1">
                 <div class="form-group1">
                     <label for="address">숙소 주소</label>
-                    <input type="text" id="address" placeholder="숙소 주소를 입력해 주세요.">
+                    <input type="text" id="address" name="lodgingAddress" placeholder="숙소 주소를 입력해 주세요.">
                 </div>
                 <div class="form-group1">
                     <label for="phone">숙소 전화번호</label>
-                    <input type="text" id="phone" placeholder="숙소 전화번호를 입력해 주세요.">
+                    <input type="text" id="phone" name="lodgingNumber" placeholder="숙소 전화번호를 입력해 주세요.">
                 </div>
             </div>
             <div class="form-group1">
                 <label for="url">숙소 URL</label>
-                <input type="url" id="url" placeholder="숙소 URL을 입력해 주세요.">
+                <input type="url" id="url" name="lodgingUrl" placeholder="숙소 URL을 입력해 주세요.">
             </div>
             <div class="form-row1">
                 <div class="form-group1">
                     <label for="checkin">숙소 입실시간</label>
-                    <input type="text" id="checkin" placeholder="숙소 입실시간을 입력해 주세요.">
+                    <input type="text" id="checkin" name="lodgingOpen" placeholder="숙소 입실시간을 입력해 주세요.">
                 </div>
                 <div class="form-group1">
                     <label for="checkout">숙소 퇴실시간</label>
-                    <input type="text" id="checkout" placeholder="숙소 퇴실시간을 입력해 주세요.">
+                    <input type="text" id="checkout" name="lodgingClose" placeholder="숙소 퇴실시간을 입력해 주세요.">
                 </div>
             </div>
             <div class="form-group1">
                 <label for="description">숙소 소개</label>
-                <textarea id="description" placeholder="숙소 소개를 입력해 주세요."></textarea>
+                <textarea id="description" name="lodgingIntroduce" placeholder="숙소 소개를 입력해 주세요."></textarea>
             </div>
             <div class="form-group1">
                 <label for="facilities">숙소 시설 및 서비스</label>
-                <textarea id="facilities" placeholder="숙소 시설 및 서비스를 입력해 주세요."></textarea>
+                <textarea id="facilities" name="lodgingService" placeholder="숙소 시설 및 서비스를 입력해 주세요."></textarea>
+            </div>
+            <div class="form-group1">
+                <label for="usinginfo">숙소 이용 안내</label>
+                <textarea id="usinginfo" name="lodgingUsingInfo" placeholder="숙소 이용 정보를 입력해 주세요."></textarea>
             </div>
             <div class="form-group1">
                 <label for="notice">숙소 예약 공지</label>
-                <textarea id="notice" placeholder="숙소 예약 공지를 입력해 주세요."></textarea>
+                <textarea id="notice" name="lodgingNotice" placeholder="숙소 예약 공지를 입력해 주세요."></textarea>
             </div>
             <div class="form-row1">
                 <div class="form-group1">
-                    <label for="ownername">담담자 이름</label>
-                    <input type="text" id="ownername" placeholder="담당자 이름을 입력해 주세요.">
+                    <label for="ownername">담당자 이름</label>
+                    <input type="text" id="ownername" name="lodgingOwnerName" placeholder="담당자 이름을 입력해 주세요.">
                 </div>
                 <div class="form-group1">
                     <label for="ownerphone">담당자 전화번호</label>
-                    <input type="text" id="ownerphone" placeholder="담당자 전화번호를 입력해 주세요.">
+                    <input type="text" id="ownerphone" name="lodgingOwnerNumber" placeholder="담당자 전화번호를 입력해 주세요.">
                 </div>
             </div>
             <div class="form-group1">
                 <label for="owneremail">담당자 이메일</label>
-                <input type="email" id="owneremail" placeholder="담당자 이메일을 입력해 주세요.">
+                <input type="email" id="owneremail" name="lodgingOwnerEmail" placeholder="담당자 이메일을 입력해 주세요.">
             </div>
             <div class="form-group1">
-                <label for="ownerid">사업자등록번호</label>
-                <input type="text" id="ownerid" placeholder="사업자등록번호를 입력해 주세요.">
+                <label for="ownerid">사업자 등록 번호</label>
+                <input type="text" id="ownerid" name="lodgingOwnerId" placeholder="담당자 아이디를 입력해 주세요.">
             </div>
-            <div class="form-row1">
-                <div class="form-group1">
-                    <button type="submit">추가</button>
-                </div>
+            <div class="form-group1">
+                <label for="userid">유저 아이디</label>
+                <input type="text" id="userid" name="userId" placeholder="유저 아이디">
+            </div>
+            <div class="form-group1">
+                <button type="submit">숙소 등록</button>
             </div>
         </form>
-
     </div>
 </main>
-
-<!-- 푸터 -->
-<footer>
-
-</footer>
-
 
 </body>
 </html>

@@ -52,7 +52,7 @@ console.log(sessionStorage);
 
 function filterLodging(type) {
     const location = document.querySelector('input[name="location"]').value;
-    fetch(`/lodging/filter?location=` + encodeURIComponent(location) + `&type=` + encodeURIComponent(type))
+    fetch(`/lodging/filter?location=${encodeURIComponent(location)}&type=${encodeURIComponent(type)}`)
         .then(response => response.json())
         .then(data => {
             const resultDiv = document.querySelector('.item-list');

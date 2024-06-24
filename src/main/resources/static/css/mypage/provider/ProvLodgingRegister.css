@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
 }
+
 button {
     color: #FC5185;
 }
@@ -109,16 +110,9 @@ textarea {
     align-items: center;
     padding: 0;
 }
-/*이미지 업로드*/
-/*.preview-container {*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    margin-top: 20px;*/
-/*}*/
-/*.preview-image {*/
-/*    max-width: 300px;*/
-/*    max-height: 300px;*/
-/*    border: 1px solid #ccc;*/
-/*    padding: 10px;*/
-/*}*/
+
+.form-group1 button{
+    width: 100px;
+    margin-left: 550px;
+    border-radius: 30px;
+}

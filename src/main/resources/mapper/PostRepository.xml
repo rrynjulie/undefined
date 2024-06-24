@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.spring.repository.PostRepository">
+    <insert id="createPost" flushCache="true" parameterType="com.lec.spring.domain.Post"
+            useGeneratedKeys="true" keyColumn="post_id" keyProperty="postId">
+        INSERT INTO post (post_picture, post_text, post_grade, user_id, reservation_id, lodging_id, room_id)
+        VALUES (#{postPicture}, #{postText}, #{postGrade}, #{userId}, #{reservationId}, #{lodgingId}, #{roomId})
+    </insert>
+
+    <sql id="SELECT_BASE">
+        SELECT p.post_id
+             , p.post_picture
+             , p.post_text
+             , p.post_grade
+             , u.user_id
+             , re.reservation_id
+             , l.lodging_id
+             , ro.room_id
+        FROM
+            post p, user u, reservation re, lodging l, room ro
+        WHERE
+            p.user_id = u.user_id
+        AND p.reservation_id = re.reservation_id
+        AND l.lodging_id = ro.lodging_id
+        AND p.room_id = ro.room_id
+    </sql>
+
+    <select id="findByRoomId" resultType="com.lec.spring.domain.Post">
+        <include refid="SELECT_BASE"/>
+        AND ro.room_id = #{roomId}
+    </select>
+
+    <update id="update" flushCache="true" parameterType="com.lec.spring.domain.Post">
+        UPDATE post
+        SET post_picture = #{postPicture}
+          , post_text = #{postText}
+          , post_grade = #{postGrade}
+        WHERE post_id = #{postId}
+    </update>
+
+    <delete id="delete" flushCache="true" parameterType="com.lec.spring.domain.Post">
+        DELETE FROM post WHERE post_id = #{postId}
+    </delete>
+</mapper>

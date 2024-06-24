@@ -75,9 +75,11 @@ CREATE TABLE post
     post_id        INT          NOT NULL AUTO_INCREMENT COMMENT '후기 교유 id',
     post_picture   LONGTEXT     NULL     COMMENT '후기 사진',
     post_text      LONGTEXT     NOT NULL COMMENT '후기 내용',
-    post_grade     INT          NOT NULL COMMENT '평점 (1~5)',
+    post_grade     DOUBLE          NOT NULL COMMENT '평점 (1.0~5.0)',
     user_id        INT NOT NULL COMMENT '아이디',
     reservation_id INT         NOT NULL COMMENT '예약 고유 id값',
+    lodging_id     INT         NOT NULL COMMENT '숙소고유 id값',
+    room_id        INT         NOT NULL COMMENT '객실고유 id값',
     PRIMARY KEY (post_id)
 ) COMMENT '후기';
 
@@ -177,6 +179,17 @@ ALTER TABLE comment
     ADD CONSTRAINT FK_post_TO_comment
         FOREIGN KEY (post_id)
             REFERENCES post (post_id);
+
+ALTER TABLE post
+    ADD CONSTRAINT FK_lodging_TO_post
+        FOREIGN KEY (lodging_id)
+            REFERENCES lodging (lodging_id);
+
+ALTER TABLE post
+    ADD CONSTRAINT FK_room_TO_post
+        FOREIGN KEY (room_id)
+            REFERENCES room (room_id);
+
 
 # ALTER TABLE coupon
 #     ADD CONSTRAINT FK_reservation_TO_coupon

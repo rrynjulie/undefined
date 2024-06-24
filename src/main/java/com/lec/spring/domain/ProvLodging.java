@@ -12,8 +12,6 @@ import java.util.List;
 public class ProvLodging {
     private Long lodgingId;                 // 숙소 ID
     private String lodgingPicture1;        // 숙소 사진 1
-    private String lodgingPicture2;        // 숙소 사진 2
-    private String lodgingPicture3;        // 숙소 사진 3
     private String lodgingName;            // 숙소 이름
     private String lodgingType;            // 숙소 유형
     private String lodgingLocation1;       // 숙소 위치1

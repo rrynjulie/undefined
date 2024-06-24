@@ -1,130 +1,184 @@
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 400;
+    src:
+            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'),
+            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'),
+            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');
+}
+
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
 .container {
-    width: 70%;
-    margin: auto;
-    /*position: relative;*/
+    width: 60%;
+    margin: 50px auto;
 }
-.lodging-img {
-    height: 440px;
+
+.room-info {
     width: 100%;
-}
-.mySlides img {
-    border-radius: 15px;
-}
-.slideshow-container {
-    position: relative;
-}
-.next {
-    right: 0;
-}
-.prev {
-    left: 0;
-}
-.nav-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 20px;
-    cursor: pointer;
-}
-.number {
-    text-align: center;
+    display: flex;
+    margin: 30px 0 50px 0;
 }
 
+.room-img {
+    border-radius: 10px;
+    margin-right: 50px;
+    width: 60%;
+}
 
-.room {
-    border-bottom: solid black 1px;
+.room-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 40%;
 }
-.reserve-pont {
-    height: 15px;
+
+.room-detail-hr {
+    border: 1px solid #EBEBEB;
 }
-.room-reserve {
-    border: solid black 1px;
+
+.room-detail-inner {
+    gap: 20px;
+}
+
+.room-detail-inner h2 {
+    margin-bottom: 10px;
+}
+
+.room-detail-inner p {
+    color: dimgrey;
+    font-size: 17px;
+}
+
+.room-reserve-frame {
+    display: flex;
     height: 180px;
     width: 100%;
     border-radius: 10px;
-    margin-top: 40px;
-    background-color: #eee;
+    margin: 30px 0 50px 0;
+    padding: 40px 70px;
+    background-color: #F5F5F5;
 }
-.room-reserve1 {
-    display: flex;
-    justify-content: flex-end;
-}
-.time {
-    height: 30%;
-    margin-top: 20px;
-}
-.datetime {
+
+.room-reserve-info {
     width: 60%;
     display: flex;
-    justify-content: flex-start;
     flex-direction: column;
+    justify-content: center;
 }
-.reserve {
+
+.room-reserve-date {
+    display: flex;
+    justify-content: space-around;
+}
+
+.room-reserve-date div {
+    margin-right: 50px;
+}
+
+.room-reserve-date div label {
+    font-weight: bold;
+}
+
+.room-reserve-date div p {
+    color: #555555;
+}
+
+.reserve-confirm {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: flex-end;
     width: 40%;
 }
-.pont {
+
+.reserve-notice {
     color: red;
     font-weight: bold;
 }
-.price {
+
+.reserve-price {
     padding-bottom: 10px;
 }
-.reserve-div {
-    width: 100%;
-}
+
 .reserve-btn {
-    width: 100%;
-    height: 30px;
-    border-radius: 10px;
-    background-color:#FC5185;
+    width: 60%;
+    height: 40px;
+    border-radius: 7px;
+    background-color: #FC5185;
+    text-decoration: none;
     font-weight: bold;
+    text-align: center;
+    align-content: center;
     color: white;
-    border:none;
     cursor: pointer;
 }
 
+.reserve-btn:hover {
+    transform: scale(1.02);
+}
 
-.item-list {
+.post-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-see-all {
+    display: flex;
+    text-decoration: none;
+    color: #1273E4;
+    align-items: flex-end;
+}
+
+.post-list {
     display: flex;
     justify-content: space-between;
     height: 130px;
-    margin-top: 20px;
-}
-.item {
-    width: 32%;
-    display: flex;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-}
-.lodging-img {
-    width: 40%;
-}
-.item {
-}
-.item-details {
-    background-color: #eee;
-    width: 60%;
-    flex-direction: column;
-}
-.item-rating {
-    color: black;
-    height: 20%;
-}
-.item-title {
-    width: 100%;
-    font-size: 18px;
+    margin-top: 30px;
 }
 
-.review {
-    margin-top: 10px;
+.post-frame {
+    width: 32%;
+    height: 100%;
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
 }
-.review-btn {
+
+.post-img {
+    height: 100%;
+    width: 40%;
+    background-color: #EBEBEB;
+}
+
+.post-details {
+    background-color: #F5F5F5;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.post-rating {
+    height: 30%;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.post-contents {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    height: calc(1.5em * 3);
     width: 100%;
-    height: 50px;
+    line-height: 1.5em;
+    font-size: 14px;
+    color: dimgray;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
