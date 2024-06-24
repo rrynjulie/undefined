@@ -28,7 +28,7 @@
                MIN(r.room_price) AS roomPrice
         FROM lodging l
                  JOIN room r
-                     ON l.lodging_id = r.lodging_id
+                      ON l.lodging_id = r.lodging_id
         WHERE #{type} = '전체' OR l.lodging_type = #{type}
         GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type, l.lodging_address;
     </select>
@@ -62,14 +62,15 @@
                r.room_price AS roomPrices,
                r.room_id AS roomId
         FROM lodging l
-            JOIN room r
-                ON l.lodging_id = r.lodging_id
+                 JOIN room r
+                      ON l.lodging_id = r.lodging_id
         WHERE l.lodging_id = #{lodgingId}
-        </select>
+    </select>
 
     <!--    숙소 상세 1개만 뽑아올 것들    -->
     <select id="findLodgingByName" resultType="com.lec.spring.domain.Lodging">
-        SELECT l.lodging_name AS lodgingName,
+        SELECT l.lodging_id AS lodgingId,
+               l.lodging_name AS lodgingName,
                l.lodging_picture_1 AS lodgingPicture1,
                l.lodging_introduce AS lodgingIntroduce,
                l.lodging_service AS lodgingService,
@@ -80,11 +81,23 @@
                l.lodging_owner_number AS lodgingOwnerNumber,
                l.lodging_owner_email AS lodgingOwnerEmail,
                l.lodging_owner_id AS lodgingOwnerId,
-               r.room_picture_1 AS roomPicture1,
-               r.room_picture_2 AS roomPicture2
+               r.room_picture_1 AS roomPicture1
         FROM lodging l
-            JOIN room r ON l.lodging_id = r.lodging_id
+                 JOIN room r ON l.lodging_id = r.lodging_id
         WHERE l.lodging_id = #{lodgingId}
         LIMIT 1
+    </select>
+
+
+    <!--   전체 후기 리스트   -->
+    <select id="allPostList" resultType="com.lec.spring.domain.Lodging">
+        SELECT p.post_picture AS postPicture,
+               p.post_text AS postText,
+               p.post_grade AS postGrade,
+               r.room_name AS roomName
+        FROM post p
+                 JOIN lodging l ON p.lodging_id = l.lodging_id
+                 JOIN room r ON p.room_id = r.room_id
+        WHERE p.lodging_id = #{lodgingId}
     </select>
 </mapper>
