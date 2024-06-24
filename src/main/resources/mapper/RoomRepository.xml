@@ -15,19 +15,19 @@
     </insert>
 
     <sql id="SELECT_BASE">
-        SELECT r.room_id AS roomId
-             , r.room_picture_1 AS roomPicture1
-             , r.room_name AS roomName
-             , r.room_normal_people AS roomNormalPeople
-             , r.room_max_people AS roomMaxPeople
-             , r.room_price AS roomPrice
-             , r.room_number AS roomNumber
-             , r.room_area AS roomArea
-             , r.room_bed AS roomBed
-             , r.room_bed_grade AS roomBedGrade
-             , r.room_bathroom AS roomBathroom
-             , r.room_smoke AS roomSmoke
-             , l.lodging_id AS lodgingId
+        SELECT r.room_id
+             , r.room_picture_1
+             , r.room_name
+             , r.room_normal_people
+             , r.room_max_people
+             , r.room_price
+             , r.room_number
+             , r.room_area
+             , r.room_bed
+             , r.room_bed_grade
+             , r.room_bathroom
+             , r.room_smoke
+             , l.lodging_id
         FROM
             room r, lodging l
         WHERE
@@ -100,5 +100,10 @@
         SELECT room_id, room_name
         FROM room
         WHERE lodging_id = #{lodgingId}
+    </select>
+
+    <select id="findById" resultMap="mapRoom">
+        <include refid="SELECT_BASE"/>
+        AND r.room_id = #{roomId}
     </select>
 </mapper>

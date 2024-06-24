@@ -68,7 +68,7 @@ public class ReservationController {
         model.addAttribute("lodging", lodging);
 
         // Lodging ID에 해당하는 Room 목록 조회
-        List<Room> rooms = roomService.findRoomsByLodgingId(roomId);
+        List<Room> rooms = roomService.findRoomsByLodgingId(lodgingId);
         model.addAttribute("rooms", rooms);
 
         // 선택한 객실 정보 조회

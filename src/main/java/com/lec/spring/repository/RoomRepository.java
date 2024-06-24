@@ -18,6 +18,4 @@ public interface RoomRepository {
     int delete(Room room);
 
     List<Room> findRoomsByLodgingId(Long lodgingId);
-
-    Room findById(Long roomId);
 }
