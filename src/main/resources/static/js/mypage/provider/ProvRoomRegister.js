@@ -72,7 +72,7 @@ function uploadRoomImages() {
     // 객실 이미지를 업로드하는 AJAX 요청
     $.ajax({
         type: 'POST',
-        url: '/uploadRoomImages',  // 객실 이미지 업로드 처리하는 경로에 맞게 수정
+        url: '/mypage/provider/uploadRoomImages',  // 객실 이미지 업로드 처리하는 경로에 맞게 수정
         data: formData,
         contentType: false,
         processData: false,

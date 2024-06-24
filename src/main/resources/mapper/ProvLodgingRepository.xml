@@ -55,8 +55,6 @@
         SELECT
             lodging_id as lodgingId,
             lodging_picture_1 as lodgingPicture1,
-            lodging_picture_2 as lodgingPicture2,
-            lodging_picture_3 as lodgingPicture3,
             lodging_name as lodgingName,
             lodging_type as lodgingType,
             lodging_location1 as lodgingLocation1,
@@ -73,7 +71,8 @@
             lodging_owner_name as lodgingOwnerName,
             lodging_owner_number as lodgingOwnerNumber,
             lodging_owner_email as lodgingOwnerEmail,
-            lodging_owner_id as lodgingOwnerId
+            lodging_owner_id as lodgingOwnerId,
+            user_id as userId
         FROM
             lodging
         WHERE
@@ -82,18 +81,18 @@
 
     <insert id="saveLodging" parameterType="com.lec.spring.domain.ProvLodging">
         INSERT INTO lodging (
-            lodging_picture_1, lodging_picture_2, lodging_picture_3, lodging_name,
-            lodging_type, lodging_location1, lodging_location2, lodging_address,
-            lodging_number, lodging_url, lodging_open, lodging_close,
-            lodging_introduce, lodging_service, lodging_usinginfo, lodging_notice,
-            lodging_owner_name, lodging_owner_email, lodging_owner_id
+            lodging_picture_1, lodging_name, lodging_type, lodging_location1,
+            lodging_location2, lodging_address, lodging_number, lodging_url,
+            lodging_open, lodging_close, lodging_introduce, lodging_service,
+            lodging_usinginfo, lodging_notice, lodging_owner_name, lodging_owner_number,
+            lodging_owner_email, lodging_owner_id, user_id
         )
         VALUES (
-                   #{lodgingPicture1}, #{lodgingPicture2}, #{lodgingPicture3}, #{lodgingName},
-                   #{lodgingType}, #{lodgingLocation1}, #{lodgingLocation2}, #{lodgingAddress},
-                   #{lodgingNumber}, #{lodgingUrl}, #{lodgingOpen}, #{lodgingClose},
-                   #{lodgingIntroduce}, #{lodgingService}, #{lodgingUsingInfo}, #{lodgingNotice},
-                   #{lodgingOwnerName}, #{lodgingOwnerNumber}, #{lodgingOwnerEmail}, #{lodgingOwnerId}
+                   #{lodgingPicture1}, #{lodgingName}, #{lodgingType}, #{lodgingLocation1},
+                   #{lodgingLocation2}, #{lodgingAddress}, #{lodgingNumber}, #{lodgingUrl},
+                   #{lodgingOpen}, #{lodgingClose}, #{lodgingIntroduce}, #{lodgingService},
+                   #{lodgingUsingInfo}, #{lodgingNotice}, #{lodgingOwnerName}, #{lodgingOwnerNumber},
+                   #{lodgingOwnerEmail}, #{lodgingOwnerId}, #{userId}
                )
     </insert>
 </mapper>
