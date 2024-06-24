@@ -23,4 +23,5 @@ public interface LodgingService {
 
     List<Lodging> getPostList(Long lodgingId);
 
+    Lodging getLodgingById(Long lodgingId);
 }

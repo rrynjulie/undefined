@@ -22,12 +22,16 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     @Transactional
     public Reservation makeReservation(Reservation reservation) {
-        reservationRepository.insertReservation(reservation);
-        return reservation;
+        return reservationRepository.save(reservation);
     }
 
     @Override
     public Reservation getReservationDetails(Long reservationId) {
         return reservationRepository.getReservationDetails(reservationId);
+    }
+
+    @Override
+    public Reservation save(Reservation reservation) {
+        return reservationRepository.save(reservation);
     }
 }

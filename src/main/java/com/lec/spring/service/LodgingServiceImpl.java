@@ -50,4 +50,9 @@ public class LodgingServiceImpl implements LodgingService {
         return lodgingRepository.allPostList(lodgingId);
     }
 
+    @Override
+    public Lodging getLodgingById(Long lodgingId) {
+        return lodgingRepository.findLodgingById(lodgingId).stream().findFirst().orElse(null);
+    }
+
 }
