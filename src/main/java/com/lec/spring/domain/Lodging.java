@@ -16,7 +16,6 @@ public class Lodging {
     private String lodgingName;
     private String lodgingType;
     private String lodgingPicture1;
-    private int roomPrice;
     private String lodgingOpen;
     private String lodgingClose;
     private String lodgingIntroduce;
@@ -28,11 +27,17 @@ public class Lodging {
     private String lodgingOwnerNumber;
     private String lodgingOwnerEmail;
     private String lodgingOwnerId;
+
     private Long roomId;
     private String roomName;
     private String roomPicture1;
     private String roomPicture2;
-    private int roomPrices;
+    private int roomPrice;  // 객실 최솟값
+    private int roomPrices; // 한 숙소의 객실들 가격
+
+    private String postPicture;
+    private String postText;
+    private int postGrade;
 
 
 

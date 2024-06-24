@@ -8,9 +8,7 @@
 //         window.location.href = "../../../../templates/views/mypage/customer/BookingList.html";
 //     });
 //
-//     document.getElementById("review-btn").addEventListener("click", function() {
-//         window.location.href = "../../../../templates/views/mypage/customer/ReviewList.html";
-//     });
+
 //
 //     document.getElementById("coupon-btn").addEventListener("click", function() {
 //         window.location.href = "../../../../templates/views/mypage/customer/CouponList.html";

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/lodging/PostList.css}">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+
+    <div id="postList" th:each="lodgingss : ${lodgingss}">
+        <div class="stars" th:attr="starCount=${lodgingss.postGrade}">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+        </div>
+        <p th:text="${lodgingss.roomName}"></p>
+        <p th:text="${lodgingss.postPicture}"></p>
+        <p th:text="${lodgingss.postText}"></p>
+    </div>
+
+
+
+
+</div>
+
+<script th:src="@{/js/lodging/PostList.js}"></script>
+</body>
+</html>

@@ -45,4 +45,9 @@ public class LodgingServiceImpl implements LodgingService {
         return lodgingRepository.findLodgingsByLocationAndType(location, type);
     }
 
+    @Override
+    public List<Lodging> getPostList(Long lodgingId) {
+        return lodgingRepository.allPostList(lodgingId);
+    }
+
 }

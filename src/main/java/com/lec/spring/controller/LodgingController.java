@@ -47,9 +47,18 @@ public class LodgingController {
         return "lodging/LodgingDetail";
     }
 
+
     @GetMapping("/filter")
     @ResponseBody
     public List<Lodging> filterLodgingsByLocationAndType(@RequestParam("location") String location, @RequestParam("type") String type) {
         return lodgingService.getLodgingsByLocationAndType(location, type);
     }
+
+    @GetMapping("/PostList/{lodgingId}")
+    public String postList (@PathVariable("lodgingId") Long lodgingId, Model model) {
+        List<Lodging> lodgingss = lodgingService.getPostList(lodgingId);
+        model.addAttribute("lodgingss", lodgingss);
+        return "lodging/PostList";
+    }
+
 }
