@@ -9,14 +9,14 @@ document.addEventListener("DOMContentLoaded", function() {
             { id: 'normal', label: '객실 기준 인원수' },
             { id: 'max', label: '객실 최대 인원수' },
             { id: 'price', label: '객실 가격' },
-            { id: 'grade', label: '객실 등급' },
+            // { id: 'grade', label: '객실 등급' },
             { id: 'nm', label: '객실 호수' },
             { id: 'area', label: '객실 면적' },
             { id: 'bedcnt', label: '객실 침대 개수' },
             { id: 'roombedtype', label: '객실 침대 유형' },
             { id: 'bathcnt', label: '객실 욕실 개수' },
-            { id: 'smoke', label: '객실 흡연 여부' },
-            { id: 'notion', label: '숙소 공지사항 및 소개' }
+            // { id: 'smoke', label: '객실 흡연 여부' },
+            // { id: 'notion', label: '숙소 공지사항 및 소개' }
         ];
 
         let allValid = true;
@@ -60,31 +60,31 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-function uploadRoomImages() {
-    var fileInput2 = document.getElementById('fileInput2');
-    var formData = new FormData();
-
-    // 모든 선택된 파일들을 FormData에 추가
-    for (var i = 0; i < fileInput2.files.length; i++) {
-        formData.append('files', fileInput2.files[i]);
-    }
-
-    // 객실 이미지를 업로드하는 AJAX 요청
-    $.ajax({
-        type: 'POST',
-        url: '/mypage/provider/uploadRoomImages',  // 객실 이미지 업로드 처리하는 경로에 맞게 수정
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function(response) {
-            console.log('객실 이미지 업로드 성공');
-            console.log(response);  // 확인용 로그
-
-            alert('객실 이미지가 성공적으로 업로드되었습니다.');
-        },
-        error: function(err) {
-            console.error('객실 이미지 업로드 에러');
-            alert('객실 이미지 업로드 중 오류가 발생했습니다.');
-        }
-    });
-}
+// function uploadRoomImages() {
+//     var fileInput2 = document.getElementById('fileInput2');
+//     var formData = new FormData();
+//
+//     // 모든 선택된 파일들을 FormData에 추가
+//     for (var i = 0; i < fileInput2.files.length; i++) {
+//         formData.append('files', fileInput2.files[i]);
+//     }
+//
+//     // 객실 이미지를 업로드하는 AJAX 요청
+//     $.ajax({
+//         type: 'POST',
+//         url: '/mypage/provider/uploadRoomImages',  // 객실 이미지 업로드 처리하는 경로에 맞게 수정
+//         data: formData,
+//         contentType: false,
+//         processData: false,
+//         success: function(response) {
+//             console.log('객실 이미지 업로드 성공');
+//             console.log(response);  // 확인용 로그
+//
+//             alert('객실 이미지가 성공적으로 업로드되었습니다.');
+//         },
+//         error: function(err) {
+//             console.error('객실 이미지 업로드 에러');
+//             alert('객실 이미지 업로드 중 오류가 발생했습니다.');
+//         }
+//     });
+// }

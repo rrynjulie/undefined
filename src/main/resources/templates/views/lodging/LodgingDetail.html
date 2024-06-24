@@ -35,7 +35,7 @@
 
     <div class="review-header" th:each="lodgingName : ${lodgingName}">
         <div>⭐ 평균별점</div>
-        <a class="all" th:href="@{'/lodging/PostList/' + ${lodgingName.lodgingId}}">전체보기 ></a>
+        <a class="all" th:href="@{'/lodging/LodgingPostList/' + ${lodgingName.lodgingId}}">전체보기 ></a>
     </div>
 
     <div class="item-list" th:each="lodgingName : ${lodgingName}">

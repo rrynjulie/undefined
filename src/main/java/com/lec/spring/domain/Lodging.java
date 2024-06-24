@@ -37,7 +37,9 @@ public class Lodging {
 
     private String postPicture;
     private String postText;
-    private int postGrade;
+    private double postGrade;
+
+    private double avgPostGrade;
 
 
 
@@ -51,4 +53,9 @@ public class Lodging {
         NumberFormat numberFormats = NumberFormat.getInstance(Locale.KOREA);
         return numberFormats.format(roomPrices);
     }
+
+    public String getFormattedAvgPostGrade() {
+        return String.format("%.1f", avgPostGrade);
+    }
+
 }

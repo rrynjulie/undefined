@@ -9,13 +9,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
 public class Post {
-    private Integer postId;
-    private Integer postGrade;
-    private String postText;
-    private Integer userId;
-    private Integer reservationId;
+    private Long postId;  // NOT NULL
     private String postPicture;
-}
+    private String postText;  // NOT NULL
+    private double postGrade;  // NOT NULL
 
+    // Foreign Key
+    private Long userId;  // NOT NULL
+    private Long reservationId;  // NOT NULL
+    private Long lodgingId;  // NOT NULL
+    private Long roomId;  // NOT NULL
+}

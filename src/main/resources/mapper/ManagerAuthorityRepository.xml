@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lec.spring.repository.ManagerAuthorityRepository">
+
+
+<!--    사용자 권한 추가   -->
+    <insert id="addManagerAuthority">
+        INSERT INTO user_authority (user_id, authority_id)
+        VALUES (#{userId}, #{authorityId})
+    </insert>
+
+<!--    사용자 권한 제거   -->
+    <delete id="removeManagerAuthority">
+        DELETE FROM user_authority
+        WHERE user_id = #{userId} AND authority_id = #{authorityId}
+    </delete>
+
+<!-- 사용자 ID로 권한 조회 -->
+    <select id="findByUserId" parameterType="int" resultType="com.lec.spring.domain.ManagerAuthority">
+        SELECT user_id, authority_id
+        FROM user_authority
+        WHERE user_id = #{userId}
+    </select>
+
+</mapper>

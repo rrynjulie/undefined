@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class PostServiceImpl implements PostService {
 
-    private final PostRepository postRepository;
+    private PostRepository postRepository;
 
     @Autowired
     public PostServiceImpl(PostRepository postRepository) {
@@ -18,7 +18,30 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void createPost(Post post) {
+    public int createPost(Post post) {
         postRepository.createPost(post);
+        return 0;
     }
+
+    @Override
+    public int countAllPostsByLodgingId(Long lodgingId) {
+        return postRepository.countAllPostsByLodgingId(lodgingId);
+    }
+
+    @Override
+    public List<Post> findPostsByRoomId(Long roomId) {
+        return postRepository.findPostsByRoomId(roomId);
+    }
+
+    @Override
+    public int updatePost(Post post) {
+        return 0;
+    }
+
+    @Override
+    public int deletePost(Long postId) {
+        return 0;
+    }
+
+
 }

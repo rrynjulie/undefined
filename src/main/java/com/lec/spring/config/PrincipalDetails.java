@@ -3,7 +3,6 @@ package com.lec.spring.config;
 import com.lec.spring.domain.Authority;
 import com.lec.spring.domain.User;
 import com.lec.spring.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -50,13 +49,13 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 
         Collection<GrantedAuthority> collect = new ArrayList<>();
 
-        List<Authority> list = userService.selectAuthoritiesById(user.getId());  // DB 에서 user 의 권한(들) 읽어오기
+        List<Authority> list = userService.selectAuthoritiesById(user.getUserId());  // DB 에서 user 의 권한(들) 읽어오기
 
         for(Authority auth : list){
             collect.add(new GrantedAuthority() {
                 @Override
                 public String getAuthority() {
-                    return auth.getName();
+                    return String.valueOf(auth.getAuthority());
                 }
 
             });

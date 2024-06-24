@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.lec.spring.repository.RoomRepository">
-    <insert id="create" flushCache="true" parameterType="com.lec.spring.domain.Room"
+    <insert id="createRoom" flushCache="true" parameterType="com.lec.spring.domain.Room"
             useGeneratedKeys="true" keyColumn="room_id" keyProperty="roomId">
         INSERT INTO room
             (room_picture_1, room_name, room_normal_people, room_max_people

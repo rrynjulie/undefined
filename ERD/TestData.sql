@@ -9,21 +9,21 @@ SELECT * FROM lodging;
 SELECT * FROM room;
 SELECT * FROM authority;
 SELECT * FROM user_authority;
+SELECT * FROM post;
 
 # user 테이블 내 데이터 삽입
 INSERT INTO user
 VALUES
-    (DEFAULT, '1234', '이재혁', 'jaehyeok817@gmail.com', now(), 'j_hyeok_2', '010-4678-3712', null, null)
-     , (DEFAULT, '1234', '최은정', 'eunjeong0911@naver.com', now(), 'eunjeong', '010-9114-4287', null, null)
-     , (DEFAULT, '1234', '정준영', 'nejunyoung@gmail.com', now(), 'dun', '010-6572-7204', null, null)
-     , (DEFAULT, '1234', '임예나', 'rynjulie0917@gmail.com', now(), 'rrynjulie', '010-4408-0242', null, null)
-     , (DEFAULT, '1234', '최영재', 'dudwo0113@gmail.com', now(), 'dudwo0113', '010-6605-7937', null, null)
-     , (DEFAULT, '1234', '임동준', 'dlaehdwns2020@gmail.com', now(), 'leemdongjoon2267', '010-3703-2267', null, null)
+    (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', '이재혁', 'jaehyeok817@gmail.com', now(), 'j_hyeok_2', '010-4678-3712', null, null)
+     , (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', '최은정', 'eunjeong0911@naver.com', now(), 'eunjeong', '010-9114-4287', null, null)
+     , (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', '정준영', 'nejunyoung@gmail.com', now(), 'dun', '010-6572-7204', null, null)
+     , (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', '임예나', 'rynjulie0917@gmail.com', now(), 'rrynjulie', '010-4408-0242', null, null)
+     , (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', '최영재', 'dudwo0113@gmail.com', now(), 'dudwo0113', '010-6605-7937', null, null)
+     , (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', '임동준', 'dlaehdwns2020@gmail.com', now(), 'leemdongjoon2267', '010-3703-2267', null, null)
 ;
 
-
 INSERT INTO user_authority
-VALUES (1, 1), (1, 2), (1, 3), (2, 1), (2, 2);
+VALUES (1, 1), (1, 2), (1, 3), (2, 1), (2, 2), (3, 1), (4, 1), (5, 1), (6, 1);
 
 
 # lodging 테이블 내 데이터 삽입
@@ -313,24 +313,24 @@ VALUES
 ;
 
 INSERT INTO post
-VALUES (1, '사진1', '후기1', '5', '3', '1', '11', '22')
-     , (2, '사진1', '후기2', '3', '3', '2', '11', '22')
-     , (3, '사진1', '후기3', '4', '3', '3', '11', '21')
-     , (4, '사진1', '후기4', '5', '3', '4', '11', '22')
-     , (5, '사진1', '후기5', '5', '3', '5', '11', '21')
-     , (6, '사진1', '후기6', '1', '3', '6', '11', '22')
-     , (7, '사진1', '후기7', '2', '3', '7', '11', '21')
-     , (8, '사진1', '후기8', '3', '3', '8', '11', '1')
-     , (9, '사진1', '후기9', '5', '3', '9', '11', '1')
-     , (10, '사진1', '후기10', '2', '3', '10', '1', '1')
-     , (11, '사진1', '후기11', '4', '3', '11', '1', '2')
-     , (12, '사진1', '후기12', '5', '3', '12', '1', '2')
-     , (13, '사진1', '후기13', '3', '3', '13', '1', '1')
-     , (14, '사진1', '후기14', '3', '3', '14', '1', '2')
-     , (15, '사진1', '후기15', '4', '3', '15', '21', '42')
-     , (16, '사진1', '후기16', '4', '3', '16', '21', '42')
-     , (17, '사진1', '후기17', '5', '3', '17', '21', '41')
-     , (18, '사진1', '후기18', '5', '3', '18', '21', '41')
+VALUES (1, null, '후기1', '5', '3', '1', '11', '22')
+     , (2, null, '후기2', '3', '3', '2', '11', '22')
+     , (3, null, '후기3', '4', '3', '3', '11', '21')
+     , (4, null, '후기4', '5', '3', '4', '11', '22')
+     , (5, null, '후기5', '5', '3', '5', '11', '21')
+     , (6, null, '후기6', '1', '3', '6', '11', '22')
+     , (7, null, '후기7', '2', '3', '7', '11', '21')
+     , (8, null, '후기8', '3', '3', '8', '11', '1')
+     , (9, null, '후기9', '5', '3', '9', '11', '1')
+     , (10, null, '후기10', '2', '3', '10', '1', '1')
+     , (11, null, '후기11', '4', '3', '11', '1', '2')
+     , (12, null, '후기12', '5', '3', '12', '1', '2')
+     , (13, null, '후기13', '3', '3', '13', '1', '1')
+     , (14, null, '후기14', '3', '3', '14', '1', '2')
+     , (15, null, '후기15', '4', '3', '15', '21', '42')
+     , (16, null, '후기16', '4', '3', '16', '21', '42')
+     , (17, null, '후기17', '5', '3', '17', '21', '41')
+     , (18, null, '후기18', '5', '3', '18', '21', '41')
 ;
 
 # user 테이블 내 데이터 삽입

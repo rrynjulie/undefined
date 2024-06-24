@@ -2,12 +2,17 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{/css/lodging/PostList.css}">
+    <link rel="stylesheet" th:href="@{/css/lodging/LodgingPostList.css}">
     <title>Title</title>
 </head>
 <body>
 <div class="container">
 
+        <h3>숙소 평점</h3>
+    <div id="totalDiv">
+        <div id="totalStar">&#9733;</div>
+        <div id="avgPostGrade" th:text="${avgPostGrade} + ' / 5'"></div>
+    </div>
     <div id="postList" th:each="lodgingss : ${lodgingss}">
         <div class="stars" th:attr="starCount=${lodgingss.postGrade}">
             <span class="star">&#9733;</span>
@@ -26,6 +31,6 @@
 
 </div>
 
-<script th:src="@{/js/lodging/PostList.js}"></script>
+<script th:src="@{/js/lodging/LodgingPostList.js}"></script>
 </body>
 </html>
