@@ -19,4 +19,5 @@ public interface UserService {
 
     Authentication authenticate(String nickname, String password);
 
+    User findByUsername(String username);
 }
