@@ -16,7 +16,7 @@ public interface ReservationRepository {
 //    @Delete("DELETE FROM reservation WHERE user_id = #{userId} AND reservation_id = #{reservationId}")
 //    int deleteByUserIdAndId(@Param("userId") String userId, @Param("reservationId") Long reservationId);
 
-    void insertReservation(Reservation reservation);
+    Reservation save(Reservation reservation);
 
     Reservation getReservationDetails(@Param("reservationId") Long reservationId);
 }

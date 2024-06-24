@@ -90,4 +90,10 @@
         WHERE res.reservation_id = #{reservationId}
     </select>
 
+
+<!--    <insert id="save" parameterType="com.lec.spring.domain.Reservation">-->
+<!--        &lt;!&ndash; 여기에 SQL 문 작성 &ndash;&gt;-->
+<!--        INSERT INTO reservation (visitor_name, visitor_phonenum, reservation_paytype)-->
+<!--        VALUES (#{visitorName}, #{visitorPhone}, #{payType})-->
+<!--    </insert>-->
 </mapper>
