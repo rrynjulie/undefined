@@ -5,7 +5,7 @@ import com.lec.spring.domain.Room;
 import java.util.List;
 
 public interface RoomRepository {
-    int create(Room room);
+    void createRoom(Room room);
 
     List<Room> findAll();
 

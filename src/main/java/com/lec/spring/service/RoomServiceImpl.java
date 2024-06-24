@@ -22,8 +22,8 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public int createRoom(Room room, Map<String, MultipartFile> files) {
-        return 0;
+    public void createRoom(Room room) {
+        roomRepository.createRoom(room);
     }
 
     @Override
