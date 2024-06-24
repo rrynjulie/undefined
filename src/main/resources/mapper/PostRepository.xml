@@ -29,8 +29,8 @@
 
     <select id="countAllPostsByLodgingId" resultType="int">
         SELECT count(*)
-        FROM post p, lodging l
-        WHERE p.lodging_id = l.lodging_id
+        FROM post p
+        WHERE lodging_id = #{lodging_id}
     </select>
 
     <select id="findPostsByRoomId" resultType="com.lec.spring.domain.Post">

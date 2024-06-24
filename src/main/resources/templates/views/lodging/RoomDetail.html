@@ -27,9 +27,9 @@
                 <h2>객실 상세정보</h2>
                 <p th:text="'체크인 ' + ${lodging.lodgingOpen} + ' &nbsp;&nbsp; 체크아웃 ' + ${lodging.lodgingClose}"></p>
                 <p th:text="'기준' + ${room.roomNormalPeople} + '인 &nbsp;&nbsp; 최대 ' + ${room.roomMaxPeople} + '인'"></p>
-                <p th:text="${room.roomBedGrade} + '침대 ' + ${room.roomBed} + '개'"></p>
+                <div th:if="${room.roomBedGrade} != null"><p th:text="${room.roomBedGrade} + '침대 ' + ${room.roomBed} + '개'"></p></div>
                 <P th:text="'화장실 ' + ${room.roomBathroom} + '개'"></P>
-                <p th:text="${room.roomArea} + '평'"></p>
+                <div th:if="${room.roomArea != null && room.roomArea != '0'}"><p th:text="${room.roomArea} + '평'"></p></div>
                 <div th:if="${room.roomSmoke.toString() == 'YES'}"><p>흡연 가능 객실</p></div>
                 <div th:if="${room.roomSmoke.toString() == 'NO'}"><p>금연 객실</p></div>
             </div>
@@ -58,15 +58,15 @@
         <div class="reserve-confirm">
             <div class="reserve-notice"><p>취소 및 환불 불가</p></div>
             <div class="reserve-price" th:text="${roomPrice} + '원'"></div>
-            <a class="reserve-btn" href="#">예약하기</a>
+            <a class="reserve-btn" th:href="@{/lodging/LodgingBooking(lodgingId=${lodging.lodgingId}, roomId=${room != null ? room.roomId : 0})}">예약하기</a>
         </div>
     </div>
 
     <div class="post-title">
         <h1>객실 이용 후기</h1>
-        <a class="btn-see-all" href="#">전체보기</a>
+        <a class="btn-see-all" href="">전체보기</a>
     </div>
-    <div class="post-list">
+    <div class="post-list" th:if="${totalPosts != 0}">
         <div class="post-frame" th:each="posts : ${postList}">
             <div class="post-img-frame" th:if="${posts.postPicture} == null"><img class="post-img" th:src="@{/image/NoImage.png}" alt="후기 이미지"></div>
             <div class="post-img-frame" th:if="${posts.postPicture} != null"><img class="post-img" th:src="${posts.postPicture}" alt="후기 이미지"></div>
@@ -76,6 +76,7 @@
             </div>
         </div>
     </div>
+    <div class="post-null" th:if="${totalPosts == 0}">등록된 후기가 없습니다.</div>
 
 </section>
 

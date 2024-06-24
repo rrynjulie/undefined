@@ -146,6 +146,7 @@
     display: flex;
     border-radius: 10px;
     overflow: hidden;
+    background-color: yellow;
 }
 
 .post-img-frame {
@@ -190,4 +191,12 @@
     color: dimgray;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.post-null {
+    color: darkgray;
+    height: 130px;
+    font-size: 30px;
+    text-align: center;
+    align-content: center;
 }

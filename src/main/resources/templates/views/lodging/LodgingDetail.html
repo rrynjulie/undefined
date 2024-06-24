@@ -120,7 +120,7 @@
             <div class="room-details">
                 <div class="room-detail" style="padding: 0 10px;">
                     <h4>숙박</h4>
-                    <button class="detail-btn">상세보기 ></button>
+                    <a class="detail-btn" th:href="@{'/lodging/RoomDetail/' + ${lodging.lodgingId} + '/' + ${lodging.roomId}}">상세보기 ></a>
                 </div>
                 <div th:text="'체크인 ' + ${lodging.lodgingOpen} + ' ~ ' + '체크아웃 ' +  ${lodging.lodgingClose}" style="padding: 0 10px"></div>
                 <div style="display: flex; justify-content: space-between; margin-top: 15px; padding: 0 10px;">
