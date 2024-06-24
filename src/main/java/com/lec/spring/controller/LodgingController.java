@@ -1,10 +1,12 @@
 package com.lec.spring.controller;
 
 
+import com.lec.spring.domain.Post;
 import com.lec.spring.domain.ProvLodging;
 import com.lec.spring.domain.Room;
 import com.lec.spring.service.LodgingService;
 import com.lec.spring.domain.Lodging;
+import com.lec.spring.service.PostService;
 import com.lec.spring.service.ProviderService;
 import com.lec.spring.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +24,14 @@ public class LodgingController {
     private final LodgingService lodgingService;
     private ProviderService providerService;
     private RoomService roomService;
+    private PostService postService;
 
     @Autowired
-    public LodgingController(LodgingService lodgingService, ProviderService providerService, RoomService roomService) {
+    public LodgingController(LodgingService lodgingService, ProviderService providerService, RoomService roomService, PostService postService) {
         this.lodgingService = lodgingService;
         this.providerService = providerService;
         this.roomService = roomService;
+        this.postService = postService;
     }
 
     @GetMapping("/LodgingSearch")
@@ -70,14 +74,22 @@ public class LodgingController {
         return "lodging/PostList";
     }
 
-    @GetMapping("/{lodgingId}/RoomDetail/{roomId}")
+    @GetMapping("/RoomDetail/{lodgingId}/{roomId}")
     public String RoomDetail(@PathVariable("lodgingId") int lodgingId, @PathVariable("roomId") Long roomId, Model model) {
         ProvLodging lodging = providerService.getLodgingById(lodgingId);
         Room room = roomService.findByRoomId(roomId);
+        List<Post> postList = postService.findPostsByRoomId(roomId);
+        int totalPosts = postService.countAllPostsByLodgingId((long)lodgingId);
+
+        if(postList.size() > 3)
+            postList = postList.subList(0, 3);
 
         model.addAttribute("lodging", lodging);
         model.addAttribute("room", room);
         model.addAttribute("roomPrice", DecimalFormat.getInstance().format(room.getRoomPrice()));
+        model.addAttribute("postList", postList);
+        model.addAttribute("totalPosts", totalPosts);
+
         return "lodging/RoomDetail";
     }
 }

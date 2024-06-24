@@ -148,10 +148,19 @@
     overflow: hidden;
 }
 
-.post-img {
+.post-img-frame {
+    display: flex;
+    flex-direction: column;
+    max-width: 40%;
     height: 100%;
-    width: 40%;
     background-color: #EBEBEB;
+    justify-content: center;
+    align-items: center;
+}
+
+.post-img {
+    max-width: 60%;
+    height: auto;
 }
 
 .post-details {

@@ -67,25 +67,12 @@
         <a class="btn-see-all" href="#">전체보기</a>
     </div>
     <div class="post-list">
-        <div class="post-frame">
-            <img class="post-img" src="placeholder.png" alt="호텔 이미지">
+        <div class="post-frame" th:each="posts : ${postList}">
+            <div class="post-img-frame" th:if="${posts.postPicture} == null"><img class="post-img" th:src="@{/image/NoImage.png}" alt="후기 이미지"></div>
+            <div class="post-img-frame" th:if="${posts.postPicture} != null"><img class="post-img" th:src="${posts.postPicture}" alt="후기 이미지"></div>
             <div class="post-details">
-                <p class="post-rating">⭐ 4.6(512)</p>
-                <p class="post-contents">리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 </p>
-            </div>
-        </div>
-        <div class="post-frame">
-            <img class="post-img" src="placeholder.png" alt="호텔 이미지">
-            <div class="post-details">
-                <p class="post-rating">⭐ 4.6(512)</p>
-                <p class="post-contents">리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 </p>
-            </div>
-        </div>
-        <div class="post-frame">
-            <img class="post-img" src="placeholder.png" alt="호텔 이미지">
-            <div class="post-details">
-                <p class="post-rating">⭐ 4.6(512)</p>
-                <p class="post-contents">리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 </p>
+                <p class="post-rating" th:text="'⭐ ' + ${posts.postGrade} + '(' + ${totalPosts} + ')'"></p>
+                <p class="post-contents" th:text="${posts.postText}"></p>
             </div>
         </div>
     </div>
