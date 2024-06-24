@@ -22,9 +22,8 @@ VALUES
      , (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', '임동준', 'dlaehdwns2020@gmail.com', now(), 'leemdongjoon2267', '010-3703-2267', null, null)
 ;
 
-
 INSERT INTO user_authority
-VALUES (1, 1), (1, 2), (1, 3), (2, 1), (2, 2);
+VALUES (1, 1), (1, 2), (1, 3), (2, 1), (2, 2), (3, 1), (4, 1), (5, 1), (6, 1);
 
 
 # lodging 테이블 내 데이터 삽입
