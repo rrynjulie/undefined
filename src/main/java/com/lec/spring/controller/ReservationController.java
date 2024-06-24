@@ -20,28 +20,34 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class ReservationController {
+
     private final ReservationService reservationService;
     private final LodgingService lodgingService;
+    private final RoomService roomService;
     private final UserService userService;
 
     @Autowired
-    public ReservationController(ReservationService reservationService, LodgingService lodgingService, UserService userService) {
+    public ReservationController(ReservationService reservationService, LodgingService lodgingService, RoomService roomService, UserService userService) {
         this.reservationService = reservationService;
         this.lodgingService = lodgingService;
+        this.roomService = roomService;
         this.userService = userService;
     }
 
+    // 숙소 예약 폼 페이지 보여주기
+    @GetMapping("/lodging/LodgingBooking")
+    public String ShowReservationForm(@RequestParam("lodgingId") Long lodgingId,
+                                      @RequestParam(value = "roomId", required = false) Long roomId,
+                                      Model model,
+                                      Authentication authentication) {
 
-    // 숙소 예약 폼 페이지 보여주기
-    // 숙소 예약 폼 페이지 보여주기
-    @GetMapping("/lodging/reservation/form")
-    public String showReservationForm(@RequestParam("lodgingId") Long lodgingId, Model model, Authentication authentication) {
         if (authentication == null || !authentication.isAuthenticated()) {
             // 인증되지 않은 사용자 처리
-            return "/Home"; // 로그인 페이지로 리다이렉트 또는 예외 처리
+            return "redirect:/login"; // 로그인 페이지로 리다이렉트 또는 예외 처리
         }
 
         Object principal = authentication.getPrincipal();
@@ -60,6 +66,18 @@ public class ReservationController {
 
         Lodging lodging = lodgingService.getLodgingById(lodgingId);
         model.addAttribute("lodging", lodging);
+
+        // Lodging ID에 해당하는 Room 목록 조회
+        List<Room> rooms = roomService.findRoomsByLodgingId(roomId);
+        model.addAttribute("rooms", rooms);
+
+        // 선택한 객실 정보 조회
+        Room selectedRoom = null;
+        if (roomId != null && roomId != 0) {
+            selectedRoom = roomService.getRoomById(roomId);
+        }
+        model.addAttribute("selectedRoom", selectedRoom);
+
         model.addAttribute("reservation", new Reservation());
 
         return "lodging/LodgingBooking";
