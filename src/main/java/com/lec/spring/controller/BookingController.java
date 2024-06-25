@@ -87,6 +87,11 @@ public class BookingController {
         return "lodging/LodgingBooking";
     }
 
+    @GetMapping("/mypage/provider/ProvBookingList/{userId}")
+    public void provBookingList(Model model) {
+
+    }
+
 //    @GetMapping("/mypage/customer/BookingList/{userId}")
 //    public String BookingList(@PathVariable("userId") Long userId, Model model){
 //        //List<Booking> booking = bookingService.getBookingDetails(userId);

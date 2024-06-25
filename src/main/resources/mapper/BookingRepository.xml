@@ -37,9 +37,16 @@
     </insert>
 
     <!-- READ -->
-    <select id="findByUserId" resultType="com.lec.spring.domain.Booking">
+    <!-- 객실에 대한 예약 내역 -->
+    <select id="findBooksByRoomId" resultType="com.lec.spring.domain.Booking">
         <include refid="SELECT_BASE"/>
-        AND l.user_id = #{userId}
+        AND b.room_id = #{roomId}
+    </select>
+
+    <!-- 유저에 대한 예약 내역 -->
+    <select id="findBooksByUserId" resultType="com.lec.spring.domain.Booking">
+        <include refid="SELECT_BASE"/>
+        AND b.user_id = #{userId}
     </select>
 
     <!-- DELETE -->

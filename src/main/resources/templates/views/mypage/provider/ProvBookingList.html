@@ -16,22 +16,9 @@
     <th:block th:insert="~{mypage/provider/ProvNavMenu::prov-nav-menu}"></th:block>
 
     <!-- 숙소 정보 페이지 -->
-    <section class="lodging-info">
+    <section class="booking-info">
         <h1>예약 관리</h1>
-        <div class="slideshow-container">
-            <div class="my-slides">
-                <img class="lodging-img" src="https://yaimg.yanolja.com/v5/2021/12/29/17/1280/61cc9baf0192c8.90237210.jpg" alt="">
-                <img class="lodging-img" src="https://yaimg.yanolja.com/v5/2021/12/29/17/1280/61cc9b625a05c4.02961832.jpg" alt="">
-                <img class="lodging-img" src="https://yaimg.yanolja.com/v5/2021/12/29/17/1280/61cc9b62ebe628.00477093.jpg" alt="">
-            </div>
-            <div class="nav-button prev" onclick="plusSlide(-1)">❮</div>
-            <div class="nav-button next" onclick="plusSlide(1)">❯</div>
-            <div class="dot-pagination">
-                <span class="dot" onclick="currentSlide(0)"></span>
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-            </div>
-        </div>
+
         <div class="lodging-list">
             <label class="info-label">
                 숙소명<br>
@@ -103,7 +90,6 @@
             <button class="btn-delete">삭제 요청</button>
         </div>
     </section>
-    <script src="../../../../static/js/mypage/provider/ProvBookingList.js"></script>
 </main>
 
 <!-- 푸터 -->

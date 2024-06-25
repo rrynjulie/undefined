@@ -5,6 +5,8 @@ import com.lec.spring.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -16,17 +18,22 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public Booking makeBooking(Booking booking) {
-        return null;
+    public int createBooking(Booking booking) {
+        return bookingRepository.createBooking(booking);
     }
 
     @Override
-    public Booking getBookingDetails(Long bookingId) {
-        return null;
+    public List<Booking> findBooksByRoomId(Long roomId) {
+        return bookingRepository.findBooksByRoomId(roomId);
     }
 
     @Override
-    public Booking saveBooking(Booking booking) {
-        return null;
+    public List<Booking> findBooksByUserId(Long userId) {
+        return bookingRepository.findBooksByUserId(userId);
+    }
+
+    @Override
+    public int deleteBooking(Booking booking) {
+        return bookingRepository.deleteBooking(booking);
     }
 }
