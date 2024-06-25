@@ -1,123 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/provider/ProvRoomRegister.css}">
     <script th:src="@{/js/mypage/provider/ProvRoomRegister.js}"></script>
-    <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
     <title>객실 등록</title>
 </head>
 <body>
-<header>
-    <div class="container">
-        <div class="header-items">
-            <h1>객실 등록</h1>
-            <div>
-                <img src="LOGO_URL" alt="Logo" height="40">
-            </div>
-        </div>
-    </div>
-</header>
+<!-- 헤더 -->
+<th:block th:insert="~{common/Header::header}"></th:block>
 
+<!-- 메인 -->
 <main>
-    <div class="container">
-        <div class="header-menu">
-            <h2>숙소 오너</h2>
-            <div>
-                <button>내 정보 관리</button>
-                <button><a href="roomregister">객실 등록</a></button>
-            </div>
-        </div>
+    <!-- 좌측 네비게이션 메뉴 -->
+    <th:block th:insert="~{mypage/provider/ProvNavMenu::prov-nav-menu}"></th:block>
 
-        <form id="registrationForm2" action="/mypage/provider/createRoom" method="post">
-        <label for="fileInput2">객실 이미지</label>
-        <div id="Upload2">
-                <input type="text" id="fileInput2" name="roomPicture1" placeholder="객실 이미지 url을 넣어주세요.">
-        </div>
-            <br>
-            <div class="form-row2">
-                <div class="form-group2">
-                    <label for="roomname">객실 이름</label>
-                    <input type="text" id="roomname" name="roomName" placeholder="객실 이름을 입력해 주세요.">
+    <!-- 객실 등록 구역 -->
+    <section class="room-info">
+        <h1>객실 등록</h1>
+        <div class="lodging-name" th:text="${lodging.lodgingName}"></div>
+        <form id="room-registration" th:action="@{/mypage/provider/ProvRoomRegister}" method="post">
+            <div class="room-list">
+                <div class="room-info-frame-hidden">
+                    <label class="info-label" for="lodgingId">객실ID<div class="required-dot"></div></label>
+                    <input class="info-input" id="lodgingId" name="lodgingId" type="text" placeholder="객실명을 입력하세요." th:value="${lodging.lodgingId}">
                 </div>
-            </div>
+                <div class="room-info-frame">
+                    <label class="info-label" for="roomName">객실명<div class="required-dot"></div></label>
+                    <input class="info-input" id="roomName" name="roomName" type="text" placeholder="객실명을 입력하세요." th:value="${roomName}">
+                </div>
+                <div class="room-info-frame">
+                    <label class="info-label" for="roomNumber">객실 호수</label>
+                    <input class="info-input" id="roomNumber" name="roomNumber" type="number" placeholder="객실 호수를 입력하세요." th:value="${roomNumber}">
+                </div>
+                <div class="room-info-frame">
+                    <label class="info-label" for="roomNormalPeople">객실 기준 인원<div class="required-dot"></div></label>
+                    <input class="info-input" id="roomNormalPeople" name="roomNormalPeople" type="number" placeholder="객실 기준 인원을 입력하세요." th:value="${roomNormalPeople}">
+                </div>
+                <div class="room-info-frame">
+                    <label class="info-label" for="roomMaxPeople">객실 최대 인원<div class="required-dot"></div></label>
+                    <input class="info-input" id="roomMaxPeople" name="roomMaxPeople" type="number" placeholder="객실 최대 인원을 입력하세요." th:value="${roomMaxPeople}">
+                </div>
+                <div class="room-info-frame">
+                    <label class="info-label" for="roomArea">객실 면적</label>
+                    <input class="info-input" id="roomArea" name="roomArea" type="number" placeholder="객실 면적을 입력하세요." th:value="${roomArea}">
+                </div>
+                <div class="room-info-frame">
+                        <label class="info-label" for="roomPrice">객실 가격<div class="required-dot"></div></label>
+                        <input class="info-input" id="roomPrice" name="roomPrice" type="number" placeholder="객실 가격을 입력하세요." th:value="${roomPrice}">
+                </div>
+                <div class="room-info-frame">
+                    <label class="info-label" for="roomBedGrade">객실 침대 타입</label>
+                    <input class="info-input" id="roomBedGrade" name="roomBedGrade" type="text" placeholder="객실 침대 타입을 입력하세요." th:value="${roomBedGrade}">
+                </div>
+                <div class="room-info-frame">
+                    <label class="info-label" for="roomBed">객실 침대 갯수<div class="required-dot"></div></label>
+                    <input class="info-input" id="roomBed" name="roomBed" type="number" placeholder="객실 침대 갯수를 입력하세요." th:value="${roomBed}">
+                </div>
+                <div class="room-info-frame">
+                    <label class="info-label" for="roomBathroom">객실 욕실 갯수</label>
+                    <input class="info-input" id="roomBathroom" name="roomBathroom" type="number" placeholder="객실 욕실 개수를 입력하세요." th:value="${roomBathroom}">
+                </div>
+                <div class="room-info-frame">
+                    <label class="info-label">객실 흡연 가능 여부<div class="required-dot"></div></label>
+                    <div class="smoke-radio-frame">
+                        <input type="radio" class="btn-check" name="roomSmoke" id="roomSmoke1" value="YES" th:checked="${roomSmoke}">
+                        <label class="smoke-radio-label" for="roomSmoke1">흡연 가능 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 
-            <div class="form-row2">
-                <div class="form-group2">
-                    <label for="normal">객실 기준 인원수</label>
-                    <input type="text" id="normal" name="roomNormalPeople" placeholder="객실 기준 인원수를 입력해 주세요.">
+                        <input type="radio" class="btn-check" name="roomSmoke" id="roomSmoke2" value="NO" th:checked="${roomSmoke} ? ${roomSmoke == 'NO'} : ${true}">
+                        <label class="smoke-radio-label" for="roomSmoke2">흡연 불가</label>
+                    </div>
                 </div>
-                <div class="form-group2">
-                    <label for="max">객실 최대 인원수</label>
-                    <input type="text" id="max" name="roomMaxPeople" placeholder="객실 최대 인원수를 입력해 주세요.">
-                </div>
-            </div>
-
-            <div class="form-row2">
-                <div class="form-group2">
-                    <label for="price">객실 가격</label>
-                    <input type="text" id="price" name="roomPrice" placeholder="객실 숙소 가격을 입력해 주세요.">
+                <div class="image-upload">
+                    <label class="info-label" for="roomPicture1">사진 첨부<div class="required-dot"></div></label>
+                    <div class="image-upload-input">
+                        <input class="image-url" id="roomPicture1" name="roomPicture1" type="text" th:value="${roomPicture1}">
+                        <button class="btn-upload" type="button">찾아보기</button>
+                    </div>
                 </div>
             </div>
-
-            <div class="form-row2">
-                <div class="form-group2">
-                    <label for="nm">객실 호수</label>
-                    <input type="text" id="nm" name="roomNumber" placeholder="객실 호수를 입력해 주세요.">
-                </div>
-                <div class="form-group2">
-                    <label for="area">객실 면적</label>
-                    <input type="text" id="area" name="roomArea" placeholder="객실 면적을 입력해 주세요.">
-                </div>
-            </div>
-
-            <div class="form-row2">
-                <div class="form-group2">
-                    <label for="bedcnt">객실 침대 개수</label>
-                    <input type="text" id="bedcnt" name="roomBed" placeholder="객실 침대 개수를 입력해 주세요.">
-                </div>
-                <div class="form-group2">
-                    <label for="roombedtype">객실 침대 유형</label>
-                    <select id="roombedtype" name="roomBedGrade">
-                        <option value="">침대 유형을 선택해 주세요.</option>
-                        <option value="싱글 침대">싱글 침대</option>
-                        <option value="더블 침대">더블 침대</option>
-                        <option value="퀸 침대">퀸 침대</option>
-                        <option value="킹 침대">킹 침대</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-row2">
-                <div class="form-group2">
-                    <label for="bathcnt">객실 욕실 개수</label>
-                    <input type="text" id="bathcnt" name="roomBathroom" placeholder="객실 욕실 개수를 입력해 주세요.">
-                </div>
-                <div class="form-group2">
-                    <label for="smoke">객실 흡연 여부</label>
-                    <input type="text" id="smoke" name="roomSmoke" placeholder="객실 흡연 여부를 입력해 주세요.">
-                </div>
-                <div class="form-group2">
-                    <label for="lodgingId">로징 아이디</label>
-                    <input type="text" id="lodgingId" name="lodgingId" placeholder="로징 아이디를 입력해주세요.">
-                </div>
-            </div>
-
-            <div class="form-row2">
-                <div class="form-group2">
-                    <button type="submit">객실 등록</button>
-                </div>
-            </div>
+            <button class="btn-register" type="submit">등록하기</button>
         </form>
-
-    </div>
+    </section>
 </main>
 
 <!-- 푸터 -->
-<footer>
-
-</footer>
-
-
+<th:block th:insert="~{common/Footer::footer}"></th:block>
 </body>
 </html>
