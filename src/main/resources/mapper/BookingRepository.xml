@@ -33,7 +33,7 @@
             b.room_id = r.room_id
     </sql>
 
-    <resultMap id="ReservationResultMap" type="com.lec.spring.domain.Booking">
+    <resultMap id="BookingResultMap" type="com.lec.spring.domain.Booking">
         <id property="bookingId" column="booking_id" />
         <result property="bookingTime" column="booking_time" />
         <result property="bookingAdult" column="booking_adult" />
