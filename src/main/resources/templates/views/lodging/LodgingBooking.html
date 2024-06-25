@@ -5,44 +5,48 @@
     <title>숙소 예약 폼</title>
 </head>
 <body>
-<h2 th:text="${lodging.lodgingName} + ' 예약하기'"></h2>
 
 <!-- 예약 폼 내용 -->
 <form action="/lodging/LodgingBooking" method="get">
+<!--<form action="/lodging/saveReservation" method="post">-->
+    /-<h2 th:text="${lodging.lodgingName} + ' 예약하기'"></h2>
 
-    <div class="room">
-        <div>
-            <h3 style="margin-left: 40px">객실 선택</h3>
-        </div>
-        <div id="dateTotal">
-            <div id="selectedDate" class="clickable" style="border-right:solid 1px black;">
-            </div>
-            <div id="total" class="clickable">
-            </div>
-        </div>
-    </div>
 
-    <label>사용자 이름:</label>
+    <label>이용자 이름: </label>
     <span th:text="${user.username}"></span>
+
+    <label>이용자 전화번호: </label>
     <span th:text="${user.phonenum}"></span>
 
+    <!--  예약인원, 날짜(세션)  -->
+    <div class="room">
+        <div id="selectedDate"></div>
+        <div id="total"></div>
+    </div>
+
+    <!--  객실  -->
     <label>객실:</label>
     <span th:text="${selectedRoom.roomName}"></span>
 
-    <label>가격: </label>
+    <!-- 결제 방식 -->
+    <label>결제 방식:</label>
+    <select name="reservationPaytype" required>
+        <option value="카드">카드</option>
+        <option value="무통장입금">무통장입금</option>
+    </select>
+
+    <label>결제금액: </label>
     <span th:text="${selectedRoom.roomPrice}"></span>
 
 
-    <input type="hidden" name="lodgingId" th:value="${lodging.lodgingId}" />
+    <!-- 사용자 ID -->
+    <input type="hidden" name="userId" th:value="${user.userId}" />
+    <input type="hidden" name="lodgingId" th:value="${selectedRoom.roomId}" />
 
     <!-- 결제 버튼 -->
-    <button type="submit">결제하기</button>
+    <button id="reservationButton">예약하기</button>
 </form>
 
-<!-- 쿠폰 및 예약 버튼 -->
-<div class="couponReserve" style="padding: 0 10px;">
-    <button>쿠폰 ></button>
-</div>
 
 <script th:src="@{/js/lodging/LodgingBooking.js}"></script>
 </body>

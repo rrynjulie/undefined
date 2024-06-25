@@ -19,8 +19,8 @@ public class Reservation {
     private String reservationPayType; //결제방식
     private long reservationPay; //결제금액
     private long reservationFinalPay; //최종결제금액
-    private Date reservationStartDate; //체크인 날짜
-    private Date reservationEndDate; //체크아웃 날짜
+    private LocalDateTime reservationStartDate; //체크인 날짜
+    private LocalDateTime reservationEndDate; //체크아웃 날짜
     private Integer roomId; //객실 Id
     private String userId; //사용자 ID
 
