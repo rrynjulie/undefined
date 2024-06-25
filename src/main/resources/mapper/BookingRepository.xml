@@ -3,18 +3,18 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.lec.spring.repository.ReservationRepository">
-    <resultMap id="ReservationResultMap" type="com.lec.spring.domain.Reservation">
-        <id property="reservationId" column="reservation_id" />
-        <result property="reservationTime" column="reservation_time" />
-        <result property="reservationAdult" column="reservation_adult" />
-        <result property="reservationChild" column="reservation_child" />
+<mapper namespace="com.lec.spring.repository.BookingRepository">
+    <resultMap id="ReservationResultMap" type="com.lec.spring.domain.Booking">
+        <id property="bookingId" column="booking_id" />
+        <result property="bookingTime" column="booking_time" />
+        <result property="bookingAdult" column="booking_adult" />
+        <result property="bookingChild" column="booking_child" />
         <result property="visitorName" column="visitor_name" />
         <result property="visitorPhoneNum" column="visitor_phonenum" />
-        <result property="reservationPayType" column="reservation_paytype" />
-        <result property="reservationFinalPay" column="reservation_finalpay" />
-        <result property="reservationStartDate" column="reservation_startdate" />
-        <result property="reservationEndDate" column="reservation_enddate" />
+        <result property="bookingPayType" column="booking_paytype" />
+        <result property="bookingFinalPay" column="booking_finalpay" />
+        <result property="bookingStartDate" column="booking_startdate" />
+        <result property="bookingEndDate" column="booking_enddate" />
         <result property="roomId" column="room_id" />
         <result property="userId" column="user_id" />
     </resultMap>
@@ -44,37 +44,37 @@
     </resultMap>
 
     <!-- 예약 삽입 -->
-    <insert id="insertReservation" useGeneratedKeys="true" keyProperty="reservationId">
-        INSERT INTO reservation (
-            reservation_time,
-            reservation_adult,
-            reservation_child,
+    <insert id="insertBooking" useGeneratedKeys="true" keyProperty="bookingId">
+        INSERT INTO booking (
+            booking_time,
+            booking_adult,
+            booking_child,
             visitor_name,
             visitor_phonenum,
-            reservation_paytype,
-            reservation_finalpay,
-            reservation_startdate,
-            reservation_enddate,
+            booking_paytype,
+            booking_finalpay,
+            booking_startdate,
+            booking_enddate,
             room_id,
             user_id
         )
         VALUES (
                    NOW(),
-                   #{reservationAdult},
-                   #{reservationChild},
+                   #{bookingAdult},
+                   #{bookingChild},
                    #{visitorName},
                    #{visitorPhoneNum},
-                   #{reservationPayType},
-                   #{reservationFinalPay},
-                   #{reservationStartDate},
-                   #{reservationEndDate},
+                   #{bookingPayType},
+                   #{bookingFinalPay},
+                   #{bookingStartDate},
+                   #{bookingEndDate},
                    #{roomId},
                    #{userid}
                )
     </insert>
 
     <!-- 필요한 정보 JOIN하여 가져오기 -->
-    <select id="getReservationDetails" resultType="map">
+    <select id="getBookingDetails" resultType="map">
         SELECT
             u.user_name ,
             u.user_phonenum ,
@@ -84,38 +84,38 @@
             r.room_id,
             u.user_id
         FROM user u
-                 JOIN reservation res ON u.user_id = res.user_id
-                 JOIN room r ON res.room_id = r.room_id
+                 JOIN booking b ON u.user_id = b.user_id
+                 JOIN room r ON b.room_id = r.room_id
                  JOIN lodging l ON r.lodging_id = l.lodging_id
-        WHERE res.reservation_id = #{reservationId}
+        WHERE b.reservation_id = #{reservationId}
     </select>
 
 
-    <insert id="save" parameterType="com.lec.spring.domain.Reservation" useGeneratedKeys="true" keyProperty="reservationId">
-        INSERT INTO reservation (
-            reservation_time,
-            reservation_adult,
-            reservation_child,
+    <insert id="save" parameterType="com.lec.spring.domain.Booking" useGeneratedKeys="true" keyProperty="bookingId">
+        INSERT INTO booking (
+            booking_time,
+            booking_adult,
+            booking_child,
             visitor_name,
             visitor_phonenum,
-            reservation_paytype,
-            reservation_pay,
-            reservation_finalpay,
-            reservation_startdate,
-            reservation_enddate,
+            booking_paytype,
+            booking_pay,
+            booking_finalpay,
+            booking_startdate,
+            booking_enddate,
             room_id,
             user_id
         ) VALUES (
                      NOW(),
-                     #{reservationAdult},
-                     #{reservationChild},
+                     #{bookingAdult},
+                     #{bookingChild},
                      #{visitorName},
                      #{visitorPhoneNum},
-                     #{reservationPayType},
-                     #{reservationPay},
-                     #{reservationFinalPay},
-                     #{reservationStartDate},
-                     #{reservationEndDate},
+                     #{bookingPayType},
+                     #{bookingPay},
+                     #{bookingFinalPay},
+                     #{bookingStartDate},
+                     #{bookingEndDate},
                      #{room.roomId},
                      #{user.userId}
                  )

@@ -2,40 +2,33 @@ package com.lec.spring.controller;
 
 import com.lec.spring.config.PrincipalDetails;
 import com.lec.spring.domain.Lodging;
-import com.lec.spring.domain.Reservation;
+import com.lec.spring.domain.Booking;
 
 import com.lec.spring.domain.Room;
 import com.lec.spring.domain.User;
 import com.lec.spring.service.LodgingService;
-import com.lec.spring.service.ReservationService;
+import com.lec.spring.service.BookingService;
 import com.lec.spring.service.RoomService;
 import com.lec.spring.service.UserService;
-import com.lec.spring.util.U;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
-import java.security.Principal;
-import java.util.Date;
 import java.util.List;
 
 @Controller
-public class ReservationController {
+public class BookingController {
 
-    private final ReservationService reservationService;
+    private final BookingService bookingService;
     private final LodgingService lodgingService;
     private final RoomService roomService;
     private final UserService userService;
 
     @Autowired
-    public ReservationController(ReservationService reservationService, LodgingService lodgingService, RoomService roomService, UserService userService) {
-        this.reservationService = reservationService;
+    public BookingController(BookingService bookingService, LodgingService lodgingService, RoomService roomService, UserService userService) {
+        this.bookingService = bookingService;
         this.lodgingService = lodgingService;
         this.roomService = roomService;
         this.userService = userService;
@@ -85,7 +78,7 @@ public class ReservationController {
         }
         model.addAttribute("selectedRoom", selectedRoom);
 
-        model.addAttribute("reservation", new Reservation());
+        model.addAttribute("reservation", new Booking());
 
         return "lodging/LodgingBooking";
     }
