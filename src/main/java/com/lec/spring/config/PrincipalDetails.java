@@ -51,15 +51,13 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 
         List<Authority> list = userService.selectAuthoritiesById(user.getUserId());  // DB 에서 user 의 권한(들) 읽어오기
         System.out.println(user.getUserId());
-        System.out.println(list);
 
         if (list != null) {
             for (Authority auth : list) {
                 if (auth == null) {
-                    System.out.println("auth: null -> " + auth);
                 } else if (auth.getAuthority() != null) {
 
-                collect.add(new GrantedAuthority() {
+                    collect.add(new GrantedAuthority() {
                         @Override
                         public String getAuthority() {
                             return String.valueOf(auth.getAuthority());

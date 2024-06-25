@@ -97,11 +97,6 @@ public class UserServiceImpl implements UserService {
         return authorities;
     }
 
-//    @Override
-//    public Authentication authenticate(String email, String password) {
-//        return null;
-//    }
-
     @Override
     public User findByUsername(String username) {
         return null;
@@ -135,4 +130,17 @@ public class UserServiceImpl implements UserService {
 //        }
 //        return null;
 //    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+

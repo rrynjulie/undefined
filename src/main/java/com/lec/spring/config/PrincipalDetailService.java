@@ -46,17 +46,4 @@ public class PrincipalDetailService implements UserDetailsService {
         // 해당 nickname 또는 email 의 user 가 없다면?
         throw new UsernameNotFoundException("User not found with username: " + username);
     }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-

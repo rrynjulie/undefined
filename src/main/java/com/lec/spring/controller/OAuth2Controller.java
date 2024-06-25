@@ -50,6 +50,7 @@ public class OAuth2Controller {
     private AuthenticationManager authenticationManager;
 
 
+
     @GetMapping("/kakao/callback")
     public String kakaoCallBack(String code){
         System.out.println("\n<<카카오 인증 완료>>\ncode: " + code);
@@ -191,6 +192,26 @@ public class OAuth2Controller {
         System.out.println("SecurityContext: " + sc);
         System.out.println("Session: " + session);
         System.out.println("Kakao 인증 로그인 처리 완료");
+    }
+
+    public void loginGoogleUser(User googleUser, HttpSession session) {
+        // 사용자 인증 처리
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                googleUser.getNickname(),    // 사용자명 또는 닉네임 (구글에서 제공하는 ID 등)
+                ""                          // 비밀번호 (사용하지 않는 경우 비움)
+        );
+
+        Authentication authentication = authenticationManager.authenticate(authenticationToken);
+        SecurityContext sc = SecurityContextHolder.getContext();
+        sc.setAuthentication(authentication);
+
+        // 세션에 SecurityContext 저장
+        session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, sc);
+
+        System.out.println("Authentication: " + authentication);
+        System.out.println("SecurityContext: " + sc);
+        System.out.println("Session: " + session);
+        System.out.println("구글 사용자 로그인 처리 완료");
     }
 
 

@@ -1,5 +1,6 @@
 package com.lec.spring.repository;
 
+import com.lec.spring.domain.Room;
 import com.lec.spring.domain.User;
 
 
@@ -15,6 +16,5 @@ public interface UserRepository {
 
     int update(User user);
 
-    User findByUsername(String username);
 
 }
