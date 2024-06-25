@@ -44,10 +44,10 @@
             lodging_name as lodgingName,
             lodging_type as lodgingType,
             lodging_address as lodgingAddress,
-            lodging_number as lodgingNumber
-#             user_id as userId
+            lodging_number as lodgingNumber,
+            user_id as userId
         FROM lodging
-        WHERE lodging_type = '모텔'
+        WHERE user_id = #{userId}
     </select>
 
     <select id="findAllDetails" parameterType="int" resultType="com.lec.spring.domain.ProvLodging">

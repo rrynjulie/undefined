@@ -2,14 +2,20 @@ package com.lec.spring.controller;
 
 import com.lec.spring.domain.ProvLodging;
 import com.lec.spring.domain.Room;
+import com.lec.spring.domain.User;
 import com.lec.spring.service.ProviderService;
 import com.lec.spring.service.RoomService;
+import com.lec.spring.service.UserService;
+import com.lec.spring.util.U;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,18 +29,51 @@ public class ProviderController {
     @Autowired
     private RoomService roomService;
 
+//    @Autowired
+//    private UserService userService;
+
     @Autowired
     public ProviderController(ProviderService providerService) {
         this.providerService = providerService;
     }
 
+//    @GetMapping("/provlodginglist")
+//    public String provlodginglist(Model model) {
+//        List<ProvLodging> lodgings = providerService.getLodgings();
+//        model.addAttribute("lodgings", lodgings);
+//        return "mypage/provider/ProvLodgingList";
+//    }
+
     @GetMapping("/provlodginglist")
     public String provlodginglist(Model model) {
-        List<ProvLodging> lodgings = providerService.getLodgings();
-        model.addAttribute("lodgings", lodgings);
+        User loggedUser = U.getLoggedUser(); // 로그인된 사용자 정보
+        Long userId = loggedUser.getUserId(); // 사용자 ID
+        System.out.println("세션 userId: " + userId); // userId를 콘솔에 출력
+
+        List<ProvLodging> lodgings = providerService.getLodgings(userId);
+        System.out.println("가져온 숙소 목록: " + lodgings);
+
+        List<ProvLodging> myLodgings = new ArrayList<>();
+        for (ProvLodging item : lodgings) {
+            System.out.println("숙소 userId: " + item.getUserId());
+            if (item.getUserId() != null && item.getUserId().equals(userId)) {
+                myLodgings.add(item);
+            }
+        }
+        System.out.println("필터링된 숙소 목록: " + myLodgings);
+
+        model.addAttribute("lodgings", myLodgings);
         return "mypage/provider/ProvLodgingList";
     }
 
+
+
+
+    @RequestMapping("/auth")
+    @ResponseBody
+    public Authentication auth(){
+        return SecurityContextHolder.getContext().getAuthentication();
+    }
 
     @GetMapping("/provlodgingdetail/{lodgingId}")
     public String provlodgingdetail(@PathVariable int lodgingId, Model model) {
