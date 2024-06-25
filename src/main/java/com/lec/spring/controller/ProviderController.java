@@ -101,10 +101,6 @@ public class ProviderController {
         return "redirect:ProvRoomList";
     }
 
-    @GetMapping("/ProvBookingList")
-    public void provBookingList(Model model) {
-    }
-
     @GetMapping("/ProvRoomRegister/{lodgingId}")
     public String provRoomRegister(@PathVariable("lodgingId") int lodgingId, Model model) {
         ProvLodging lodging = providerService.getAllDetails(lodgingId);

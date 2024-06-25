@@ -2,11 +2,15 @@ package com.lec.spring.service;
 
 import com.lec.spring.domain.Booking;
 
+import java.util.List;
+
 public interface BookingService {
-    Booking makeBooking(Booking booking);
+    int createBooking(Booking booking);
 
-    Booking getBookingDetails(Long bookingId);
+    List<Booking> findBooksByRoomId(Long roomId);
 
-    Booking saveBooking(Booking booking);
+    List<Booking> findBooksByUserId(Long userId);
+
+    int deleteBooking(Booking booking);
 
 }
