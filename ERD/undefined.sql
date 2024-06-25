@@ -28,7 +28,7 @@ CREATE TABLE coupon
     coupon_max       INT               NOT NULL COMMENT '쿠폰 사용 최소 구매 가격',
     coupon_use       ENUM('YES', 'NO') NOT NULL COMMENT '쿠폰 사용 여부',
     user_id          INT      NOT NULL COMMENT '아이디',
-    reservation_id   INT              NOT NULL COMMENT '예약 고유 id값',
+    booking_id   INT              NOT NULL COMMENT '예약 고유 id값',
     PRIMARY KEY (coupon_code)
 ) COMMENT '쿠폰';
 
@@ -77,7 +77,7 @@ CREATE TABLE post
     post_text      LONGTEXT     NOT NULL COMMENT '후기 내용',
     post_grade     DOUBLE          NOT NULL COMMENT '평점 (1.0~5.0)',
     user_id        INT NOT NULL COMMENT '아이디',
-    reservation_id INT         NOT NULL COMMENT '예약 고유 id값',
+    booking_id INT         NOT NULL COMMENT '예약 고유 id값',
     lodging_id     INT         NOT NULL COMMENT '숙소고유 id값',
     room_id        INT         NOT NULL COMMENT '객실고유 id값',
     PRIMARY KEY (post_id)
@@ -92,7 +92,7 @@ CREATE TABLE booking
     visitor_name      VARCHAR(100)            NOT NULL COMMENT '이용자 이름',
     visitor_phonenum  VARCHAR(100)            NOT NULL COMMENT '이용자 전화번호',
     booking_paytype   ENUM('카드', '무통장입금') NOT NULL COMMENT '결제 방식 (카드/무통장입금)',
-    booking_finalpay  LONG                    NOT NULL COMMENT '결제 금액',
+    booking_pay       INT                     NOT NULL COMMENT '결제 금액',
     booking_startdate DATETIME                NOT NULL COMMENT '체크인 날짜',
     booking_enddate   DATETIME                NOT NULL COMMENT '체크아웃 날짜',
     room_id           INT                     NOT NULL COMMENT '객실고유 id 값',
@@ -170,7 +170,7 @@ ALTER TABLE room
             REFERENCES lodging (lodging_id);
 
 ALTER TABLE booking
-    ADD CONSTRAINT FK_room_TO_reservation
+    ADD CONSTRAINT FK_room_TO_booking
         FOREIGN KEY (room_id)
             REFERENCES room (room_id);
 
@@ -191,9 +191,9 @@ ALTER TABLE post
 
 
 # ALTER TABLE coupon
-#     ADD CONSTRAINT FK_reservation_TO_coupon
-#         FOREIGN KEY (reservation_id)
-#             REFERENCES reservation (reservation_id);
+#     ADD CONSTRAINT FK_booking_TO_coupon
+#         FOREIGN KEY (booking_id)
+#             REFERENCES booking (booking_id);
 
 ALTER TABLE comment
     ADD CONSTRAINT FK_user_TO_comment
@@ -201,7 +201,7 @@ ALTER TABLE comment
             REFERENCES user (user_id);
 
 ALTER TABLE booking
-    ADD CONSTRAINT FK_user_TO_reservation
+    ADD CONSTRAINT FK_user_TO_booking
         FOREIGN KEY (user_id)
             REFERENCES user (user_id);
 
@@ -221,8 +221,8 @@ ALTER TABLE post
             REFERENCES user (user_id);
 
 ALTER TABLE post
-    ADD CONSTRAINT FK_reservation_TO_post
-        FOREIGN KEY (reservation_id)
+    ADD CONSTRAINT FK_booking_TO_post
+        FOREIGN KEY (booking_id)
             REFERENCES booking (booking_id);
 
 ALTER TABLE lodging

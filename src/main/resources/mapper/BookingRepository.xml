@@ -4,6 +4,35 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.lec.spring.repository.BookingRepository">
+    <insert id="createBooking" flushCache="true" parameterType="com.lec.spring.domain.Room"
+            useGeneratedKeys="true" keyColumn="booking_id" keyProperty="bookingId">
+        INSERT INTO booking
+        (booking_time, booking_adult, booking_child, visitor_name, visitor_phonenum
+        , booking_paytype, booking_pay, booking_startdate, booking_enddate, room_id, user_id)
+        VALUES
+            (#{bookingTime}, #{bookingAdult}, #{bookingChild}, #{visitorName}, #{visitorPhonenum}
+            , #{bookingPaytype}, #{bookingPay}, #{bookingStartdate}, #{bookingEnddate}, #{roomId}, #{userId})
+    </insert>
+
+    <sql id="SELECT_BASE">
+        SELECT b.booking_id
+             , b.booking_time
+             , b.booking_adult
+             , b.booking_child
+             , b.visitor_name
+             , b.visitor_phonenum
+             , b.booking_paytype
+             , b.booking_pay
+             , b.booking_startdate
+             , b.booking_enddate
+             , r.room_id
+             , u.user_id
+        FROM
+            booking b, room r, user u
+        WHERE
+            b.room_id = r.room_id
+    </sql>
+
     <resultMap id="ReservationResultMap" type="com.lec.spring.domain.Booking">
         <id property="bookingId" column="booking_id" />
         <result property="bookingTime" column="booking_time" />
@@ -87,7 +116,7 @@
                  JOIN booking b ON u.user_id = b.user_id
                  JOIN room r ON b.room_id = r.room_id
                  JOIN lodging l ON r.lodging_id = l.lodging_id
-        WHERE b.reservation_id = #{reservationId}
+        WHERE b.booking_id = #{bookingId}
     </select>
 
 
