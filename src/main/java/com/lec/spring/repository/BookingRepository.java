@@ -9,4 +9,5 @@ public interface BookingRepository {
     int createBooking(Booking booking);
 
     int deleteBooking(Booking booking);
+
 }

@@ -86,4 +86,10 @@ public class BookingController {
 
         return "lodging/LodgingBooking";
     }
+
+//    @GetMapping("/mypage/customer/BookingList/{userId}")
+//    public String BookingList(@PathVariable("userId") Long userId, Model model){
+//        //List<Booking> booking = bookingService.getBookingDetails(userId);
+//
+//    }
 }
