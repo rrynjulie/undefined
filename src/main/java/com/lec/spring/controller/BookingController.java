@@ -88,7 +88,7 @@ public class BookingController {
 //    public ResponseEntity<String> saveBooking(@RequestBody Booking booking) {
 //        try {
 //            // 서비스 메서드 호출: 예약을 데이터베이스에 저장합니다
-//            bookingService.saveReservation(booking);
+//            bookingService.saveBooking(booking);
 //            return ResponseEntity.ok("예약이 성공적으로 저장되었습니다!");
 //        } catch (Exception e) {
 //            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("예약 저장에 실패했습니다");
