@@ -22,34 +22,29 @@ public class PrincipalDetailService implements UserDetailsService {
     private UserService userService;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        System.out.println("loadUserByEmail(" + email + ") 호출");
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("loadUserByUsername(" + username + ") 호출");
 
-        // DB 조회
-        User user = userService.findByEmail(email);
-        System.out.println(user.getEmail());
-
-        // 해당 nickname 의 user 가 DB 에 있다면
-        // UserDetails 생성해서 리턴
-        if(user != null){
-            PrincipalDetails userDetails = new PrincipalDetails(user);
-            userDetails.setUserService(userService);
-            return userDetails;
-
-
+        // 분기처리: 이메일 형식이면 이메일로, 그렇지 않으면 닉네임으로 조회
+        User user;
+        if (username.contains("@")) {
+            user = userService.findByEmail(username);
+            if (user != null) {
+                PrincipalDetails userDetails = new PrincipalDetails(user);
+                userDetails.setUserService(userService);
+                return userDetails;
+            }
+        } else {
+            user = userService.findByNickname(username);
+            if (user != null) {
+                PrincipalDetails userDetails = new PrincipalDetails(user);
+                userDetails.setUserService(userService);
+                return userDetails;
+            }
         }
 
-        user = userService.findByEmail(email);
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found with email: " + email);
-        }
-        // UserDetails 생성 및 반환
-
-        // 해당 nickname 의 user 가 없다면?
-        // UsernameNotFoundException 을 throw 해주어야 한다
-        throw new UsernameNotFoundException(email);
-
-        // 주의!  여기서 null 리턴하면 예외 발생!
+        // 해당 nickname 또는 email 의 user 가 없다면?
+        throw new UsernameNotFoundException("User not found with username: " + username);
     }
 
 

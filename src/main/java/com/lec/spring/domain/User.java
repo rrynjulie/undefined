@@ -50,10 +50,6 @@ public class User {
         return re_password;
     }
 
-    public void setRe_password(String re_password) {
-        this.re_password = re_password;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -68,22 +64,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public LocalDateTime getRegDate() {
-        return regDate;
-    }
-
-    public void setRegDate(LocalDateTime regDate) {
-        this.regDate = regDate;
-    }
-
-    public String getPhonenum() {
-        return phonenum;
-    }
-
-    public void setPhonenum(String phonenum) {
-        this.phonenum = phonenum;
     }
 
     public List<Authority> getAuthorities() {
@@ -108,6 +88,10 @@ public class User {
     private String phonenum;
 
     private List<Authority> authorities = new ArrayList<>();
+
+    // oAuth2 Client
+    private String provider;
+    private String providerId;
 
 
 }

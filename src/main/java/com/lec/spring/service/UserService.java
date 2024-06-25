@@ -15,9 +15,12 @@ public interface UserService {
 
     int register(User user);
 
-    List<Authority> selectAuthoritiesById(Long id);
+    List<Authority> selectAuthoritiesById(Long userId);
 
     Authentication authenticate(String nickname, String password);
 
     User findByUsername(String username);
+
+
+    void logout();
 }

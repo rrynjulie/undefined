@@ -7,13 +7,15 @@
 
     <sql id="SELECT_BASE">
         SELECT
-            user_id "id"
+            user_id "userId"
              , user_password "password"
              , user_name "username"
              , user_email "email"
              , user_regdate "regdate"
              , user_nickname "nickname"
              , user_phonenum "phonenum"
+             , provider "provider"
+             , providerId "providerId"
         FROM user
         WHERE 1 = 1
     </sql>
@@ -33,10 +35,15 @@
         AND user_email = #{email}
     </select>
 
+    <select id="findByProvider" resultType="com.lec.spring.domain.User">
+        <include refid="SELECT_BASE"/>
+        AND provider = #{provider}
+    </select>
+
     <insert id="save" flushCache="true" parameterType="com.lec.spring.domain.User"
             useGeneratedKeys="true" keyColumn="id" keyProperty="userId">
-        INSERT INTO user(user_password, user_name, user_email, user_nickname, user_phonenum)
-            VALUE(#{password}, #{username}, #{email}, #{nickname}, #{phonenum})
+        INSERT INTO user(user_password, user_name, user_email, user_nickname, user_phonenum, provider, providerId)
+            VALUE(#{password}, #{username}, #{email}, #{nickname}, #{phonenum}, #{provider}, #{providerId})
     </insert>
 
     <update id="update" flushCache="true" parameterType="com.lec.spring.domain.User">

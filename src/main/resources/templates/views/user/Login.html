@@ -18,11 +18,14 @@
 
 <body>
 
-<img id="logo" src="../../../static/image/logo.png">
+<!--<img id="logo" src="../../../static/image/logo.png">-->
+<a th:href="@{/Home}">
+    <img th:src="@{/image/MainLogo.png}" alt="StayFind" id="logo">
+</a>
 <div class="container mt-3 text-center">
     <!-- 로그인 폼 -->
     <form th:action="@{/user/login}" method="POST">
-    <div class="row mt-5">
+        <div class="row mt-5">
             <div class="col-12 text-danger" th:text="${errorMessage}">
                 <!-- 에러 메세지 출력 -->
             </div>
@@ -38,12 +41,14 @@
             <div id="passwordError" class="text-danger d-none">비밀번호를 입력해 주세요.</div>
         </div>
         <br>
-        <button class="w-100 btn btn-lg btn-primary my-1 custom-btn" type="submit" id="loginButton" style="border: none !important; background-color:#FC5185">로그인</button>
+        <button class="w-100 btn btn-lg btn-primary my-1 custom-btn" type="submit" id="loginButton"
+                style="border: none !important; background-color:#FC5185">로그인
+        </button>
     </form>
 
     <div id="choice" class="d-flex justify-content-center align-items-center">
         <div class="btn" data-bs-toggle="modal" data-bs-target="#resetModal">비밀번호 재설정 ></div>
-        <div> | </div>
+        <div> |</div>
         <a class="btn" data-bs-toggle="modal" data-bs-target="#termsModal">회원가입 ></a>
     </div>
     <hr style="width: 10px">
@@ -80,13 +85,17 @@
                         <input type="email" class="form-control" id="re_email" required>
                     </div>
                 </form>
-                <button type="submit" class="w-100 btn btn-lg btn-primary my-1 custom-btn" style="border: none !important; background-color:#FC5185">링크 전송하기</button>
+                <button type="submit" class="w-100 btn btn-lg btn-primary my-1 custom-btn"
+                        style="border: none !important; background-color:#FC5185">링크 전송하기
+                </button>
                 <div id="confirmation" class="d-none">
                     <div class="notice alert alert-success">
                         <p>입력한 이메일로 링크가 발송되었습니다. (남은 횟수 00회)</p>
                     </div>
                     <div class="modal-footer">
-                        <button class="w-100 btn btn-lg btn-primary my-1 custom-btn" type="button" style="border: none !important; background-color:#FC5185" data-bs-dismiss="modal">확인</button>
+                        <button class="w-100 btn btn-lg btn-primary my-1 custom-btn" type="button"
+                                style="border: none !important; background-color:#FC5185" data-bs-dismiss="modal">확인
+                        </button>
                     </div>
                 </div>
             </div>
@@ -144,8 +153,10 @@
             </div>
             <div class="modal-footer">
                 <a href="../user/register">
-                    <button type="button" class="btn btn-primary agree-button" id="agreeButton" style="border: none !important; background-color:#FC5185">
-                    동의하고 계속하기</button>
+                    <button type="button" class="btn btn-primary agree-button" id="agreeButton"
+                            style="border: none !important; background-color:#FC5185">
+                        동의하고 계속하기
+                    </button>
                 </a>
 
             </div>
@@ -156,7 +167,7 @@
 <!-- 푸터 -->
 <footer id="footer"></footer>
 <!--<script src="../../../../../../src/main/resources/static/js/LoadFooter.js"></script>-->
- <script th:src="@{/js/user/login.js}"></script>
+<script th:src="@{/js/user/login.js}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
