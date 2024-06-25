@@ -21,25 +21,29 @@ import java.util.List;
 @Controller
 public class BookingController {
 
-    private final BookingService bookingService;
-    private final LodgingService lodgingService;
-    private final RoomService roomService;
-    private final UserService userService;
+    private BookingService bookingService;
+    private LodgingService lodgingService;
+    private RoomService roomService;
+    private UserService userService;
 
     @Autowired
-    public BookingController(BookingService bookingService, LodgingService lodgingService, RoomService roomService, UserService userService) {
+    public BookingController(
+            BookingService bookingService
+            , LodgingService lodgingService
+            , RoomService roomService
+            , UserService userService
+    ) {
         this.bookingService = bookingService;
         this.lodgingService = lodgingService;
         this.roomService = roomService;
         this.userService = userService;
     }
 
-    // 숙소 예약 폼 페이지 보여주기
     @GetMapping("/lodging/LodgingBooking")
-    public String ShowBookingForm(@RequestParam("lodgingId") Long lodgingId,
-                                  @RequestParam(value = "roomId", required = false) Long roomId,
-                                  Model model,
-                                  Authentication authentication) {
+    public String lodgingBooking(@RequestParam("lodgingId") Long lodgingId,
+                                 @RequestParam(value = "roomId", required = false) Long roomId,
+                                 Model model,
+                                 Authentication authentication) {
 
         if (authentication == null || !authentication.isAuthenticated()) {
             // 인증되지 않은 사용자 처리
@@ -82,16 +86,4 @@ public class BookingController {
 
         return "lodging/LodgingBooking";
     }
-
-
-//    @PostMapping("/saveBooking")
-//    public ResponseEntity<String> saveBooking(@RequestBody Booking booking) {
-//        try {
-//            // 서비스 메서드 호출: 예약을 데이터베이스에 저장합니다
-//            bookingService.saveBooking(booking);
-//            return ResponseEntity.ok("예약이 성공적으로 저장되었습니다!");
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("예약 저장에 실패했습니다");
-//        }
-//    }
 }

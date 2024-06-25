@@ -4,149 +4,46 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.lec.spring.repository.BookingRepository">
+    <!-- BASE -->
+    <sql id="SELECT_BASE">
+        SELECT b.booking_id AS bookingId
+             , b.booking_time AS bookingTime
+             , b.booking_adult AS bookingAdult
+             , b.booking_child AS bookingChild
+             , b.visitor_name AS visitorName
+             , b.visitor_phonenum AS visitorPhoneNum
+             , b.booking_paytype AS bookingPayType
+             , b.booking_pay AS bookingPay
+             , b.booking_startdate AS bookingStartDate
+             , b.booking_enddate AS bookingEndDate
+             , r.room_id AS roomId
+             , u.user_id AS userId
+        FROM
+            booking b, room r, user u
+        WHERE
+            b.room_id = r.room_id
+          AND b.user_id = u.user_id
+    </sql>
+
+    <!-- CREATE -->
     <insert id="createBooking" flushCache="true" parameterType="com.lec.spring.domain.Room"
             useGeneratedKeys="true" keyColumn="booking_id" keyProperty="bookingId">
         INSERT INTO booking
         (booking_time, booking_adult, booking_child, visitor_name, visitor_phonenum
         , booking_paytype, booking_pay, booking_startdate, booking_enddate, room_id, user_id)
         VALUES
-            (#{bookingTime}, #{bookingAdult}, #{bookingChild}, #{visitorName}, #{visitorPhonenum}
-            , #{bookingPaytype}, #{bookingPay}, #{bookingStartdate}, #{bookingEnddate}, #{roomId}, #{userId})
+            (#{bookingTime}, #{bookingAdult}, #{bookingChild}, #{visitorName}, #{visitorPhoneNum}
+            , #{bookingPayType}, #{bookingPay}, #{bookingStartDate}, #{bookingEndDate}, #{roomId}, #{userId})
     </insert>
 
-    <sql id="SELECT_BASE">
-        SELECT b.booking_id
-             , b.booking_time
-             , b.booking_adult
-             , b.booking_child
-             , b.visitor_name
-             , b.visitor_phonenum
-             , b.booking_paytype
-             , b.booking_pay
-             , b.booking_startdate
-             , b.booking_enddate
-             , r.room_id
-             , u.user_id
-        FROM
-            booking b, room r, user u
-        WHERE
-            b.room_id = r.room_id
-    </sql>
-
-    <resultMap id="BookingResultMap" type="com.lec.spring.domain.Booking">
-        <id property="bookingId" column="booking_id" />
-        <result property="bookingTime" column="booking_time" />
-        <result property="bookingAdult" column="booking_adult" />
-        <result property="bookingChild" column="booking_child" />
-        <result property="visitorName" column="visitor_name" />
-        <result property="visitorPhoneNum" column="visitor_phonenum" />
-        <result property="bookingPayType" column="booking_paytype" />
-        <result property="bookingFinalPay" column="booking_finalpay" />
-        <result property="bookingStartDate" column="booking_startdate" />
-        <result property="bookingEndDate" column="booking_enddate" />
-        <result property="roomId" column="room_id" />
-        <result property="userId" column="user_id" />
-    </resultMap>
-
-    <resultMap id="UserResultMap" type="com.lec.spring.domain.User">
-        <id property="userid" column="user_id" />
-        <result property="nickname" column="user_nickname" />
-        <result property="username" column="user_name" />
-        <result property="email" column="user_email" />
-        <result property="phonenum" column="user_phonenum" />
-    </resultMap>
-
-    <resultMap id="LodgingResultMap" type="com.lec.spring.domain.Lodging">
-        <id property="lodgingId" column="lodging_id" />
-        <result property="lodgingName" column="lodging_name" />
-        <result property="lodgingType" column="lodging_type" />
-        <result property="lodgingOpen" column="lodging_open" />
-        <result property="lodgingClose" column="lodging_close" />
-        <result property="uerId" column="user_id"/>
-    </resultMap>
-
-    <resultMap id="RoomResultMap" type="com.lec.spring.domain.Room">
-        <id property="roomId" column="room_id" />
-        <result property="roomName" column="room_name" />
-        <result property="roomPrice" column="room_price" />
-        <result property="lodgingId" column="lodging_id" />
-    </resultMap>
-
-    <!-- 예약 삽입 -->
-    <insert id="insertBooking" useGeneratedKeys="true" keyProperty="bookingId">
-        INSERT INTO booking (
-            booking_time,
-            booking_adult,
-            booking_child,
-            visitor_name,
-            visitor_phonenum,
-            booking_paytype,
-            booking_finalpay,
-            booking_startdate,
-            booking_enddate,
-            room_id,
-            user_id
-        )
-        VALUES (
-                   NOW(),
-                   #{bookingAdult},
-                   #{bookingChild},
-                   #{visitorName},
-                   #{visitorPhoneNum},
-                   #{bookingPayType},
-                   #{bookingFinalPay},
-                   #{bookingStartDate},
-                   #{bookingEndDate},
-                   #{roomId},
-                   #{userid}
-               )
-    </insert>
-
-    <!-- 필요한 정보 JOIN하여 가져오기 -->
-    <select id="getBookingDetails" resultType="map">
-        SELECT
-            u.user_name ,
-            u.user_phonenum ,
-            l.lodging_name,
-            r.room_name,
-            r.room_price,
-            r.room_id,
-            u.user_id
-        FROM user u
-                 JOIN booking b ON u.user_id = b.user_id
-                 JOIN room r ON b.room_id = r.room_id
-                 JOIN lodging l ON r.lodging_id = l.lodging_id
-        WHERE b.booking_id = #{bookingId}
+    <!-- READ -->
+    <select id="findByUserId" resultType="com.lec.spring.domain.Booking">
+        <include refid="SELECT_BASE"/>
+        AND l.user_id = #{userId}
     </select>
 
-
-    <insert id="save" parameterType="com.lec.spring.domain.Booking" useGeneratedKeys="true" keyProperty="bookingId">
-        INSERT INTO booking (
-            booking_time,
-            booking_adult,
-            booking_child,
-            visitor_name,
-            visitor_phonenum,
-            booking_paytype,
-            booking_pay,
-            booking_finalpay,
-            booking_startdate,
-            booking_enddate,
-            room_id,
-            user_id
-        ) VALUES (
-                     NOW(),
-                     #{bookingAdult},
-                     #{bookingChild},
-                     #{visitorName},
-                     #{visitorPhoneNum},
-                     #{bookingPayType},
-                     #{bookingPay},
-                     #{bookingFinalPay},
-                     #{bookingStartDate},
-                     #{bookingEndDate},
-                     #{room.roomId},
-                     #{user.userId}
-                 )
-    </insert>
+    <!-- DELETE -->
+    <delete id="deleteBooking" flushCache="true" parameterType="com.lec.spring.domain.Booking">
+        DELETE FROM booking WHERE booking_id = #{bookingId}
+    </delete>
 </mapper>
