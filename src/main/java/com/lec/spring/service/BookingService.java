@@ -3,9 +3,9 @@ package com.lec.spring.service;
 import com.lec.spring.domain.Booking;
 
 public interface BookingService {
-//    List<Reservation> getReservationsByUserId(String userId);
+//    List<Booking> getBookingsByUserId(String userId);
 //
-//    int deleteReservationByUserIdAndId(String userId, Long reservationId);
+//    int deleteBookingByUserIdAndId(String userId, Long bookingId);
 
     Booking makeBooking(Booking booking);
 

@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="menu-list">
-            <button class="menu-item" id="reservation-btn">예약 내역<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
+            <button class="menu-item" id="booking-btn">예약 내역<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
             <button class="menu-item" id="manage-info-btn">내 정보 관리<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
             <button class="menu-item" id="review-btn">작성 후기<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
             <button class="menu-item" id="coupon-btn">쿠폰<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <section id="reservation">
+    <section id="booking">
         <h2>예약 내역</h2>
         <div class="filter-container">
             <select id="accommodation-type">
@@ -47,11 +47,11 @@
             </select>
             <img id="search-btn" src="../../../../static/image/IconSearch.png" class="search-icon" width="50">
         </div>
-        <h1>Reservation List</h1>
+        <h1>Booking List</h1>
         <table>
             <thead>
             <tr>
-                <th>Reservation ID</th>
+                <th>Booking ID</th>
                 <th>Visitor Name</th>
                 <th>Phone Number</th>
                 <th>Start Date</th>
@@ -64,21 +64,20 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="reservation : ${reservations}">
-                <td th:text="${reservation.reservationId}"></td>
-                <td th:text="${reservation.visitorName}"></td>
-                <td th:text="${reservation.visitorPhoneNum}"></td>
-                <td th:text="${reservation.reservationStartDate}"></td>
-                <td th:text="${reservation.reservationEndDate}"></td>
-                <td th:text="${reservation.reservationPayType}"></td>
-                <td th:text="${reservation.reservationPay}"></td>
-                <td th:text="${reservation.reservationFinalPay}"></td>
-                <td th:text="${reservation.roomId}"></td>
-                <td th:text="${reservation.userId}"></td>
+            <tr th:each="booking : ${bookings}">
+                <td th:text="${booking.bookingId}"></td>
+                <td th:text="${booking.visitorName}"></td>
+                <td th:text="${booking.visitorPhoneNum}"></td>
+                <td th:text="${booking.bookingStartDate}"></td>
+                <td th:text="${booking.bookingEndDate}"></td>
+                <td th:text="${booking.bookingPayType}"></td>
+                <td th:text="${booking.bookingPay}"></td>
+                <td th:text="${booking.roomId}"></td>
+                <td th:text="${booking.userId}"></td>
                 <td>
-                    <form th:action="@{/mypage/customer/{userId}/reservation/delete/{reservationId}(userId=${userId}, reservationId=${reservation.reservationId})}" method="post">
+                    <form th:action="@{/mypage/customer/{userId}/booking/delete/{bookingId}(userId=${userId}, bookingId=${booking.bookingId})}" method="post">
                         <input type="hidden" name="userId" th:value="${userId}">
-                        <input type="hidden" name="reservationId" th:value="${reservation.reservationId}">
+                        <input type="hidden" name="bookingId" th:value="${booking.bookingId}">
                         <input type="submit" value="삭제">
                     </form>
                 </td>

@@ -36,10 +36,10 @@ public class BookingController {
 
     // 숙소 예약 폼 페이지 보여주기
     @GetMapping("/lodging/LodgingBooking")
-    public String ShowReservationForm(@RequestParam("lodgingId") Long lodgingId,
-                                      @RequestParam(value = "roomId", required = false) Long roomId,
-                                      Model model,
-                                      Authentication authentication) {
+    public String ShowBookingForm(@RequestParam("lodgingId") Long lodgingId,
+                                  @RequestParam(value = "roomId", required = false) Long roomId,
+                                  Model model,
+                                  Authentication authentication) {
 
         if (authentication == null || !authentication.isAuthenticated()) {
             // 인증되지 않은 사용자 처리
@@ -78,17 +78,17 @@ public class BookingController {
         }
         model.addAttribute("selectedRoom", selectedRoom);
 
-        model.addAttribute("reservation", new Booking());
+        model.addAttribute("booking", new Booking());
 
         return "lodging/LodgingBooking";
     }
 
 
-//    @PostMapping("/saveReservation")
-//    public ResponseEntity<String> saveReservation(@RequestBody Reservation reservation) {
+//    @PostMapping("/saveBooking")
+//    public ResponseEntity<String> saveBooking(@RequestBody Booking booking) {
 //        try {
 //            // 서비스 메서드 호출: 예약을 데이터베이스에 저장합니다
-//            reservationService.saveReservation(reservation);
+//            bookingService.saveReservation(booking);
 //            return ResponseEntity.ok("예약이 성공적으로 저장되었습니다!");
 //        } catch (Exception e) {
 //            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("예약 저장에 실패했습니다");

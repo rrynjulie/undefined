@@ -25,7 +25,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Booking getBookingDetails(Long bookingId) {
-        return bookingRepository.getReservationDetails(bookingId);
+        return bookingRepository.getBookingDetails(bookingId);
     }
 
     @Override

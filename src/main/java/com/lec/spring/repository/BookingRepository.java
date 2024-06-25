@@ -10,10 +10,10 @@ public interface BookingRepository {
 //
 //    List<Reservation> findByUserId(String userId);
 //
-//    @Delete("DELETE FROM reservation WHERE user_id = #{userId} AND reservation_id = #{reservationId}")
-//    int deleteByUserIdAndId(@Param("userId") String userId, @Param("reservationId") Long reservationId);
+//    @Delete("DELETE FROM booking WHERE user_id = #{userId} AND booking_id = #{bookingId}")
+//    int deleteByUserIdAndId(@Param("userId") String userId, @Param("bookingId") Long bookingId);
 
     Booking save(Booking booking);
 
-    Booking getReservationDetails(@Param("bookingId") Long bookingId);
+    Booking getBookingDetails(@Param("bookingId") Long bookingId);
 }

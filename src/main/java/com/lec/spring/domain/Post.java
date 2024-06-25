@@ -17,7 +17,7 @@ public class Post {
 
     // Foreign Key
     private Long userId;  // NOT NULL
-    private Long reservationId;  // NOT NULL
+    private Long bookingId;  // NOT NULL
     private Long lodgingId;  // NOT NULL
     private Long roomId;  // NOT NULL
 }
