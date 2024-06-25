@@ -6,14 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface BookingRepository {
-//    List<Booking> findAll();
-//
-//    List<Booking> findByUserId(String userId);
-//
-//    @Delete("DELETE FROM booking WHERE user_id = #{userId} AND booking_id = #{bookingId}")
-//    int deleteByUserIdAndId(@Param("userId") String userId, @Param("bookingId") Long bookingId);
+    int createBooking(Booking booking);
 
-    Booking save(Booking booking);
-
-    Booking getBookingDetails(@Param("bookingId") Long bookingId);
+    int deleteBooking(Booking booking);
 }
