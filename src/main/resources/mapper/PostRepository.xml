@@ -10,14 +10,19 @@
     </insert>
 
     <sql id="SELECT_BASE">
-        SELECT p.post_id
-             , p.post_picture
-             , p.post_text
-             , p.post_grade
-             , u.user_id
-             , re.reservation_id
-             , l.lodging_id
-             , ro.room_id
+        SELECT p.post_id AS postId, p.post_picture AS postPicture, p.post_text AS postText, p.post_grade AS postGrade, p.user_id AS userId, p.reservation_id AS reservationId, p.lodging_id AS lodgingId, p.room_id AS roomId
+        FROM post p
+    </sql>
+
+    <sql id="SELECT_BASES">
+        SELECT p.post_id AS postId
+             , p.post_picture AS postPicture
+             , p.post_text AS postText
+             , p.post_grade AS postGrade
+             , u.user_id AS userID
+             , re.reservation_id AS reservationId
+             , l.lodging_id AS lodgingId
+             , ro.room_id AS roomId
         FROM
             post p, user u, reservation re, lodging l, room ro
         WHERE
@@ -32,7 +37,7 @@
         AND ro.room_id = #{roomId}
     </select>
 
-    <update id="update" flushCache="true" parameterType="com.lec.spring.domain.Post">
+    <update id="postUpdate" flushCache="true" parameterType="com.lec.spring.domain.Post">
         UPDATE post
         SET post_picture = #{postPicture}
           , post_text = #{postText}
@@ -43,4 +48,19 @@
     <delete id="delete" flushCache="true" parameterType="com.lec.spring.domain.Post">
         DELETE FROM post WHERE post_id = #{postId}
     </delete>
+
+<!--    마이페이지에서 유저 id 값으로 자신이 작성한 후기 보는 쿼리-->
+    <select id="postUserId" resultType="com.lec.spring.domain.Post">
+        <include refid="SELECT_BASE"/>
+        WHERE p.user_id = #{userId}
+    </select>
+
+<!--    유저 id 값으로 거른 뒤 후기 id 값으로 한 번더 거르는 쿼리-->
+    <select id="postUserUpdate" resultType="com.lec.spring.domain.Post">
+        <include refid="SELECT_BASE"/>
+        WHERE p.user_id = #{userId}
+        AND p.post_id = #{postId}
+    </select>
+
+
 </mapper>

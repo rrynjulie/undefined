@@ -16,6 +16,26 @@ public class PostServiceImpl implements PostService {
         this.postRepository = postRepository;
     }
 
+    @Override
+    public List<Post> allPostUserId(Long userId) {
+        return postRepository.postUserId(userId);
+    }
+
+    @Override
+    public List<Post> allPostUserUpdate(Long userId, Long postId) {
+        return postRepository.postUserUpdate(userId, postId);
+    }
+
+    @Override
+    public int allPostUpdate(Post post) {
+        int result = 0;
+        result = postRepository.postUpdate(post);
+        return result;
+    }
+
+
+
+
     //    오류 때문에 잠시 주석처리
 //    @Override
 //    public void createPost(Post post) {
