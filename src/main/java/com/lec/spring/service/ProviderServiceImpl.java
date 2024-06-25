@@ -22,13 +22,13 @@ public class ProviderServiceImpl implements ProviderService {
     }
 
     @Override
-    public List<ProvLodging> getAllLodgingDetails() {
-        return providerRepository.findAllDetails();
+    public List<ProvLodging> getLodgings(Long userId) {
+        return providerRepository.findLodgings(userId);
     }
 
     @Override
-    public ProvLodging getLodgingById(int lodgingId) {
-        return providerRepository.findLodgingById(lodgingId);
+    public ProvLodging getAllDetails(int lodgingId) {
+        return providerRepository.findAllDetails(lodgingId);
     }
 
     @Override

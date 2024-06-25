@@ -146,12 +146,22 @@
     display: flex;
     border-radius: 10px;
     overflow: hidden;
+    background-color: yellow;
+}
+
+.post-img-frame {
+    display: flex;
+    flex-direction: column;
+    max-width: 40%;
+    height: 100%;
+    background-color: #EBEBEB;
+    justify-content: center;
+    align-items: center;
 }
 
 .post-img {
-    height: 100%;
-    width: 40%;
-    background-color: #EBEBEB;
+    max-width: 60%;
+    height: auto;
 }
 
 .post-details {
@@ -181,4 +191,12 @@
     color: dimgray;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.post-null {
+    color: darkgray;
+    height: 130px;
+    font-size: 30px;
+    text-align: center;
+    align-content: center;
 }

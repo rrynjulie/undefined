@@ -92,7 +92,6 @@ CREATE TABLE reservation
     visitor_name          VARCHAR(100)        NOT NULL COMMENT '이용자 이름',
     visitor_phonenum      VARCHAR(100)        NOT NULL COMMENT '이용자 전화번호',
     reservation_paytype   ENUM('카드', '무통장입금') NOT NULL COMMENT '결제 방식 (카드/무통장입금)',
-    reservation_pay       LONG                NOT NULL COMMENT '예약금액',
     reservation_finalpay  LONG                NOT NULL COMMENT '최종 결제 금액',
     reservation_startdate DATETIME            NOT NULL COMMENT '체크인 날짜',
     reservation_enddate   DATETIME            NOT NULL COMMENT '체크아웃 날짜',

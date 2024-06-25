@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/mypage/customer/PostUpdate.css}">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="container">
+
+    <div th:each="post : ${userPostUpdate}">
+        <h2 id="body-head">후기 수정</h2>
+        <form th:action="@{/mypage/customer/PostUpdate}" method="post">
+            <div class="userPost" style="height: 350px;">
+                <input type="hidden" name="postId" th:value="${post.postId}" />
+                <input type="hidden" name="userId" th:value="${post.userId}" />
+                <input type="hidden" id="stars" name="postGrade" th:value="${post.postGrade}" />
+                <div style="display: flex; justify-content: space-between; align-items: center"; >
+                    <div class="stars" th:data-star-count="${post.postGrade}">
+                        <span class="star" data-value="1">&#9733;</span>
+                        <span class="star" data-value="2">&#9733;</span>
+                        <span class="star" data-value="3">&#9733;</span>
+                        <span class="star" data-value="4">&#9733;</span>
+                        <span class="star" data-value="5">&#9733;</span>
+                    </div>
+                </div>
+                <div class="inputDiv" style="margin-bottom: 50px"> 후기사진
+                    <input type="text" name="postPicture" style="border: solid 1px black; width: 100%; height: 100%;" th:placeholder="${post.postPicture}" />
+                </div>
+                <div class="inputDiv"> 후기
+                    <input type="text" name="postText" style="border: solid 1px black; width: 100%; height: 100%;" th:placeholder="${post.postText}" />
+                </div>
+                <div style="width: 99.5%; height: 50px; margin-top: 40px;">
+                    <button type="submit">수정확인</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+
+
+<!--</div>-->
+<script th:src="@{/js/mypage/customer/PostUpdate.js}"></script>
+</body>
+</html>

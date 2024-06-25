@@ -22,8 +22,8 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public int createRoom(Room room, Map<String, MultipartFile> files) {
-        return 0;
+    public void createRoom(Room room) {
+        roomRepository.createRoom(room);
     }
 
     @Override
@@ -50,5 +50,15 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public int deleteRoom(Long roomId) {
         return 0;
+    }
+
+    @Override
+    public List<Room> findRoomsByLodgingId(Long lodgingId) {
+        return roomRepository.findRoomsByLodgingId(lodgingId);
+    }
+
+    @Override
+    public Room getRoomById(Long roomId) {
+        return roomRepository.findByRoomId(roomId);
     }
 }
