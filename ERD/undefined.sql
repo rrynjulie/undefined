@@ -83,21 +83,21 @@ CREATE TABLE post
     PRIMARY KEY (post_id)
 ) COMMENT '후기';
 
-CREATE TABLE reservation
+CREATE TABLE booking
 (
-    reservation_id        INT                 NOT NULL AUTO_INCREMENT COMMENT '예약 고유 id값',
-    reservation_time      DATETIME            NOT NULL DEFAULT now() COMMENT '예약한 시간',
-    reservation_adult     INT                 NOT NULL DEFAULT 0 COMMENT '성인 예약 인원',
-    reservation_child     INT                 NOT NULL DEFAULT 0 COMMENT '아동 예약 인원',
-    visitor_name          VARCHAR(100)        NOT NULL COMMENT '이용자 이름',
-    visitor_phonenum      VARCHAR(100)        NOT NULL COMMENT '이용자 전화번호',
-    reservation_paytype   ENUM('카드', '무통장입금') NOT NULL COMMENT '결제 방식 (카드/무통장입금)',
-    reservation_finalpay  LONG                NOT NULL COMMENT '최종 결제 금액',
-    reservation_startdate DATETIME            NOT NULL COMMENT '체크인 날짜',
-    reservation_enddate   DATETIME            NOT NULL COMMENT '체크아웃 날짜',
-    room_id               INT                NOT NULL COMMENT '객실고유 id 값',
-    user_id               INT        NOT NULL COMMENT '아이디',
-    PRIMARY KEY (reservation_id)
+    booking_id        INT                     NOT NULL AUTO_INCREMENT COMMENT '예약 고유 id값',
+    booking_time      DATETIME                NOT NULL DEFAULT now() COMMENT '예약한 시간',
+    booking_adult     INT                     NOT NULL DEFAULT 0 COMMENT '성인 예약 인원',
+    booking_child     INT                     NOT NULL DEFAULT 0 COMMENT '아동 예약 인원',
+    visitor_name      VARCHAR(100)            NOT NULL COMMENT '이용자 이름',
+    visitor_phonenum  VARCHAR(100)            NOT NULL COMMENT '이용자 전화번호',
+    booking_paytype   ENUM('카드', '무통장입금') NOT NULL COMMENT '결제 방식 (카드/무통장입금)',
+    booking_finalpay  LONG                    NOT NULL COMMENT '결제 금액',
+    booking_startdate DATETIME                NOT NULL COMMENT '체크인 날짜',
+    booking_enddate   DATETIME                NOT NULL COMMENT '체크아웃 날짜',
+    room_id           INT                     NOT NULL COMMENT '객실고유 id 값',
+    user_id           INT                     NOT NULL COMMENT '아이디',
+    PRIMARY KEY (booking_id)
 ) COMMENT '예약';
 
 CREATE TABLE room
@@ -169,7 +169,7 @@ ALTER TABLE room
         FOREIGN KEY (lodging_id)
             REFERENCES lodging (lodging_id);
 
-ALTER TABLE reservation
+ALTER TABLE booking
     ADD CONSTRAINT FK_room_TO_reservation
         FOREIGN KEY (room_id)
             REFERENCES room (room_id);
@@ -200,7 +200,7 @@ ALTER TABLE comment
         FOREIGN KEY (user_id)
             REFERENCES user (user_id);
 
-ALTER TABLE reservation
+ALTER TABLE booking
     ADD CONSTRAINT FK_user_TO_reservation
         FOREIGN KEY (user_id)
             REFERENCES user (user_id);
@@ -223,7 +223,7 @@ ALTER TABLE post
 ALTER TABLE post
     ADD CONSTRAINT FK_reservation_TO_post
         FOREIGN KEY (reservation_id)
-            REFERENCES reservation (reservation_id);
+            REFERENCES booking (booking_id);
 
 ALTER TABLE lodging
     ADD CONSTRAINT FK_user_TO_lodging
