@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const reservationForm = document.getElementById('reservationForm'); // 예약 폼 요소 가져오기
+    const bookingForm = document.getElementById('bookingForm'); // 예약 폼 요소 가져오기
     const selectedDate = document.getElementById('selectedDate');
     const total = document.getElementById('total');
-    const reservation = document.getElementById('reservation'); // 예약 폼 요소 가져오기
+    const booking = document.getElementById('booking'); // 예약 폼 요소 가져오기
 
     // 예약 폼에 날짜와 인원수 정보를 표시하는 함수
-    function showReservationInfo() {
+    function showBookingInfo() {
         // sessionStorage에서 데이터 가져오기
         const storedStartDate = sessionStorage.getItem('startDate');
         const storedEndDate = sessionStorage.getItem('endDate');
@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // 예약 폼 제출 시 처리
-    // reservation.addEventListener('submit', function (event) {
+    // booking.addEventListener('submit', function (event) {
     // });
 
     // 페이지 로드 시 예약 정보를 표시
-    showReservationInfo();
+    showBookingInfo();
 });
