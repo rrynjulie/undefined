@@ -63,9 +63,6 @@
     </div>
 
     <div class="room">
-        <div>
-            <h3 style="margin-left: 40px">객실 선택</h3>
-        </div>
         <div id="dateTotal">
             <div id="selectedDate" class="clickable" style="border-right:solid 1px black;">
                 07/04 ~ 07/05, 1박
@@ -120,13 +117,13 @@
             <div class="room-details">
                 <div class="room-detail" style="padding: 0 10px;">
                     <h4>숙박</h4>
-                    <button class="detail-btn">상세보기 ></button>
+                    <a class="detail-btn" th:href="@{'/lodging/RoomDetail/' + ${lodging.lodgingId} + '/' + ${lodging.roomId}}">상세보기 ></a>
                 </div>
                 <div th:text="'체크인 ' + ${lodging.lodgingOpen} + ' ~ ' + '체크아웃 ' +  ${lodging.lodgingClose}" style="padding: 0 10px"></div>
                 <div style="display: flex; justify-content: space-between; margin-top: 15px; padding: 0 10px;">
                     <div th:text="${lodging.roomName}"></div>
                     <div th:text="${lodging.formattedRoomPrices} + '원'"></div></div>
-                <div class="couponReserve" style="padding: 0 10px;"><button>쿠폰 ></button><a th:href="@{/lodging/reservation/form(lodgingId=${lodging.lodgingId})}"><button class="reserve-btn">예약하기</button></a></div>
+                <div class="couponReserve" style="padding: 0 10px;"><button>쿠폰 ></button><a class="reserve-btn" th:href="@{/lodging/LodgingBooking(lodgingId=${lodging.lodgingId}, roomId=${lodging.roomId})}">예약하기</a></div>
             </div>
         </div>
     </div>

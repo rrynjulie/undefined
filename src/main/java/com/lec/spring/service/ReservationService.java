@@ -13,7 +13,7 @@ public interface ReservationService {
 
     Reservation getReservationDetails(Long reservationId);
 
-    Reservation save(Reservation reservation);
+    Reservation saveReservation(Reservation reservation);
 
 
 

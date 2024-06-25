@@ -34,7 +34,7 @@ public class RoomRepositoryTest {
                 .build();
 
         System.out.println("[생성 전]" + room);
-        int result = roomRepository.create(room);
+        roomRepository.createRoom(room);
         System.out.println("[생성 후]" + room);
         System.out.println();
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -47,9 +48,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public int register(User user) {
+        // 사용자 비밀번호 암호화
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user); // userRepository.save의 반환 값을 그대로 전달
+
+        // 사용자 정보 저장
+        userRepository.save(user);
+
+        // 기본 권한 설정
+        Authority authority = new Authority();
+        authority.setAuthority(1);
+        authority.setUser(user);
+        authority.setUserId(user.getUserId()); // user의 ID를 Authority에 설정
+
+        // 권한 저장
+        authorityRepository.save(authority);
+
+        // 유저에 권한 추가
+        user.getAuthorities().add(authority);
+//        userRepository.save(user);
+
+        return 1; // 성공적으로 저장된 경우 1을 반환
     }
 
     @Override
@@ -63,6 +83,12 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    @Override
+    public User findByUsername(String username) {
+        return null;
+    }
+
+
 //    @Override
 //    public Authentication authenticate(String nickname, String password) {
 //        User user = findByNickname(nickname);
@@ -72,10 +98,7 @@ public class UserServiceImpl implements UserService {
 //        return null;
 //    }
 
-    @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
+
 }
 
 

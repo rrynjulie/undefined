@@ -11,7 +11,13 @@ import java.util.List;
 
 @Mapper
 public interface PostRepository {
+    int createPost(Post post);
 
+    int countAllPostsByLodgingId(Long lodgingId);
+
+    List<Post> findPostsByRoomId(Long roomId);
+
+    int updatePost(Post post);
     List<Post> postUserId(@Param("userId") Long userId);
 
     List<Post> postUserUpdate(@Param("userId") Long userId, @Param("postId") Long postId);
@@ -20,4 +26,7 @@ public interface PostRepository {
 
 //    오류 때문에 잠시 주석처리
 //    void createPost(Post post);
+
+
+    int deletePost(Post post);
 }

@@ -9,9 +9,12 @@ import java.util.List;
 @Mapper
 public interface AuthorityRepository {
 
-    Authority findByNickname(String nickname);
+    Authority findById(Long id);
 
     List<Authority> findByUser(User user);
 
     int addAuthority(Long user_id, Long auth_id);
+
+    void save(Authority authority);
+
 }

@@ -12,18 +12,30 @@
         WHERE authority_name = #{name}
     </select>
 
-    <select id="findByUser"
-            parameterType="com.lec.spring.domain.User"
-            resultType="com.lec.spring.domain.Authority">
-        SELECT a.authority_id "id", a.authority_name "name"
-        FROM authority a, user_authority u
-        WHERE a.authority_id = u.authority_id AND u.user_id = #{id};
-    </select>
+<!--    <select id="findByUser"-->
+<!--            parameterType="com.lec.spring.domain.User"-->
+<!--            resultType="com.lec.spring.domain.Authority">-->
+<!--        SELECT a.authority_id "id", a.authority_name "name"-->
+<!--        FROM authority a, user_authority u-->
+<!--        WHERE a.authority_id = u.authority_id AND u.user_id = #{id};-->
+<!--    </select>-->
 
     <insert id="addAuthority" flushCache="true">
         INSERT INTO user_authority(user_id, authority_id)
         VALUES(#{param1}, #{param2})
     </insert>
+
+    <insert id="save" parameterType="com.lec.spring.domain.Authority">
+        INSERT INTO user_authority (authority_id, user_id)
+        VALUES (#{authority}, #{userId})
+    </insert>
+
+    <select id="findByUser" resultType="com.lec.spring.domain.Authority">
+        SELECT a.authority_id, a.authority_name
+        FROM authority a
+                 JOIN user_authority ua ON a.authority_id = ua.authority_id
+        WHERE ua.user_id = #{userId}
+    </select>
 
 </mapper>
 

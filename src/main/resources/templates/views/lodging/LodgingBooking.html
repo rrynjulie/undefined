@@ -8,39 +8,42 @@
 <h2 th:text="${lodging.lodgingName} + ' 예약하기'"></h2>
 
 <!-- 예약 폼 내용 -->
-<form action="/lodging/reservation/submit" method="post" th:object="${reservation}">
-<!--    <input type="hidden" th:field="*{lodging.id}" th:value="${lodging.id}">-->
-    <!-- Other form fields for reservation details -->
+<form action="/lodging/LodgingBooking" method="get">
+
+    <div class="room">
+        <div>
+            <h3 style="margin-left: 40px">객실 선택</h3>
+        </div>
         <div id="dateTotal">
             <div id="selectedDate" class="clickable" style="border-right:solid 1px black;">
-                07/04 ~ 07/05, 1박
             </div>
             <div id="total" class="clickable">
-                성인 1, 아동 0
             </div>
         </div>
+    </div>
 
-        <label>사용자 이름:</label>
-        <span th:text="${user.username}"></span>
+    <label>사용자 이름:</label>
+    <span th:text="${user.username}"></span>
+    <span th:text="${user.phonenum}"></span>
+
+    <label>객실:</label>
+    <span th:text="${selectedRoom.roomName}"></span>
+
+    <label>가격: </label>
+    <span th:text="${selectedRoom.roomPrice}"></span>
 
 
-
-    <!-- 폼 요소들 (예: 이름, 전화번호, 결제 방식 등) -->
-<!--    <label for="visitorName">이용자 이름:</label>-->
-<!--    <input type="text" id="visitorName" name="visitorName" required><br><br>-->
-
-<!--    <label for="visitorPhone">이용자 전화번호:</label>-->
-<!--    <input type="text" id="visitorPhone" name="visitorPhone" required><br><br>-->
-
-<!--    <label for="payType">결제 방식:</label>-->
-<!--    <select id="payType" name="payType" required>-->
-<!--        <option value="카드">카드</option>-->
-<!--        <option value="무통장입금">무통장입금</option>-->
-<!--    </select><br><br>-->
+    <input type="hidden" name="lodgingId" th:value="${lodging.lodgingId}" />
 
     <!-- 결제 버튼 -->
-    <a th:href="@{/lodging/reservation/submit}"><button type="submit">결제하기</button></a>
-    <script th:src="@{/js/lodging/LodgingBooking.js}"></script>
+    <button type="submit">결제하기</button>
 </form>
+
+<!-- 쿠폰 및 예약 버튼 -->
+<div class="couponReserve" style="padding: 0 10px;">
+    <button>쿠폰 ></button>
+</div>
+
+<script th:src="@{/js/lodging/LodgingBooking.js}"></script>
 </body>
 </html>

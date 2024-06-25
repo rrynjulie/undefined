@@ -37,7 +37,7 @@
         AND l.user_id = #{userId}
     </select>
 
-    <select id="findAllDetails" resultType="com.lec.spring.domain.ProvLodging">
+    <select id="findLodgings" resultType="com.lec.spring.domain.ProvLodging">
         SELECT
             lodging_id as lodgingId,
             lodging_picture_1 as lodgingPicture1,
@@ -45,11 +45,12 @@
             lodging_type as lodgingType,
             lodging_address as lodgingAddress,
             lodging_number as lodgingNumber
+#             user_id as userId
         FROM lodging
         WHERE lodging_type = '모텔'
     </select>
 
-    <select id="findLodgingById" parameterType="int" resultType="com.lec.spring.domain.ProvLodging">
+    <select id="findAllDetails" parameterType="int" resultType="com.lec.spring.domain.ProvLodging">
         SELECT
             lodging_id as lodgingId,
             lodging_picture_1 as lodgingPicture1,

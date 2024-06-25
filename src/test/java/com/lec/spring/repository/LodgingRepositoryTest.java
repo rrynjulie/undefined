@@ -21,4 +21,11 @@ public class LodgingRepositoryTest {
         providerRepository.findByUserId(1L).forEach(System.out::println);
         System.out.println();
     }
+
+    @Test
+    void lodging(){
+        LodgingRepository lodgingRepository = sqlSession.getMapper(LodgingRepository.class);
+        lodgingRepository.findLodgingById(1L).forEach(System.out::println);
+        System.out.println();
+    }
 }

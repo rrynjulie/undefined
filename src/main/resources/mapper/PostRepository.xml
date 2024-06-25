@@ -10,16 +10,11 @@
     </insert>
 
     <sql id="SELECT_BASE">
-        SELECT p.post_id AS postId, p.post_picture AS postPicture, p.post_text AS postText, p.post_grade AS postGrade, p.user_id AS userId, p.reservation_id AS reservationId, p.lodging_id AS lodgingId, p.room_id AS roomId
-        FROM post p
-    </sql>
-
-    <sql id="SELECT_BASES">
         SELECT p.post_id AS postId
              , p.post_picture AS postPicture
              , p.post_text AS postText
              , p.post_grade AS postGrade
-             , u.user_id AS userID
+             , u.user_id AS userId
              , re.reservation_id AS reservationId
              , l.lodging_id AS lodgingId
              , ro.room_id AS roomId
@@ -32,7 +27,13 @@
         AND p.room_id = ro.room_id
     </sql>
 
-    <select id="findByRoomId" resultType="com.lec.spring.domain.Post">
+    <select id="countAllPostsByLodgingId" resultType="int">
+        SELECT count(*)
+        FROM post p
+        WHERE lodging_id = #{lodging_id}
+    </select>
+
+    <select id="findPostsByRoomId" resultType="com.lec.spring.domain.Post">
         <include refid="SELECT_BASE"/>
         AND ro.room_id = #{roomId}
     </select>
@@ -45,7 +46,7 @@
         WHERE post_id = #{postId}
     </update>
 
-    <delete id="delete" flushCache="true" parameterType="com.lec.spring.domain.Post">
+    <delete id="deletePost" flushCache="true" parameterType="com.lec.spring.domain.Post">
         DELETE FROM post WHERE post_id = #{postId}
     </delete>
 

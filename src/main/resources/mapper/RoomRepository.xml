@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.lec.spring.repository.RoomRepository">
-    <insert id="create" flushCache="true" parameterType="com.lec.spring.domain.Room"
+    <insert id="createRoom" flushCache="true" parameterType="com.lec.spring.domain.Room"
             useGeneratedKeys="true" keyColumn="room_id" keyProperty="roomId">
         INSERT INTO room
             (room_picture_1, room_name, room_normal_people, room_max_people
@@ -95,4 +95,15 @@
 <!--    <select id="countAll" resultType="int">-->
 <!--        SELECT count(*) FROM t5_post;-->
 <!--    </select>-->
+
+    <select id="findRoomsByLodgingId" resultMap="mapRoom" parameterType="java.lang.Long">
+        SELECT room_id, room_name
+        FROM room
+        WHERE lodging_id = #{lodgingId}
+    </select>
+
+    <select id="findById" resultMap="mapRoom">
+        <include refid="SELECT_BASE"/>
+        AND r.room_id = #{roomId}
+    </select>
 </mapper>
