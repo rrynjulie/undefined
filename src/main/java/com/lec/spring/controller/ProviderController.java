@@ -13,7 +13,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,12 +89,6 @@ public class ProviderController {
         return "mypage/provider/ProvLodgingRegister";
     }
 
-    @GetMapping("/provroomregister")
-    public String provroomregister() {
-        return "mypage/provider/ProvRoomRegister";
-    }
-
-
     @PostMapping("/saveLodging")
     public String saveLodging(@ModelAttribute ProvLodging lodging) {
         providerService.saveLodging(lodging);
@@ -109,12 +105,17 @@ public class ProviderController {
     public void provBookingList(Model model) {
     }
 
-    @GetMapping("/ProvRoomRegister")
-    public void provRoomRegister() {}
+    @GetMapping("/ProvRoomRegister/{lodgingId}")
+    public String provRoomRegister(@PathVariable("lodgingId") int lodgingId, Model model) {
+        ProvLodging lodging = providerService.getAllDetails(lodgingId);
+        model.addAttribute("lodging", lodging);
+        return "mypage/provider/ProvRoomRegister";
+    }
 
     @PostMapping("/ProvRoomRegister")
-    public String provRoomRegisterOk() {
-        return "provider/ProvRoomRegisterOk";
+    public String provRoomRegisterOk(Room room, Model model) {
+        model.addAttribute("result", roomService.createRoom(room));
+        return "mypage/provider/ProvRoomRegisterOk";
     }
 
     @GetMapping("/ProvRoomList/{userId}")
@@ -142,4 +143,3 @@ public class ProviderController {
         return "provider/ProvRoomUpdateOk";
     }
 }
-

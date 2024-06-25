@@ -64,8 +64,9 @@
             </label>
         </div>
         <div class="btn-list">
-            <button class="btn-update">정보 수정</button>
-            <button class="btn-delete">삭제 요청</button>
+            <a class="btn-reverse" th:href="@{'/mypage/provider/ProvRoomList/' + ${room.lodgingId}}">목록 보기</a>
+            <a class="btn-update" href="#">정보 수정</a>
+            <a class="btn-delete" href="#">삭제 요청</a>
         </div>
     </section>
     <script src="../../../../static/js/mypage/provider/ProvRoomDetail.js"></script>

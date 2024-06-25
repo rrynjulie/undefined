@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
         event.preventDefault();
 
         const requiredFields = [
-            { id: 'roomname', label: '객실 이름' },
+            { id: 'roomname', label: '객실명' },
             { id: 'normal', label: '객실 기준 인원수' },
             { id: 'max', label: '객실 최대 인원수' },
             { id: 'price', label: '객실 가격' },

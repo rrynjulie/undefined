@@ -99,24 +99,23 @@ main {
     justify-content: end;
     margin-top: 20px;
     border-radius: 7px;
-
 }
 
-.btn-list button {
-    height: 50px;
-    width: 150px;
+.btn-list a {
+    height: 40px;
+    width: 120px;
     border: 0;
     border-radius: 7px;
-    margin-left: 20px;
-    font-size: 17px;
+    font-size: 15px;
     font-weight: bold;
-}
-
-.btn-register {
     background-color: #FC5185;
+    text-decoration: none;
     color: white;
+    text-align: center;
+    align-content: center;
+    cursor: pointer;
 }
 
-.btn-list button:hover {
+.btn-list a:hover {
     transform: scale(1.02);
 }
