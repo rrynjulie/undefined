@@ -88,6 +88,7 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+
 //    @Override
 //    public Authentication authenticate(String nickname, String password) {
 //        User user = findByNickname(nickname);

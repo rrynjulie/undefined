@@ -11,6 +11,8 @@ import com.lec.spring.service.ReservationService;
 import com.lec.spring.service.RoomService;
 import com.lec.spring.service.UserService;
 import com.lec.spring.util.U;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -51,18 +54,22 @@ public class ReservationController {
         }
 
         Object principal = authentication.getPrincipal();
+        User user = null;
         if (principal instanceof PrincipalDetails) {
             PrincipalDetails principalDetails = (PrincipalDetails) principal;
-            User user = principalDetails.getUser();
+            user = principalDetails.getUser();
             model.addAttribute("user", user);
         } else if (principal instanceof String) {
             String username = (String) principal;
-            User user = userService.findByUsername(username);
+            user = userService.findByUsername(username);
             model.addAttribute("user", user);
         } else {
             // 다른 타입에 대한 처리
             throw new IllegalStateException("Unknown principal type: " + principal.getClass());
         }
+
+        // 사용자 정보 모델에 추가
+        model.addAttribute("phonenum", user.getPhonenum());
 
         Lodging lodging = lodgingService.getLodgingById(lodgingId);
         model.addAttribute("lodging", lodging);
@@ -82,4 +89,16 @@ public class ReservationController {
 
         return "lodging/LodgingBooking";
     }
+
+
+//    @PostMapping("/saveReservation")
+//    public ResponseEntity<String> saveReservation(@RequestBody Reservation reservation) {
+//        try {
+//            // 서비스 메서드 호출: 예약을 데이터베이스에 저장합니다
+//            reservationService.saveReservation(reservation);
+//            return ResponseEntity.ok("예약이 성공적으로 저장되었습니다!");
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("예약 저장에 실패했습니다");
+//        }
+//    }
 }

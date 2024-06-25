@@ -9,26 +9,30 @@
 
 <!-- 예약 폼 내용 -->
 <form action="/lodging/LodgingBooking" method="get">
-    <!-- Other form fields for reservation details -->
-    <div id="dateTotal">
-        <div id="selectedDate" class="clickable" style="border-right:solid 1px black;">
-            2024.6.1 ~ 2024.6.8, 7박
+
+    <div class="room">
+        <div>
+            <h3 style="margin-left: 40px">객실 선택</h3>
         </div>
-        <div id="total" class="clickable">
-            성인 2명, 아동 0명
+        <div id="dateTotal">
+            <div id="selectedDate" class="clickable" style="border-right:solid 1px black;">
+            </div>
+            <div id="total" class="clickable">
+            </div>
         </div>
     </div>
 
     <label>사용자 이름:</label>
     <span th:text="${user.username}"></span>
+    <span th:text="${user.phonenum}"></span>
 
-    <!-- 객실 선택 드롭다운 -->
-    <label>객실 선택:</label>
-    <select name="roomId">
-        <option th:each="room : ${rooms}" th:value="${room.roomId}" th:text="${room.roomName}"></option>
-    </select>
+    <label>객실:</label>
+    <span th:text="${selectedRoom.roomName}"></span>
 
-    <!-- Hidden field for lodgingId -->
+    <label>가격: </label>
+    <span th:text="${selectedRoom.roomPrice}"></span>
+
+
     <input type="hidden" name="lodgingId" th:value="${lodging.lodgingId}" />
 
     <!-- 결제 버튼 -->
