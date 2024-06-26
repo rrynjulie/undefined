@@ -84,6 +84,36 @@ public class ProviderController {
         return "mypage/provider/ProvLodgingDetail";
     }
 
+    @GetMapping("/provlodgingupdate/{lodgingId}")
+    public String provLodgingUpdate(@PathVariable int lodgingId, Model model) {
+        ProvLodging lodging = providerService.getAllDetails(lodgingId); // 숙소 정보 가져오기
+        model.addAttribute("lodging", lodging); // 모델에 숙소 정보 추가
+        return "mypage/provider/ProvLodgingUpdate"; // 숙소 업데이트 페이지로 이동
+    }
+
+    @PostMapping("/updateLodging")
+    public String updateLodging(@ModelAttribute ProvLodging lodging) {
+        // lodging 객체에서 lodgingId 추출
+        Long lodgingId = lodging.getLodgingId();
+
+        providerService.updateLodging(lodging);
+        return "redirect:/mypage/provider/provlodgingdetail/" + lodgingId;
+    }
+
+    @PostMapping("/deleteLodging/{lodgingId}")
+    public String deleteLodging(@PathVariable int lodgingId, Model model) {
+        int result;
+        try {
+            providerService.deleteLodging(lodgingId);
+            result = 1; // 삭제 성공
+        } catch (Exception e) {
+            result = 0; // 삭제 실패
+        }
+        model.addAttribute("result", result);
+        return "mypage/provider/ProvLodgingDeleteOk";
+    }
+
+
     @GetMapping("/provlodgingregister")
     public String provlodgingregister() {
         return "mypage/provider/ProvLodgingRegister";

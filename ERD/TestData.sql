@@ -4,9 +4,9 @@ WHERE TABLE_SCHEMA = 'db_undefined'
 ;
 
 # 각 테이블 내 데이터 확인
-SELECT * FROM user;
-SELECT * FROM lodging;
-SELECT * FROM room;
+SELECT * FROM user order by user_id desc ;
+SELECT * FROM lodging order by lodging_id desc ;
+SELECT * FROM room order by room_id desc ;
 SELECT * FROM authority;
 SELECT * FROM user_authority;
 SELECT * FROM post;

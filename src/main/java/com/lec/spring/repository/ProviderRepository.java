@@ -14,4 +14,8 @@ public interface ProviderRepository {
 
     List<ProvLodging> findByUserId(Long userId);
 
+    void updateLodging(ProvLodging lodging);
+
+    void deleteLodging(int lodgingId);
+
 }
