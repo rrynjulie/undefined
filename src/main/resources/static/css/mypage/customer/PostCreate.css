@@ -1,5 +1,11 @@
-.rating {
-    direction: rtl; /* 오른쪽에서 왼쪽으로 별을 표시 */
+.container {
+    width: 60%;
+    margin: auto;
+    user-select: none;
+}
+
+.star {
+    /*direction: rtl; !* 오른쪽에서 왼쪽으로 별을 표시 *!*/
     unicode-bidi: bidi-override;
     display: inline-block;
     font-size: 2em;
@@ -7,7 +13,7 @@
 
 .star {
     cursor: pointer;
-    color: gray;
+    color: lightgray;
 }
 
 .star.highlighted {

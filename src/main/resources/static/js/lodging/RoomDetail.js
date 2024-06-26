@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const selectedEndDate = document.getElementById('selected-end-date');
     const selectedLineup = document.getElementById('selected-lineup');
 
-    function showReservationInfo() {
+    function showBookingInfo() {
         // session storage 에서 데이터 가져오기
         const storedStartDate = sessionStorage.getItem('startDate');
         const storedEndDate = sessionStorage.getItem('endDate');
@@ -58,5 +58,5 @@ document.addEventListener('DOMContentLoaded', function () {
         selectedLineup.innerHTML = `성인 ${storedAdultCount}, 아동 ${storedChildCount}`;
     }
 
-    showReservationInfo();
+    showBookingInfo();
 });

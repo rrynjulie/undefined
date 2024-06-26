@@ -2,14 +2,22 @@ package com.lec.spring.controller;
 
 import com.lec.spring.domain.ProvLodging;
 import com.lec.spring.domain.Room;
+import com.lec.spring.domain.User;
 import com.lec.spring.service.ProviderService;
 import com.lec.spring.service.RoomService;
+import com.lec.spring.service.UserService;
+import com.lec.spring.util.U;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,18 +31,51 @@ public class ProviderController {
     @Autowired
     private RoomService roomService;
 
+//    @Autowired
+//    private UserService userService;
+
     @Autowired
     public ProviderController(ProviderService providerService) {
         this.providerService = providerService;
     }
 
+//    @GetMapping("/provlodginglist")
+//    public String provlodginglist(Model model) {
+//        List<ProvLodging> lodgings = providerService.getLodgings();
+//        model.addAttribute("lodgings", lodgings);
+//        return "mypage/provider/ProvLodgingList";
+//    }
+
     @GetMapping("/provlodginglist")
     public String provlodginglist(Model model) {
-        List<ProvLodging> lodgings = providerService.getLodgings();
-        model.addAttribute("lodgings", lodgings);
+        User loggedUser = U.getLoggedUser(); // 로그인된 사용자 정보
+        Long userId = loggedUser.getUserId(); // 사용자 ID
+        System.out.println("세션 userId: " + userId); // userId를 콘솔에 출력
+
+        List<ProvLodging> lodgings = providerService.getLodgings(userId);
+        System.out.println("가져온 숙소 목록: " + lodgings);
+
+        List<ProvLodging> myLodgings = new ArrayList<>();
+        for (ProvLodging item : lodgings) {
+            System.out.println("숙소 userId: " + item.getUserId());
+            if (item.getUserId() != null && item.getUserId().equals(userId)) {
+                myLodgings.add(item);
+            }
+        }
+        System.out.println("필터링된 숙소 목록: " + myLodgings);
+
+        model.addAttribute("lodgings", myLodgings);
         return "mypage/provider/ProvLodgingList";
     }
 
+
+
+
+    @RequestMapping("/auth")
+    @ResponseBody
+    public Authentication auth(){
+        return SecurityContextHolder.getContext().getAuthentication();
+    }
 
     @GetMapping("/provlodgingdetail/{lodgingId}")
     public String provlodgingdetail(@PathVariable int lodgingId, Model model) {
@@ -43,16 +84,40 @@ public class ProviderController {
         return "mypage/provider/ProvLodgingDetail";
     }
 
+    @GetMapping("/provlodgingupdate/{lodgingId}")
+    public String provLodgingUpdate(@PathVariable int lodgingId, Model model) {
+        ProvLodging lodging = providerService.getAllDetails(lodgingId); // 숙소 정보 가져오기
+        model.addAttribute("lodging", lodging); // 모델에 숙소 정보 추가
+        return "mypage/provider/ProvLodgingUpdate"; // 숙소 업데이트 페이지로 이동
+    }
+
+    @PostMapping("/updateLodging")
+    public String updateLodging(@ModelAttribute ProvLodging lodging) {
+        // lodging 객체에서 lodgingId 추출
+        Long lodgingId = lodging.getLodgingId();
+
+        providerService.updateLodging(lodging);
+        return "redirect:/mypage/provider/provlodgingdetail/" + lodgingId;
+    }
+
+    @PostMapping("/deleteLodging/{lodgingId}")
+    public String deleteLodging(@PathVariable int lodgingId, Model model) {
+        int result;
+        try {
+            providerService.deleteLodging(lodgingId);
+            result = 1; // 삭제 성공
+        } catch (Exception e) {
+            result = 0; // 삭제 실패
+        }
+        model.addAttribute("result", result);
+        return "mypage/provider/ProvLodgingDeleteOk";
+    }
+
+
     @GetMapping("/provlodgingregister")
     public String provlodgingregister() {
         return "mypage/provider/ProvLodgingRegister";
     }
-
-    @GetMapping("/provroomregister")
-    public String provroomregister() {
-        return "mypage/provider/ProvRoomRegister";
-    }
-
 
     @PostMapping("/saveLodging")
     public String saveLodging(@ModelAttribute ProvLodging lodging) {
@@ -66,16 +131,17 @@ public class ProviderController {
         return "redirect:ProvRoomList";
     }
 
-    @GetMapping("/ProvBookingList")
-    public void provBookingList(Model model) {
+    @GetMapping("/ProvRoomRegister/{lodgingId}")
+    public String provRoomRegister(@PathVariable("lodgingId") int lodgingId, Model model) {
+        ProvLodging lodging = providerService.getAllDetails(lodgingId);
+        model.addAttribute("lodging", lodging);
+        return "mypage/provider/ProvRoomRegister";
     }
 
-    @GetMapping("/ProvRoomRegister")
-    public void provRoomRegister() {}
-
     @PostMapping("/ProvRoomRegister")
-    public String provRoomRegisterOk() {
-        return "provider/ProvRoomRegisterOk";
+    public String provRoomRegisterOk(Room room, Model model) {
+        model.addAttribute("result", roomService.createRoom(room));
+        return "mypage/provider/ProvRoomRegisterOk";
     }
 
     @GetMapping("/ProvRoomList/{userId}")
@@ -103,4 +169,3 @@ public class ProviderController {
         return "provider/ProvRoomUpdateOk";
     }
 }
-

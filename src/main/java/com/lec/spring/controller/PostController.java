@@ -6,11 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/mypage/customer")
@@ -27,6 +26,43 @@ public class PostController {
         model.addAttribute("post", new Post());
         return "/mypage/customer/PostCreate";
     }
+
+
+    @GetMapping("/PostList/{userId}")
+    public String postList(@PathVariable("userId") Long userId, Model model) {
+        List<Post> userPost = postService.allPostUserId(userId);
+        model.addAttribute("userPost", userPost);
+        return "/mypage/customer/PostList";
+    }
+
+    @GetMapping("/PostUpdate/{userId}/{postId}")
+    public String postUpdate(@PathVariable Long userId, @PathVariable Long postId, Model model) {
+        List<Post> userPostUpdate = postService.allPostUserUpdate(userId, postId);
+        model.addAttribute("userPostUpdate", userPostUpdate);
+
+        return "/mypage/customer/PostUpdate";
+    }
+
+    @PostMapping("/PostUpdate")
+    public String postUpdate(@ModelAttribute Post post) {
+        int result = postService.allPostUpdate(post);
+        if (result > 0) {
+            return "redirect:/mypage/customer/PostList/" + post.getUserId();
+        } else {
+            return "redirect:/mypage/customer/PostUpdate/" + post.getUserId() + "/" + post.getPostId();
+        }
+    }
+
+
+
+
+//    @GetMapping("/PostList")
+//    public void postList() {
+//
+//    }
+
+
+
 
 //    오류 때문에 잠시 주석처리
 //    @PostMapping("/PostCreate")

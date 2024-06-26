@@ -5,8 +5,8 @@
 <mapper namespace="com.lec.spring.repository.PostRepository">
     <insert id="createPost" flushCache="true" parameterType="com.lec.spring.domain.Post"
             useGeneratedKeys="true" keyColumn="post_id" keyProperty="postId">
-        INSERT INTO post (post_picture, post_text, post_grade, user_id, reservation_id, lodging_id, room_id)
-        VALUES (#{postPicture}, #{postText}, #{postGrade}, #{userId}, #{reservationId}, #{lodgingId}, #{roomId})
+        INSERT INTO post (post_picture, post_text, post_grade, user_id, booking_id, lodging_id, room_id)
+        VALUES (#{postPicture}, #{postText}, #{postGrade}, #{userId}, #{bookingId}, #{lodgingId}, #{roomId})
     </insert>
 
     <sql id="SELECT_BASE">
@@ -15,14 +15,14 @@
              , p.post_text AS postText
              , p.post_grade AS postGrade
              , u.user_id AS userId
-             , re.reservation_id AS reservationId
+             , b.booking_id AS bookingId
              , l.lodging_id AS lodgingId
              , ro.room_id AS roomId
         FROM
-            post p, user u, reservation re, lodging l, room ro
+            post p, user u, booking b, lodging l, room ro
         WHERE
             p.user_id = u.user_id
-        AND p.reservation_id = re.reservation_id
+        AND p.booking_id = b.booking_id
         AND l.lodging_id = ro.lodging_id
         AND p.room_id = ro.room_id
     </sql>
@@ -38,7 +38,7 @@
         AND ro.room_id = #{roomId}
     </select>
 
-    <update id="updatePost" flushCache="true" parameterType="com.lec.spring.domain.Post">
+    <update id="postUpdate" flushCache="true" parameterType="com.lec.spring.domain.Post">
         UPDATE post
         SET post_picture = #{postPicture}
           , post_text = #{postText}
@@ -49,4 +49,19 @@
     <delete id="deletePost" flushCache="true" parameterType="com.lec.spring.domain.Post">
         DELETE FROM post WHERE post_id = #{postId}
     </delete>
+
+<!--    마이페이지에서 유저 id 값으로 자신이 작성한 후기 보는 쿼리-->
+    <select id="postUserId" resultType="com.lec.spring.domain.Post">
+        <include refid="SELECT_BASE"/>
+        WHERE p.user_id = #{userId}
+    </select>
+
+<!--    유저 id 값으로 거른 뒤 후기 id 값으로 한 번더 거르는 쿼리-->
+    <select id="postUserUpdate" resultType="com.lec.spring.domain.Post">
+        <include refid="SELECT_BASE"/>
+        WHERE p.user_id = #{userId}
+        AND p.post_id = #{postId}
+    </select>
+
+
 </mapper>

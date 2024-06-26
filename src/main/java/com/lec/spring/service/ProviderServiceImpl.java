@@ -22,8 +22,8 @@ public class ProviderServiceImpl implements ProviderService {
     }
 
     @Override
-    public List<ProvLodging> getLodgings() {
-        return providerRepository.findLodgings();
+    public List<ProvLodging> getLodgings(Long userId) {
+        return providerRepository.findLodgings(userId);
     }
 
     @Override
@@ -44,5 +44,15 @@ public class ProviderServiceImpl implements ProviderService {
             lodging.setRoomList(roomList);
         });
         return lodgingList;
+    }
+
+    @Override
+    public void updateLodging(ProvLodging lodging) {
+        providerRepository.updateLodging(lodging);
+    }
+
+    @Override
+    public void deleteLodging(int lodgingId) {
+        providerRepository.deleteLodging(lodgingId);
     }
 }

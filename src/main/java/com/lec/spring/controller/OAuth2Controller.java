@@ -7,6 +7,7 @@ import com.lec.spring.domain.oauth.KakaoOAuthToken;
 import com.lec.spring.domain.oauth.KakaoProfile;
 import com.lec.spring.service.UserService;
 import com.lec.spring.util.U;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -49,6 +50,7 @@ public class OAuth2Controller {
     private AuthenticationManager authenticationManager;
 
 
+
     @GetMapping("/kakao/callback")
     public String kakaoCallBack(String code){
         System.out.println("\n<<카카오 인증 완료>>\ncode: " + code);
@@ -81,6 +83,10 @@ public class OAuth2Controller {
                 kakaoTokenRequest,
                 String.class
         );
+
+        System.out.println("카카오 AccessToken 요청 응답: " + response);
+
+        System.out.println("카카오 AccessToken 응답 body: " + response.getBody());
 
         ObjectMapper mapper = new ObjectMapper();
         KakaoOAuthToken token = null;
@@ -124,6 +130,13 @@ public class OAuth2Controller {
             throw new RuntimeException(e);
         }
 
+        System.out.println("""
+                [카카오 회원정보]
+                id: %s
+                nickname: %s
+                """.formatted(profile.getId(), profile.getKakaoAccount().getProfile().getNickname()));
+
+
         return profile;
     }
 
@@ -142,6 +155,8 @@ public class OAuth2Controller {
                     .nickname(nickname)
                     .username(name)
                     .password(password)
+                    .provider(provider)
+                    .providerId(providerId)
                     .build();
 
             int cnt = userService.register(newUser);  // 회원가입 INSERT
@@ -160,35 +175,44 @@ public class OAuth2Controller {
 
     // ---------------------------------------------
     // 로그인 시키기
-    public void loginKakaoUser(User kakaoUser){
+    public void loginKakaoUser(User kakaoUser) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 kakaoUser.getNickname(),    // nickname
                 oauth2Password              // password
         );
 
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
-
         SecurityContext sc = SecurityContextHolder.getContext();
         sc.setAuthentication(authentication);
 
-        U.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, sc);
+        HttpSession session = U.getSession();
+        session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, sc);
+
+        System.out.println("Authentication: " + authentication);
+        System.out.println("SecurityContext: " + sc);
+        System.out.println("Session: " + session);
         System.out.println("Kakao 인증 로그인 처리 완료");
     }
 
+    public void loginGoogleUser(User googleUser, HttpSession session) {
+        // 사용자 인증 처리
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                googleUser.getNickname(),    // 사용자명 또는 닉네임 (구글에서 제공하는 ID 등)
+                ""                          // 비밀번호 (사용하지 않는 경우 비움)
+        );
+
+        Authentication authentication = authenticationManager.authenticate(authenticationToken);
+        SecurityContext sc = SecurityContextHolder.getContext();
+        sc.setAuthentication(authentication);
+
+        // 세션에 SecurityContext 저장
+        session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, sc);
+
+        System.out.println("Authentication: " + authentication);
+        System.out.println("SecurityContext: " + sc);
+        System.out.println("Session: " + session);
+        System.out.println("구글 사용자 로그인 처리 완료");
+    }
+
+
 } // end Controller
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

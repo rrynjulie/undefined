@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface RoomService {
-    void createRoom(Room room);
+    int createRoom(Room room);
     List<Room> readRoomList(Long lodgingId);
     Room readRoomDetail(Long roomId);
     Room findByRoomId(Long roomId);

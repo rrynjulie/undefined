@@ -10,12 +10,12 @@
 <div class="container">
 
     <div>숙소 이용에 대해 만족하셨나요?</div>
-    <div class="rating">
-        <span class="star" data-value="5">&#9733;</span>
-        <span class="star" data-value="4">&#9733;</span>
-        <span class="star" data-value="3">&#9733;</span>
-        <span class="star" data-value="2">&#9733;</span>
+    <div class="stars">
         <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
     </div>
     <form id="reviewForm" action="/submit_review" method="post">
         <input type="hidden" name="rating" id="rating" value="">
@@ -41,8 +41,8 @@
 <!--        <label for="userId">User ID:</label>-->
 <!--        <input type="text" id="userId" th:feild="${userId}"/>-->
 
-<!--        <label for="reservationId">Reservation ID:</label>-->
-<!--        <input type="text" id="reservationId" th:feild="${reservationId}"/>-->
+<!--        <label for="bookingId">Booking ID:</label>-->
+<!--        <input type="text" id="bookingId" th:feild="${bookingId}"/>-->
 
 <!--        <label for="lodgingId">Lodging ID:</label>-->
 <!--        <input type="text" id="lodgingId" th:feild="${lodgingId}"/>-->
