@@ -23,8 +23,11 @@ public class Booking {
     private Long roomId; //객실 Id
     private Long userId; //사용자 ID
 
-    private Room room;
     private User user;
-    private Lodging lodging;
+    private Room room;
+    private ProvLodging lodging;
+
+    private String formattedPay;
+    private int dateGap;
 }
 

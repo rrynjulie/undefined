@@ -36,11 +36,6 @@ public class LodgingServiceImpl implements LodgingService {
     }
 
     @Override
-    public List<Lodging> getLodgingsByType(String type) {
-        return lodgingRepository.findLodgingByType(type);
-    }
-
-    @Override
     public List<Lodging> getLodgingsByLocationAndType(String location, String type) { // 새로운 메서드 구현
         return lodgingRepository.findLodgingsByLocationAndType(location, type);
     }
@@ -57,6 +52,7 @@ public class LodgingServiceImpl implements LodgingService {
 
     @Override
     public Double getAvgPostGrade(Long lodgingId) {
-        return lodgingRepository.avgPostGrade(lodgingId);
+        Double avgPostGrade = lodgingRepository.avgPostGrade(lodgingId);
+        return (avgPostGrade != null) ? avgPostGrade : 0.0;
     }
 }

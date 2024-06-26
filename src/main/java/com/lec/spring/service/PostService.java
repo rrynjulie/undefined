@@ -11,17 +11,17 @@ public interface PostService {
 
     List<Post> findPostsByRoomId(Long roomId);
 
+    List<Post> findPostByLodgingId(Long lodgingId);
+
     int updatePost(Post post);
 
     int deletePost(Long postId);
 
     List<Post> allPostUserId(Long userId);
 
-    List<Post> allPostUserUpdate(Long userId, Long postId);
+    List<Post> allPostUser(Long userId, Long postId);
 
     int allPostUpdate(Post post);
 
-
-    //    오류 때문에 잠시 주석처리
-//    void createPost(Post post);
+    int allPostDelete(Post post);
 }

@@ -12,7 +12,7 @@ public interface BookingService {
 
     List<Booking> findBooksByUserId(Long userId);
 
-    int deleteByBookingId(Long bookingId);
+    int deleteBooking(Long bookingId);
 
     LocalDate getBookingStartDate(Long bookingId);
 }

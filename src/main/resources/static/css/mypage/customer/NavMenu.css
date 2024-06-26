@@ -1,0 +1,67 @@
+.my-page-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    width: 25%;
+    margin-right: 50px;
+}
+
+.customer-menu-pc {
+    background-color: white;
+    height: fit-content;
+    width: 100%;
+    border: 1px solid #EBEBEB;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.customer-menu-pc a {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding-left: 20px;
+    border: 1px solid #EBEBEB;
+    border-radius: 0;
+}
+
+.customer-menu-pc a:hover {
+    background-color: #F5F5F5;
+}
+
+.customer-menu-pc a {
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+    text-align: start;
+}
+
+.customer-menu-pc a.active {
+    color: #FC5185;
+}
+
+.customer-menu-icon {
+    height: 30px;
+    width: 30px;
+    margin-right: 30px;
+}
+
+.btn-provider-page, .btn-manager-page {
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    align-content: center;
+    border-radius: 7px;
+    margin-top: 20px;
+    height: 40px;
+    width: 70%;
+    color: #1273E4;
+    background-color: #E0F7FA;
+}
+
+.btn-provider-page:hover, .btn-manager-page:hover {
+    transform: scale(1.02);
+}

@@ -63,3 +63,62 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 });
+
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    fetch('/mypage/customer/getProvider')
+        .then(response => response.text())
+        .then(provider => {
+            if (provider === 'KAKAO' || provider === 'google') {
+                document.getElementById('nickname').disabled = true;
+                document.getElementById('password').disabled = true;
+                document.getElementById('email').disabled = true;
+                document.getElementById('phone').disabled = true;
+                document.getElementById('save-btn').disabled = true;
+            }
+        })
+        .catch(error => console.error('Error fetching provider:', error));
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var manageAccountForm = document.getElementById('manage-account-form');
+    var currentPasswordInput = document.getElementById('current-password');
+    var currentPasswordError = document.getElementById('current-password-error');
+    var newPasswordInput = document.getElementById('new-password');
+    var confirmPasswordInput = document.getElementById('confirm-password');
+    var confirmPasswordError = document.getElementById('confirm-password-error');
+    var saveBtn = document.getElementById('save-btn');
+
+    saveBtn.addEventListener('click', function(event) {
+        event.preventDefault(); // 기본 폼 제출 방지
+
+        // 새 비밀번호와 확인 비밀번호가 일치하는지 확인
+        if (newPasswordInput.value !== confirmPasswordInput.value) {
+            confirmPasswordError.style.display = 'inline';
+            return;
+        } else {
+            confirmPasswordError.style.display = 'none';
+        }
+
+        // 현재 비밀번호 확인을 위한 AJAX 요청
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/mypage/customer/check-password', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200 && xhr.responseText === 'success') {
+                    currentPasswordError.style.display = 'none';
+
+                    // 비밀번호가 일치하면 폼을 실제로 제출
+                    manageAccountForm.submit();
+                } else {
+                    currentPasswordError.style.display = 'inline';
+                    console.log("확인용A: " + xhr.status)
+                    console.log("확인용B: " + xhr.responseText)
+                }
+            }
+        };
+        xhr.send('currentPassword=' + encodeURIComponent(currentPasswordInput.value));
+    });
+});

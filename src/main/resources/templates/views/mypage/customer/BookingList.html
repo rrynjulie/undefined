@@ -1,100 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/customer/BookingList.css}">
-<!--    <link rel="stylesheet" type="text/css" href="../../../../static/css/mypage/customer/BookingList.css">-->
-        <script th:src="@{/js/mypage/customer/BookingList.js}"></script>
-<!--    <script src="../../../../static/js/mypage/customer/BookingList.js"></script>-->
-    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/customer/BookingList.css}">
+    <script th:src="@{/js/mypage/customer/BookingList.js}"></script>
+    <title>예약 내역</title>
 </head>
 
 <body>
-<header id="nav-bar"></header>
-<script src="../../../../static/js/LoadHeader.js"></script>
-<script src="../../../../static/js/Header.js"></script>
+<!-- 헤더 -->
+<th:block th:insert="~{common/Header::header}"></th:block>
+
 <main>
-    <div class="profile-menu-container">
-        <div class="profile-info">
-            <div>
-                <h2>닉네임</h2>
+    <!-- 좌측 네비게이션 메뉴 -->
+    <th:block th:insert="~{mypage/customer/NavMenu::nav-menu}"></th:block>
+
+    <section class="booking-list">
+        <h1>예약 내역</h1>
+        <div class="filter-container">
+            <div class="filter-frame">
+                <label for="accommodation-type">숙소 분류</label>
+                <select id="accommodation-type">
+                    <option value="">전체</option>
+                    <option value="호텔">호텔</option>
+                    <option value="펜션/리조트">펜션/리조트</option>
+                    <option value="모텔">모텔</option>
+                </select>
+            </div>
+            <div class="filter-frame">
+                <label for="time-period">날짜 범위</label>
+                <select id="time-period">
+                    <option value="3months">전체</option>
+                    <option value="3months">최근 3개월</option>
+                    <option value="6months">최근 6개월</option>
+                    <option value="1year">최근 1년</option>
+                </select>
+            </div>
+            <img class="btn-search" th:src="@{/image/mypage/customer/IconSearch.png}" alt="">
+        </div>
+
+        <h3>이용 전</h3>
+        <div th:if="${#arrays.isEmpty(booksBefore)}">
+            <div class="empty-use-frame">
+                <div class="empty-comment">
+                    <p class="empty-title">예약 내역이 없습니다.</p>
+                    <p class="empty-detail">새로운 예약을 진행해보세요.</p>
+                </div>
+                <img th:src="@{/image/mypage/customer/EmptyBooking.svg}" alt="">
             </div>
         </div>
-        <div class="menu-list">
-            <button class="menu-item" id="booking-btn">예약 내역<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
-            <button class="menu-item" id="manage-info-btn">내 정보 관리<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
-            <button class="menu-item" id="review-btn">작성 후기<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
-            <button class="menu-item" id="coupon-btn">쿠폰<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
-            <button class="menu-item" id="seller-btn">판매자 페이지<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
-            <button class="menu-item" id="manager-btn">관리자 페이지<img src="../../../../static/image/IconRight.png" class="icon-right"></button>
+        <div th:unless="${#arrays.isEmpty(booksBefore)}">
+            <div class="before-use-frame" th:each="books: ${booksBefore} ">
+                <div class="lodging-info-frame">
+                    <div class="lodging-info-inner">
+                        <img class="lodging-img" th:src="${books.lodging.lodgingPicture1}" alt="">
+                        <div class="booking-info">
+                            <p class="lodging-name" th:text="${books.lodging.lodgingName}"></p>
+                            <p class="room-name" th:text="${books.room.roomName}"></p>
+                            <p class="room-name" th:text="${books.dateGap} + '박'"></p>
+                        </div>
+                    </div>
+<!--                    <a href="#">예약 상세</a>-->
+                </div>
+                <div class="check-date-frame">
+                    <label>
+                        체크인
+                        <p th:text="${books.bookingStartDate}"></p>
+                    </label>
+                    <label>
+                        체크아웃
+                        <p th:text="${books.bookingEndDate}"></p>
+                    </label>
+                    <label>
+                        결제 금액
+                        <p th:text="${books.formattedPay} + '원'"></p>
+                    </label>
+                    <a class="btn-booking-cancel" href="#">예약 취소</a>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <section id="booking">
-        <h2>예약 내역</h2>
-        <div class="filter-container">
-            <select id="accommodation-type">
-                <option value="">전체</option>
-                <option value="호텔">호텔</option>
-                <option value="펜션/리조트">펜션/리조트</option>
-                <option value="모텔">모텔</option>
-            </select>
-            <select id="time-period">
-                <option value="3months">전체</option>
-                <option value="3months">최근 3개월</option>
-                <option value="6months">최근 6개월</option>
-                <option value="1year">최근 1년</option>
-            </select>
-            <img id="search-btn" src="../../../../static/image/IconSearch.png" class="search-icon" width="50">
+        <h3 class="h3-after-use">이용 후</h3>
+        <div th:if="${#arrays.isEmpty(booksAfter)}">
+            <div class="empty-use-frame">
+                <div class="empty-comment">
+                    <p class="empty-title">예약 내역이 없습니다.</p>
+                    <p class="empty-detail">새로운 예약을 진행해보세요.</p>
+                </div>
+                <img th:src="@{/image/mypage/customer/EmptyBooking.svg}" alt="">
+            </div>
         </div>
-        <h1>Booking List</h1>
-        <table>
-            <thead>
-            <tr>
-                <th>Booking ID</th>
-                <th>Visitor Name</th>
-                <th>Phone Number</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Pay Type</th>
-                <th>Pay</th>
-                <th>Final Pay</th>
-                <th>Room ID</th>
-                <th>User ID</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="booking : ${booking}">
-                <td th:text="${booking.bookingId}"></td>
-                <td th:text="${booking.visitorName}"></td>
-                <td th:text="${booking.visitorPhoneNum}"></td>
-                <td th:text="${booking.bookingStartDate}"></td>
-                <td th:text="${booking.bookingEndDate}"></td>
-                <td th:text="${booking.bookingPayType}"></td>
-                <td th:text="${booking.bookingPay}"></td>
-                <td th:text="${booking.roomId}"></td>
-                <td th:text="${booking.userId}"></td>
-                <td>
-                    <form th:action="@{/mypage/customer/deleteBooking/{userId}/{bookingId}(userId=${userId}, bookingId=${booking.bookingId})}" method="post">
-                        <input type="hidden" name="userId" th:value="${userId}">
-                        <input type="hidden" name="bookingId" th:value="${bookingId}">
-                        <input type="submit" value="삭제">
-                    </form>
-                </td>
-
-            </tr>
-            </tbody>
-        </table>
+        <div th:unless="${#arrays.isEmpty(booksAfter)}">
+            <div class="after-use-frame" th:each="books: ${booksAfter} ">
+                <div class="lodging-info-frame">
+                    <div class="lodging-info-inner">
+                        <img class="lodging-img" th:src="${books.lodging.lodgingPicture1}" alt="">
+                        <div class="booking-info">
+                            <p class="lodging-name" th:text="${books.lodging.lodgingName}"></p>
+                            <p class="room-name" th:text="${books.room.roomName}"></p>
+                            <p class="room-name" th:text="${books.dateGap} + '박'"></p>
+                        </div>
+                    </div>
+<!--                    <a href="#">예약 상세</a>-->
+                </div>
+                <div class="check-date-frame">
+                    <label>
+                        체크인
+                        <p th:text="${books.bookingStartDate}"></p>
+                    </label>
+                    <label>
+                        체크아웃
+                        <p th:text="${books.bookingEndDate}"></p>
+                    </label>
+                    <label>
+                        결제 금액
+                        <p th:text="${books.formattedPay} + '원'"></p>
+                    </label>
+                    <a class="btn-booking-post" href="#">후기 작성</a>
+                </div>
+            </div>
+        </div>
     </section>
-
-
-
 </main>
 
-
-
-<footer id="footer"></footer>
-<script src="../../../../static/js/LoadFooter.js"></script>
+<!-- 푸터 -->
+<th:block th:insert="~{common/Footer::footer}"></th:block>
 </body>
-
 </html>

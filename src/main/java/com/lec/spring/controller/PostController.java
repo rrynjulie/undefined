@@ -37,9 +37,8 @@ public class PostController {
 
     @GetMapping("/PostUpdate/{userId}/{postId}")
     public String postUpdate(@PathVariable Long userId, @PathVariable Long postId, Model model) {
-        List<Post> userPostUpdate = postService.allPostUserUpdate(userId, postId);
+        List<Post> userPostUpdate = postService.allPostUser(userId, postId);
         model.addAttribute("userPostUpdate", userPostUpdate);
-
         return "/mypage/customer/PostUpdate";
     }
 
@@ -53,13 +52,13 @@ public class PostController {
         }
     }
 
+    @PostMapping("/PostDelete")
+    public String postDelete(Post post, Model model) {
+        int result = postService.allPostDelete(post);
+        model.addAttribute("result", result);
+        return "redirect:/mypage/customer/PostList/" + post.getUserId();
+    }
 
-
-
-//    @GetMapping("/PostList")
-//    public void postList() {
-//
-//    }
 
 
 

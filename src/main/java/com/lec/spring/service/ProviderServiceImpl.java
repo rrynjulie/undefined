@@ -27,7 +27,7 @@ public class ProviderServiceImpl implements ProviderService {
     }
 
     @Override
-    public ProvLodging getAllDetails(int lodgingId) {
+    public ProvLodging getAllDetails(Long lodgingId) {
         return providerRepository.findAllDetails(lodgingId);
     }
 

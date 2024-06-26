@@ -249,3 +249,15 @@ function initMap() {
 const script = document.createElement('script');    // google API 는 외부 스크립트라서 동적으로 사용하기 위해 새로운 script 를 만듦
 script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap`;  // script 가 실행될 때 마다 initMap 함수를 호출하여 지도 초기화
 document.body.append(script);   // script 를 html body 에 선언
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var starsContainers = document.querySelectorAll('.stars');
+    starsContainers.forEach(function(container) {
+        var starCount = container.getAttribute('data-star-count');
+        var stars = container.querySelectorAll('.star');
+        for (var i = 0; i < starCount; i++) {
+            stars[i].classList.add('filled');
+        }
+    });
+});
