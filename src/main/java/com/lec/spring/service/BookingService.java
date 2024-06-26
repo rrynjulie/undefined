@@ -1,6 +1,7 @@
 package com.lec.spring.service;
 
 import com.lec.spring.domain.Booking;
+import com.lec.spring.domain.ProvLodging;
 
 import java.time.LocalDate;
 import java.util.List;

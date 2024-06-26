@@ -2,6 +2,7 @@ package com.lec.spring.service;
 
 import com.lec.spring.domain.Post;
 import com.lec.spring.repository.PostRepository;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<Post> findPostByLodgingId(Long lodgingId) {
+        return postRepository.findPostByLodgingId(lodgingId);
+    }
+
+    @Override
     public int updatePost(Post post) {
         return 0;
     }
@@ -50,8 +56,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> allPostUserUpdate(Long userId, Long postId) {
-        return postRepository.postUserUpdate(userId, postId);
+    public List<Post> allPostUser(Long userId, Long postId) {
+        return postRepository.postUser(userId, postId);
     }
 
     @Override
@@ -61,12 +67,14 @@ public class PostServiceImpl implements PostService {
         return result;
     }
 
+    @Override
+    public int allPostDelete(Post postId) {
+        int result = 0;
+        result = postRepository.postDelete(postId);
+        return result;
+    }
 
 
 
-    //    오류 때문에 잠시 주석처리
-//    @Override
-//    public void createPost(Post post) {
-//        postRepository.createPost(post);
-//    }
+
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/lodging")
@@ -24,7 +25,7 @@ public class LodgingController {
     private final LodgingService lodgingService;
     private ProviderService providerService;
     private RoomService roomService;
-    private PostService postService;
+    private final PostService postService;
 
     @Autowired
     public LodgingController(LodgingService lodgingService, ProviderService providerService, RoomService roomService, PostService postService) {
@@ -41,8 +42,17 @@ public class LodgingController {
 
     @PostMapping("/LodgingList")
     public String handleSearchRequest(@RequestParam("location") String location, Model model) {
-        List<Lodging> lodging = lodgingService.getLodgingsByLocation(location);
-        model.addAttribute("lodging", lodging);
+        List<Lodging> lodgings = lodgingService.getLodgingsByLocation(location);
+
+        // 각 숙소에 대해 평균 점수를 설정
+        lodgings = lodgings.stream()
+                .peek(lodging -> lodging.setAvgPostGrade(
+                        lodgingService.getAvgPostGrade(lodging.getLodgingId()) != null
+                                ? lodgingService.getAvgPostGrade(lodging.getLodgingId())
+                                : 0.0))
+                .collect(Collectors.toList());
+
+        model.addAttribute("lodging", lodgings);
         model.addAttribute("location", location); // location 정보를 모델에 추가
         return "lodging/LodgingList";
     }
@@ -55,8 +65,13 @@ public class LodgingController {
     public String getLodgingDetail(@PathVariable("lodgingId") Long lodgingId, Model model) {
         List<Lodging> lodging = lodgingService.lodgingDetail(lodgingId);
         List<Lodging> lodgingName = lodgingService.lodgingName(lodgingId);
+        List<Post> lodgingPost = postService.findPostByLodgingId(lodgingId);
+        Double avgPostGrade = lodgingService.getAvgPostGrade(lodgingId);
+        String formattedAvgPostGrade = String.format("%.1f", avgPostGrade);
         model.addAttribute("lodging", lodging);
         model.addAttribute("lodgingName", lodgingName);
+        model.addAttribute("lodgingPost", lodgingPost);
+        model.addAttribute("avgPostGrade", formattedAvgPostGrade);
         return "lodging/LodgingDetail";
     }
 
@@ -78,7 +93,7 @@ public class LodgingController {
     }
 
     @GetMapping("/RoomDetail/{lodgingId}/{roomId}")
-    public String RoomDetail(@PathVariable("lodgingId") int lodgingId, @PathVariable("roomId") Long roomId, Model model) {
+    public String RoomDetail(@PathVariable("lodgingId") Long lodgingId, @PathVariable("roomId") Long roomId, Model model) {
         ProvLodging lodging = providerService.getAllDetails(lodgingId);
         Room room = roomService.findByRoomId(roomId);
         List<Post> postList = postService.findPostsByRoomId(roomId);

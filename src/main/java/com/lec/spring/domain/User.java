@@ -13,11 +13,12 @@ import java.util.List;
 @Builder
 public class User {
 
+    //유저 번호
     private Long userId;
 
 //    private Long id;
 
-
+    // 유저 닉네임
     private String nickname;
     @JsonIgnore
     private String password;
@@ -66,6 +67,22 @@ public class User {
         this.email = email;
     }
 
+    public LocalDateTime getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(LocalDateTime regDate) {
+        this.regDate = regDate;
+    }
+
+    public String getPhonenum() {
+        return phonenum;
+    }
+
+    public void setPhonenum(String phonenum) {
+        this.phonenum = phonenum;
+    }
+
     public List<Authority> getAuthorities() {
         return authorities;
     }
@@ -92,6 +109,10 @@ public class User {
     // oAuth2 Client
     private String provider;
     private String providerId;
-
-
 }
+//    private Boolean hasRoleProvider;
+
+
+
+
+
