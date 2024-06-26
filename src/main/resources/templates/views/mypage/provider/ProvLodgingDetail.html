@@ -15,6 +15,7 @@
     <!-- 좌측 네비게이션 메뉴 -->
     <th:block th:insert="~{mypage/provider/ProvNavMenu::prov-nav-menu}"></th:block>
 
+<!--    <form id="updateForm" method="post" th:action="@{/mypage/provider/updateLodging}">-->
     <!-- 숙소 정보 페이지 -->
     <section class="lodging-info">
         <h1>숙소 상세 정보</h1>
@@ -97,11 +98,15 @@
                 <input class="info-input" type="text" th:value="${lodging.lodgingOwnerId}" disabled>
             </label>
         </div>
+<!--        <form id="deleteForm" method="post" th:action="@{/mypage/provider/deleteLodging/{lodgingId}(lodgingId=${lodging.lodgingId})}">-->
+        <form id="deleteForm" th:action="@{/mypage/provider/deleteLodging/{lodgingId}(lodgingId=${lodging.lodgingId})}" method="post">
         <div class="btn-list">
             <a class="btn-update" href="/mypage/provider/provlodginglist">숙소 리스트</a>
-            <a class="btn-update" href="ProvLodgingUpdate.html">정보 수정</a>
-            <button class="btn-delete">삭제 요청</button>
+            <a class="btn-update" th:href="@{'/mypage/provider/provlodgingupdate/' + ${lodging.lodgingId}}">정보 수정</a>
+<!--            <a class="btn-delete" th:href="@{'/mypage/provider/deleteLodging/' + ${lodging.lodgingId}}">숙소 삭제</a>-->
+            <button type="button" class="btn-delete" onclick="confirmDelete()">숙소 삭제</button>
         </div>
+        </form>
     </section>
 
     <script src="../../../../static/js/mypage/provider/ProvLodgingDetail.js"></script>

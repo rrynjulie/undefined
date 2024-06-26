@@ -94,6 +94,37 @@
                    #{lodgingOwnerEmail}, #{lodgingOwnerId}, #{userId}
                )
     </insert>
+
+    <update id="updateLodging" parameterType="com.lec.spring.domain.ProvLodging">
+        UPDATE lodging
+        SET
+            lodging_picture_1 = #{lodgingPicture1},
+            lodging_name = #{lodgingName},
+            lodging_type = #{lodgingType},
+            lodging_location1 = #{lodgingLocation1},
+            lodging_location2 = #{lodgingLocation2},
+            lodging_address = #{lodgingAddress},
+            lodging_number = #{lodgingNumber},
+            lodging_url = #{lodgingUrl},
+            lodging_open = #{lodgingOpen},
+            lodging_close = #{lodgingClose},
+            lodging_introduce = #{lodgingIntroduce},
+            lodging_service = #{lodgingService},
+            lodging_usinginfo = #{lodgingUsingInfo},
+            lodging_notice = #{lodgingNotice},
+            lodging_owner_name = #{lodgingOwnerName},
+            lodging_owner_number = #{lodgingOwnerNumber},
+            lodging_owner_email = #{lodgingOwnerEmail},
+            lodging_owner_id = #{lodgingOwnerId},
+            user_id = #{userId}
+        WHERE lodging_id = #{lodgingId}
+    </update>
+
+    <delete id="deleteLodging" parameterType="int">
+        DELETE FROM lodging
+        WHERE lodging_id = #{lodgingId}
+    </delete>
+
 </mapper>
 
 
