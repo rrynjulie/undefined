@@ -63,3 +63,71 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 });
+
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    fetch('/mypage/customer/getProvider')
+        .then(response => response.text())
+        .then(provider => {
+            if (provider === 'KAKAO' || provider === 'google') {
+                document.getElementById('nickname').disabled = true;
+                document.getElementById('password').disabled = true;
+                document.getElementById('email').disabled = true;
+                document.getElementById('phone').disabled = true;
+                document.getElementById('save-btn').disabled = true;
+            }
+        })
+        .catch(error => console.error('Error fetching provider:', error));
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var manageAccountForm = document.getElementById('manage-account-form');
+    var currentPasswordInput = document.getElementById('current-password');
+    var currentPasswordError = document.getElementById('current-password-error');
+    var newPasswordInput = document.getElementById('new-password');
+    var confirmPasswordInput = document.getElementById('confirm-password');
+    var confirmPasswordError = document.getElementById('confirm-password-error');
+    var currentPasswordValid = false; // 현재 비밀번호의 유효성을 저장하는 변수
+
+    currentPasswordInput.addEventListener('input', function() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/check-password', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200 && xhr.responseText === 'success') {
+                    currentPasswordError.style.display = 'none';
+                    currentPasswordValid = true;
+                } else {
+                    currentPasswordError.style.display = 'inline';
+                    currentPasswordValid = false;
+                }
+            }
+        };
+        xhr.send('currentPassword=' + encodeURIComponent(currentPasswordInput.value));
+    });
+
+    manageAccountForm.addEventListener('submit', function(event) {
+        event.preventDefault();  // 기본 폼 제출 방지
+
+        // 현재 비밀번호가 유효한지 확인
+        if (!currentPasswordValid) {
+            currentPasswordError.style.display = 'inline';
+            return;
+        }
+
+        // 새 비밀번호와 확인 비밀번호가 일치하는지 확인
+        if (newPasswordInput.value !== confirmPasswordInput.value) {
+            confirmPasswordError.style.display = 'inline';
+            return;
+        } else {
+            confirmPasswordError.style.display = 'none';
+        }
+
+        // 비밀번호가 일치하면 폼을 실제로 제출
+        manageAccountForm.submit();
+        alert('수정되었습니다.');
+        window.location.href = '/home'; // 홈으로 이동
+    });
+});

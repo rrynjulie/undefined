@@ -166,7 +166,7 @@ main {
     background-color: #1273E4;
 }
 
-.btn-booking-cancel:hover, .btn-booking-post:hover {
+.btn-booking-cancel:hover, .btn-booking-post:hover  {
     transform: scale(1.02);
 }
 
