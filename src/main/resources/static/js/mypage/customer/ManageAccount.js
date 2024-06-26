@@ -88,34 +88,10 @@ document.addEventListener('DOMContentLoaded', function() {
     var newPasswordInput = document.getElementById('new-password');
     var confirmPasswordInput = document.getElementById('confirm-password');
     var confirmPasswordError = document.getElementById('confirm-password-error');
-    var currentPasswordValid = false; // 현재 비밀번호의 유효성을 저장하는 변수
+    var saveBtn = document.getElementById('save-btn');
 
-    currentPasswordInput.addEventListener('input', function() {
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/check-password', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200 && xhr.responseText === 'success') {
-                    currentPasswordError.style.display = 'none';
-                    currentPasswordValid = true;
-                } else {
-                    currentPasswordError.style.display = 'inline';
-                    currentPasswordValid = false;
-                }
-            }
-        };
-        xhr.send('currentPassword=' + encodeURIComponent(currentPasswordInput.value));
-    });
-
-    manageAccountForm.addEventListener('submit', function(event) {
-        event.preventDefault();  // 기본 폼 제출 방지
-
-        // 현재 비밀번호가 유효한지 확인
-        if (!currentPasswordValid) {
-            currentPasswordError.style.display = 'inline';
-            return;
-        }
+    saveBtn.addEventListener('click', function(event) {
+        event.preventDefault(); // 기본 폼 제출 방지
 
         // 새 비밀번호와 확인 비밀번호가 일치하는지 확인
         if (newPasswordInput.value !== confirmPasswordInput.value) {
@@ -125,9 +101,24 @@ document.addEventListener('DOMContentLoaded', function() {
             confirmPasswordError.style.display = 'none';
         }
 
-        // 비밀번호가 일치하면 폼을 실제로 제출
-        manageAccountForm.submit();
-        alert('수정되었습니다.');
-        window.location.href = '/home'; // 홈으로 이동
+        // 현재 비밀번호 확인을 위한 AJAX 요청
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/mypage/customer/check-password', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200 && xhr.responseText === 'success') {
+                    currentPasswordError.style.display = 'none';
+
+                    // 비밀번호가 일치하면 폼을 실제로 제출
+                    manageAccountForm.submit();
+                } else {
+                    currentPasswordError.style.display = 'inline';
+                    console.log("확인용A: " + xhr.status)
+                    console.log("확인용B: " + xhr.responseText)
+                }
+            }
+        };
+        xhr.send('currentPassword=' + encodeURIComponent(currentPasswordInput.value));
     });
 });

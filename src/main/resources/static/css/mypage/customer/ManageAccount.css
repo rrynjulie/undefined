@@ -256,3 +256,22 @@ body {
     padding: 8px;
     box-sizing: border-box;
 }
+
+.required-dot {
+    background-color: #FC5185;
+    border-radius: 50%;
+    margin-left: 1px;
+    margin-top: 4px;
+    height: 4px;
+    width: 4px;
+}
+
+.essential {
+    display: flex;
+    align-items: center;
+    color: dimgray;
+}
+
+.test {
+    display: flex;
+}

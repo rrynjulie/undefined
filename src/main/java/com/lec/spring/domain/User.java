@@ -20,7 +20,6 @@ public class User {
 
     // 유저 닉네임
     private String nickname;
-
     @JsonIgnore
     private String password;
 
@@ -111,8 +110,13 @@ public class User {
     private String provider;
     private String providerId;
 
+    // ROLE_PROVIDER 권한 여부
+    private Boolean hasRoleProvider;
+
+    // ROLE_MASTER 권한 여부
+    private Boolean hasRoleMaster;
 }
-//    private Boolean hasRoleProvider;
+
 
 
 
