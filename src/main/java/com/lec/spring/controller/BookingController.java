@@ -11,9 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.DecimalFormat;
+import java.awt.print.Book;
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -39,7 +42,7 @@ public class BookingController {
 
     @GetMapping("/lodging/LodgingBooking")
     public String lodgingBooking(@RequestParam("lodgingId") Long lodgingId,
-                                 @RequestParam(value = "roomId", required = false) Long roomId,
+                                 @RequestParam("roomId") Long roomId,
                                  Model model,
                                  Authentication authentication) {
 
@@ -49,41 +52,59 @@ public class BookingController {
         }
 
         Object principal = authentication.getPrincipal();
-        User user = null;
         if (principal instanceof PrincipalDetails) {
             PrincipalDetails principalDetails = (PrincipalDetails) principal;
-            user = principalDetails.getUser();
+            User user = principalDetails.getUser();
             model.addAttribute("user", user);
         } else if (principal instanceof String) {
             String username = (String) principal;
-            user = userService.findByUsername(username);
+            User user = userService.findByUsername(username);
             model.addAttribute("user", user);
         } else {
             // 다른 타입에 대한 처리
             throw new IllegalStateException("Unknown principal type: " + principal.getClass());
         }
 
-        // 사용자 정보 모델에 추가
-        model.addAttribute("phonenum", user.getPhonenum());
-
         Lodging lodging = lodgingService.getLodgingById(lodgingId);
         model.addAttribute("lodging", lodging);
 
         // Lodging ID에 해당하는 Room 목록 조회
-        List<Room> rooms = roomService.findRoomsByLodgingId(lodgingId);
-        model.addAttribute("rooms", rooms);
+//        List<Room> rooms = roomService.findRoomsByLodgingId(lodgingId);
+//        model.addAttribute("rooms", rooms);
 
         // 선택한 객실 정보 조회
-        Room selectedRoom = null;
+        Room room = null;
         if (roomId != null && roomId != 0) {
-            selectedRoom = roomService.getRoomById(roomId);
+            room = roomService.getRoomById(roomId);
         }
-        model.addAttribute("selectedRoom", selectedRoom);
-
-        model.addAttribute("booking", new Booking());
+        model.addAttribute("room", room);
 
         return "lodging/LodgingBooking";
     }
+
+    @PostMapping("/lodging/LodgingBooking")
+    public String lodgingBookingOk(Booking booking,
+                                   Model model,
+                                   Principal principal) {
+
+        booking.setBookingTime(LocalDateTime.now());
+
+        // 사용자 이름 설정
+
+        String userName = principal.getName(); // 사용자 이름 가져오기
+        booking.setVisitorName(userName);
+
+
+        booking.setVisitorPhoneNum(booking.getVisitorPhoneNum());
+
+        // 예약 정보 저장
+        model.addAttribute("result", bookingService.createBooking(booking));
+
+        // 예약 완료 페이지로 이동
+        return "/LodgingBookingOk";
+    }
+
+
 
     @GetMapping("/mypage/provider/ProvBookingList/{userId}")
     public void provBookingList(Model model) {
@@ -104,6 +125,11 @@ public class BookingController {
         model.addAttribute("booksAfter", booksAfter);
         return "mypage/customer/BookingList";
     }
+
+    @PostMapping("/mypage/customer/DeleteBooking/{userId}/{bookingId}")
+    public String deleteBooking(@PathVariable("userId") Long userId,
+                                @PathVariable("bookingId") Long bookingId,
+                                Model model) {
 
     @PostMapping("/mypage/customer/CancelBookingOk")
     public String cancelBookingOk(Long bookingId, Model model) {

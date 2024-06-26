@@ -45,12 +45,10 @@ public class LodgingController {
         List<Lodging> lodgings = lodgingService.getLodgingsByLocation(location);
 
         // 각 숙소에 대해 평균 점수를 설정
-        lodgings = lodgings.stream()
-                .peek(lodging -> lodging.setAvgPostGrade(
-                        lodgingService.getAvgPostGrade(lodging.getLodgingId()) != null
-                                ? lodgingService.getAvgPostGrade(lodging.getLodgingId())
-                                : 0.0))
-                .collect(Collectors.toList());
+        for (Lodging lodging : lodgings) {
+            Double avgPostGrade = lodgingService.getAvgPostGrade(lodging.getLodgingId());
+            lodging.setAvgPostGrade(avgPostGrade != null ? avgPostGrade : 0.0);
+        }
 
         model.addAttribute("lodging", lodgings);
         model.addAttribute("location", location); // location 정보를 모델에 추가

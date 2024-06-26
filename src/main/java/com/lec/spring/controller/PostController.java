@@ -37,10 +37,8 @@ public class PostController {
 
     @GetMapping("/PostUpdate/{userId}/{postId}")
     public String postUpdate(@PathVariable Long userId, @PathVariable Long postId, Model model) {
-//        List<Post> userPost = postService.allPostUserId(userId);
         List<Post> userPostUpdate = postService.allPostUser(userId, postId);
         model.addAttribute("userPostUpdate", userPostUpdate);
-//        model.addAttribute("userPost", userPost);
         return "/mypage/customer/PostUpdate";
     }
 

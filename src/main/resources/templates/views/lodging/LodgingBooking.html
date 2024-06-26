@@ -9,8 +9,10 @@
 <body>
 
 <!-- 예약 폼 내용 -->
-<form action="/lodging/LodgingBooking" method="get">
+<form id="bookingForm" action="/lodging/LodgingBooking" method="post">
+<!--    <form id="bookingForm" action="#" th:action="@{/booking/submit}" method="post">-->
 <!--<form action="/lodging/saveReservation" method="post">-->
+<!--    <form id="bookingForm" action="/booking/confirm" method="post">-->
     /-<h2 th:text="${lodging.lodgingName} + ' 예약하기'"></h2>
 
 
@@ -28,7 +30,7 @@
 
     <!--  객실  -->
     <label>객실:</label>
-    <span th:text="${selectedRoom.roomName}"></span>
+    <span th:text="${room.roomName}"></span>
 
     <!-- 결제 방식 -->
     <label>결제 방식:</label>
@@ -38,15 +40,19 @@
     </select>
 
     <label>결제금액: </label>
-    <span th:text="${selectedRoom.roomPrice}"></span>
+    <span th:text="${room.roomPrice}"></span>
 
 
     <!-- 사용자 ID -->
     <input type="hidden" name="userId" th:value="${user.userId}" />
-    <input type="hidden" name="lodgingId" th:value="${selectedRoom.roomId}" />
+    <input type="hidden" name="lodgingId" th:value="${room.roomId}" />
+    <input type="hidden" name="lodgingId" th:value="${lodging.lodgingId}" />
 
     <!-- 결제 버튼 -->
-    <button id="reservationButton">예약하기</button>
+
+    <button type="submit">결제하기</button>
+
+
 </form>
 
 
