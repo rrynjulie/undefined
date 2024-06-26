@@ -71,25 +71,32 @@
 
 
 
-
+<div>
     <div id="result-filter">
         <span th:text="${#lists.size(lodging)} + '개의 검색 결과'"></span>
     </div>
     <div class="item-list">
         <div style="display: flex; width: 48%; height: 100%; margin-bottom: 10px;" th:each="lodging : ${lodging}">
             <a class="item" th:href="@{'/lodging/LodgingDetail/' + ${lodging.lodgingId}}">
-                <p class="item-img"><img th:src="${lodging.lodgingPicture1}" alt="Lodging Picture"/>
+                <p class="item-img">
+                    <img th:src="${lodging.lodgingPicture1}" alt="Lodging Picture"/>
                 <div class="item-details">
-                <p class="item-title" th:text="${lodging.lodgingName}">~~~~ 호텔</p>
-                <p class="item-rating">⭐ 4.6(512)</p>
-                <p class="item-type" th:text="${lodging.lodgingType}"></p>
+                <p class="item-title" th:text="${lodging.lodgingName}"></p>
+                <div class="item-type" th:text="${lodging.lodgingType}"></div>
+                <div class="item-rating" style="display: flex; align-items: center">
+                    <p id="star">&#9733;</p>
+                    <p class="star" th:text="${lodging.avgPostGrade}"></p>
+                </div>
                 <p class="item-price" th:text="${lodging.formattedRoomPrice} + '원 ~'">Room Price</p>
                 </div>
             </a>
         </div>
     </div>
+
+
     <!-- 추가: location 값을 저장하는 hidden input -->
     <input type="hidden" name="location" th:value="${location}">
+</div>
 </main>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

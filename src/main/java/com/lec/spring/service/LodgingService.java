@@ -17,8 +17,6 @@ public interface LodgingService {
 
     List<Lodging> lodgingName(Long lodgingId);
 
-    List<Lodging> getLodgingsByType(String type);
-
     List<Lodging> getLodgingsByLocationAndType(String location, String type); // 새로운 메서드
 
     List<Lodging> getPostList(Long lodgingId);
