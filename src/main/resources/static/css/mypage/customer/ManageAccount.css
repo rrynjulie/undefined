@@ -120,3 +120,44 @@ main {
     background-color: rgb(252, 81, 133);
 }
 
+.profile-menu-container {
+    display: flex;
+    /*background-color: #FC5185;*/
+    color: white;
+    padding: 10px;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.menu-list {
+    flex: 2;
+}
+
+.form-group {
+    margin-bottom: 1em;
+}
+
+.form-group label {
+    display: block;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5em;
+    box-sizing: border-box;
+}
+
+#save-btn {
+    background-color: #FC5185;
+    color: white;
+    padding: 1em;
+    border: none;
+    cursor: pointer;
+}
+
+#save-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

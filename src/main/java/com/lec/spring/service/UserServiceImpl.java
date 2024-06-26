@@ -1,20 +1,28 @@
 package com.lec.spring.service;
 
+import com.lec.spring.config.PrincipalDetails;
 import com.lec.spring.domain.Authority;
+import com.lec.spring.domain.Post;
 import com.lec.spring.domain.User;
 import com.lec.spring.repository.AuthorityRepository;
 import com.lec.spring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -131,6 +139,84 @@ public class UserServiceImpl implements UserService {
 //        return null;
 //    }
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    @Override
+    public User getUserById(int userId) {
+        String sql = "SELECT * FROM user WHERE user_id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{userId}, new UserRowMapper());
+    }
+
+//    @Autowired
+//    private JdbcTemplate jdbcTemplate;
+
+//    jdbcTemplate@Override
+//    public User findByEmail(String email) {
+//        String sql = "SELECT * FROM user WHERE user_email = ?";
+//        return jdbcTemplate.queryForObject(sql, new Object[]{email}, new UserRowMapper());
+//    }
+
+    @Override
+    public void updateUser(Long userId, String nickname, String password, String email, String phone) {
+        StringBuilder sql = new StringBuilder("UPDATE user SET ");
+        List<Object> params = new ArrayList<>();
+
+        if (nickname != null && !nickname.isEmpty()) {
+            sql.append("user_nickname = ?, ");
+            params.add(nickname);
+        }
+
+        if (phone != null && !phone.isEmpty()) {
+            sql.append("user_phonenum = ?, ");
+            params.add(phone);
+        }
+
+        if (password != null && !password.isEmpty()) {
+            sql.append("user_password = ?, ");
+            params.add(password);
+        }
+
+        if (email != null && !email.isEmpty()) {
+            sql.append("user_email = ?, ");
+            params.add(email);
+        }
+
+        sql.setLength(sql.length() - 2);
+
+        sql.append(" WHERE user_id = ?");
+        params.add(userId);
+
+        jdbcTemplate.update(sql.toString(), params.toArray());
+    }
+
+    private static class UserRowMapper implements RowMapper<User> {
+        @Override
+        public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+            User user = new User();
+            user.setUserId(rs.getLong("user_id"));
+            user.setPassword(rs.getString("user_password"));
+            user.setUsername(rs.getString("user_name"));
+            user.setEmail(rs.getString("user_email"));
+            user.setNickname(rs.getString("user_nickname"));
+            user.setPhonenum(rs.getString("user_phonenum"));
+            return user;
+        }
+    }
+
+
+
+//    @Autowired
+//    private UserRepository userRepository;
+//
+//    @Override
+//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+//        User user = userRepository.findByEmail(email);
+//        if (user == null) {
+//            throw new UsernameNotFoundException("User not found");
+//        }
+//        return new PrincipalDetails(user);
+//    }
 
 }
 

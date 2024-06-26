@@ -129,4 +129,9 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     public String getName() {
         return null;  // 사용하지 않을 예정이라 .. null
     }
+
+    public String getProvider() {
+        return user.getProvider();
+    }
+
 }

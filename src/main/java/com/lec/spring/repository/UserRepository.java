@@ -1,5 +1,6 @@
 package com.lec.spring.repository;
 
+import com.lec.spring.domain.Post;
 import com.lec.spring.domain.Room;
 import com.lec.spring.domain.User;
 
@@ -14,7 +15,6 @@ public interface UserRepository {
 
     int save(User user);
 
-    int update(User user);
-
+    int userupdate(User user);
 
 }

@@ -63,3 +63,55 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 });
+
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    fetch('/mypage/customer/getProvider')
+        .then(response => response.text())
+        .then(provider => {
+            if (provider === 'KAKAO' || provider === 'google') {
+                document.getElementById('nickname').disabled = true;
+                document.getElementById('password').disabled = true;
+                document.getElementById('email').disabled = true;
+                document.getElementById('phone').disabled = true;
+                document.getElementById('save-btn').disabled = true;
+            }
+        })
+        .catch(error => console.error('Error fetching provider:', error));
+});
+
+
+document.getElementById('updateUserForm').addEventListener('submit', function(event) {
+    let isValid = true;
+
+    const nickname = document.getElementById('nickname').value;
+    const password = document.getElementById('password').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+
+    document.getElementById('nicknameError').textContent = '';
+    document.getElementById('passwordError').textContent = '';
+    document.getElementById('emailError').textContent = '';
+    document.getElementById('phoneError').textContent = '';
+
+    if (!nickname) {
+        document.getElementById('nicknameError').textContent = 'Nickname is required';
+        isValid = false;
+    }
+    if (!password) {
+        document.getElementById('passwordError').textContent = 'Password is required';
+        isValid = false;
+    }
+    if (!email) {
+        document.getElementById('emailError').textContent = 'Email is required';
+        isValid = false;
+    }
+    if (!phone) {
+        document.getElementById('phoneError').textContent = 'Phone is required';
+        isValid = false;
+    }
+
+    if (!isValid) {
+        event.preventDefault(); // 폼 제출을 막음
+    }
+});

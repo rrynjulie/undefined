@@ -23,4 +23,9 @@ public interface UserService {
 
 
     void logout();
+
+    User getUserById(int userId);
+    void updateUser(Long userId, String nickname, String password, String email, String phone);
+
+
 }
