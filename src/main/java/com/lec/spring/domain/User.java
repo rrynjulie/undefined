@@ -109,6 +109,7 @@ public class User {
     // oAuth2 Client
     private String provider;
     private String providerId;
+}
 //    private Boolean hasRoleProvider;
 }
 
