@@ -93,7 +93,7 @@ public class LodgingController {
     }
 
     @GetMapping("/RoomDetail/{lodgingId}/{roomId}")
-    public String RoomDetail(@PathVariable("lodgingId") int lodgingId, @PathVariable("roomId") Long roomId, Model model) {
+    public String RoomDetail(@PathVariable("lodgingId") Long lodgingId, @PathVariable("roomId") Long roomId, Model model) {
         ProvLodging lodging = providerService.getAllDetails(lodgingId);
         Room room = roomService.findByRoomId(roomId);
         List<Post> postList = postService.findPostsByRoomId(roomId);

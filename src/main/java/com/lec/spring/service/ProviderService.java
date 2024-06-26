@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface ProviderService {
     List<ProvLodging> getLodgings(Long userId);
-    ProvLodging getAllDetails(int lodgingId);
+    ProvLodging getAllDetails(Long lodgingId);
     void saveLodging(ProvLodging lodging);
 
     List<ProvLodging> getLodgingsAndRoomsByUserId(Long userId);
 
     void updateLodging(ProvLodging lodging);
 
-    void deleteLodging(int lodgingId);
+    void deleteLodging(Long lodgingId);
 
 }

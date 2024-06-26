@@ -40,13 +40,13 @@
         </div>
 
         <h3>이용 전</h3>
-        <div class="before-use-frame">
+        <div class="before-use-frame" th:each="books : ${books}">
             <div class="lodging-info-frame">
                 <div class="lodging-info-inner">
-                    <img class="lodging-img" th:src="@{/image/NoImage.png}" alt="">
+                    <img class="lodging-img" th:src="${books.lodging.lodgingPicture1}" alt="">
                     <div class="booking-info">
-                        <p class="lodging-name">서울역 더 디자이너스</p>
-                        <p class="room-name">비즈니스 트윈</p>
+                        <p class="lodging-name" th:text="${books.lodging.lodgingName}"></p>
+                        <p class="room-name" th:text="${books.room.roomName}"></p>
                         <p class="room-name">1박</p>
                     </div>
                 </div>
@@ -55,15 +55,15 @@
             <div class="check-date-frame">
                 <label>
                     체크인
-                    <p>2024.06.26</p>
+                    <p th:text="${books.bookingStartDate}"></p>
                 </label>
                 <label>
                     체크아웃
-                    <p>2024.06.27</p>
+                    <p th:text="${books.bookingEndDate}"></p>
                 </label>
                 <label>
                     결제 금액
-                    <p>130,000원</p>
+                    <p th:text="${bookingPay}"></p>
                 </label>
                 <a class="btn-booking-cancel" href="#">예약 취소</a>
             </div>

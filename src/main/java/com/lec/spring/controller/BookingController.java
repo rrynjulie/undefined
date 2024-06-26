@@ -1,22 +1,18 @@
 package com.lec.spring.controller;
 
 import com.lec.spring.config.PrincipalDetails;
-import com.lec.spring.domain.Lodging;
-import com.lec.spring.domain.Booking;
+import com.lec.spring.domain.*;
 
-import com.lec.spring.domain.Room;
-import com.lec.spring.domain.User;
-import com.lec.spring.service.LodgingService;
-import com.lec.spring.service.BookingService;
-import com.lec.spring.service.RoomService;
-import com.lec.spring.service.UserService;
+import com.lec.spring.service.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -94,8 +90,13 @@ public class BookingController {
 
     @GetMapping("/mypage/customer/BookingList/{userId}")
     public String BookingList(@PathVariable("userId") Long userId, Model model){
-        List<Booking> booking = bookingService.findBooksByUserId(userId);
-        model.addAttribute("booking", booking);
+        List<Booking> books = bookingService.findBooksByUserId(userId);
+        List<String> bookingPays = new ArrayList<>();
+        books.forEach(book -> {
+            bookingPays.add(DecimalFormat.getInstance().format(book.getBookingPay()));
+        });
+        model.addAttribute("books", books);
+        model.addAttribute("bookingPay", bookingPays);
         return "mypage/customer/BookingList";
     }
 
