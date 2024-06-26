@@ -52,7 +52,7 @@ public class ProviderServiceImpl implements ProviderService {
     }
 
     @Override
-    public void deleteLodging(Long lodgingId) {
+    public void deleteLodging(int lodgingId) {
         providerRepository.deleteLodging(lodgingId);
     }
 }

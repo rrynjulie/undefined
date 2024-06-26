@@ -26,5 +26,8 @@ public class Booking {
     private User user;
     private Room room;
     private ProvLodging lodging;
+
+    private String formattedPay;
+    private int dateGap;
 }
 

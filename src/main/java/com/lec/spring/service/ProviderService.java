@@ -14,6 +14,6 @@ public interface ProviderService {
 
     void updateLodging(ProvLodging lodging);
 
-    void deleteLodging(Long lodgingId);
+    void deleteLodging(int lodgingId);
 
 }

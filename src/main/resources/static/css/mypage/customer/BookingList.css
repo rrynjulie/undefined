@@ -26,6 +26,7 @@ main {
     background-color: white;
     width: 75%;
     height: auto;
+    padding-bottom: 50px;
 }
 
 /*검색필터*/
@@ -67,14 +68,37 @@ main {
     transform: scale(1.02);
 }
 
-.before-use-frame {
+.before-use-frame, .after-use-frame {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: 1px solid #EBEBEB;
     border-radius: 7px;
     margin-top: 20px;
     padding: 25px;
+    box-shadow: 0 2px 16px #00000014;
+}
+
+.empty-use-frame {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 7px;
+    margin-top: 20px;
+    box-shadow: 0 2px 16px #00000014;
+}
+
+.empty-title {
+    font-weight: bold;
+    font-size: 25px;
+    align-content: center;
+    padding: 0 70px;
+    color: #333333;
+}
+
+.empty-detail {
+    font-size: 15px;
+    padding: 0 70px;
+    color: gray;
 }
 
 .lodging-info-frame {
@@ -117,7 +141,7 @@ main {
 
 .check-date-frame label {
     color: grey;
-    margin-right: 70px;
+    margin-right: 60px;
     font-size: 13px;
 }
 
@@ -126,7 +150,7 @@ main {
     font-size: 17px;
 }
 
-.btn-booking-cancel {
+.btn-booking-cancel, .btn-booking-post {
     text-decoration: none;
     text-align: center;
     align-content: center;
@@ -138,6 +162,14 @@ main {
     bottom: 0;
 }
 
+.btn-booking-post {
+    background-color: #1273E4;
+}
+
+.btn-booking-cancel:hover, .btn-booking-post:hover {
+    transform: scale(1.02);
+}
+
 .h3-after-use {
-    margin-top: 30px;
+    margin-top: 50px;
 }

@@ -101,7 +101,7 @@ public class ProviderController {
     }
 
     @PostMapping("/deleteLodging/{lodgingId}")
-    public String deleteLodging(@PathVariable Long lodgingId, Model model) {
+    public String deleteLodging(@PathVariable int lodgingId, Model model) {
         int result;
         try {
             providerService.deleteLodging(lodgingId);

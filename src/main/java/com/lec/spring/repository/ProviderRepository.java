@@ -16,6 +16,6 @@ public interface ProviderRepository {
 
     void updateLodging(ProvLodging lodging);
 
-    void deleteLodging(Long lodgingId);
+    void deleteLodging(int lodgingId);
 
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,12 +92,16 @@ public class BookingController {
     @GetMapping("/mypage/customer/BookingList/{userId}")
     public String BookingList(@PathVariable("userId") Long userId, Model model){
         List<Booking> books = bookingService.findBooksByUserId(userId);
-        List<String> bookingPays = new ArrayList<>();
+        List<Booking> booksBefore = new ArrayList<>();
+        List<Booking> booksAfter = new ArrayList<>();
         books.forEach(book -> {
-            bookingPays.add(DecimalFormat.getInstance().format(book.getBookingPay()));
+            book.setFormattedPay(DecimalFormat.getInstance().format(book.getBookingPay()));
+            book.setDateGap(Period.between(book.getBookingStartDate(), book.getBookingEndDate()).getDays());
+            if(Period.between(LocalDate.now(), book.getBookingEndDate()).getDays() >= 0) booksBefore.add(book);
+            else booksAfter.add(book);
         });
-        model.addAttribute("books", books);
-        model.addAttribute("bookingPay", bookingPays);
+        model.addAttribute("booksBefore", booksBefore);
+        model.addAttribute("booksAfter", booksAfter);
         return "mypage/customer/BookingList";
     }
 
