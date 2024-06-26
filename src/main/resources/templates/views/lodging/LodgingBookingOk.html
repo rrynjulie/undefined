@@ -1,21 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>예약 성공</title>
-</head>
-<body>
-<h2>예약 성공</h2>
-<p>예약이 성공적으로 완료되었습니다.</p>
-
-<div>
-    <label>예약 번호:</label>
-    <span th:text="${booking.id}"></span>
-</div>
-<div>
-    <label>숙소 이름:</label>
-    <span th:text="${booking.lodging.lodgingName}"></span>
-</div>
-<!-- Display other booking details as needed -->
-</body>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<script th:unless="${result > 0}">
+    alert("등록실패");
+    history.back();
+</script>
+<script th:if="${result > 0}" th:inline="javascript">
+    alert("등록 성공");
+    location.href = "lodging/lodgingBooking/";
+</script>
 </html>

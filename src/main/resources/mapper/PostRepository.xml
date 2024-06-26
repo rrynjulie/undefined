@@ -15,7 +15,7 @@
                p.post_text AS postText,
                p.post_grade AS postGrade,
                p.user_id AS userId,
-               p.reservation_id AS reservationId,
+               p.booking_id AS bookingId,
                p.lodging_id AS lodgingId,
                p.room_id AS roomId
         FROM post p
@@ -57,7 +57,7 @@
                p.post_text AS postText,
                p.post_grade AS postGrade,
                p.user_id AS userId,
-               p.reservation_id AS reservationId,
+               p.booking_id AS bookingId,
                p.lodging_id AS lodgingId,
                p.room_id AS roomId
         FROM post p
@@ -90,7 +90,7 @@
                p.post_text AS postText,
                p.post_grade AS postGrade,
                p.user_id AS userId,
-               p.reservation_id AS reservationId,
+               p.booking_id AS bookingId,
                p.lodging_id AS lodgingId,
                p.room_id AS roomId
         FROM post p
@@ -110,7 +110,7 @@
                p.post_text AS postText,
                p.post_grade AS postGrade,
                p.user_id AS userId,
-               p.reservation_id AS reservationId,
+               p.booking_id AS bookingId,
                p.lodging_id AS lodgingId,
                p.room_id AS roomId
         FROM post p

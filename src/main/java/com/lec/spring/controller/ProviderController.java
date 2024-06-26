@@ -78,14 +78,14 @@ public class ProviderController {
     }
 
     @GetMapping("/provlodgingdetail/{lodgingId}")
-    public String provlodgingdetail(@PathVariable int lodgingId, Model model) {
+    public String provlodgingdetail(@PathVariable Long lodgingId, Model model) {
         ProvLodging lodging = providerService.getAllDetails(lodgingId);
         model.addAttribute("lodging", lodging);
         return "mypage/provider/ProvLodgingDetail";
     }
 
     @GetMapping("/provlodgingupdate/{lodgingId}")
-    public String provLodgingUpdate(@PathVariable int lodgingId, Model model) {
+    public String provLodgingUpdate(@PathVariable Long lodgingId, Model model) {
         ProvLodging lodging = providerService.getAllDetails(lodgingId); // 숙소 정보 가져오기
         model.addAttribute("lodging", lodging); // 모델에 숙소 정보 추가
         return "mypage/provider/ProvLodgingUpdate"; // 숙소 업데이트 페이지로 이동
@@ -132,7 +132,7 @@ public class ProviderController {
     }
 
     @GetMapping("/ProvRoomRegister/{lodgingId}")
-    public String provRoomRegister(@PathVariable("lodgingId") int lodgingId, Model model) {
+    public String provRoomRegister(@PathVariable("lodgingId") Long lodgingId, Model model) {
         ProvLodging lodging = providerService.getAllDetails(lodgingId);
         model.addAttribute("lodging", lodging);
         return "mypage/provider/ProvRoomRegister";

@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface ProviderRepository {
     List<ProvLodging> findLodgings(Long userId);
-    ProvLodging findAllDetails(int lodgingId);
+    ProvLodging findAllDetails(Long lodgingId);
     void saveLodging(ProvLodging lodging);
 
     List<ProvLodging> findByUserId(Long userId);

@@ -50,7 +50,7 @@
         WHERE user_id = #{userId}
     </select>
 
-    <select id="findAllDetails" parameterType="int" resultType="com.lec.spring.domain.ProvLodging">
+    <select id="findAllDetails" resultType="com.lec.spring.domain.ProvLodging">
         SELECT
             lodging_id as lodgingId,
             lodging_picture_1 as lodgingPicture1,
@@ -124,7 +124,6 @@
         DELETE FROM lodging
         WHERE lodging_id = #{lodgingId}
     </delete>
-
 </mapper>
 
 
