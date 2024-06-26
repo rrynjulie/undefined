@@ -1,13 +1,10 @@
 package com.lec.spring.controller;
 
 import com.lec.spring.config.PrincipalDetails;
-import com.lec.spring.domain.Post;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.UserAuthority;
-import com.lec.spring.service.ManagerService;
 import com.lec.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.stereotype.Controller;
@@ -18,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 import java.util.Map;
 
-
 @Controller
 @RequestMapping("mypage/customer")
 public class CustomerController {
@@ -26,13 +22,9 @@ public class CustomerController {
     @Autowired
     private UserService userService;
 
-
-//    private ManagerService managerService;
-
     @GetMapping("/ManageAccount")
     public String manageAccount(Model model) {
         User user = getLoggedUser();
-        System.out.println("user: " + user);
         model.addAttribute("user", user);
 
         List<UserAuthority> userAuthorities = userService.getAllUserAuthorities();
@@ -70,10 +62,11 @@ public class CustomerController {
         redirectAttributes.addFlashAttribute("success", "수정되었습니다.");
 
         // 홈으로 리다이렉트
-        return "/home";
+        return "redirect:/Home";
     }
 
     @PostMapping("/check-password")
+    @ResponseBody
     public String checkPassword(@RequestParam String currentPassword) {
         User user = getLoggedUser();
         if (userService.checkPassword(user.getUserId(), currentPassword)) {
@@ -87,7 +80,6 @@ public class CustomerController {
     @ResponseBody
     public String getProvider() {
         User user = getLoggedUser();
-        System.out.println(user.getProvider());
         return user.getProvider();
     }
 
@@ -96,7 +88,6 @@ public class CustomerController {
 
         if (principal instanceof PrincipalDetails) {
             PrincipalDetails principalDetails = (PrincipalDetails) principal;
-            System.out.println(principalDetails.getUser());
             return principalDetails.getUser();
         } else if (principal instanceof DefaultOAuth2User) {
             Map<String, Object> attributes = ((DefaultOAuth2User) principal).getAttributes();
@@ -109,14 +100,4 @@ public class CustomerController {
             throw new IllegalStateException("Unknown principal type: " + principal.getClass());
         }
     }
-
-
-
-
 }
-
-
-
-
-
-

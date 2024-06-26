@@ -1,12 +1,11 @@
 package com.lec.spring.service;
 
-import com.lec.spring.config.PrincipalDetails;
 import com.lec.spring.domain.Authority;
-import com.lec.spring.domain.Post;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.UserAuthority;
 import com.lec.spring.repository.AuthorityRepository;
 import com.lec.spring.repository.UserRepository;
+import com.lec.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -44,7 +43,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private AuthorityRepository authorityRepository;
-
 
     @Override
     public User findByNickname(String nickname) {
@@ -199,17 +197,4 @@ public class UserServiceImpl implements UserService {
             return user;
         }
     }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
