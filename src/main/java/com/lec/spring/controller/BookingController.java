@@ -97,7 +97,7 @@ public class BookingController {
         books.forEach(book -> {
             book.setFormattedPay(DecimalFormat.getInstance().format(book.getBookingPay()));
             book.setDateGap(Period.between(book.getBookingStartDate(), book.getBookingEndDate()).getDays());
-            if(Period.between(LocalDate.now(), book.getBookingEndDate()).getDays() >= 0) booksBefore.add(book);
+            if(Period.between(LocalDate.now(), book.getBookingStartDate()).getDays() >= 0) booksBefore.add(book);
             else booksAfter.add(book);
         });
         model.addAttribute("booksBefore", booksBefore);
@@ -105,19 +105,16 @@ public class BookingController {
         return "mypage/customer/BookingList";
     }
 
-    @PostMapping("/mypage/customer/deleteBooking/{userId}/{bookingId}")
-    public String deleteBooking(@PathVariable("userId") Long userId,
-                                @PathVariable("bookingId") Long bookingId,
-                                Model model) {
-
+    @PostMapping("/mypage/customer/CancelBookingOk")
+    public String cancelBookingOk(Long bookingId, Model model) {
         LocalDate bookingStartDate = bookingService.getBookingStartDate(bookingId);
         if (!bookingStartDate.isAfter(LocalDate.now())) {
-            model.addAttribute("errorMessage", "예약을 취소할  수 없습니당");
+            model.addAttribute("errorMessage", "예약을 취소할 수 없습니당");
             return "error";
         }
 
-        bookingService.deleteByBookingId(bookingId);
-        return "redirect:/mypage/customer/BookingList/" + userId;
+        bookingService.deleteBooking(bookingId);
+        return "redirect:/mypage/customer/BookingList/";
     }
 
 }
