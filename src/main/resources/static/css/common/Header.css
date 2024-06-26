@@ -81,8 +81,31 @@ li {
     color: white;
     border-radius: 7px;
 }
+#logout-btn {
+    height: 40px;
+    width: 140px;
+    text-align: center;
+    align-content: center;
+    background-color: #FC5185;
+    color: white;
+    border-radius: 7px;
+}
+
+#user-info {
+    left: 7%;
+}
 
 #btn-login-pc:hover {
+    border-bottom: 0 none;
+    transform: scale(1.02);
+}
+#user-info-logout{
+    osition: relative;
+    left: 20%;
+    width: 60%;
+}
+
+#logout-btn:hover {
     border-bottom: 0 none;
     transform: scale(1.02);
 }
@@ -160,6 +183,15 @@ li {
     }
 
     #btn-login-mobile:hover {
+        background-color: #F5F5F5 !important;
+        color: #FC5185 !important;
+    }
+    #logout-btn {
+        background-color: #FC5185 !important;
+        color: white !important;
+    }
+
+    #logout-btn:hover {
         background-color: #F5F5F5 !important;
         color: #FC5185 !important;
     }

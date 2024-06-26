@@ -2,6 +2,7 @@ package com.lec.spring.service;
 
 import com.lec.spring.domain.Authority;
 import com.lec.spring.domain.User;
+import com.lec.spring.domain.UserAuthority;
 import org.springframework.security.core.Authentication;
 
 import java.util.List;
@@ -28,4 +29,7 @@ public interface UserService {
     void updateUser(Long userId, String nickname, String password, String email, String phone);
 
 
+    List<UserAuthority> getAllUserAuthorities();
+
+    boolean checkPassword(Long userId, String currentPassword);
 }

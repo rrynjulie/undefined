@@ -20,6 +20,7 @@ public class User {
 
     // 유저 닉네임
     private String nickname;
+
     @JsonIgnore
     private String password;
 
@@ -109,6 +110,8 @@ public class User {
     // oAuth2 Client
     private String provider;
     private String providerId;
+
+}
 //    private Boolean hasRoleProvider;
 
 

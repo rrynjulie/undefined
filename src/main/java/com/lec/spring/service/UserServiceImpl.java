@@ -4,6 +4,7 @@ import com.lec.spring.config.PrincipalDetails;
 import com.lec.spring.domain.Authority;
 import com.lec.spring.domain.Post;
 import com.lec.spring.domain.User;
+import com.lec.spring.domain.UserAuthority;
 import com.lec.spring.repository.AuthorityRepository;
 import com.lec.spring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,16 +130,6 @@ public class UserServiceImpl implements UserService {
         throw new BadCredentialsException("Invalid credentials");
     }
 
-
-//    @Override
-//    public Authentication authenticate(String nickname, String password) {
-//        User user = findByNickname(nickname);
-//        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-//            return user;
-//        }
-//        return null;
-//    }
-
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -147,15 +138,6 @@ public class UserServiceImpl implements UserService {
         String sql = "SELECT * FROM user WHERE user_id = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{userId}, new UserRowMapper());
     }
-
-//    @Autowired
-//    private JdbcTemplate jdbcTemplate;
-
-//    jdbcTemplate@Override
-//    public User findByEmail(String email) {
-//        String sql = "SELECT * FROM user WHERE user_email = ?";
-//        return jdbcTemplate.queryForObject(sql, new Object[]{email}, new UserRowMapper());
-//    }
 
     @Override
     public void updateUser(Long userId, String nickname, String password, String email, String phone) {
@@ -174,7 +156,7 @@ public class UserServiceImpl implements UserService {
 
         if (password != null && !password.isEmpty()) {
             sql.append("user_password = ?, ");
-            params.add(password);
+            params.add(passwordEncoder.encode(password)); // 비밀번호 암호화
         }
 
         if (email != null && !email.isEmpty()) {
@@ -188,6 +170,20 @@ public class UserServiceImpl implements UserService {
         params.add(userId);
 
         jdbcTemplate.update(sql.toString(), params.toArray());
+    }
+
+    @Override
+    public List<UserAuthority> getAllUserAuthorities() {
+        return null;
+    }
+
+    public boolean checkPassword(Long userId, String currentPassword) {
+        User user = userRepository.findById(userId);
+        if (user == null) {
+            throw new IllegalArgumentException("Invalid user ID");
+        }
+        // 비밀번호 확인 로직 구현 (예: 암호화된 비밀번호 비교)
+        return passwordEncoder.matches(currentPassword, user.getPassword());
     }
 
     private static class UserRowMapper implements RowMapper<User> {
@@ -204,19 +200,6 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-
-
-//    @Autowired
-//    private UserRepository userRepository;
-//
-//    @Override
-//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-//        User user = userRepository.findByEmail(email);
-//        if (user == null) {
-//            throw new UsernameNotFoundException("User not found");
-//        }
-//        return new PrincipalDetails(user);
-//    }
 
 }
 

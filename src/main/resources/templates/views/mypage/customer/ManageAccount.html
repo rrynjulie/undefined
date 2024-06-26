@@ -17,37 +17,57 @@
             </div>
         </div>
         <div class="menu-list">
-            <button class="menu-item" id="reservation-btn">예약 내역<img th:src="@{/image/IconRight.png}" class="icon-right"></button>
-            <button class="menu-item" id="manage-info-btn">내 정보 관리<img th:src="@{/image/IconRight.png}" class="icon-right"></button>
-            <button class="menu-item" id="review-btn">작성 후기<img th:src="@{/image/IconRight.png}" class="icon-right"></button>
-            <button class="menu-item" id="coupon-btn">쿠폰<img th:src="@{/image/IconRight.png}" class="icon-right"></button>
-            <button class="menu-item" id="seller-btn">판매자 페이지<img th:src="@{/image/IconRight.png}" class="icon-right"></button>
-            <button class="menu-item" id="manager-btn">관리자 페이지<img th:src="@{/image/IconRight.png}" class="icon-right"></button>
+            <button class="menu-item" id="reservation-btn">예약 내역<img th:src="@{/image/IconRight.png}"
+                                                                     class="icon-right"></button>
+            <button class="menu-item" id="manage-info-btn">내 정보 관리<img th:src="@{/image/IconRight.png}"
+                                                                       class="icon-right"></button>
+            <button class="menu-item" id="review-btn">작성 후기<img th:src="@{/image/IconRight.png}" class="icon-right">
+            </button>
+            <button class="menu-item" id="seller-btn">판매자 페이지<img th:src="@{/image/IconRight.png}" class="icon-right">
+            </button>
+            <button class="menu-item" id="manager-btn">관리자 페이지<img th:src="@{/image/IconRight.png}" class="icon-right">
+            </button>
         </div>
     </div>
 
     <section id="manage-account">
         <h2>내 정보 관리</h2>
         <form id="manage-account-form" method="post" th:action="@{/mypage/customer/ManageAccount}">
-            <div class="form-group">
-                <label for="user-id">아이디</label>
-                <input type="text" id="user-id" name="user-id"readonly>
-            </div>
-            <div class="form-group">
-                <label for="email">이메일</label>
-                <input type="email" id="email" name="email" th:value="${manager.userEmail}" readonly>
-            </div>
+
             <div class="form-group">
                 <label for="nickname">닉네임</label>
-                <input type="text" id="nickname" name="nickname">
+                <div th:if="${user}">
+                    <input type="text" id="nickname" th:value="${user.nickname}" name="nickname">
+                </div>
+            </div>
+            <br><br><br><br><br>
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <div th:if="${user}">
+                <input type="email" id="email" th:value="${user.email}" name="email" readonly>
+                </div>
             </div>
             <div class="form-group">
-                <label for="password">비밀번호</label>
-                <input type="password" id="password" name="password">
+                <label for="current-password">현재 비밀번호</label>
+                <div th:if="${user}">
+                    <input type="password" id="current-password" name="currentPassword">
+                    <span id="current-password-error" style="color: red; display: none;">현재 비밀번호가 일치하지 않습니다.</span>
+                </div>
             </div>
             <div class="form-group">
-                <label for="phone">휴대전화번호</label>
-                <input type="tel" id="phone" name="phone">
+                <label for="new-password">새로운 비밀번호</label>
+                <input type="password" id="new-password" name="newPassword">
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">비밀번호 확인</label>
+                <input type="password" id="confirm-password" name="confirmPassword">
+                <span id="confirm-password-error" style="color: red; display: none;">새 비밀번호가 일치하지 않습니다.</span>
+            </div>
+            <div class="form-group">
+                <label for="phone">전화번호</label>
+                <div th:if="${user}">
+                    <input type="text" id="phone" th:value="${user.phonenum}" name="phone">
+                </div>
             </div>
             <button type="submit" id="save-btn">저장</button>
         </form>
