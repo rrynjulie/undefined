@@ -4,8 +4,8 @@ import com.lec.spring.domain.Room;
 
 import java.util.List;
 
-public interface RoomRepository {
-    void createRoom(Room room);
+public interface  RoomRepository {
+    int createRoom(Room room);
 
     List<Room> findAll();
 

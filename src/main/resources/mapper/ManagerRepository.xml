@@ -4,15 +4,55 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.lec.spring.repository.ManagerRepository">
-    <select id="findAll" resultType="com.lec.spring.domain.Manager">
+
+    <resultMap id="userResultMap" type="com.lec.spring.domain.User">
+        <id property="userId" column="user_id" />
+        <result property="username" column="user_name" />
+        <result property="email" column="user_email" />
+        <result property="regDate" column="user_regdate" />
+        <result property="nickname" column="user_nickname" />
+        <result property="phonenum" column="user_phonenum" />
+        <collection property="authorities" ofType="com.lec.spring.domain.UserAuthority">
+            <id property="userid" column="ua_user_id" />
+            <result property="authorityId" column="authority_id" />
+        </collection>
+    </resultMap>
+
+    <select id="findAllWithAuthorities" resultMap="userResultMap">
+        SELECT
+            u.user_id,
+            u.user_name,
+            u.user_email,
+            u.user_regdate,
+            u.user_nickname,
+            u.user_phonenum,
+            ua.user_id AS ua_user_id,
+            ua.authority_id
+        FROM
+            user u
+                LEFT JOIN
+            user_authority ua ON u.user_id = ua.user_id
+    </select>
+
+    <select id="findAll" resultType="com.lec.spring.domain.User">
         SELECT
             user_id AS userId,
-            user_name AS userName,
-            user_email AS userEmail,
-            user_regdate AS userRegdate,
-            user_nickname AS userNickname,
-            user_phonenum AS userPhonenum
+            user_name AS username,
+            user_email AS email,
+            user_regdate AS regDate,
+            user_nickname AS nickname,
+            user_phonenum AS phonenum
         FROM
             user
     </select>
+
+    <select id="findAllUserAuthority" resultType="com.lec.spring.domain.UserAuthority">
+        SELECT
+            user_id AS userid,
+            authority_id AS authorityId
+        FROM
+            user_authority
+    </select>
+
+
 </mapper>

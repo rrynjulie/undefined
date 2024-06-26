@@ -4,7 +4,7 @@
 //         window.location.href = "../../../../templates/views/mypage/customer/ManageAccount.html";
 //     });
 //
-//     document.getElementById("reservation-btn").addEventListener("click", function() {
+//     document.getElementById("booking-btn").addEventListener("click", function() {
 //         window.location.href = "../../../../templates/views/mypage/customer/BookingList.html";
 //     });
 //

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lec.spring.repository.BookingRepository">
+    <!-- BASE -->
+    <sql id="SELECT_BASE">
+        SELECT b.booking_id AS bookingId
+             , b.booking_time AS bookingTime
+             , b.booking_adult AS bookingAdult
+             , b.booking_child AS bookingChild
+             , b.visitor_name AS visitorName
+             , b.visitor_phonenum AS visitorPhoneNum
+             , b.booking_paytype AS bookingPayType
+             , b.booking_pay AS bookingPay
+             , b.booking_startdate AS bookingStartDate
+             , b.booking_enddate AS bookingEndDate
+             , r.room_id AS roomId
+             , u.user_id AS userId
+        FROM
+            booking b, room r, user u
+        WHERE
+            b.room_id = r.room_id
+          AND b.user_id = u.user_id
+    </sql>
+
+    <!-- CREATE -->
+    <insert id="createBooking" flushCache="true" parameterType="com.lec.spring.domain.Room"
+            useGeneratedKeys="true" keyColumn="booking_id" keyProperty="bookingId">
+        INSERT INTO booking
+        (booking_time, booking_adult, booking_child, visitor_name, visitor_phonenum
+        , booking_paytype, booking_pay, booking_startdate, booking_enddate, room_id, user_id)
+        VALUES
+            (#{bookingTime}, #{bookingAdult}, #{bookingChild}, #{visitorName}, #{visitorPhoneNum}
+            , #{bookingPayType}, #{bookingPay}, #{bookingStartDate}, #{bookingEndDate}, #{roomId}, #{userId})
+    </insert>
+
+    <!-- READ -->
+    <!-- 객실에 대한 예약 내역 -->
+    <select id="findBooksByRoomId" resultType="com.lec.spring.domain.Booking">
+        <include refid="SELECT_BASE"/>
+        AND b.room_id = #{roomId}
+    </select>
+
+    <!-- 유저에 대한 예약 내역 -->
+    <select id="findBooksByUserId" resultType="com.lec.spring.domain.Booking">
+        <include refid="SELECT_BASE"/>
+        AND b.user_id = #{userId}
+    </select>
+
+    <select id="findByBookingId" resultType="com.lec.spring.domain.Booking">
+        <include refid="SELECT_BASE"/>
+        AND b.booking_id = #{bookingId}
+    </select>
+
+    <!-- DELETE -->
+    <delete id="deleteBooking" flushCache="true" parameterType="com.lec.spring.domain.Booking">
+        DELETE FROM booking WHERE booking_id = #{bookingId}
+    </delete>
+</mapper>

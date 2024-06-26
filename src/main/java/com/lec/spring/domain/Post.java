@@ -15,9 +15,15 @@ public class Post {
     private String postText;  // NOT NULL
     private double postGrade;  // NOT NULL
 
+    // Join 해서 가져온 컬럼
+    private String lodgingName;
+    private String lodgingPicture1;
+    private String lodgingType;
+    private String roomName;
+
     // Foreign Key
     private Long userId;  // NOT NULL
-    private Long reservationId;  // NOT NULL
+    private Long bookingId;  // NOT NULL
     private Long lodgingId;  // NOT NULL
     private Long roomId;  // NOT NULL
 }

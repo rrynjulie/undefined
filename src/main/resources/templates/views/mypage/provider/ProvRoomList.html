@@ -44,9 +44,7 @@
                     </table>
                 </a>
             </div>
-        </div>
-        <div class="btn-list">
-            <button class="btn-register">객실 등록</button>
+            <div class="btn-list"><a class="btn-register" th:href="@{'/mypage/provider/ProvRoomRegister/' + ${lodging.lodgingId}}">객실 등록</a></div>
         </div>
     </section>
 </main>

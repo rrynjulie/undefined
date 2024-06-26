@@ -33,19 +33,61 @@
                 <th>user_email</th>
                 <th>user_regdate</th>
                 <th>user_nickname</th>
+                <th>authorities</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="manager : ${managers}">
                 <td th:text="${manager.userId}"></td>
-                <td th:text="${manager.userName}"></td>
-                <td th:text="${manager.userEmail}"></td>
-                <td th:text="${manager.userRegdate}"></td>
-                <td th:text="${manager.userNickname}"></td>
+                <td th:text="${manager.username}"></td>
+                <td th:text="${manager.email}"></td>
+                <td th:text="${manager.regDate}"></td>
+                <td th:text="${manager.nickname}"></td>
+                <td>
+                    <ul>
+                        <li th:each="authority : ${manager.authorities}" th:text="${authority.authorityId}"></li>
+                    </ul>
+                </td>
             </tr>
             </tbody>
         </table>
     </section>
+
+<!--    <section class="content">-->
+<!--        <h2>회원 목록</h2>-->
+<!--        <table>-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>user_id</th>-->
+<!--                <th>user_name</th>-->
+<!--                <th>user_email</th>-->
+<!--                <th>user_regdate</th>-->
+<!--                <th>user_nickname</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr th:each="manager : ${managers}">-->
+<!--                <td th:text="${manager.userId}"></td>-->
+<!--                <td th:text="${manager.username}"></td>-->
+<!--                <td th:text="${manager.email}"></td>-->
+<!--                <td th:text="${manager.regDate}"></td>-->
+<!--                <td th:text="${manager.nickname}"></td>-->
+
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+
+<!--        &lt;!&ndash; 권한 정보 출력 &ndash;&gt;-->
+<!--        <table>-->
+<!--            <tbody>-->
+<!--            <tr th:each="userAuthoritie : ${userAuthorities}">-->
+<!--                <td th:text="${userAuthoritie.userid}"></td>-->
+<!--                <td th:text="${userAuthoritie.authorityId}"></td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+
+<!--    </section>-->
 </main>
 </body>
 <script th:src="@{/js/mypage/manager/MemberManagement.js}"></script>

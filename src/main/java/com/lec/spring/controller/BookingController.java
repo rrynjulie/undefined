@@ -2,51 +2,49 @@ package com.lec.spring.controller;
 
 import com.lec.spring.config.PrincipalDetails;
 import com.lec.spring.domain.Lodging;
-import com.lec.spring.domain.Reservation;
+import com.lec.spring.domain.Booking;
 
 import com.lec.spring.domain.Room;
 import com.lec.spring.domain.User;
 import com.lec.spring.service.LodgingService;
-import com.lec.spring.service.ReservationService;
+import com.lec.spring.service.BookingService;
 import com.lec.spring.service.RoomService;
 import com.lec.spring.service.UserService;
-import com.lec.spring.util.U;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
-import java.security.Principal;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-public class ReservationController {
+public class BookingController {
 
-    private final ReservationService reservationService;
-    private final LodgingService lodgingService;
-    private final RoomService roomService;
-    private final UserService userService;
+    private BookingService bookingService;
+    private LodgingService lodgingService;
+    private RoomService roomService;
+    private UserService userService;
 
     @Autowired
-    public ReservationController(ReservationService reservationService, LodgingService lodgingService, RoomService roomService, UserService userService) {
-        this.reservationService = reservationService;
+    public BookingController(
+            BookingService bookingService
+            , LodgingService lodgingService
+            , RoomService roomService
+            , UserService userService
+    ) {
+        this.bookingService = bookingService;
         this.lodgingService = lodgingService;
         this.roomService = roomService;
         this.userService = userService;
     }
 
-    // 숙소 예약 폼 페이지 보여주기
     @GetMapping("/lodging/LodgingBooking")
-    public String ShowReservationForm(@RequestParam("lodgingId") Long lodgingId,
-                                      @RequestParam(value = "roomId", required = false) Long roomId,
-                                      Model model,
-                                      Authentication authentication) {
+    public String lodgingBooking(@RequestParam("lodgingId") Long lodgingId,
+                                 @RequestParam(value = "roomId", required = false) Long roomId,
+                                 Model model,
+                                 Authentication authentication) {
 
         if (authentication == null || !authentication.isAuthenticated()) {
             // 인증되지 않은 사용자 처리
@@ -85,20 +83,36 @@ public class ReservationController {
         }
         model.addAttribute("selectedRoom", selectedRoom);
 
-        model.addAttribute("reservation", new Reservation());
+        model.addAttribute("booking", new Booking());
 
         return "lodging/LodgingBooking";
     }
 
+    @GetMapping("/mypage/provider/ProvBookingList/{userId}")
+    public void provBookingList(Model model) {
 
-//    @PostMapping("/saveReservation")
-//    public ResponseEntity<String> saveReservation(@RequestBody Reservation reservation) {
-//        try {
-//            // 서비스 메서드 호출: 예약을 데이터베이스에 저장합니다
-//            reservationService.saveReservation(reservation);
-//            return ResponseEntity.ok("예약이 성공적으로 저장되었습니다!");
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("예약 저장에 실패했습니다");
-//        }
-//    }
+    }
+
+    @GetMapping("/mypage/customer/BookingList/{userId}")
+    public String BookingList(@PathVariable("userId") Long userId, Model model){
+        List<Booking> booking = bookingService.findBooksByUserId(userId);
+        model.addAttribute("booking", booking);
+        return "mypage/customer/BookingList";
+    }
+
+    @PostMapping("/mypage/customer/deleteBooking/{userId}/{bookingId}")
+    public String deleteBooking(@PathVariable("userId") Long userId,
+                                @PathVariable("bookingId") Long bookingId,
+                                Model model) {
+
+        LocalDate bookingStartDate = bookingService.getBookingStartDate(bookingId);
+        if (!bookingStartDate.isAfter(LocalDate.now())) {
+            model.addAttribute("errorMessage", "예약을 취소할  수 없습니당");
+            return "error";
+        }
+
+        bookingService.deleteByBookingId(bookingId);
+        return "redirect:/mypage/customer/BookingList/" + userId;
+    }
+
 }

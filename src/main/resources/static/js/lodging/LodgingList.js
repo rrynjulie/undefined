@@ -60,21 +60,25 @@ function filterLodging(type) {
 
             data.forEach(lodging => {
                 resultDiv.innerHTML += `
-                            <div style="display: flex; width: 48%; height: 100%; margin-bottom: 10px;">
-                                <a class="item" href="/lodging/LodgingDetail/${lodging.lodgingId}">
-                                    <p class="item-img"><img src="${lodging.lodgingPicture1}" alt="Lodging Picture"></p>
-                                    <div class="item-details">
-                                        <p class="item-title">${lodging.lodgingName}</p>
-                                        <p class="item-rating">⭐ 4.6(512)</p>
-                                        <p class="item-type">${lodging.lodgingType}</p>
-                                        <p class="item-price">${lodging.roomPrice}원 ~</p>
+                           <div style="display: flex; width: 48%; height: 100%; margin-bottom: 10px;">
+                            <a class="item" href="/lodging/LodgingDetail/${lodging.lodgingId}">
+                                <p class="item-img">
+                                    <img src="${lodging.lodgingPicture1}" alt="Lodging Picture"/>
+                                <div class="item-details">
+                                    <p class="item-title">${lodging.lodgingName}</p>
+                                    <div class="item-type">${lodging.lodgingType}</div>
+                                    <div class="item-rating" style="display: flex; align-items: center;">
+                                        <p id="star">&#9733;</p>
+                                        <p class="star">${lodging.avgPostGrade}</p>
                                     </div>
-                                </a>
-                            </div>
+                                    <p class="item-price">${lodging.roomPrice.toLocaleString()}원 ~</p>
+                                </div>
+                            </a>
+                        </div>
                         `;
+                console.log(data);
             });
 
-            // 검색 결과 개수 업데이트
             document.getElementById('result-filter').innerHTML = `<span>${data.length}개의 검색 결과</span>`;
         })
         .catch(error => {
