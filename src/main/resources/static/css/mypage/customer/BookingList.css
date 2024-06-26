@@ -65,7 +65,7 @@ main {
 }
 
 /*예약내역*/
-#reservation {
+#booking {
     padding: 20px; /* 안쪽 여백 설정 */
     width: 70%;
     height: 90%;
@@ -73,12 +73,12 @@ main {
     margin-right: 90px;
 }
 
-#reservation h2 {
+#booking h2 {
     color: black; /* 제목 글자색 설정 */
     margin-bottom: 40px; /* 아래쪽 여백 설정 */
 }
 
-.reservation-content {
+.booking-content {
     background-color: rgba(255, 255, 255, 0.61);
     height: 90%;
     padding: 20px;
@@ -107,7 +107,7 @@ main {
 }
 
 /*예약내역 상세*/
-.reservation-content {
+.booking-content {
     display: flex;
     flex-direction: column;
     gap: 20px; /* 예약 항목 사이의 간격 */

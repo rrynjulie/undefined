@@ -17,7 +17,7 @@
 <!--            resultType="com.lec.spring.domain.Authority">-->
 <!--        SELECT a.authority_id "id", a.authority_name "name"-->
 <!--        FROM authority a, user_authority u-->
-<!--        WHERE a.authority_id = u.authority_id AND u.user_id = #{id};-->
+<!--        WHERE a.authority_id = u.authority_id AND u.user_id = #{userId};-->
 <!--    </select>-->
 
     <insert id="addAuthority" flushCache="true">

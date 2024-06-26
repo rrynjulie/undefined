@@ -6,7 +6,7 @@ import com.lec.spring.domain.User;
 
 public interface UserRepository {
 
-    User findById(Long id);
+    User findById(Long userId);
 
     // 특정 email 의 user return
     User findByNickname(String nickname);

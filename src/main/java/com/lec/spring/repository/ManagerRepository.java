@@ -1,6 +1,8 @@
 package com.lec.spring.repository;
 
-import com.lec.spring.domain.Manager;
+
+import com.lec.spring.domain.UserAuthority;
+import com.lec.spring.domain.User;
 
 import java.util.List;
 
@@ -8,17 +10,20 @@ import java.util.List;
 public interface ManagerRepository {
 
     // 모든 사용자 조회
-    List<Manager> findAll();
+    List<User> findAll();
 
-    // 아이디로 사용자 조회
-//    Optional<User> findById(Long id);
+    // 권한정보 불러오기
+    List<UserAuthority> findAllUserAuthority();
 
-    // 사용자 저장
-//    User save(User user);
 
-    //아이디로 사용자 삭제
-//    void deleteById(Long id);
+    //사용자와 권한정보 테이블 조인
+    List<User> findAllWithAuthorities();
 
+
+    // 특정 id에 따른 권한 추가 (insert)
+
+
+    // 특정 id에 따른 권한 제거 (delete)
 
 
 }

@@ -13,11 +13,12 @@ import java.util.List;
 @Builder
 public class User {
 
+    //유저 번호
     private Long userId;
 
 //    private Long id;
 
-
+    // 유저 닉네임
     private String nickname;
     @JsonIgnore
     private String password;
@@ -48,10 +49,6 @@ public class User {
 
     public String getRe_password() {
         return re_password;
-    }
-
-    public void setRe_password(String re_password) {
-        this.re_password = re_password;
     }
 
     public String getUsername() {
@@ -109,8 +106,12 @@ public class User {
 
     private List<Authority> authorities = new ArrayList<>();
 
+    // oAuth2 Client
+    private String provider;
+    private String providerId;
+//    private Boolean hasRoleProvider;
 
-}
+
 
 
 

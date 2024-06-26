@@ -31,6 +31,8 @@ public class ProvLodging {
     private String lodgingOwnerId;         // 숙소 주인 ID
 //    private boolean lodgingApproval;       // 숙소 승인 여부
 
+
+
     private Long userId;
 
     private List<Room> roomList;

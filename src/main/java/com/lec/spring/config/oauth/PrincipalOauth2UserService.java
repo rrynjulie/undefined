@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
     private final UserService userService;
+
     private final String oauth2Password;
 
     @Autowired
@@ -28,11 +29,40 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+        System.out.println("OAuth2UserService.loadUser() 호출");
         OAuth2User oAuth2User = super.loadUser(userRequest);
-        OAuth2UserInfo oAuth2UserInfo = getOAuth2UserInfo(oAuth2User, userRequest.getClientRegistration().getRegistrationId());
-        String nickname = oAuth2UserInfo.getProviderId();
+        System.out.println("""
+             ClientRegistration: %s
+             RegistrationId: %s
+             AccessToken: %s
+             OAuth2User Attributes : %s
+           """.formatted(
+                userRequest.getClientRegistration()    // ClientRegistration
+                , userRequest.getClientRegistration().getRegistrationId()   // id?
+                , userRequest.getAccessToken().getTokenValue()  // access token
+                , oAuth2User.getAttributes()    // Map<String, Object>  <- 사용자 프로필 정보
+        ));
+
+
+        String provider = userRequest.getClientRegistration().getRegistrationId();
+
+        OAuth2UserInfo oAuth2UserInfo = switch(provider.toLowerCase()){
+            case "google" -> new GoogleUserInfo(oAuth2User.getAttributes());
+            case "naver" -> new GoogleUserInfo(oAuth2User.getAttributes());
+            default -> null;
+        };
+
+        if (oAuth2UserInfo == null) {
+            throw new IllegalArgumentException("Unsupported provider: " + provider);
+        }
+
+        String providerId = oAuth2UserInfo.getProviderId();
+        String nickname = provider + "_" + providerId;
+        String password = oauth2Password;
         String email = oAuth2UserInfo.getEmail();
         String name = oAuth2UserInfo.getName();
+
+
         User user = userService.findByNickname(nickname);
 
         if (user == null) {
@@ -41,6 +71,8 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
                     .username(name)
                     .email(email)
                     .password(oauth2Password)
+                    .provider(provider)
+                    .providerId(providerId)
                     .build();
             int cnt = userService.register(newUser);
             if (cnt > 0) {
@@ -54,15 +86,9 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         }
 
         PrincipalDetails principalDetails = new PrincipalDetails(user, oAuth2User.getAttributes());
+        principalDetails.setUserService(userService);
         return principalDetails;
     }
 
-    private OAuth2UserInfo getOAuth2UserInfo(OAuth2User oAuth2User, String registrationId) {
-        switch (registrationId.toLowerCase()) {
-            case "google":
-                return new GoogleUserInfo(oAuth2User.getAttributes());
-            default:
-                throw new IllegalArgumentException("Unsupported provider: " + registrationId);
-        }
-    }
+
 }

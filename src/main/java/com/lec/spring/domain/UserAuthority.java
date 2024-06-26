@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ManagerAuthority {
-    private int userid; // 사용자 ID
-    private int authorityId; // 권한 ID
+public class UserAuthority {
+    private Long userid; // 사용자 ID
+    private Long authorityId; // 권한 ID
 }
