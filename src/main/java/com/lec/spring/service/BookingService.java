@@ -1,7 +1,6 @@
 package com.lec.spring.service;
 
 import com.lec.spring.domain.Booking;
-import com.lec.spring.domain.ProvLodging;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,7 +14,7 @@ public interface BookingService {
 
     List<Booking> findBooksByUserId(Long userId);
 
-    int deleteByBookingId(Long bookingId);
+    int deleteBooking(Long bookingId);
 
     LocalDate getBookingStartDate(Long bookingId);
 }

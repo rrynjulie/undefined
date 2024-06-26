@@ -10,11 +10,11 @@ import java.util.List;
 public interface BookingRepository {
     int createBooking(Booking booking);
 
+    Booking findByBookingId(Long bookingId);
+
     List<Booking> findBooksByRoomId(Long roomId);
 
     List<Booking> findBooksByUserId(Long userId);
-
-    Booking findByBookingId(Long bookingId);
 
     int deleteBooking(Booking booking);
 

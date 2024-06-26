@@ -14,4 +14,20 @@ import lombok.NoArgsConstructor;
 public class UserAuthority {
     private Long userid; // 사용자 ID
     private Long authorityId; // 권한 ID
+
+    public Long getUserId() {
+        return userid;
+    }
+
+    public void setUserId(Long userid) {
+        this.userid = userid;
+    }
+
+    public Long getAuthorityId() {
+        return authorityId;
+    }
+
+    public void setAuthorityId(Long authorityId) {
+        this.authorityId = authorityId;
+    }
 }

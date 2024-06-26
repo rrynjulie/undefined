@@ -5,8 +5,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const nextButton = document.getElementById('next');
     const selectedDate = document.getElementById('selectedDate');
     let currentDate = new Date();
-    let startDate = null;
-    let endDate = null;
+    let startDate = sessionStorage.getItem('startDate') ? new Date(sessionStorage.getItem('startDate')) : new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+    let endDate = sessionStorage.getItem('endDate') ? new Date(sessionStorage.getItem('endDate')) : new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
+
+    if (!sessionStorage.getItem('startDate')) {
+        sessionStorage.setItem('startDate', startDate.toISOString());
+    }
+    if (!sessionStorage.getItem('endDate')) {
+        sessionStorage.setItem('endDate', endDate.toISOString());
+    }
     let lastClickedCells = [];
 
     function renderCalendar(date) {
@@ -32,51 +39,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let cellDate = new Date(year, month, date);
 
-            // 입실일과 퇴실일 사이의 날짜 색상 처리
             if (startDate && endDate) {
-                const start = startDate.getTime();
-                const end = endDate.getTime();
+                const start = new Date(startDate).getTime();
+                const end = new Date(endDate).getTime();
                 const cellTime = cellDate.getTime();
                 if (cellTime > start && cellTime < end) {
                     cell.style.backgroundColor = '#ff86ab'; // 입실일과 퇴실일 사이의 날짜 색상
                 }
             }
 
-            if (startDate && cellDate.toDateString() === startDate.toDateString()) {
+            if (startDate && cellDate.toDateString() === new Date(startDate).toDateString()) {
                 cell.style.backgroundColor = '#FC5185';
                 lastClickedCells.push(cell);
-            } else if (endDate && cellDate.toDateString() === endDate.toDateString()) {
+            } else if (endDate && cellDate.toDateString() === new Date(endDate).toDateString()) {
                 cell.style.backgroundColor = '#FC5185';
                 lastClickedCells.push(cell);
             }
 
             cell.addEventListener('click', function() {
                 if (!startDate) {
-                    lastClickedCells.forEach(function(cell) {
-                        cell.style.backgroundColor = 'white';
-                    });
-                    lastClickedCells = [];
+                    clearLastClickedCells();
                     startDate = new Date(year, month, date);
                     cell.style.backgroundColor = '#FC5185';
                     lastClickedCells.push(cell);
                     saveSelectedDate();
                 } else if (!endDate) {
-                    // 입실일과 퇴실일 사이의 날짜 색상 처리
                     if (startDate < cellDate) {
                         endDate = new Date(year, month, date);
                         lastClickedCells.push(cell);
-                        renderCalendar(currentDate); // 달력을 다시 렌더링하여 색상을 업데이트합니다.
+                        renderCalendar(currentDate);
                         saveSelectedDate();
                     }
-                    const nights = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
-                    selectedDate.innerHTML = `${startDate.getFullYear()}.${startDate.getMonth() + 1}.${startDate.getDate()} ~ ${endDate.getFullYear()}.${endDate.getMonth() + 1}.${endDate.getDate()}, ${nights}박`;
+                    updateSelectedDateText();
                     saveSelectedDate();
-
                 } else {
-                    lastClickedCells.forEach(function(cell) {
-                        cell.style.backgroundColor = 'white';
-                    });
-                    lastClickedCells = [];
+                    clearLastClickedCells();
                     startDate = new Date(year, month, date);
                     endDate = null;
                     cell.style.backgroundColor = '#FC5185';
@@ -93,8 +90,20 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function saveSelectedDate() {
-        sessionStorage.setItem('startDate', startDate ? startDate.toString() : '');
-        sessionStorage.setItem('endDate', endDate ? endDate.toString() : '');
+        sessionStorage.setItem('startDate', startDate ? startDate.toISOString() : '');
+        sessionStorage.setItem('endDate', endDate ? endDate.toISOString() : '');
+    }
+
+    function clearLastClickedCells() {
+        lastClickedCells.forEach(function(cell) {
+            cell.style.backgroundColor = 'white';
+        });
+        lastClickedCells = [];
+    }
+
+    function updateSelectedDateText() {
+        const nights = Math.ceil((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24));
+        selectedDate.textContent = `${new Date(startDate).getFullYear()}.${new Date(startDate).getMonth() + 1}.${new Date(startDate).getDate()} ~ ${new Date(endDate).getFullYear()}.${new Date(endDate).getMonth() + 1}.${new Date(endDate).getDate()}, ${nights}박`;
     }
 
     prevButton.addEventListener('click', function() {
@@ -109,26 +118,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     renderCalendar(currentDate);
 });
+
 document.addEventListener('DOMContentLoaded', function() {
     const decreaseBtn1 = document.getElementById('decrease-btn1');
     const increaseBtn1 = document.getElementById('increase-btn1');
     const adultCountDiv = document.getElementById('adult-count');
-
     const decreaseBtn2 = document.getElementById('decrease-btn2');
     const increaseBtn2 = document.getElementById('increase-btn2');
     const childCountDiv = document.getElementById('child-count');
-
-    const totalDiv = document.getElementsByClassName('total')[0];
-
     let adultCount = parseInt(sessionStorage.getItem('adultCount')) || 1;
     let childCount = parseInt(sessionStorage.getItem('childCount')) || 0;
 
     function updateCount() {
         adultCountDiv.textContent = adultCount;
         childCountDiv.textContent = childCount;
-        totalDiv.textContent = `성인 ${adultCount}, 아동 ${childCount}`;
-        sessionStorage.setItem('adultCount', adultCount);
-        sessionStorage.setItem('childCount', childCount);
+        sessionStorage.setItem('adultCount', adultCount.toString());
+        sessionStorage.setItem('childCount', childCount.toString());
     }
 
     updateCount();
@@ -181,24 +186,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function saveSearchHistory(searchWord) {
         let searchHistory = JSON.parse(sessionStorage.getItem('searchHistory')) || [];
-        let searchDate = new Date();
-        let startDate = sessionStorage.getItem('startDate') || "";
-        let endDate = sessionStorage.getItem('endDate') || "";
-        let adultCount = parseInt(sessionStorage.getItem('adultCount')) || 1;
-        let childCount = parseInt(sessionStorage.getItem('childCount')) || 0;
-
         searchHistory.unshift({
             word: searchWord,
-            startDate: startDate,
-            endDate: endDate,
-            adults: adultCount,
-            children: childCount
+            startDate: sessionStorage.getItem('startDate') || new Date().toISOString(),
+            endDate: sessionStorage.getItem('endDate') || new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString(),
+            adults: parseInt(sessionStorage.getItem('adultCount')) || 1,
+            children: parseInt(sessionStorage.getItem('childCount')) || 0
         });
-
         sessionStorage.setItem('searchHistory', JSON.stringify(searchHistory));
-        updateRecentlySearches();
     }
 
+
+    // 최근검색어 js
     function updateRecentlySearches() {
         let searchHistory = JSON.parse(sessionStorage.getItem('searchHistory')) || [];
         let recentlySearchContainer = document.getElementById("recently-search-container");
@@ -230,4 +229,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     updateRecentlySearches();
+
+
 });

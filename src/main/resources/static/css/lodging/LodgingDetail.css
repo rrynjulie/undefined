@@ -410,5 +410,10 @@
     height: 130px;
     display: flex;
     border-radius: 10px;
+    background-color: #f5f5f5;;
+}
+#postText {
+    padding: 10px;
+    font-size: 14px;
 }
 
