@@ -89,7 +89,6 @@ public class BookingController {
 
     @GetMapping("/mypage/provider/ProvBookingList/{userId}")
     public void provBookingList(Model model) {
-
     }
 
     @GetMapping("/mypage/customer/BookingList/{userId}")

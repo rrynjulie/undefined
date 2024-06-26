@@ -1,89 +1,31 @@
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 400;
+    src:
+            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'),
+            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'),
+            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');
+}
+
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: white; /* 전체 배경색 */
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 main {
     display: flex;
-    justify-content: space-between; /* 섹션들을 좌우로 정렬 */
-    padding: 20px  50px;
-    height: 700px;
-}
-
-/*닉네임*/
-.profile-menu-container {
-    margin-left: 50px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* 요소들 사이의 간격 설정 */
-}
-
-.profile-info {
-    margin-top: 20px;
-    padding: 20px;
-}
-
-.profile-info h2 {
-    font-size: 24px;
-    color: #000000; /* 닉네임 텍스트 색상 */
-}
-
-/*메뉴리스트*/
-.menu-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* 메뉴 아이템 사이의 간격 설정 */
-    width: 200px;
-    height: 430px;
-    border-radius: 10px;
-    border: 1px solid #d2d2d2;
-}
-
-.menu-item {
-    margin-top: 10px;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
+    padding: 40px 20%;
+    height: fit-content;
     justify-content: space-between;
-    font-size: 16px;
-    background-color: white;
-}
-
-.icon-right {
-    width: 15px;
-    height: auto;
-    margin-left: 5px;
 }
 
 /*예약내역*/
-#booking {
-    padding: 20px; /* 안쪽 여백 설정 */
-    width: 70%;
-    height: 90%;
-    margin-top: 20px; /* 위쪽 여백 설정 */
-    margin-right: 90px;
-}
-
-#booking h2 {
-    color: black; /* 제목 글자색 설정 */
-    margin-bottom: 40px; /* 아래쪽 여백 설정 */
-}
-
-.booking-content {
-    background-color: rgba(255, 255, 255, 0.61);
-    height: 90%;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+.booking-list {
+    background-color: white;
+    width: 75%;
+    height: auto;
 }
 
 /*검색필터*/
@@ -91,91 +33,111 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 30px;
+    margin: 30px 0 80px 0;
+    height: 35px;
     width: 100%;
+}
+
+.filter-frame {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-frame label {
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .filter-container select {
     padding: 10px;
-    font-size: 16px;
-    border: 1px solid #000000;
+    font-size: 15px;
+    border: 1px solid #EBEBEB;
     border-radius: 4px;
-    background-color: rgba(239, 239, 239, 0.72);
-    color: #333;
-    width: 430px;
+    width: 350px;
 }
 
-/*예약내역 상세*/
-.booking-content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* 예약 항목 사이의 간격 */
-}
-
-.booking-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    background-color: #FFF;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.booking-item:last-child {
-    border-bottom: none;
-}
-
-.booking-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.booking-info h3 {
-    margin: 0 0 10px 0;
-}
-
-.booking-info p {
-    margin: 5px 0;
-}
-
-.review {
-    margin-top: 100px;
-}
-
-/* 모달 기본 스타일 */
-.modal {
-    display: none; /* 초기에는 숨겨진 상태 */
-    position: fixed; /* 고정 위치 */
-    z-index: 1000; /* 상위 요소 */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5); /* 반투명한 배경 */
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+.btn-search {
+    max-height: 100%;
+    margin-top: 75px;
     cursor: pointer;
 }
 
-.close:hover,
-.close:focus {
-    color: black;
+.btn-search:hover {
+    transform: scale(1.02);
+}
+
+.before-use-frame {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #EBEBEB;
+    border-radius: 7px;
+    margin-top: 20px;
+    padding: 25px;
+}
+
+.lodging-info-frame {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.lodging-info-inner {
+    display: flex;
+}
+
+.lodging-img {
+    border-radius: 5px;
+    background-color: #F5F5F5;
+    max-height: 100px;
+    margin-right: 20px;
+}
+
+.lodging-name {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.room-name {
+    color: grey;
+}
+
+.lodging-info-frame a {
     text-decoration: none;
+    color: #1273E4;
+}
+
+.check-date-frame {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.check-date-frame label {
+    color: grey;
+    margin-right: 70px;
+    font-size: 13px;
+}
+
+.check-date-frame label p {
+    color: black;
+    font-size: 17px;
+}
+
+.btn-booking-cancel {
+    text-decoration: none;
+    text-align: center;
+    align-content: center;
+    background-color: #FC5185;
+    color: white;
+    border-radius: 5px;
+    height: 40px;
+    width: 150px;
+    bottom: 0;
+}
+
+.h3-after-use {
+    margin-top: 30px;
 }
