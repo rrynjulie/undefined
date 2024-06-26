@@ -126,13 +126,8 @@ public class BookingController {
         return "mypage/customer/BookingList";
     }
 
-    @PostMapping("/mypage/customer/DeleteBooking/{userId}/{bookingId}")
-    public String deleteBooking(@PathVariable("userId") Long userId,
-                                @PathVariable("bookingId") Long bookingId,
-                                Model model) {
-
     @PostMapping("/mypage/customer/CancelBookingOk")
-    public String cancelBookingOk(Long bookingId Model model) {
+    public String cancelBookingOk(Long bookingId, Model model) {
         LocalDate bookingStartDate = bookingService.getBookingStartDate(bookingId);
         if (!bookingStartDate.isAfter(LocalDate.now())) {
             model.addAttribute("errorMessage", "예약을 취소할 수 없습니당");
