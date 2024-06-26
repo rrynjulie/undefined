@@ -13,11 +13,12 @@ import java.util.List;
 @Builder
 public class User {
 
+    //유저 번호
     private Long userId;
 
 //    private Long id;
 
-
+    // 유저 닉네임
     private String nickname;
     @JsonIgnore
     private String password;
@@ -108,6 +109,8 @@ public class User {
     private String phonenum;
 
     private List<Authority> authorities = new ArrayList<>();
+
+//    private Boolean hasRoleProvider;
 
 
 }
