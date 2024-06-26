@@ -87,9 +87,9 @@
                 <td th:text="${booking.bookingPay}"></td>
                 <td th:text="${booking.roomId}"></td>
                 <td>
-                    <form th:action="@{/mypage/customer/{userId}/booking/delete/{bookingId}(userId=${userId}, bookingId=${booking.bookingId})}" method="post">
+                    <form th:action="@{/mypage/customer/deleteBooking/{userId}/{bookingId}(userId=${userId}, bookingId=${booking.bookingId})}" method="post">
                         <input type="hidden" name="userId" th:value="${userId}">
-                        <input type="hidden" name="bookingId" th:value="${booking.bookingId}">
+                        <input type="hidden" name="bookingId" th:value="${bookingId}">
                         <input type="submit" value="삭제">
                     </form>
                 </td>

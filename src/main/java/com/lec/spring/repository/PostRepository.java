@@ -17,16 +17,14 @@ public interface PostRepository {
 
     List<Post> findPostsByRoomId(Long roomId);
 
+    List<Post> findPostByLodgingId(Long lodgingId);
+
     int updatePost(Post post);
     List<Post> postUserId(@Param("userId") Long userId);
 
-    List<Post> postUserUpdate(@Param("userId") Long userId, @Param("postId") Long postId);
+    List<Post> postUser(@Param("userId") Long userId, @Param("postId") Long postId);
 
     int postUpdate(Post post);
 
-//    오류 때문에 잠시 주석처리
-//    void createPost(Post post);
-
-
-    int deletePost(Post post);
+    int postDelete(Post post);
 }

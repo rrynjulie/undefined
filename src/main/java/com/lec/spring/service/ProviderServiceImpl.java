@@ -45,4 +45,14 @@ public class ProviderServiceImpl implements ProviderService {
         });
         return lodgingList;
     }
+
+    @Override
+    public void updateLodging(ProvLodging lodging) {
+        providerRepository.updateLodging(lodging);
+    }
+
+    @Override
+    public void deleteLodging(int lodgingId) {
+        providerRepository.deleteLodging(lodgingId);
+    }
 }

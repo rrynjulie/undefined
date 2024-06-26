@@ -19,7 +19,7 @@
     </delete>
 
 <!-- 사용자 ID로 권한 조회 -->
-    <select id="findByUserId" parameterType="int" resultType="com.lec.spring.domain.ManagerAuthority">
+    <select id="findByUserId" parameterType="int" resultType="com.lec.spring.domain.UserAuthority">
         SELECT user_id, authority_id
         FROM user_authority
         WHERE user_id = #{userId}

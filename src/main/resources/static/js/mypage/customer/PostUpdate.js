@@ -9,15 +9,15 @@ document.addEventListener('DOMContentLoaded', function() {
             highlightStars(value);  // highlightStars 에 저장
         });
 
-        star.addEventListener('mouseover', function() { // 마우스를 star 에 올렸을 때
-            const value = this.getAttribute('data-value');
-            highlightStars(value);
-        });
+        // star.addEventListener('mouseover', function() { // 마우스를 star 에 올렸을 때
+        //     const value = this.getAttribute('data-value');
+        //     highlightStars(value);
+        // });
 
-        star.addEventListener('mouseout', function() {  // 마우스를 star 밖으로 댈 때
-            const value = starsInput.value;    // starsInput 의 value 를 value 에 저장
-            highlightStars(value);
-        });
+        // star.addEventListener('mouseout', function() {  // 마우스를 star 밖으로 댈 때
+        //     const value = starsInput.value;    // starsInput 의 value 를 value 에 저장
+        //     highlightStars(value);
+        // });
     });
 
     function highlightStars(value) {
@@ -29,16 +29,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-});
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    var starsContainers = document.querySelectorAll('.stars');
-    starsContainers.forEach(function(container) {
-        var starCount = container.getAttribute('data-star-count');
-        var stars = container.querySelectorAll('.star');
-        for (var i = 0; i < starCount; i++) {
-            stars[i].classList.add('filled');
-        }
-    });
 });

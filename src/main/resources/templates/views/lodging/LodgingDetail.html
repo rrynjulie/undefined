@@ -13,12 +13,9 @@
 
     <div>
         <div class="slideshow-container">
-
             <div class="mySlides" th:each="lodgingName : ${lodgingName}">
                 <img class="img" th:src="${lodgingName.lodgingPicture1}">
             </div>
-
-
         </div>
     </div>
 
@@ -33,32 +30,28 @@
     </div>
 
 
+
     <div class="review-header" th:each="lodgingName : ${lodgingName}">
-        <div>⭐ 평균별점</div>
+        <div style="display: flex">
+            <div id="totalStar">&#9733;</div>
+            <div id="avgPostGrade" th:text="${avgPostGrade}"></div>
+        </div>
         <a class="all" th:href="@{'/lodging/LodgingPostList/' + ${lodgingName.lodgingId}}">전체보기 ></a>
     </div>
 
-    <div class="item-list" th:each="lodgingName : ${lodgingName}">
-        <div class="item">
-            <div class="item-details">
-                <p class="item-rating">⭐ 4.6(512)</p>
-                <p class="item-title">리뷰 내용</p>
+    <div id="postDivContainer">
+        <div id="postDiv" th:each="lodgingPost, iterStat : ${lodgingPost}" th:if="${iterStat.index < 3}" style="border: 1px solid black; display: flex; justify-content: space-between">
+            <div>
+                <div class="stars" th:attr="data-star-count=${lodgingPost.postGrade}">
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                </div>
+                <div th:text="${lodgingPost.postText}"></div>
             </div>
-            <img class="lodging-img" th:src="${lodgingName.roomPicture1}" alt="호텔 이미지">
-        </div>
-        <div class="item">
-            <div class="item-details">
-                <p class="item-rating">⭐ 4.6(512)</p>
-                <p class="item-title">리뷰 내용</p>
-            </div>
-            <img class="lodging-img" th:src="${lodgingName.roomPicture2}" alt="호텔 이미지">
-        </div>
-        <div class="item">
-            <div class="item-details">
-                <p class="item-rating">⭐ 4.6(512)</p>
-                <p class="item-title">리뷰 내용</p>
-            </div>
-            <img class="lodging-img" src="placeholder.png" alt="호텔 이미지">
+            <div th:text="${lodgingPost.postPicture}"></div>
         </div>
     </div>
 
