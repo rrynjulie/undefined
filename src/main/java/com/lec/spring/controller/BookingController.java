@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -97,6 +98,21 @@ public class BookingController {
         List<Booking> booking = bookingService.findBooksByUserId(userId);
         model.addAttribute("booking", booking);
         return "mypage/customer/BookingList";
+    }
+
+    @PostMapping("/mypage/customer/deleteBooking/{userId}/{bookingId}")
+    public String deleteBooking(@PathVariable("userId") Long userId,
+                                @PathVariable("bookingId") Long bookingId,
+                                Model model) {
+
+        LocalDate bookingStartDate = bookingService.getBookingStartDate(bookingId);
+        if (!bookingStartDate.isAfter(LocalDate.now())) {
+            model.addAttribute("errorMessage", "예약을 취소할  수 없습니당");
+            return "error";
+        }
+
+        bookingService.deleteByBookingId(bookingId);
+        return "redirect:/mypage/customer/BookingList/" + userId;
     }
 
 }

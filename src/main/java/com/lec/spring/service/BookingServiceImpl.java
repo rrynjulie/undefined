@@ -5,6 +5,7 @@ import com.lec.spring.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -33,7 +34,22 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public int deleteBooking(Booking booking) {
-        return bookingRepository.deleteBooking(booking);
+    public int deleteByBookingId(Long bookingId) {
+        int result = 0;
+
+        Booking booking = bookingRepository.findByBookingId(bookingId);
+        if(booking != null){
+            result = bookingRepository.deleteBooking(booking);
+        }
+
+        return result;
     }
+
+    @Override
+    public LocalDate getBookingStartDate(Long bookingId) {
+        Booking booking = bookingRepository.findByBookingId(bookingId);
+        return booking.getBookingStartDate();
+    }
+
+
 }
