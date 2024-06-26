@@ -92,9 +92,11 @@ public class BookingController {
 
     }
 
-//    @GetMapping("/mypage/customer/BookingList/{userId}")
-//    public String BookingList(@PathVariable("userId") Long userId, Model model){
-//        //List<Booking> booking = bookingService.getBookingDetails(userId);
-//
-//    }
+    @GetMapping("/mypage/customer/BookingList/{userId}")
+    public String BookingList(@PathVariable("userId") Long userId, Model model){
+        List<Booking> booking = bookingService.findBooksByUserId(userId);
+        model.addAttribute("booking", booking);
+        return "mypage/customer/BookingList";
+    }
+
 }
