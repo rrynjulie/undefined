@@ -24,10 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
         total.innerHTML = `성인 ${storedAdultCount}명, 아동 ${storedChildCount}명`;
     }
 
-    // 예약 폼 제출 시 처리
-    // booking.addEventListener('submit', function (event) {
-    // });
-
     // 페이지 로드 시 예약 정보를 표시
     showBookingInfo();
+
+    //예약 폼 제출 시 처리
+    booking.addEventListener('submit', function (event) {
+    });
 });
