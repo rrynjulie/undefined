@@ -115,6 +115,3 @@ public class User {
 //    private Boolean hasRoleProvider;
 
 
-
-
-
