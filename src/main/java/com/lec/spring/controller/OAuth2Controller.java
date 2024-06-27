@@ -149,7 +149,7 @@ public class OAuth2Controller {
         String name = profile.getKakaoAccount().getProfile().getNickname();
         String password = oauth2Password;
 
-        User user = userService.findByNickname(nickname);
+        User user = userService.findByProviderId(providerId);
         if (user == null){  // 미가입자인 경우에만 회원가입 진행
             User newUser = User.builder()
                     .nickname(nickname)
@@ -162,7 +162,7 @@ public class OAuth2Controller {
             int cnt = userService.register(newUser);  // 회원가입 INSERT
             if (cnt > 0){
                 System.out.println("[Kakao 인증 회원 가입 성공]");
-                user = userService.findByNickname(nickname);    // 다시 읽어온다 id, regdate
+                user = userService.findByProviderId(providerId);    // 다시 읽어온다 id, regdate
             } else {
                 System.out.println("[Kakao 인증 회원 가입 실패]");
             }
@@ -177,7 +177,7 @@ public class OAuth2Controller {
     // 로그인 시키기
     public void loginKakaoUser(User kakaoUser) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                kakaoUser.getNickname(),    // nickname
+                kakaoUser.getProviderId(),    // nickname
                 oauth2Password              // password
         );
 

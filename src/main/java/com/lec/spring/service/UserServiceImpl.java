@@ -55,8 +55,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isExist(String nickname) {
-        User user = findByNickname(nickname);
+    public boolean isExist(String providerId) {
+        User user = findByProviderId(providerId);
         return user != null;
     }
 
@@ -194,6 +194,11 @@ public class UserServiceImpl implements UserService {
         }
         // 비밀번호 확인 로직 구현 (예: 암호화된 비밀번호 비교)
         return passwordEncoder.matches(currentPassword, user.getPassword());
+    }
+
+    @Override
+    public User findByProviderId(String providerId) {
+        return userRepository.findByProviderId(providerId);
     }
 
     private static class UserRowMapper implements RowMapper<User> {
