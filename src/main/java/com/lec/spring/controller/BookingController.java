@@ -78,9 +78,9 @@ public class BookingController {
                                    Model model,
                                    Principal principal) {
         booking.setBookingTime(LocalDateTime.now());
-        // 사용자 이름 설정
-        String userName = principal.getName(); // 사용자 이름 가져오기
-        booking.setVisitorName(userName);
+//        // 사용자 이름 설정
+//        String userName = principal.getName(); // 사용자 이름 가져오기
+//        booking.setVisitorName(userName);
 
         model.addAttribute("result", bookingService.createBooking(booking));
 

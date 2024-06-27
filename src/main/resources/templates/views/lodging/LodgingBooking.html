@@ -19,7 +19,7 @@
 
 
     <label class="info-label" for="visitorName">이용자 이름: <div class="required-dot"></div></label>
-    <span class="info-span" id="visitorName" name="visitorName" th:value="${visitorName}" th:text="${user.userName}"></span>
+    <span class="info-span" id="visitorName" name="visitorName" th:value="${visitorName}" th:text="${user.username}"></span>
 <!--    <input class="info-input" id="visitorName" name="visitorName" type="text" placeholder="객실명을 입력하세요." th:value="${user.userName}">-->
 <!--    <label>이용자 이름: </label>-->
 <!--    <span th:text="${user.username}"></span>-->
@@ -32,24 +32,24 @@
 <!--    <input type="hidden" name="visitorPhoneNum" th:value="${user.phonenum}" />-->
 
     <!-- 예약인원 -->
-    <label>성인: </label>
-    <input type="number" name="bookingAdult" min="0" required />
+<!--    <label>성인: </label>-->
+<!--    <input type="number" name="bookingAdult" min="0" required />-->
 
-    <label>아동: </label>
-    <input type="number" name="bookingChild" min="0" required />
+<!--    <label>아동: </label>-->
+<!--    <input type="number" name="bookingChild" min="0" required />-->
 
-    <!-- 예약 날짜 -->
-    <label>예약 시작 날짜: </label>
-    <input type="date" name="bookingStartDate" required />
+<!--    &lt;!&ndash; 예약 날짜 &ndash;&gt;-->
+<!--    <label>예약 시작 날짜: </label>-->
+<!--    <input type="date" name="bookingStartDate" required />-->
 
-    <label>예약 종료 날짜: </label>
-    <input type="date" name="bookingEndDate" required />
+<!--    <label>예약 종료 날짜: </label>-->
+<!--    <input type="date" name="bookingEndDate" required />-->
 
     <!-- 객실 -->
 
-    <label class="info-label" for="roomId">객실 이름: <div class="required-dot"></div></label>
+    <label class="info-label" for="roomName">객실 이름: <div class="required-dot"></div></label>
 <!--    <span class="info-span" id="roomId" name="roomId" th:value="${roomId}"></span>-->
-    <input type="hidden" id="roomId" th:value="${room.roomId}" />
+    <span type="info-span" id="roomName" th:value="${room.roomName}" ></span>-->
 <!--    <label>객실:</label>-->
 <!--    <span th:text="${room.roomName}"></span>-->
 <!--    <input type="hidden" name="roomId" th:value="${room.roomId}" />-->
@@ -66,10 +66,6 @@
     <label class="info-label" for="bookingPay">가격: <div class="required-dot"></div></label>
     <span class="info-span" id="bookingPay" name="bookingPay" th:value="${bookingPay}" th:text="${room.roomPrice}"></span>
 
-    <!-- 사용자 ID -->
-    <label class="info-label" for="userId">객실 이름: <div class="required-dot"></div></label>
-    <!--    <span class="info-span" id="roomId" name="roomId" th:value="${roomId}"></span>-->
-    <input type="hidden" id="userId" th:value="${user.userId}" />
 
 
     <!-- 결제 버튼 -->
