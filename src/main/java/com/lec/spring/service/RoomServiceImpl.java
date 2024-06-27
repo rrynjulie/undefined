@@ -1,7 +1,6 @@
 package com.lec.spring.service;
 
 import com.lec.spring.domain.Room;
-import com.lec.spring.repository.ProviderRepository;
 import com.lec.spring.repository.RoomRepository;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,11 +43,6 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public int updateRoom(Room room, Map<String, MultipartFile> files, Long[] delfile) {
-        return 0;
-    }
-
-    @Override
-    public int deleteRoom(Long roomId) {
         return 0;
     }
 

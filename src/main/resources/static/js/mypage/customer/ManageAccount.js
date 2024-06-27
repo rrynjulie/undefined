@@ -94,12 +94,6 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault(); // 기본 폼 제출 방지
 
         // 새 비밀번호와 확인 비밀번호가 일치하는지 확인
-        if (newPasswordInput.value !== confirmPasswordInput.value) {
-            confirmPasswordError.style.display = 'inline';
-            return;
-        } else {
-            confirmPasswordError.style.display = 'none';
-        }
 
         // 현재 비밀번호 확인을 위한 AJAX 요청
         var xhr = new XMLHttpRequest();
@@ -109,16 +103,23 @@ document.addEventListener('DOMContentLoaded', function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200 && xhr.responseText === 'success') {
                     currentPasswordError.style.display = 'none';
-
                     // 비밀번호가 일치하면 폼을 실제로 제출
                     manageAccountForm.submit();
                 } else {
                     currentPasswordError.style.display = 'inline';
-                    console.log("확인용A: " + xhr.status)
-                    console.log("확인용B: " + xhr.responseText)
+                    // console.log("확인용A: " + xhr.status)
+                    // console.log("확인용B: " + xhr.responseText)
                 }
             }
         };
+
+        if (newPasswordInput.value !== confirmPasswordInput.value) {
+            confirmPasswordError.style.display = 'inline';
+            return;
+        } else {
+            confirmPasswordError.style.display = 'none';
+        }
+
         xhr.send('currentPassword=' + encodeURIComponent(currentPasswordInput.value));
     });
 });
