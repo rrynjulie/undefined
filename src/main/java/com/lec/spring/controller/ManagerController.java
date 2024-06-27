@@ -35,8 +35,9 @@ public class ManagerController {
         List<User> managers = managerService.getAllUsersWithAuthorities();
         model.addAttribute("managers", managers);
 
-        System.out.println(managers);
-        System.out.println(userAuthorities);
+//        System.out.println(managers); // manager 출력해보기
+//        System.out.println(userAuthorities); // user 권한 출력해보기
+
         return "mypage/manager/MemberManagement";
     }
 
@@ -50,6 +51,18 @@ public class ManagerController {
     @PostMapping("/addRoleMaster")
     public String addRoleMaster(@RequestParam Long userId) {
         managerService.addUserAuthority(userId, 3L); // 3L is ROLE_MASTER
+        return "redirect:/mypage/manager/MemberManagement";
+    }
+
+    @PostMapping("/removeRoleProvider")
+    public String removeRoleProvider(@RequestParam Long userId) {
+        managerService.removeUserAuthority(userId, 2L); // 2L is ROLE_PROVIDER
+        return "redirect:/mypage/manager/MemberManagement";
+    }
+
+    @PostMapping("/removeRoleMaster")
+    public String removeRoleMaster(@RequestParam Long userId) {
+        managerService.removeUserAuthority(userId, 3L); // 3L is ROLE_MASTER
         return "redirect:/mypage/manager/MemberManagement";
     }
 

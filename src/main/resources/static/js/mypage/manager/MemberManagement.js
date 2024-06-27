@@ -41,3 +41,11 @@ function addRoleMaster(userId) {
         }
     });
 }
+
+function confirmAction(name, action) {
+
+    console.log("Name", name)
+    console.log("Action", action)
+
+    return confirm(action + " 하시겠습니까?");
+}

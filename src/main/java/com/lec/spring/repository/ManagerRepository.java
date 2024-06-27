@@ -24,7 +24,7 @@ public interface ManagerRepository {
     // 권한 추가 (insert)
     void addUserAuthority(UserAuthority userAuthority);
 
-    // 특정 id에 따른 권한 제거 (delete)
-
+    // 특정 권한 제거 (delete)
+    void removeUserAuthority(UserAuthority userAuthority);
 
 }
