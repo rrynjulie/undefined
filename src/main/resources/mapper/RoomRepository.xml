@@ -106,4 +106,8 @@
         <include refid="SELECT_BASE"/>
         AND r.room_id = #{roomId}
     </select>
+
+    <delete id="deleteRooms" flushCache="true" parameterType="com.lec.spring.domain.Lodging">
+        DELETE FROM room WHERE lodging_id = #{lodgingId}
+    </delete>
 </mapper>

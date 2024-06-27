@@ -34,7 +34,7 @@ public class CustomLoginFailureHandler implements AuthenticationFailureHandler {
         String errorMessage;
 
         if (exception instanceof BadCredentialsException) {
-            errorMessage = "아이디가 맞지 않습니다. 다시 확인해 주세요.";
+            errorMessage = "아이디 또는 비밀번호가 맞지 않습니다. 다시 확인해 주세요.";
         } else if (exception instanceof InternalAuthenticationServiceException){
             errorMessage = "비밀번호가 맞지 않습니다. 다시 확인해 주세요.";
         }else if (exception instanceof DisabledException) {

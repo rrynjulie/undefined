@@ -51,9 +51,51 @@
         WHERE user_id = #{userId}
     </update>
 
-    <delete id="delete" flushCache="true" parameterType="com.lec.spring.domain.User">
+    <delete id="deleteUser" flushCache="true" parameterType="com.lec.spring.domain.User">
         DELETE FROM user
         WHERE user_id = #{userId}
+    </delete>
+
+    <delete id="deleteLodging" flushCache="true">
+        DELETE FROM lodging WHERE user_id = #{userId}
+    </delete>
+
+    <delete id="deleteUserAuthority" flushCache="true">
+        DELETE FROM user_authority WHERE user_id = #{userId}
+    </delete>
+
+<!--    <delete id="deleteLikes" parameterType="com.lec.spring.domain.User">-->
+<!--        DELETE FROM `like` WHERE user_id = #{userId}-->
+<!--    </delete>-->
+
+    <delete id="deletePosts" flushCache="true">
+        DELETE FROM post WHERE user_id = #{userId}
+    </delete>
+
+    <delete id="deleteComments" flushCache="true">
+        DELETE FROM comment WHERE user_id = #{userId}
+    </delete>
+
+    <delete id="deleteReservations" parameterType="long">
+        DELETE FROM reservation WHERE user_id = #{userId}
+    </delete>
+
+    <delete id="deleteBookings" flushCache="true">
+        DELETE FROM booking WHERE user_id = #{userId}
+    </delete>
+
+    <delete id="deleteRooms" parameterType="long">
+        DELETE room FROM room
+                             JOIN lodging ON room.lodging_id = lodging.lodging_id
+        WHERE lodging.user_id = #{userId}
+    </delete>
+
+    <delete id="deletePostsByBookingId" parameterType="long">
+        DELETE FROM post WHERE booking_id IN (SELECT booking_id FROM booking WHERE user_id = #{userId})
+    </delete>
+
+    <delete id="deleteReservationsByUserId" parameterType="long">
+        DELETE FROM reservation WHERE user_id = #{userId}
     </delete>
 
 </mapper>
