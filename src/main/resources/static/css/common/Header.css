@@ -74,6 +74,18 @@ li {
     text-align: center;
 }
 
+.user-frame {
+    display: flex;
+    justify-content: center;
+    border: 1px solid #EBEBEB;
+    border-radius: 5px;
+}
+
+.user-frame p {
+    align-content: center;
+    margin-left: 10px;
+}
+
 #btn-login-pc, #logout-btn-pc {
     height: 40px;
     width: 140px;

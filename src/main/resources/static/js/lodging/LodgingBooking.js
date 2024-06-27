@@ -30,4 +30,24 @@ document.addEventListener('DOMContentLoaded', function () {
     //예약 폼 제출 시 처리
     booking.addEventListener('submit', function (event) {
     });
+
+    var visitorNameSpan = document.getElementById("visitorName");
+    var visitorPhoneNumSpan = document.getElementById("visitorPhoneNum");
+    var roomNameSpan = document.getElementById("roomName");
+    var bookingPaySpan = document.getElementById("bookingPay");
+    visitorNameSpan.value = visitorNameSpan.textContent;
+    visitorPhoneNumSpan.value = visitorPhoneNumSpan.textContent;
+    roomNameSpan.value = roomNameSpan.textContent;
+    bookingPaySpan.value = bookingPaySpan.textContent;
 });
+
+function setBooking() {
+    const visitorNameSpan = document.getElementById("visitorName");
+    const visitorPhoneNumSpan = document.getElementById("visitorPhoneNum");
+    const roomNameSpan = document.getElementById("roomName");
+    const bookingPaySpan = document.getElementById("bookingPay");
+    visitorNameSpan.value = visitorNameSpan.textContent;
+    visitorPhoneNumSpan.value = visitorPhoneNumSpan.textContent;
+    roomNameSpan.value = roomNameSpan.textContent;
+    bookingPaySpan.value = bookingPaySpan.textContent;
+}

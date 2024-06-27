@@ -2,81 +2,56 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/provider/ProvBookingList.css}">
-    <script th:src="@{/js/mypage/provider/ProvBookingList.js}"></script>
-    <title></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/lodging/LodgingBooking.css}">
+    <script th:src="@{/js/lodging/LodgingBooking.js}"></script>
+    <title>예약하기</title>
 </head>
 <body>
+<!-- 헤더 -->
+<th:block th:insert="~{common/Header::header}"></th:block>
 
-<!-- 예약 폼 내용 -->
-<form id="bookingForm" th:action="@{/lodging/LodgingBooking}" method="post">
-<!--    <form id="bookingForm" action="#" th:action="@{/booking/submit}" method="post">-->
-<!--<form action="/lodging/saveReservation" method="post">-->
-<!--    <form id="bookingForm" action="/booking/confirm" method="post">-->
+<!-- 메인 -->
+<main>
+    <h1 th:text="${lodging.lodgingName} + ' / ' + ${room.roomName} + ' 예약하기'"></h1>
 
+    <!-- 예약 폼 내용 -->
+    <form id="bookingForm" th:action="@{/lodging/LodgingBooking}" method="post">
+        <label for="bookingAdult">어른</label>
+        <input id="bookingAdult" name="bookingAdult" type="number" th:value="${bookingAdult}">
 
-    <h2 th:text="${lodging.lodgingName} + ' 예약하기'"></h2>
+        <label for="bookingChild">아동</label>
+        <input id="bookingChild" name="bookingChild" type="number" th:value="${bookingChild}">
 
+        <label for="visitorName">방문자명</label>
+        <input id="visitorName" name="visitorName" type="text" th:value="${user.username}" disabled>
 
-    <label class="info-label" for="visitorName">이용자 이름: <div class="required-dot"></div></label>
-    <span class="info-span" id="visitorName" name="visitorName" th:value="${user.userName}"></span>
-<!--    <input class="info-input" id="visitorName" name="visitorName" type="text" placeholder="객실명을 입력하세요." th:value="${user.userName}">-->
-<!--    <label>이용자 이름: </label>-->
-<!--    <span th:text="${user.username}"></span>-->
-<!--    <input type="hidden" name="visitorName" th:value="${user.username}" />-->
+        <label for="visitorName">방문자 전화번호</label>
+        <input id="visitorPhoneNum" name="visitorPhoneNum" type="text" th:value="${user.phonenum}" disabled>
 
-    <label class="info-label" for="visitorPhoneNum">이용자 전화번호: <div class="required-dot"></div></label>
-    <span class="info-span" id="visitorPhoneNum" name="visitorPhoneNum" th:value="${visitorPhoneNum}" th:text="${user.phonenum}"></span>
-<!--    <label>이용자 전화번호: </label>-->
-<!--    <span th:text="${user.phonenum}"></span>-->
-<!--    <input type="hidden" name="visitorPhoneNum" th:value="${user.phonenum}" />-->
+        <label for="bookingPayType">결제 방식</label>
+        <input id="bookingPayType" name="bookingPayType" type="text" th:value="${bookingPayType}">
 
-    <!-- 예약인원 -->
-<!--    <label>성인: </label>-->
-<!--    <input type="number" name="bookingAdult" min="0" required />-->
+        <label for="bookingPay">결제 금액</label>
+        <input id="bookingPay" name="bookingPay" type="number" th:value="${room.roomPrice}" disabled>
 
-<!--    <label>아동: </label>-->
-<!--    <input type="number" name="bookingChild" min="0" required />-->
+        <label for="bookingStartDate">체크인</label>
+        <input id="bookingStartDate" name="bookingStartDate" type="date" th:value="${bookingStartDate}">
 
-<!--    &lt;!&ndash; 예약 날짜 &ndash;&gt;-->
-<!--    <label>예약 시작 날짜: </label>-->
-<!--    <input type="date" name="bookingStartDate" required />-->
+        <label for="bookingStartDate">체크아웃</label>
+        <input id="bookingEndDate" name="bookingEndDate" type="date" th:value="${bookingEndDate}">
 
-<!--    <label>예약 종료 날짜: </label>-->
-<!--    <input type="date" name="bookingEndDate" required />-->
+        <label class="hidden-label" for="roomId">roomId</label>
+        <input id="roomId" name="roomId" type="hidden" th:value="${room.roomId}" disabled>
 
-    <!-- 객실 -->
+        <label class="hidden-label" for="userId">userId</label>
+        <input id="userId" name="userId" type="hidden" th:value="${user.userId}" disabled>
 
-    <label class="info-label" for="roomName">객실 이름: <div class="required-dot"></div></label>
-<!--    <span class="info-span" id="roomId" name="roomId" th:value="${roomId}"></span>-->
-    <span type="info-span" id="roomName" th:value="${room.roomName}"  th:text="${room.roomName}"></span>-->
-<!--    <label>객실:</label>-->
-<!--    <span th:text="${room.roomName}"></span>-->
-    <span type="hidden" name="roomId" th:value="${room.roomId}"></span>
-    <span th:type="hidden" name="userId" th:value="${user.userId}"></span>
+        <!-- 결제 버튼 -->
+        <button class="" type="submit">결제하기</button>
+    </form>
+</main>
 
-
-    <!-- 결제 방식 -->
-<!--    <label>결제 방식:</label>-->
-<!--    <label class="info-label" for="bookingPayType">결제방식: <div class="required-dot"></div></label>-->
-<!--    <select id="bookingPayType" name="bookingPayType" required>-->
-<!--        <option value="카드">카드</option>-->
-<!--        <option value="무통장입금">무통장입금</option>-->
-<!--    </select>-->
-
-    <!-- 결제 금액 -->
-    <label class="info-label" for="bookingPay">가격: <div class="required-dot"></div></label>
-    <span class="info-span" id="bookingPay" name="bookingPay" th:value="${bookingPay}" th:text="${room.roomPrice}"></span>
-
-
-
-    <!-- 결제 버튼 -->
-    <button class="" type="submit">결제하기</button>
-
-
-</form>
-
-
-<script th:src="@{/js/lodging/LodgingBooking.js}"></script>
+<!-- 푸터 -->
+<th:block th:insert="~{common/Footer::footer}"></th:block>
 </body>
 </html>

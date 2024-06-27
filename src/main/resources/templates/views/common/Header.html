@@ -9,21 +9,20 @@
         <ul class="nav-bar-pc-inner">
             <li class="nav-bar-inner-left">
                 <a th:href="@{/Home}">
-                    <img th:src="@{/image/MainLogo.png}" alt="StayFind">
+                    <img th:src="@{/image/common/MainLogo.png}" alt="저기어때">
                 </a>
             </li>
-            <li class="nav-bar-inner-right" th:with="user=${#authentication.getPrincipal().getUser()}">
+            <!-- 로그인 했을때는 username 과 로그아웃 form 보여주기 -->
+            <form class="nav-bar-inner-right" th:action="@{/user/logout}" method="POST" th:with="user=${#authentication.getPrincipal().getUser()}" id="user-info-logout">
                 <a th:href="@{/lodging/LodgingSearch}">숙박 예약</a>
                 <a th:href="@{/ticket/TicketCheck}">승차권 조회</a>
-                <a th:href="@{'/mypage/customer/BookingList/' + ${user.userId}}" sec:authorize="isAuthenticated()" >마이페이지</a>
+                <a class="user-frame" th:href="@{'/mypage/customer/BookingList/' + ${user.userId}}" sec:authorize="isAuthenticated()">
+                    <img class="user-icon" th:src="@{/image/common/UserIcon.png}" alt="">
+                    <p th:text="${user.username}"></p>
+                </a>
                 <a class="btn btn-primary" sec:authorize="isAnonymous()" th:href="@{/user/login}" id="btn-login-pc">로그인 / 회원가입</a>
-
-                <!-- 로그인 했을때는 username 과 로그아웃 form 보여주기 -->
-                <form th:action="@{/user/logout}" method="POST" sec:authorize="isAuthenticated()" id="user-info-logout">
-                    <button class="btn btn-danger" type="submit" id="logout-btn-pc" onclick="logout()">로그아웃</button>
-                </form>
-                <span class="text-light p-2" id="user-info">[[${user.username}]]</span>
-            </li>
+                <button class="btn btn-danger" type="submit" id="logout-btn-pc" onclick="logout()">로그아웃</button>
+            </form>
         </ul>
     </nav>
 
@@ -32,7 +31,7 @@
         <!-- Top Navigation Menu -->
         <div class="nav-bar-mobile-inner">
             <a th:href="@{/Home}" class="main-logo-mobile">
-                <img th:src="@{/image/MainLogo.png}" alt="StayFind">
+                <img th:src="@{/image/common/MainLogo.png}" alt="저기어때">
             </a>
 
             <!-- 햄버거 아이콘 -->

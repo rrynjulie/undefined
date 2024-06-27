@@ -47,7 +47,7 @@ public class BookingController {
                                  Authentication authentication) {
         if (authentication == null || !authentication.isAuthenticated()) {
             // 인증되지 않은 사용자 처리
-            return "redirect:/login"; // 로그인 페이지로 리다이렉트 또는 예외 처리
+            return "redirect:/user/login"; // 로그인 페이지로 리다이렉트 또는 예외 처리
         }
 
         Object principal = authentication.getPrincipal();
@@ -69,34 +69,32 @@ public class BookingController {
 
         Room room = roomService.getRoomById(roomId);
         model.addAttribute("room", room);
-        System.out.println(room);
 
         return "lodging/LodgingBooking";
     }
 
     @PostMapping("/lodging/LodgingBooking")
     public String createBooking(Booking booking,
-                                Room room,
-                                User user,
                                 Model model,
                                 Authentication authentication) {
 
         if (authentication == null || !authentication.isAuthenticated()) {
             // 인증되지 않은 사용자 처리
-            return "redirect:/login"; // 로그인 페이지로 리다이렉트 또는 예외 처리
+            return "redirect:/user/login"; // 로그인 페이지로 리다이렉트 또는 예외 처리
         }
 
-        Object principal = authentication.getPrincipal();
-        if (principal instanceof PrincipalDetails) {
-            user = ((PrincipalDetails) principal).getUser();
-        } else if (principal instanceof String) {
-            user = userService.findByUsername((String) principal);
-        } else {
-            throw new IllegalStateException("Unknown principal type: " + principal.getClass());
-        }
+//        Object principal = authentication.getPrincipal();
+//        if (principal instanceof PrincipalDetails) {
+//            user = ((PrincipalDetails) principal).getUser();
+//        } else if (principal instanceof String) {
+//            user = userService.findByUsername((String) principal);
+//        } else {
+//            throw new IllegalStateException("Unknown principal type: " + principal.getClass());
+//        }
+        System.out.println("[예약 정보]");
+        System.out.println(booking);
 
-
-        model.addAttribute("result", bookingService.createBooking(user, room, booking));
+        model.addAttribute("result", bookingService.createBooking(booking));
 //        // 사용자 이름 설정
 //        String userName = principal.getName(); // 사용자 이름 가져오기
 //        booking.setVisitorName(userName);

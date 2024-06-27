@@ -30,7 +30,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public int createBooking(User user, Room room, Booking booking) {
+    public int createBooking(Booking booking) {
 //        user = userRepository.findById(user.getUserId());
 //        room = roomRepository.findByRoomId(room.getRoomId());
 

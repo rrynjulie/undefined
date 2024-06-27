@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface BookingService {
-    int createBooking(User user, Room room, Booking booking);
+    int createBooking(Booking booking);
 
     Booking findBookingByBookingId(Long bookingId);
 

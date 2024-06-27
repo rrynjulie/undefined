@@ -35,7 +35,7 @@ public class BookingRepositoryTest {
                 .build();
 
         System.out.println("[생성 전]" + booking);
-        bookingRepository.createBooking(booking);
+        bookingRepository.save(booking);
         System.out.println("[생성 후]" + booking);
         System.out.println();
         System.out.println("[예약 리스트]");
