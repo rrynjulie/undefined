@@ -3,6 +3,7 @@ package com.lec.spring.repository;
 
 import com.lec.spring.domain.UserAuthority;
 import com.lec.spring.domain.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,10 +21,10 @@ public interface ManagerRepository {
     List<User> findAllWithAuthorities();
 
 
-    // 특정 id에 따른 권한 추가 (insert)
+    // 권한 추가 (insert)
+    void addUserAuthority(UserAuthority userAuthority);
 
-
-    // 특정 id에 따른 권한 제거 (delete)
-
+    // 특정 권한 제거 (delete)
+    void removeUserAuthority(UserAuthority userAuthority);
 
 }

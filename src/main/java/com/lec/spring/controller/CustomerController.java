@@ -1,38 +1,50 @@
 package com.lec.spring.controller;
 
 import com.lec.spring.config.PrincipalDetails;
+import com.lec.spring.domain.Booking;
 import com.lec.spring.domain.Post;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.UserAuthority;
+import com.lec.spring.service.BookingService;
 import com.lec.spring.service.ManagerService;
 import com.lec.spring.service.UserService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
 @Controller
-@RequestMapping("mypage/customer")
+@RequestMapping("/mypage/customer")
 public class CustomerController {
 
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private BookingService bookingService;
+
+    @Autowired
+    private HttpServletRequest request;
 
 //    private ManagerService managerService;
 
     @GetMapping("/ManageAccount")
     public String manageAccount(Model model) {
         User user = getLoggedUser();
-        System.out.println("user: " + user);
         model.addAttribute("user", user);
 
         List<UserAuthority> userAuthorities = userService.getAllUserAuthorities();
@@ -70,10 +82,11 @@ public class CustomerController {
         redirectAttributes.addFlashAttribute("success", "수정되었습니다.");
 
         // 홈으로 리다이렉트
-        return "/home";
+        return "redirect:/Home";
     }
 
     @PostMapping("/check-password")
+    @ResponseBody
     public String checkPassword(@RequestParam String currentPassword) {
         User user = getLoggedUser();
         if (userService.checkPassword(user.getUserId(), currentPassword)) {
@@ -87,7 +100,6 @@ public class CustomerController {
     @ResponseBody
     public String getProvider() {
         User user = getLoggedUser();
-        System.out.println(user.getProvider());
         return user.getProvider();
     }
 
@@ -96,7 +108,6 @@ public class CustomerController {
 
         if (principal instanceof PrincipalDetails) {
             PrincipalDetails principalDetails = (PrincipalDetails) principal;
-            System.out.println(principalDetails.getUser());
             return principalDetails.getUser();
         } else if (principal instanceof DefaultOAuth2User) {
             Map<String, Object> attributes = ((DefaultOAuth2User) principal).getAttributes();
@@ -110,13 +121,64 @@ public class CustomerController {
         }
     }
 
+    @GetMapping("/BookingList/{userId}")
+    public String BookingList(@PathVariable("userId") Long userId, Model model){
+        List<Booking> books = bookingService.findBooksByUserId(userId);
+        List<Booking> booksBefore = new ArrayList<>();
+        List<Booking> booksAfter = new ArrayList<>();
+        books.forEach(book -> {
+            book.setFormattedPay(DecimalFormat.getInstance().format(book.getBookingPay()));
+            book.setDateGap(Period.between(book.getBookingStartDate(), book.getBookingEndDate()).getDays());
+            if(Period.between(LocalDate.now(), book.getBookingStartDate()).getDays() >= 0) booksBefore.add(book);
+            else booksAfter.add(book);
+        });
+        model.addAttribute("booksBefore", booksBefore);
+        model.addAttribute("booksAfter", booksAfter);
+        return "mypage/customer/BookingList";
+    }
+
+    @PostMapping("/CancelBooking")
+    public String cancelBookingOk(Long bookingId, Model model) {
+        model.addAttribute("result", bookingService.deleteBooking(bookingId));
+        return "/mypage/customer/CancelBookingOk";
+    }
+
+    @GetMapping("/Unregister")
+    public String unregisterPage(Model model) {
+        User user = getLoggedUser();
+        model.addAttribute("user", user);
+        return "mypage/customer/Unregister";
+    }
+
+    @PostMapping("/Unregister")
+    @ResponseBody()
+    public String unregister(@RequestParam String password) {
+        User user = getLoggedUser();
+        if (userService.checkPassword(user.getUserId(), password)) {
+            return "success";
+        } else {
+            return "failure";
+        }
+    }
+
+    @PostMapping("/UnregisterConfirm")
+    public String unregisterConfirm(RedirectAttributes redirectAttributes) {
+        User user = getLoggedUser();
+        System.out.println("userData: " + user);
+        try {
+            userService.deleteUserAndReferences(user.getUserId());
+//            userService.deleteUser(user.getUserId());
+            // 로그아웃 처리
+            request.logout();
+            redirectAttributes.addFlashAttribute("success", "회원 탈퇴가 완료되었습니다.");
+            return "redirect:/home";  // 로그아웃 후 홈 페이지로 리다이렉트
+        } catch (Exception e) {
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute("error", "회원 탈퇴 처리 중 오류가 발생했습니다.");
+            return "redirect:/mypage/customer/Unregister";
+        }
+    }
 
 
 
 }
-
-
-
-
-
-

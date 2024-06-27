@@ -17,4 +17,11 @@
 
         //사용자와 권한정보 테이블 조인
         List<User> getAllUsersWithAuthorities();
+
+        // 유저 권한 추가
+        void addUserAuthority(Long userId, Long authorityId);
+
+        // 특정 권한 제거
+        void removeUserAuthority(Long userId, Long authorityId);
     }
+

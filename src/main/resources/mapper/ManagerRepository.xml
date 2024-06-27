@@ -12,8 +12,10 @@
         <result property="regDate" column="user_regdate" />
         <result property="nickname" column="user_nickname" />
         <result property="phonenum" column="user_phonenum" />
+        <result property="hasRoleProvider" column="has_role_provider" javaType="boolean"/>
+        <result property="hasRoleMaster" column="has_role_master" javaType="boolean"/>
         <collection property="authorities" ofType="com.lec.spring.domain.UserAuthority">
-            <id property="userid" column="ua_user_id" />
+            <id property="userid" column="user_id" />
             <result property="authorityId" column="authority_id" />
         </collection>
     </resultMap>
@@ -26,24 +28,24 @@
             u.user_regdate,
             u.user_nickname,
             u.user_phonenum,
-            ua.user_id AS ua_user_id,
-            ua.authority_id
+            CASE
+                WHEN EXISTS (SELECT 1 FROM user_authority ua WHERE ua.user_id = u.user_id AND ua.authority_id = 2)
+                    THEN true
+                ELSE false
+                END AS has_role_provider,
+            CASE
+                WHEN EXISTS (SELECT 1 FROM user_authority ua WHERE ua.user_id = u.user_id AND ua.authority_id = 3)
+                    THEN true
+                ELSE false
+                END AS has_role_master,
+            ua.user_id AS user_id,
+            ua.authority_id AS authority_id
         FROM
             user u
                 LEFT JOIN
             user_authority ua ON u.user_id = ua.user_id
-    </select>
-
-    <select id="findAll" resultType="com.lec.spring.domain.User">
-        SELECT
-            user_id AS userId,
-            user_name AS username,
-            user_email AS email,
-            user_regdate AS regDate,
-            user_nickname AS nickname,
-            user_phonenum AS phonenum
-        FROM
-            user
+        ORDER BY
+            u.user_id
     </select>
 
     <select id="findAllUserAuthority" resultType="com.lec.spring.domain.UserAuthority">
@@ -53,6 +55,15 @@
         FROM
             user_authority
     </select>
+
+    <insert id="addUserAuthority">
+        INSERT INTO user_authority (user_id, authority_id)
+        VALUES (#{userId}, #{authorityId})
+    </insert>
+
+    <delete id="removeUserAuthority">
+        DELETE FROM user_authority WHERE user_id = #{userId} AND authority_id = #{authorityId}
+    </delete>
 
 
 </mapper>

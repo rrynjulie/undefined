@@ -17,4 +17,25 @@ public interface UserRepository {
 
     int userupdate(User user);
 
+    void delete(Long userId);
+
+    void deleteUserReferences(Long userId);
+
+    void deleteLodging(Long userId);
+    void deleteUserAuthority(Long userId);
+    void deleteLikes(Long userId);
+    void deletePosts(Long userId);
+    void deleteComments(Long userId);
+    void deleteReservations(Long userId);
+    void deleteBookings(Long userId);
+
+    void deleteRooms(Long userId);
+
+    void deleteUser(Long userId);
+
+    void deletePostsByBookingId(Long userId);
+
+    void deleteReservationsByUserId(Long userId);
+
+    User findByProviderId(String providerId);
 }

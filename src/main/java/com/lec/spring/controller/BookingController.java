@@ -4,6 +4,7 @@ import com.lec.spring.config.PrincipalDetails;
 import com.lec.spring.domain.*;
 
 import com.lec.spring.service.*;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,7 +46,6 @@ public class BookingController {
                                  @RequestParam("roomId") Long roomId,
                                  Model model,
                                  Authentication authentication) {
-
         if (authentication == null || !authentication.isAuthenticated()) {
             // 인증되지 않은 사용자 처리
             return "redirect:/login"; // 로그인 페이지로 리다이렉트 또는 예외 처리
@@ -68,74 +68,64 @@ public class BookingController {
         Lodging lodging = lodgingService.getLodgingById(lodgingId);
         model.addAttribute("lodging", lodging);
 
-        // Lodging ID에 해당하는 Room 목록 조회
-//        List<Room> rooms = roomService.findRoomsByLodgingId(lodgingId);
-//        model.addAttribute("rooms", rooms);
-
-        // 선택한 객실 정보 조회
-        Room room = null;
-        if (roomId != null && roomId != 0) {
-            room = roomService.getRoomById(roomId);
-        }
+        Room room = roomService.getRoomById(roomId);
         model.addAttribute("room", room);
+        System.out.println(room);
 
         return "lodging/LodgingBooking";
     }
 
     @PostMapping("/lodging/LodgingBooking")
-    public String lodgingBookingOk(Booking booking,
-                                   Model model,
-                                   Principal principal) {
+    public String createBooking(@RequestParam("visitorName") String visitorName,
+                                @RequestParam("visitorPhoneNum") String visitorPhoneNum,
+                                @RequestParam("bookingPayType") String bookingPayType,
+                                @RequestParam("bookingPay") int bookingPay,
+                                @RequestParam("bookingStartDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bookingStartDate,
+                                @RequestParam("bookingEndDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bookingEndDate,
+                                @RequestParam("roomId") Long roomId,
+                                @RequestParam("userId") Long userId,
+                                Authentication authentication,
+                                Model model) {
 
-        booking.setBookingTime(LocalDateTime.now());
+        Object principal = authentication.getPrincipal();
+        User user;
+        if (principal instanceof PrincipalDetails) {
+            user = ((PrincipalDetails) principal).getUser();
+        } else if (principal instanceof String) {
+            user = userService.findByUsername((String) principal);
+        } else {
+            throw new IllegalStateException("Unknown principal type: " + principal.getClass());
+        }
 
-        // 사용자 이름 설정
+        // Retrieve the room object based on roomId
+        Room room = roomService.findByRoomId(roomId); // Assuming you have a roomService to fetch room by id
 
-        String userName = principal.getName(); // 사용자 이름 가져오기
-        booking.setVisitorName(userName);
+        if (room == null) {
+            // Handle case where room with given id is not found
+            throw new IllegalArgumentException("Room not found for roomId: " + roomId);
+        }
+
+        Booking booking = Booking.builder()
+                .visitorName(visitorName)
+                .visitorPhoneNum(visitorPhoneNum)
+                .bookingPayType(Booking.BookingPayType.valueOf("카드"))
+                .bookingPay(bookingPay)
+                .bookingStartDate(bookingStartDate)
+                .bookingEndDate(bookingEndDate)
+                .userId(userId)
+                .roomId(roomId)
+                .build();
 
 
-        booking.setVisitorPhoneNum(booking.getVisitorPhoneNum());
 
-        // 예약 정보 저장
         model.addAttribute("result", bookingService.createBooking(booking));
+        model.addAttribute("user", user);
 
-        // 예약 완료 페이지로 이동
-        return "/LodgingBookingOk";
+        return "lodging/LodgingBookingOk";
     }
-
 
 
     @GetMapping("/mypage/provider/ProvBookingList/{userId}")
     public void provBookingList(Model model) {
     }
-
-    @GetMapping("/mypage/customer/BookingList/{userId}")
-    public String BookingList(@PathVariable("userId") Long userId, Model model){
-        List<Booking> books = bookingService.findBooksByUserId(userId);
-        List<Booking> booksBefore = new ArrayList<>();
-        List<Booking> booksAfter = new ArrayList<>();
-        books.forEach(book -> {
-            book.setFormattedPay(DecimalFormat.getInstance().format(book.getBookingPay()));
-            book.setDateGap(Period.between(book.getBookingStartDate(), book.getBookingEndDate()).getDays());
-            if(Period.between(LocalDate.now(), book.getBookingStartDate()).getDays() >= 0) booksBefore.add(book);
-            else booksAfter.add(book);
-        });
-        model.addAttribute("booksBefore", booksBefore);
-        model.addAttribute("booksAfter", booksAfter);
-        return "mypage/customer/BookingList";
-    }
-
-    @PostMapping("/mypage/customer/CancelBookingOk")
-    public String cancelBookingOk(Long bookingId, Model model) {
-        LocalDate bookingStartDate = bookingService.getBookingStartDate(bookingId);
-        if (!bookingStartDate.isAfter(LocalDate.now())) {
-            model.addAttribute("errorMessage", "예약을 취소할 수 없습니당");
-            return "error";
-        }
-
-        bookingService.deleteBooking(bookingId);
-        return "redirect:/mypage/customer/BookingList/";
-    }
-
 }
