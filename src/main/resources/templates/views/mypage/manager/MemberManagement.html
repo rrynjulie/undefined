@@ -35,7 +35,8 @@
                 <th>user_nickname</th>
                 <th>ROLE_PROVIDER</th>
                 <th>ROLE_MASTER</th>
-                <th>Actions</th>
+                <th>권한부여</th>
+                <th>권한삭제</th>
             </tr>
             </thead>
             <tbody>
@@ -48,13 +49,43 @@
                 <td th:text="${manager.hasRoleProvider ? 'ROLE_PROVIDER' : 'null'}"></td>
                 <td th:text="${manager.hasRoleMaster ? 'ROLE_MASTER' : 'null'}"></td>
                 <td>
-                    <form th:if="${!manager.hasRoleProvider}" th:action="@{/mypage/manager/addRoleProvider}" method="post">
+                    <form th:if="${!manager.hasRoleProvider}"
+                          th:action="@{/mypage/manager/addRoleProvider}"
+                          method="post"
+                          style="display: inline;"
+                          onsubmit="return confirmAction('${manager.username}', '오너 권한을 부여')">
                         <input type="hidden" name="userId" th:value="${manager.userId}" />
+                        <input type="hidden" name="username" th:value="${manager.username}" />
                         <button type="submit">Add ROLE_PROVIDER</button>
                     </form>
-                    <form th:if="${!manager.hasRoleMaster}" th:action="@{/mypage/manager/addRoleMaster}" method="post">
+                    <form th:if="${!manager.hasRoleMaster}"
+                          th:action="@{/mypage/manager/addRoleMaster}"
+                          method="post"
+                          style="display: inline;"
+                          onsubmit="return confirmAction('${manager.username}', '마스터 권한을 부여')">
                         <input type="hidden" name="userId" th:value="${manager.userId}" />
+                        <input type="hidden" name="username" th:value="${manager.username}" />
                         <button type="submit">Add ROLE_MASTER</button>
+                    </form>
+                </td>
+                <td>
+                    <form th:if="${manager.hasRoleProvider}"
+                          th:action="@{/mypage/manager/removeRoleProvider}"
+                          method="post"
+                          style="display: inline;"
+                          onsubmit="return confirmAction('${manager.username}', '오너 권한을 제거')">
+                        <input type="hidden" name="userId" th:value="${manager.userId}" />
+                        <input type="hidden" name="username" th:value="${manager.username}" />
+                        <button type="submit">Remove ROLE_PROVIDER</button>
+                    </form>
+                    <form th:if="${manager.hasRoleMaster}"
+                          th:action="@{/mypage/manager/removeRoleMaster}"
+                          method="post"
+                          style="display: inline;"
+                          onsubmit="return confirmAction('${manager.username}', '마스터 권한을 제거')">
+                        <input type="hidden" name="userId" th:value="${manager.userId}" />
+                        <input type="hidden" name="username" th:value="${manager.username}" />
+                        <button type="submit">Remove ROLE_MASTER</button>
                     </form>
                 </td>
             </tr>
