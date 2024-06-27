@@ -61,5 +61,9 @@
         VALUES (#{userId}, #{authorityId})
     </insert>
 
+    <delete id="removeUserAuthority">
+        DELETE FROM user_authority WHERE user_id = #{userId} AND authority_id = #{authorityId}
+    </delete>
+
 
 </mapper>

@@ -26,13 +26,13 @@
     </sql>
 
     <!-- CREATE -->
-    <insert id="createBooking" flushCache="true" parameterType="com.lec.spring.domain.Booking"
+    <insert id="save" flushCache="true" parameterType="com.lec.spring.domain.Booking"
             useGeneratedKeys="true" keyColumn="booking_id" keyProperty="bookingId">
         INSERT INTO booking
-        (booking_time, booking_adult, booking_child, visitor_name, visitor_phonenum
+        (booking_adult, booking_child, visitor_name, visitor_phonenum
         , booking_paytype, booking_pay, booking_startdate, booking_enddate, room_id, user_id)
         VALUES
-            (#{bookingTime}, #{bookingAdult}, #{bookingChild}, #{visitorName}, #{visitorPhoneNum}
+            (#{bookingAdult}, #{bookingChild}, #{user.userName}, #{visitorPhoneNum}
             , #{bookingPayType}, #{bookingPay}, #{bookingStartDate}, #{bookingEndDate}, #{roomId}, #{userId})
     </insert>
 

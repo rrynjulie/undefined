@@ -69,23 +69,42 @@ public class BookingController {
 
         Room room = roomService.getRoomById(roomId);
         model.addAttribute("room", room);
+        System.out.println(room);
 
         return "lodging/LodgingBooking";
     }
 
     @PostMapping("/lodging/LodgingBooking")
-    public String lodgingBookingOk(Booking booking,
-                                   Model model,
-                                   Principal principal) {
-        booking.setBookingTime(LocalDateTime.now());
-        // 사용자 이름 설정
-        String userName = principal.getName(); // 사용자 이름 가져오기
-        booking.setVisitorName(userName);
+    public String createBooking(Booking booking,
+                                Room room,
+                                User user,
+                                Model model,
+                                Authentication authentication) {
 
-        model.addAttribute("result", bookingService.createBooking(booking));
+        if (authentication == null || !authentication.isAuthenticated()) {
+            // 인증되지 않은 사용자 처리
+            return "redirect:/login"; // 로그인 페이지로 리다이렉트 또는 예외 처리
+        }
+
+        Object principal = authentication.getPrincipal();
+        if (principal instanceof PrincipalDetails) {
+            user = ((PrincipalDetails) principal).getUser();
+        } else if (principal instanceof String) {
+            user = userService.findByUsername((String) principal);
+        } else {
+            throw new IllegalStateException("Unknown principal type: " + principal.getClass());
+        }
+
+
+        model.addAttribute("result", bookingService.createBooking(user, room, booking));
+//        // 사용자 이름 설정
+//        String userName = principal.getName(); // 사용자 이름 가져오기
+//        booking.setVisitorName(userName);
+
+        //model.addAttribute("result", bookingService.createBooking(booking));
 
         // 예약 완료 페이지로 이동
-        return "LodgingBookingOk";
+        return "lodging/LodgingBookingOk";
     }
 
     @GetMapping("/mypage/provider/ProvBookingList/{userId}")

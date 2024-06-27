@@ -42,4 +42,11 @@ public class ManagerServiceImpl implements ManagerService {
         managerRepository.addUserAuthority(userAuthority);
     }
 
+    @Override
+    public void removeUserAuthority(Long userId, Long authorityId) {
+        UserAuthority userAuthority = new UserAuthority();
+        userAuthority.setUserId(userId);
+        userAuthority.setAuthorityId(authorityId);
+        managerRepository.removeUserAuthority(userAuthority);
+    }
 }

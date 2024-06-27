@@ -26,14 +26,7 @@ VALUES (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS',
 INSERT INTO user_authority
 VALUES (1, 1), (1, 2), (1, 3), (2, 1), (2, 2), (3, 1), (4, 1), (5, 1), (6, 1);
 
-INSERT INTO user_authority
-VALUES (2,3);
 
-INSERT INTO user_authority
-VALUES (3,2), (4,2);
-
-INSERT INTO user_authority
-VALUES (5,3), (6,3);
 
 # lodging 테이블 내 데이터 삽입
 INSERT INTO lodging
