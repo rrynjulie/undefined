@@ -24,4 +24,5 @@ public interface LodgingService {
     Lodging getLodgingById(Long lodgingId);
 
     Double getAvgPostGrade(Long lodgingId);
+    Integer getTotalPosts(Long lodgingId);
 }

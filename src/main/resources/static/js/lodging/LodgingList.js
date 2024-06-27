@@ -49,46 +49,44 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // 숙소 필터
-document.addEventListener('DOMContentLoaded', function () {
-    const text1 = document.getElementById('result-filter');
-    console.log("Result Filter Text Element:", text1); // 추가된 콘솔 로그
-});
-
-console.log(sessionStorage);
-
-function filterLodging(type) {
-    const location = document.querySelector('input[name="location"]').value;
-    fetch(`/lodging/filter?location=${encodeURIComponent(location)}&type=${encodeURIComponent(type)}`)
-        .then(response => response.json())
-        .then(data => {
-            const resultDiv = document.querySelector('.item-list');
-            resultDiv.innerHTML = '';
-
-            data.forEach(lodging => {
-                resultDiv.innerHTML += `
-                   <div style="display: flex; width: 48%; height: 100%; margin-bottom: 10px;">
-                       <a class="item" href="/lodging/LodgingDetail/${lodging.lodgingId}">
-                           <p class="item-img">
-                               <img src="${lodging.lodgingPicture1}" alt="Lodging Picture"/>
-                           </p>
-                           <div class="item-details">
-                               <p class="item-title">${lodging.lodgingName}</p>
-                               <div class="item-type">${lodging.lodgingType}</div>
-                               <div class="item-rating" style="display: flex; align-items: center;">
-                                   <p id="star">&#9733;</p>
-                                   <p class="star">${lodging.avgPostGrade}</p>
-                               </div>
-                               <p class="item-price">${lodging.roomPrice.toLocaleString()}원 ~</p>
-                           </div>
-                       </a>
-                   </div>
-               `;
-            });
-            document.getElementById('result-filter').innerHTML = `<span>${data.length}개의 검색 결과</span>`;
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
+function filterLodging(location, type) {
+    // Ajax 요청을 통해 서버에 필터링된 숙소 정보 요청
+    $.ajax({
+        type: "GET",
+        url: "/lodging/filter",  // 서버에서 필터링된 숙소 정보를 반환하는 엔드포인트
+        data: {
+            location: location,
+            type: type  // 클릭된 버튼의 타입을 전달
+        },
+        success: function(response) {
+            // 성공적으로 데이터를 받았을 때 처리할 내용
+            updateLodgingList(response);  // 숙소 리스트 업데이트 함수 호출
+        }
+    });
 }
 
+// 숙소 리스트를 업데이트하는 함수
+function updateLodgingList(data) {
+    // 받은 데이터(data)를 기반으로 숙소 목록을 업데이트
+    var lodgingListDiv = document.getElementById("item-list");
+    lodgingListDiv.innerHTML = "";  // 기존 목록 초기화
 
+    data.forEach(function(lodging) {
+        // 각 숙소 정보를 HTML로 구성하여 숙소 목록에 추가
+        var lodgingItem = `
+            <div style="display: flex; width: 48%; height: 100%; margin-bottom: 10px;">
+                <a class="item" href="/lodging/LodgingDetail/${lodging.lodgingId}">
+                    <p class="item-img">
+                        <img src="${lodging.lodgingPicture1}" alt="Lodging Picture"/>
+                        <div class="item-details">
+                            <div class="item-title">${lodging.lodgingName}</div>
+                            <div class="item-type">${lodging.lodgingType}</div>
+              
+                        </div>
+                    </p>
+                </a>
+            </div>
+        `;
+        lodgingListDiv.innerHTML += lodgingItem;
+    });
+}
