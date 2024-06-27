@@ -55,4 +55,9 @@ public class LodgingServiceImpl implements LodgingService {
         Double avgPostGrade = lodgingRepository.avgPostGrade(lodgingId);
         return (avgPostGrade != null) ? avgPostGrade : 0.0;
     }
+    @Override
+    public Integer getTotalPosts(Long lodgingId) {
+        Integer totalPosts = lodgingRepository.totalPosts(lodgingId);
+        return (totalPosts != null) ? totalPosts : 0;
+    }
 }

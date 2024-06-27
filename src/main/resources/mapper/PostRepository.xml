@@ -45,7 +45,7 @@
         WHERE lodging_id = #{lodging_id}
     </select>
 
-    <select id="findPostByRoomId" resultType="com.lec.spring.domain.Post">
+    <select id="findPostsByRoomId" resultType="com.lec.spring.domain.Post">
         <include refid="SELECT_BASE"/>
         AND ro.room_id = #{roomId}
     </select>
@@ -63,6 +63,7 @@
         FROM post p
             JOIN lodging l ON p.lodging_id = l.lodging_id
         WHERE p.lodging_id = #{lodging_id}
+        LIMIT 1
     </select>
 
 <!--    후기 업데이트 쿼리-->

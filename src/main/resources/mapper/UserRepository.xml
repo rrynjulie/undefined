@@ -40,6 +40,11 @@
         AND provider = #{provider}
     </select>
 
+    <select id="findByProviderId" resultType="com.lec.spring.domain.User">
+        <include refid="SELECT_BASE"/>
+        AND providerId = #{providerId}
+    </select>
+
     <insert id="save" flushCache="true" parameterType="com.lec.spring.domain.User"
             useGeneratedKeys="true" keyColumn="id" keyProperty="userId">
         INSERT INTO user(user_password, user_name, user_email, user_nickname, user_phonenum, provider, providerId)
