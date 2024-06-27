@@ -40,6 +40,7 @@ public class Lodging {
     private double postGrade;
 
     private double avgPostGrade;
+    private Integer totalPosts;
 
 
 

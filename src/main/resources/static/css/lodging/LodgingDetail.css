@@ -416,4 +416,10 @@
     padding: 10px;
     font-size: 14px;
 }
-
+.post-null {
+    color: darkgray;
+    height: 130px;
+    font-size: 30px;
+    text-align: center;
+    align-content: center;
+}

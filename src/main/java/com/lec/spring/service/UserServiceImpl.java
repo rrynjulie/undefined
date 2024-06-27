@@ -5,7 +5,6 @@ import com.lec.spring.domain.User;
 import com.lec.spring.domain.UserAuthority;
 import com.lec.spring.repository.AuthorityRepository;
 import com.lec.spring.repository.UserRepository;
-import com.lec.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -15,8 +14,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +31,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private LodgingService roomRepository;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
@@ -55,8 +55,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isExist(String nickname) {
-        User user = findByNickname(nickname);
+    public boolean isExist(String providerId) {
+        User user = findByProviderId(providerId);
         return user != null;
     }
 
@@ -171,6 +171,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void deleteUser(Long userId) {
+
+    }
+
+    @Override
+    public void deleteUserReferences(Long userId) {
+
+    }
+
+
+
+    @Override
     public List<UserAuthority> getAllUserAuthorities() {
         return null;
     }
@@ -182,6 +194,11 @@ public class UserServiceImpl implements UserService {
         }
         // 비밀번호 확인 로직 구현 (예: 암호화된 비밀번호 비교)
         return passwordEncoder.matches(currentPassword, user.getPassword());
+    }
+
+    @Override
+    public User findByProviderId(String providerId) {
+        return userRepository.findByProviderId(providerId);
     }
 
     private static class UserRowMapper implements RowMapper<User> {
@@ -197,4 +214,55 @@ public class UserServiceImpl implements UserService {
             return user;
         }
     }
+
+    @Override
+    public void deleteUserAndReferences(Long userId) {
+        try {
+            userRepository.deleteComments(userId);
+            userRepository.deletePosts(userId);
+            userRepository.deletePostsByBookingId(userId);  // post 테이블의 데이터를 먼저 삭제
+            userRepository.deleteBookings(userId);  // 그 다음 booking 테이블의 데이터를 삭제
+            userRepository.deleteRooms(userId);  // Room 데이터 삭제
+            userRepository.deleteReservationsByUserId(userId); // reservation 테이블의 데이터를 삭제
+            userRepository.deleteLodging(userId);
+            userRepository.deleteUserAuthority(userId);
+//            userRepository.deleteLikes(userId);
+            userRepository.deleteUser(userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("사용자 삭제 중 오류가 발생했습니다.");
+        }
+    }
+
+    @Override
+    public void deleteLodging(Long userId) {
+
+    }
+
+    @Override
+    public void deleteUserAuthority(Long userId) {
+
+    }
+
+    @Override
+    public void deleteLikes(Long userId) {
+
+    }
+
+    @Override
+    public void deletePosts(Long userId) {
+
+    }
+
+    @Override
+    public void deleteComments(Long userId) {
+
+    }
+
+
+    @Override
+    public void deleteBookings(Long userId) {
+
+    }
+
 }

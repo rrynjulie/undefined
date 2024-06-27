@@ -35,7 +35,7 @@ public class PrincipalDetailService implements UserDetailsService {
                 return userDetails;
             }
         } else {
-            user = userService.findByNickname(username);
+            user = userService.findByProviderId(username);
             if (user != null) {
                 PrincipalDetails userDetails = new PrincipalDetails(user);
                 userDetails.setUserService(userService);

@@ -63,6 +63,7 @@
         FROM post p
             JOIN lodging l ON p.lodging_id = l.lodging_id
         WHERE p.lodging_id = #{lodging_id}
+        LIMIT 1
     </select>
 
 <!--    후기 업데이트 쿼리-->

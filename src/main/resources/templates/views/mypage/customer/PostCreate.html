@@ -6,6 +6,8 @@
     <title>Title</title>
 </head>
 <body>
+<!-- 헤더 -->
+<th:block th:insert="~{common/Header::header}"></th:block>
 
 <div class="container">
 
@@ -57,5 +59,7 @@
 
 
 <script th:src="@{/js/mypage/customer/PostCreate.js}"></script>
+<!-- 푸터 -->
+<th:block th:insert="~{common/Footer::footer}"></th:block>
 </body>
 </html>
