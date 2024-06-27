@@ -10,15 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.text.DecimalFormat;
-import java.awt.print.Book;
-import java.security.Principal;
 import java.time.LocalDate;
-import java.time.Period;
-import java.util.ArrayList;
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Controller
 public class BookingController {
@@ -82,6 +74,8 @@ public class BookingController {
                                 @RequestParam("bookingPay") int bookingPay,
                                 @RequestParam("bookingStartDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bookingStartDate,
                                 @RequestParam("bookingEndDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bookingEndDate,
+                                @RequestParam("bookingAdult") int bookingAdult,
+                                @RequestParam("bookingChild") int bookingChild,
                                 @RequestParam("roomId") Long roomId,
                                 @RequestParam("userId") Long userId,
                                 Authentication authentication,
@@ -97,8 +91,8 @@ public class BookingController {
             throw new IllegalStateException("Unknown principal type: " + principal.getClass());
         }
 
-        // Retrieve the room object based on roomId
-        Room room = roomService.findByRoomId(roomId); // Assuming you have a roomService to fetch room by id
+
+        Room room = roomService.findByRoomId(roomId);
 
         if (room == null) {
             // Handle case where room with given id is not found
@@ -112,12 +106,11 @@ public class BookingController {
                 .bookingPay(bookingPay)
                 .bookingStartDate(bookingStartDate)
                 .bookingEndDate(bookingEndDate)
+                .bookingAdult(bookingAdult)
+                .bookingChild(bookingChild)
                 .userId(userId)
                 .roomId(roomId)
                 .build();
-
-
-
         model.addAttribute("result", bookingService.createBooking(booking));
         model.addAttribute("user", user);
 
