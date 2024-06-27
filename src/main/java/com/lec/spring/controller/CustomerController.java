@@ -179,6 +179,11 @@ public class CustomerController {
         }
     }
 
+    @GetMapping("/PostList")
+    public void PostList() {
+
+    }
+
 
 
 }
