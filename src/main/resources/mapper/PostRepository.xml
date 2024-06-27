@@ -45,7 +45,7 @@
         WHERE lodging_id = #{lodging_id}
     </select>
 
-    <select id="findPostByRoomId" resultType="com.lec.spring.domain.Post">
+    <select id="findPostsByRoomId" resultType="com.lec.spring.domain.Post">
         <include refid="SELECT_BASE"/>
         AND ro.room_id = #{roomId}
     </select>

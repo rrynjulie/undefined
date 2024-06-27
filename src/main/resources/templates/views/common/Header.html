@@ -12,27 +12,20 @@
                     <img th:src="@{/image/MainLogo.png}" alt="StayFind">
                 </a>
             </li>
-            <li class="nav-bar-inner-right">
+            <li class="nav-bar-inner-right" th:with="user=${#authentication.getPrincipal().getUser()}">
                 <a th:href="@{/lodging/LodgingSearch}">숙박 예약</a>
                 <a th:href="@{/ticket/TicketCheck}">승차권 조회</a>
-                <a th:href="@{/mypage/customer/BookingList/3}">마이페이지</a>
-<!--                <a th:href="@{/user/Login}" id="btn-login-pc">로그인 / 회원가입</a>-->
-<!--                <a th:href="@{/user/Logout}" id="btn-logout-pc">로그아웃</a>-->
-
+                <a th:href="@{'/mypage/customer/BookingList/' + ${user.userId}}" sec:authorize="isAuthenticated()" >마이페이지</a>
                 <a class="btn btn-primary" sec:authorize="isAnonymous()" th:href="@{/user/login}" id="btn-login-pc">로그인 / 회원가입</a>
 
                 <!-- 로그인 했을때는 username 과 로그아웃 form 보여주기 -->
-                <form th:action="@{/user/logout}" method="POST" sec:authorize="isAuthenticated()" th:with="user=${#authentication.getPrincipal().getUser()}" id="user-info-logout">
-                    <span class="d-flex">
-                    <span><button class="btn btn-danger" type="submit" id="logout-btn" onclick="logout()">로그아웃</button></span>
-                    <span class="text-light p-2" id="user-info"><span>[[${user.nickname}]]([[${user.username}]])</span> 님 환영합니다</span>
-                </span>
+                <form th:action="@{/user/logout}" method="POST" sec:authorize="isAuthenticated()" id="user-info-logout">
+                    <button class="btn btn-danger" type="submit" id="logout-btn-pc" onclick="logout()">로그아웃</button>
                 </form>
+                <span class="text-light p-2" id="user-info">[[${user.username}]]</span>
             </li>
         </ul>
     </nav>
-
-    <h6 id="loginUser">님 환영합니다!</h6>
 
     <!-- 모바일 버전 -->
     <nav class="nav-bar-mobile">
@@ -61,6 +54,7 @@
                     <span class="text-light p-2"><span>[[${user.nickname}]]([[${user.username}]])</span> 님 환영합니다</span>
                     </span>
             </form>
+            <a th:href="@{/mypage/customer/BookingList/3}" sec:authorize="isAuthenticated()" >마이페이지</a>
             <a th:href="@{/lodging/LodgingSearch}">숙박 예약</a>
             <a th:href="@{/ticket/TicketCheck}">승차권 조회</a>
         </div>
