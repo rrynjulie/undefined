@@ -45,7 +45,6 @@ public class BookingController {
                                  @RequestParam("roomId") Long roomId,
                                  Model model,
                                  Authentication authentication) {
-
         if (authentication == null || !authentication.isAuthenticated()) {
             // 인증되지 않은 사용자 처리
             return "redirect:/login"; // 로그인 페이지로 리다이렉트 또는 예외 처리
@@ -68,15 +67,7 @@ public class BookingController {
         Lodging lodging = lodgingService.getLodgingById(lodgingId);
         model.addAttribute("lodging", lodging);
 
-        // Lodging ID에 해당하는 Room 목록 조회
-//        List<Room> rooms = roomService.findRoomsByLodgingId(lodgingId);
-//        model.addAttribute("rooms", rooms);
-
-        // 선택한 객실 정보 조회
-        Room room = null;
-        if (roomId != null && roomId != 0) {
-            room = roomService.getRoomById(roomId);
-        }
+        Room room = roomService.getRoomById(roomId);
         model.addAttribute("room", room);
 
         return "lodging/LodgingBooking";
@@ -86,56 +77,18 @@ public class BookingController {
     public String lodgingBookingOk(Booking booking,
                                    Model model,
                                    Principal principal) {
-
         booking.setBookingTime(LocalDateTime.now());
+//        // 사용자 이름 설정
+//        String userName = principal.getName(); // 사용자 이름 가져오기
+//        booking.setVisitorName(userName);
 
-        // 사용자 이름 설정
-
-        String userName = principal.getName(); // 사용자 이름 가져오기
-        booking.setVisitorName(userName);
-
-
-        booking.setVisitorPhoneNum(booking.getVisitorPhoneNum());
-
-        // 예약 정보 저장
         model.addAttribute("result", bookingService.createBooking(booking));
 
         // 예약 완료 페이지로 이동
-        return "/LodgingBookingOk";
+        return "LodgingBookingOk";
     }
-
-
 
     @GetMapping("/mypage/provider/ProvBookingList/{userId}")
     public void provBookingList(Model model) {
     }
-
-    @GetMapping("/mypage/customer/BookingList/{userId}")
-    public String BookingList(@PathVariable("userId") Long userId, Model model){
-        List<Booking> books = bookingService.findBooksByUserId(userId);
-        List<Booking> booksBefore = new ArrayList<>();
-        List<Booking> booksAfter = new ArrayList<>();
-        books.forEach(book -> {
-            book.setFormattedPay(DecimalFormat.getInstance().format(book.getBookingPay()));
-            book.setDateGap(Period.between(book.getBookingStartDate(), book.getBookingEndDate()).getDays());
-            if(Period.between(LocalDate.now(), book.getBookingStartDate()).getDays() >= 0) booksBefore.add(book);
-            else booksAfter.add(book);
-        });
-        model.addAttribute("booksBefore", booksBefore);
-        model.addAttribute("booksAfter", booksAfter);
-        return "mypage/customer/BookingList";
-    }
-
-    @PostMapping("/mypage/customer/CancelBookingOk")
-    public String cancelBookingOk(Long bookingId, Model model) {
-        LocalDate bookingStartDate = bookingService.getBookingStartDate(bookingId);
-        if (!bookingStartDate.isAfter(LocalDate.now())) {
-            model.addAttribute("errorMessage", "예약을 취소할 수 없습니당");
-            return "error";
-        }
-
-        bookingService.deleteBooking(bookingId);
-        return "redirect:/mypage/customer/BookingList/";
-    }
-
 }

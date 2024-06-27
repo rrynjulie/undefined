@@ -44,11 +44,14 @@
             <div class="form-group">
                 <label for="email">이메일</label>
                 <div th:if="${user}">
-                <input type="email" id="email" th:value="${user.email}" name="email" readonly>
+                    <input type="email" id="email" th:value="${user.email}" name="email" readonly>
                 </div>
             </div>
             <div class="form-group">
-                <label for="current-password">현재 비밀번호</label>
+                <div class="test">
+                    <label for="current-password" class="essential">현재 비밀번호 </label>
+                    <div class="required-dot"></div>
+                </div>
                 <div th:if="${user}">
                     <input type="password" id="current-password" name="currentPassword">
                     <span id="current-password-error" style="color: red; display: none;">현재 비밀번호가 일치하지 않습니다.</span>

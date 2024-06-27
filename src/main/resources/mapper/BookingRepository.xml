@@ -26,7 +26,7 @@
     </sql>
 
     <!-- CREATE -->
-    <insert id="createBooking" flushCache="true" parameterType="com.lec.spring.domain.Room"
+    <insert id="createBooking" flushCache="true" parameterType="com.lec.spring.domain.Booking"
             useGeneratedKeys="true" keyColumn="booking_id" keyProperty="bookingId">
         INSERT INTO booking
         (booking_time, booking_adult, booking_child, visitor_name, visitor_phonenum
