@@ -1,8 +1,12 @@
 package com.lec.spring.controller;
 
 import com.lec.spring.config.PrincipalDetails;
+import com.lec.spring.domain.Booking;
+import com.lec.spring.domain.Post;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.UserAuthority;
+import com.lec.spring.service.BookingService;
+import com.lec.spring.service.ManagerService;
 import com.lec.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,15 +16,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("mypage/customer")
+@RequestMapping("/mypage/customer")
 public class CustomerController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BookingService bookingService;
+
+//    private ManagerService managerService;
 
     @GetMapping("/ManageAccount")
     public String manageAccount(Model model) {
@@ -99,5 +112,27 @@ public class CustomerController {
         } else {
             throw new IllegalStateException("Unknown principal type: " + principal.getClass());
         }
+    }
+
+    @GetMapping("/BookingList/{userId}")
+    public String BookingList(@PathVariable("userId") Long userId, Model model){
+        List<Booking> books = bookingService.findBooksByUserId(userId);
+        List<Booking> booksBefore = new ArrayList<>();
+        List<Booking> booksAfter = new ArrayList<>();
+        books.forEach(book -> {
+            book.setFormattedPay(DecimalFormat.getInstance().format(book.getBookingPay()));
+            book.setDateGap(Period.between(book.getBookingStartDate(), book.getBookingEndDate()).getDays());
+            if(Period.between(LocalDate.now(), book.getBookingStartDate()).getDays() >= 0) booksBefore.add(book);
+            else booksAfter.add(book);
+        });
+        model.addAttribute("booksBefore", booksBefore);
+        model.addAttribute("booksAfter", booksAfter);
+        return "mypage/customer/BookingList";
+    }
+
+    @PostMapping("/CancelBooking")
+    public String cancelBookingOk(Long bookingId, Model model) {
+        model.addAttribute("result", bookingService.deleteBooking(bookingId));
+        return "/mypage/customer/CancelBookingOk";
     }
 }

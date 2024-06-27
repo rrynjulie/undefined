@@ -75,7 +75,7 @@
                         결제 금액
                         <p th:text="${books.formattedPay} + '원'"></p>
                     </label>
-                    <a class="btn-booking-cancel" href="#">예약 취소</a>
+                    <button class="btn-booking-cancel" th:href="@{mypage/customer/CancelBookingOk}">예약 취소</button>
                 </div>
             </div>
         </div>
