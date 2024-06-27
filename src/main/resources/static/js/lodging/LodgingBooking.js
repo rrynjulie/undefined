@@ -55,6 +55,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // 인원수 정보 표시
         total.innerHTML = `성인 ${storedAdultCount}명, 아동 ${storedChildCount}명`;
+
+        // hidden input 필드로 인원 정보 추가
+        const hiddenAdultCountField = document.createElement('input');
+        hiddenAdultCountField.type = 'hidden';
+        hiddenAdultCountField.name = 'bookingAdult';
+        hiddenAdultCountField.value = storedAdultCount;
+        bookingForm.appendChild(hiddenAdultCountField);
+
+        const hiddenChildCountField = document.createElement('input');
+        hiddenChildCountField.type = 'hidden';
+        hiddenChildCountField.name = 'bookingChild';
+        hiddenChildCountField.value = storedChildCount;
+        bookingForm.appendChild(hiddenChildCountField);
     }
 
     // 페이지 로드 시 예약 정보를 표시
