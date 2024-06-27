@@ -31,7 +31,7 @@
                  JOIN room r ON l.lodging_id = r.lodging_id
         WHERE (l.lodging_location1 = #{location} OR l.lodging_location2 = #{location})
           AND (#{type} = '전체' OR l.lodging_type = #{type})
-        GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type, l.lodging_address;
+        GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type;
     </select>
 
 
@@ -70,7 +70,6 @@
                r.room_picture_1 AS roomPicture1
         FROM lodging l
                 JOIN room r ON l.lodging_id = r.lodging_id
-                JOIN post p ON l.lodging_id = p.lodging_id
         WHERE l.lodging_id = #{lodgingId}
         LIMIT 1
     </select>
@@ -89,12 +88,18 @@
     </select>
 
     <select id="avgPostGrade" resultType="java.lang.Double">
-        SELECT TRUNCATE(AVG(p.post_grade), 1) AS avgPostGrade
+        SELECT COALESCE(TRUNCATE(AVG(p.post_grade), 1), 0) AS avgPostGrade
         FROM post p
                  JOIN lodging l ON p.lodging_id = l.lodging_id
                  JOIN room r ON p.room_id = r.room_id
         WHERE p.lodging_id = #{lodgingId}
         LIMIT 1;
+    </select>
+
+    <select id="totalPosts" resultType="java.lang.Integer">
+        SELECT COUNT(*) AS totalPosts
+        FROM post p
+        WHERE p.lodging_id = #{lodgingId};
     </select>
 
 </mapper>
