@@ -1,13 +1,7 @@
 package com.lec.spring.service;
 
-import com.lec.spring.domain.Booking;
-import com.lec.spring.domain.ProvLodging;
-import com.lec.spring.domain.Room;
-import com.lec.spring.domain.User;
-import com.lec.spring.repository.BookingRepository;
-import com.lec.spring.repository.ProviderRepository;
-import com.lec.spring.repository.RoomRepository;
-import com.lec.spring.repository.UserRepository;
+import com.lec.spring.domain.*;
+import com.lec.spring.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,8 +30,20 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public int createBooking(Booking booking) {
-        return bookingRepository.createBooking(booking);
+    public int createBooking(User user, Room room, Booking booking) {
+//        user = userRepository.findById(user.getUserId());
+//        room = roomRepository.findByRoomId(room.getRoomId());
+
+//        booking.setVisitorName(user.getUsername());
+//        booking.setVisitorPhoneNum(user.getPhonenum());
+//        booking.setBookingPay(room.getRoomPrice());
+//        booking.setBookingStartDate(LocalDate.parse(startDate));
+//        booking.setBookingEndDate(LocalDate.parse(endDate));
+//        booking.setBookingAdult(adultCount);
+//        booking.setBookingChild(childCount);
+
+        return bookingRepository.save(booking);
+
     }
 
     @Override
@@ -74,12 +80,6 @@ public class BookingServiceImpl implements BookingService {
         }
 
         return result;
-    }
-
-    @Override
-    public LocalDate getBookingStartDate(Long bookingId) {
-        Booking booking = bookingRepository.findByBookingId(bookingId);
-        return booking.getBookingStartDate();
     }
 
 

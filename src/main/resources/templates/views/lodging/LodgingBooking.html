@@ -19,7 +19,7 @@
 
 
     <label class="info-label" for="visitorName">이용자 이름: <div class="required-dot"></div></label>
-    <span class="info-span" id="visitorName" name="visitorName" th:value="${visitorName}" th:text="${user.username}"></span>
+    <span class="info-span" id="visitorName" name="visitorName" th:value="${user.userName}"></span>
 <!--    <input class="info-input" id="visitorName" name="visitorName" type="text" placeholder="객실명을 입력하세요." th:value="${user.userName}">-->
 <!--    <label>이용자 이름: </label>-->
 <!--    <span th:text="${user.username}"></span>-->
@@ -49,10 +49,12 @@
 
     <label class="info-label" for="roomName">객실 이름: <div class="required-dot"></div></label>
 <!--    <span class="info-span" id="roomId" name="roomId" th:value="${roomId}"></span>-->
-    <span type="info-span" id="roomName" th:value="${room.roomName}" ></span>-->
+    <span type="info-span" id="roomName" th:value="${room.roomName}"  th:text="${room.roomName}"></span>-->
 <!--    <label>객실:</label>-->
 <!--    <span th:text="${room.roomName}"></span>-->
-<!--    <input type="hidden" name="roomId" th:value="${room.roomId}" />-->
+    <span type="hidden" name="roomId" th:value="${room.roomId}"></span>
+    <span th:type="hidden" name="userId" th:value="${user.userId}"></span>
+
 
     <!-- 결제 방식 -->
 <!--    <label>결제 방식:</label>-->
