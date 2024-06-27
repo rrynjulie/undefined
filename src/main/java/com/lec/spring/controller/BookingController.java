@@ -4,6 +4,7 @@ import com.lec.spring.config.PrincipalDetails;
 import com.lec.spring.domain.*;
 
 import com.lec.spring.service.*;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -75,18 +76,19 @@ public class BookingController {
     }
 
     @PostMapping("/lodging/LodgingBooking")
-    public String createBooking(Booking booking,
-                                Room room,
-                                User user,
-                                Model model,
-                                Authentication authentication) {
-
-        if (authentication == null || !authentication.isAuthenticated()) {
-            // 인증되지 않은 사용자 처리
-            return "redirect:/login"; // 로그인 페이지로 리다이렉트 또는 예외 처리
-        }
+    public String createBooking(@RequestParam("visitorName") String visitorName,
+                                @RequestParam("visitorPhoneNum") String visitorPhoneNum,
+                                @RequestParam("bookingPayType") String bookingPayType,
+                                @RequestParam("bookingPay") int bookingPay,
+                                @RequestParam("bookingStartDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bookingStartDate,
+                                @RequestParam("bookingEndDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bookingEndDate,
+                                @RequestParam("roomId") Long roomId,
+                                @RequestParam("userId") Long userId,
+                                Authentication authentication,
+                                Model model) {
 
         Object principal = authentication.getPrincipal();
+        User user;
         if (principal instanceof PrincipalDetails) {
             user = ((PrincipalDetails) principal).getUser();
         } else if (principal instanceof String) {
@@ -95,17 +97,33 @@ public class BookingController {
             throw new IllegalStateException("Unknown principal type: " + principal.getClass());
         }
 
+        // Retrieve the room object based on roomId
+        Room room = roomService.findByRoomId(roomId); // Assuming you have a roomService to fetch room by id
 
-        model.addAttribute("result", bookingService.createBooking(user, room, booking));
-//        // 사용자 이름 설정
-//        String userName = principal.getName(); // 사용자 이름 가져오기
-//        booking.setVisitorName(userName);
+        if (room == null) {
+            // Handle case where room with given id is not found
+            throw new IllegalArgumentException("Room not found for roomId: " + roomId);
+        }
 
-        //model.addAttribute("result", bookingService.createBooking(booking));
+        Booking booking = Booking.builder()
+                .visitorName(visitorName)
+                .visitorPhoneNum(visitorPhoneNum)
+                .bookingPayType(Booking.BookingPayType.valueOf("카드"))
+                .bookingPay(bookingPay)
+                .bookingStartDate(bookingStartDate)
+                .bookingEndDate(bookingEndDate)
+                .userId(userId)
+                .roomId(roomId)
+                .build();
 
-        // 예약 완료 페이지로 이동
+
+
+        model.addAttribute("result", bookingService.createBooking(booking));
+        model.addAttribute("user", user);
+
         return "lodging/LodgingBookingOk";
     }
+
 
     @GetMapping("/mypage/provider/ProvBookingList/{userId}")
     public void provBookingList(Model model) {
