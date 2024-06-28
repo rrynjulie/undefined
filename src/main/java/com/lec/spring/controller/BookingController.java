@@ -40,7 +40,7 @@ public class BookingController {
                                  Authentication authentication) {
         if (authentication == null || !authentication.isAuthenticated()) {
             // 인증되지 않은 사용자 처리
-            return "redirect:/login"; // 로그인 페이지로 리다이렉트 또는 예외 처리
+            return "redirect:/user/login"; // 로그인 페이지로 리다이렉트 또는 예외 처리
         }
 
         Object principal = authentication.getPrincipal();
@@ -62,7 +62,6 @@ public class BookingController {
 
         Room room = roomService.getRoomById(roomId);
         model.addAttribute("room", room);
-        System.out.println(room);
 
         return "lodging/LodgingBooking";
     }
@@ -115,7 +114,6 @@ public class BookingController {
 
         return "lodging/LodgingBookingOk";
     }
-
 
     @GetMapping("/mypage/provider/ProvBookingList/{userId}")
     public void provBookingList(Model model) {

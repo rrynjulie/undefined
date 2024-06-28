@@ -2,11 +2,13 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/provider/ProvBookingList.css}">
-    <script th:src="@{/js/mypage/provider/ProvBookingList.js}"></script>
-    <title></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/lodging/LodgingBooking.css}">
+    <script th:src="@{/js/lodging/LodgingBooking.js}"></script>
+    <title>예약하기</title>
 </head>
 <body>
+<!-- 헤더 -->
+<th:block th:insert="~{common/Header::header}"></th:block>
 
 <!-- 예약 폼 내용 -->
 <form id="bookingForm" th:action="@{/lodging/LodgingBooking}" method="post">
@@ -127,7 +129,7 @@
 
 </form>
 
-
-<script th:src="@{/js/lodging/LodgingBooking.js}"></script>
+<!-- 푸터 -->
+<th:block th:insert="~{common/Footer::footer}"></th:block>
 </body>
 </html>
