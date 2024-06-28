@@ -10,16 +10,16 @@
 <!-- 헤더 -->
 <th:block th:insert="~{common/Header::header}"></th:block>
 
+<main>
 <!-- 예약 폼 내용 -->
 <form id="bookingForm" th:action="@{/lodging/LodgingBooking}" method="post">
+    <h2>예약자 정보</h2>
+    <section class="box-user-info"></section>
+    <section class="box-booking-info"></section>
+    <section class="box-pay-type"></section>
+    <section class="box-user-info"></section>
     <input type="hidden" name="roomId" th:value="${room.roomId}">
     <input type="hidden" name="userId" th:value="${user.userId}">
-
-
-    <!--    <form id="bookingForm" action="#" th:action="@{/booking/submit}" method="post">-->
-<!--<form action="/lodging/saveReservation" method="post">-->
-<!--    <form id="bookingForm" action="/booking/confirm" method="post">-->
-
 
     <h2 th:text="${lodging.lodgingName} + ' 예약하기'"></h2>
 
@@ -27,45 +27,13 @@
     <label class="info-label" for="visitorName">이용자 이름: <div class="required-dot"></div></label>
     <input class="info-input" id="visitorName" name="visitorName" type="text" th:value="${user.username}" readonly>
 
-    <!--    <input class="info-input" id="visitorName" name="visitorName" type="text" placeholder="객실명을 입력하세요." th:value="${user.userName}">-->
-<!--    <label>이용자 이름: </label>-->
-<!--    <span th:text="${user.username}"></span>-->
-<!--    <input type="hidden" name="visitorName" th:value="${user.username}" />-->
-
     <label class="info-label" for="visitorPhoneNum">이용자 전화번호: <div class="required-dot"></div></label>
     <input class="info-input" id="visitorPhoneNum" name="visitorPhoneNum" type="text" th:value="${user.phonenum}">
-
-    <!--    <label>이용자 전화번호: </label>-->
-<!--    <span th:text="${user.phonenum}"></span>-->
-<!--    <input type="hidden" name="visitorPhoneNum" th:value="${user.phonenum}" />-->
-
-    <!-- 예약인원 -->
-<!--    <label>성인: </label>-->
-<!--    <input type="number" name="bookingAdult" min="0" required />-->
-
-<!--    <label>아동: </label>-->
-<!--    <input type="number" name="bookingChild" min="0" required />-->
-
-<!--    &lt;!&ndash; 예약 날짜 &ndash;&gt;-->
-<!--    <label>예약 시작 날짜: </label>-->
-<!--    <input type="date" name="bookingStartDate" required />-->
-
-<!--    <label>예약 종료 날짜: </label>-->
-<!--    <input type="date" name="bookingEndDate" required />-->
 
     <!-- 객실 -->
 
     <label class="info-label" for="roomName">객실 이름: <div class="required-dot"></div></label>
-<!--    <span class="info-span" id="roomId" name="roomId" th:value="${roomId}"></span>-->
     <span type="info-span" id="roomName" th:value="${room.roomName}"  th:text="${room.roomName}"></span>-->
-<!--    <label>객실:</label>-->
-<!--    <span th:text="${room.roomName}"></span>-->
-<!--    <span type="hidden" name="roomId" th:value="${room.roomId}"></span>-->
-<!--    <span th:type="hidden" name="userId" th:value="${user.userId}"></span>-->
-
-<!--    <label for="roomId">Room ID:</label>-->
-<!--    <input type="number" id="roomId" name="room_id" required><br><br>-->
-
 
     <label class="roomId" for="roomId">객실 Id: <div class="required-dot"></div></label>
     <!--    <span class="info-span" id="roomId" name="roomId" th:value="${roomId}"></span>-->
@@ -81,20 +49,6 @@
     <!--    <span class="info-span" id="roomId" name="roomId" th:value="${roomId}"></span>-->
     <span type="info-span" id="userId" th:value="${user.userId}"  th:text="${user.userId}"></span>-->
 
-
-
-    <!-- 결제 방식 -->
-<!--    <label>결제 방식:</label>-->
-<!--    <label class="info-label" for="bookingPayType">결제방식: <div class="required-dot"></div></label>-->
-<!--    <select id="bookingPayType" name="bookingPayType" required>-->
-<!--        <option value="카드">카드</option>-->
-<!--        <option value="무통장입금">무통장입금</option>-->
-<!--    </select>-->
-
-<!--    <label class="info-label" for="bookingPayType">결제 유형: <div class="required-dot"></div></label>-->
-<!--    <input class="info-input" id="bookingPayType" name="bookingPayType" type="text" placeholder="결제 유형 입력">-->
-
-
     <label class="info-label">객실 흡연 가능 여부<div class="required-dot"></div></label>
     <div class="smoke-radio-frame">
         <input type="radio" class="btn-check" name="bookingPayType" id="bookingPayType1" value="카드" th:checked="${bookingPayType}">
@@ -104,30 +58,16 @@
         <label class="smoke-radio-label" for="bookingPayType2">무통장입금</label>
     </div>
 
-    <!-- 결제 금액 -->
-<!--    <label class="info-label" for="bookingPay">가격: <div class="required-dot"></div></label>-->
-<!--    <span class="info-span" id="bookingPay" name="bookingPay" th:value="${bookingPay}" th:text="${room.roomPrice}"></span>-->
-
     <label class="info-label" for="bookingPay">결제 금액: <div class="required-dot"></div></label>
     <input class="info-input" id="bookingPay" name="bookingPay" th:value="${room.roomPrice}" th:text="${room.roomPrice}">
-
-<!--    <input type="hidden" id="startDate" name="bookingStartDate">-->
-<!--    <input type="hidden" id="endDate" name="bookingEndDate">-->
-
-<!--    <label class="info-label" for="bookingStartDate">입실: <div class="required-dot"></div></label>-->
-<!--    <input class="info-input" id="bookingStartDate" name="bookingStartDate">-->
-<!--    <label class="info-label" for="bookingEndDate">퇴실: <div class="required-dot"></div></label>-->
-<!--    <input class="info-input" id="bookingEndDate" name="bookingEndDate">-->
 
     <div id="selectedDate"></div>
     <div id="total"></div>
 
-
     <!-- 결제 버튼 -->
     <button class="" type="submit">결제하기</button>
-
-
 </form>
+</main>
 
 <!-- 푸터 -->
 <th:block th:insert="~{common/Footer::footer}"></th:block>
