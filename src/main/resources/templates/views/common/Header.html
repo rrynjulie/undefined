@@ -9,39 +9,29 @@
         <ul class="nav-bar-pc-inner">
             <li class="nav-bar-inner-left">
                 <a th:href="@{/Home}">
-                    <img th:src="@{/image/MainLogo.png}" alt="StayFind">
+                    <img th:src="@{/image/common/MainLogo.png}" alt="저기어때">
                 </a>
             </li>
-            <li class="nav-bar-inner-right">
-                <a th:href="@{/lodging/LodgingSearch}">숙박 예약</a>
-                <a th:href="@{/ticket/TicketCheck}">승차권 조회</a>
-                <a th:href="@{/mypage/customer/BookingList/3}">마이페이지</a>
-<!--                <a th:href="@{/user/Login}" id="btn-login-pc">로그인 / 회원가입</a>-->
-<!--                <a th:href="@{/user/Logout}" id="btn-logout-pc">로그아웃</a>-->
-
+            <!-- 로그인 했을때는 username 과 로그아웃 form 보여주기 -->
+            <form class="nav-bar-inner-right" th:action="@{/user/logout}" method="POST" id="user-info-logout">
+                <a class="common-menu" th:href="@{/lodging/LodgingSearch}">숙박 예약</a>
+                <a class="common-menu" th:href="@{/ticket/TicketCheck}">승차권 조회</a>
+                <a class="user-frame" th:href="@{'/mypage/customer/BookingList/' + ${user.userId}}" sec:authorize="isAuthenticated()" th:with="user=${#authentication.getPrincipal().getUser()}">
+                    <div class="user-icon"><img th:src="@{/image/common/UserIcon.png}" alt=""></div>
+                    <p th:text="${user.username}"></p>
+                </a>
                 <a class="btn btn-primary" sec:authorize="isAnonymous()" th:href="@{/user/login}" id="btn-login-pc">로그인 / 회원가입</a>
-
-                <!-- 로그인 했을때는 username 과 로그아웃 form 보여주기 -->
-                <form th:action="@{/user/logout}" method="POST" sec:authorize="isAuthenticated()">
-                    <span class="d-flex">
-                    <span><button class="btn btn-danger" type="submit" id="logout-btn">로그아웃</button></span>
-                    <span class="text-light p-2" id="user-info">
-                        <span th:text="${user.nickname} + '(' + ${user.username} + ') 님 환영합니다'"></span>
-                    </span>
-                </span>
-                </form>
-            </li>
+                <button class="btn btn-danger" type="submit" id="btn-logout-pc" sec:authorize="isAuthenticated()">로그아웃</button>
+            </form>
         </ul>
     </nav>
-
-<!--    <h6 id="loginUser">님 환영합니다!</h6>-->
 
     <!-- 모바일 버전 -->
     <nav class="nav-bar-mobile">
         <!-- Top Navigation Menu -->
         <div class="nav-bar-mobile-inner">
             <a th:href="@{/Home}" class="main-logo-mobile">
-                <img th:src="@{/image/MainLogo.png}" alt="StayFind">
+                <img th:src="@{/image/common/MainLogo.png}" alt="저기어때">
             </a>
 
             <!-- 햄버거 아이콘 -->
@@ -57,7 +47,7 @@
 <!--            <a id="btn-login-mobile" th:href="@{/user/Login}">로그인 / 회원가입</a>-->
 <!--            <a id="btn-logout-mobile" th:href="@{/user/Login}">로그아웃</a>-->
             <a class="btn btn-primary" sec:authorize="isAnonymous()" th:href="@{/user/login}" id="btn-login-mobile">로그인 / 회원가입</a>
-            <form th:action="@{/user/logout}" method="POST" sec:authorize="isAuthenticated()">
+            <form th:action="@{/user/logout}" method="POST" sec:authorize="isAuthenticated()" th:with="user=${#authentication.getPrincipal().getUser()}">
                 <span class="d-flex">
                     <span><button class="btn btn-danger" type="submit" id="logout-btn-mobile">로그아웃</button></span>
                     <span class="text-light p-2">
@@ -65,6 +55,7 @@
                     </span>
                 </span>
             </form>
+            <a th:href="@{/mypage/customer/BookingList/3}" sec:authorize="isAuthenticated()" >마이페이지</a>
             <a th:href="@{/lodging/LodgingSearch}">숙박 예약</a>
             <a th:href="@{/ticket/TicketCheck}">승차권 조회</a>
         </div>

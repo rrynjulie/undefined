@@ -13,6 +13,8 @@ public class Authority {
     private Long id; // 권한의 식별자(ID)
     private Integer authority; // 권한의 ID (정수형)
 
+    private String name;
+
     private Long userId; // 사용자 ID (추가됨)
     private User user;
 

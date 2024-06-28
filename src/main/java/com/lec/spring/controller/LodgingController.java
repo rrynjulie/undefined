@@ -113,7 +113,7 @@ public class LodgingController {
     public String RoomDetail(@PathVariable("lodgingId") Long lodgingId, @PathVariable("roomId") Long roomId, Model model) {
         ProvLodging lodging = providerService.getAllDetails(lodgingId);
         Room room = roomService.findByRoomId(roomId);
-        List<Post> postList = postService.findPostsByRoomId(roomId);
+        List<Post> postList = postService.findPostByLodgingId(lodgingId);
         int totalPosts = postService.countAllPostsByLodgingId((long)lodgingId);
 
         if(postList.size() > 3)
