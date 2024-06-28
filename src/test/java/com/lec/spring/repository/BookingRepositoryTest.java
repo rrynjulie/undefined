@@ -26,7 +26,6 @@ public class BookingRepositoryTest {
                 .bookingChild(2)
                 .visitorName("이재혁")
                 .visitorPhoneNum("010-0000-0000")
-                .bookingPayType("카드")
                 .bookingPay(50000)
                 .bookingStartDate(LocalDate.parse("2024-06-01"))
                 .bookingEndDate(LocalDate.parse("2024-06-15"))

@@ -46,7 +46,7 @@ li {
     text-decoration: none;
 }
 
-.nav-bar-inner-right a:hover {
+.common-menu:hover {
     color: #FC5185;
     border-bottom: 2px solid #FC5185;
     transition: border-bottom 0.1s ease-in-out;
@@ -68,25 +68,39 @@ li {
     color: black;
 }
 
-.nav-bar a {
-    flex: 1;
-    /* 화면 크기에 따라 버튼 크기가 조절됨 */
-    text-align: center;
-}
-
 .user-frame {
     display: flex;
     justify-content: center;
+    height: 40px;
+    width: fit-content;
     border: 1px solid #EBEBEB;
     border-radius: 5px;
+    margin-right: 20px;
+    padding: 5px 15px;
+}
+
+.user-frame:hover {
+    transform: scale(1.02);
 }
 
 .user-frame p {
     align-content: center;
-    margin-left: 10px;
+    margin-left: 7px;
 }
 
-#btn-login-pc, #logout-btn-pc {
+.user-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    height: 90%;
+}
+
+.user-icon img {
+    height: 100%;
+}
+
+#btn-login-pc, #btn-logout-pc {
     height: 40px;
     width: 140px;
     text-align: center;
@@ -94,6 +108,12 @@ li {
     background-color: #FC5185;
     color: white;
     border-radius: 7px;
+}
+
+#btn-logout-pc {
+    width: 80px;
+    border: 0;
+    font-size: 15px;
 }
 
 #user-info {
@@ -104,11 +124,8 @@ li {
     border-bottom: 0 none;
     transform: scale(1.02);
 }
-#user-info-logout{
-    border: 0;
-}
 
-#logout-btn-pc {
+#user-info-logout{
     border: 0;
 }
 
