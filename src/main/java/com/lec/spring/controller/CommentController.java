@@ -32,6 +32,8 @@ public class CommentController {
         return commentService.write(postId, userId, content);
     }
 
-
-
+    @PostMapping("/delete")
+    public QryResult delete(Long id){
+        return commentService.delete(id);
+    }
 }
