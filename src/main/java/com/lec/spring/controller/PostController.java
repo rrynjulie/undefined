@@ -54,21 +54,21 @@ public class PostController {
         return "redirect:/mypage/customer/PostList/" + post.getUserId();
     }
 
-    @GetMapping("/PostCreate/{userId}")
+    @GetMapping("/PostCreate/{userId}/{bookingId}")
     public String postCreate(@ModelAttribute Long userId, Model model) {
         Post newPost = new Post();
         model.addAttribute("newPost", newPost);
         return "mypage/customer/PostCreate";
     }
-    @PostMapping("/PostCreate")
-    public String savePost(@ModelAttribute Post post) {
-        int result = postService.savePost(post);
-        if (result > 0) {
-            return "redirect:/mypage/customer/PostList/" + post.getUserId();
-        } else {
-            return "redirect:/mypage/customer/PostCreate" + post.getUserId();
-        }
-    }
+//    @PostMapping("/PostCreate")
+//    public String savePost(@ModelAttribute Post post) {
+//        int result = postService.savePost(post);
+//        if (result > 0) {
+//            return "redirect:/mypage/customer/PostList/" + post.getUserId();
+//        } else {
+//            return "redirect:/mypage/customer/PostCreate" + post.getUserId();
+//        }
+//    }
 
 
 
