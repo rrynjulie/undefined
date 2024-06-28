@@ -124,10 +124,5 @@ public class LodgingController {
         return "lodging/RoomDetail";
     }
 
-    @GetMapping("/LodgingDetail/Booking")
-    public List<Booking> findBooksByRoomId(@RequestParam Long roomId){
-        return bookingService.findBooksByRoomId(roomId);
-    }
-
 
 }

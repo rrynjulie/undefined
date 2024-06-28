@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 public class BookingController {
@@ -113,6 +114,13 @@ public class BookingController {
         model.addAttribute("user", user);
 
         return "lodging/LodgingBookingOk";
+    }
+
+    @GetMapping("/lodging/LodgingDetail/Booking")
+    @ResponseBody
+    public List<Booking> getBookingsByRoomId(@RequestParam Long roomId) {
+        List<Booking> bookings = bookingService.findBooksByRoomId(roomId);
+        return bookings;
     }
 
     @GetMapping("/mypage/provider/ProvBookingList/{userId}")
