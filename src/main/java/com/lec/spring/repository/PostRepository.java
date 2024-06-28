@@ -11,7 +11,7 @@ import java.util.List;
 
 @Mapper
 public interface PostRepository {
-    int createPost(Post post);
+    int savePost(Post post);
 
     int countAllPostsByLodgingId(Long lodgingId);
 
