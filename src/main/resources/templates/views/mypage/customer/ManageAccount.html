@@ -39,25 +39,31 @@
                 <div th:if="${user}">
                     <input type="text" id="nickname" th:value="${user.nickname}" name="nickname">
                 </div>
-                <div style="color: #fc5185">* 변경사항은 다음 로그인 시 적용됩니다.</div>
+<!--                <div style="color: #fc5185">* 변경사항은 다음 로그인 시 적용됩니다.</div>-->
             </div>
-            <br><br><br><br><br>
+            <br><br>
             <div class="form-group">
                 <label for="email">이메일</label>
                 <div th:if="${user}">
                     <input type="email" id="email" th:value="${user.email}" name="email" readonly>
                 </div>
             </div>
+
             <div class="form-group" id="password-container">
-                <label for="current-password">현재 비밀번호</label>
+                <div class="test">
+                    <label for="current-password">현재 비밀번호 </label>
+                <div class="required-dot"></div>
+                </div>
                 <div th:if="${user}">
                     <input type="password" id="current-password" name="currentPassword">
                     <span id="current-password-error" style="color: red; display: none;">현재 비밀번호가 일치하지 않습니다.</span>
                 </div>
+                <br>
                 <div class="form-group">
                     <label for="new-password">새로운 비밀번호</label>
                     <input type="password" id="new-password" name="newPassword">
                 </div>
+                <br>
                 <div class="form-group">
                     <label for="confirm-password">비밀번호 확인</label>
                     <input type="password" id="confirm-password" name="confirmPassword">
