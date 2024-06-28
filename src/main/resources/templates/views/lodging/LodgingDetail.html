@@ -6,8 +6,8 @@
     <title>내 숙소 상세</title>
 </head>
 <body>
-<!--&lt;!&ndash; 헤더 &ndash;&gt;-->
-<!--<th:block th:insert="~{common/Header::header}"></th:block>-->
+<!-- 헤더 -->
+<th:block th:insert="~{common/Header::header}"></th:block>
 
 <div class="container">
 
@@ -30,17 +30,26 @@
     </div>
 
 
-
-    <div class="review-header" th:each="lodgingName : ${lodgingName}">
-        <div style="display: flex">
-            <div id="totalStar">&#9733;</div>
-            <div id="avgPostGrade" th:text="${avgPostGrade}"></div>
+    <div>
+        <div class="review-header">
+            <div style="display: flex" th:each="lodging, iterStat : ${lodging}" th:if="${iterStat.index == 1}">
+                <div id="totalStar">&#9733;</div>
+                <div id="avgPostGrade" th:text="${lodging.avgPostGrade} + '(' + ${lodging.totalPosts} + ')'"></div>
+            </div>
+            <div th:each="lodgingName : ${lodgingName}">
+            <a class="all" th:href="@{'/lodging/LodgingPostList/' + ${lodgingName.lodgingId}}">전체보기 ></a>
+            </div>
         </div>
-        <a class="all" th:href="@{'/lodging/LodgingPostList/' + ${lodgingName.lodgingId}}">전체보기 ></a>
     </div>
 
-    <div id="postDivContainer">
-        <div id="postDiv" th:each="lodgingPost, iterStat : ${lodgingPost}" th:if="${iterStat.index < 3}" style="border: 1px solid black; display: flex; justify-content: space-between">
+    <!-- 후기가 없는 경우 -->
+    <div th:if="${#lists.isEmpty(lodgingPost)}">
+        <p class="post-null">등록된 후기가 없습니다.</p>
+    </div>
+
+    <!-- 후기가 있는 경우 -->
+    <div th:if="${not #lists.isEmpty(lodgingPost)}" id="postDivContainer">
+        <div id="postDiv" th:each="lodgingPost : ${lodgingPost}" style="border: 1px solid black; display: flex; justify-content: space-between">
             <div>
                 <div class="stars" th:attr="data-star-count=${lodgingPost.postGrade}">
                     <span class="star">&#9733;</span>
@@ -104,7 +113,6 @@
 
 
     <div class="room-list">
-
         <div class="room-list1" th:each="lodging : ${lodging}">
             <img class="room-img" th:src="${lodging.roomPicture1}" alt="객실 이미지">
             <div class="room-details">
@@ -173,7 +181,6 @@
 <script th:src="@{/js/lodging/LodgingDetail.js}"></script>
 
 <!-- 푸터 -->
-<!--    <footer id="footer"></footer>-->
-<!--    <script src="../../../static/js/LoadFooter.js"></script>-->
+<th:block th:insert="~{common/Footer::footer}"></th:block>
 </body>
 </html>

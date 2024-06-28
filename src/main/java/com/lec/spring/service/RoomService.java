@@ -12,7 +12,6 @@ public interface RoomService {
     Room readRoomDetail(Long roomId);
     Room findByRoomId(Long roomId);
     int updateRoom(Room room, Map<String, MultipartFile> files, Long[] delfile);
-    int deleteRoom(Long roomId);
     List<Room> findRoomsByLodgingId(Long lodgingId);
     Room getRoomById(Long roomId);
 

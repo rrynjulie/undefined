@@ -1,3 +1,7 @@
+.hidden-label {
+    display: none;
+}
+
 /* Reset styles */
 * {
     margin: 0;

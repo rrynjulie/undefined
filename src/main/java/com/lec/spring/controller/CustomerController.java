@@ -8,11 +8,15 @@ import com.lec.spring.domain.UserAuthority;
 import com.lec.spring.service.BookingService;
 import com.lec.spring.service.ManagerService;
 import com.lec.spring.service.UserService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -32,6 +36,9 @@ public class CustomerController {
 
     @Autowired
     private BookingService bookingService;
+
+    @Autowired
+    private HttpServletRequest request;
 
 //    private ManagerService managerService;
 
@@ -135,4 +142,48 @@ public class CustomerController {
         model.addAttribute("result", bookingService.deleteBooking(bookingId));
         return "/mypage/customer/CancelBookingOk";
     }
+
+    @GetMapping("/Unregister")
+    public String unregisterPage(Model model) {
+        User user = getLoggedUser();
+        model.addAttribute("user", user);
+        return "mypage/customer/Unregister";
+    }
+
+    @PostMapping("/Unregister")
+    @ResponseBody()
+    public String unregister(@RequestParam String password) {
+        User user = getLoggedUser();
+        if (userService.checkPassword(user.getUserId(), password)) {
+            return "success";
+        } else {
+            return "failure";
+        }
+    }
+
+    @PostMapping("/UnregisterConfirm")
+    public String unregisterConfirm(RedirectAttributes redirectAttributes) {
+        User user = getLoggedUser();
+        System.out.println("userData: " + user);
+        try {
+            userService.deleteUserAndReferences(user.getUserId());
+//            userService.deleteUser(user.getUserId());
+            // 로그아웃 처리
+            request.logout();
+            redirectAttributes.addFlashAttribute("success", "회원 탈퇴가 완료되었습니다.");
+            return "redirect:/home";  // 로그아웃 후 홈 페이지로 리다이렉트
+        } catch (Exception e) {
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute("error", "회원 탈퇴 처리 중 오류가 발생했습니다.");
+            return "redirect:/mypage/customer/Unregister";
+        }
+    }
+
+    @GetMapping("/PostList")
+    public void PostList() {
+
+    }
+
+
+
 }

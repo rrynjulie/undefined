@@ -63,7 +63,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         String name = oAuth2UserInfo.getName();
 
 
-        User user = userService.findByNickname(nickname);
+        User user = userService.findByProviderId(providerId);
 
         if (user == null) {
             User newUser = User.builder()
@@ -77,7 +77,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             int cnt = userService.register(newUser);
             if (cnt > 0) {
                 System.out.println("[OAuth2 인증. 회원 가입 성공]");
-                user = userService.findByNickname(nickname);
+                user = userService.findByProviderId(providerId);
             } else {
                 System.out.println("[OAuth2 인증. 회원 가입 실패!]");
             }

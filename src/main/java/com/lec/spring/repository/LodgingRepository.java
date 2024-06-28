@@ -21,4 +21,6 @@ public interface LodgingRepository {
     List<Lodging> allPostList(Long lodgingId);
 
     Double avgPostGrade(Long lodgingId);
+
+    Integer totalPosts(Long lodgingId);
 }

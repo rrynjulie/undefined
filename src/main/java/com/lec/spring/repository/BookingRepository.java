@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface BookingRepository {
-    int createBooking(Booking booking);
+    int save(Booking booking);
 
     Booking findByBookingId(Long bookingId);
 
@@ -17,5 +17,4 @@ public interface BookingRepository {
     List<Booking> findBooksByUserId(Long userId);
 
     int deleteBooking(Booking booking);
-
 }

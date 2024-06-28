@@ -115,7 +115,7 @@
                         결제 금액
                         <p th:text="${books.formattedPay} + '원'"></p>
                     </label>
-                    <a class="btn-booking-post" href="#">후기 작성</a>
+                    <a class="btn-booking-post" th:href="@{/mypage/customer/PostCreate}">후기 작성</a>
                 </div>
             </div>
         </div>

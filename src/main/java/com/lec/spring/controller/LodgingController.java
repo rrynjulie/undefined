@@ -40,6 +40,10 @@ public class LodgingController {
         return "lodging/LodgingSearch";
     }
 
+    @GetMapping("/LodgingList")
+    public void showLodgingListPage() {
+    }
+
     @PostMapping("/LodgingList")
     public String handleSearchRequest(@RequestParam("location") String location, Model model) {
         List<Lodging> lodgings = lodgingService.getLodgingsByLocation(location);
@@ -47,7 +51,9 @@ public class LodgingController {
         // 각 숙소에 대해 평균 점수를 설정
         for (Lodging lodging : lodgings) {
             Double avgPostGrade = lodgingService.getAvgPostGrade(lodging.getLodgingId());
+            Integer totalPosts = lodgingService.getTotalPosts(lodging.getLodgingId());
             lodging.setAvgPostGrade(avgPostGrade != null ? avgPostGrade : 0.0);
+            lodging.setTotalPosts(totalPosts != null ? totalPosts : 0);
         }
 
         model.addAttribute("lodging", lodgings);
@@ -55,38 +61,52 @@ public class LodgingController {
         return "lodging/LodgingList";
     }
 
-    @GetMapping("/LodgingList")
-    public void showLodgingListPage() {
+    @GetMapping("/filter")
+    @ResponseBody
+    public List<Lodging> filterLodgingsByType(@RequestParam("location") String location, @RequestParam("type") String type) {
+        // type에 따라 필터링된 숙소 정보를 서비스 계층을 통해 가져옴
+        List<Lodging> filteredLodgings = lodgingService.getLodgingsByLocationAndType(location, type);  // 여기서 location은 비어있어도 상관없음
+        // 각 숙소에 대해 평균 점수 및 후기 수 설정
+        filteredLodgings.forEach(lodging -> {
+            Double avgPostGrade = lodgingService.getAvgPostGrade(lodging.getLodgingId());
+            Integer totalPosts = lodgingService.getTotalPosts(lodging.getLodgingId());
+            lodging.setAvgPostGrade(avgPostGrade != null ? avgPostGrade : 0.0);
+            lodging.setTotalPosts(totalPosts != null ? totalPosts : 0);
+        });
+
+        return filteredLodgings;
     }
 
     @GetMapping("/LodgingDetail/{lodgingId}")
     public String getLodgingDetail(@PathVariable("lodgingId") Long lodgingId, Model model) {
-        List<Lodging> lodging = lodgingService.lodgingDetail(lodgingId);
+        List<Lodging> lodgings = lodgingService.lodgingDetail(lodgingId);
         List<Lodging> lodgingName = lodgingService.lodgingName(lodgingId);
         List<Post> lodgingPost = postService.findPostByLodgingId(lodgingId);
-        Double avgPostGrade = lodgingService.getAvgPostGrade(lodgingId);
-        String formattedAvgPostGrade = String.format("%.1f", avgPostGrade);
-        model.addAttribute("lodging", lodging);
+        for (Lodging lodging : lodgings) {
+            Double avgPostGrade = lodgingService.getAvgPostGrade(lodging.getLodgingId());
+            Integer totalPosts = lodgingService.getTotalPosts(lodging.getLodgingId());
+            lodging.setAvgPostGrade(avgPostGrade != null ? avgPostGrade : 0.0);
+            lodging.setTotalPosts(totalPosts != null ? totalPosts : 0);
+        }
+
+
+        model.addAttribute("lodging", lodgings);
         model.addAttribute("lodgingName", lodgingName);
         model.addAttribute("lodgingPost", lodgingPost);
-        model.addAttribute("avgPostGrade", formattedAvgPostGrade);
+
         return "lodging/LodgingDetail";
-    }
-
-
-    @GetMapping("/filter")
-    @ResponseBody
-    public List<Lodging> filterLodgingsByLocationAndType(@RequestParam("location") String location, @RequestParam("type") String type) {
-        return lodgingService.getLodgingsByLocationAndType(location, type);
     }
 
     @GetMapping("/LodgingPostList/{lodgingId}")
     public String postList (@PathVariable("lodgingId") Long lodgingId, Model model) {
         List<Lodging> lodgingss = lodgingService.getPostList(lodgingId);
         Double avgPostGrade = lodgingService.getAvgPostGrade(lodgingId);
+        int totalPosts = postService.countAllPostsByLodgingId((long)lodgingId);
+
         String formattedAvgPostGrade = String.format("%.1f", avgPostGrade);
         model.addAttribute("lodgingss", lodgingss);
         model.addAttribute("avgPostGrade", formattedAvgPostGrade);
+        model.addAttribute("totalPosts", totalPosts);
         return "lodging/LodgingPostList";
     }
 
@@ -94,7 +114,7 @@ public class LodgingController {
     public String RoomDetail(@PathVariable("lodgingId") Long lodgingId, @PathVariable("roomId") Long roomId, Model model) {
         ProvLodging lodging = providerService.getAllDetails(lodgingId);
         Room room = roomService.findByRoomId(roomId);
-        List<Post> postList = postService.findPostsByRoomId(roomId);
+        List<Post> postList = postService.findPostByLodgingId(lodgingId);
         int totalPosts = postService.countAllPostsByLodgingId((long)lodgingId);
 
         if(postList.size() > 3)
