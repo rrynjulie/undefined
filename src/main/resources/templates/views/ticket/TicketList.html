@@ -7,18 +7,13 @@
     <title>버스 목록</title>
 </head>
 <body>
+<!-- 헤더 -->
+<th:block th:insert="~{common/Header::header}"></th:block>
+<main>
 <div class="container">
-    <div class="header">
-        <div class="logo">
-            <img src="logo.png" alt="LOGO">
-        </div>
-        <div class="title">
-            <h1>교통 리스트</h1>
-        </div>
-    </div>
-    <div id="currentDate"></div>
+
     <div class="trip-type">
-        <h1>편도</h1>
+        <h1>편도</h1><div class="date" id="currentDate"></div>
     </div>
     <table>
         <thead>
@@ -76,11 +71,11 @@
             </tbody>
         </table>
     </div>
-
-    <div class="back-button">
-        <a href="/ticketcheck">뒤로가기</a>
-    </div>
+        <button class="back-button"><a href="/ticketcheck">뒤로가기</a></button>
 </div>
-
+</main>
+<!-- 푸터 -->
+<th:block th:insert="~{common/Footer::footer}"></th:block>
 </body>
+
 </html>
