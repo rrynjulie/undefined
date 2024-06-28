@@ -7,6 +7,7 @@ import com.lec.spring.domain.User;
 import com.lec.spring.domain.UserAuthority;
 import com.lec.spring.service.BookingService;
 import com.lec.spring.service.ManagerService;
+import com.lec.spring.service.PostService;
 import com.lec.spring.service.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -39,6 +40,9 @@ public class CustomerController {
 
     @Autowired
     private HttpServletRequest request;
+
+    @Autowired
+    private PostService postService;
 
 //    private ManagerService managerService;
 
@@ -177,11 +181,6 @@ public class CustomerController {
             redirectAttributes.addFlashAttribute("error", "회원 탈퇴 처리 중 오류가 발생했습니다.");
             return "redirect:/mypage/customer/Unregister";
         }
-    }
-
-    @GetMapping("/PostList")
-    public void PostList() {
-
     }
 
 

@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -133,6 +134,37 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
+
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        http.authorizeRequests(authorizeRequests ->
+//                        authorizeRequests.anyRequest().authenticated()
+//                )
+//                .formLogin(formLogin ->
+//                        formLogin.loginPage("/login").permitAll()
+//                )
+//                .logout(logout ->
+//                        logout.permitAll()
+//                );
+//        return http.build();
+//    }
+
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+//        manager.createUser(User.withDefaultPasswordEncoder()
+//                .username("user")
+//                .password("password")
+//                .roles("USER")
+//                .build());
+//        manager.createUser(User.withDefaultPasswordEncoder()
+//                .username("admin")
+//                .password("admin")
+//                .roles("ADMIN")
+//                .build());
+//        return manager;
+//    }
 
 
 

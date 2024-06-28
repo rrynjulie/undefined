@@ -61,22 +61,21 @@ public class LodgingController {
         return "lodging/LodgingList";
     }
 
-    @GetMapping("/filter")
-    @ResponseBody
-    public List<Lodging> filterLodgingsByType(@RequestParam("location") String location, @RequestParam("type") String type) {
-        // type에 따라 필터링된 숙소 정보를 서비스 계층을 통해 가져옴
-        List<Lodging> filteredLodgings = lodgingService.getLodgingsByLocationAndType(location, type);  // 여기서 location은 비어있어도 상관없음
-        // 각 숙소에 대해 평균 점수 및 후기 수 설정
-        filteredLodgings.forEach(lodging -> {
+    @PostMapping("/LodgingList/filter")
+    public String filterLodgings(@RequestParam("location") String location, @RequestParam("type") String type, Model model) {
+        List<Lodging> lodgings = lodgingService.getLodgingsByLocationAndType(location, type);
+        for (Lodging lodging : lodgings) {
             Double avgPostGrade = lodgingService.getAvgPostGrade(lodging.getLodgingId());
             Integer totalPosts = lodgingService.getTotalPosts(lodging.getLodgingId());
             lodging.setAvgPostGrade(avgPostGrade != null ? avgPostGrade : 0.0);
             lodging.setTotalPosts(totalPosts != null ? totalPosts : 0);
-        });
-
-        return filteredLodgings;
+        }
+        model.addAttribute("lodging", lodgings);
+        return "lodging/LodgingList :: #item-list"; // Thymeleaf fragment
     }
 
+
+    
     @GetMapping("/LodgingDetail/{lodgingId}")
     public String getLodgingDetail(@PathVariable("lodgingId") Long lodgingId, Model model) {
         List<Lodging> lodgings = lodgingService.lodgingDetail(lodgingId);

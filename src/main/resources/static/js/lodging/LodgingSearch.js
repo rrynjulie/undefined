@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentDate = new Date();
     let startDate = sessionStorage.getItem('startDate') ? new Date(sessionStorage.getItem('startDate')) : new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
     let endDate = sessionStorage.getItem('endDate') ? new Date(sessionStorage.getItem('endDate')) : new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
-
+    selectedDate.innerHTML = startDate.getFullYear() + '.' + (startDate.getMonth() + 1) + '.' + startDate.getDate() + ' ~ ' + endDate.getFullYear() + '.' + (endDate.getMonth() + 1) + '.' + (endDate.getDate());
     if (!sessionStorage.getItem('startDate')) {
         sessionStorage.setItem('startDate', startDate.toISOString());
     }
@@ -128,12 +128,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const childCountDiv = document.getElementById('child-count');
     let adultCount = parseInt(sessionStorage.getItem('adultCount')) || 1;
     let childCount = parseInt(sessionStorage.getItem('childCount')) || 0;
+    let total = document.getElementById("total");
 
     function updateCount() {
         adultCountDiv.textContent = adultCount;
         childCountDiv.textContent = childCount;
         sessionStorage.setItem('adultCount', adultCount.toString());
         sessionStorage.setItem('childCount', childCount.toString());
+        total.innerText = '성인 ' + adultCount + ', 아동 ' + childCount;
     }
 
     updateCount();

@@ -37,6 +37,7 @@
     width: 28%;
     font-size: 25px;
     margin-bottom: 5px;
+    align-content: flex-end;
 }
 #lodgingPicture {
     width: 100%;
@@ -86,4 +87,9 @@ a {
 
 .post-null {
     height: 423px;
+}
+.dateTime {
+    width: 98%;
+    font-size: 15px;
+    margin-top: 30px;
 }

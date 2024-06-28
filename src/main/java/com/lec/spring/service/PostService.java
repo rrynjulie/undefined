@@ -5,7 +5,7 @@ import com.lec.spring.domain.Post;
 import java.util.List;
 
 public interface PostService {
-    int createPost(Post post);
+    int savePost(Post post);
 
     int countAllPostsByLodgingId(Long lodgingId);
 

@@ -19,12 +19,38 @@
         <span class="star" data-value="4">&#9733;</span>
         <span class="star" data-value="5">&#9733;</span>
     </div>
-    <form id="reviewForm" action="/submit_review" method="post">
-        <input type="hidden" name="rating" id="rating" value="">
-        <textarea name="review" placeholder="후기를 작성해주세요"></textarea>
-        <input type="hidden" name="lodgingId" value="1"> <!-- 실제 숙소 ID를 동적으로 설정 -->
-<!--        <button type="submit">제출 하기</button>-->
+    <form id="postForm" th:action="@{/mypage/customer/PostList}" method="post">
+        <div class="postDiv" id="postDiv">
+            <textarea id="postText" name="postText" rows="4" cols="50" th:placeholder="후기를 입력해주세요"></textarea>
+        </div>
+        <div class="pictureDiv" id="pictureDiv">
+            <input id="postPicture" type="text" name="postPicture" placeholder="사진 주소를 입력해주세요" />
+        </div>
+        <div style="width: 99.5%; height: 50px; margin-top: 20px;">
+            <button type="submit" style="float: right; width: 10%;">작성완료</button>
+        </div>
     </form>
+
+<!--    <h1>새로운 후기 작성</h1>-->
+<!--    <form th:action="@{/mypage/customer/PostCreate}" th:object="${newPost}" method="post">-->
+<!--        <input type="hidden" th:field="${userId}" />-->
+<!--        <div>-->
+<!--            <label for="title">제목:</label>-->
+<!--            <input type="text" id="title" th:field="${title}" />-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <label for="content">내용:</label>-->
+<!--            <textarea id="content" th:field="${content}"></textarea>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; 추가적으로 필요한 필드들 &ndash;&gt;-->
+<!--        <div>-->
+<!--            <button type="submit">저장</button>-->
+<!--        </div>-->
+<!--    </form>-->
+
+
+
+
 
 <!--    <form th:action="@{/mypage/customer/PostCreate}" th:object="${post}" method="post">-->
 <!--        <label for="postPicture">Picture:</label>-->

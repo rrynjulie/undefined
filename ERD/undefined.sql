@@ -93,8 +93,8 @@ CREATE TABLE booking
     visitor_phonenum  VARCHAR(100)            NOT NULL COMMENT '이용자 전화번호',
     booking_paytype   ENUM('카드', '무통장입금') NOT NULL COMMENT '결제 방식 (카드/무통장입금)',
     booking_pay       INT                     NOT NULL COMMENT '결제 금액',
-    booking_startdate DATETIME                NOT NULL COMMENT '체크인 날짜',
-    booking_enddate   DATETIME                NOT NULL COMMENT '체크아웃 날짜',
+    booking_startdate DATE                NOT NULL COMMENT '체크인 날짜',
+    booking_enddate   DATE                NOT NULL COMMENT '체크아웃 날짜',
     room_id           INT                     NOT NULL COMMENT '객실고유 id 값',
     user_id           INT                     NOT NULL COMMENT '아이디',
     PRIMARY KEY (booking_id)
