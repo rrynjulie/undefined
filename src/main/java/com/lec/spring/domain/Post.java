@@ -20,6 +20,8 @@ public class Post {
     private String lodgingPicture1;
     private String lodgingType;
     private String roomName;
+    private String startDate;
+    private String endDate;
 
     // Foreign Key
     private Long userId;  // NOT NULL

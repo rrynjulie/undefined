@@ -77,7 +77,7 @@ CREATE TABLE post
     post_text      LONGTEXT     NOT NULL COMMENT '후기 내용',
     post_grade     DOUBLE          NOT NULL COMMENT '평점 (1.0~5.0)',
     user_id        INT NOT NULL COMMENT '아이디',
-    booking_id INT         NOT NULL COMMENT '예약 고유 id값',
+    booking_id     INT         NOT NULL COMMENT '예약 고유 id값',
     lodging_id     INT         NOT NULL COMMENT '숙소고유 id값',
     room_id        INT         NOT NULL COMMENT '객실고유 id값',
     PRIMARY KEY (post_id)

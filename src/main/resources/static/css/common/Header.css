@@ -1,9 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 @font-face {
     font-family: 'Noto Sans KR';
     font-style: normal;
@@ -12,6 +6,13 @@
             url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'),
             url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'),
             url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .nav-bar-pc {
@@ -129,7 +130,7 @@ li {
     border: 0;
 }
 
-#logout-btn:hover {
+#btn-logout-pc:hover {
     border-bottom: 0 none;
     transform: scale(1.02);
 }

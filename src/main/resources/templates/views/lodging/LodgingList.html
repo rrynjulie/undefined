@@ -60,7 +60,7 @@
         <div id="result-filter">
             <span th:text="${#lists.size(lodging)} + '개의 검색 결과'"></span>
         </div>
-        <div class="item-list" id="item-list">
+        <div class="item-list" id="item-list" th:fragment="item-list">
             <div style="display: flex; width: 48%; height: 100%; margin-bottom: 10px;" th:each="lodging : ${lodging}">
                 <a class="item" th:href="@{'/lodging/LodgingDetail/' + ${lodging.lodgingId}}">
                     <p class="item-img1">

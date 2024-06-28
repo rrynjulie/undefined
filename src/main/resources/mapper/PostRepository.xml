@@ -4,10 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lec.spring.repository.PostRepository">
 
-    <insert id="createPost" flushCache="true" parameterType="com.lec.spring.domain.Post"
+    <insert id="savePost" flushCache="true" parameterType="com.lec.spring.domain.Post"
             useGeneratedKeys="true" keyColumn="post_id" keyProperty="postId">
-        INSERT INTO post (post_picture, post_text, post_grade, user_id, booking_id, lodging_id, room_id)
-        VALUES (#{postPicture}, #{postText}, #{postGrade}, #{userId}, #{bookingId}, #{lodgingId}, #{roomId})
+        INSERT INTO post (post_id, post_picture, post_text, post_grade, user_id, booking_id, lodging_id, room_id)
+        VALUES (#{postID},#{postPicture}, #{postText}, #{postGrade}, #{userId}, #{bookingId}, #{lodgingId}, #{roomId})
     </insert>
     <sql id="SELECT_BASES">
         SELECT p.post_id AS postId,
@@ -93,10 +93,13 @@
                p.user_id AS userId,
                p.booking_id AS bookingId,
                p.lodging_id AS lodgingId,
-               p.room_id AS roomId
+               p.room_id AS roomId,
+               b.booking_startdate AS startDate,
+               b.booking_endDate AS endDate
         FROM post p
             JOIN lodging l ON p.lodging_id = l.lodging_id
             JOIN room r ON p.room_id = r.room_id
+            JOIN booking b ON b.user_id = p.user_id
         WHERE p.user_id = #{userId}
     </select>
 
