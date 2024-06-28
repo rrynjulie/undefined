@@ -94,7 +94,6 @@ public class BookingController {
         Room room = roomService.findByRoomId(roomId);
 
         if (room == null) {
-            // Handle case where room with given id is not found
             throw new IllegalArgumentException("Room not found for roomId: " + roomId);
         }
 
