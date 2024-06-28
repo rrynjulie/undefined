@@ -7,11 +7,9 @@
     <title>승차권 검색</title>
 </head>
 <body>
-<div class="header">
-    <a href="/Home">
-        <img src="/image/common/MainLogo.png" alt="StayFind">
-    </a>
-</div>
+<!-- 헤더 -->
+<th:block th:insert="~{common/Header::header}"></th:block>
+<main>
 <div>
     <a href="/mypage/provider/provlodginglist">오너 숙소 리스트</a>
 </div>
@@ -20,26 +18,26 @@
     <div class="tab-item" id="round-trip-tab">왕복</div>
 </div>
 <div class="form-container">
-    <form action="/fetchBusInfo" method="get">
-        <label for="depTerminalId">출발 터미널</label>
-        <input type="text" id="depTerminalId" name="depTerminalId" placeholder="출발터미널ID 입력">
+    <form id="ticketForm" action="/fetchBusInfo" method="get">
+            <label class="info-label" for="depTerminalId">출발 터미널<div class="required-dot"></div></label>
+            <input class="ticketcheck-input" type="text" id="depTerminalId" name="depTerminalId" placeholder="출발터미널ID 입력">
 
-        <label for="arrTerminalId">도착 터미널</label>
-        <input type="text" id="arrTerminalId" name="arrTerminalId" placeholder="도착터미널ID 입력">
+            <label class="info-label" for="arrTerminalId">도착 터미널<div class="required-dot"></div></label>
+            <input class="ticketcheck-input" type="text" id="arrTerminalId" name="arrTerminalId" placeholder="도착터미널ID 입력">
 
-        <label for="depPlandTime">출발일</label>
-        <input type="text" id="depPlandTime" name="depPlandTime" placeholder="출발일(YYYYMMDD) 입력">
+            <label class="info-label" for="depPlandTime">출발일<div class="required-dot"></div></label>
+            <input class="ticketcheck-input" type="text" id="depPlandTime" name="depPlandTime" placeholder="출발일(YYYYMMDD) 입력">
 
-        <!-- 돌아오는 날짜 입력란 -->
-        <div class="return-date-input" id="return-date-input">
-            <label for="returnPlandTime">도착일 (왕복일 경우)</label>
-            <input type="text" id="returnPlandTime" name="returnPlandTime" placeholder="도착일(YYYYMMDD) 입력">
-        </div>
+            <!-- 돌아오는 날짜 입력란 -->
+            <div class="return-date-input" id="return-date-input">
+                <label class="info-label" for="returnPlandTime">도착일 (왕복일 경우)<div class="required-dot"></div></label>
+                <input class="ticketcheck-input" type="text" id="returnPlandTime" name="returnPlandTime" placeholder="도착일(YYYYMMDD) 입력">
+            </div>
 
-        <label for="busGradeId">버스 등급</label>
-        <input type="text" id="busGradeId" name="busGradeId" placeholder="버스등급 입력">
+            <label class="info-label" for="busGradeId">버스 등급<div class="required-dot"></div></label>
+            <input class="ticketcheck-input" type="text" id="busGradeId" name="busGradeId" placeholder="버스등급 입력">
 
-        <button type="submit">승차권 조회</button>
+        <button class="btn-select" type="submit">승차권 조회</button>
     </form>
 </div>
 <div style="text-align: center;">
@@ -155,10 +153,8 @@
         </tr>
     </table>
 </div>
-<footer>
-    <hr>
-    <h3>관리자 소개</h3>
-    <hr>
-</footer>
+</main>
+<!-- 푸터 -->
+<th:block th:insert="~{common/Footer::footer}"></th:block>
 </body>
 </html>

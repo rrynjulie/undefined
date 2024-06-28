@@ -9,15 +9,8 @@
     <title>오너 숙소 리스트</title>
 </head>
 <body>
-<header>
-    <a href="/Home">
-        <img src="/image/common/MainLogo.png" alt="StayFind">
-    </a>
-    <nav>
-        <a href="#">숙박 예약</a>
-        <a href="/ticketcheck">승차권 조회</a>
-    </nav>
-</header>
+<!-- 헤더 -->
+<th:block th:insert="~{common/Header::header}"></th:block>
 <main>
     <h1>내 숙소 리스트</h1>
     <table>
@@ -32,14 +25,14 @@
                         <p>숙소 연락처: <span th:text="${lodging.lodgingNumber}">02-1234-5678</span></p>
 <!--                        <p>유저아이디: <span th:text="${lodging.userId}"></span></p>-->
                     </div>
-                    <button><a class="view-details" th:href="@{'/mypage/provider/provlodgingdetail/' + ${lodging.lodgingId}}">상세 보기</a></button>
+                    <button class="detail-btn"><a class="view-details" th:href="@{'/mypage/provider/provlodgingdetail/' + ${lodging.lodgingId}}">상세 보기</a></button>
                 </div>
             </td>
         </tr>
     </table>
     <a class="register-btn" href="/mypage/provider/provlodgingregister">숙소 등록</a>
 </main>
-
-
+<!-- 푸터 -->
+<th:block th:insert="~{common/Footer::footer}"></th:block>
 </body>
 </html>
