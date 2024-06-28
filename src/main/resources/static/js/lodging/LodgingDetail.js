@@ -267,7 +267,7 @@ let bookings = [];
 
 // 예약 정보를 가져오는 함수
 function fetchBookingsByRoomId(roomId) {
-    fetch(`/LodgingDetail/Booking?roomId=${roomId}`)
+    fetch(`lodging/LodgingDetail/${roomId}`)
         .then(response => response.json())
         .then(data => {
             bookings = data; // 서버에서 받은 예약 정보 업데이트
