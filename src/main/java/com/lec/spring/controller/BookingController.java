@@ -10,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 public class BookingController {
@@ -63,16 +66,18 @@ public class BookingController {
         Room room = roomService.getRoomById(roomId);
         model.addAttribute("room", room);
 
+        String formattedPay = DecimalFormat.getInstance().format(room.getRoomPrice());
+        model.addAttribute("formattedPay", formattedPay);
+
         return "lodging/LodgingBooking";
     }
 
     @PostMapping("/lodging/LodgingBooking")
     public String createBooking(@RequestParam("visitorName") String visitorName,
                                 @RequestParam("visitorPhoneNum") String visitorPhoneNum,
-                                @RequestParam("bookingPayType") String bookingPayType,
                                 @RequestParam("bookingPay") int bookingPay,
-                                @RequestParam("bookingStartDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bookingStartDate,
-                                @RequestParam("bookingEndDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bookingEndDate,
+                                @RequestParam("bookingStartDate") LocalDate bookingStartDate,
+                                @RequestParam("bookingEndDate") LocalDate bookingEndDate,
                                 @RequestParam("bookingAdult") int bookingAdult,
                                 @RequestParam("bookingChild") int bookingChild,
                                 @RequestParam("roomId") Long roomId,
@@ -97,10 +102,15 @@ public class BookingController {
             throw new IllegalArgumentException("Room not found for roomId: " + roomId);
         }
 
+        // 중복 예약 체크
+        int conflictingReservations = bookingService.bookingcount(roomId, bookingStartDate, bookingEndDate);
+        if (conflictingReservations > 0) {
+            throw new IllegalArgumentException("예약불가");
+        }
+
         Booking booking = Booking.builder()
                 .visitorName(visitorName)
                 .visitorPhoneNum(visitorPhoneNum)
-                .bookingPayType(Booking.BookingPayType.valueOf("카드"))
                 .bookingPay(bookingPay)
                 .bookingStartDate(bookingStartDate)
                 .bookingEndDate(bookingEndDate)

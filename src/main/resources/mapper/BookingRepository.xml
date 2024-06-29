@@ -12,7 +12,6 @@
              , b.booking_child AS bookingChild
              , b.visitor_name AS visitorName
              , b.visitor_phonenum AS visitorPhoneNum
-             , b.booking_paytype AS bookingPayType
              , b.booking_pay AS bookingPay
              , b.booking_startdate AS bookingStartDate
              , b.booking_enddate AS bookingEndDate
@@ -30,10 +29,10 @@
             useGeneratedKeys="true" keyColumn="booking_id" keyProperty="bookingId">
         INSERT INTO booking
         (booking_adult, booking_child, visitor_name, visitor_phonenum
-        , booking_paytype, booking_pay, booking_startdate, booking_enddate, room_id, user_id)
+        , booking_pay, booking_startdate, booking_enddate, room_id, user_id)
         VALUES
             (#{bookingAdult}, #{bookingChild}, #{visitorName}, #{visitorPhoneNum}
-            , #{bookingPayType}, #{bookingPay}, #{bookingStartDate}, #{bookingEndDate}, #{roomId}, #{userId})
+            , #{bookingPay}, #{bookingStartDate}, #{bookingEndDate}, #{roomId}, #{userId})
     </insert>
 
     <!-- READ -->
@@ -49,13 +48,15 @@
         AND b.user_id = #{userId}
     </select>
 
-    <select id="findByBookingId" resultType="com.lec.spring.domain.Booking">
-        <include refid="SELECT_BASE"/>
-        AND b.booking_id = #{bookingId}
-    </select>
-
     <!-- DELETE -->
     <delete id="deleteBooking" flushCache="true" parameterType="com.lec.spring.domain.Booking">
         DELETE FROM booking WHERE booking_id = #{bookingId}
     </delete>
+
+    <select id="bookingcount" resultType="int">
+        SELECT count(*)
+        FROM booking
+        WHERE room_id = #{roomId}
+        AND (booking.booking_startdate &lt; #{bookingEndDate} AND booking.booking_enddate &gt; #{bookingStartDate})
+    </select>
 </mapper>

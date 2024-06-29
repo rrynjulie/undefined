@@ -11,11 +11,11 @@ import java.util.List;
 public interface BookingService {
     int createBooking(Booking booking);
 
-    Booking findBookingByBookingId(Long bookingId);
-
     List<Booking> findBooksByRoomId(Long roomId);
 
     List<Booking> findBooksByUserId(Long userId);
 
     int deleteBooking(Long bookingId);
+
+    int bookingcount(Long roomId, LocalDate bookingStartDate, LocalDate bookingEndDate);
 }
