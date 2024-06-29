@@ -1,36 +1,8 @@
-let currentIndex = 0;
-showSlides(currentIndex);
+// 두 Select 불러오기
+const leftSelect = document.getElementById('lodging-select');
+const rightSelect = document.getElementById('room-select');
 
-// 3초마다 페이지가
-setInterval(function() {
-    plusSlide(0);
-}, 3000);
-
-function plusSlide(idx) {
-    showSlides(currentIndex += idx);
-}
-
-function currentSlide(idx) {
-    showSlides(currentIndex = idx);
-}
-
-function showSlides(idx) {
-    const slides= document.querySelectorAll('.lodging-img');
-    const dots= document.querySelectorAll('.dot');
-
-    if (idx >= slides.length) {
-        currentIndex = 0;
-    } else if (idx < 0) {
-        currentIndex = slides.length - 1;
-    } else {
-        currentIndex = idx;
-    }
-
-    slides.forEach((slide, i) => {
-        slide.style.display = 'none';
-        dots[i].classList.remove('active');
-    });
-
-    slides[currentIndex].style.display = 'block';
-    dots[currentIndex].classList.add('active');
+const option = {
+    [[${lodgings.lodgingId}]]: [
+    ]
 }
