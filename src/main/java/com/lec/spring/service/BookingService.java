@@ -13,6 +13,8 @@ public interface BookingService {
 
     Booking findBookingByBookingId(Long bookingId);
 
+    Booking findBookingById(Long bookingId);
+
     List<Booking> findBooksByRoomId(Long roomId);
 
     List<Booking> findBooksByUserId(Long userId);

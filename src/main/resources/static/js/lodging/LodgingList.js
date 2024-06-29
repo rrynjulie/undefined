@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function filterLodging(type) {
     const location = document.getElementById('location').value;
     $.ajax({
-        url: '/LodgingList/filter',
+        url: '/lodging/LodgingList/filter',
         type: 'POST',
         data: {
             location: location,

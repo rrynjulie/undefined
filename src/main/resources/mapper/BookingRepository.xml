@@ -18,6 +18,7 @@
              , b.booking_enddate AS bookingEndDate
              , r.room_id AS roomId
              , u.user_id AS userId
+             , r.lodging_id AS lodgingId
         FROM
             booking b, room r, user u
         WHERE
