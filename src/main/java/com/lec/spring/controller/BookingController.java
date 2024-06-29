@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -63,6 +65,9 @@ public class BookingController {
 
         Room room = roomService.getRoomById(roomId);
         model.addAttribute("room", room);
+
+        String formattedPay = DecimalFormat.getInstance().format(room.getRoomPrice());
+        model.addAttribute("formattedPay", formattedPay);
 
         return "lodging/LodgingBooking";
     }

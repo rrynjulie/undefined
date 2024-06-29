@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const bookingLineUp = document.getElementById('bookingLineUp');
 
     // sessionStorage 에서 데이터 가져오기
-    const storedStartDate = sessionStorage.getItem('startDate').split('T')[0].replaceAll('-', '.');
-    const storedEndDate = sessionStorage.getItem('endDate').split('T')[0].replaceAll('-', '.');
+    const storedStartDate = sessionStorage.getItem('startDate').split('T')[0];
+    const storedEndDate = sessionStorage.getItem('endDate').split('T')[0];
     const storedAdultCount = parseInt(sessionStorage.getItem('adultCount')) || 1;
     const storedChildCount = parseInt(sessionStorage.getItem('childCount')) || 0;
     let nights;
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
             nights = Math.ceil((new Date(storedEndDate) - new Date(storedStartDate)) / (1000 * 60 * 60 * 24));
 
         // HTML 에 데이터 전송
-        bookingDate.innerHTML = `${storedStartDate} ~ ${storedEndDate} (${nights}박)`;
+        bookingDate.innerHTML = `${storedStartDate.replaceAll('-', '.')} ~ ${storedEndDate.replaceAll('-', '.')} (${nights}박)`;
         bookingLineUp.innerHTML = `성인 ${storedAdultCount}인, 아동 ${storedChildCount}인`;
     }
 

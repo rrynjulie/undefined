@@ -17,22 +17,30 @@
 
 main {
     padding: 0 20%;
+    height: fit-content;
 }
 
 form {
-
+    margin: 30px 0;
+    height: fit-content;
 }
 
 .booking-container {
     display: grid;
-    grid-template-columns: 70% 30%;
-    grid-template-rows: 50% 50%;
+    grid-template-columns: 60% 40%;
+    grid-template-rows: auto auto;
     grid-column-gap: 20px;
     grid-row-gap: 20px;
+    height: fit-content;
+    width: 100%;
     section {
         display: flex;
         flex-direction: column;
     }
+}
+
+.box-user-info {
+    padding-top: 15px;
 }
 
 .box-booking-info, .box-pay-info {
@@ -43,163 +51,88 @@ form {
 .booking-label-input {
     display: flex;
     flex-direction: column;
+    margin-top: 20px;
+}
+
+.info-label {
+    font-size: 13px;
+    color: dimgray;
+    margin-bottom: 5px;
+}
+
+#visitorName, #visitorPhoneNum {
+    border: 0;
+    border-radius: 7px;
+    background-color: #F5F5F5;
+    height: 50px;
+    width: 350px;
+    padding: 10px;
+    font-size: 17px;
+}
+
+.box-booking-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+.box-booking-info img {
+    width: 100%;
+    height: 60%;
+    border-radius: 7px;
+    margin: 15px 0;
 }
 
 .booking-info-container {
     display: grid;
-    grid-template-columns: 30% 70%;
-    grid-template-rows: 50% 50% 50%;
+    grid-template-columns: 20% 70%;
+    grid-template-rows: 30px 30px 30px;
     grid-column-gap: 5px;
     grid-row-gap: 5px;
+    justify-content: center;
+    height:40%;
+    .info-label {
+        padding: 5px;
+    }
+
+    p {
+        align-content: center;
+    }
 }
 
-.info label {
-    color: lightgray;
+.box-pay-type {
+    padding-top: 15px;
 }
 
-.hidden-label {
-    display: none;
-}
-
-.content {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.booking-details {
-    width: 60%;
-}
-
-section {
-    margin-bottom: 30px;
-}
-
-h1, h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-.info {
+.box-pay-info {
+    padding: 15px;
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
+    div {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+    }
 }
 
-.info label {
-    margin-bottom: 5px;
+.info-input {
+    color: #1273E4;
+    font-size: 17px;
+    font-weight: bold;
 }
 
-.info input {
-    padding: 10px;
-    font-size: 1em;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+.btn-submit-booking {
+    height: 40px;
     width: 100%;
-    box-sizing: border-box;
-}
-
-.discount-options {
-    margin-top: 10px;
-}
-
-.radio-label {
-    display: flex;
-    align-items: center;
-    margin-right: 10px;
-    margin-bottom: 10px;
-}
-
-.radio-label input[type="radio"] {
-    margin-right: 5px;
-}
-
-.methods {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 10px;
-}
-
-.methods button {
-    padding: 10px;
-    font-size: 0.9em;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
+    color: white;
+    background-color: #FC5185;
+    border: 0;
     border-radius: 5px;
-    cursor: pointer;
-}
-
-.methods button:hover {
-    background-color: #0056b3;
-}
-
-.summary-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 50%;
-}
-
-.summary {
-    text-align: center;
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.summary img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-}
-
-.price-info {
-    font-size: 1.2em;
-    margin: 10px 0;
-}
-
-.terms {
-    margin: 20px 0;
-}
-
-.pay-button {
-    background-color: #fc5185;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.pay-button:hover {
-    background-color: rgba(252, 81, 133, 0.8);
-}
-
-.checkbox {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-}
-
-.checkbox input[type="checkbox"] {
-    margin-right: 10px;
+    font-size: 17px;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    main {
-        flex-direction: column;
-        padding: 50px;
-    }
 
-    .content {
-        flex-direction: column;
-    }
-
-    .booking-details,
-    .summary-container {
-        width: 100%;
-    }
 }
