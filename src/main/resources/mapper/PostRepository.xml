@@ -4,11 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lec.spring.repository.PostRepository">
 
-    <insert id="savePost" flushCache="true" parameterType="com.lec.spring.domain.Post"
-            useGeneratedKeys="true" keyColumn="post_id" keyProperty="postId">
-        INSERT INTO post (post_id, post_picture, post_text, post_grade, user_id, booking_id, lodging_id, room_id)
-        VALUES (#{postID},#{postPicture}, #{postText}, #{postGrade}, #{userId}, #{bookingId}, #{lodgingId}, #{roomId})
-    </insert>
     <sql id="SELECT_BASES">
         SELECT p.post_id AS postId,
                p.post_picture AS postPicture,
@@ -39,6 +34,24 @@
         AND p.room_id = ro.room_id
     </sql>
 
+<!--    후기 작성 쿼리-->
+    <insert id="savePost" flushCache="true" parameterType="com.lec.spring.domain.Post" useGeneratedKeys="true" keyColumn="post_id" keyProperty="postId">
+        INSERT INTO post
+            (post_id, post_picture, post_text, post_grade,
+             user_id, booking_id, lodging_id, room_id)
+        VALUES
+            (#{postId},#{postPicture}, #{postText}, #{postGrade},
+             #{userId}, #{bookingId}, #{lodgingId}, #{roomId})
+    </insert>
+
+    <select id="countAllPostsByUserId" resultType="int">
+        SELECT count(*)
+        FROM post p
+        WHERE user_id = #{user_id}
+        AND post_id = #{post_id}
+    </select>
+
+<!--    한 숙소에 작성된 후기들의 개수-->
     <select id="countAllPostsByLodgingId" resultType="int">
         SELECT count(*)
         FROM post p
@@ -94,12 +107,15 @@
                p.booking_id AS bookingId,
                p.lodging_id AS lodgingId,
                p.room_id AS roomId,
-               b.booking_startdate AS startDate,
-               b.booking_endDate AS endDate
+               b.startDate,
+               b.endDate
         FROM post p
-            JOIN lodging l ON p.lodging_id = l.lodging_id
-            JOIN room r ON p.room_id = r.room_id
-            JOIN booking b ON b.user_id = p.user_id
+                 JOIN lodging l ON p.lodging_id = l.lodging_id
+                 JOIN room r ON p.room_id = r.room_id
+                 LEFT JOIN (
+            SELECT booking_id, booking_startdate AS startDate, booking_enddate AS endDate
+            FROM booking
+        ) b ON p.booking_id = b.booking_id
         WHERE p.user_id = #{userId}
     </select>
 
