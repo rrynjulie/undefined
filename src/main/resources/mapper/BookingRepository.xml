@@ -53,4 +53,11 @@
     <delete id="deleteBooking" flushCache="true" parameterType="com.lec.spring.domain.Booking">
         DELETE FROM booking WHERE booking_id = #{bookingId}
     </delete>
+
+    <select id="bookingcount" resultType="int">
+        SELECT count(*)
+        FROM booking
+        WHERE room_id = #{roomId}
+        AND (booking.booking_startdate &lt; #{bookingEndDate} AND booking.booking_enddate &gt; #{bookingStartDate})
+    </select>
 </mapper>

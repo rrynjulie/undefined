@@ -98,6 +98,12 @@ public class BookingController {
             throw new IllegalArgumentException("Room not found for roomId: " + roomId);
         }
 
+        // 중복 예약 체크
+        int conflictingReservations = bookingService.bookingcount(roomId, bookingStartDate, bookingEndDate);
+        if (conflictingReservations > 0) {
+            throw new IllegalArgumentException("예약불가");
+        }
+
         Booking booking = Booking.builder()
                 .visitorName(visitorName)
                 .visitorPhoneNum(visitorPhoneNum)

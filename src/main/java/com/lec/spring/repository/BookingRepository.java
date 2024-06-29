@@ -4,6 +4,7 @@ import com.lec.spring.domain.Booking;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Mapper
@@ -17,4 +18,6 @@ public interface BookingRepository {
     List<Booking> findBooksByUserId(Long userId);
 
     int deleteBooking(Booking booking);
+
+    int bookingcount(Long roomId, LocalDate bookingStartDate, LocalDate bookingEndDate);
 }
