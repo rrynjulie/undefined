@@ -12,7 +12,6 @@
              , b.booking_child AS bookingChild
              , b.visitor_name AS visitorName
              , b.visitor_phonenum AS visitorPhoneNum
-             , b.booking_paytype AS bookingPayType
              , b.booking_pay AS bookingPay
              , b.booking_startdate AS bookingStartDate
              , b.booking_enddate AS bookingEndDate
@@ -30,10 +29,10 @@
             useGeneratedKeys="true" keyColumn="booking_id" keyProperty="bookingId">
         INSERT INTO booking
         (booking_adult, booking_child, visitor_name, visitor_phonenum
-        , booking_paytype, booking_pay, booking_startdate, booking_enddate, room_id, user_id)
+        , booking_pay, booking_startdate, booking_enddate, room_id, user_id)
         VALUES
             (#{bookingAdult}, #{bookingChild}, #{visitorName}, #{visitorPhoneNum}
-            , #{bookingPayType}, #{bookingPay}, #{bookingStartDate}, #{bookingEndDate}, #{roomId}, #{userId})
+            , #{bookingPay}, #{bookingStartDate}, #{bookingEndDate}, #{roomId}, #{userId})
     </insert>
 
     <!-- READ -->
