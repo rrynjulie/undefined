@@ -1,3 +1,20 @@
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 400;
+    src:
+            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'),
+            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'),
+            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');
+}
+
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 h1 {
     text-align: center;
     align-items: center;
@@ -17,13 +34,14 @@ body {
     align-items: center;
     padding: 20px 0;
 }
-.logo img {
-    width: 100px; /* 로고 크기 조정 필요시 변경 */
-}
+
 table {
     width: 100%;
-    border-collapse: collapse;
+    /*border-collapse: collapse;*/
     margin-top: 20px;
+    border-radius: 10px;
+    border: 10px solid #ccc;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 th, td {
     border: 1px solid black;
@@ -60,4 +78,17 @@ th {
     text-align: center;
     margin-top: 20px;
     margin-left: 500px;
+}
+
+.back-button {
+    background-color: #FC5185;
+    color: white;
+    border: white;
+    border: solid 3px;
+}
+.back-button a {
+    color: white;
+}
+.date {
+    margin-right: -450px;
 }

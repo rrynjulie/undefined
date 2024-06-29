@@ -1,57 +1,83 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var resetModal = document.getElementById('resetModal');
+document.addEventListener('DOMContentLoaded', function () {
+    // 비밀번호 재설정 모달 열기
+    document.querySelector('[data-bs-target="#resetModal"]').addEventListener('click', function () {
+        var resetModal = new bootstrap.Modal(document.getElementById('resetModal'));
+        resetModal.show();
+    });
 
-    if (resetModal) {
-        resetModal.addEventListener('show.bs.modal', function() {
-            document.getElementById('reset-form').classList.remove('d-none');
-            document.getElementById('confirmation').classList.add('d-none');
+    // 회원가입 모달 열기
+    document.querySelector('[data-bs-target="#termsModal"]').addEventListener('click', function () {
+        var termsModal = new bootstrap.Modal(document.getElementById('termsModal'));
+        termsModal.show();
+    });
+
+    // 모달 닫을 때 이벤트 추가 (비밀번호 재설정 모달)
+    document.getElementById('resetModal').addEventListener('hidden.bs.modal', function () {
+        document.body.classList.remove('modal-open');
+        document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+    });
+
+    // 모달 닫을 때 이벤트 추가 (약관 동의 모달)
+    document.getElementById('termsModal').addEventListener('hidden.bs.modal', function () {
+        document.body.classList.remove('modal-open');
+        document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+    });
+
+    // 전체 동의 체크박스
+    const agreeAllCheckbox = document.getElementById('agreeAll');
+    const agreeCheckboxes = document.querySelectorAll('.terms-list input[type="checkbox"]');
+
+    // 전체 동의 클릭 시 모든 체크박스 체크/해제
+    agreeAllCheckbox.addEventListener('change', function () {
+        agreeCheckboxes.forEach(checkbox => {
+            checkbox.checked = agreeAllCheckbox.checked;
         });
+        updateAgreeButtonState();
+    });
+
+    // 개별 체크박스 클릭 시 전체 동의 체크박스 상태 업데이트
+    agreeCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function () {
+            if (!this.checked) {
+                agreeAllCheckbox.checked = false;
+            } else {
+                const allChecked = Array.from(agreeCheckboxes).every(cb => cb.checked);
+                agreeAllCheckbox.checked = allChecked;
+            }
+            updateAgreeButtonState();
+        });
+    });
+
+    // 동의하고 계속하기 버튼
+    const agreeButton = document.getElementById('agreeButton');
+
+    // agree1 체크박스 상태에 따라 버튼 활성화/비활성화
+    document.getElementById('agree1').addEventListener('change', function () {
+        updateAgreeButtonState();
+    });
+
+    function updateAgreeButtonState() {
+        const agree1Checked = document.getElementById('agree1').checked;
+        if (agree1Checked) {
+            agreeButton.style.backgroundColor = '#FC5185';
+            agreeButton.style.pointerEvents = 'auto';
+            agreeButton.classList.remove('disabled');
+        } else {
+            agreeButton.style.backgroundColor = 'gray';
+            agreeButton.style.pointerEvents = 'none';
+            agreeButton.classList.add('disabled');
+        }
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        var loginForm = document.getElementById('login-form');
-
-        if (loginForm) {
-            loginForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                window.location.href = '/Home';
-            });
+    // 동의하고 계속하기 버튼 클릭 시
+    agreeButton.addEventListener('click', function (e) {
+        if (document.getElementById('agree1').checked) {
+            window.location.href = '../user/register'; // agree1이 체크된 경우에만 이동
         } else {
-            console.error('로그인 폼을 찾을 수 없습니다.');
+            e.preventDefault(); // agree1이 체크되지 않으면 이동하지 않음
         }
     });
 
-    document.getElementById('agreeButton').addEventListener('click', function() {
-        if (!document.getElementById('agree1').checked) {
-            alert('만 14세 이상 이용, 서비스 이용약관, 개인정보 수집 및 이용 동의는 필수입니다.');
-            return false;
-        }else {
-            window.location.href = '/user/Register';
-        }
-    });
-
-    document.getElementById('agreeAll').addEventListener('change', function() {
-        const isChecked = this.checked;
-        document.querySelectorAll('.form-check-input').forEach(function(input) {
-            input.checked = isChecked;
-        });
-    });
-
-    document.querySelectorAll('.form-check-input').forEach(function(input) {
-        input.addEventListener('change', function() {
-            const allChecked = document.querySelectorAll('.form-check-input').length === document.querySelectorAll('.form-check-input:checked').length;
-            document.getElementById('agreeAll').checked = allChecked;
-        });
-    });
-
-    document.querySelectorAll('.terms-list .form-check-input').forEach(function(input) {
-        input.addEventListener('change', function() {
-            const individualCheckboxes = document.querySelectorAll('.terms-list .form-check-input');
-            const allChecked = Array.from(individualCheckboxes).every(function(checkbox) {
-                return checkbox.checked;
-            });
-            document.getElementById('agreeAll').checked = allChecked;
-        });
-    });
-
+    // 페이지 로드 시 초기 버튼 상태 설정
+    updateAgreeButtonState();
 });
