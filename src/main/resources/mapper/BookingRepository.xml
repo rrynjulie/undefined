@@ -49,6 +49,12 @@
         AND b.user_id = #{userId}
     </select>
 
+    <!-- 예약한 후기 찾기위한 쿼리 -->
+    <select id="findByBookingId" resultType="com.lec.spring.domain.Booking">
+        <include refid="SELECT_BASE"/>
+        AND b.booking_id = #{bookingId}
+    </select>
+
     <!-- DELETE -->
     <delete id="deleteBooking" flushCache="true" parameterType="com.lec.spring.domain.Booking">
         DELETE FROM booking WHERE booking_id = #{bookingId}

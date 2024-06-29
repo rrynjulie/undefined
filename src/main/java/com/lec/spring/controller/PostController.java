@@ -63,7 +63,7 @@ public class PostController {
 
 
     @GetMapping("/PostCreate/{userId}/{bookingId}")
-    public String postCreate(@PathVariable Long userId, @PathVariable Long bookingId, Model model) {
+    public String postCreate(@PathVariable("userId") Long userId, @PathVariable("bookingId") Long bookingId, Model model) {
         Booking booking = bookingService.findBookingById(bookingId);
         Post post = new Post();
         post.setUserId(userId);
@@ -71,6 +71,7 @@ public class PostController {
         post.setLodgingId(booking.getLodgingId());
         post.setRoomId(booking.getRoomId());
         model.addAttribute("post", post);
+
         return "mypage/customer/PostCreate";
     }
 
