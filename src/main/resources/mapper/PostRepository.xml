@@ -76,7 +76,6 @@
         FROM post p
             JOIN lodging l ON p.lodging_id = l.lodging_id
         WHERE p.lodging_id = #{lodging_id}
-        LIMIT 1
     </select>
 
 <!--    후기 업데이트 쿼리-->
@@ -132,10 +131,16 @@
                p.user_id AS userId,
                p.booking_id AS bookingId,
                p.lodging_id AS lodgingId,
-               p.room_id AS roomId
+               p.room_id AS roomId,
+               b.startDate,
+               b.endDate
         FROM post p
                  JOIN lodging l ON p.lodging_id = l.lodging_id
                  JOIN room r ON p.room_id = r.room_id
+                 LEFT JOIN (
+            SELECT booking_id, booking_startdate AS startDate, booking_enddate AS endDate
+            FROM booking
+        ) b ON p.booking_id = b.booking_id
         WHERE p.user_id = #{userId}
         AND p.post_id = #{postId}
     </select>

@@ -17,36 +17,29 @@ $(document).ready(function () {
     });
 });
 
+
 document.addEventListener('DOMContentLoaded', function () {
+    const text = document.getElementById('lodging-text1')
+    const searchWord = sessionStorage.getItem('searchWord')
 
-    const lodgingText = document.getElementById('lodging-text1');
-    const selectDate = document.getElementById('selectedDate');
-    const people = document.getElementById('people');
+    const selectedDate = document.getElementById("selectedDate");
+    const startDate = new Date(sessionStorage.getItem('startDate'));
+    const endDate = new Date(sessionStorage.getItem('endDate'));
 
-    const searchHistory = JSON.parse(sessionStorage.getItem('searchHistory')) || [];
-    console.log("searchHistory: ", searchHistory);
+    const totalDiv = document.getElementsByClassName('total');
+    const adultCount = parseInt(sessionStorage.getItem('adultCount'));
+    const childCount = parseInt(sessionStorage.getItem('childCount'));
 
-    searchHistory.forEach(i => {
-        const word = i.word;
-        const startDate = i.startDate;
-        const endDate = i.endDate;
-        const adults = i.adults;
-        const children = i.children;
 
-        // console.log(searchWord);
-        console.log("searchWord: ", word);
-        console.log("start Date: ", startDate);
-        console.log("end Date: ", endDate);
-        console.log("adults: ", adults);
-        console.log("children: ", children);
+    text.innerHTML = `${searchWord}`
 
-        lodgingText.innerHTML = word;
-        selectDate.innerHTML = `${new Date(startDate).getFullYear()}.${new Date(startDate).getMonth() + 1}.${new Date(startDate).getDate()}
-        ~ ${new Date(endDate).getFullYear()}.${new Date(endDate).getMonth() + 1}.${new Date(endDate).getDate()}`;
-        people.innerHTML = `성인 ${adults}, 아동 ${children}`;
-    })
+    selectedDate.innerHTML = `${startDate.getFullYear()}.${startDate.getMonth() + 1}.${startDate.getDate()} ~ ${endDate.getFullYear()}.${endDate.getMonth() + 1}.${endDate.getDate()}`
+
+    for (let i = 0; i < totalDiv.length; i++) {
+        totalDiv[i].innerHTML = `인원: 성인 ${adultCount}, 아동 ${childCount}`;
+    }
+
 });
-
 
 
 
@@ -61,6 +54,8 @@ function filterLodging(type) {
             type: type
         },
         success: function (data) {
+            const resultCount = $(data).find('.item-list1').length;
+            $('#result-filter').text(resultCount + '개의 검색 결과');
             $('#item-list').html(data);
         },
         error: function (error) {

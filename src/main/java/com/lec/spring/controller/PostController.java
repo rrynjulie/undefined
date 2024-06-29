@@ -29,6 +29,28 @@ public class PostController {
         this.bookingService = bookingService;
     }
 
+    @GetMapping("/PostCreate/{userId}/{bookingId}")
+    public String postCreate(@PathVariable("userId") Long userId, @PathVariable("bookingId") Long bookingId, Model model) {
+        Booking booking = bookingService.findBookingById(bookingId);
+        Post post = new Post();
+        post.setUserId(userId);
+        post.setBookingId(bookingId);
+        post.setLodgingId(booking.getLodgingId());
+        post.setRoomId(booking.getRoomId());
+        model.addAttribute("post", post);
+
+        return "mypage/customer/PostCreate";
+    }
+
+    @PostMapping("/PostCreate")
+    public String postCreateOk(@ModelAttribute Post post) {
+        int result = postService.allPostSave(post);
+        if (result > 0) {
+            return "redirect:/mypage/customer/PostList/" + post.getUserId();
+        } else {
+            return "redirect:/mypage/customer/PostCreate" + post.getUserId() + "/" + post.getBookingId();
+        }
+    }
 
     @GetMapping("/PostList/{userId}")
     public String postList(@PathVariable("userId") Long userId, Model model) {
@@ -61,28 +83,5 @@ public class PostController {
         return "redirect:/mypage/customer/PostList/" + post.getUserId();
     }
 
-
-    @GetMapping("/PostCreate/{userId}/{bookingId}")
-    public String postCreate(@PathVariable("userId") Long userId, @PathVariable("bookingId") Long bookingId, Model model) {
-        Booking booking = bookingService.findBookingById(bookingId);
-        Post post = new Post();
-        post.setUserId(userId);
-        post.setBookingId(bookingId);
-        post.setLodgingId(booking.getLodgingId());
-        post.setRoomId(booking.getRoomId());
-        model.addAttribute("post", post);
-
-        return "mypage/customer/PostCreate";
-    }
-
-    @PostMapping("/PostCreate")
-    public String postCreateOk(@ModelAttribute Post post) {
-        int result = postService.allPostSave(post);
-        if (result > 0) {
-            return "redirect:/mypage/customer/PostList/" + post.getUserId();
-        } else {
-            return "redirect:/mypage/customer/PostCreate" + post.getUserId() + "/" + post.getBookingId();
-        }
-    }
 
 }   // end PostController
