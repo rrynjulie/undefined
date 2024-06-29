@@ -91,10 +91,9 @@ CREATE TABLE booking
     booking_child     INT                     NOT NULL DEFAULT 0 COMMENT '아동 예약 인원',
     visitor_name      VARCHAR(100)            NOT NULL COMMENT '이용자 이름',
     visitor_phonenum  VARCHAR(100)            NOT NULL COMMENT '이용자 전화번호',
-    booking_paytype   ENUM('카드', '무통장입금') NOT NULL COMMENT '결제 방식 (카드/무통장입금)',
     booking_pay       INT                     NOT NULL COMMENT '결제 금액',
-    booking_startdate DATE                NOT NULL COMMENT '체크인 날짜',
-    booking_enddate   DATE                NOT NULL COMMENT '체크아웃 날짜',
+    booking_startdate DATE                    NOT NULL COMMENT '체크인 날짜',
+    booking_enddate   DATE                    NOT NULL COMMENT '체크아웃 날짜',
     room_id           INT                     NOT NULL COMMENT '객실고유 id 값',
     user_id           INT                     NOT NULL COMMENT '아이디',
     PRIMARY KEY (booking_id)

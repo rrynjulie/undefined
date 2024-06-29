@@ -16,7 +16,6 @@ public class Booking {
     private int bookingChild; //어린이예약인원
     private String visitorName; //예약자이름
     private String visitorPhoneNum; //예약자 전화번호
-    private BookingPayType bookingPayType; //결제방식
     private int bookingPay; //결제금액
     private LocalDate bookingStartDate; //체크인 날짜
     private LocalDate bookingEndDate; //체크아웃 날짜
@@ -30,8 +29,6 @@ public class Booking {
 
     private String formattedPay;
     private int dateGap;
-
-    public enum BookingPayType {카드, 무통장입금}
 }
 
 

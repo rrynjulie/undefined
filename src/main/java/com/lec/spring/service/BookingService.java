@@ -20,4 +20,6 @@ public interface BookingService {
     List<Booking> findBooksByUserId(Long userId);
 
     int deleteBooking(Long bookingId);
+
+    int bookingcount(Long roomId, LocalDate bookingStartDate, LocalDate bookingEndDate);
 }
