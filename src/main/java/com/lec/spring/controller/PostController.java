@@ -43,6 +43,8 @@ public class PostController {
         post.setRoomId(booking.getRoomId());
         model.addAttribute("post", post);
 
+        AuthenticationUtil.addAuthenticationDetailsToModel(model);
+
         return "mypage/customer/PostCreate";
     }
 

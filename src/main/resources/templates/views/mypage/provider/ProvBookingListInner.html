@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>객실별 예약 내역</title>
+</head>
+<body>
+<div th:fragment="bookingList" id="booking-list-by-room">
+    <div th:each="rooms : ${rooms}">
+        <p th:text="${rooms.roomName}"></p>
+        <div th:each="bookings : ${rooms.bookList}">
+            <p th:text="${bookings.bookingStartDate}"></p>
+            <p th:text="${bookings.bookingEndDate}"></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
