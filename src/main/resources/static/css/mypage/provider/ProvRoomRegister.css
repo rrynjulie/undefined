@@ -94,6 +94,7 @@ main {
 .image-upload-input {
     display: flex;
     justify-content: space-between;
+    width: 920px;
 }
 
 .btn-upload {
@@ -144,3 +145,4 @@ main {
 .btn-register:hover {
     transform: scale(1.02);
 }
+
