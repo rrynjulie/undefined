@@ -38,10 +38,16 @@ public class Lodging {
 
     private String postPicture;
     private String postText;
+
+    // 후기 평균값
     private double postGrade;
 
+    //평점 평균을 저장하는 double타입
     private double avgPostGrade;
+    // 총 평균을 저장하는 interger타입
     private Integer totalPosts;
+    // 평점 갯수
+    private int countPostGrade;
 
 
 

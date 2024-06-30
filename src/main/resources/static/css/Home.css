@@ -1,3 +1,5 @@
+home.css
+
 @font-face {
     font-family: 'Noto Sans KR';
     font-style: normal;
@@ -39,6 +41,32 @@
 
 .shortcut-frame {
     display: flex;
+}
+
+.shortcut-lodging{
+    background-image: url("../image/Ocean.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.shortcut-lodging p{
+    color: white;
+    margin-left:10px;
+    margin-top:10px;
+}
+
+.shortcut-ticket p{
+    color:white;
+    margin-left:10px;
+    margin-top:10px;
+}
+
+.shortcut-ticket{
+    background-image: url("../image/traffic.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .shortcut-frame a {

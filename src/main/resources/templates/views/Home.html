@@ -129,64 +129,14 @@
             <button class="btn-see-all">전체보기</button>
         </div>
         <div class="item-list">
-            <div class="item">
-                <img src="placeholder.png" alt="호텔 이미지">
+            <div th:each="lodging : ${lodgings}" class="item">
+                <img th:src="@{${lodging.lodgingPicture1}}" alt="호텔 이미지">
                 <div class="item-details">
                     <div>
-                        <p class="item-title">~~~~~~~~~~~호텔</p>
-                        <p class="item-rating">⭐ 4.6(512)</p>
+                        <p class="item-title" th:text="${lodging.lodgingName}"></p>
+                        <p class="item-rating" th:text="'⭐ ' + ${lodging.postGrade} + ' (' + ${lodging.countPostGrade} + ')'"></p>
                     </div>
-                    <p class="item-price">61,600원~</p>
-                </div>
-            </div>
-            <div class="item">
-                <img src="placeholder.png" alt="호텔 이미지">
-                <div class="item-details">
-                    <div>
-                        <p class="item-title">~~~~~~~~~~~호텔</p>
-                        <p class="item-rating">⭐ 4.6(512)</p>
-                    </div>
-                    <p class="item-price">61,600원~</p>
-                </div>
-            </div>
-            <div class="item">
-                <img src="placeholder.png" alt="호텔 이미지">
-                <div class="item-details">
-                    <div>
-                        <p class="item-title">~~~~~~~~~~~호텔</p>
-                        <p class="item-rating">⭐ 4.6(512)</p>
-                    </div>
-                    <p class="item-price">61,600원~</p>
-                </div>
-            </div>
-            <div class="item">
-                <img src="placeholder.png" alt="호텔 이미지">
-                <div class="item-details">
-                    <div>
-                        <p class="item-title">~~~~~~~~~~~호텔</p>
-                        <p class="item-rating">⭐ 4.6(512)</p>
-                    </div>
-                    <p class="item-price">61,600원~</p>
-                </div>
-            </div>
-            <div class="item">
-                <img src="placeholder.png" alt="호텔 이미지">
-                <div class="item-details">
-                    <div>
-                        <p class="item-title">~~~~~~~~~~~호텔</p>
-                        <p class="item-rating">⭐ 4.6(512)</p>
-                    </div>
-                    <p class="item-price">61,600원~</p>
-                </div>
-            </div>
-            <div class="item">
-                <img src="placeholder.png" alt="호텔 이미지">
-                <div class="item-details">
-                    <div>
-                        <p class="item-title">~~~~~~~~~~~호텔</p>
-                        <p class="item-rating">⭐ 4.6(512)</p>
-                    </div>
-                    <p class="item-price">61,600원~</p>
+                    <p class="item-price" th:text="${lodging.roomPrice} + '원~'"></p>
                 </div>
             </div>
         </div>

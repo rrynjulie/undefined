@@ -60,18 +60,39 @@
         DELETE FROM booking WHERE booking_id = #{bookingId}
     </delete>
 
-<!--    <select id="bookingCount" resultType="int">-->
-<!--        SELECT count(*)-->
-<!--        FROM booking-->
-<!--        WHERE room_id = #{roomId}-->
-<!--        AND ((booking_startdate &gt;> #{bookingStartDate} AND booking_startdate &lt;< #{bookingEndDate})-->
-<!--        OR (booking_enddate &lt; #{bookingEndDate} AND booking_enddate &gt; #{bookingStartDate}))-->
-<!--    </select>-->
+    <!--    <select id="bookingCount" resultType="int">-->
+    <!--        SELECT count(*)-->
+    <!--        FROM booking-->
+    <!--        WHERE room_id = #{roomId}-->
+    <!--        AND ((booking_startdate &gt;> #{bookingStartDate} AND booking_startdate &lt;< #{bookingEndDate})-->
+    <!--        OR (booking_enddate &lt; #{bookingEndDate} AND booking_enddate &gt; #{bookingStartDate}))-->
+    <!--    </select>-->
     <select id="bookingCount" resultType="int">
         SELECT count(*)
         FROM booking
         WHERE room_id = #{roomId}
-        AND NOT (booking_startdate &gt;= #{bookingEndDate}
-        OR booking_enddate &lt;= #{bookingStartDate})
+          AND NOT (booking_startdate &gt;= #{bookingEndDate}
+            OR booking_enddate &lt;= #{bookingStartDate})
     </select>
+
+
+<!--    &lt;!&ndash; 한 숙소에 예약된 예약 개수&ndash;&gt;-->
+<!--    <select id="countHotelBokking" resultType="int">-->
+<!--        SELECT-->
+<!--            l.lodging_id 숙소고유번호,-->
+<!--            l.lodging_name 숙소이름,-->
+<!--            COUNT(b.booking_id ) AS 예약숫자-->
+<!--        FROM-->
+<!--            lodging l-->
+<!--                LEFT JOIN-->
+<!--            room r ON l.lodging_id = r.lodging_id-->
+<!--                LEFT JOIN-->
+<!--            booking b ON r.room_id = b.room_id-->
+<!--        GROUP BY-->
+<!--            l.lodging_id, l.lodging_name-->
+<!--        ORDER BY-->
+<!--            예약숫자 DESC;-->
+<!--    </select>-->
+
+
 </mapper>

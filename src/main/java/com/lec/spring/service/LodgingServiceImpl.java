@@ -90,4 +90,10 @@ public class LodgingServiceImpl implements LodgingService {
         Integer totalPosts = lodgingRepository.totalPosts(lodgingId);
         return (totalPosts != null) ? totalPosts : 0;
     }
+
+//  홈 페이지에서 후기 목록 가져오기
+    @Override
+    public List<Lodging> getCountHotelBookingWithRatings(){
+        return lodgingRepository.countHotelBookingWithRatings();
+    }
 }
