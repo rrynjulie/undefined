@@ -3,6 +3,7 @@ package com.lec.spring.controller;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.UserAuthority;
 import com.lec.spring.service.ManagerService;
+import com.lec.spring.util.AuthenticationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -36,11 +37,7 @@ public class ManagerController {
         List<User> managers = managerService.getAllUsersWithAuthorities();
         model.addAttribute("managers", managers);
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        List<String> authorityIds = authentication.getAuthorities().stream()
-                .map(authority -> (authority.getAuthority().replace("ROLE_", "")))
-                .collect(Collectors.toList());
-        model.addAttribute("authorityIds", authorityIds);
+        AuthenticationUtil.addAuthenticationDetailsToModel(model);
 
 
 //        System.out.println(managers); // manager 출력해보기

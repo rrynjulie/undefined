@@ -4,6 +4,7 @@ import com.lec.spring.domain.Booking;
 import com.lec.spring.domain.Post;
 import com.lec.spring.service.BookingService;
 import com.lec.spring.service.PostService;
+import com.lec.spring.util.AuthenticationUtil;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -60,11 +61,7 @@ public class PostController {
         List<Post> userPost = postService.allPostUserId(userId);
         model.addAttribute("userPost", userPost);
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        List<String> authorityIds = authentication.getAuthorities().stream()
-                .map(authority -> (authority.getAuthority().replace("ROLE_", "")))
-                .collect(Collectors.toList());
-        model.addAttribute("authorityIds", authorityIds);
+        AuthenticationUtil.addAuthenticationDetailsToModel(model);
 
         return "/mypage/customer/PostList";
     }
