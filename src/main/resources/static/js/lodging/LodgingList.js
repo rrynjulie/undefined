@@ -1,23 +1,3 @@
-$(document).ready(function () {
-    $("#open-dialog").click(function () {
-        $("#price-range").toggle();
-        if ($("#price-range").is(":visible")) {
-            $("#slider-range").slider({
-                range: true,
-                min: 1,
-                max: 50,
-                values: [1, 50],
-                slide: function (event, ui) {
-                    $("#price-text").text(ui.values[0] + "만원 ~ " + ui.values[1] + "만원 이상");
-                }
-            });
-            $("#price-text").text($("#slider-range").slider("values", 0) + "만원 ~ " +
-                $("#slider-range").slider("values", 1) + "만원 이상");
-        }
-    });
-});
-
-
 document.addEventListener('DOMContentLoaded', function () {
     const text = document.getElementById('lodging-text1')
     const searchWord = sessionStorage.getItem('searchWord')
@@ -29,6 +9,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const totalDiv = document.getElementsByClassName('total');
     const adultCount = parseInt(sessionStorage.getItem('adultCount'));
     const childCount = parseInt(sessionStorage.getItem('childCount'));
+
+    console.log('searchWord: ' + searchWord);
+    console.log('startDate: ' + startDate);
+    console.log('endDate: ' + endDate);
+    console.log('adultCount: ' + adultCount);
+    console.log('childCount: ' + childCount);
 
 
     text.innerHTML = `${searchWord}`
@@ -63,3 +49,25 @@ function filterLodging(type) {
         }
     });
 }
+
+$(document).ready(function() {
+    $('#priceFilter').change(function() {
+        var selectedPriceOrder = $(this).val();
+        var location = $('#location').val(); // Hidden input에서 location 값을 가져옴
+
+        $.ajax({
+            type: 'POST',
+            url: '/lodging/LodgingList/price',
+            data: {
+                location: location,
+                price: selectedPriceOrder
+            },
+            success: function(response) {
+                $('#item-list').html(response);
+            },
+            error: function(error) {
+                console.error('에러:', error);
+            }
+        });
+    });
+});

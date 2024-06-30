@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/mypage/manager")
@@ -34,6 +35,13 @@ public class ManagerController {
 
         List<User> managers = managerService.getAllUsersWithAuthorities();
         model.addAttribute("managers", managers);
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<String> authorityIds = authentication.getAuthorities().stream()
+                .map(authority -> (authority.getAuthority().replace("ROLE_", "")))
+                .collect(Collectors.toList());
+        model.addAttribute("authorityIds", authorityIds);
+
 
 //        System.out.println(managers); // manager 출력해보기
 //        System.out.println(userAuthorities); // user 권한 출력해보기

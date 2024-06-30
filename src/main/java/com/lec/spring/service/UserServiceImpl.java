@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
 
         // 기본 권한 설정
         Authority authority = new Authority();
-        authority.setAuthority(1);
+        authority.setId(1L);
         authority.setUser(user);
         authority.setUserId(user.getUserId()); // user의 ID를 Authority에 설정
 
@@ -121,7 +121,7 @@ public class UserServiceImpl implements UserService {
         if (user != null && passwordEncoder.matches(password, user.getPassword())) {
             List<GrantedAuthority> authorities = new ArrayList<>();
             for (Authority authority : user.getAuthorities()) {
-                authorities.add(new SimpleGrantedAuthority("ROLE_" + authority.getAuthority()));
+                authorities.add(new SimpleGrantedAuthority("ROLE_" + authority.getName()));
             }
             return new UsernamePasswordAuthenticationToken(user, password, authorities);
         }
