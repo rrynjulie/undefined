@@ -19,5 +19,5 @@ public interface BookingService {
 
     int deleteBooking(Long bookingId);
 
-    int bookingcount(Long roomId, LocalDate bookingStartDate, LocalDate bookingEndDate);
+    int bookingCount(Long roomId, LocalDate bookingStartDate, LocalDate bookingEndDate);
 }

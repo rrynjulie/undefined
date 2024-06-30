@@ -21,34 +21,45 @@
     </select>
 
     <!-- location 과 type 으로 필터링하는 쿼리 -->
-<!--    <select id="findLodgingsByLocationAndType" resultType="com.lec.spring.domain.Lodging">-->
-<!--        SELECT l.lodging_id AS lodgingId,-->
-<!--               l.lodging_name AS lodgingName,-->
-<!--               l.lodging_picture_1 AS lodgingPicture1,-->
-<!--               l.lodging_type AS lodgingType,-->
-<!--               MIN(r.room_price) AS roomPrice-->
-<!--        FROM lodging l-->
-<!--                 JOIN room r ON l.lodging_id = r.lodging_id-->
-<!--        WHERE (l.lodging_location1 LIKE CONCAT('%', #{location}, '%')-->
-<!--            OR l.lodging_location2 LIKE CONCAT('%', #{location}, '%'))-->
-<!--          AND (#{type} = '전체' OR l.lodging_type = #{type})-->
-<!--        GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type;-->
-<!--    </select>-->
-
     <select id="findLodgingsByLocationAndType" resultType="com.lec.spring.domain.Lodging">
         SELECT l.lodging_id AS lodgingId,
-        l.lodging_name AS lodgingName,
-        l.lodging_picture_1 AS lodgingPicture1,
-        l.lodging_type AS lodgingType,
-        MIN(r.room_price) AS roomPrice
+               l.lodging_name AS lodgingName,
+               l.lodging_picture_1 AS lodgingPicture1,
+               l.lodging_type AS lodgingType,
+               MIN(r.room_price) AS roomPrice
         FROM lodging l
-        JOIN room r ON l.lodging_id = r.lodging_id
+                 JOIN room r ON l.lodging_id = r.lodging_id
         WHERE (l.lodging_location1 LIKE CONCAT('%', #{location}, '%')
-        OR l.lodging_location2 LIKE CONCAT('%', #{location}, '%'))
-        <if test="type != '전체'">
-            AND l.lodging_type = #{type}
-        </if>
+            OR l.lodging_location2 LIKE CONCAT('%', #{location}, '%'))
+          AND (#{type} = '전체' OR l.lodging_type = #{type})
         GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type;
+    </select>
+
+    <select id="findLodgingByPriceASC" resultType="com.lec.spring.domain.Lodging">
+        SELECT l.lodging_id AS lodgingId,
+               l.lodging_name AS lodgingName,
+               l.lodging_picture_1 AS lodgingPicture1,
+               l.lodging_type AS lodgingType,
+               MIN(r.room_price) AS roomPrice
+        FROM lodging l
+                 JOIN room r ON l.lodging_id = r.lodging_id
+        WHERE l.lodging_location1  LIKE CONCAT('%', #{location}, '%')
+           OR l.lodging_location2  LIKE CONCAT('%', #{location}, '%')
+        GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type
+        ORDER BY roomPrice ASC
+    </select>
+    <select id="findLodgingByPriceDESC" resultType="com.lec.spring.domain.Lodging">
+        SELECT l.lodging_id AS lodgingId,
+               l.lodging_name AS lodgingName,
+               l.lodging_picture_1 AS lodgingPicture1,
+               l.lodging_type AS lodgingType,
+               MIN(r.room_price) AS roomPrice
+        FROM lodging l
+                 JOIN room r ON l.lodging_id = r.lodging_id
+        WHERE l.lodging_location1  LIKE CONCAT('%', #{location}, '%')
+           OR l.lodging_location2  LIKE CONCAT('%', #{location}, '%')
+        GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type
+        ORDER BY roomPrice DESC
     </select>
 
     <!--    숙소 상세    -->

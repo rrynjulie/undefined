@@ -18,7 +18,7 @@
     <!-- 숙소 정보 페이지 -->
     <section class="booking-info">
         <h1>예약 관리</h1>
-        <form th:action="" class="booking-filter" method="get">
+        <form th:action="@{mypage/provider/ProvBookingList}" class="booking-filter" method="get">
             <label class="select-label" for="lodging-select">
                 숙소 선택
                 <select class="select-element" id="lodging-select" name="lodgingId" th:onchange="'javascript:getRooms(this.value)'">

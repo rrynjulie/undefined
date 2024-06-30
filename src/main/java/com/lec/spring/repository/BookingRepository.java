@@ -2,7 +2,6 @@ package com.lec.spring.repository;
 
 import com.lec.spring.domain.Booking;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,5 +18,5 @@ public interface BookingRepository {
 
     int deleteBooking(Booking booking);
 
-    int bookingcount(Long roomId, LocalDate bookingStartDate, LocalDate bookingEndDate);
+    int bookingCount(Long roomId, LocalDate bookingStartDate, LocalDate bookingEndDate);
 }
