@@ -5,7 +5,6 @@ import com.lec.spring.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -31,9 +30,9 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public int createBooking(Booking booking) {
-        int countBooking = bookingRepository.bookingcount(booking.getRoomId(), booking.getBookingStartDate(), booking.getBookingEndDate());
+        int countBooking = bookingRepository.bookingCount(booking.getRoomId(), booking.getBookingStartDate(), booking.getBookingEndDate());
         if (countBooking > 0) {
-            throw new IllegalArgumentException("The reservation dates conflict with an existing reservation.");
+            throw new IllegalArgumentException("예약불가");
         }
         return bookingRepository.save(booking);
     }
@@ -75,8 +74,8 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public int bookingcount(Long roomId, LocalDate bookingStartDate, LocalDate bookingEndDate) {
-        return bookingRepository.bookingcount(roomId, bookingStartDate, bookingEndDate);
+    public int bookingCount(Long roomId, LocalDate bookingStartDate, LocalDate bookingEndDate) {
+        return bookingRepository.bookingCount(roomId, bookingStartDate, bookingEndDate);
     }
 
 

@@ -4,11 +4,13 @@ package com.lec.spring.controller;
 import com.lec.spring.domain.*;
 import com.lec.spring.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,11 +26,12 @@ public class LodgingController {
     private BookingService bookingService;
 
     @Autowired
-    public LodgingController(LodgingService lodgingService, ProviderService providerService, RoomService roomService, PostService postService) {
+    public LodgingController(LodgingService lodgingService, ProviderService providerService, RoomService roomService, PostService postService, BookingService bookingService) {
         this.lodgingService = lodgingService;
         this.providerService = providerService;
         this.roomService = roomService;
         this.postService = postService;
+        this.bookingService = bookingService;
     }
 
     @GetMapping("/LodgingSearch")
@@ -70,13 +73,16 @@ public class LodgingController {
         return "lodging/LodgingList :: #item-list"; // Thymeleaf fragment
     }
 
-
-    
     @GetMapping("/LodgingDetail/{lodgingId}")
-    public String getLodgingDetail(@PathVariable("lodgingId") Long lodgingId, Model model) {
+    public String getLodgingDetail(@PathVariable("lodgingId") Long lodgingId,
+                                   @RequestParam(value = "bookingStartDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bookingStartDate,
+                                   @RequestParam(value = "bookingEndDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bookingEndDate,
+                                   Model model) {
         List<Lodging> lodgings = lodgingService.lodgingDetail(lodgingId);
         List<Lodging> lodgingName = lodgingService.lodgingName(lodgingId);
         List<Post> lodgingPost = postService.findPostByLodgingId(lodgingId);
+        List<Room> rooms = roomService.findRoomsByLodgingId(lodgingId);
+
         for (Lodging lodging : lodgings) {
             Double avgPostGrade = lodgingService.getAvgPostGrade(lodging.getLodgingId());
             Integer totalPosts = lodgingService.getTotalPosts(lodging.getLodgingId());
@@ -85,11 +91,29 @@ public class LodgingController {
         }
 
 
+        for (Room room : rooms) {
+            int conflictingBookingCount = 0;
+            if (bookingStartDate != null && bookingEndDate != null) {
+                // 예약 상황을 확인하여 겹치는 예약 수를 구합니다.
+                conflictingBookingCount = bookingService.bookingCount(room.getRoomId(), bookingStartDate, bookingEndDate);
+            }
+            room.setAvailable(conflictingBookingCount);
+        }
+
+
         model.addAttribute("lodging", lodgings);
         model.addAttribute("lodgingName", lodgingName);
         model.addAttribute("lodgingPost", lodgingPost);
+        model.addAttribute("rooms", rooms);
+        model.addAttribute("bookingStartDate", bookingStartDate);
+        model.addAttribute("bookingEndDate", bookingEndDate);
+
+        System.out.println("체크인 날짜" + bookingStartDate);
+        System.out.println("체크아웃 날짜" + bookingEndDate);
+        System.out.println();
 
         return "lodging/LodgingDetail";
+
     }
 
     @GetMapping("/LodgingPostList/{lodgingId}")
