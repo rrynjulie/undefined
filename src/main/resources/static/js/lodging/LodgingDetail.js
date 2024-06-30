@@ -261,3 +261,49 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const bookingForm = document.getElementById('bookingForm');
+    const bookingStartDate = document.getElementById('bookingStartDate');
+    const bookingEndDate = document.getElementById('bookingEndDate');
+
+    const storedStartDate = sessionStorage.getItem('startDate')?.split('T')[0];
+    const storedEndDate = sessionStorage.getItem('endDate')?.split('T')[0];
+
+    function setBookingInfo() {
+        if (storedStartDate) bookingStartDate.value = storedStartDate;
+        if (storedEndDate) bookingEndDate.value = storedEndDate;
+
+        bookingForm.action = `lodging/LodgingDetail/${lodgingId}`;
+    }
+
+    setBookingInfo();
+});
+
+// document.addEventListener('DOMContentLoaded', function (){
+//     const storedStartDate = sessionStorage.getItem('startDate')?.split('T')[0];
+//     const storedEndDate = sessionStorage.getItem('endDate')?.split('T')[0];
+//
+//     // 예약 시작일과 종료일을 출력할 요소 가져오기
+//     const bookingStartDateElem = document.getElementById('bookingStartDate');
+//     const bookingEndDateElem = document.getElementById('bookingEndDate');
+//
+//     // 저장된 예약 날짜가 있는 경우에만 출력
+//     if (storedStartDate && storedEndDate) {
+//         bookingStartDateElem.textContent = `예약 체크인: ${storedStartDate.replaceAll('-', '.')}`;
+//         bookingEndDateElem.textContent = `예약 체크아웃: ${storedEndDate.replaceAll('-', '.')}`;
+//     }
+// });
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     const bookingStartDate = sessionStorage.getItem('startDate');
+//     const bookingEndDate = sessionStorage.getItem('endDate');
+//     const bookingForm = document.getElementById('bookingForm');
+//
+//     if (bookingStartDate && bookingEndDate) {
+//         bookingForm.action = `/lodging/LodgingDetail/${lodgingId}?bookingStartDate=${bookingStartDate}&bookingEndDate=${bookingEndDate}`;
+//         bookingForm.submit();
+//     }
+// });
+//

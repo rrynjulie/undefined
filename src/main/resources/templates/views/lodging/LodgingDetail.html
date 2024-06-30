@@ -123,10 +123,14 @@
                 <div style="display: flex; justify-content: space-between; margin-top: 15px; padding: 0 10px;">
                     <div th:text="${lodging.roomName}"></div>
                     <div th:text="${lodging.formattedRoomPrices} + '원'"></div></div>
-                    <p id="availabilityMessage_${lodging.roomId}" class="availability-message"></p>
                 <div class="couponReserve" style="padding: 0 10px;"><button>쿠폰 ></button><a class="reserve-btn" th:href="@{/lodging/LodgingBooking(lodgingId=${lodging.lodgingId}, roomId=${lodging.roomId})}">예약하기</a></div>
             </div>
         </div>
+        <form id="bookingForm" action="" method="get">
+            <input type="hidden" id="bookingStartDate" name="bookingStartDate">
+            <input type="hidden" id="bookingEndDate" name="bookingEndDate">
+            <button type="submit">Submit</button>
+        </form>
     </div>
 
     <div class="lodging-location" th:each="lodgingName : ${lodgingName}">
