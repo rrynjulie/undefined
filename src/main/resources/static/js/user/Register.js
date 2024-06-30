@@ -1,48 +1,48 @@
-let timer;
-let countdownSeconds = 3;
+// let timer;
+// let countdownSeconds = 3;
+//
+// function sendVerificationCode() {
+//     const email = document.getElementById('email').value;
+//     if (email) {
+//         document.getElementById('verification-form').style.display = 'block';
+//         resetVerificationForm();
+//         startCountdown();
+//     }
+// }
+//
+// function startCountdown() {
+//     const countdownElement = document.getElementById('countdown');
+//     timer = setInterval(() => {
+//         if (countdownSeconds <= 0) {
+//             clearInterval(timer);
+//             countdownElement.style.display = 'none';
+//             showTimeoutMessage();
+//         } else {
+//             countdownSeconds--;
+//             const minutes = Math.floor(countdownSeconds / 60);
+//             const seconds = countdownSeconds % 60;
+//             countdownElement.textContent = `${minutes}분 ${seconds < 10 ? '0' : ''}${seconds}초`;
+//         }
+//     }, 1000);
+// }
+//
+// function showTimeoutMessage() {
+//     const verificationInput = document.getElementById('verification-code');
+//     const errorMessage = document.createElement('div');
+//     errorMessage.textContent = '인증번호 입력 시간이 초과하였습니다. 재전송해주세요.';
+//     errorMessage.classList.add('red-text');
+//     errorMessage.id = 'timeout-message';
+//     verificationInput.classList.add('red-border');
+//     verificationInput.parentNode.insertBefore(errorMessage, verificationInput.nextSibling);
+// }
 
-function sendVerificationCode() {
-    const email = document.getElementById('email').value;
-    if (email) {
-        document.getElementById('verification-form').style.display = 'block';
-        resetVerificationForm();
-        startCountdown();
-    }
-}
-
-function startCountdown() {
-    const countdownElement = document.getElementById('countdown');
-    timer = setInterval(() => {
-        if (countdownSeconds <= 0) {
-            clearInterval(timer);
-            countdownElement.style.display = 'none';
-            showTimeoutMessage();
-        } else {
-            countdownSeconds--;
-            const minutes = Math.floor(countdownSeconds / 60);
-            const seconds = countdownSeconds % 60;
-            countdownElement.textContent = `${minutes}분 ${seconds < 10 ? '0' : ''}${seconds}초`;
-        }
-    }, 1000);
-}
-
-function showTimeoutMessage() {
-    const verificationInput = document.getElementById('verification-code');
-    const errorMessage = document.createElement('div');
-    errorMessage.textContent = '인증번호 입력 시간이 초과하였습니다. 재전송해주세요.';
-    errorMessage.classList.add('red-text');
-    errorMessage.id = 'timeout-message';
-    verificationInput.classList.add('red-border');
-    verificationInput.parentNode.insertBefore(errorMessage, verificationInput.nextSibling);
-}
-
-function verifyCode() {
-    const verificationCode = document.getElementById('verification-code').value;
-    if (verificationCode) {
-        clearInterval(timer);
-        document.getElementById('registration-modal').style.display = 'block';
-    }
-}
+// function verifyCode() {
+//     const verificationCode = document.getElementById('verification-code').value;
+//     if (verificationCode) {
+//         clearInterval(timer);
+//         document.getElementById('registration-modal').style.display = 'block';
+//     }
+// }
 
 function completeRegistration() {
     const nickname = document.getElementById('nickname').value;

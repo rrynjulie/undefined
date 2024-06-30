@@ -39,6 +39,11 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public Booking findBookingById(Long bookingId) {
+        return bookingRepository.findByBookingId(bookingId);
+    }
+
+    @Override
     public List<Booking> findBooksByRoomId(Long roomId) {
         return bookingRepository.findBooksByRoomId(roomId);
     }

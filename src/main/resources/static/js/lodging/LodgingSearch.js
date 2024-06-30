@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function saveSearchHistory(searchWord) {
         let searchHistory = JSON.parse(sessionStorage.getItem('searchHistory')) || [];
-        searchHistory.unshift({
+        searchHistory.unshift({ // 새로운 객체를 배열에 맨 앞으로
             word: searchWord,
             startDate: sessionStorage.getItem('startDate') || new Date().toISOString(),
             endDate: sessionStorage.getItem('endDate') || new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString(),
@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
 
-    // 최근검색어 js
+    // 최근검색어
     function updateRecentlySearches() {
         let searchHistory = JSON.parse(sessionStorage.getItem('searchHistory')) || [];
         let recentlySearchContainer = document.getElementById("recently-search-container");

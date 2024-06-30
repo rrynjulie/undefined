@@ -49,7 +49,7 @@
 
     <!-- 후기가 있는 경우 -->
     <div th:if="${not #lists.isEmpty(lodgingPost)}" id="postDivContainer">
-        <div id="postDiv" th:each="lodgingPost : ${lodgingPost}" style="border: 1px solid black; display: flex; justify-content: space-between">
+        <div id="postDiv" th:each="lodgingPost, iterStat : ${lodgingPost}" th:if="${iterStat.index < 3}" style="border: 1px solid black; display: flex; justify-content: space-between">
             <div>
                 <div class="stars" th:attr="data-star-count=${lodgingPost.postGrade}">
                     <span class="star">&#9733;</span>
