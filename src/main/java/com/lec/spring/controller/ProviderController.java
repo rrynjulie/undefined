@@ -174,4 +174,21 @@ public class ProviderController {
         roomService.updateRoom(room);
         return "redirect:/mypage/provider/ProvRoomDetail/" + room.getRoomId();
     }
+
+    @PostMapping("/deleteRoom/{roomId}")
+    public String deleteRoom(@PathVariable int roomId, Model model) {
+        int result;
+        Long userId = U.getLoggedUser().getUserId();
+        try {
+            roomService.deleteRoom(roomId);
+            result = 1; // 삭제 성공
+        } catch (Exception e) {
+            result = 0; // 삭제 실패
+        }
+        model.addAttribute("result", result);
+        model.addAttribute("userId", userId);
+        return "mypage/provider/ProvRoomDeleteOk";
+    }
+
+
 }

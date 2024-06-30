@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>객실 삭제 결과</title>
+</head>
+<body>
+<script th:unless="${result > 0}">
+    alert("객실 삭제 실패");
+    history.back();
+</script>
+<script th:if="${result > 0}" th:inline="javascript">
+    alert("객실 삭제 성공");
+    var userId = /*[[${userId}]]*/ 0;
+    location.href = "/mypage/provider/ProvRoomList/" + userId;
+</script>
+</body>
+</html>

@@ -16,5 +16,6 @@ public interface RoomService {
     List<Room> findRoomsByLodgingId(Long lodgingId);
     Room getRoomById(Long roomId);
 
+    void deleteRoom(int roomId);
 
 }
