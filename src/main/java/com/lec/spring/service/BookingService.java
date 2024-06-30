@@ -11,6 +11,8 @@ import java.util.List;
 public interface BookingService {
     int createBooking(Booking booking);
 
+    Booking findBookingById(Long bookingId);
+
     List<Booking> findBooksByRoomId(Long roomId);
 
     List<Booking> findBooksByUserId(Long userId);

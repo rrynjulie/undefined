@@ -5,8 +5,15 @@
 
 .item-list {
     display: flex;
+    width: 100%;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+.item-list1 {
+    display: flex;
+    width: 48%;
+    height: 190px;
+    margin-bottom: 10px;
 }
 .item {
     width: 100%;

@@ -1,5 +1,6 @@
 package com.lec.spring.service;
 
+import com.lec.spring.domain.ProvLodging;
 import com.lec.spring.domain.Room;
 import com.lec.spring.repository.RoomRepository;
 import org.apache.ibatis.session.SqlSession;
@@ -42,8 +43,8 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public int updateRoom(Room room, Map<String, MultipartFile> files, Long[] delfile) {
-        return 0;
+    public void updateRoom(Room room) {
+        roomRepository.updateRoom(room);
     }
 
     @Override

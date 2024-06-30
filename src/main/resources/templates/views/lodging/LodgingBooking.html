@@ -18,19 +18,21 @@
 
         <div class="booking-container">
             <section class="box-user-info">
-                <h2>예약자 정보</h2>
+                <h3>예약자 정보</h3>
                 <div class="booking-label-input">
                     <label class="info-label" for="visitorName">예약자 이름</label>
-                    <input type="text" id="visitorName" name="visitorName" th:value="${user.username}">
+                    <input type="text" id="visitorName" th:value="${user.username}" disabled>
+                    <input type="hidden" name="visitorName" th:value="${user.username}">
                 </div>
                 <div class="booking-label-input">
                     <label class="info-label" for="visitorPhoneNum">예약자 전화번호</label>
-                    <input type="text" id="visitorPhoneNum" name="visitorPhoneNum" th:value="${user.phonenum}">
+                    <input type="text" id="visitorPhoneNum" th:value="${user.phonenum}" disabled>
+                    <input type="hidden" name="visitorPhoneNum" th:value="${user.phonenum}">
                 </div>
             </section>
 
             <section class="box-booking-info">
-                <h2 th:text="${lodging.lodgingName}"></h2>
+                <h3 th:text="${lodging.lodgingName}"></h3>
                 <img th:src="${lodging.lodgingPicture1}" alt="">
                 <div class="booking-info-container">
                     <label class="info-label">객실</label>
@@ -43,20 +45,19 @@
             </section>
 
             <section class="box-pay-type">
-                <h2>결제 수단</h2>
+                <h3>결제 수단</h3>
             </section>
 
             <section class="box-pay-info">
-                <h2>결제 정보</h2>
-                <label class="info-label" for="bookingPay">결제 금액: </label>
-                <input type="hidden" id="bookingPay" name="bookingPay" th:value="${room.roomPrice}">
-                <p class="info-input" th:text="${room.roomPrice}"></p>
+                <h3>결제 정보</h3>
+                <div>
+                    <label class="info-label" for="bookingPay">총 결제 금액</label>
+                    <input type="hidden" id="bookingPay" name="bookingPay" th:value="${room.roomPrice}">
+                    <p class="info-input" th:text="${formattedPay} + '원'"></p>
+                </div>
+                <button class="btn-submit-booking" type="submit">[[${formattedPay}]]원 결제하기</button>
             </section>
         </div>
-
-
-        <!-- 결제 버튼 -->
-        <button class="" type="submit">결제하기</button>
     </form>
     </main>
 

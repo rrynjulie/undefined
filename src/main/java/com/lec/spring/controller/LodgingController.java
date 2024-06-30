@@ -73,8 +73,6 @@ public class LodgingController {
         return "lodging/LodgingList :: #item-list"; // Thymeleaf fragment
     }
 
-
-    
     @GetMapping("/LodgingDetail/{lodgingId}")
     public String getLodgingDetail(@PathVariable("lodgingId") Long lodgingId,
                                    @RequestParam(value = "bookingStartDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bookingStartDate,

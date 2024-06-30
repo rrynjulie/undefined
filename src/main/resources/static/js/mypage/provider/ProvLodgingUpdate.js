@@ -88,8 +88,6 @@ $(document).ready(function() {
 
     // 숙소 정보 로드 함수
     function loadLodgingInfo() {
-
-
         // 각 입력 필드에 숙소 정보 설정
         document.getElementById('lodgingId').value = lodging.lodgingId;
         document.getElementById('fileInput1').value = lodging.lodgingPicture1;
