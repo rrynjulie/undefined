@@ -39,11 +39,13 @@
                     <div id="postPicture" th:text="${userPost.postPicture}"></div>
                 </div>
                 <div id="btnDiv">
-                    <a th:href="@{'/mypage/customer/PostUpdate/' + ${userPost.userId} + '/' + ${userPost.postId}}">수정</a>
+                    <div id="update">
+                        <a id="update1" th:href="@{'/mypage/customer/PostUpdate/' + ${userPost.userId} + '/' + ${userPost.postId}}">수정</a>
+                    </div>
                     <form th:action="@{/mypage/customer/PostDelete}" method="post" style="display:inline;">
                         <input type="hidden" name="postId" th:value="${userPost.postId}"/>
                         <input type="hidden" name="userId" th:value="${userPost.userId}"/>
-                        <button type="submit">삭제</button>
+                        <button id="delete" type="submit">삭제</button>
                     </form>
                 </div>
             </div>

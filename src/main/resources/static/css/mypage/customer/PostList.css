@@ -81,8 +81,34 @@
     background-color: #f5f5f5;
 }
 #btnDiv {
+    display: flex;
     float: right;
     margin-top: 15px;
+}
+#update {
+    width: 60px;
+    height: 25px;
+    font-size: 15px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1273E4;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+#update1 {
+    margin-right: 1px;
+}
+#delete {
+    width: 60px;
+    height: 25px;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1273E4;
+    color: white;
+    cursor: pointer;
 }
 button {
     text-decoration: none;
