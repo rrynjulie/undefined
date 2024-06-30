@@ -13,6 +13,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/mypage/customer")
@@ -43,8 +45,6 @@ public class CustomerController {
 
     @Autowired
     private PostService postService;
-
-//    private ManagerService managerService;
 
     @GetMapping("/ManageAccount")
     public String manageAccount(Model model) {
@@ -67,25 +67,19 @@ public class CustomerController {
                                 RedirectAttributes redirectAttributes) {
         User user = getLoggedUser();
 
-        // 현재 비밀번호가 입력되었는지 확인
         if (currentPassword != null && !currentPassword.isEmpty()) {
-            // 새 비밀번호와 확인 비밀번호가 일치하는지 확인
             if (newPassword == null || confirmPassword == null || !newPassword.equals(confirmPassword)) {
                 redirectAttributes.addFlashAttribute("error", "새 비밀번호가 일치하지 않습니다.");
                 return "redirect:/mypage/customer/ManageAccount";
             }
 
-            // 비밀번호를 업데이트 파라미터로 포함
             password = newPassword;
         }
 
-        // 다른 사용자 정보 업데이트
         userService.updateUser(user.getUserId(), nickname, password, email, phone);
 
-        // 수정이 성공적으로 완료되었음을 알림
         redirectAttributes.addFlashAttribute("success", "수정되었습니다.");
 
-        // 홈으로 리다이렉트
         return "redirect:/Home";
     }
 
@@ -138,6 +132,15 @@ public class CustomerController {
         });
         model.addAttribute("booksBefore", booksBefore);
         model.addAttribute("booksAfter", booksAfter);
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<String> authorityIds = authentication.getAuthorities().stream()
+                .map(authority -> (authority.getAuthority().replace("ROLE_", "")))
+                .collect(Collectors.toList());
+        model.addAttribute("authorityIds", authorityIds);
+
+        System.out.println("authorityId: " + authorityIds);
+
         return "mypage/customer/BookingList";
     }
 
