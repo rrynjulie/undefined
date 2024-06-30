@@ -65,7 +65,7 @@
         AND l.lodging_id = #{lodgingId}
     </select>
 
-    <update id="update" flushCache="true" parameterType="com.lec.spring.domain.Room">
+    <update id="updateRoom" flushCache="true" parameterType="com.lec.spring.domain.Room">
         UPDATE room
         SET room_picture_1 = #{roomPicture1}
           , room_name = #{roomName}

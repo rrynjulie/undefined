@@ -74,8 +74,6 @@ public class LodgingController {
         return "lodging/LodgingList :: #item-list"; // Thymeleaf fragment
     }
 
-
-    
     @GetMapping("/LodgingDetail/{lodgingId}")
     public String getLodgingDetail(@PathVariable("lodgingId") Long lodgingId, Model model) {
         List<Lodging> lodgings = lodgingService.lodgingDetail(lodgingId);

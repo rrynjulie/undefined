@@ -65,7 +65,7 @@
         </div>
         <div class="btn-list">
             <a class="btn-reverse" th:href="@{'/mypage/provider/ProvRoomList/' + ${room.lodgingId}}">목록 보기</a>
-            <a class="btn-update" href="#">정보 수정</a>
+            <a class="btn-update" th:href="@{'/mypage/provider/ProvRoomUpdate/' + ${room.roomId}}">정보 수정</a>
             <a class="btn-delete" href="#">삭제 요청</a>
         </div>
     </section>

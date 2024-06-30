@@ -51,17 +51,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+// function filterLodging(type) {
+//     const location = document.getElementById('location').value;
+//     $.ajax({
+//         url: '/LodgingList/filter',
+//         type: 'POST',
+//         data: {
+//             location: location,
+//             type: type
+//         },
+//         success: function (data) {
+//             $('#item-list').html(data);
+//         },
+//         error: function (error) {
+//             console.error('Error:', error);
+//         }
+//     });
+// }
 function filterLodging(type) {
     const location = document.getElementById('location').value;
     $.ajax({
-        url: '/LodgingList/filter',
+        url: '/lodging/LodgingList/filter',
         type: 'POST',
         data: {
             location: location,
             type: type
         },
         success: function (data) {
-            $('#item-list').html(data);
+            $('#item-list').html(data);  // 필터링된 결과로 item-list 부분 갱신
         },
         error: function (error) {
             console.error('Error:', error);
