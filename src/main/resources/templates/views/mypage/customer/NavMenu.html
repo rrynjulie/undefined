@@ -6,7 +6,7 @@
     <!-- PC 버전 -->
     <div class="my-page-menu">
         <nav class="customer-menu-pc">
-            <a class="active" th:href="@{/mypage/customer/BookingList}">
+            <a class="active" href="">
                 <img th:src="@{/image/mypage/customer/Booking.png}" alt="" class="customer-menu-icon">
                 <p>예약 내역</p>
             </a>
@@ -21,7 +21,7 @@
         </nav>
 
         <a class="btn-provider-page" th:href="@{/mypage/provider/ProvBookingList}">판매자 페이지</a>
-        <a class="btn-manager-page" href="">관리자 페이지</a>
+        <a class="btn-manager-page" th:href="@{/mypage/manager/MemberManagement}">관리자 페이지</a>
     </div>
 
     <!-- 모바일 버전 -->
