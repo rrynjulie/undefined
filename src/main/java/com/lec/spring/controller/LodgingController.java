@@ -81,30 +81,25 @@ public class LodgingController {
         List<Lodging> lodgings = lodgingService.lodgingDetail(lodgingId);
         List<Lodging> lodgingName = lodgingService.lodgingName(lodgingId);
         List<Post> lodgingPost = postService.findPostByLodgingId(lodgingId);
-        List<Room> rooms = roomService.findRoomsByLodgingId(lodgingId);
 
         for (Lodging lodging : lodgings) {
             Double avgPostGrade = lodgingService.getAvgPostGrade(lodging.getLodgingId());
             Integer totalPosts = lodgingService.getTotalPosts(lodging.getLodgingId());
             lodging.setAvgPostGrade(avgPostGrade != null ? avgPostGrade : 0.0);
             lodging.setTotalPosts(totalPosts != null ? totalPosts : 0);
-        }
 
-
-        for (Room room : rooms) {
             int conflictingBookingCount = 0;
             if (bookingStartDate != null && bookingEndDate != null) {
                 // 예약 상황을 확인하여 겹치는 예약 수를 구합니다.
-                conflictingBookingCount = bookingService.bookingCount(room.getRoomId(), bookingStartDate, bookingEndDate);
+                conflictingBookingCount = bookingService.bookingCount(lodging.getRoomId(), bookingStartDate, bookingEndDate);
             }
-            room.setAvailable(conflictingBookingCount);
+            lodging.setAvailable(conflictingBookingCount);
         }
 
 
         model.addAttribute("lodging", lodgings);
         model.addAttribute("lodgingName", lodgingName);
         model.addAttribute("lodgingPost", lodgingPost);
-        model.addAttribute("rooms", rooms);
         model.addAttribute("bookingStartDate", bookingStartDate);
         model.addAttribute("bookingEndDate", bookingEndDate);
 
