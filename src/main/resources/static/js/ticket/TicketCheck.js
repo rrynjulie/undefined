@@ -27,4 +27,38 @@ document.addEventListener('DOMContentLoaded', function() {
         roundTripTab.classList.remove('active');
         oneWayTab.classList.add('active');
     });
+    // 폼 제출 이벤트 리스너 추가
+    ticketForm.addEventListener('submit', function(event) {
+        // 각 필드를 확인
+        const depTerminalId = document.getElementById('depTerminalId').value.trim();
+        const arrTerminalId = document.getElementById('arrTerminalId').value.trim();
+        const depPlandTime = document.getElementById('depPlandTime').value.trim();
+        const busGradeId = document.getElementById('busGradeId').value.trim();
+        const isRoundTrip = roundTripTab.classList.contains('active');
+        const returnPlandTime = document.getElementById('returnPlandTime').value.trim();
+
+        // 필수 필드가 비어 있는지 확인
+        let emptyFields = [];
+
+        if (!depTerminalId) {
+            emptyFields.push('출발 터미널');
+        }
+        if (!arrTerminalId) {
+            emptyFields.push('도착 터미널');
+        }
+        if (!depPlandTime) {
+            emptyFields.push('출발일');
+        }
+        if (isRoundTrip && !returnPlandTime) {
+            emptyFields.push('도착일');
+        }
+        if (!busGradeId) {
+            emptyFields.push('버스 등급');
+        }
+        // 모든 필수 필드가 채워졌는지 확인
+        if (emptyFields.length > 0) {
+            event.preventDefault();  // 폼 제출을 막음
+            alert(`다음 필드를 입력해주세요:\n${emptyFields.join(', ')}`);
+        }
+    });
 });

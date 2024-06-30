@@ -1,21 +1,35 @@
 .container {
     width: 60%;
+    height: 413px;
     margin: auto;
     user-select: none;
+    display: flex;
+    margin-top: 40px;
+}
+#body-head {
+    margin-bottom: 30px;
+}
+#postDiv {
+    margin-bottom: 5px;
+}
+.starDiv , .textDiv , .pictureDiv {
+    margin-bottom: 10px;
+}
+#starLabel, #textLabel, #pictureLabel {
+    margin-right: 10px;
 }
 
 .star {
-    /*direction: rtl; !* 오른쪽에서 왼쪽으로 별을 표시 *!*/
     unicode-bidi: bidi-override;
     display: inline-block;
     font-size: 2em;
-}
-
-.star {
     cursor: pointer;
     color: lightgray;
 }
-
 .star.highlighted {
     color: gold;
+}
+
+button {
+    float: right;
 }

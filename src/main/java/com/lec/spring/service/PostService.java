@@ -7,6 +7,8 @@ import java.util.List;
 public interface PostService {
     int savePost(Post post);
 
+    int allPostSave(Post post);
+
     int countAllPostsByLodgingId(Long lodgingId);
 
     List<Post> findPostsByRoomId(Long roomId);
