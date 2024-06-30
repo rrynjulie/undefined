@@ -3,6 +3,7 @@ package com.lec.spring.domain;
 import lombok.*;
 
 import java.text.NumberFormat;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -43,6 +44,7 @@ public class Lodging {
     private double avgPostGrade;
     private Integer totalPosts;
 
+    private List<Booking> bookingList;
 
 
     public String getFormattedRoomPrice() {
