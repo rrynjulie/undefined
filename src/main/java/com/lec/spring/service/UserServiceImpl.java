@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
 
         // 기본 권한 설정
         Authority authority = new Authority();
-        authority.setId(1L);
+        authority.setAuthority(1);
         authority.setUser(user);
         authority.setUserId(user.getUserId()); // user의 ID를 Authority에 설정
 

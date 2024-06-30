@@ -13,6 +13,8 @@ public class Authority {
     private Long id;  // 권한의 식별자(ID)
     private String name;  // 권한의 이름
 
+    private Integer authority;
+
     // 권한의 이름을 가져오는 메서드
     public String getName() {
         return name;

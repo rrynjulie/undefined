@@ -25,7 +25,5 @@ public class Room {
 
     private Long lodgingId;
 
-    private int available;
-
     public enum RoomSmoke {YES, NO}
 }

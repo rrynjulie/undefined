@@ -307,3 +307,22 @@ document.addEventListener('DOMContentLoaded', function () {
 //     }
 // });
 //
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     const bookingStartDate = document.getElementById('bookingStartDate');
+//     const bookingEndDate = document.getElementById('bookingEndDate');
+//
+//     const storedStartDate = sessionStorage.getItem('startDate')?.split('T')[0];
+//     const storedEndDate = sessionStorage.getItem('endDate')?.split('T')[0];
+//
+//     function setBookingInfo() {
+//         if (storedStartDate) bookingStartDate.value = storedStartDate;
+//         if (storedEndDate) bookingEndDate.value = storedEndDate;
+//     }
+//
+//     setBookingInfo();
+//
+//     // 추가: 폼 제출 이벤트 리스너 대신 자동 설정 방법
+//     // 예를 들어, 아래와 같이 할 수 있습니다 (페이지 로드 시 자동으로 값을 채우는 방법):
+//     // 예를 들어, 다음은 예시에 불과합니다:
+// });
