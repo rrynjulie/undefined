@@ -1,14 +1,8 @@
 package com.lec.spring.controller;
 
 
-import com.lec.spring.domain.Post;
-import com.lec.spring.domain.ProvLodging;
-import com.lec.spring.domain.Room;
-import com.lec.spring.service.LodgingService;
-import com.lec.spring.domain.Lodging;
-import com.lec.spring.service.PostService;
-import com.lec.spring.service.ProviderService;
-import com.lec.spring.service.RoomService;
+import com.lec.spring.domain.*;
+import com.lec.spring.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +20,8 @@ public class LodgingController {
     private ProviderService providerService;
     private RoomService roomService;
     private final PostService postService;
+
+    private BookingService bookingService;
 
     @Autowired
     public LodgingController(LodgingService lodgingService, ProviderService providerService, RoomService roomService, PostService postService) {
@@ -125,4 +121,6 @@ public class LodgingController {
 
         return "lodging/RoomDetail";
     }
+
+
 }

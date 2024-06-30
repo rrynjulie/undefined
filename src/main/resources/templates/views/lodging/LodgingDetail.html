@@ -49,7 +49,7 @@
 
     <!-- 후기가 있는 경우 -->
     <div th:if="${not #lists.isEmpty(lodgingPost)}" id="postDivContainer">
-        <div id="postDiv" th:each="lodgingPost : ${lodgingPost}" style="border: 1px solid black; display: flex; justify-content: space-between">
+        <div id="postDiv" th:each="lodgingPost, iterStat : ${lodgingPost}" th:if="${iterStat.index < 3}" style="border: 1px solid black; display: flex; justify-content: space-between">
             <div>
                 <div class="stars" th:attr="data-star-count=${lodgingPost.postGrade}">
                     <span class="star">&#9733;</span>
@@ -111,7 +111,6 @@
         </div>
     </div>
 
-
     <div class="room-list">
         <div class="room-list1" th:each="lodging : ${lodging}">
             <img class="room-img" th:src="${lodging.roomPicture1}" alt="객실 이미지">
@@ -124,6 +123,7 @@
                 <div style="display: flex; justify-content: space-between; margin-top: 15px; padding: 0 10px;">
                     <div th:text="${lodging.roomName}"></div>
                     <div th:text="${lodging.formattedRoomPrices} + '원'"></div></div>
+                    <p id="availabilityMessage_${lodging.roomId}" class="availability-message"></p>
                 <div class="couponReserve" style="padding: 0 10px;"><button>쿠폰 ></button><a class="reserve-btn" th:href="@{/lodging/LodgingBooking(lodgingId=${lodging.lodgingId}, roomId=${lodging.roomId})}">예약하기</a></div>
             </div>
         </div>

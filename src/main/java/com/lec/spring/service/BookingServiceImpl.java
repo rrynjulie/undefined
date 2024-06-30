@@ -31,23 +31,15 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public int createBooking(Booking booking) {
-//        user = userRepository.findById(user.getUserId());
-//        room = roomRepository.findByRoomId(room.getRoomId());
-
-//        booking.setVisitorName(user.getUsername());
-//        booking.setVisitorPhoneNum(user.getPhonenum());
-//        booking.setBookingPay(room.getRoomPrice());
-//        booking.setBookingStartDate(LocalDate.parse(startDate));
-//        booking.setBookingEndDate(LocalDate.parse(endDate));
-//        booking.setBookingAdult(adultCount);
-//        booking.setBookingChild(childCount);
-
+        int countBooking = bookingRepository.bookingcount(booking.getRoomId(), booking.getBookingStartDate(), booking.getBookingEndDate());
+        if (countBooking > 0) {
+            throw new IllegalArgumentException("The reservation dates conflict with an existing reservation.");
+        }
         return bookingRepository.save(booking);
-
     }
 
     @Override
-    public Booking findBookingByBookingId(Long bookingId) {
+    public Booking findBookingById(Long bookingId) {
         return bookingRepository.findByBookingId(bookingId);
     }
 
@@ -80,6 +72,11 @@ public class BookingServiceImpl implements BookingService {
         }
 
         return result;
+    }
+
+    @Override
+    public int bookingcount(Long roomId, LocalDate bookingStartDate, LocalDate bookingEndDate) {
+        return bookingRepository.bookingcount(roomId, bookingStartDate, bookingEndDate);
     }
 
 
