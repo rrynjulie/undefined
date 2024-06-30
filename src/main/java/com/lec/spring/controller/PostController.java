@@ -6,6 +6,8 @@ import com.lec.spring.service.BookingService;
 import com.lec.spring.service.PostService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.awt.print.Book;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/mypage/customer")
@@ -56,6 +59,13 @@ public class PostController {
     public String postList(@PathVariable("userId") Long userId, Model model) {
         List<Post> userPost = postService.allPostUserId(userId);
         model.addAttribute("userPost", userPost);
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<String> authorityIds = authentication.getAuthorities().stream()
+                .map(authority -> (authority.getAuthority().replace("ROLE_", "")))
+                .collect(Collectors.toList());
+        model.addAttribute("authorityIds", authorityIds);
+
         return "/mypage/customer/PostList";
     }
 
