@@ -24,8 +24,8 @@
                         <p>숙소 주소: <span th:text="${lodging.lodgingAddress}">서울특별시 강남구</span></p>
                         <p>숙소 연락처: <span th:text="${lodging.lodgingNumber}">02-1234-5678</span></p>
 <!--                        <p>유저아이디: <span th:text="${lodging.userId}"></span></p>-->
-                    </div>
                     <button class="detail-btn"><a class="view-details" th:href="@{'/mypage/provider/provlodgingdetail/' + ${lodging.lodgingId}}">상세 보기</a></button>
+                    </div>
                 </div>
             </td>
         </tr>

@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/lodging/LodgingList.css}">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <title>Title</title>
 </head>
 <!-- 헤더 -->
@@ -11,7 +10,7 @@
 
 <body>
 <main class="container">
-    <div style="padding: 0 0 0 20px; display: flex; justify-content: space-between; height: 50px; background-color: #F5F5F5; border-radius: 10px;">
+    <div style="margin-top: 20px; padding: 0 0 0 20px; display: flex; justify-content: space-between; height: 50px; background-color: #F5F5F5; border-radius: 10px;">
         <div id="lodging-text1" style="width: 80%; height: 100%; font-size: 25px; padding-left: 10px; align-content: center;">
             <input id="lodging-text" disabled/>
         </div>
@@ -26,42 +25,40 @@
         <div id="people" class="date-people2 total"></div>
     </div>
     <div id="list-div">
-        <div class="btn-div">
-            <button class="btn" onclick="filterLodging('전체')">전체</button>
-        </div>
-        <div class="btn-div">
-            <button class="btn" onclick="filterLodging('모텔')">모텔</button>
-        </div>
-        <div class="btn-div">
-            <button class="btn" onclick="filterLodging('호텔/리조트')">호텔/리조트</button>
-        </div>
-        <div class="btn-div">
-            <button class="btn" onclick="filterLodging('펜션/풀빌라')">펜션/풀빌라</button>
-        </div>
-        <div class="btn1-div">
-            <div>
-                <select class="btn1">
-                    <option value="예약가 높은 순">예약가 높은 순</option>
-                    <option value="예약가 낮은 순">예약가 낮은 순</option>
-                    <option value="찜 많은 순">찜 많은 순</option>
-                    <option value="후기 많은 순">후기 많은 순</option>
-                </select>
+        <div class="btn-div1">
+            <div class="btn-div2">
+                <button class="btn1" onclick="filterLodging('전체', this)">전체</button>
             </div>
-            <div>
-                <button class="btn1" id="open-dialog">가격</button>
+            <div class="btn-div2">
+                <button class="btn1" onclick="filterLodging('모텔', this)">모텔</button>
+            </div>
+            <div class="btn-div2">
+                <button class="btn1" onclick="filterLodging('호텔/리조트', this)">호텔/리조트</button>
+            </div>
+            <div class="btn-div2">
+                <button class="btn1" onclick="filterLodging('펜션/풀빌라', this)">펜션/풀빌라</button>
             </div>
         </div>
+        <div>
+            <select class="btn2" id="priceFilter">
+                <option value="ALL">선택</option>
+                <option value="DESC">예약가 높은 순</option>
+                <option value="ASC">예약가 낮은 순</option>
+            </select>
+        </div>
     </div>
-    <div id="price-range" title="가격">
-        <div id="slider-range"></div>
-        <div id="price-text">1만원 ~ 50만원</div>
-    </div>
+
     <div>
         <div id="result-filter">
             <span th:text="${#lists.size(lodging)} + '개의 검색 결과'"></span>
         </div>
-        <div class="item-list" id="item-list" th:fragment="item-list">
-            <div style="display: flex; width: 48%; height: 100%; margin-bottom: 10px;" th:each="lodging : ${lodging}">
+
+        <!-- 검색 숙소가 없는 경우 -->
+        <div th:if="${#lists.isEmpty(lodging)}">
+            <p class="post-null">해당 지역에 등록된 숙소가 없습니다</p>
+        </div>
+        <div class="item-list" id="item-list">
+            <div class="item-list1" th:each="lodging : ${lodging}">
                 <a class="item" th:href="@{'/lodging/LodgingDetail/' + ${lodging.lodgingId}}">
                     <p class="item-img1">
                         <img class="item-img2" th:src="${lodging.lodgingPicture1}" alt="Lodging Picture"/>

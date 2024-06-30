@@ -5,11 +5,19 @@
 
 .item-list {
     display: flex;
+    width: 100%;
     flex-wrap: wrap;
     justify-content: space-between;
 }
+.item-list1 {
+    display: flex;
+    width: 48%;
+    height: 190px;
+    margin-bottom: 10px;
+}
 .item {
     width: 100%;
+    height: 180px;
     display: flex;
     margin: 10px;
     border: 1px solid #ddd;
@@ -22,13 +30,6 @@
 .item:hover {
     text-decoration: none;
     text-decoration-color: white;
-}
-.item {
-    width: 100%;
-    height: 180px;
-    background-color: #eee;
-    margin-right: 20px;
-    border-radius: 10px;
 }
 .item-img1 {
     width: 45%;
@@ -117,12 +118,16 @@
 }
 #list-div {
     display: flex;
+    justify-content: space-between;
     margin: 0 10px;
 }
-.btn-div{
+.btn-div1 {
+    display: flex;
+}
+.btn-div2{
     margin: 0 10px 0 0;
 }
-.btn {
+.btn1 {
     width: 100px;
     height: 30px;
     margin-top: 30px;
@@ -130,49 +135,42 @@
     background-color: #F5F5F5;
     border: none;
 }
-.btn:hover {
+.btn1:hover {
     background-color: #FC5185;
     color: white;
     border: none;
     border-radius: 10px;
+    text-decoration: none;
+}
+.btn1:hover {
+    text-decoration: none;
 }
 
-.btn1-div {
+.btn2-div {
     display: flex;
-    margin-left: auto;
+    align-items: flex-end;
 }
-.btn1 {
-    /*margin-top: 30px;*/
-    margin: 30px 10px 0 10px;
+.btn2 {
+    margin: 30px 0 0 10px;
     height: 30px;
 }
-
-
 #result-filter {
     display: flex;
     justify-content: space-between;
     margin: 28px 10px 40px 10px;
     font-weight: bold;
 }
-
-
-
-#slider-range {
-    margin-top: 30px;
-}
-#price-range {
-    margin: 0 20px;
-    float: right;
-    text-align: right;
-    font-weight:bold;
-    color:#4CAF50;
-    display: none;
-    width: 35%;
-}
-
-
 #star {
     color: gold;
     font-size: 22px;
     margin-right: 5px;
 }
+.post-null {
+    color: darkgray;
+    height: 130px;
+    font-size: 30px;
+    text-align: center;
+    align-content: center;
+    margin-bottom: 16px;
+}
+

@@ -4,6 +4,7 @@ import com.lec.spring.domain.Authority;
 import com.lec.spring.domain.User;
 import com.lec.spring.service.UserService;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
@@ -15,6 +16,7 @@ import java.util.Map;
 public class PrincipalDetails implements UserDetails, OAuth2User {
 
     private UserService userService;
+    private Collection<? extends GrantedAuthority> authorities;
 
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -22,21 +24,16 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 
     // 로그인한 사용자 정보
     private User user;
-    public User getUser() {return this.user;}
+    public User getUser() { return this.user; }
 
     // 일반 로그인 용 생성자
-    public PrincipalDetails(User user){
-        System.out.println("UserDetails(user) 생성: " + user);
+    public PrincipalDetails(User user) {
         this.user = user;
     }
 
     // OAuth2 로그인 용 생성자
-    public  PrincipalDetails(User user, Map<String, Object> attributes){
-        System.out.println("""
-           UserDetails(user, oauth attributes) 생성:
-               user: %s
-               attributes: %s
-           """.formatted(user, attributes));
+    public PrincipalDetails(User user, Map<String, Object> attributes) {
+        System.out.printf("UserDetails(user, oauth attributes) 생성: user: %s, attributes: %s%n", user, attributes);
         this.user = user;
         this.attributes = attributes;
     }
@@ -50,31 +47,13 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
         Collection<GrantedAuthority> collect = new ArrayList<>();
 
         List<Authority> list = userService.selectAuthoritiesById(user.getUserId());  // DB 에서 user 의 권한(들) 읽어오기
-        System.out.println(user.getUserId());
 
-        if (list != null) {
-            for (Authority auth : list) {
-                if (auth == null) {
-                } else if (auth.getAuthority() != null) {
-
-                    collect.add(new GrantedAuthority() {
-                        @Override
-                        public String getAuthority() {
-                            return String.valueOf(auth.getAuthority());
-                        }
-
-                        @Override
-                        public String toString() {
-                            return auth.getName();
-                        }
-                    });
-
-                } else {
-                    System.out.println("Authority or Authority.getAuthority() is null");
-                }
+        for (Authority auth : list) {
+            if (auth != null && auth.getName() != null) {
+                collect.add(new SimpleGrantedAuthority(auth.getName()));
+            } else {
+                System.err.println("Authority or Authority Name is null for user: " + user.getUserId());
             }
-        } else {
-            System.out.println("User authorities list is null");
         }
 
         return collect;
@@ -89,7 +68,6 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     public String getUsername() {
         return user.getNickname();
     }
-
 
     public String getEmail() {
         return user.getEmail();
@@ -116,8 +94,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     // 계정이 활성화 되었는지?
     @Override
     public boolean isEnabled() {
-        return true
-                ;
+        return true;
     }
 
     //----------------------------------------------------
@@ -138,5 +115,4 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     public String getProvider() {
         return user.getProvider();
     }
-
 }

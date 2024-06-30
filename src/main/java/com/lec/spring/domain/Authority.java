@@ -10,10 +10,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Authority {
-    private Long id; // 권한의 식별자(ID)
-    private Integer authority; // 권한의 ID (정수형)
+    private Long id;  // 권한의 식별자(ID)
+    private String name;  // 권한의 이름
 
-    private String name;
+    private Integer authority;
+
+    // 권한의 이름을 가져오는 메서드
+    public String getName() {
+        return name;
+    }
+
+    // 권한의 이름을 설정하는 메서드
+    public void setName(String name) {
+        this.name = name;
+    }
 
     private Long userId; // 사용자 ID (추가됨)
     private User user;
@@ -26,13 +36,13 @@ public class Authority {
         this.id = id;
     }
 
-    public Integer getAuthority() {
-        return authority;
-    }
-
-    public void setAuthority(Integer authority) {
-        this.authority = authority;
-    }
+//    public Integer getAuthority() {
+//        return authority;
+//    }
+//
+//    public void setAuthority(Integer authority) {
+//        this.authority = authority;
+//    }
 
     public Long getUserId() {
         return userId;

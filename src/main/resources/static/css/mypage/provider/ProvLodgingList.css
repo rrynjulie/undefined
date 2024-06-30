@@ -54,6 +54,9 @@ h1 {
 
 .accommodation-info p {
     margin: 5px 0;
+    white-space: nowrap; /* 텍스트가 줄바꿈되지 않도록 설정 */
+    overflow: hidden; /* 넘치는 텍스트를 숨김 */
+    text-overflow: ellipsis; /* 넘치는 텍스트에 말줄임표(...)를 추가 */
 }
 
 .register-btn {
@@ -66,7 +69,8 @@ h1 {
     text-align: center;
     text-decoration: none;
     border-radius: 5px;
-    width: 150px; /* 버튼의 너비를 조정합니다. */
+    width: 150px;
+    cursor: pointer;
 }
 
 .detail-btn {
@@ -81,8 +85,17 @@ h1 {
     background-color: #FC5185;
     color: white;
     float: right;
-
+    cursor: pointer;
 }
+
+.register-btn:hover {
+    transform: scale(1.02);
+}
+
+.detail-btn:hover {
+    transform: scale(1.02);
+}
+
 .view-details{
     text-decoration: none;
     color: white;

@@ -65,7 +65,7 @@
         AND l.lodging_id = #{lodgingId}
     </select>
 
-    <update id="update" flushCache="true" parameterType="com.lec.spring.domain.Room">
+    <update id="updateRoom" flushCache="true" parameterType="com.lec.spring.domain.Room">
         UPDATE room
         SET room_picture_1 = #{roomPicture1}
           , room_name = #{roomName}
@@ -81,9 +81,9 @@
         WHERE room_id = #{roomId}
     </update>
 
-    <delete id="delete" flushCache="true" parameterType="com.lec.spring.domain.Room">
-        DELETE FROM room WHERE room_id = #{roomId}
-    </delete>
+<!--    <delete id="delete" flushCache="true" parameterType="com.lec.spring.domain.Room">-->
+<!--        DELETE FROM room WHERE room_id = #{roomId}-->
+<!--    </delete>-->
 
     <!--페이징 용 쿼리-->
 <!--    <select id="selectFromRow" resultMap="mapPost">-->
@@ -107,7 +107,7 @@
         AND r.room_id = #{roomId}
     </select>
 
-    <delete id="deleteRooms" flushCache="true" parameterType="com.lec.spring.domain.Lodging">
-        DELETE FROM room WHERE lodging_id = #{lodgingId}
+    <delete id="deleteRoom" parameterType="int">
+        DELETE FROM room WHERE room_id = #{roomId}
     </delete>
 </mapper>

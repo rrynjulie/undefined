@@ -49,7 +49,7 @@
 
     <!-- 후기가 있는 경우 -->
     <div th:if="${not #lists.isEmpty(lodgingPost)}" id="postDivContainer">
-        <div id="postDiv" th:each="lodgingPost : ${lodgingPost}" style="border: 1px solid black; display: flex; justify-content: space-between">
+        <div id="postDiv" th:each="lodgingPost, iterStat : ${lodgingPost}" th:if="${iterStat.index < 3}" style="border: 1px solid black; display: flex; justify-content: space-between">
             <div>
                 <div class="stars" th:attr="data-star-count=${lodgingPost.postGrade}">
                     <span class="star">&#9733;</span>
@@ -123,10 +123,31 @@
                 <div style="display: flex; justify-content: space-between; margin-top: 15px; padding: 0 10px;">
                     <div th:text="${lodging.roomName}"></div>
                     <div th:text="${lodging.formattedRoomPrices} + '원'"></div></div>
-                    <p id="availabilityMessage_${lodging.roomId}" class="availability-message"></p>
                 <div class="couponReserve" style="padding: 0 10px;"><button>쿠폰 ></button><a class="reserve-btn" th:href="@{/lodging/LodgingBooking(lodgingId=${lodging.lodgingId}, roomId=${lodging.roomId})}">예약하기</a></div>
             </div>
+            <div th:if="${lodging.available == 0}" style="padding: 0 10px; color: green;">예약 가능</div>
+            <div th:if="${lodging.available > 0}" style="padding: 0 10px; color: red;">예약 불가</div>
+            <hr>
         </div>
+        <form id="bookingForm" action="" method="get">
+            <input type="hidden" id="bookingStartDate" name="bookingStartDate">
+            <input type="hidden" id="bookingEndDate" name="bookingEndDate">
+            <button type="submit">Submit</button>
+
+<!--            <div th:each="room : ${rooms}">-->
+<!--            </div>-->
+        </form>
+
+<!--        <form id="bookingForm">-->
+<!--            <label for="bookingStartDate">Check-in Date:</label>-->
+<!--            <input type="date" id="bookingStartDate" name="bookingStartDate" required><br><br>-->
+
+<!--            <label for="bookingEndDate">Check-out Date:</label>-->
+<!--            <input type="date" id="bookingEndDate" name="bookingEndDate" required><br><br>-->
+
+<!--            <button type="button" onclick="checkAvailability()">Check Availability</button>-->
+<!--        </form>-->
+
     </div>
 
     <div class="lodging-location" th:each="lodgingName : ${lodgingName}">

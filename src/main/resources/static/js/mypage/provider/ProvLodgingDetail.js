@@ -46,7 +46,7 @@
 //     }
 // });
 function confirmDelete() {
-    if (confirm("삭제하시겠습니까?")) {
+    if (confirm("숙소를 삭제하시겠습니까?")) {
         document.getElementById('deleteForm').submit();
     }
 }

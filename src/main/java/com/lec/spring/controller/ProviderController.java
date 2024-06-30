@@ -197,14 +197,37 @@ public class ProviderController {
         return "mypage/provider/ProvRoomDetail";
     }
 
+
+
+    // 수정 폼을 보여주는 메서드
     @GetMapping("/ProvRoomUpdate/{roomId}")
-    public String provRoomUpdate(@PathVariable Long roomId, Model model) {
-        model.addAttribute("room", roomService.findByRoomId(roomId));
-        return "provider/ProvRoomUpdate";
+    public String showUpdateForm(@PathVariable Long roomId, Model model) {
+        Room room = roomService.findByRoomId(roomId);
+        model.addAttribute("room", room);
+        return "mypage/provider/ProvRoomUpdate";
     }
 
+    // 수정 처리를 담당하는 메서드
     @PostMapping("/ProvRoomUpdate")
-    public String provRoomUpdateOk() {
-        return "provider/ProvRoomUpdateOk";
+    public String provRoomUpdateOk(@ModelAttribute Room room) {
+        roomService.updateRoom(room);
+        return "redirect:/mypage/provider/ProvRoomDetail/" + room.getRoomId();
     }
+
+    @PostMapping("/deleteRoom/{roomId}")
+    public String deleteRoom(@PathVariable int roomId, Model model) {
+        int result;
+        Long userId = U.getLoggedUser().getUserId();
+        try {
+            roomService.deleteRoom(roomId);
+            result = 1; // 삭제 성공
+        } catch (Exception e) {
+            result = 0; // 삭제 실패
+        }
+        model.addAttribute("result", result);
+        model.addAttribute("userId", userId);
+        return "mypage/provider/ProvRoomDeleteOk";
+    }
+
+
 }

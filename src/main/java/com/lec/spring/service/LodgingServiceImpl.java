@@ -26,6 +26,41 @@ public class LodgingServiceImpl implements LodgingService {
     }
 
     @Override
+    public List<Lodging> getLodgingsByLocationAndType(String location, String type) {
+        return lodgingRepository.findLodgingsByLocationAndType(location, type);
+    }
+
+    @Override
+    public List<Lodging> findLodgingByPriceASC(String location) {
+        return lodgingRepository.findLodgingByPriceASC(location);
+    }
+
+    @Override
+    public List<Lodging> findLodgingByPriceDESC(String location) {
+        return lodgingRepository.findLodgingByPriceDESC(location);
+    }
+
+    @Override
+    public List<Lodging> findLodgingIdASC(String location) {
+        return lodgingRepository.findLodgingIdASC(location);
+    }
+
+    @Override
+    public List<Lodging> findLodgingIdASCByType(String location, String type) {
+        return lodgingRepository.findLodgingIdASCByType(location, type);
+    }
+
+    @Override
+    public List<Lodging> findLodgingByLocationAndTypeAndPriceASC(String location, String type) {
+        return lodgingRepository.findLodgingByLocationAndTypeAndPriceASC(location, type);
+    }
+
+    @Override
+    public List<Lodging> findLodgingByLocationAndTypeAndPriceDESC(String location, String type) {
+        return lodgingRepository.findLodgingByLocationAndTypeAndPriceDESC(location, type);
+    }
+
+    @Override
     public List<Lodging> lodgingDetail(Long lodgingId) {
         return lodgingRepository.findLodgingById(lodgingId);
     }
@@ -33,11 +68,6 @@ public class LodgingServiceImpl implements LodgingService {
     @Override
     public List<Lodging> lodgingName(Long lodgingId) {
         return lodgingRepository.findLodgingByName(lodgingId);
-    }
-
-    @Override
-    public List<Lodging> getLodgingsByLocationAndType(String location, String type) { // 새로운 메서드 구현
-        return lodgingRepository.findLodgingsByLocationAndType(location, type);
     }
 
     @Override

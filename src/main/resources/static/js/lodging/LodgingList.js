@@ -1,70 +1,89 @@
-$(document).ready(function () {
-    $("#open-dialog").click(function () {
-        $("#price-range").toggle();
-        if ($("#price-range").is(":visible")) {
-            $("#slider-range").slider({
-                range: true,
-                min: 1,
-                max: 50,
-                values: [1, 50],
-                slide: function (event, ui) {
-                    $("#price-text").text(ui.values[0] + "만원 ~ " + ui.values[1] + "만원 이상");
-                }
-            });
-            $("#price-text").text($("#slider-range").slider("values", 0) + "만원 ~ " +
-                $("#slider-range").slider("values", 1) + "만원 이상");
-        }
-    });
-});
-
 document.addEventListener('DOMContentLoaded', function () {
+    const text = document.getElementById('lodging-text1')
+    const searchWord = sessionStorage.getItem('searchWord')
 
-    const lodgingText = document.getElementById('lodging-text1');
-    const selectDate = document.getElementById('selectedDate');
-    const people = document.getElementById('people');
+    const selectedDate = document.getElementById("selectedDate");
+    const startDate = new Date(sessionStorage.getItem('startDate'));
+    const endDate = new Date(sessionStorage.getItem('endDate'));
 
-    const searchHistory = JSON.parse(sessionStorage.getItem('searchHistory')) || [];
-    console.log("searchHistory: ", searchHistory);
+    const totalDiv = document.getElementsByClassName('total');
+    const adultCount = parseInt(sessionStorage.getItem('adultCount'));
+    const childCount = parseInt(sessionStorage.getItem('childCount'));
 
-    searchHistory.forEach(i => {
-        const word = i.word;
-        const startDate = i.startDate;
-        const endDate = i.endDate;
-        const adults = i.adults;
-        const children = i.children;
+    console.log('searchWord: ' + searchWord);
+    console.log('startDate: ' + startDate);
+    console.log('endDate: ' + endDate);
+    console.log('adultCount: ' + adultCount);
+    console.log('childCount: ' + childCount);
 
-        // console.log(searchWord);
-        console.log("searchWord: ", word);
-        console.log("start Date: ", startDate);
-        console.log("end Date: ", endDate);
-        console.log("adults: ", adults);
-        console.log("children: ", children);
 
-        lodgingText.innerHTML = word;
-        selectDate.innerHTML = `${new Date(startDate).getFullYear()}.${new Date(startDate).getMonth() + 1}.${new Date(startDate).getDate()}
-        ~ ${new Date(endDate).getFullYear()}.${new Date(endDate).getMonth() + 1}.${new Date(endDate).getDate()}`;
-        people.innerHTML = `성인 ${adults}, 아동 ${children}`;
-    })
+    text.innerHTML = `${searchWord}`
+
+    selectedDate.innerHTML = `${startDate.getFullYear()}.${startDate.getMonth() + 1}.${startDate.getDate()} ~ ${endDate.getFullYear()}.${endDate.getMonth() + 1}.${endDate.getDate()}`
+
+    for (let i = 0; i < totalDiv.length; i++) {
+        totalDiv[i].innerHTML = `인원: 성인 ${adultCount}, 아동 ${childCount}`;
+    }
+
 });
 
 
-
-
-
-function filterLodging(type) {
-    const location = document.getElementById('location').value;
-    $.ajax({
-        url: '/lodging/LodgingList/filter',
-        type: 'POST',
-        data: {
-            location: location,
-            type: type
-        },
-        success: function (data) {
-            $('#item-list').html(data);
-        },
-        error: function (error) {
-            console.error('Error:', error);
-        }
+function filterLodging(type, btn1) {
+    // 모든 버튼의 배경색을 초기화
+    var buttons = document.querySelectorAll('.btn1');
+    buttons.forEach(function(button) {
+        button.style.backgroundColor = ''; // 기본 값으로 설정
+        button.style.color = 'black';
     });
+
+    // 선택한 버튼의 배경색을 변경
+    btn1.style.backgroundColor = '#FC5185';
+    btn1.style.color = 'white';
+    // 필터링 로직 추가 (필요한 경우)
+    console.log(type);
 }
+
+$(document).ready(function() {
+    var currentType = ''; // 초기값은 빈 문자열로 설정
+
+    // 숙소 타입 버튼 클릭 시
+    $('.btn1').click(function() {
+        var type = $(this).text();
+        currentType = type; // 현재 선택된 타입 업데이트
+        filterLodging();
+    });
+
+    // 가격 필터링 변경 시
+    $('#priceFilter').change(function() {
+        filterLodging();
+    });
+
+    // 숙소 필터링 함수
+    function filterLodging() {
+        var price = $('#priceFilter').val();
+        var location = $('#location').val();
+
+        $.ajax({
+            type: 'POST',
+            url: '/lodging/LodgingList/price',
+            data: {
+                location: location,
+                price: price,
+                type: currentType // 현재 선택된 타입 전달
+            },
+            success: function(response) {
+                $('#item-list').html(response);
+                updateResultCount();
+            },
+            error: function(error) {
+                console.error('에러:', error);
+            }
+        });
+    }
+
+    // 결과 개수 업데이트 함수
+    function updateResultCount() {
+        const resultCount = $('.item-list1').length;
+        $('#result-filter').text(resultCount + '개의 검색 결과');
+    }
+});

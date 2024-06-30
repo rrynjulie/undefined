@@ -1,86 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../../../../static/css/mypage/provider/ProvRoomUpdate.css">
-    <title>숙소 정보 수정</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/provider/ProvRoomUpdate.css}">
+    <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/js/mypage/provider/ProvRoomUpdate.js}"></script>
+    <title>객실 정보 수정</title>
 </head>
 <body>
 <!-- 헤더 -->
-<header id="nav-bar"></header>
-<script src="../../../../static/js/LoadHeader.js"></script>
-<script src="../../../../static/js/common/Header.js"></script>
+<th:block th:insert="~{common/Header::header}"></th:block>
 
 <!-- 메인 -->
 <main>
     <!-- 좌측 네비게이션 메뉴 -->
     <th:block th:insert="~{mypage/provider/ProvNavMenu::prov-nav-menu}"></th:block>
 
-    <!-- 숙소 정보 페이지 -->
-    <section class="lodging-info">
+    <!-- 객실 수정 폼 -->
+    <section class="room-info">
         <h1>객실 정보 수정</h1>
-        <form>
-            <div class="lodging-list">
-                <label class="image-upload">
-                    사진 첨부<br>
-                    <div class="image-upload-input">
-                        <input class="image-url" type="text" disabled>
-                        <button class="btn-upload">찾아보기</button>
+        <form id="room-update" th:action="@{/mypage/provider/ProvRoomUpdate}" method="post">
+            <input type="hidden" id="roomId" name="roomId" th:value="${room.roomId}">
+            <div class="room-list">
+                <div class="room-info-frame">
+                    <label class="info-label" for="roomName">객실명<div class="required-dot"></div></label>
+                    <input class="info-input" id="roomName" name="roomName" type="text" placeholder="객실명을 입력하세요." th:value="${room.roomName}">
+                </div>
+                <div class="room-info-frame">
+                    <label class="info-label" for="roomNumber">객실 호수</label>
+                    <input class="info-input" id="roomNumber" name="roomNumber" type="number" placeholder="객실 호수를 입력하세요." th:value="${room.roomNumber}">
+                </div>
+                <div class="room-info-frame">
+                    <label class="info-label" for="roomNormalPeople">객실 기준 인원<div class="required-dot"></div></label>
+                    <input class="info-input" id="roomNormalPeople" name="roomNormalPeople" type="number" placeholder="객실 기준 인원을 입력하세요." th:value="${room.roomNormalPeople}">
+                </div>
+                <div class="room-info-frame">
+                    <label class="info-label" for="roomMaxPeople">객실 최대 인원<div class="required-dot"></div></label>
+                    <input class="info-input" id="roomMaxPeople" name="roomMaxPeople" type="number" placeholder="객실 최대 인원을 입력하세요." th:value="${room.roomMaxPeople}">
+                </div>
+                <div class="room-info-frame">
+                    <label class="info-label" for="roomArea">객실 면적</label>
+                    <input class="info-input" id="roomArea" name="roomArea" type="number" placeholder="객실 면적을 입력하세요." th:value="${room.roomArea}">
+                </div>
+                <div class="room-info-frame">
+                    <label class="info-label" for="roomPrice">객실 가격<div class="required-dot"></div></label>
+                    <input class="info-input" id="roomPrice" name="roomPrice" type="number" placeholder="객실 가격을 입력하세요." th:value="${room.roomPrice}">
+                </div>
+                <div class="room-info-frame">
+                    <label class="info-label" for="roomBedGrade">객실 침대 타입</label>
+                    <input class="info-input" id="roomBedGrade" name="roomBedGrade" type="text" placeholder="객실 침대 타입을 입력하세요." th:value="${room.roomBedGrade}">
+                </div>
+                <div class="room-info-frame">
+                    <label class="info-label" for="roomBed">객실 침대 갯수<div class="required-dot"></div></label>
+                    <input class="info-input" id="roomBed" name="roomBed" type="number" placeholder="객실 침대 갯수를 입력하세요." th:value="${room.roomBed}">
+                </div>
+                <div class="room-info-frame">
+                    <label class="info-label" for="roomBathroom">객실 욕실 갯수</label>
+                    <input class="info-input" id="roomBathroom" name="roomBathroom" type="number" placeholder="객실 욕실 개수를 입력하세요." th:value="${room.roomBathroom}">
+                </div>
+                <div class="room-info-frame">
+                    <label class="info-label">객실 흡연 가능 여부<div class="required-dot"></div></label>
+                    <div class="smoke-radio-frame">
+                        <input type="radio" class="btn-check" name="roomSmoke" id="roomSmoke1" value="YES" th:checked="${room.roomSmoke} == 'YES'">
+                        <label class="smoke-radio-label" for="roomSmoke1">흡연 가능 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+
+                        <input type="radio" class="btn-check" name="roomSmoke" id="roomSmoke2" value="NO" th:checked="${roomSmoke} ? ${roomSmoke == 'NO'} : ${true}">
+                        <label class="smoke-radio-label" for="roomSmoke2">흡연 불가</label>
                     </div>
-                </label>
-                <label class="info-label">
-                    객실명<br>
-                    <input class="info-input" type="text">
-                </label>
-                <label class="info-label">
-                    객실 호수<br>
-                    <input class="info-input" type="text">
-                </label>
-                <label class="info-label">
-                    객실 기준 인원<br>
-                    <input class="info-input" type="text">
-                </label>
-                <label class="info-label">
-                    객실 최대 인원<br>
-                    <input class="info-input" type="text">
-                </label>
-                <label class="info-label">
-                    객실 면적<br>
-                    <input class="info-input" type="time">
-                </label>
-                <label class="info-label">
-                    객실 가격<br>
-                    <input class="info-input" type="time">
-                </label>
-                <label class="info-label">
-                    객실 침대 개수<br>
-                    <input class="info-input" type="text">
-                </label>
-                <label class="info-label">
-                    객실 욕실 개수<br>
-                    <input class="info-input" type="text">
-                </label>
-                <label class="info-label">
-                    객실 흡연 가능 여부<br>
-                    <input class="info-input" type="text">
-                </label>
+                </div>
+                <div class="image-upload">
+                    <label class="info-label" for="roomPicture1">사진 첨부<div class="required-dot"></div></label>
+                    <div class="image-upload-input">
+                        <input class="image-url" id="roomPicture1" name="roomPicture1" placeholder="객실 이미지 url을 넣어주세요." type="text" th:value="${room.roomPicture1}">
+                    </div>
+                </div>
             </div>
-            <div class="lodging-list">
-                <label class="info-label-textarea">
-                    객실 공지사항 및 소개<br>
-                    <textarea class="info-textarea"></textarea>
-                </label>
-            </div>
+            <button class="btn-update" type="submit">수정하기</button>
+            <button class="btn-back" href="/mypage/provider/ProvRoomDetail">이전으로</button>
         </form>
-        <div class="btn-list">
-            <button class="btn-update-complete">수정 완료</button>
-        </div>
     </section>
-    <script src="../../../../static/js/mypage/provider/ProvRoomUpdate.js"></script>
 </main>
 
 <!-- 푸터 -->
-<footer id="footer"></footer>
-<script src="../../../../static/js/LoadFooter.js"></script>
+<th:block th:insert="~{common/Footer::footer}"></th:block>
 </body>
 </html>

@@ -6,19 +6,11 @@
 <mapper namespace="com.lec.spring.repository.AuthorityRepository">
     <select id="findByName" resultType="com.lec.spring.domain.Authority">
         SELECT
-            authority_id "id"
-             , authority_name "name"
+            authority_id AS id,
+            authority_name AS name
         FROM authority
         WHERE authority_name = #{name}
     </select>
-
-<!--    <select id="findByUser"-->
-<!--            parameterType="com.lec.spring.domain.User"-->
-<!--            resultType="com.lec.spring.domain.Authority">-->
-<!--        SELECT a.authority_id "id", a.authority_name "name"-->
-<!--        FROM authority a, user_authority u-->
-<!--        WHERE a.authority_id = u.authority_id AND u.user_id = #{userId};-->
-<!--    </select>-->
 
     <insert id="addAuthority" flushCache="true">
         INSERT INTO user_authority(user_id, authority_id)
@@ -30,18 +22,10 @@
         VALUES (#{authority}, #{userId})
     </insert>
 
-    <select id="findByUser" resultType="com.lec.spring.domain.Authority">
-        SELECT a.authority_id, a.authority_name
+    <select id="findByUser" parameterType="long" resultType="com.lec.spring.domain.Authority">
+        SELECT a.authority_id AS id, a.authority_name AS name
         FROM authority a
                  JOIN user_authority ua ON a.authority_id = ua.authority_id
         WHERE ua.user_id = #{userId}
     </select>
-
 </mapper>
-
-
-
-
-
-
-

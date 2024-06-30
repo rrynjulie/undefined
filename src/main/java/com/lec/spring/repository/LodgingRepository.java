@@ -14,6 +14,18 @@ public interface LodgingRepository {
 
     List<Lodging> findLodgingsByLocationAndType(String location, String type);
 
+    List<Lodging> findLodgingByPriceASC(String location);
+
+    List<Lodging> findLodgingByPriceDESC(String location);
+
+    List<Lodging> findLodgingIdASC(String location);
+
+    List<Lodging> findLodgingIdASCByType(String location, String type);
+
+    List<Lodging> findLodgingByLocationAndTypeAndPriceASC(String location, String type);
+
+    List<Lodging> findLodgingByLocationAndTypeAndPriceDESC(String location, String type);
+
     List<Lodging> findLodgingById(Long lodgingId);
 
     List<Lodging> findLodgingByName(Long lodgingId);
