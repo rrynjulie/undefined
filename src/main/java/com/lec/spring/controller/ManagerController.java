@@ -3,6 +3,7 @@ package com.lec.spring.controller;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.UserAuthority;
 import com.lec.spring.service.ManagerService;
+import com.lec.spring.util.AuthenticationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/mypage/manager")
@@ -34,6 +36,9 @@ public class ManagerController {
 
         List<User> managers = managerService.getAllUsersWithAuthorities();
         model.addAttribute("managers", managers);
+
+        AuthenticationUtil.addAuthenticationDetailsToModel(model);
+
 
 //        System.out.println(managers); // manager 출력해보기
 //        System.out.println(userAuthorities); // user 권한 출력해보기

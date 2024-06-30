@@ -6,7 +6,7 @@
     <!-- PC 버전 -->
     <div class="my-page-menu">
         <nav class="customer-menu-pc">
-            <a class="active" href="">
+            <a class="active" th:href="@{'/mypage/customer/BookingList/' + ${userId}}">
                 <img th:src="@{/image/mypage/customer/Booking.png}" alt="" class="customer-menu-icon">
                 <p>예약 내역</p>
             </a>

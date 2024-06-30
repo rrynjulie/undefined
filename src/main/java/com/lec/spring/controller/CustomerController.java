@@ -9,6 +9,7 @@ import com.lec.spring.service.BookingService;
 import com.lec.spring.service.ManagerService;
 import com.lec.spring.service.PostService;
 import com.lec.spring.service.UserService;
+import com.lec.spring.util.AuthenticationUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -133,13 +134,7 @@ public class CustomerController {
         model.addAttribute("booksBefore", booksBefore);
         model.addAttribute("booksAfter", booksAfter);
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        List<String> authorityIds = authentication.getAuthorities().stream()
-                .map(authority -> (authority.getAuthority().replace("ROLE_", "")))
-                .collect(Collectors.toList());
-        model.addAttribute("authorityIds", authorityIds);
-
-        System.out.println("authorityId: " + authorityIds);
+        AuthenticationUtil.addAuthenticationDetailsToModel(model);
 
         return "mypage/customer/BookingList";
     }

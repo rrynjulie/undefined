@@ -32,6 +32,7 @@ public class Lodging {
     private String roomName;
     private String roomPicture1;
     private String roomPicture2;
+    private int available;
     private int roomPrice;  // 객실 최솟값
     private int roomPrices; // 한 숙소의 객실들 가격
 
