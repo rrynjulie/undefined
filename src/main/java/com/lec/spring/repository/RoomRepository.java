@@ -13,7 +13,7 @@ public interface  RoomRepository {
 
     List<Room> findByLodgingId(Long lodgingId);
 
-    int update(Room room);
+    void updateRoom(Room room);
 
     int delete(Room room);
 

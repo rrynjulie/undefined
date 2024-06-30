@@ -60,10 +60,18 @@
         DELETE FROM booking WHERE booking_id = #{bookingId}
     </delete>
 
-    <select id="bookingcount" resultType="int">
+<!--    <select id="bookingCount" resultType="int">-->
+<!--        SELECT count(*)-->
+<!--        FROM booking-->
+<!--        WHERE room_id = #{roomId}-->
+<!--        AND ((booking_startdate &gt;> #{bookingStartDate} AND booking_startdate &lt;< #{bookingEndDate})-->
+<!--        OR (booking_enddate &lt; #{bookingEndDate} AND booking_enddate &gt; #{bookingStartDate}))-->
+<!--    </select>-->
+    <select id="bookingCount" resultType="int">
         SELECT count(*)
         FROM booking
         WHERE room_id = #{roomId}
-        AND (booking.booking_startdate &lt; #{bookingEndDate} AND booking.booking_enddate &gt; #{bookingStartDate})
+        AND NOT (booking_startdate &gt;= #{bookingEndDate}
+        OR booking_enddate &lt;= #{bookingStartDate})
     </select>
 </mapper>

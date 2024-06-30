@@ -12,6 +12,11 @@
     font-family: 'Noto Sans KR', sans-serif;
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
 main {
     display: flex;
     padding: 40px 20%;
@@ -20,12 +25,17 @@ main {
     border-top: 1px solid #F5F5F5;
 }
 
-.lodging-info {
+.room-info {
     background-color: white;
     width: 75%;
 }
 
-.lodging-list {
+.lodging-name {
+    font-size: 20px;
+    color: gray;
+}
+
+.room-list {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -33,12 +43,48 @@ main {
     margin-top: 20px;
 }
 
-.image-upload, .info-label, .info-label-textarea {
+.room-info-frame-hidden {
+    display: none;
+}
+
+.room-info-frame, .image-upload {
     width: 48%;
     margin: 10px 0;
+}
+
+.info-label {
+    display: flex;
     font-size: 12px;
     font-weight: bold;
     color: dimgray;
+}
+
+.required-dot {
+    background-color: #FC5185;
+    border-radius: 50%;
+    margin-left: 1px;
+    margin-top: 4px;
+    height: 4px;
+    width: 4px;
+}
+
+.smoke-radio-frame {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    border: 0;
+    margin-top: 5px;
+    padding: 0 15px;
+    font-size: 17px;
+}
+
+.smoke-radio-label {
+    align-content: center;
+}
+
+.btn-check {
+    margin-right: 10px;
 }
 
 .image-upload {
@@ -48,30 +94,16 @@ main {
 .image-upload-input {
     display: flex;
     justify-content: space-between;
+    width: 920px;
 }
 
-.btn-upload {
-    height: 50px;
-    width: 20%;
-    border: 0;
-    border-radius: 7px;
-    margin-top: 5px;
-    margin-left: 20px;
-    font-size: 17px;
-    font-weight: bold;
-    background-color: #FFEBEF;
-    color: #FC5185;
-}
+
 
 .btn-upload:hover {
     transform: scale(1.02);
 }
 
-.info-label-textarea {
-    width: 100%;
-}
-
-.image-url, .info-input, .info-textarea {
+.image-url, .info-input {
     width: 100%;
     height: 50px;
     border: 0;
@@ -86,30 +118,37 @@ main {
     width: 77%;
 }
 
-.info-textarea {
-    padding: 15px;
-    height: 150px;
-    resize: none;
-}
-
-.btn-list {
-    display: flex;
-    justify-content: end;
-    margin-top: 20px;
-}
-
-.btn-list button {
+.btn-update {
     height: 50px;
     width: 150px;
     border: 0;
     border-radius: 7px;
-    margin-left: 20px;
+    margin-top: 30px;
     font-size: 17px;
     font-weight: bold;
     background-color: #FC5185;
     color: white;
+    float: right;
 }
 
-.btn-list button:hover {
+.btn-update:hover {
+    transform: scale(1.02);
+}
+
+.btn-back {
+    height: 50px;
+    width: 150px;
+    border: 0;
+    border-radius: 7px;
+    margin-top: -50px;
+    font-size: 17px;
+    font-weight: bold;
+    background-color: #FC5185;
+    color: white;
+    float: right;
+    margin-right: 560px;
+}
+
+.btn-back:hover {
     transform: scale(1.02);
 }

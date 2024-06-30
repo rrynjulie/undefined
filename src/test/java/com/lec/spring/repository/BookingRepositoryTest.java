@@ -49,4 +49,14 @@ public class BookingRepositoryTest {
         bookingRepository.findBooksByUserId(userId).forEach(System.out::println);
     }
 
+    @Test
+    void bookingExceptionControlTest() {
+        BookingRepository bookingRepository = sqlSession.getMapper(BookingRepository.class);
+        System.out.println("예약 중복 처리 검사");
+        Long roomId = 135L;
+        LocalDate bookingStartDate = LocalDate.parse("2024-06-13");
+        LocalDate bookingEndDate = LocalDate.parse("2024-06-16");
+        System.out.println(bookingRepository.bookingCount(roomId, bookingStartDate, bookingEndDate));
+    }
+
 }

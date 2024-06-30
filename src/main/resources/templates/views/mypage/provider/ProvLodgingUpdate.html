@@ -3,168 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/provider/ProvLodgingUpdate.css}">
+    <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
     <script th:src="@{/js/mypage/provider/ProvLodgingUpdate.js}"></script>
     <title>숙소 수정</title>
 </head>
 <body>
-<header>
-    <a href="/Home">
-        <img src="/image/common/MainLogo.png" alt="StayFind">
-    </a>
-    <div class="container">
-        <div class="header-items">
-            <h1>숙소 수정</h1>
-        </div>
-    </div>
-</header>
-
+<!-- 헤더 -->
+<th:block th:insert="~{common/Header::header}"></th:block>
 <main>
-    <div class="container">
-        <div class="header-menu">
-            <h2>정보</h2>
-        </div>
-
-<!--        <form id="updateForm" method="post" th:action="@{'/mypage/provider/provlodgingdetail/'+ ${lodging.lodgingId}}">-->
+    <!-- 좌측 네비게이션 메뉴 -->
+    <th:block th:insert="~{mypage/provider/ProvNavMenu::prov-nav-menu}"></th:block>
+    <section class="lodging-info">
+        <h1>숙소 수정</h1>
         <form id="updateForm" method="post" th:action="@{/mypage/provider/updateLodging}">
-            <label for="fileInput1">숙소 이미지</label>
-            <input type="hidden" id="lodgingId" name="lodgingId" th:value="${lodging.lodgingId}"/>
-            <div id="Upload1">
-                <input type="text" id="fileInput1" name="lodgingPicture1" th:value="${lodging.lodgingPicture1}" placeholder="숙소 이미지 url을 넣어주세요.">
-            </div>
-            <br>
-            <div class="form-row1">
-                <div class="form-group1">
-                    <label for="lodgingName">숙소 이름</label>
-                    <input type="text" id="lodgingName" name="lodgingName" th:value="${lodging.lodgingName}" placeholder="숙소 이름을 입력해 주세요.">
+                <input type="hidden" id="lodgingId" name="lodgingId" th:value="${lodging.lodgingId}"/>
+            <div class="lodging-register">
+                <div class="lodging-info-frame">
+                    <label class="info-label" for="lodgingName">숙소 이름<div class="required-dot"></div></label>
+                    <input class="info-input" type="text" id="lodgingName" name="lodgingName" th:value="${lodging.lodgingName}" placeholder="숙소 이름을 입력해 주세요.">
                 </div>
-                <div class="form-group1">
-                    <label for="lodgingType">숙소 타입</label>
-                    <select id="lodgingType" name="lodgingType" th:value="${lodging.lodgingType}">
+                <div class="lodging-info-select">
+                    <label class="info-label" for="lodgingType">숙소 타입<div class="required-dot"></div></label>
+                    <select id="lodgingType" name="lodgingType">
                         <option value="">숙소 타입을 선택해 주세요.</option>
-                        <option value="펜션/풀빌라">펜션/풀빌라</option>
-                        <option value="모텔">모텔</option>
-                        <option value="호텔/리조트">호텔/리조트</option>
+                        <option value="펜션/풀빌라" th:selected="${lodging.lodgingType == '펜션/풀빌라'}">펜션/풀빌라</option>
+                        <option value="모텔" th:selected="${lodging.lodgingType == '모텔'}">모텔</option>
+                        <option value="호텔/리조트" th:selected="${lodging.lodgingType == '호텔/리조트'}">호텔/리조트</option>
                     </select>
                 </div>
-            </div>
-            <div class="form-group1">
-                <label for="region">지역</label>
-                <select id="region" name="lodgingLocation1" th:value="${lodging.lodgingLocation1}">
-                    <option value="">지역을 선택해 주세요.</option>
-                    <option value="서울특별시">서울특별시</option>
-                    <option value="부산광역시">부산광역시</option>
-                    <option value="인천광역시">인천광역시</option>
-                    <option value="제주특별자치도">제주특별자치도</option>
-                    <option value="경기도">경기도</option>
-                    <option value="경상남도">경상남도</option>
-                    <option value="경상북도">경상북도</option>
-                    <option value="전라남도">전라남도</option>
-                    <option value="충청남도">충청남도</option>
-                    <option value="강원도">강원도</option>
-                    <option value="대전광역시">대전광역시</option>
-                    <option value="대구광역시">대구광역시</option>
-                    <option value="울산광역시">울산광역시</option>
-                </select>
-            </div>
-            <div class="form-group1">
-                <label for="sub-region">하위 지역</label>
-                <select id="sub-region" name="lodgingLocation2" th:value="${lodging.lodgingLocation2}">
-                    <option value="">하위 지역을 선택해 주세요.</option>
-                    <option value="중구">중구</option>
-                    <option value="해운대구">해운대구</option>
-                    <option value="강화군">강화군</option>
-                    <option value="남동구">남동구</option>
-                    <option value="제주시">제주시</option>
-                    <option value="서귀포시">서귀포시</option>
-                    <option value="수원시">수원시</option>
-                    <option value="고양시">고양시</option>
-                    <option value="용인시">용인시</option>
-                    <option value="창원시">창원시</option>
-                    <option value="김해시">김해시</option>
-                    <option value="포항시">포항시</option>
-                    <option value="경주시">경주시</option>
-                    <option value="여수시">여수시</option>
-                    <option value="여주시">여주시</option>
-                    <option value="순천시">순천시</option>
-                    <option value="천안시">천안시</option>
-                    <option value="아산시">아산시</option>
-                    <option value="춘천시">춘천시</option>
-                    <option value="강릉시">강릉시</option>
-                    <option value="서구">서구</option>
-                    <option value="북구">북구</option>
-                    <option value="울주군">울주군</option>
-                </select>
-            </div>
-            <div class="form-group1">
-                <label for="lodgingAddress">숙소 주소</label>
-                <input type="text" id="lodgingAddress" name="lodgingAddress" th:value="${lodging.lodgingAddress}" placeholder="숙소 주소를 입력해 주세요.">
-            </div>
-            <div class="form-group1">
-                <label for="lodgingNumber">숙소 연락처</label>
-                <input type="text" id="lodgingNumber" name="lodgingNumber" th:value="${lodging.lodgingNumber}" placeholder="숙소 전화번호를 입력해 주세요.">
-            </div>
-            <div class="form-group1">
-                <label for="lodgingUrl">숙소 URL</label>
-                <input type="url" id="lodgingUrl" name="lodgingUrl" th:value="${lodging.lodgingUrl}" placeholder="숙소 URL을 입력해 주세요.">
-            </div>
-            <div class="form-row1">
-                <div class="form-group1">
-                    <label for="lodgingOpen">숙소 입실시간</label>
-                    <input type="time" id="lodgingOpen" name="lodgingOpen" th:value="${lodging.lodgingOpen}" placeholder="숙소 입실시간을 입력해 주세요.">
+                <div class="lodging-info-select">
+                    <label class="info-label" for="region">지역<div class="required-dot"></div></label>
+                    <select id="region" name="lodgingLocation1">
+                        <option value="">지역을 선택해 주세요.</option>
+                        <option value="서울특별시" th:selected="${lodging.lodgingLocation1 == '서울특별시'}">서울특별시</option>
+                        <option value="부산광역시" th:selected="${lodging.lodgingLocation1 == '부산광역시'}">부산광역시</option>
+                        <option value="인천광역시" th:selected="${lodging.lodgingLocation1 == '인천광역시'}">인천광역시</option>
+                        <option value="제주특별자치도" th:selected="${lodging.lodgingLocation1 == '제주특별자치도'}">제주특별자치도</option>
+                        <option value="경기도" th:selected="${lodging.lodgingLocation1 == '경기도'}">경기도</option>
+                        <option value="경상남도" th:selected="${lodging.lodgingLocation1 == '경상남도'}">경상남도</option>
+                        <option value="경상북도" th:selected="${lodging.lodgingLocation1 == '경상북도'}">경상북도</option>
+                        <option value="전라남도" th:selected="${lodging.lodgingLocation1 == '전라남도'}">전라남도</option>
+                        <option value="충청남도" th:selected="${lodging.lodgingLocation1 == '충청남도'}">충청남도</option>
+                        <option value="강원도" th:selected="${lodging.lodgingLocation1 == '강원도'}">강원도</option>
+                        <option value="대전광역시" th:selected="${lodging.lodgingLocation1 == '대전광역시'}">대전광역시</option>
+                        <option value="대구광역시" th:selected="${lodging.lodgingLocation1 == '대구광역시'}">대구광역시</option>
+                        <option value="울산광역시" th:selected="${lodging.lodgingLocation1 == '울산광역시'}">울산광역시</option>
+                    </select>
                 </div>
-                <div class="form-group1">
-                    <label for="lodgingClose">숙소 퇴실시간</label>
-                    <input type="time" id="lodgingClose" name="lodgingClose" th:value="${lodging.lodgingClose}" placeholder="숙소 퇴실시간을 입력해 주세요.">
+                <div class="lodging-info-select">
+                    <label class="info-label" for="sub-region">하위 지역<div class="required-dot"></div></label>
+                    <select id="sub-region" name="lodgingLocation2">
+                        <option value="">하위 지역을 선택해 주세요.</option>
+                        <option value="중구" th:selected="${lodging.lodgingLocation2 == '중구'}">중구</option>
+                        <option value="강남구" th:selected="${lodging.lodgingLocation2 == '강남구'}">강남구</option>
+                        <option value="동대문구" th:selected="${lodging.lodgingLocation2 == '동대문구'}">동대문구</option>
+                        <option value="서초구" th:selected="${lodging.lodgingLocation2 == '서초구'}">서초구</option>
+                        <option value="성북구" th:selected="${lodging.lodgingLocation2 == '성북구'}">성북구</option>
+                        <option value="노원구" th:selected="${lodging.lodgingLocation2 == '노원구'}">노원구</option>
+                        <option value="금천구" th:selected="${lodging.lodgingLocation2 == '금천구'}">금천구</option>
+                        <option value="용산구" th:selected="${lodging.lodgingLocation2 == '용산구'}">용산구</option>
+                        <option value="강동구" th:selected="${lodging.lodgingLocation2 == '강동구'}">강동구</option>
+                        <option value="강북구" th:selected="${lodging.lodgingLocation2 == '강북구'}">강북구</option>
+                        <option value="마포구" th:selected="${lodging.lodgingLocation2 == '마포구'}">마포구</option>
+                        <option value="해운대구" th:selected="${lodging.lodgingLocation2 == '해운대구'}">해운대구</option>
+                        <option value="강화군" th:selected="${lodging.lodgingLocation2 == '강화군'}">강화군</option>
+                        <option value="남동구" th:selected="${lodging.lodgingLocation2 == '남동구'}">남동구</option>
+                        <option value="제주시" th:selected="${lodging.lodgingLocation2 == '제주시'}">제주시</option>
+                        <option value="서귀포시" th:selected="${lodging.lodgingLocation2 == '서귀포시'}">서귀포시</option>
+                        <option value="수원시" th:selected="${lodging.lodgingLocation2 == '수원시'}">수원시</option>
+                        <option value="고양시" th:selected="${lodging.lodgingLocation2 == '고양시'}">고양시</option>
+                        <option value="용인시" th:selected="${lodging.lodgingLocation2 == '용인시'}">용인시</option>
+                        <option value="창원시" th:selected="${lodging.lodgingLocation2 == '창원시'}">창원시</option>
+                        <option value="김해시" th:selected="${lodging.lodgingLocation2 == '김해시'}">김해시</option>
+                        <option value="포항시" th:selected="${lodging.lodgingLocation2 == '포항시'}">포항시</option>
+                        <option value="경주시" th:selected="${lodging.lodgingLocation2 == '경주시'}">경주시</option>
+                        <option value="여수시" th:selected="${lodging.lodgingLocation2 == '여수시'}">여수시</option>
+                        <option value="여주시" th:selected="${lodging.lodgingLocation2 == '여주시'}">여주시</option>
+                        <option value="순천시" th:selected="${lodging.lodgingLocation2 == '순천시'}">순천시</option>
+                        <option value="천안시" th:selected="${lodging.lodgingLocation2 == '천안시'}">천안시</option>
+                        <option value="아산시" th:selected="${lodging.lodgingLocation2 == '아산시'}">아산시</option>
+                        <option value="춘천시" th:selected="${lodging.lodgingLocation2 == '춘천시'}">춘천시</option>
+                        <option value="강릉시" th:selected="${lodging.lodgingLocation2 == '강릉시'}">강릉시</option>
+                        <option value="서구" th:selected="${lodging.lodgingLocation2 == '서구'}">서구</option>
+                        <option value="북구" th:selected="${lodging.lodgingLocation2 == '북구'}">북구</option>
+                        <option value="울주군" th:selected="${lodging.lodgingLocation2 == '울주군'}">울주군</option>
+                    </select>
                 </div>
-            </div>
-            <div class="form-group1">
-                <label for="lodgingIntroduce">숙소 소개</label>
-                <textarea id="lodgingIntroduce" name="lodgingIntroduce" th:text="${lodging.lodgingIntroduce}" placeholder="숙소 소개를 입력해 주세요."></textarea>
-            </div>
-            <div class="form-group1">
-                <label for="lodgingService">숙소 시설 및 서비스</label>
-                <textarea id="lodgingService" name="lodgingService" th:text="${lodging.lodgingService}" placeholder="숙소 시설 및 서비스를 입력해 주세요."></textarea>
-            </div>
-            <div class="form-group1">
-                <label for="lodgingUsingInfo">숙소 이용 안내</label>
-                <textarea id="lodgingUsingInfo" name="lodgingUsingInfo" th:text="${lodging.lodgingUsingInfo}" placeholder="숙소 이용 정보를 입력해 주세요."></textarea>
-            </div>
-            <div class="form-group1">
-                <label for="lodgingNotice">숙소 예약 공지</label>
-                <textarea id="lodgingNotice" name="lodgingNotice" th:text="${lodging.lodgingNotice}" placeholder="숙소 예약 공지를 입력해 주세요."></textarea>
-            </div>
-            <div class="form-row1">
-                <div class="form-group1">
-                    <label for="lodgingOwnerName">담당자 이름</label>
-                    <input type="text" id="lodgingOwnerName" name="lodgingOwnerName" th:value="${lodging.lodgingOwnerName}" placeholder="담당자 이름을 입력해 주세요.">
+                <div class="lodging-info-frame">
+                    <label class="info-label" for="lodgingAddress">숙소 주소<div class="required-dot"></div></label>
+                    <input class="info-input" type="text" id="lodgingAddress" name="lodgingAddress" th:value="${lodging.lodgingAddress}" placeholder="숙소 주소를 입력해 주세요.">
                 </div>
-                <div class="form-group1">
-                    <label for="lodgingOwnerNumber">담당자 전화번호</label>
-                    <input type="text" id="lodgingOwnerNumber" name="lodgingOwnerNumber" th:value="${lodging.lodgingOwnerNumber}" placeholder="담당자 전화번호를 입력해 주세요.">
+                <div class="lodging-info-frame">
+                    <label class="info-label" for="lodgingNumber">숙소 전화번호</label>
+                    <input class="info-input" type="text" id="lodgingNumber" name="lodgingNumber" th:value="${lodging.lodgingNumber}" placeholder="숙소 전화번호를 입력해 주세요.">
                 </div>
+                <div class="lodging-info-frame full-width">
+                    <label class="info-label" for="lodgingUrl">숙소 URL</label>
+                    <input class="info-input" type="url" id="lodgingUrl" name="lodgingUrl" th:value="${lodging.lodgingUrl}" placeholder="숙소 URL을 입력해 주세요.">
+                </div>
+                <div class="lodging-info-frame half-width">
+                    <label class="info-label" for="lodgingOpen">숙소 입실시간<div class="required-dot"></div></label>
+                    <input class="info-time" type="time" id="lodgingOpen" name="lodgingOpen" th:value="${lodging.lodgingOpen}" placeholder="숙소 입실시간을 입력해 주세요.">
+                </div>
+                <div class="lodging-info-frame half-width">
+                    <label class="info-label" for="lodgingClose">숙소 퇴실시간<div class="required-dot"></div></label>
+                    <input class="info-time" type="time" id="lodgingClose" name="lodgingClose" th:value="${lodging.lodgingClose}" placeholder="숙소 퇴실시간을 입력해 주세요.">
+                </div>
+                <div class="lodging-info-frame half-width">
+                    <label class="info-label" for="lodgingIntroduce">숙소 소개</label>
+                    <textarea class="info-input" id="lodgingIntroduce" name="lodgingIntroduce" rows="5" th:text="${lodging.lodgingIntroduce}" placeholder="숙소를 소개해 주세요."></textarea>
+                </div>
+                <div class="lodging-info-frame half-width">
+                    <label class="info-label" for="facilities">숙소 시설 및 서비스</label>
+                    <textarea class="info-input" id="facilities" name="lodgingService" th:text="${lodging.lodgingService}" placeholder="숙소 시설 및 서비스를 입력해 주세요."></textarea>
+                </div>
+            <div class="lodging-info-frame half-width">
+                <label class="info-label" for="usinginfo">숙소 이용 안내</label>
+                <textarea class="info-input" id="usinginfo" name="lodgingUsingInfo" th:text="${lodging.lodgingUsingInfo}" placeholder="숙소 이용 정보를 입력해 주세요."></textarea>
             </div>
-            <div class="form-group1">
-                <label for="lodgingOwnerEmail">담당자 이메일</label>
-                <input type="email" id="lodgingOwnerEmail" name="lodgingOwnerEmail" th:value="${lodging.lodgingOwnerEmail}" placeholder="담당자 이메일을 입력해 주세요.">
+            <div class="lodging-info-frame half-width">
+                <label class="info-label" for="notice">숙소 예약 공지</label>
+                <textarea class="info-input" id="notice" name="lodgingNotice" th:text="${lodging.lodgingNotice}" placeholder="숙소 예약 공지를 입력해 주세요."></textarea>
             </div>
-            <div class="form-group1">
-                <label for="lodgingOwnerId">사업자 등록 번호</label>
-                <input type="text" id="lodgingOwnerId" name="lodgingOwnerId" th:value="${lodging.lodgingOwnerId}" placeholder="사업자 등록 번호를 입력해 주세요." readonly>
+            <div class="lodging-info-frame half-width">
+                <label class="info-label" for="ownername">담당자 이름<div class="required-dot"></div></label>
+                <input class="info-input" type="text" id="ownername" name="lodgingOwnerName" th:value="${lodging.lodgingOwnerName}" placeholder="담당자 이름을 입력해 주세요.">
             </div>
-            <div class="form-group1">
-                <label for="userid">유저 아이디</label>
-                <input type="text" id="userid" name="userId" th:value="${lodging.userId}" placeholder="유저 아이디" readonly>
+            <div class="lodging-info-frame half-width">
+                <label class="info-label" for="ownerphone">담당자 전화번호<div class="required-dot"></div></label>
+                <input class="info-input" type="text" id="ownerphone" name="lodgingOwnerNumber" th:value="${lodging.lodgingOwnerNumber}" placeholder="담당자 전화번호를 입력해 주세요.">
             </div>
-            <div class="form-group1">
-                <button type="submit" onclick="return confirm('정말로 수정하시겠습니까?')">수정 완료</button>
+            <div class="lodging-info-frame half-width">
+                <label class="info-label" for="owneremail">담당자 이메일</label>
+                <input class="info-input" type="email" id="owneremail" name="lodgingOwnerEmail" th:value="${lodging.lodgingOwnerEmail}" placeholder="담당자 이메일을 입력해 주세요.">
+            </div>
+            <div class="lodging-info-frame half-width">
+                <label class="info-label" for="ownerid">사업자 등록 번호<div class="required-dot"></div></label>
+                <input class="info-input" type="text" id="ownerid" name="lodgingOwnerId" th:value="${lodging.lodgingOwnerId}" placeholder="담당자 아이디를 입력해 주세요.">
+            </div>
+            <div class="lodging-info-frame half-width">
+                <label class="info-label" for="userid">유저 아이디<div class="required-dot"></div></label>
+                <input class="info-input" type="text" id="userid" name="userId" th:value="${lodging.userId}" placeholder="유저 아이디">
+            </div>
+            <div class="image-upload-input">
+                <label class="info-label" for="fileInput1">숙소 이미지<div class="required-dot"></div></label>
+                <input class="info-input" type="text" id="fileInput1" name="lodgingPicture1" th:value="${lodging.lodgingPicture1}" placeholder="숙소 이미지 url을 넣어주세요.">
+            </div>
+                <button type="submit" class="btn1" href="/mypage/provider/provlodgingdetail">이전으로</button>
+                <button type="submit" class="btn2">수정하기</button>
             </div>
         </form>
-    </div>
+    </section>
 </main>
-
-
-<!-- jQuery 추가 -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- JavaScript 코드 -->
 <script>
@@ -176,6 +166,7 @@
         });
     });
 </script>
-
+<!-- 푸터 -->
+<th:block th:insert="~{common/Footer::footer}"></th:block>
 </body>
 </html>

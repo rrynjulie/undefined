@@ -1,5 +1,6 @@
 package com.lec.spring.service;
 
+import com.lec.spring.domain.ProvLodging;
 import com.lec.spring.domain.Room;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,7 +12,7 @@ public interface RoomService {
     List<Room> readRoomList(Long lodgingId);
     Room readRoomDetail(Long roomId);
     Room findByRoomId(Long roomId);
-    int updateRoom(Room room, Map<String, MultipartFile> files, Long[] delfile);
+    void updateRoom(Room room);
     List<Room> findRoomsByLodgingId(Long lodgingId);
     Room getRoomById(Long roomId);
 
