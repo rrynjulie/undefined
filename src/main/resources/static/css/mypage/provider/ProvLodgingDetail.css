@@ -152,6 +152,19 @@ main {
 }
 
 .btn-delete {
-    background-color: #F8F9FA;
-    color: gray;
+    background-color: #FFEBEF;
+    color: #FC5185;
+    cursor: pointer;
+}
+
+.btn-delete:hover {
+    transform: scale(1.02);
+}
+
+.btn-update:hover {
+    transform: scale(1.02);
+}
+
+.btn-delete:hover {
+    transform: scale(1.02);
 }

@@ -134,6 +134,10 @@ textarea {
     background-color: #FC5185;
     color: white;
     float: right;
+    cursor: pointer;
+}
+.btn-register:hover {
+    transform: scale(1.02);
 }
 
 select {

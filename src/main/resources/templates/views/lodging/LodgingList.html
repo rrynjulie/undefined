@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/lodging/LodgingList.css}">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <title>Title</title>
 </head>
 <!-- 헤더 -->
@@ -40,25 +39,22 @@
         </div>
         <div class="btn1-div">
             <div>
-                <select class="btn1">
-                    <option value="예약가 높은 순">예약가 높은 순</option>
-                    <option value="예약가 낮은 순">예약가 낮은 순</option>
-                    <option value="찜 많은 순">찜 많은 순</option>
-                    <option value="후기 많은 순">후기 많은 순</option>
+                <select class="btn1" id="priceFilter">
+                    <option value="DESC">예약가 높은 순</option>
+                    <option value="ASC">예약가 낮은 순</option>
                 </select>
-            </div>
-            <div>
-                <button class="btn1" id="open-dialog">가격</button>
             </div>
         </div>
     </div>
-    <div id="price-range" title="가격">
-        <div id="slider-range"></div>
-        <div id="price-text">1만원 ~ 50만원</div>
-    </div>
+
     <div>
         <div id="result-filter">
             <span th:text="${#lists.size(lodging)} + '개의 검색 결과'"></span>
+        </div>
+
+        <!-- 검색 숙소가 없는 경우 -->
+        <div th:if="${#lists.isEmpty(lodging)}">
+            <p class="post-null">해당 지역에 등록된 숙소가 없습니다</p>
         </div>
         <div class="item-list" id="item-list">
             <div class="item-list1" th:each="lodging : ${lodging}">

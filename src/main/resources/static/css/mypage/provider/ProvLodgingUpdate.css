@@ -136,10 +136,18 @@ textarea {
 
 .btn1 {
     float: none;
+    cursor: pointer;
 }
 
 .btn2 {
     float: none;
+    cursor: pointer;
+}
+.btn1:hover {
+    transform: scale(1.02);
+}
+.btn2:hover {
+    transform: scale(1.02);
 }
 select {
     -webkit-appearance: none;

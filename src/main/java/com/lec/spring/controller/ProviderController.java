@@ -158,16 +158,7 @@ public class ProviderController {
         return "mypage/provider/ProvRoomDetail";
     }
 
-//    @GetMapping("/ProvRoomUpdate/{roomId}")
-//    public String provRoomUpdate(@PathVariable Long roomId, Model model) {
-//        model.addAttribute("room", roomService.findByRoomId(roomId));
-//        return "provider/ProvRoomUpdate";
-//    }
-//
-//    @PostMapping("/ProvRoomUpdate")
-//    public String provRoomUpdateOk() {
-//        return "provider/ProvRoomUpdateOk";
-//    }
+
 
     // 수정 폼을 보여주는 메서드
     @GetMapping("/ProvRoomUpdate/{roomId}")
