@@ -70,6 +70,31 @@ public class LodgingController {
         return "lodging/LodgingList :: #item-list"; // Thymeleaf fragment
     }
 
+    @PostMapping("/LodgingList/price")
+    public String filterPrice(@RequestParam("location") String location,
+                              @RequestParam("price") String price,
+                              Model model) {
+        List<Lodging> lodgings;
+        if (price.equals("DESC")) {
+            lodgings = lodgingService.findLodgingByPriceDESC(location);
+        } else {
+            lodgings = lodgingService.findLodgingByPriceASC(location);
+        }
+        addAdditionalInfoToLodgings(lodgings);
+        model.addAttribute("lodging", lodgings); // 'lodgings'를 'lodging'으로 변경
+        return "lodging/LodgingList :: #item-list";
+    }
+    // 추가 정보를 설정하는 메서드
+    private void addAdditionalInfoToLodgings(List<Lodging> lodgings) {
+        for (Lodging lodging : lodgings) {
+            Double avgPostGrade = lodgingService.getAvgPostGrade(lodging.getLodgingId());
+            Integer totalPosts = lodgingService.getTotalPosts(lodging.getLodgingId());
+            lodging.setAvgPostGrade(avgPostGrade != null ? avgPostGrade : 0.0);
+            lodging.setTotalPosts(totalPosts != null ? totalPosts : 0);
+            // 필요한 경우 추가 정보 설정
+        }
+    }
+
 
     
     @GetMapping("/LodgingDetail/{lodgingId}")
