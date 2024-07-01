@@ -56,6 +56,7 @@ public class CustomerController {
 
         List<UserAuthority> userAuthorities = userService.getAllUserAuthorities();
         model.addAttribute("userAuthorities", userAuthorities);
+        AuthenticationUtil.addAuthenticationDetailsToModel(model);
         return "mypage/customer/ManageAccount";
     }
 
@@ -80,7 +81,6 @@ public class CustomerController {
         }
 
         userService.updateUser(user.getUserId(), nickname, password, email, phone);
-
         redirectAttributes.addFlashAttribute("success", "수정되었습니다.");
 
         return "redirect:/Home";

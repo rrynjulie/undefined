@@ -11,9 +11,20 @@ body {
 
 main {
     display: flex;
-    justify-content: space-between; /* 섹션들을 좌우로 정렬 */
+    flex-grow: 1;
+    justify-content: flex-start;
     padding: 20px  50px;
     height: 700px;
+    /*overflow: auto;*/
+    margin-bottom: 10%;
+}
+
+.content-wrapper {
+    /*margin-top: 100%;*/
+    flex: 1;
+    /*display: flex;*/
+    flex-direction: column;
+    /*overflow: auto;*/
 }
 
 .profile-menu-container {
@@ -64,13 +75,13 @@ main {
 
 /*내 정보 관리*/
 #manage-account {
-    padding: 20px;
-    margin: 0 auto;
+    /*padding: 20px;*/
+    /*margin: 0 auto;*/
     width: 50%;
-    padding: 20px; /* 안쪽 여백 설정 */
+    padding: 20px;
     height: 90%;
-    margin-top: 20px; /* 위쪽 여백 설정 */
-    margin-right: 250px;
+    margin-top: 20px;
+    /*margin-right: 250px;*/
 }
 
 #manage-account h2 {
@@ -80,7 +91,7 @@ main {
 }
 
 #manage-account-form {
-    display: flex;
+    /*display: flex;*/
     flex-direction: column;
     gap: 30px;
 }
