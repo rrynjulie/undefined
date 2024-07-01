@@ -38,7 +38,8 @@ label {
 }
 
 input {
-    width: 40%;
+    margin-top: 5px;
+    width: 120%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -55,7 +56,7 @@ input:focus {
 }
 
 button {
-    width: 40%;
+    width: 100%;
     padding: 10px 20px;
     background-color: #FC5185;
     color: white;
@@ -236,7 +237,9 @@ main {
 
 .user-info-input {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 20px;
 }
 
 
@@ -254,3 +257,9 @@ main {
     color: #fc5185;
 }
 
+.info-label {
+    display: flex;
+    /*font-size: 12px;*/
+    /*font-weight: bold;*/
+    /*color: dimgray;*/
+}
