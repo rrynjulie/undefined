@@ -7,8 +7,12 @@
     <title>Title</title>
 </head>
 <body>
-<header id="nav-bar"></header>
 
+<th:block th:insert="~{common/Header::header}"></th:block>
+
+<!--<header id="nav-bar"></header>-->
+
+<main>
     <form method="POST" th:action="@{/user/register}">
         </div>
         <div class="user-info-input">
@@ -39,11 +43,14 @@
         <br>
         <button type="submit">회원가입 완료</button>
     </form>
+</main>
+<br>
+<br>
+<br>
+<br>
 <!--</div>-->
-
-<a id="home-url" th:href="@{/Home}" style="display:none;"></a>
 <!-- 푸터 -->
-<footer id="footer"></footer>
+<th:block th:insert="~{common/Footer::footer}"></th:block>
 <script th:src="@{/js/user/Register.js}"></script>
 </body>
 </html>
