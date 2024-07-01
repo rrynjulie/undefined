@@ -28,8 +28,6 @@ public class ManagerController {
 
     @GetMapping("/MemberManagement")
     public String getAllManagers(Model model) {
-//        List<User> managers = managerService.getAllUsers();
-//        model.addAttribute("managers", managers);
 
         List<UserAuthority> userAuthorities = managerService.getAllUserAuthorities();
         model.addAttribute("userAuthorities", userAuthorities);

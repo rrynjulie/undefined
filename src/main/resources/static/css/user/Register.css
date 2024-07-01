@@ -221,3 +221,23 @@ main {
 .dot.active {
     background-color: #717171;
 }
+
+.user-info-input {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.required-dot {
+    background-color: #FC5185;
+    border-radius: 50%;
+    margin-left: 1px;
+    margin-top: 4px;
+    height: 4px;
+    width: 4px;
+}
+
+.text-danger{
+    font-size: small;
+    color: #fc5185;
+}

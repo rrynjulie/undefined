@@ -26,4 +26,7 @@ public interface PostService {
     int allPostUpdate(Post post);
 
     int allPostDelete(Post post);
+
+    boolean checkIfUserPosted(Long userId, Long bookingId);
+
 }

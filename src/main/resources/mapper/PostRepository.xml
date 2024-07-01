@@ -145,5 +145,9 @@
         AND p.post_id = #{postId}
     </select>
 
-
+    <select id="checkIfUserPosted" resultType="boolean">
+        SELECT COUNT(*) > 0
+        FROM post
+        WHERE user_id = #{userId} AND booking_id = #{bookingId}
+    </select>
 </mapper>
