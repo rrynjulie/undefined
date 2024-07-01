@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Booking Error</title>
+</head>
+<body>
+
+<h1>Booking Error</h1>
+
+<p th:text="${error}"></p>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/     // JavaScript 코드를 HTML 문서 내에서 CDATA 섹션으로 감싸는 방법 중 하나
+    var errorMessage = /*[[${error}]]*/ null;
+    if (errorMessage) {
+        alert(errorMessage); // 예약 불가 메시지 표시
+        location.href = "/mypage/customer/BookingList/[[${user.userId}]]";
+    }
+    /*]]>*/
+</script>
+
+</body>
+</html>
