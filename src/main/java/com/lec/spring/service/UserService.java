@@ -13,7 +13,8 @@ public interface UserService {
 
     User findByEmail(String email);
 
-    boolean isExist(String nickname);
+    boolean isExistNickname(String nickname);
+    boolean isExistPhonenum(String phonenum);
 
     int register(User user);
 
@@ -47,4 +48,6 @@ public interface UserService {
     boolean checkPassword(Long userId, String currentPassword);
 
     User findByProviderId(String providerId);
+
+    boolean emailExists(String email);
 }

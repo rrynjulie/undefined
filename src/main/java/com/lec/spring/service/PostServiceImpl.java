@@ -78,6 +78,10 @@ public class PostServiceImpl implements PostService {
         return result;
     }
 
+    @Override
+    public boolean checkIfUserPosted(Long userId, Long bookingId) {
+        return postRepository.checkIfUserPosted(userId, bookingId);
+    }
 
 
 

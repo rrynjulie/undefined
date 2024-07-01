@@ -127,10 +127,6 @@ public class LodgingController {
             lodging.setAvgPostGrade(avgPostGrade != null ? avgPostGrade : 0.0);
             lodging.setTotalPosts(totalPosts != null ? totalPosts : 0);
 
-//            System.out.println(lodging.getRoomId());
-//            lodging.setBookingList(bookingService.findBooksByRoomId(lodging.getRoomId()));
-//            System.out.println(lodging.getBookingList());
-
             int conflictingBookingCount = 0;
             if (bookingStartDate != null && bookingEndDate != null) {
                 // 예약 상황을 확인하여 겹치는 예약 수를 구합니다.
