@@ -94,6 +94,8 @@ public class LodgingServiceImpl implements LodgingService {
 //  홈 페이지에서 후기 목록 가져오기
     @Override
     public List<Lodging> getCountHotelBookingWithRatings(){
+        List<Lodging> lodgings = lodgingRepository.countHotelBookingWithRatings();
+
         return lodgingRepository.countHotelBookingWithRatings();
     }
 }

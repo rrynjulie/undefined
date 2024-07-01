@@ -107,6 +107,12 @@ home.css
     border: 0;
 }
 
+.filter .btn-active {
+    background-color: #FFEBEF;
+    color: #FC5185;
+    border: 0;
+}
+
 .btn-see-all {
     background-color: white;
     border: 0;
@@ -128,6 +134,8 @@ home.css
     margin-top: 20px;
     border: 0;
     border-radius: 10px;
+    align-items: flex-start;
+    cursor: pointer;
 }
 .item img {
     width: 40%;

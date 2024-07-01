@@ -198,32 +198,47 @@
             booking :
             post : 후기평점 -->
     <select id="countHotelBookingWithRatings" resultType="com.lec.spring.domain.Lodging">
+        WITH ranked_lodgings AS (
+            SELECT
+                l.lodging_id AS lodgingId,
+                l.lodging_picture_1 AS lodgingPicture1,
+                l.lodging_name AS lodgingName,
+                l.lodging_type AS lodgingType,
+                r.room_price AS roomPrice,
+                ROUND(AVG(p.post_grade), 2) AS postGrade,
+                COUNT(p.post_id) AS countPostGrade,
+                ROW_NUMBER() OVER (PARTITION BY l.lodging_id ORDER BY r.room_price) AS rn
+            FROM
+                lodging l
+                    LEFT JOIN
+                room r ON l.lodging_id = r.lodging_id
+                    LEFT JOIN
+                booking b ON r.room_id = b.room_id
+                    LEFT JOIN
+                post p ON b.booking_id = p.booking_id
+            WHERE
+                p.post_grade IS NOT NULL
+            GROUP BY
+                l.lodging_id,
+                l.lodging_picture_1,
+                l.lodging_name,
+                l.lodging_type,
+                r.room_price
+        )
         SELECT
-            l.lodging_id AS lodgingId,
-            l.lodging_picture_1 AS lodgingPicture1,
-            l.lodging_name AS lodgingName,
-            l.lodging_type AS lodgingType,
-            r.room_price AS roomPrice,
-            p.post_grade AS postGrade,
-            count(p.post_grade) AS countPostGrade
+            lodgingId,
+            lodgingPicture1,
+            lodgingName,
+            lodgingType,
+            roomPrice,
+            postGrade,
+            countPostGrade
         FROM
-            lodging l
-                LEFT JOIN
-            room r ON l.lodging_id = r.lodging_id
-                LEFT JOIN
-            booking b ON r.room_id = b.room_id
-                LEFT JOIN
-            post p On b.room_id = p.room_id
+            ranked_lodgings
         WHERE
-            p.post_grade IS NOT NULL
-        GROUP BY
-            l.lodging_id,
-            l.lodging_picture_1,
-            l.lodging_name,
-            l.lodging_type,
-            r.room_price,
-            p.post_grade
+            rn = 1
         ORDER BY
-            count(p.post_grade) DESC;
+            countPostGrade DESC
+        LIMIT 6;
     </select>
 </mapper>
