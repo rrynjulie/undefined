@@ -319,7 +319,8 @@
 .couponReserve {
     margin-top: 13px;
 }
-.reserve-btn {
+#reserve-btn {
+    display: block;
     text-decoration: none;
     text-align: center;
     align-content: center;
@@ -333,8 +334,13 @@
     border:none;
     cursor: pointer;
 }
-.reserve-btn:hover {
+
+#reserve-btn:hover {
     background-color: #D43F6A; /* 마우스를 올렸을 때 배경색 */
+}
+
+#reserve-stop {
+    display: none;
 }
 
 
@@ -422,4 +428,8 @@
     font-size: 30px;
     text-align: center;
     align-content: center;
+}
+
+#bookingSavedDate {
+    display: none;
 }

@@ -52,12 +52,14 @@
     margin-left: 5px;
 }
 .item-title {
+    margin-top: 20px;
     height: 31%;
     font-size: 17px;
     font-weight: bold;
     margin: 0;
 }
 .item-type {
+    margin-top: 40px;
     font-size: 14px;
 }
 .item-rating {
@@ -83,7 +85,7 @@
 
 
 #lodging-text {
-    width:100%;
+    width:905px;
     height: 40px;
     border-radius: 10px;
     font-size: 20px;

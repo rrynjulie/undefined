@@ -15,6 +15,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
@@ -122,18 +123,51 @@ public class CustomerController {
     }
 
     @GetMapping("/BookingList/{userId}")
-    public String BookingList(@PathVariable("userId") Long userId, Model model){
-        List<Booking> books = bookingService.findBooksByUserId(userId);
-        List<Booking> booksBefore = new ArrayList<>();
-        List<Booking> booksAfter = new ArrayList<>();
+    public String BookingList(
+            @PathVariable("userId") Long userId
+            , @RequestParam(value = "lodgingType", required = false) String lodgingType
+            , @RequestParam(value = "timePeriod", required = false) String timePeriod
+            , Model model) {
+
+        List<Booking> books = bookingService.findBooksByUserId(userId);  // 전체 예약 리스트
+        List<Booking> booksBefore = new ArrayList<>();  // 이용 전 예약 리스트
+        List<Booking> booksAfter = new ArrayList<>();  // 이용 후 예약 리스트
+
+        LocalDate now = LocalDate.now();
+        LocalDate startDate;
+
+        // 기간 필터링
+        if ("3months".equals(timePeriod)) {
+            startDate = now.minusMonths(3);
+        } else if ("6months".equals(timePeriod)) {
+            startDate = now.minusMonths(6);
+        } else if ("1year".equals(timePeriod)) {
+            startDate = now.minusYears(1);
+        } else {
+            startDate = null;
+        }
+
         books.forEach(book -> {
-            book.setFormattedPay(DecimalFormat.getInstance().format(book.getBookingPay()));
-            book.setDateGap(Period.between(book.getBookingStartDate(), book.getBookingEndDate()).getDays());
-            if(Period.between(LocalDate.now(), book.getBookingStartDate()).getDays() >= 0) booksBefore.add(book);
-            else booksAfter.add(book);
+            // 필터링 변수
+            boolean matchesLodgingType = lodgingType == null || lodgingType.isEmpty() || book.getLodging().getLodgingType().equals(lodgingType);
+            boolean matchesTimePeriod = startDate == null || book.getBookingStartDate().isAfter(startDate);
+
+            // 설정한 숙소 타입과 기간에 맞는 예약 리스트만 추리기
+            if(matchesLodgingType && matchesTimePeriod) {
+                book.setFormattedPay(DecimalFormat.getInstance().format(book.getBookingPay()));
+                book.setDateGap(Period.between(book.getBookingStartDate(), book.getBookingEndDate()).getDays());
+
+                if(book.getBookingStartDate().isAfter(now) || book.getBookingStartDate().isEqual(now)) {
+                    booksBefore.add(book);
+                } else {
+                    booksAfter.add(book);
+                }
+            }
         });
         model.addAttribute("booksBefore", booksBefore);
         model.addAttribute("booksAfter", booksAfter);
+        model.addAttribute("lodgingType", lodgingType);
+        model.addAttribute("timePeriod", timePeriod);
 
         AuthenticationUtil.addAuthenticationDetailsToModel(model);
 
