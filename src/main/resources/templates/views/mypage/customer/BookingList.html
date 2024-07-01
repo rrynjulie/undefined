@@ -6,7 +6,6 @@
     <script th:src="@{/js/mypage/customer/BookingList.js}"></script>
     <title>예약 내역</title>
 </head>
-
 <body>
 <!-- 헤더 -->
 <th:block th:insert="~{common/Header::header}"></th:block>
@@ -17,8 +16,8 @@
 
     <section class="booking-list">
         <h1>예약 내역</h1>
-<!--        (userId=${#httpServletRequest.getUserPrincipal().name})-->
-        <form class="filter-form" method="GET" th:action="@{'/mypage/customer/BookingList/'+ ${#authentication.getPrincipal().getUser().userId}}">
+        <!--        (userId=${#httpServletRequest.getUserPrincipal().name})-->
+        <form class="filter-form" id="filter-form" method="GET" th:action="@{'/mypage/customer/BookingList/'+ ${#authentication.getPrincipal().getUser().userId}}">
             <div class="filter-frame">
                 <label for="lodging-type">숙소 분류</label>
                 <select id="lodging-type" name="lodgingType">
@@ -64,7 +63,7 @@
                             <p class="room-name" th:text="${books.dateGap} + '박'"></p>
                         </div>
                     </div>
-<!--                    <a href="#">예약 상세</a>-->
+                    <!--                    <a href="#">예약 상세</a>-->
                 </div>
                 <div class="check-date-frame">
                     <label>
@@ -104,7 +103,7 @@
                             <p class="room-name" th:text="${books.dateGap} + '박'"></p>
                         </div>
                     </div>
-<!--                    <a href="#">예약 상세</a>-->
+                    <!--                    <a href="#">예약 상세</a>-->
                 </div>
                 <div class="check-date-frame">
                     <label>
