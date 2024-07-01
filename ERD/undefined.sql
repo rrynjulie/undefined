@@ -35,7 +35,7 @@ CREATE TABLE coupon
 # ALTER TABLE coupon
 #     ADD CONSTRAINT UQ_coupon_code UNIQUE (coupon_code);
 
-CREATE TABLE `like`
+CREATE TABLE love
 (
     lodging_id INT          NOT NULL COMMENT '숙소고유 id값',
     user_id    INT NOT NULL COMMENT '아이디',
@@ -161,8 +161,8 @@ ALTER TABLE user_authority
         FOREIGN KEY (authority_id)
             REFERENCES authority (authority_id);
 
-ALTER TABLE `like`
-    ADD CONSTRAINT FK_lodging_TO_like
+ALTER TABLE love
+    ADD CONSTRAINT FK_lodging_TO_love
         FOREIGN KEY (lodging_id)
             REFERENCES lodging (lodging_id);
 
@@ -212,8 +212,8 @@ ALTER TABLE user_authority
         FOREIGN KEY (user_id)
             REFERENCES user (user_id);
 
-ALTER TABLE `like`
-    ADD CONSTRAINT FK_user_TO_like
+ALTER TABLE love
+    ADD CONSTRAINT FK_user_TO_love
         FOREIGN KEY (user_id)
             REFERENCES user (user_id);
 

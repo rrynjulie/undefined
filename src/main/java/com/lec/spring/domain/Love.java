@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Like {
+public class Love {
     private Long lodgingId;
     private Long userId;
 }

@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-
     // 숙소 타입 버튼 클릭 시
     $('.btn1').click(function() {
         var type = $(this).text();
