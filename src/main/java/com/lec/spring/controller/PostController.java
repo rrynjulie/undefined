@@ -108,6 +108,7 @@ public class PostController {
     public String postUpdate(@PathVariable Long userId, @PathVariable Long postId, Model model) {
         List<Post> userPostUpdate = postService.allPostUser(userId, postId);
         model.addAttribute("userPostUpdate", userPostUpdate);
+        AuthenticationUtil.addAuthenticationDetailsToModel(model);
         return "/mypage/customer/PostUpdate";
     }
 

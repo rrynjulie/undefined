@@ -1,6 +1,7 @@
 .container {
     width: 60%;
     margin: auto;
+    margin-top: 40px;
 }
 
 .days {
@@ -23,6 +24,8 @@
     border: 1px solid black;
     border-left: none;
     border-right: none;
+    background-color: #FC5185;
+    color: white;
 }
 
 #calendar-header {
@@ -85,7 +88,7 @@ td {
 }
 
 
-.btn {
+.button {
     width: 30px;
     height: 30px;
     font-size: 20px;
@@ -116,10 +119,10 @@ td {
 
 
 #lodging-search {
-    /*margin: 0 50px;*/
+    margin-bottom: 20px;
 }
 #lodging-input {
-    width: 99.8%;
+    width: 100%;
     height: 50px;
     border-radius: 20px 20px 0 0;
     border: 1px solid black;

@@ -3,34 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/lodging/LodgingPostList.css}">
-    <title>Title</title>
+    <title>숙소 후기</title>
 </head>
 <body>
 <!-- 헤더 -->
 <th:block th:insert="~{common/Header::header}"></th:block>
-<div class="container">
 
+<div class="container">
+    <h2 style="text-align: center; border-bottom: 1px solid #EBEBEB; margin: 20px 0; height: 40px">후기</h2>
     <h3>숙소 평점</h3>
+
     <div id="totalDiv">
         <div id="totalStar">&#9733;</div>
         <div id="avgPostGrade" th:text="${avgPostGrade} + ' / 5'"></div>
     </div>
-    <div id="postList" th:each="lodgingss : ${lodgingss}">
-        <div class="stars" th:attr="starCount=${lodgingss.postGrade}">
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
+
+    <div id="item-list" th:if="${not #lists.isEmpty(userPosts)}">
+        <div class="userPost" th:each="userPost : ${userPosts}">
+            <!-- 후기 내용 출력 -->
+            <div id="postHeader" style="display: flex; justify-content: space-between; align-items: center">
+                <div id="div1">
+                    <img id="lodgingPicture" th:src="${userPost.lodgingPicture1}"/>
+                </div>
+                <div id="div2">
+                    <p id="lodgingName" th:text="${userPost.lodgingName} + ' - ' + ${userPost.roomName}"></p>
+                    <p id="lodgingType" th:text="${userPost.lodgingType}"></p>
+                </div>
+                <div id="div3">
+                    <div class="stars" th:attr="data-star-count=${userPost.postGrade}">
+                        <span class="star" data-value="5">&#9733;</span>
+                        <span class="star" data-value="4">&#9733;</span>
+                        <span class="star" data-value="3">&#9733;</span>
+                        <span class="star" data-value="2">&#9733;</span>
+                        <span class="star" data-value="1">&#9733;</span>
+                    </div>
+                    <div style="display: flex; width: 100%; margin-left: 142px;">
+                        <label class="a">체크인
+                            <p class="b" th:text="${userPost.startDate}"></p>
+                        </label>
+                        <label class="a">체크아웃
+                            <p class="b" th:text="${userPost.endDate}"></p>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div id="postText" th:text="${userPost.postText}"></div>
+                <div id="postPicture" th:text="${userPost.postPicture}"></div>
+            </div>
         </div>
-        <p th:text="${lodgingss.roomName}"></p>
-        <p th:text="${lodgingss.postPicture}"></p>
-        <p th:text="${lodgingss.postText}"></p>
     </div>
 
-
-
-
+    <!-- 후기가 없는 경우 -->
+    <div th:if="${#lists.isEmpty(userPosts)}">
+        <p class="post-null">등록된 후기가 없습니다.</p>
+    </div>
 </div>
 
 <script th:src="@{/js/lodging/LodgingPostList.js}"></script>
