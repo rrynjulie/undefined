@@ -12,6 +12,7 @@ public interface UserRepository {
     // 특정 email 의 user return
     User findByNickname(String nickname);
     User findByEmail(String email);
+    User findByPhonenum(String phonenum);
 
     int save(User user);
 
