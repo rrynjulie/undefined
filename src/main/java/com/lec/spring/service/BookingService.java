@@ -17,7 +17,7 @@ public interface BookingService {
 
     List<Booking> findBooksByUserId(Long userId);
 
-    void deleteBooking(int bookingId);
+    int deleteBooking(String userId, String bookingId);
 
     int bookingCount(Long roomId, LocalDate bookingStartDate, LocalDate bookingEndDate);
 }
