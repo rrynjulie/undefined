@@ -10,7 +10,7 @@
 <th:block th:insert="~{common/Header::header}"></th:block>
 
 <div class="container">
-    <h2 style="text-align: center; border-bottom: 1px solid #EBEBEB; margin: 20px 0; height: 40px">후기</h2>
+    <h2 style="text-align: center; border-bottom: 1px solid #EBEBEB; margin: 20px 0; height: 40px"  th:text="'후기 (' + ${totalPosts} + ')'"></h2>
     <h3>숙소 평점</h3>
 
     <div id="totalDiv">
