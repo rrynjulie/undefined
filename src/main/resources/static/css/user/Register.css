@@ -1,6 +1,13 @@
+
+main {
+    display: flex;
+    padding: 40px 20%;
+    height: fit-content;
+    justify-content: space-between;
+}
 body {
     font-family: Arial, sans-serif;
-    display: flex;
+    /*display: flex;*/
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -18,8 +25,11 @@ body {
 }
 
 form {
-    display: flex;
-    flex-direction: column;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*width: 100%;*/
+    /*padding: 40px 20%;*/
+
 }
 
 label {
@@ -28,13 +38,16 @@ label {
 }
 
 input {
-    width: 94%;
+    margin-top: 5px;
+    width: 120%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
     transition: border-color 0.3s;
+    /*height: 10px;*/
+    align-content: center;
 }
 
 input:focus {
@@ -43,7 +56,7 @@ input:focus {
 }
 
 button {
-    width: 99%;
+    width: 100%;
     padding: 10px 20px;
     background-color: #FC5185;
     color: white;
@@ -224,7 +237,9 @@ main {
 
 .user-info-input {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 20px;
 }
 
 
@@ -240,4 +255,11 @@ main {
 .text-danger{
     font-size: small;
     color: #fc5185;
+}
+
+.info-label {
+    display: flex;
+    /*font-size: 12px;*/
+    /*font-weight: bold;*/
+    /*color: dimgray;*/
 }

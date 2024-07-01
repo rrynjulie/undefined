@@ -1,3 +1,17 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // 초기 상태 설정: 전체보기 버튼 클릭 상태로 설정
+    filterItems('all');
+
+    // 가격 형식화
+    const prices = document.querySelectorAll('.item-price');
+    prices.forEach(priceElement => {
+        const price = priceElement.parentElement.parentElement.getAttribute('data-price');
+        if (price) {
+            priceElement.textContent = formatPrice(Number(price)) + '원~';
+        }
+    });
+});
+
 function logout() {
     fetch('/user/logout', {
         method: 'POST',
@@ -45,4 +59,8 @@ function filterItems(type) {
 function goToLodgingDetail(element) {
     const lodgingId = element.getAttribute('data-id');
     window.location.href = `lodging/LodgingDetail/${lodgingId}`;
+}
+
+function formatPrice(price) {
+    return price.toLocaleString();
 }
