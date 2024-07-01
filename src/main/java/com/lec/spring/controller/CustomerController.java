@@ -10,6 +10,7 @@ import com.lec.spring.service.ManagerService;
 import com.lec.spring.service.PostService;
 import com.lec.spring.service.UserService;
 import com.lec.spring.util.AuthenticationUtil;
+import com.lec.spring.util.U;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -139,10 +140,22 @@ public class CustomerController {
         return "mypage/customer/BookingList";
     }
 
-    @PostMapping("/CancelBooking")
-    public String cancelBookingOk(Long bookingId, Model model) {
-        model.addAttribute("result", bookingService.deleteBooking(bookingId));
-        return "/mypage/customer/CancelBookingOk";
+    @PostMapping("/CancelBooking/{bookingId}")
+    public String cancelBookingOk(@PathVariable int bookingId, Model model) {
+        int result;
+        Long userId = U.getLoggedUser().getUserId();
+        try {
+            bookingService.deleteBooking(bookingId);
+            result = 1;
+        } catch (Exception e) {
+            result = 0;
+        }
+
+        System.out.println("로그인한 user -> " + userId);
+        System.out.println("삭제 할 bookingId -> " + bookingId);
+        model.addAttribute("result", result);
+        model.addAttribute("userId", userId);
+        return "mypage/customer/CancelBookingOk"; // 뷰 리졸버가 자동으로 경로를 찾도록 수정
     }
 
     @GetMapping("/Unregister")

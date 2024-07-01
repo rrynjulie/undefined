@@ -22,4 +22,8 @@
 //         modal.style.display = 'none';
 //     }
 // };
-
+function confirmDelete() {
+    if (confirm("예약을 취소하시겠습니까?")) {
+    document.getElementById("deleteForm").submit();
+    }
+}

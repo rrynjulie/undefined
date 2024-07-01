@@ -16,7 +16,7 @@ public interface BookingRepository {
 
     List<Booking> findBooksByUserId(Long userId);
 
-    int deleteBooking(Booking booking);
+    void deleteBooking(int booking);
 
     int bookingCount(Long roomId, LocalDate bookingStartDate, LocalDate bookingEndDate);
 }
