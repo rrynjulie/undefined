@@ -27,7 +27,7 @@
     <div id="list-div">
         <div class="btn-div1">
             <div class="btn-div2">
-                <button class="btn1" onclick="filterLodging('전체', this)">전체</button>
+                <button class="btn1 ALL active" onclick="filterLodging('전체', this)">전체</button>
             </div>
             <div class="btn-div2">
                 <button class="btn1" onclick="filterLodging('모텔', this)">모텔</button>
@@ -40,10 +40,10 @@
             </div>
         </div>
         <div>
-            <select class="btn2" id="priceFilter">
-                <option value="ALL">선택</option>
-                <option value="DESC">예약가 높은 순</option>
-                <option value="ASC">예약가 낮은 순</option>
+            <select class="btn2 custom-select" id="priceFilter">
+                <option class="custom-option" value="ALL">전체</option>
+                <option class="custom-option" value="DESC">예약가 높은 순</option>
+                <option class="custom-option" value="ASC">예약가 낮은 순</option>
             </select>
         </div>
     </div>

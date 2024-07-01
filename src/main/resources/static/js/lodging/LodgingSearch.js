@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const end = new Date(endDate).getTime();
                 const cellTime = cellDate.getTime();
                 if (cellTime > start && cellTime < end) {
-                    cell.style.backgroundColor = '#ff86ab'; // 입실일과 퇴실일 사이의 날짜 색상
+                    cell.style.backgroundColor = '#FFEBEF'; // 입실일과 퇴실일 사이의 날짜 색상
                 }
             }
 
@@ -213,7 +213,7 @@ document.addEventListener("DOMContentLoaded", function() {
             searchDiv.innerHTML =
                 `<div style="display: flex; justify-content: space-between">
                     <div><span>${search.word}</div> 
-                    <div><span class="delete-icon"><img style="height: 20px" src="/image/x.png"></span></div>
+                    <div><span class="delete-icon"><img style="height: 10px" src="/image/x.png"></span></div>
                 </div>
                 <br> <span>날짜: ${search.startDate ? new Date(search.startDate).toLocaleDateString() : ""} ~ ${search.endDate ? new Date(search.endDate).toLocaleDateString() : ""}</span>
                 <br> <span>성인: ${search.adults}명, 아동: ${search.children}명</span>`;
