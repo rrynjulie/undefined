@@ -1,8 +1,11 @@
 package com.lec.spring.controller;
 
 import com.lec.spring.config.PrincipalDetails;
+import com.lec.spring.domain.Lodging;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.UserAuthority;
+import com.lec.spring.service.LodgingService;
+import com.lec.spring.service.LodgingServiceImpl;
 import com.lec.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -22,6 +25,8 @@ public class HomeController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private LodgingService lodgingService;
 
     @RequestMapping("/")
     public String home() {
@@ -31,11 +36,18 @@ public class HomeController {
     @RequestMapping("/Home")
     public void home(Model model) {
         User user = getLoggedUser();
-        System.out.println("user: " + user);
+
         model.addAttribute("user", user);
+
 
         List<UserAuthority> userAuthorities = userService.getAllUserAuthorities();
         model.addAttribute("userAuthorities", userAuthorities);
+        System.out.println("user: " + user);
+
+        List<Lodging> lodgings = lodgingService.getCountHotelBookingWithRatings();
+        model.addAttribute("lodgings",lodgings);
+        System.out.println("home에서 출력 " + lodgings);
+
     }
 
     @RequestMapping("/lodging/LodgingSearch")

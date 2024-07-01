@@ -17,27 +17,31 @@
 
     <section class="booking-list">
         <h1>예약 내역</h1>
-        <div class="filter-container">
+<!--        (userId=${#httpServletRequest.getUserPrincipal().name})-->
+        <form class="filter-form" method="GET" th:action="@{'/mypage/customer/BookingList/'+ ${#authentication.getPrincipal().getUser().userId}}">
             <div class="filter-frame">
-                <label for="accommodation-type">숙소 분류</label>
-                <select id="accommodation-type">
-                    <option value="">전체</option>
-                    <option value="호텔">호텔</option>
-                    <option value="펜션/리조트">펜션/리조트</option>
-                    <option value="모텔">모텔</option>
+                <label for="lodging-type">숙소 분류</label>
+                <select id="lodging-type" name="lodgingType">
+                    <option value="" th:selected="${lodgingType == ''}">전체</option>
+                    <option value="호텔/리조트" th:selected="${lodgingType == '호텔/리조트'}">호텔/리조트</option>
+                    <option value="펜션/풀빌라" th:selected="${lodgingType == '펜션/풀빌라'}">펜션/풀빌라</option>
+                    <option value="모텔" th:selected="${lodgingType == '모텔'}">모텔</option>
                 </select>
             </div>
             <div class="filter-frame">
                 <label for="time-period">날짜 범위</label>
-                <select id="time-period">
-                    <option value="3months">전체</option>
-                    <option value="3months">최근 3개월</option>
-                    <option value="6months">최근 6개월</option>
-                    <option value="1year">최근 1년</option>
+                <select id="time-period" name="timePeriod">
+                    <option value="" th:selected="${timePeriod == ''}">전체</option>
+                    <option value="3months" th:selected="${timePeriod == '3months'}">최근 3개월</option>
+                    <option value="6months" th:selected="${timePeriod == '6months'}">최근 6개월</option>
+                    <option value="1year" th:selected="${timePeriod == '1year'}">최근 1년</option>
                 </select>
             </div>
-            <img class="btn-search" th:src="@{/image/mypage/customer/IconSearch.png}" alt="">
-        </div>
+            <button type="submit" class="btn-search-frame">
+                <img class="btn-search" th:src="@{/image/mypage/customer/IconSearch.png}" alt="">
+            </button>
+
+        </form>
 
         <h3>이용 전</h3>
         <div th:if="${#arrays.isEmpty(booksBefore)}">
@@ -75,7 +79,11 @@
                         결제 금액
                         <p th:text="${books.formattedPay} + '원'"></p>
                     </label>
-                    <button class="btn-booking-cancel" th:href="@{mypage/customer/CancelBookingOk}">예약 취소</button>
+                    <form id="deleteForm" th:action="@{/mypage/customer/CancelBooking/{bookingId}(bookingId=${books.bookingId})}" method="post">
+                        <div class="btn-list">
+                            <button type="button" class="btn-booking-cancel" onclick="confirmDelete()">예약 취소</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

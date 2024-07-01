@@ -41,6 +41,26 @@ public class LodgingServiceImpl implements LodgingService {
     }
 
     @Override
+    public List<Lodging> findLodgingIdASC(String location) {
+        return lodgingRepository.findLodgingIdASC(location);
+    }
+
+    @Override
+    public List<Lodging> findLodgingIdASCByType(String location, String type) {
+        return lodgingRepository.findLodgingIdASCByType(location, type);
+    }
+
+    @Override
+    public List<Lodging> findLodgingByLocationAndTypeAndPriceASC(String location, String type) {
+        return lodgingRepository.findLodgingByLocationAndTypeAndPriceASC(location, type);
+    }
+
+    @Override
+    public List<Lodging> findLodgingByLocationAndTypeAndPriceDESC(String location, String type) {
+        return lodgingRepository.findLodgingByLocationAndTypeAndPriceDESC(location, type);
+    }
+
+    @Override
     public List<Lodging> lodgingDetail(Long lodgingId) {
         return lodgingRepository.findLodgingById(lodgingId);
     }
@@ -69,5 +89,13 @@ public class LodgingServiceImpl implements LodgingService {
     public Integer getTotalPosts(Long lodgingId) {
         Integer totalPosts = lodgingRepository.totalPosts(lodgingId);
         return (totalPosts != null) ? totalPosts : 0;
+    }
+
+//  홈 페이지에서 후기 목록 가져오기
+    @Override
+    public List<Lodging> getCountHotelBookingWithRatings(){
+        List<Lodging> lodgings = lodgingRepository.countHotelBookingWithRatings();
+
+        return lodgingRepository.countHotelBookingWithRatings();
     }
 }

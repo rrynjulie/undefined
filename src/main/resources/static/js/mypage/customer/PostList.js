@@ -8,3 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+function deleteOk() {
+    alert('선택한 후기를 삭제하시겠습니까?')
+}

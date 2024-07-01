@@ -1,12 +1,16 @@
 package com.lec.spring.controller;
 
+import com.lec.spring.config.PrincipalDetails;
+import com.lec.spring.domain.Booking;
 import com.lec.spring.domain.ProvLodging;
 import com.lec.spring.domain.Room;
 import com.lec.spring.domain.User;
+import com.lec.spring.service.BookingService;
 import com.lec.spring.service.ProviderService;
 import com.lec.spring.service.RoomService;
 import com.lec.spring.service.UserService;
 import com.lec.spring.util.U;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.core.Authentication;
@@ -25,18 +29,53 @@ import java.util.List;
 @RequestMapping("/mypage/provider")
 public class ProviderController {
 
-
+    @Autowired
+    private UserService userService;
     @Autowired
     private ProviderService providerService;
     @Autowired
     private RoomService roomService;
-
-//    @Autowired
-//    private UserService userService;
-
     @Autowired
-    public ProviderController(ProviderService providerService) {
-        this.providerService = providerService;
+    private BookingService bookingService;
+
+    @GetMapping("/ProvBookingList")
+    public String provBookingList(Model model, Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            // 인증되지 않은 사용자 처리
+            return "redirect:/user/login"; // 로그인 페이지로 리다이렉트 또는 예외 처리
+        }
+
+        Object principal = authentication.getPrincipal();
+        User user;
+        if (principal instanceof PrincipalDetails) {
+            PrincipalDetails principalDetails = (PrincipalDetails) principal;
+            user = principalDetails.getUser();
+            model.addAttribute("user", user);
+        } else if (principal instanceof String) {
+            String username = (String) principal;
+            user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+        } else {
+            // 다른 타입에 대한 처리
+            throw new IllegalStateException("Unknown principal type: " + principal.getClass());
+        }
+
+        List<ProvLodging> lodgings = providerService.getLodgings(user.getUserId());
+
+        model.addAttribute("lodgings", lodgings);
+
+        return "mypage/provider/ProvBookingList";
+    }
+
+    @GetMapping("/ProvBookingList/books")
+    public String provBookingListGetBooks(@RequestParam("lodgingId") Long lodgingId, Model model) {
+        List<Room> rooms = roomService.findRoomsByLodgingId(lodgingId);
+        rooms.forEach(room -> {
+            room.setBookList(bookingService.findBooksByRoomId(room.getRoomId()));
+        });
+        model.addAttribute("rooms", rooms);
+
+        return "mypage/provider/ProvBookingListInner :: bookingList";
     }
 
 //    @GetMapping("/provlodginglist")
@@ -174,4 +213,21 @@ public class ProviderController {
         roomService.updateRoom(room);
         return "redirect:/mypage/provider/ProvRoomDetail/" + room.getRoomId();
     }
+
+    @PostMapping("/deleteRoom/{roomId}")
+    public String deleteRoom(@PathVariable int roomId, Model model) {
+        int result;
+        Long userId = U.getLoggedUser().getUserId();
+        try {
+            roomService.deleteRoom(roomId);
+            result = 1; // 삭제 성공
+        } catch (Exception e) {
+            result = 0; // 삭제 실패
+        }
+        model.addAttribute("result", result);
+        model.addAttribute("userId", userId);
+        return "mypage/provider/ProvRoomDeleteOk";
+    }
+
+
 }

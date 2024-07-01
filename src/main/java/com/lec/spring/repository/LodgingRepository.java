@@ -2,6 +2,7 @@ package com.lec.spring.repository;
 
 
 
+import com.lec.spring.domain.Booking;
 import com.lec.spring.domain.Lodging;
 
 
@@ -18,6 +19,14 @@ public interface LodgingRepository {
 
     List<Lodging> findLodgingByPriceDESC(String location);
 
+    List<Lodging> findLodgingIdASC(String location);
+
+    List<Lodging> findLodgingIdASCByType(String location, String type);
+
+    List<Lodging> findLodgingByLocationAndTypeAndPriceASC(String location, String type);
+
+    List<Lodging> findLodgingByLocationAndTypeAndPriceDESC(String location, String type);
+
     List<Lodging> findLodgingById(Long lodgingId);
 
     List<Lodging> findLodgingByName(Long lodgingId);
@@ -27,4 +36,6 @@ public interface LodgingRepository {
     Double avgPostGrade(Long lodgingId);
 
     Integer totalPosts(Long lodgingId);
+
+    List<Lodging> countHotelBookingWithRatings();
 }

@@ -76,15 +76,27 @@ public class LodgingController {
     @PostMapping("/LodgingList/price")
     public String filterPrice(@RequestParam("location") String location,
                               @RequestParam("price") String price,
+                              @RequestParam(value = "type", required = false) String type,
                               Model model) {
         List<Lodging> lodgings;
-        if (price.equals("DESC")) {
-            lodgings = lodgingService.findLodgingByPriceDESC(location);
+        if (type == null || type.isEmpty() || type.equals("전체")) {
+            if (price.equals("ALL")) {
+                lodgings = lodgingService.findLodgingIdASC(location);
+            } else if (price.equals("DESC")) {
+                lodgings = lodgingService.findLodgingByPriceDESC(location);
+            } else {
+                lodgings = lodgingService.findLodgingByPriceASC(location);
+            }
         } else {
-            lodgings = lodgingService.findLodgingByPriceASC(location);
+            if (price.equals("ALL")) {
+                lodgings = lodgingService.findLodgingIdASCByType(location, type);
+            } else if (price.equals("DESC")) {
+                lodgings = lodgingService.findLodgingByLocationAndTypeAndPriceDESC(location, type);
+            } else
+                lodgings = lodgingService.findLodgingByLocationAndTypeAndPriceASC(location, type);
         }
         addAdditionalInfoToLodgings(lodgings);
-        model.addAttribute("lodging", lodgings); // 'lodgings'를 'lodging'으로 변경
+        model.addAttribute("lodging", lodgings);
         return "lodging/LodgingList :: #item-list";
     }
     // 추가 정보를 설정하는 메서드
@@ -115,6 +127,10 @@ public class LodgingController {
             lodging.setAvgPostGrade(avgPostGrade != null ? avgPostGrade : 0.0);
             lodging.setTotalPosts(totalPosts != null ? totalPosts : 0);
 
+//            System.out.println(lodging.getRoomId());
+//            lodging.setBookingList(bookingService.findBooksByRoomId(lodging.getRoomId()));
+//            System.out.println(lodging.getBookingList());
+
             int conflictingBookingCount = 0;
             if (bookingStartDate != null && bookingEndDate != null) {
                 // 예약 상황을 확인하여 겹치는 예약 수를 구합니다.
@@ -123,16 +139,12 @@ public class LodgingController {
             lodging.setAvailable(conflictingBookingCount);
         }
 
-
         model.addAttribute("lodging", lodgings);
         model.addAttribute("lodgingName", lodgingName);
         model.addAttribute("lodgingPost", lodgingPost);
         model.addAttribute("bookingStartDate", bookingStartDate);
         model.addAttribute("bookingEndDate", bookingEndDate);
 
-        System.out.println("체크인 날짜" + bookingStartDate);
-        System.out.println("체크아웃 날짜" + bookingEndDate);
-        System.out.println();
 
         return "lodging/LodgingDetail";
     }

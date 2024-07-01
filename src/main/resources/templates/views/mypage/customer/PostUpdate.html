@@ -12,7 +12,6 @@
 <div class="container" th:each="post : ${userPostUpdate}">
     <!-- 좌측 네비게이션 메뉴 -->
     <th:block th:insert="~{mypage/customer/NavMenu::nav-menu}"></th:block>
-
     <div>
         <h2 id="body-head">후기 수정</h2>
         <form th:action="@{/mypage/customer/PostUpdate}" method="post">
@@ -31,24 +30,33 @@
                     </div>
                     <div id="div3">
                         <div id class="stars" th:data-star-count="${post.postGrade}">
-                            <span class="star" data-value="1">&#9733;</span>
-                            <span class="star" data-value="2">&#9733;</span>
-                            <span class="star" data-value="3">&#9733;</span>
-                            <span class="star" data-value="4">&#9733;</span>
                             <span class="star" data-value="5">&#9733;</span>
+                            <span class="star" data-value="4">&#9733;</span>
+                            <span class="star" data-value="3">&#9733;</span>
+                            <span class="star" data-value="2">&#9733;</span>
+                            <span class="star" data-value="1">&#9733;</span>
                         </div>
-                        <div class="dateTime" th:text="${post.startDate} + ' - ' + ${post.endDate}"></div>
+                        <div style="display: flex; width: 100%; margin-left: 33px;">
+                            <label class="a">체크인
+                                <p class="b" th:text="${post.startDate}"></p>
+                            </label>
+                            <label class="a">체크아웃
+                                <p class="b" th:text="${post.endDate}"></p>
+                            </label>
+                        </div>
                     </div>
                 </div>
 
-                    <div class="inputDiv" id="Text">
-                    <textarea id="postText" name="postText" rows="4" cols="50" th:placeholder="${post.postText}"></textarea>
-                </div>
-                <div class="inputText" id="picture">
-                    <input id="postPicture" type="text" name="postPicture" th:placeholder="${post.postPicture}" />
+                <div>
+                    <div id="postText">
+                        <textarea id="text" name="postText" rows="4" cols="50" th:placeholder="${post.postText}"></textarea>
+                    </div>
+                    <div id="postPicture">
+                        <input id="picture" type="text" name="postPicture" th:placeholder="${post.postPicture}" />
+                    </div>
                 </div>
                 <div style="width: 99.5%; height: 50px; margin-top: 20px;">
-                    <button type="submit" style="float: right; width: 10%">수정확인</button>
+                    <button type="submit" id="submit">수정확인</button>
                 </div>
             </div>
         </form>

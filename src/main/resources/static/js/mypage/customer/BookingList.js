@@ -23,3 +23,18 @@
 //     }
 // };
 
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("filter-form");
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const url = new URL(form.action);
+        const params = new URLSearchParams(new FormData(form)).toString();
+        window.location.href = `${url}?${params}`;
+    });
+});
+
+function confirmDelete() {
+    if (confirm("예약을 취소하시겠습니까?")) {
+    document.getElementById("deleteForm").submit();
+    }
+}

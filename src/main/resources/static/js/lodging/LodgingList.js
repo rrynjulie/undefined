@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const text = document.getElementById('lodging-text1')
-    const searchWord = sessionStorage.getItem('searchWord')
+    const text = document.getElementById('lodging-text');
+    const searchWord = sessionStorage.getItem('searchWord') || '';
 
     const selectedDate = document.getElementById("selectedDate");
     const startDate = new Date(sessionStorage.getItem('startDate'));
     const endDate = new Date(sessionStorage.getItem('endDate'));
 
     const totalDiv = document.getElementsByClassName('total');
-    const adultCount = parseInt(sessionStorage.getItem('adultCount'));
-    const childCount = parseInt(sessionStorage.getItem('childCount'));
+    const adultCount = parseInt(sessionStorage.getItem('adultCount')) || 0;
+    const childCount = parseInt(sessionStorage.getItem('childCount')) || 0;
 
     console.log('searchWord: ' + searchWord);
     console.log('startDate: ' + startDate);
@@ -16,58 +16,91 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log('adultCount: ' + adultCount);
     console.log('childCount: ' + childCount);
 
+    text.value = searchWord;
 
-    text.innerHTML = `${searchWord}`
-
-    selectedDate.innerHTML = `${startDate.getFullYear()}.${startDate.getMonth() + 1}.${startDate.getDate()} ~ ${endDate.getFullYear()}.${endDate.getMonth() + 1}.${endDate.getDate()}`
+    selectedDate.textContent = `${startDate.getFullYear()}.${startDate.getMonth() + 1}.${startDate.getDate()} ~ ${endDate.getFullYear()}.${endDate.getMonth() + 1}.${endDate.getDate()}`;
 
     for (let i = 0; i < totalDiv.length; i++) {
-        totalDiv[i].innerHTML = `인원: 성인 ${adultCount}, 아동 ${childCount}`;
+        totalDiv[i].textContent = `인원: 성인 ${adultCount}, 아동 ${childCount}`;
     }
 
-});
+    // 검색 버튼 클릭 시
+    document.getElementById('search').addEventListener('click', function() {
+        const location = text.value.trim();
+        sessionStorage.setItem('searchWord', location);
+        filterLodging();
+    });
 
-
-
-
-function filterLodging(type) {
-    const location = document.getElementById('location').value;
-    $.ajax({
-        url: '/lodging/LodgingList/filter',
-        type: 'POST',
-        data: {
-            location: location,
-            type: type
-        },
-        success: function (data) {
-            const resultCount = $(data).find('.item-list1').length;
-            $('#result-filter').text(resultCount + '개의 검색 결과');
-            $('#item-list').html(data);
-        },
-        error: function (error) {
-            console.error('Error:', error);
+    // 엔터 키 입력 처리
+    text.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            const location = text.value.trim();
+            sessionStorage.setItem('searchWord', location);
+            filterLodging();
         }
     });
-}
 
-$(document).ready(function() {
+
+    // 숙소 타입 버튼 클릭 시
+    $('.btn1').click(function() {
+        var type = $(this).text();
+        $('.btn1').removeClass('active');
+        $(this).addClass('active');
+        filterLodging(type, this); // 버튼의 타입과 자신을 전달
+    });
+
+    // 가격 필터링 변경 시
     $('#priceFilter').change(function() {
-        var selectedPriceOrder = $(this).val();
-        var location = $('#location').val(); // Hidden input에서 location 값을 가져옴
+        filterLodging();
+    });
+
+    // 숙소 필터링 함수
+    function filterLodging(type, btn1) {
+        // 모든 버튼의 배경색을 초기화
+        var buttons = document.querySelectorAll('.btn1');
+        buttons.forEach(function(button) {
+            button.style.backgroundColor = ''; // 기본 값으로 설정
+            button.style.color = 'black';
+        });
+
+        // 선택한 버튼의 배경색을 변경
+        if (btn1) {
+            btn1.style.backgroundColor = '#FC5185';
+            btn1.style.color = 'white';
+        }
+
+        // 필터링 로직 추가 (필요한 경우)
+        console.log(type);
+
+        var price = $('#priceFilter').val();
+        var location = sessionStorage.getItem('searchWord');
+        var selectedType = $('.btn1.active').text(); // 현재 선택된 타입 가져오기
 
         $.ajax({
             type: 'POST',
             url: '/lodging/LodgingList/price',
             data: {
                 location: location,
-                price: selectedPriceOrder
+                price: price,
+                type: selectedType // 현재 선택된 타입 전달
             },
             success: function(response) {
                 $('#item-list').html(response);
+                updateResultCount();
             },
             error: function(error) {
                 console.error('에러:', error);
             }
         });
-    });
+    }
+
+    // 초기 필터링 적용
+    filterLodging();
+
+    // 결과 개수 업데이트 함수
+    function updateResultCount() {
+        const resultCount = $('.item-list1').length;
+        $('#result-filter').text(resultCount + '개의 검색 결과');
+    }
 });

@@ -53,13 +53,13 @@ public class RoomRepositoryTest {
         System.out.println();
 
         room.setRoomName("스위트룸");
-        roomRepository.update(room);
+        roomRepository.updateRoom(room);
         room = roomRepository.findByRoomId(roomId);
         System.out.println("[객실명 변경 후]");
         roomRepository.findAll().forEach(System.out::println);
         System.out.println();
 
-        roomRepository.delete(room);
+        roomRepository.deleteRoom(Math.toIntExact(roomId));
         System.out.println("[객실 삭제 후]");
         roomRepository.findAll().forEach(System.out::println);
     }

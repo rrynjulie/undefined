@@ -1,6 +1,7 @@
 package com.lec.spring.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ProvLodging {
     private Long lodgingId;                 // 숙소 ID
     private String lodgingPicture1;        // 숙소 사진 1

@@ -23,6 +23,7 @@ main {
 .booking-info {
     background-color: white;
     width: 75%;
+    min-height: 588px;
 }
 
 .booking-filter {
