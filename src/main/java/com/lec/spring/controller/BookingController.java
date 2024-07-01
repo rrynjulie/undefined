@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Book;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.List;
@@ -126,34 +127,5 @@ public class BookingController {
         model.addAttribute("user", user);
 
         return "lodging/LodgingBookingOk";
-    }
-
-    @GetMapping("/mypage/provider/ProvBookingList")
-    public String provBookingList(Model model, Authentication authentication) {
-        if (authentication == null || !authentication.isAuthenticated()) {
-            // 인증되지 않은 사용자 처리
-            return "redirect:/user/login"; // 로그인 페이지로 리다이렉트 또는 예외 처리
-        }
-
-        Object principal = authentication.getPrincipal();
-        User user;
-        if (principal instanceof PrincipalDetails) {
-            PrincipalDetails principalDetails = (PrincipalDetails) principal;
-            user = principalDetails.getUser();
-            model.addAttribute("user", user);
-        } else if (principal instanceof String) {
-            String username = (String) principal;
-            user = userService.findByUsername(username);
-            model.addAttribute("user", user);
-        } else {
-            // 다른 타입에 대한 처리
-            throw new IllegalStateException("Unknown principal type: " + principal.getClass());
-        }
-
-        List<ProvLodging> lodgings = providerService.getLodgings(user.getUserId());
-        model.addAttribute("lodgings", lodgings);
-//        Room room = roomService.findRoomsByLodgingId();
-
-        return "mypage/provider/ProvBookingList";
     }
 }

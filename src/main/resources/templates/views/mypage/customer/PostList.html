@@ -10,6 +10,7 @@
 <th:block th:insert="~{common/Header::header}"></th:block>
 
 <div class="container">
+    <!-- 좌측 네비게이션 메뉴 -->
     <th:block th:insert="~{mypage/customer/NavMenu::nav-menu}"></th:block>
     <div>
         <h2 id="body-head">내 후기 리스트</h2>
@@ -25,15 +26,23 @@
                     </div>
                     <div id="div3">
                         <div class="stars" th:attr="data-star-count=${userPost.postGrade}">
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
+                            <span class="star" data-value="5">&#9733;</span>
+                            <span class="star" data-value="4">&#9733;</span>
+                            <span class="star" data-value="3">&#9733;</span>
+                            <span class="star" data-value="2">&#9733;</span>
+                            <span class="star" data-value="1">&#9733;</span>
                         </div>
-                        <div class="dateTime" th:text="${userPost.startDate} + ' - ' + ${userPost.endDate}"></div>
+                        <div style="display: flex; width: 100%; margin-left: 33px;">
+                            <label class="a">체크인
+                                <p class="b" th:text="${userPost.startDate}"></p>
+                            </label>
+                            <label class="a">체크아웃
+                                <p class="b" th:text="${userPost.endDate}"></p>
+                            </label>
+                        </div>
                     </div>
                 </div>
+
                 <div>
                     <div id="postText" th:text="${userPost.postText}"></div>
                     <div id="postPicture" th:text="${userPost.postPicture}"></div>
@@ -45,7 +54,7 @@
                     <form th:action="@{/mypage/customer/PostDelete}" method="post" style="display:inline;">
                         <input type="hidden" name="postId" th:value="${userPost.postId}"/>
                         <input type="hidden" name="userId" th:value="${userPost.userId}"/>
-                        <button id="delete" type="submit">삭제</button>
+                        <button id="delete" onclick="deleteOk()" type="submit">삭제</button>
                     </form>
                 </div>
             </div>

@@ -127,6 +127,10 @@ public class LodgingController {
             lodging.setAvgPostGrade(avgPostGrade != null ? avgPostGrade : 0.0);
             lodging.setTotalPosts(totalPosts != null ? totalPosts : 0);
 
+//            System.out.println(lodging.getRoomId());
+//            lodging.setBookingList(bookingService.findBooksByRoomId(lodging.getRoomId()));
+//            System.out.println(lodging.getBookingList());
+
             int conflictingBookingCount = 0;
             if (bookingStartDate != null && bookingEndDate != null) {
                 // 예약 상황을 확인하여 겹치는 예약 수를 구합니다.
@@ -135,16 +139,12 @@ public class LodgingController {
             lodging.setAvailable(conflictingBookingCount);
         }
 
-
         model.addAttribute("lodging", lodgings);
         model.addAttribute("lodgingName", lodgingName);
         model.addAttribute("lodgingPost", lodgingPost);
         model.addAttribute("bookingStartDate", bookingStartDate);
         model.addAttribute("bookingEndDate", bookingEndDate);
 
-        System.out.println("체크인 날짜" + bookingStartDate);
-        System.out.println("체크아웃 날짜" + bookingEndDate);
-        System.out.println();
 
         return "lodging/LodgingDetail";
     }

@@ -30,7 +30,7 @@ main {
 }
 
 /*검색필터*/
-.filter-container {
+.filter-form {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -50,7 +50,7 @@ main {
     margin-bottom: 10px;
 }
 
-.filter-container select {
+.filter-form select {
     padding: 10px;
     font-size: 15px;
     border: 1px solid #EBEBEB;
@@ -58,9 +58,15 @@ main {
     width: 350px;
 }
 
+.btn-search-frame {
+    height: 100%;
+    margin-top: 75px;
+    background-color: white;
+    border: 0;
+}
+
 .btn-search {
     max-height: 100%;
-    margin-top: 75px;
     cursor: pointer;
 }
 

@@ -56,8 +56,9 @@
     </select>
 
     <!-- DELETE -->
-    <delete id="deleteBooking" flushCache="true" parameterType="com.lec.spring.domain.Booking">
-        DELETE FROM booking WHERE booking_id = #{bookingId}
+    <delete id="deleteBooking" parameterType="int">
+        DELETE FROM booking
+        WHERE booking_id = #{bookingId}
     </delete>
 
     <!--    <select id="bookingCount" resultType="int">-->

@@ -18,24 +18,19 @@
     <!-- 숙소 정보 페이지 -->
     <section class="booking-info">
         <h1>예약 관리</h1>
-        <form th:action="@{mypage/provider/ProvBookingList}" class="booking-filter" method="get">
+        <div class="booking-filter">
             <label class="select-label" for="lodging-select">
                 숙소 선택
-                <select class="select-element" id="lodging-select" name="lodgingId" th:onchange="'javascript:getRooms(this.value)'">
-                    <option value="">선택하세요.</option>
+                <select class="select-element" id="lodging-select" name="lodgingId">
+                    <option value="">숙소를 선택하세요.</option>
                     <option th:each="lodgings : ${lodgings}" th:value="${lodgings.lodgingId}">[[${lodgings.lodgingName}]]</option>
                 </select>
             </label>
-            <label class="select-label" for="room-select">
-                객실 선택
-                <select class="select-element" id="room-select" name="roomId">
-                    <option value="">선택하세요.</option>
-                    <div th:fragment="roomList">
-                        <option th:each="rooms : ${rooms}" th:value="${rooms.roomId}">[[${rooms.roomName}]]</option>
-                    </div>
-                </select>
-            </label>
-        </form>
+            <button class="btn-search" type="button">검색</button>
+        </div>
+        <div id="booking-list">
+            <th:block th:include="mypage/provider/ProvBookingListInner :: bookingList"></th:block>
+        </div>
     </section>
 </main>
 
