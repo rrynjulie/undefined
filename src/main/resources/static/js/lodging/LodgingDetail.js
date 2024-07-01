@@ -269,15 +269,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const bookingEDate = document.getElementById('bookingEndDate');
 
     // booking table 에 저장된 객실 예약 날짜 불러오기
-    // const bookingStartDateElements = document.querySelectorAll('.dbStartDate');
-    // const bookingEndDateElements = document.querySelectorAll('.dbEndDate');
-    // const bookingPeopleElements = document.querySelectorAll('.dbBookingPeople');
-    // const bookingList = Array.from(bookingStartDateElements).map((startDateElem, index) => {
-    //     return {
-    //         bookingStartDate: startDateElem.textContent,
-    //         bookingEndDate: bookingEndDateElements[index].textContent
-    //     };
-    // });
+    let bookingStartDateElements = document.querySelectorAll('.dbStartDate');
+    let bookingEndDateElements = document.querySelectorAll('.dbEndDate');
+    let bookingPeopleElements = document.querySelectorAll('.dbBookingPeople');
+    let bookingList = Array.from(bookingStartDateElements).map((startDateElem, index) => {
+        return {
+            bookingStartDate: startDateElem.textContent,
+            bookingEndDate: bookingEndDateElements[index].textContent
+        };
+    });
     // let peopleList = [];
     // bookingPeopleElements.forEach(tmp => {
     //     peopleList.add(tmp.textContent);
@@ -289,29 +289,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const storedAdultCount = parseInt(sessionStorage.getItem('adultCount')) || 1;
     const storedChildCount = parseInt(sessionStorage.getItem('childCount')) || 0;
 
-    // function isBookingAvailable() {
-    //     let dateCnt = 0;
-    //     let cnt = 0;
-    //     bookingList.forEach(book => {
-    //         console.log("반복횟수:" + ++cnt);
-    //         console.log("부킹리스트:" + book);
-    //         console.log(book.bookingStartDate);
-    //         console.log(book.bookingEndDate);
-    //         if((new Date(book.bookingStartDate) < new Date(storedEndDate)) && (new Date(book.bookingEndDate) > new Date(storedStartDate)))
-    //             dateCnt++;
-    //     });
-    //
-    //     console.log(dateCnt);
-    //
-    //     if(dateCnt > 0) {
-    //         document.getElementById('reserve-btn').style.display = 'none';
-    //         document.getElementById('reserve-stop').style.display = 'block';
-    //     }
-    //     else {
-    //         document.getElementById('reserve-btn').style.display = 'block';
-    //         document.getElementById('reserve-stop').style.display = 'none';
-    //     }
-    // }
+
 
     function setBookingInfo() {
         if (storedStartDate) bookingStartDate.value = storedStartDate;
@@ -325,10 +303,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const goBookingBtn = document.getElementById('reserve-btn');
 
-    goBookingBtn.addEventListener('click', function() {
+    goBookingBtn.addEventListener('submit', function(event) {
+        event.preventDefault();
         console.log(document.getElementById('bookingAvailable').textContent);
         if(document.getElementById('bookingAvailable').textContent == 0)
-            window.location.href = `/lodging/LodgingBooking(lodgingId=${lodging.lodgingId}, roomId=${lodging.roomId}`;
+            window.location.href = `/lodging/LodgingBooking(lodgingId=${lodge.lodgingId}, roomId=${lodge.roomId}`;
         else
             alert('예약이 마감된 객실입니다.');
     });

@@ -60,19 +60,6 @@ public class LodgingController {
         return "lodging/LodgingList";
     }
 
-    @PostMapping("/LodgingList/filter")
-    public String filterLodgings(@RequestParam("location") String location, @RequestParam("type") String type, Model model) {
-        List<Lodging> lodgings = lodgingService.getLodgingsByLocationAndType(location, type);
-        for (Lodging lodging : lodgings) {
-            Double avgPostGrade = lodgingService.getAvgPostGrade(lodging.getLodgingId());
-            Integer totalPosts = lodgingService.getTotalPosts(lodging.getLodgingId());
-            lodging.setAvgPostGrade(avgPostGrade != null ? avgPostGrade : 0.0);
-            lodging.setTotalPosts(totalPosts != null ? totalPosts : 0);
-        }
-        model.addAttribute("lodging", lodgings);
-        return "lodging/LodgingList :: #item-list"; // Thymeleaf fragment
-    }
-
     @PostMapping("/LodgingList/price")
     public String filterPrice(@RequestParam("location") String location,
                               @RequestParam("price") String price,
@@ -110,8 +97,6 @@ public class LodgingController {
         }
     }
 
-
-
     @GetMapping("/LodgingDetail/{lodgingId}")
     public String getLodgingDetail(@PathVariable("lodgingId") Long lodgingId,
                                    @RequestParam(value = "bookingStartDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bookingStartDate,
@@ -126,10 +111,6 @@ public class LodgingController {
             Integer totalPosts = lodgingService.getTotalPosts(lodging.getLodgingId());
             lodging.setAvgPostGrade(avgPostGrade != null ? avgPostGrade : 0.0);
             lodging.setTotalPosts(totalPosts != null ? totalPosts : 0);
-
-//            System.out.println(lodging.getRoomId());
-//            lodging.setBookingList(bookingService.findBooksByRoomId(lodging.getRoomId()));
-//            System.out.println(lodging.getBookingList());
 
             int conflictingBookingCount = 0;
             if (bookingStartDate != null && bookingEndDate != null) {
@@ -151,12 +132,12 @@ public class LodgingController {
 
     @GetMapping("/LodgingPostList/{lodgingId}")
     public String postList (@PathVariable("lodgingId") Long lodgingId, Model model) {
-        List<Lodging> lodgingss = lodgingService.getPostList(lodgingId);
+        List<Post> userPosts = postService.findPostByLodgingId(lodgingId);
         Double avgPostGrade = lodgingService.getAvgPostGrade(lodgingId);
         int totalPosts = postService.countAllPostsByLodgingId((long)lodgingId);
-
         String formattedAvgPostGrade = String.format("%.1f", avgPostGrade);
-        model.addAttribute("lodgingss", lodgingss);
+
+        model.addAttribute("userPosts", userPosts);
         model.addAttribute("avgPostGrade", formattedAvgPostGrade);
         model.addAttribute("totalPosts", totalPosts);
         return "lodging/LodgingPostList";
