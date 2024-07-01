@@ -33,9 +33,45 @@ public class PostController {
         this.bookingService = bookingService;
     }
 
+//    @GetMapping("/PostCreate/{userId}/{bookingId}")
+//    public String postCreate(@PathVariable("userId") Long userId, @PathVariable("bookingId") Long bookingId, Model model) {
+//        Booking booking = bookingService.findBookingById(bookingId);
+//        Post post = new Post();
+//        post.setUserId(userId);
+//        post.setBookingId(bookingId);
+//        post.setLodgingId(booking.getLodgingId());
+//        post.setRoomId(booking.getRoomId());
+//        model.addAttribute("post", post);
+//
+//        AuthenticationUtil.addAuthenticationDetailsToModel(model);
+//
+//        return "mypage/customer/PostCreate";
+//    }
+//
+//    @PostMapping("/PostCreate")
+//    public String postCreateOk(@ModelAttribute Post post) {
+//        int result = postService.allPostSave(post);
+//        if (result > 0) {
+//            return "redirect:/mypage/customer/PostList/" + post.getUserId();
+//        } else {
+//            return "redirect:/mypage/customer/PostCreate" + post.getUserId() + "/" + post.getBookingId();
+//        }
+//    }
+
     @GetMapping("/PostCreate/{userId}/{bookingId}")
-    public String postCreate(@PathVariable("userId") Long userId, @PathVariable("bookingId") Long bookingId, Model model) {
+    public String postCreate(@PathVariable("userId") Long userId,
+                             @PathVariable("bookingId") Long bookingId,
+                             Model model) {
         Booking booking = bookingService.findBookingById(bookingId);
+
+        // 후기 작성 여부 체크
+        boolean userPosted = postService.checkIfUserPosted(userId, bookingId);
+
+        if (userPosted) {
+            // 이미 후기를 작성한 경우, 메시지를 표시하고 예약 목록 페이지로 리다이렉션
+            return "redirect:/mypage/customer/BookingList/" + userId + "?alreadyPosted=true";
+        }
+
         Post post = new Post();
         post.setUserId(userId);
         post.setBookingId(bookingId);
@@ -54,7 +90,7 @@ public class PostController {
         if (result > 0) {
             return "redirect:/mypage/customer/PostList/" + post.getUserId();
         } else {
-            return "redirect:/mypage/customer/PostCreate" + post.getUserId() + "/" + post.getBookingId();
+            return "redirect:/mypage/customer/PostCreate/" + post.getUserId() + "/" + post.getBookingId();
         }
     }
 

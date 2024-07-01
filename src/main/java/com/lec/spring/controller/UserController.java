@@ -17,14 +17,17 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.sql.SQLOutput;
 import java.util.List;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
+//    @Autowired
     private UserService userService;
+
+//    private UserValidator userValidator;
 
     @Autowired
     public void setUserService(UserService userService){
@@ -42,29 +45,31 @@ public class UserController {
     @PostMapping("/register")
     public String registerOk(@Valid User user,
                              BindingResult result,
+                             Model model,
                              RedirectAttributes redirectAttrs) {
         if (result.hasErrors()) {
-            redirectAttrs.addFlashAttribute("nickname", user.getNickname());
             redirectAttrs.addFlashAttribute("email", user.getEmail());
+            redirectAttrs.addFlashAttribute("nickname", user.getNickname());
             redirectAttrs.addFlashAttribute("username", user.getUsername());
 
             List<FieldError> errList = result.getFieldErrors();
+
             for (FieldError err : errList) {
-                // 보다 구체적인 에러 메시지 전달을 위해 메시지 코드를 사용할 수 있음
-                redirectAttrs.addFlashAttribute("error", err.getDefaultMessage());
+//                System.out.println("에러 확인");
+//                System.out.println(err);
+                redirectAttrs.addFlashAttribute("error_" + err.getField(), err.getCode());
+//                break;
             }
 
             return "redirect:/user/register";
         }
-
+        String page = "/user/registerOk";
         int cnt = userService.register(user);
-        if (cnt == 1) {
-            return "redirect:/Home";
-        } else {
-            // 회원가입 실패 시 처리할 로직 추가 가능
-            return "redirect:/user/register";
-        }
+        model.addAttribute("result", cnt);
+        return page;
+
     }
+
 
     @Autowired
     UserValidator userValidator;
