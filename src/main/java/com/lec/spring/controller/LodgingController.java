@@ -120,16 +120,12 @@ public class LodgingController {
             lodging.setAvailable(conflictingBookingCount);
         }
 
-
         model.addAttribute("lodging", lodgings);
         model.addAttribute("lodgingName", lodgingName);
         model.addAttribute("lodgingPost", lodgingPost);
         model.addAttribute("bookingStartDate", bookingStartDate);
         model.addAttribute("bookingEndDate", bookingEndDate);
 
-        System.out.println("체크인 날짜" + bookingStartDate);
-        System.out.println("체크아웃 날짜" + bookingEndDate);
-        System.out.println();
 
         return "lodging/LodgingDetail";
     }

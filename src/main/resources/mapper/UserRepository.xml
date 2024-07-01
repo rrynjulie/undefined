@@ -35,6 +35,11 @@
         AND user_email = #{email}
     </select>
 
+    <select id="findByPhonenum" resultType="com.lec.spring.domain.User">
+        <include refid="SELECT_BASE"/>
+        AND user_phonenum = #{phonenum}
+    </select>
+
     <select id="findByProvider" resultType="com.lec.spring.domain.User">
         <include refid="SELECT_BASE"/>
         AND provider = #{provider}

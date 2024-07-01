@@ -146,6 +146,9 @@ ALTER TABLE user
 ALTER TABLE user
     ADD CONSTRAINT UQ_user_phonenum UNIQUE (user_phonenum);
 
+ALTER TABLE user
+    ADD CONSTRAINT UQ_user_email UNIQUE (user_email);
+
 CREATE TABLE user_authority
 (
     user_id      INT NOT NULL COMMENT '아이디',

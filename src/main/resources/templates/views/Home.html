@@ -34,85 +34,6 @@
         </div>
     </section>
 
-    <!-- 좋아요 TOP -->
-    <!--    <section class="ranking-list">-->
-    <!--        <div class="ranking-list-header">-->
-    <!--            <h1>좋아요 TOP</h1>-->
-    <!--            <p>누적 좋아요 많은 순 추천</p>-->
-    <!--        </div>-->
-    <!--        <div class="btn-frame">-->
-    <!--            <div class="filter">-->
-    <!--                <button class="btn-active">호텔</button>-->
-    <!--                <button>펜션</button>-->
-    <!--                <button>모텔</button>-->
-    <!--                <button>게스트 하우스</button>-->
-    <!--            </div>-->
-    <!--            <button class="btn-see-all">전체보기</button>-->
-    <!--        </div>-->
-    <!--        <div class="item-list">-->
-    <!--            <div class="item">-->
-    <!--                <img src="placeholder.png" alt="호텔 이미지">-->
-    <!--                <div class="item-details">-->
-    <!--                    <div>-->
-    <!--                        <p class="item-title">~~~~~~~~~~~호텔</p>-->
-    <!--                        <p class="item-rating">⭐ 4.6(512)</p>-->
-    <!--                    </div>-->
-    <!--                    <p class="item-price">61,600원~</p>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--            <div class="item">-->
-    <!--                <img src="placeholder.png" alt="호텔 이미지">-->
-    <!--                <div class="item-details">-->
-    <!--                    <div>-->
-    <!--                        <p class="item-title">~~~~~~~~~~~호텔</p>-->
-    <!--                        <p class="item-rating">⭐ 4.6(512)</p>-->
-    <!--                    </div>-->
-    <!--                    <p class="item-price">61,600원~</p>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--            <div class="item">-->
-    <!--                <img src="placeholder.png" alt="호텔 이미지">-->
-    <!--                <div class="item-details">-->
-    <!--                    <div>-->
-    <!--                        <p class="item-title">~~~~~~~~~~~호텔</p>-->
-    <!--                        <p class="item-rating">⭐ 4.6(512)</p>-->
-    <!--                    </div>-->
-    <!--                    <p class="item-price">61,600원~</p>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--            <div class="item">-->
-    <!--                <img src="placeholder.png" alt="호텔 이미지">-->
-    <!--                <div class="item-details">-->
-    <!--                    <div>-->
-    <!--                        <p class="item-title">~~~~~~~~~~~호텔</p>-->
-    <!--                        <p class="item-rating">⭐ 4.6(512)</p>-->
-    <!--                    </div>-->
-    <!--                    <p class="item-price">61,600원~</p>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--            <div class="item">-->
-    <!--                <img src="placeholder.png" alt="호텔 이미지">-->
-    <!--                <div class="item-details">-->
-    <!--                    <div>-->
-    <!--                        <p class="item-title">~~~~~~~~~~~호텔</p>-->
-    <!--                        <p class="item-rating">⭐ 4.6(512)</p>-->
-    <!--                    </div>-->
-    <!--                    <p class="item-price">61,600원~</p>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--            <div class="item">-->
-    <!--                <img src="placeholder.png" alt="호텔 이미지">-->
-    <!--                <div class="item-details">-->
-    <!--                    <div>-->
-    <!--                        <p class="item-title">~~~~~~~~~~~호텔</p>-->
-    <!--                        <p class="item-rating">⭐ 4.6(512)</p>-->
-    <!--                    </div>-->
-    <!--                    <p class="item-price">61,600원~</p>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </section>-->
-
     <!-- 숙소 구매 TOP -->
     <section class="ranking-list">
         <div class="ranking-list-header">
@@ -121,72 +42,21 @@
         </div>
         <div class="btn-frame">
             <div class="filter">
-                <button class="btn-active">호텔</button>
-                <button>펜션</button>
-                <button>모텔</button>
-                <button>게스트 하우스</button>
+                <button onclick="filterItems('all')">전체보기</button>
+                <button onclick="filterItems('호텔/리조트')">호텔/리조트</button>
+                <button onclick="filterItems('펜션/풀빌라')">펜션/풀빌라</button>
+                <button onclick="filterItems('모텔')">모텔</button>
             </div>
-            <button class="btn-see-all">전체보기</button>
         </div>
-        <div class="item-list">
-            <div class="item">
-                <img src="placeholder.png" alt="호텔 이미지">
+        <div class="item-list" id="item-list">
+            <div th:each="lodging : ${lodgings}" class="item" th:data-type="${lodging.lodgingType}" th:data-id="${lodging.lodgingId}" th:data-price="${lodging.roomPrice}" onclick="goToLodgingDetail(this)">
+                <img th:src="@{${lodging.lodgingPicture1}}" alt="호텔 이미지">
                 <div class="item-details">
                     <div>
-                        <p class="item-title">~~~~~~~~~~~호텔</p>
-                        <p class="item-rating">⭐ 4.6(512)</p>
+                        <p class="item-title" th:text="${lodging.lodgingName}"></p>
+                        <p class="item-rating" th:text="'⭐ ' + ${lodging.postGrade} + ' (' + ${lodging.countPostGrade} + ')'"></p>
                     </div>
-                    <p class="item-price">61,600원~</p>
-                </div>
-            </div>
-            <div class="item">
-                <img src="placeholder.png" alt="호텔 이미지">
-                <div class="item-details">
-                    <div>
-                        <p class="item-title">~~~~~~~~~~~호텔</p>
-                        <p class="item-rating">⭐ 4.6(512)</p>
-                    </div>
-                    <p class="item-price">61,600원~</p>
-                </div>
-            </div>
-            <div class="item">
-                <img src="placeholder.png" alt="호텔 이미지">
-                <div class="item-details">
-                    <div>
-                        <p class="item-title">~~~~~~~~~~~호텔</p>
-                        <p class="item-rating">⭐ 4.6(512)</p>
-                    </div>
-                    <p class="item-price">61,600원~</p>
-                </div>
-            </div>
-            <div class="item">
-                <img src="placeholder.png" alt="호텔 이미지">
-                <div class="item-details">
-                    <div>
-                        <p class="item-title">~~~~~~~~~~~호텔</p>
-                        <p class="item-rating">⭐ 4.6(512)</p>
-                    </div>
-                    <p class="item-price">61,600원~</p>
-                </div>
-            </div>
-            <div class="item">
-                <img src="placeholder.png" alt="호텔 이미지">
-                <div class="item-details">
-                    <div>
-                        <p class="item-title">~~~~~~~~~~~호텔</p>
-                        <p class="item-rating">⭐ 4.6(512)</p>
-                    </div>
-                    <p class="item-price">61,600원~</p>
-                </div>
-            </div>
-            <div class="item">
-                <img src="placeholder.png" alt="호텔 이미지">
-                <div class="item-details">
-                    <div>
-                        <p class="item-title">~~~~~~~~~~~호텔</p>
-                        <p class="item-rating">⭐ 4.6(512)</p>
-                    </div>
-                    <p class="item-price">61,600원~</p>
+                    <p class="item-price"></p>
                 </div>
             </div>
         </div>

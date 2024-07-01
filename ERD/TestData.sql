@@ -11,6 +11,7 @@ SELECT * FROM authority;
 SELECT * FROM user_authority;
 SELECT * FROM post;
 SELECT * FROM booking;
+SELECT * FROM `like`;
 
 # user 테이블 내 데이터 삽입
 INSERT INTO user
@@ -24,9 +25,17 @@ VALUES (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS',
 
 # 권한 데이터 삽입
 INSERT INTO user_authority
-VALUES (1, 1), (1, 2), (1, 3), (2, 1), (2, 2), (3, 1), (4, 1), (5, 1), (6, 1);
+VALUES (1, 1), (1, 2), (1, 3), (2, 1), (2, 5), (3, 1), (4, 1), (5, 1), (6, 1);
 
 
+
+# 좋아요 데이터 삽입
+INSERT INTO `like`
+VALUES (1, 1), (1, 2), (1, 3), (2, 1), (2, 2), (2, 3),
+               (7, 1), (8, 5), (9, 3), (10, 6), (11, 2), (12, 1), (13, 6), (14, 1), (15, 1),
+               (16, 1), (17, 2), (18, 6), (19, 1), (20, 7), (21, 7), (22, 7), (23, 1), (24, 1),
+               (80, 1), (65, 5), (45, 3), (46, 1), (47, 2), (48, 1), (35, 1), (36, 1), (37, 1),
+               (69, 1), (68, 2), (76, 3), (56, 1), (55, 2), (54, 5), (4, 3), (5, 7), (6, 3);
 
 # lodging 테이블 내 데이터 삽입
 INSERT INTO lodging

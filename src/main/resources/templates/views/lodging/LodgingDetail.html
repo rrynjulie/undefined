@@ -112,42 +112,24 @@
     </div>
 
     <div class="room-list">
-        <div class="room-list1" th:each="lodging : ${lodging}">
-            <img class="room-img" th:src="${lodging.roomPicture1}" alt="객실 이미지">
+        <div class="room-list1" th:each="lodge: ${lodging}">
+            <img class="room-img" th:src="${lodge.roomPicture1}" alt="객실 이미지">
             <div class="room-details">
                 <div class="room-detail" style="padding: 0 10px;">
                     <h4>숙박</h4>
-                    <a class="detail-btn" th:href="@{'/lodging/RoomDetail/' + ${lodging.lodgingId} + '/' + ${lodging.roomId}}">상세보기 ></a>
+                    <a class="detail-btn" th:href="@{'/lodging/RoomDetail/' + ${lodge.lodgingId} + '/' + ${lodge.roomId}}">상세보기 ></a>
                 </div>
-                <div th:text="'체크인 ' + ${lodging.lodgingOpen} + ' ~ ' + '체크아웃 ' +  ${lodging.lodgingClose}" style="padding: 0 10px"></div>
+                <div th:text="'체크인 ' + ${lodge.lodgingOpen} + ' ~ ' + '체크아웃 ' +  ${lodge.lodgingClose}" style="padding: 0 10px"></div>
                 <div style="display: flex; justify-content: space-between; margin-top: 15px; padding: 0 10px;">
-                    <div th:text="${lodging.roomName}"></div>
-                    <div th:text="${lodging.formattedRoomPrices} + '원'"></div></div>
-                <div class="couponReserve" style="padding: 0 10px;"><button>쿠폰 ></button><a class="reserve-btn" th:href="@{/lodging/LodgingBooking(lodgingId=${lodging.lodgingId}, roomId=${lodging.roomId})}">예약하기</a></div>
+                    <div th:text="${lodge.roomName}"></div>
+                    <div th:text="${lodge.formattedRoomPrices} + '원'"></div>
+                </div>
+
+                <div class="couponReserve" style="padding: 0 10px;">
+                    <a id="reserve-btn" th:href="@{/lodging/LodgingBooking(lodgingId=${lodge.lodgingId}, roomId=${lodge.roomId})}">예약하기</a>
+                </div>
             </div>
-            <div th:if="${lodging.available == 0}" style="padding: 0 10px; color: green;">예약 가능</div>
-            <div th:if="${lodging.available > 0}" style="padding: 0 10px; color: red;">예약 불가</div>
-            <hr>
         </div>
-        <form id="bookingForm" action="" method="get">
-            <input type="hidden" id="bookingStartDate" name="bookingStartDate">
-            <input type="hidden" id="bookingEndDate" name="bookingEndDate">
-            <button type="submit">Submit</button>
-
-<!--            <div th:each="room : ${rooms}">-->
-<!--            </div>-->
-        </form>
-
-<!--        <form id="bookingForm">-->
-<!--            <label for="bookingStartDate">Check-in Date:</label>-->
-<!--            <input type="date" id="bookingStartDate" name="bookingStartDate" required><br><br>-->
-
-<!--            <label for="bookingEndDate">Check-out Date:</label>-->
-<!--            <input type="date" id="bookingEndDate" name="bookingEndDate" required><br><br>-->
-
-<!--            <button type="button" onclick="checkAvailability()">Check Availability</button>-->
-<!--        </form>-->
-
     </div>
 
     <div class="lodging-location" th:each="lodgingName : ${lodgingName}">

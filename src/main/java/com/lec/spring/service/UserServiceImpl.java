@@ -55,6 +55,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean isExistNickname(String nickname) {
+        User user = userRepository.findByNickname(nickname);
+        return user != null;
+    }
+
+
+    @Override
+    public boolean isExistPhonenum(String phonenum) {
+        User user = userRepository.findByPhonenum(phonenum);
+        return user != null;
+    }
+
+//    @Override
+//    public User findByEmail(String email) {
+//        return userRepository.findByEmail(email);
+//    }
+
+    public boolean emailExists(String email) {
+        User user = userRepository.findByEmail(email);
+        return user != null;
+    }
+
+//    @Override
     public boolean isExist(String providerId) {
         User user = findByProviderId(providerId);
         return user != null;

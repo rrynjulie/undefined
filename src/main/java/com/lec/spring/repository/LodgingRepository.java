@@ -2,6 +2,7 @@ package com.lec.spring.repository;
 
 
 
+import com.lec.spring.domain.Booking;
 import com.lec.spring.domain.Lodging;
 
 
@@ -35,4 +36,6 @@ public interface LodgingRepository {
     Double avgPostGrade(Long lodgingId);
 
     Integer totalPosts(Long lodgingId);
+
+    List<Lodging> countHotelBookingWithRatings();
 }
