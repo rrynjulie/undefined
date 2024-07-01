@@ -59,23 +59,34 @@
     </select>
 
     <select id="findPostsByRoomId" resultType="com.lec.spring.domain.Post">
-        <include refid="SELECT_BASE"/>
+            <include refid="SELECT_BASE"/>
         AND ro.room_id = #{roomId}
     </select>
 
 <!--    숙소 상세, 객실 상세 페이지 안 후기-->
     <select id="findPostByLodgingId" resultType="com.lec.spring.domain.Post">
-        SELECT p.post_id AS postId,
+        SELECT r.room_name AS roomName,
+               l.lodging_name AS lodgingName,
+               l.lodging_picture_1 AS lodgingPicture1,
+               l.lodging_type AS lodgingType,
+               p.post_id AS postId,
                p.post_picture AS postPicture,
                p.post_text AS postText,
                p.post_grade AS postGrade,
                p.user_id AS userId,
                p.booking_id AS bookingId,
                p.lodging_id AS lodgingId,
-               p.room_id AS roomId
+               p.room_id AS roomId,
+               b.startDate,
+               b.endDate
         FROM post p
-            JOIN lodging l ON p.lodging_id = l.lodging_id
-        WHERE p.lodging_id = #{lodging_id}
+                 JOIN lodging l ON p.lodging_id = l.lodging_id
+                 JOIN room r ON p.room_id = r.room_id
+                 LEFT JOIN (
+            SELECT booking_id, booking_startdate AS startDate, booking_enddate AS endDate
+            FROM booking
+        ) b ON p.booking_id = b.booking_id
+        WHERE p.lodging_id = #{lodgingId}
     </select>
 
 <!--    후기 업데이트 쿼리-->

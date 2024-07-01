@@ -159,14 +159,28 @@
 
     <!--   전체 후기 리스트   -->
     <select id="allPostList" resultType="com.lec.spring.domain.Lodging">
-        SELECT p.post_picture AS postPicture,
+        SELECT r.room_name AS roomName,
+               l.lodging_name AS lodgingName,
+               l.lodging_picture_1 AS lodgingPicture1,
+               l.lodging_type AS lodgingType,
+               p.post_id AS postId,
+               p.post_picture AS postPicture,
                p.post_text AS postText,
                p.post_grade AS postGrade,
-               r.room_name AS roomName
+               p.user_id AS userId,
+               p.booking_id AS bookingId,
+               p.lodging_id AS lodgingId,
+               p.room_id AS roomId,
+               b.startDate,
+               b.endDate
         FROM post p
                  JOIN lodging l ON p.lodging_id = l.lodging_id
                  JOIN room r ON p.room_id = r.room_id
-        WHERE p.lodging_id = #{lodgingId}
+                 LEFT JOIN (
+            SELECT booking_id, booking_startdate AS startDate, booking_enddate AS endDate
+            FROM booking
+        ) b ON p.booking_id = b.booking_id
+        WHERE p.lodging_id = #{lodging_id}
     </select>
 
     <select id="avgPostGrade" resultType="java.lang.Double">

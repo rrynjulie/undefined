@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentDate = new Date();
     let startDate = sessionStorage.getItem('startDate') ? new Date(sessionStorage.getItem('startDate')) : new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
     let endDate = sessionStorage.getItem('endDate') ? new Date(sessionStorage.getItem('endDate')) : new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
-    selectedDate.innerHTML = startDate.getFullYear() + '.' + (startDate.getMonth() + 1) + '.' + startDate.getDate() + ' ~ ' + endDate.getFullYear() + '.' + (endDate.getMonth() + 1) + '.' + (endDate.getDate());
+    selectedDate.innerHTML = startDate.getFullYear() + '.' + (startDate.getMonth() + 1) + '.' + startDate.getDate() + ' ~ ' + endDate.getFullYear() + '.' + (endDate.getMonth() + 1) + '.' + (endDate.getDate() + ' (1박)');
     if (!sessionStorage.getItem('startDate')) {
         sessionStorage.setItem('startDate', startDate.toISOString());
     }
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateSelectedDateText() {
         const nights = Math.ceil((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24));
-        selectedDate.textContent = `${new Date(startDate).getFullYear()}.${new Date(startDate).getMonth() + 1}.${new Date(startDate).getDate()} ~ ${new Date(endDate).getFullYear()}.${new Date(endDate).getMonth() + 1}.${new Date(endDate).getDate()}, ${nights}박`;
+        selectedDate.textContent = `${new Date(startDate).getFullYear()}.${new Date(startDate).getMonth() + 1}.${new Date(startDate).getDate()} ~ ${new Date(endDate).getFullYear()}.${new Date(endDate).getMonth() + 1}.${new Date(endDate).getDate()} (${nights}박)`;
     }
 
     prevButton.addEventListener('click', function() {
