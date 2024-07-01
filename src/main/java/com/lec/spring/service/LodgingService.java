@@ -37,4 +37,6 @@ public interface LodgingService {
     Double getAvgPostGrade(Long lodgingId);
 
     Integer getTotalPosts(Long lodgingId);
+
+    List<Lodging> getCountHotelBookingWithRatings();
 }

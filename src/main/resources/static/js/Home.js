@@ -18,3 +18,31 @@ function logout() {
             alert('로그아웃 중 오류가 발생했습니다.');
         });
 }
+
+function filterItems(type) {
+    const items = document.querySelectorAll('.item');
+    items.forEach(item => {
+        if (type === 'all' || item.getAttribute('data-type') === type) {
+            item.style.display = 'flex';
+        } else {
+            item.style.display = 'none';
+        }
+        console.log("")
+    });
+
+    const buttons = document.querySelectorAll('.filter button');
+    buttons.forEach(button => {
+        if (button.textContent === type || (type === 'all' && button.textContent === '전체보기')) {
+            button.classList.add('btn-active');
+        } else {
+            button.classList.remove('btn-active');
+        }
+    });
+
+
+}
+
+function goToLodgingDetail(element) {
+    const lodgingId = element.getAttribute('data-id');
+    window.location.href = `lodging/LodgingDetail/${lodgingId}`;
+}

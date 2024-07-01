@@ -78,7 +78,11 @@
                         결제 금액
                         <p th:text="${books.formattedPay} + '원'"></p>
                     </label>
-                    <button class="btn-booking-cancel" th:href="@{mypage/customer/CancelBookingOk}">예약 취소</button>
+                    <form id="deleteForm" th:action="@{/mypage/customer/CancelBooking/{bookingId}(bookingId=${books.bookingId})}" method="post">
+                        <div class="btn-list">
+                            <button type="button" class="btn-booking-cancel" onclick="confirmDelete()">예약 취소</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
