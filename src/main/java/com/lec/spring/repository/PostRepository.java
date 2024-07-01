@@ -27,4 +27,6 @@ public interface PostRepository {
     int postUpdate(Post post);
 
     int postDelete(Post post);
+
+    boolean checkIfUserPosted(@Param("userId") Long userId, @Param("bookingId") Long bookingId);
 }
