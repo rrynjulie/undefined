@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/provider/ProvBookingList.css}">
@@ -26,7 +26,9 @@
                     <option th:each="lodgings : ${lodgings}" th:value="${lodgings.lodgingId}">[[${lodgings.lodgingName}]]</option>
                 </select>
             </label>
-            <button class="btn-search" type="button">검색</button>
+            <button class="btn-search" type="button">
+                <img th:src="@{/image/IconSearch.png}" alt="" height="30">
+            </button>
         </div>
         <div id="booking-list">
             <th:block th:include="mypage/provider/ProvBookingListInner :: bookingList"></th:block>

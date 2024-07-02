@@ -49,10 +49,10 @@
 
                 <div>
                     <div id="postText">
-                        <textarea id="text" name="postText" rows="4" cols="50" th:placeholder="${post.postText}"></textarea>
+                        <textarea id="text" name="postText" rows="4" cols="50" th:text="${post.postText}"></textarea>
                     </div>
                     <div id="postPicture">
-                        <input id="picture" type="text" name="postPicture" th:placeholder="${post.postPicture}" />
+                        <textarea id="picture" name="postPicture" th:text="${post.postPicture}"></textarea>
                     </div>
                 </div>
                 <div style="width: 99.5%; height: 50px; margin-top: 20px;">
