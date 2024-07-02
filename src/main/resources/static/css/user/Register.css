@@ -1,7 +1,9 @@
 
 main {
     display: flex;
-    padding: 40px 20%;
+    width: 60%;
+    margin: auto;
+    /*padding: 40px 20%;*/
     height: fit-content;
     justify-content: space-between;
 }
@@ -13,6 +15,14 @@ body {
     height: 100vh;
     margin: 0;
     background-color: white;
+}
+.dangerDiv {
+    width: 200%;
+}
+.text-danger {
+    width: 200%;
+    font-size: small;
+    color: #fc5185;
 }
 
 .container, .modal {
@@ -64,7 +74,6 @@ button {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    margin-left: 85%;
 }
 
 button:disabled {
@@ -231,10 +240,11 @@ main {
 
 .user-info-input {
     /*display: flex;*/
+
     flex-wrap: wrap;
     width: 60%;
     margin-top: 20px;
-    margin-left:85%;
+    /*margin-left:85%;*/
 }
 
 
@@ -247,11 +257,6 @@ main {
     width: 4px;
 }
 
-.text-danger{
-    font-size: small;
-    color: #fc5185;
-}
-
 .info-label {
     display: flex;
     /*font-size: 12px;*/
@@ -260,7 +265,8 @@ main {
 }
 
 #passwordguide{
-    display: block;
+    width: 200%;
+    display: flex;
     color: #8d8d8d;
     font-size:11px;
 }

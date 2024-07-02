@@ -23,6 +23,7 @@ public class Post {
     private String startDate;
     private String endDate;
     private String userName;
+    private String userNickname;
 
     // Foreign Key
     private Long userId;  // NOT NULL

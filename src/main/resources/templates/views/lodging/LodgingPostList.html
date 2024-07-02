@@ -31,7 +31,7 @@
                     <p id="lodgingType" th:text="${userPost.lodgingType}"></p>
                 </div>
                 <div id="div3">
-                    <p id="userName" th:text="${userPost.userName}"></p>
+                    <p id="userName" th:text="${userPost.userNickname} + '(' + ${userPost.userName} + ')'"></p>
 
                     <div class="stars" th:attr="data-star-count=${userPost.postGrade}">
                         <span class="star" data-value="5">&#9733;</span>

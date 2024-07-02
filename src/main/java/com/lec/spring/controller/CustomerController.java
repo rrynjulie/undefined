@@ -136,9 +136,7 @@ public class CustomerController {
             }
 
         }
-////        // Validate password
 
-//
         if (hasErrors) {
             return "redirect:/mypage/customer/ManageAccount";
         }
