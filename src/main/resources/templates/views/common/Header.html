@@ -16,9 +16,13 @@
             <form class="nav-bar-inner-right" th:action="@{/user/logout}" method="POST" id="user-info-logout">
                 <a class="common-menu" th:href="@{/lodging/LodgingSearch}">숙박 예약</a>
                 <a class="common-menu" th:href="@{/ticket/TicketCheck}">승차권 조회</a>
-                <a class="user-frame" th:href="@{'/mypage/customer/BookingList/' + ${user.userId}}" sec:authorize="isAuthenticated()" th:with="user=${#authentication.getPrincipal().getUser()}">
-                    <div class="user-icon"><img th:src="@{/image/common/UserIcon.png}" alt=""></div>
-                    <p th:text="${user.username}"></p>
+                <a class="user-frame" th:href="@{'/mypage/customer/BookingList/' + ${user.userId}}"
+                   sec:authorize="isAuthenticated()"
+                   th:with="user=${session.user != null ? session.user : #authentication.getPrincipal().getUser()}">
+                    <div class="user-icon">
+                        <img th:src="@{/image/common/UserIcon.png}" alt="">
+                    </div>
+                    <p th:text="${user.nickname}"></p>
                 </a>
                 <a class="btn btn-primary" sec:authorize="isAnonymous()" th:href="@{/user/login}" id="btn-login-pc">로그인 / 회원가입</a>
                 <button class="btn btn-danger" type="submit" id="btn-logout-pc" sec:authorize="isAuthenticated()">로그아웃</button>

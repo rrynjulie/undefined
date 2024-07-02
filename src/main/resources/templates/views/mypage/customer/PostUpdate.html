@@ -14,7 +14,7 @@
     <th:block th:insert="~{mypage/customer/NavMenu::nav-menu}"></th:block>
     <div>
         <h2 id="body-head">후기 수정</h2>
-        <form th:action="@{/mypage/customer/PostUpdate}" method="post">
+        <form th:action="@{/mypage/customer/PostUpdate}" method="post" onsubmit="validateForm()">
             <div class="userPost">
                 <input type="hidden" name="postId" th:value="${post.postId}" />
                 <input type="hidden" name="userId" th:value="${post.userId}" />
@@ -29,7 +29,7 @@
                         <p id="lodgingType" th:text="${post.lodgingType}"></p>
                     </div>
                     <div id="div3">
-                        <div id class="stars" th:data-star-count="${post.postGrade}">
+                        <div class="stars" th:data-star-count="${post.postGrade}">
                             <span class="star" data-value="5">&#9733;</span>
                             <span class="star" data-value="4">&#9733;</span>
                             <span class="star" data-value="3">&#9733;</span>
@@ -49,13 +49,17 @@
 
                 <div>
                     <div id="postText">
-                        <textarea id="text" name="postText" rows="4" cols="50" th:placeholder="${post.postText}"></textarea>
+                        <h4>후기글</h4>
+                        <textarea id="textInput" name="postText" th:text="${post.postText}"></textarea>
                     </div>
-                    <div id="postPicture">
-                        <input id="picture" type="text" name="postPicture" th:placeholder="${post.postPicture}" />
+                    <div>
+                        <h4>후기 사진</h4>
+                        <div id="postPicture">
+                            <textarea id="picture" name="postPicture" th:text="${post.postPicture}"></textarea>
+                        </div>
                     </div>
                 </div>
-                <div style="width: 99.5%; height: 50px; margin-top: 20px;">
+                <div style="width: 99.5%; height: 50px; align-content: center">
                     <button type="submit" id="submit">수정확인</button>
                 </div>
             </div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/lodging/RoomDetail.css}">
-    <script th:src="@{/js/mypage/provider/RoomDetail.js}"></script>
+
     <title>객실 상세</title>
 </head>
 <body>
@@ -81,7 +81,7 @@
     <div class="post-null" th:if="${totalPosts == 0}">등록된 후기가 없습니다.</div>
 
 </section>
-
+<script th:src="@{/js/lodging/RoomDetail.js}"></script>
 <!-- 푸터 -->
 <th:block th:insert="~{common/Footer::footer}"></th:block>
 </body>

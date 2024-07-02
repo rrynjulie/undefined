@@ -10,6 +10,7 @@ import com.lec.spring.service.ProviderService;
 import com.lec.spring.service.RoomService;
 import com.lec.spring.service.UserService;
 import com.lec.spring.util.U;
+import com.lec.spring.util.Util;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,6 +22,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,25 +41,17 @@ public class ProviderController {
     private BookingService bookingService;
 
     @GetMapping("/ProvBookingList")
-    public String provBookingList(Model model, Authentication authentication) {
+    public String provBookingList(Model model, Authentication authentication, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = U.getLoggedUser();
+            session.setAttribute("user", user);
+        }
+        model.addAttribute("user", user);
+
         if (authentication == null || !authentication.isAuthenticated()) {
             // 인증되지 않은 사용자 처리
             return "redirect:/user/login"; // 로그인 페이지로 리다이렉트 또는 예외 처리
-        }
-
-        Object principal = authentication.getPrincipal();
-        User user;
-        if (principal instanceof PrincipalDetails) {
-            PrincipalDetails principalDetails = (PrincipalDetails) principal;
-            user = principalDetails.getUser();
-            model.addAttribute("user", user);
-        } else if (principal instanceof String) {
-            String username = (String) principal;
-            user = userService.findByUsername(username);
-            model.addAttribute("user", user);
-        } else {
-            // 다른 타입에 대한 처리
-            throw new IllegalStateException("Unknown principal type: " + principal.getClass());
         }
 
         List<ProvLodging> lodgings = providerService.getLodgings(user.getUserId());
@@ -72,6 +66,7 @@ public class ProviderController {
         List<Room> rooms = roomService.findRoomsByLodgingId(lodgingId);
         rooms.forEach(room -> {
             room.setBookList(bookingService.findBooksByRoomId(room.getRoomId()));
+            //room.DecimalFormat.getInstance().format(room.getRoomPrice());
         });
         model.addAttribute("rooms", rooms);
 
@@ -86,18 +81,22 @@ public class ProviderController {
 //    }
 
     @GetMapping("/provlodginglist")
-    public String provlodginglist(Model model) {
-        User loggedUser = U.getLoggedUser(); // 로그인된 사용자 정보
-        Long userId = loggedUser.getUserId(); // 사용자 ID
-        System.out.println("세션 userId: " + userId); // userId를 콘솔에 출력
+    public String provlodginglist(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = U.getLoggedUser();
+            session.setAttribute("user", user);
+        }
+        model.addAttribute("user", user);
+        System.out.println("세션 userId: " + user.getUserId()); // userId를 콘솔에 출력
 
-        List<ProvLodging> lodgings = providerService.getLodgings(userId);
+        List<ProvLodging> lodgings = providerService.getLodgings(user.getUserId());
         System.out.println("가져온 숙소 목록: " + lodgings);
 
         List<ProvLodging> myLodgings = new ArrayList<>();
         for (ProvLodging item : lodgings) {
             System.out.println("숙소 userId: " + item.getUserId());
-            if (item.getUserId() != null && item.getUserId().equals(userId)) {
+            if (item.getUserId() != null && item.getUserId().equals(user.getUserId())) {
                 myLodgings.add(item);
             }
         }
@@ -154,7 +153,9 @@ public class ProviderController {
 
 
     @GetMapping("/provlodgingregister")
-    public String provlodgingregister() {
+    public String provlodgingregister(Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
+
         return "mypage/provider/ProvLodgingRegister";
     }
 
@@ -171,7 +172,9 @@ public class ProviderController {
     }
 
     @GetMapping("/ProvRoomRegister/{lodgingId}")
-    public String provRoomRegister(@PathVariable("lodgingId") Long lodgingId, Model model) {
+    public String provRoomRegister(@PathVariable("lodgingId") Long lodgingId, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
+
         ProvLodging lodging = providerService.getAllDetails(lodgingId);
         model.addAttribute("lodging", lodging);
         return "mypage/provider/ProvRoomRegister";
@@ -184,7 +187,13 @@ public class ProviderController {
     }
 
     @GetMapping("/ProvRoomList/{userId}")
-    public String provRoomList(@PathVariable("userId") Long userId, Model model) {
+    public String provRoomList(@PathVariable("userId") Long userId, Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = U.getLoggedUser();
+            session.setAttribute("user", user);
+        }
+        model.addAttribute("user", user);
         List<ProvLodging> roomList = providerService.getLodgingsAndRoomsByUserId(userId);
         model.addAttribute("rooms", roomList);
         return "mypage/provider/ProvRoomList";

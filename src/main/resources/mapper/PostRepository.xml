@@ -73,15 +73,17 @@
                p.post_picture AS postPicture,
                p.post_text AS postText,
                p.post_grade AS postGrade,
-               p.user_id AS userId,
                p.booking_id AS bookingId,
                p.lodging_id AS lodgingId,
                p.room_id AS roomId,
+               CONCAT(LEFT(user_name, 1), REPEAT('*', LENGTH(user_name) - 8), RIGHT(user_name, 1)) AS userName,
+               u.user_nickname AS userNickname,
                b.startDate,
                b.endDate
         FROM post p
                  JOIN lodging l ON p.lodging_id = l.lodging_id
                  JOIN room r ON p.room_id = r.room_id
+                 JOIN user u ON p.user_id = u.user_id
                  LEFT JOIN (
             SELECT booking_id, booking_startdate AS startDate, booking_enddate AS endDate
             FROM booking
