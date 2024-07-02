@@ -3,6 +3,8 @@ package com.lec.spring.controller;
 
 import com.lec.spring.domain.*;
 import com.lec.spring.service.*;
+import com.lec.spring.util.Util;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -101,7 +103,10 @@ public class LodgingController {
     public String getLodgingDetail(@PathVariable("lodgingId") Long lodgingId,
                                    @RequestParam(value = "bookingStartDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bookingStartDate,
                                    @RequestParam(value = "bookingEndDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bookingEndDate,
-                                   Model model) {
+                                   Model model,
+                                   HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
+
         List<Lodging> lodgings = lodgingService.lodgingDetail(lodgingId);
         List<Lodging> lodgingName = lodgingService.lodgingName(lodgingId);
         List<Post> lodgingPost = postService.findPostByLodgingId(lodgingId);
@@ -131,7 +136,9 @@ public class LodgingController {
     }
 
     @GetMapping("/LodgingPostList/{lodgingId}")
-    public String postList (@PathVariable("lodgingId") Long lodgingId, Model model) {
+    public String postList (@PathVariable("lodgingId") Long lodgingId, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
+
         List<Post> userPosts = postService.findPostByLodgingId(lodgingId);
         Double avgPostGrade = lodgingService.getAvgPostGrade(lodgingId);
         int totalPosts = postService.countAllPostsByLodgingId((long)lodgingId);
@@ -144,7 +151,9 @@ public class LodgingController {
     }
 
     @GetMapping("/RoomDetail/{lodgingId}/{roomId}")
-    public String RoomDetail(@PathVariable("lodgingId") Long lodgingId, @PathVariable("roomId") Long roomId, Model model) {
+    public String RoomDetail(@PathVariable("lodgingId") Long lodgingId, @PathVariable("roomId") Long roomId, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
+
         ProvLodging lodging = providerService.getAllDetails(lodgingId);
         Room room = roomService.findByRoomId(roomId);
         List<Post> postList = postService.findPostByLodgingId(lodgingId);
