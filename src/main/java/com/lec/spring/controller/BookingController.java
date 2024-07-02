@@ -109,7 +109,7 @@ public class BookingController {
         int conflictingReservations = bookingService.bookingCount(roomId, bookingStartDate, bookingEndDate);
         if (conflictingReservations > 0) {
             // 예약 불가 메시지를 전달
-            model.addAttribute("error", "예약불가");
+            model.addAttribute("error", "이미 예약된 객실입니다.");
             model.addAttribute("user", user);
             return "lodging/LodgingBookingError";
         }

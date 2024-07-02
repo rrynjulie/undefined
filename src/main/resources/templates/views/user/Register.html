@@ -20,7 +20,7 @@
                 <div class="required-dot"></div>
             </label>
 <!--        </div>-->
-        <input type="text" id="email" name="email" placeholder="example@mail.com">
+        <input type="text" id="email" name="email" placeholder="example@mail.com" required>
         <div><span class="text-danger" th:if="${error_email}" th:utext="${error_email}"></span></div>
 <!--        <div class="user-info-input">-->
             <label class="info-label" for="nickname">닉네임
@@ -39,17 +39,17 @@
         <label for="confirm-password">비밀번호 확인 </label>
         <br>
         <input type="password" id="confirm-password" name="re_password" placeholder="비밀번호 재입력">
+            <div id="passwordguide">최소 하나 이상의 영문 대소문자, 숫자, 특수문자를 혼합하여 8~20자로 입력하여 주세요.</div>
         <div><span class="text-danger" th:if="${error_password}" th:utext="${error_password}"></span></div>
         <label class="info-label" for="phone">전화번호 </label>
-        <br>
-        <input type="tel" id="phone" name="phonenum" placeholder="000-0000-0000">
+        <input type="tel" id="phone" name="phonenum" placeholder="000-0000-0000" required>
         <div><span class="text-danger" th:if="${error_phonenum}" th:utext="${error_phonenum}"></span></div>
 <!--        <div class="user-info-input">-->
             <label class="info-label" for="username">이름
                 <div class="required-dot"></div>
             </label>
 <!--        </div>-->
-        <input type="text" id="username" name="username" placeholder="이름">
+        <input type="text" id="username" name="username" placeholder="이름" required>
         <div><span class="text-danger" th:if="${error_username}" th:utext="${error_username}"></span></div>
         </div>
         <br>
