@@ -17,7 +17,7 @@
     <section class="booking-list">
         <h1>예약 내역</h1>
         <!--        (userId=${#httpServletRequest.getUserPrincipal().name})-->
-        <form class="filter-form" id="filter-form" method="GET" th:action="@{'/mypage/customer/BookingList/'+ ${#authentication.getPrincipal().getUser().userId}}">
+        <form class="filter-form" id="filter-form" method="GET" th:action="@{'/mypage/customer/BookingList/'+ ${user.userId}}">
             <div class="filter-frame">
                 <label for="lodging-type">숙소 분류</label>
                 <select id="lodging-type" name="lodgingType">
