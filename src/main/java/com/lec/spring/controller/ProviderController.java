@@ -10,6 +10,7 @@ import com.lec.spring.service.ProviderService;
 import com.lec.spring.service.RoomService;
 import com.lec.spring.service.UserService;
 import com.lec.spring.util.U;
+import com.lec.spring.util.Util;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -152,7 +153,9 @@ public class ProviderController {
 
 
     @GetMapping("/provlodgingregister")
-    public String provlodgingregister() {
+    public String provlodgingregister(Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
+
         return "mypage/provider/ProvLodgingRegister";
     }
 
@@ -169,7 +172,9 @@ public class ProviderController {
     }
 
     @GetMapping("/ProvRoomRegister/{lodgingId}")
-    public String provRoomRegister(@PathVariable("lodgingId") Long lodgingId, Model model) {
+    public String provRoomRegister(@PathVariable("lodgingId") Long lodgingId, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
+
         ProvLodging lodging = providerService.getAllDetails(lodgingId);
         model.addAttribute("lodging", lodging);
         return "mypage/provider/ProvRoomRegister";
