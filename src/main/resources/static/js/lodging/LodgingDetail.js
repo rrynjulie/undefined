@@ -359,44 +359,39 @@ document.addEventListener('DOMContentLoaded', function () {
 //     // 예를 들어, 다음은 예시에 불과합니다:
 // });
 
+
+
+// 좋아요 버튼 JS
+
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll('.like-button').forEach(function(button) {
-        button.addEventListener('click', function(event) {
-            event.preventDefault();
+        button.addEventListener('click', function() {
+            var userId = this.getAttribute('data-user-id');
+            var lodgingId = this.getAttribute('data-lodging-id');
+            var isLiked = this.getAttribute('data-is-liked') === 'true';
 
-            var form = this.closest('form');
-            var actionUrl = form.getAttribute('action');
-            var formData = new FormData(form);
-            var userId = formData.get('userId');
-            var lodgingId = formData.get('lodgingId');
-            var isLiked = this.classList.contains('liked');
+            var actionUrl = isLiked ? '/lodging/removeLove' : '/lodging/addLove';
 
-            if (confirm(isLiked ? '좋아요를 취소하시겠습니까?' : '좋아요를 추가하시겠습니까?')) {
-                fetch(actionUrl, {
-                    method: 'POST',
-                    body: new URLSearchParams(formData),
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
+            fetch(actionUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `userId=${userId}&lodgingId=${lodgingId}`
+            })
+                .then(response => {
+                    if (response.ok) {
+                        this.setAttribute('data-is-liked', !isLiked);
+                        this.classList.toggle('liked');
+                        alert(!isLiked ? '좋아요가 추가되었습니다.' : '좋아요가 취소되었습니다.');
+                    } else {
+                        alert('오류가 발생했습니다. 다시 시도해주세요.');
                     }
                 })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            if (isLiked) {
-                                this.classList.remove('liked');
-                                this.textContent = '좋아요';
-                                form.setAttribute('action', '/love/add');
-                            } else {
-                                this.classList.add('liked');
-                                this.textContent = '좋아요 취소';
-                                form.setAttribute('action', '/love/remove');
-                            }
-                        } else {
-                            alert('오류가 발생했습니다. 다시 시도해주세요.');
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
-            }
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('오류가 발생했습니다. 다시 시도해주세요.');
+                });
         });
     });
 });

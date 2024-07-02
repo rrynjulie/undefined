@@ -59,6 +59,22 @@
     color: pink;
 }
 
+.like-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    outline: none;
+}
+
+.like-button .heart {
+    fill: grey;
+}
+
+.like-button.liked .heart {
+    fill: red;
+}
+
 .review-header {
     border-top: 1px solid #EBEBEB;
     margin-top: 30px;

@@ -161,17 +161,18 @@ public class LodgingController {
     }
 
     @PostMapping("/addLove")
+    @ResponseBody
     public String addLove(@RequestParam Long userId, @RequestParam Long lodgingId) {
         loveService.addLove(userId, lodgingId);
-        return "redirect:/LodgingDetail/{lodgingId}";
+        return "{\"success\": true}";
     }
 
     @PostMapping("/removeLove")
+    @ResponseBody
     public String removeLove(@RequestParam Long userId, @RequestParam Long lodgingId) {
         loveService.removeLove(userId, lodgingId);
-        return "redirect:/LodgingDetail/{lodgingId}";
+        return "{\"success\": true}";
     }
-
 
     @GetMapping("/LodgingPostList/{lodgingId}")
     public String postList (@PathVariable("lodgingId") Long lodgingId, Model model) {
