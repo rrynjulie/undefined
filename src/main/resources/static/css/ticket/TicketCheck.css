@@ -61,9 +61,10 @@ td {
     margin-right: 900px;
     /*border: solid 2px;*/
     position: absolute;
-    top: 74px; /* 원하는 위치로 조정 */
+    top: 55px; /* 원하는 위치로 조정 */
     right: 270px; /* 원하는 위치로 조정 */
     background-color: yellow;
+    border: 1px gray;
 }
 
 .tab-menu div {
