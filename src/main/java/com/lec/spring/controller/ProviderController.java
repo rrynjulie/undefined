@@ -172,7 +172,9 @@ public class ProviderController {
     }
 
     @GetMapping("/ProvRoomRegister/{lodgingId}")
-    public String provRoomRegister(@PathVariable("lodgingId") Long lodgingId, Model model) {
+    public String provRoomRegister(@PathVariable("lodgingId") Long lodgingId, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
+
         ProvLodging lodging = providerService.getAllDetails(lodgingId);
         model.addAttribute("lodging", lodging);
         return "mypage/provider/ProvRoomRegister";
