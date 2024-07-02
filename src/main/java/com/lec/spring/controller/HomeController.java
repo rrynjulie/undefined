@@ -42,11 +42,22 @@ public class HomeController {
 
         List<UserAuthority> userAuthorities = userService.getAllUserAuthorities();
         model.addAttribute("userAuthorities", userAuthorities);
-        System.out.println("user: " + user);
+//        System.out.println("user: " + user);
 
+        // 후기 많은 순위
         List<Lodging> lodgings = lodgingService.getCountHotelBookingWithRatings();
         model.addAttribute("lodgings",lodgings);
-        System.out.println("home에서 출력 " + lodgings);
+//        System.out.println("home에서 출력 " + lodgings);
+
+        // 숙소 예약 순위
+        List<Lodging> lodgingsBooking = lodgingService.getCountHotelBookingWithRatingsByBookingCount();
+        model.addAttribute("lodgingsBooking",lodgingsBooking);
+//        System.out.println("숙소예약순위 관련 출력" + lodgingsBooking);
+
+        // 좋아요 많은 순위
+        List<Lodging> lodgingLove = lodgingService.getCountHotelBookingWithRatingsByLoveCount();
+        model.addAttribute("lodgingLove",lodgingLove);
+        System.out.println("좋아요 순위 출력" + lodgingLove);
 
     }
 

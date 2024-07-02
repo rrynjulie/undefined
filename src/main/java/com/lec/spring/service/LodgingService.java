@@ -39,4 +39,8 @@ public interface LodgingService {
     Integer getTotalPosts(Long lodgingId);
 
     List<Lodging> getCountHotelBookingWithRatings();
+
+    List<Lodging> getCountHotelBookingWithRatingsByBookingCount();
+
+    List<Lodging> getCountHotelBookingWithRatingsByLoveCount();
 }
