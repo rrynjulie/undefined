@@ -1,7 +1,17 @@
+.container {
+    width: 60%;
+    height: 100%;
+    /*margin: auto;*/
+    user-select: none;
+    /*display: flex;*/
+    /*margin-top: 40px;*/
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 body {
@@ -11,20 +21,16 @@ body {
 
 main {
     display: flex;
-    flex-grow: 1;
-    justify-content: flex-start;
-    padding: 20px  50px;
-    height: 700px;
-    /*overflow: auto;*/
-    margin-bottom: 10%;
-}
-
-.content-wrapper {
-    /*margin-top: 100%;*/
-    flex: 1;
+    padding: 40px 20%;
+    height: fit-content;
+    /*justify-content: space-between;*/
     /*display: flex;*/
-    flex-direction: column;
+    /*padding: 20px  50px;*/
+    /*height: 700px;*/
+    /*flex-grow: 1;*/
+    /*justify-content: flex-start;*/
     /*overflow: auto;*/
+    /*margin-bottom: 10%;*/
 }
 
 .profile-menu-container {
@@ -75,16 +81,18 @@ main {
 
 /*내 정보 관리*/
 #manage-account {
+    padding-right: 10%;
     /*padding: 20px;*/
     /*margin: 0 auto;*/
-    width: 50%;
-    padding: 20px;
+    /*width: 50%;*/
+    /*padding: 20px;*/
     height: 90%;
-    margin-top: 20px;
+    /*margin-top: 20px;*/
     /*margin-right: 250px;*/
 }
 
 #manage-account h2 {
+    margin-left: 45%;
     margin-bottom: 20px;
     font-size: 24px;
     color: #333;
@@ -94,6 +102,8 @@ main {
     /*display: flex;*/
     flex-direction: column;
     gap: 30px;
+    width: 70%;
+    margin-left: 20%;
 }
 
 .form-group {
@@ -105,15 +115,17 @@ main {
     margin-bottom: 5px;
     font-size: 16px;
     color: #333;
+    margin: 5px 0 5px;
+    font-weight: bold;
 }
 
 .form-group input {
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #333333;
-    border-radius: 4px;
     background-color: #f8f8f8;
     color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 #save-btn {
@@ -166,6 +178,8 @@ main {
     padding: 1em;
     border: none;
     cursor: pointer;
+    margin-left: 80%;
+    width: 20%;
 }
 
 #save-btn:disabled {
@@ -272,7 +286,7 @@ body {
     background-color: #FC5185;
     border-radius: 50%;
     margin-left: 1px;
-    margin-top: 4px;
+    margin-top: 10px;
     height: 4px;
     width: 4px;
 }
@@ -287,4 +301,7 @@ body {
     display: flex;
 }
 
-
+.error-message {
+    font-size: small;
+    color: #fc5185;
+}
