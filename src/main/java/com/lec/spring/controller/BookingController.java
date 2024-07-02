@@ -4,6 +4,8 @@ import com.lec.spring.config.PrincipalDetails;
 import com.lec.spring.domain.*;
 
 import com.lec.spring.service.*;
+import com.lec.spring.util.Util;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,25 +46,14 @@ public class BookingController {
     public String lodgingBooking(@RequestParam("lodgingId") Long lodgingId,
                                  @RequestParam("roomId") Long roomId,
                                  Model model,
+                                 HttpSession session,
                                  Authentication authentication) {
         if (authentication == null || !authentication.isAuthenticated()) {
             // 인증되지 않은 사용자 처리
             return "redirect:/user/login"; // 로그인 페이지로 리다이렉트 또는 예외 처리
         }
 
-        Object principal = authentication.getPrincipal();
-        if (principal instanceof PrincipalDetails) {
-            PrincipalDetails principalDetails = (PrincipalDetails) principal;
-            User user = principalDetails.getUser();
-            model.addAttribute("user", user);
-        } else if (principal instanceof String) {
-            String username = (String) principal;
-            User user = userService.findByUsername(username);
-            model.addAttribute("user", user);
-        } else {
-            // 다른 타입에 대한 처리
-            throw new IllegalStateException("Unknown principal type: " + principal.getClass());
-        }
+        User user = Util.getOrSetLoggedUser(session, model);
 
         Lodging lodging = lodgingService.getLodgingById(lodgingId);
         model.addAttribute("lodging", lodging);
@@ -86,19 +77,9 @@ public class BookingController {
                                 @RequestParam("bookingChild") int bookingChild,
                                 @RequestParam("roomId") Long roomId,
                                 @RequestParam("userId") Long userId,
-                                Authentication authentication,
-                                Model model) {
+                                Model model, HttpSession session, Authentication authentication) {
 
-        Object principal = authentication.getPrincipal();
-        User user;
-        if (principal instanceof PrincipalDetails) {
-            user = ((PrincipalDetails) principal).getUser();
-        } else if (principal instanceof String) {
-            user = userService.findByUsername((String) principal);
-        } else {
-            throw new IllegalStateException("Unknown principal type: " + principal.getClass());
-        }
-
+        User user = Util.getOrSetLoggedUser(session, model);
 
         Room room = roomService.findByRoomId(roomId);
 
