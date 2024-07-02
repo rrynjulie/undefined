@@ -6,12 +6,27 @@
 </head>
 <body>
 <div th:fragment="bookingList" id="booking-list-by-room">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/provider/ProvBookingListInner.css}">
     <div th:each="rooms : ${rooms}">
-        <p th:text="${rooms.roomName}"></p>
-        <div th:each="bookings : ${rooms.bookList}">
-            <p th:text="${bookings.bookingStartDate}"></p>
-            <p th:text="${bookings.bookingEndDate}"></p>
-        </div>
+        <h3 class="h3-roomName" th:text="${rooms.roomName}"></h3>
+        <table class="booking-table">
+            <tr>
+                <th>#</th>
+                <th>예약자명</th>
+                <th>연락처</th>
+                <th>체크인</th>
+                <th>체크아웃</th>
+                <th>결제금액</th>
+            </tr>
+            <tr th:each="bookings : ${rooms.bookList}">
+                <td th:text="'1'"></td>
+                <td th:text="${bookings.visitorName}"></td>
+                <td th:text="${bookings.visitorPhoneNum}"></td>
+                <td th:text="${bookings.bookingStartDate}"></td>
+                <td th:text="${bookings.bookingEndDate}"></td>
+                <td th:text="${bookings.bookingPay}"></td>
+            </tr>
+        </table>
     </div>
 </div>
 </body>

@@ -162,6 +162,7 @@ main {
     align-content: center;
     background-color: #FC5185;
     color: white;
+    border: 0;
     border-radius: 5px;
     height: 40px;
     width: 150px;

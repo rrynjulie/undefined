@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // sessionStorage 초기화
+    sessionStorage.removeItem('alertShown');
+
     const stars = document.querySelectorAll('.star');
     const postGradeInput = document.getElementById('postGradeInput'); // 숨겨진 입력 필드
 
