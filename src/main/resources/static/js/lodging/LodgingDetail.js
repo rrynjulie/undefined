@@ -125,8 +125,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 선택한 날짜를 저장
     function saveSelectedDate() {
-        sessionStorage.setItem('startDate', startDate ? startDate.toString() : '');
-        sessionStorage.setItem('endDate', endDate ? endDate.toString() : '');
+        sessionStorage.setItem('startDate', startDate ? startDate.toISOString() : '');
+        sessionStorage.setItem('endDate', endDate ? endDate.toISOString() : '');
     }
 
     // 인원수 업데이트 함수
@@ -313,51 +313,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// document.addEventListener('DOMContentLoaded', function (){
-//     const storedStartDate = sessionStorage.getItem('startDate')?.split('T')[0];
-//     const storedEndDate = sessionStorage.getItem('endDate')?.split('T')[0];
-//
-//     // 예약 시작일과 종료일을 출력할 요소 가져오기
-//     const bookingStartDateElem = document.getElementById('bookingStartDate');
-//     const bookingEndDateElem = document.getElementById('bookingEndDate');
-//
-//     // 저장된 예약 날짜가 있는 경우에만 출력
-//     if (storedStartDate && storedEndDate) {
-//         bookingStartDateElem.textContent = `예약 체크인: ${storedStartDate.replaceAll('-', '.')}`;
-//         bookingEndDateElem.textContent = `예약 체크아웃: ${storedEndDate.replaceAll('-', '.')}`;
-//     }
-// });
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     const bookingStartDate = sessionStorage.getItem('startDate');
-//     const bookingEndDate = sessionStorage.getItem('endDate');
-//     const bookingForm = document.getElementById('bookingForm');
-//
-//     if (bookingStartDate && bookingEndDate) {
-//         bookingForm.action = `/lodging/LodgingDetail/${lodgingId}?bookingStartDate=${bookingStartDate}&bookingEndDate=${bookingEndDate}`;
-//         bookingForm.submit();
-//     }
-// });
-//
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     const bookingStartDate = document.getElementById('bookingStartDate');
-//     const bookingEndDate = document.getElementById('bookingEndDate');
-//
-//     const storedStartDate = sessionStorage.getItem('startDate')?.split('T')[0];
-//     const storedEndDate = sessionStorage.getItem('endDate')?.split('T')[0];
-//
-//     function setBookingInfo() {
-//         if (storedStartDate) bookingStartDate.value = storedStartDate;
-//         if (storedEndDate) bookingEndDate.value = storedEndDate;
-//     }
-//
-//     setBookingInfo();
-//
-//     // 추가: 폼 제출 이벤트 리스너 대신 자동 설정 방법
-//     // 예를 들어, 아래와 같이 할 수 있습니다 (페이지 로드 시 자동으로 값을 채우는 방법):
-//     // 예를 들어, 다음은 예시에 불과합니다:
-// });
 
 
 
