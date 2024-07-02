@@ -164,14 +164,6 @@ td {
     width: 4px;
 }
 
-.required-dot3 {
-    background-color: #FC5185;
-    margin-top: -10px;
-    margin-left :50px;
-    height: 4px;
-    width: 4px;
-}
-
 .info-label {
     display: flex;
     align-items: center;
