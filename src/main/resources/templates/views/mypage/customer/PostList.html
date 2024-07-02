@@ -43,9 +43,11 @@
                     </div>
                 </div>
 
-                <div>
+                <div id="inputDiv">
                     <div id="postText" th:text="${userPost.postText}"></div>
-                    <div id="postPicture" th:text="${userPost.postPicture}"></div>
+                    <div id="postPicture">
+                        <img id="picture" th:src="@{${userPost.postPicture}}"/>
+                    </div>
                 </div>
                 <div id="btnDiv">
                     <div id="update">

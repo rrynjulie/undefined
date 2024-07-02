@@ -22,6 +22,7 @@ public class Post {
     private String roomName;
     private String startDate;
     private String endDate;
+    private String userName;
 
     // Foreign Key
     private Long userId;  // NOT NULL
