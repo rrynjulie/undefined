@@ -26,3 +26,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+function validateForm() {
+    // 후기글 입력 확인
+    const postText = document.getElementById('textInput').value.trim();
+    if (!postText) {
+        alert('후기글을 입력해주세요.');
+        return false;
+    }
+
+    // 모든 조건이 충족되면 true 반환하여 제출 진행
+    return true;
+}

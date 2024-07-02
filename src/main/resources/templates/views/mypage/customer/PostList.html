@@ -12,7 +12,7 @@
 <div class="container">
     <!-- 좌측 네비게이션 메뉴 -->
     <th:block th:insert="~{mypage/customer/NavMenu::nav-menu}"></th:block>
-    <div>
+    <div style="width: 80%;">
         <h2 id="body-head">내 후기 리스트</h2>
         <div th:if="${not #lists.isEmpty(userPost)}">
             <div class="userPost" th:each="userPost : ${userPost}">

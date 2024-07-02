@@ -22,7 +22,8 @@
     <div class="lodging-name" th:each="lodgingName : ${lodgingName}">
         <h3 th:text="${lodgingName.lodgingName}"></h3>
         <div>
-            <button class="like" onclick="a">♡</button>
+            <tr th:each="lodgingName: ${lodgingName}">
+                <td th:text="${hasLove ? 'O' : 'X'}"></td>
         </div>
     </div>
     <div class="lodging-address" th:each="lodgingName : ${lodgingName}">
