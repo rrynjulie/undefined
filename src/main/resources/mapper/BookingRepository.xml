@@ -56,10 +56,10 @@
     </select>
 
     <!-- DELETE -->
-<!--    <delete id="deleteBooking" parameterType="int">-->
-<!--        DELETE FROM booking-->
-<!--        WHERE booking_id = #{bookingId}-->
-<!--    </delete>-->
+    <delete id="deleteBooking">
+        DELETE FROM booking
+        WHERE user_id = #{userId} AND booking_id = #{bookingId}
+    </delete>
 
     <!--    <select id="bookingCount" resultType="int">-->
     <!--        SELECT count(*)-->

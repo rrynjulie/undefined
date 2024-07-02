@@ -177,12 +177,8 @@ public class CustomerController {
     @PostMapping("/{userId}/BookingDelete/{bookingId}")
     public String deleteReservationByUserId(@PathVariable String userId, @PathVariable String bookingId, Model model) {
         int deleteCount = bookingService.deleteBooking(userId, bookingId);
-        if (deleteCount > 0) {
-            model.addAttribute("result", "삭제 성공");
-        } else {
-            model.addAttribute("result", "삭제 실패");
-        }
-        return "redirect:/mypage/customer/BookingList/{userId}";
+        model.addAttribute("result", deleteCount > 0 ? 1 : 0); // 1이면 성공, 0이면 실패로 설정
+        return "mypage/customer/CancelBookingOk";
     }
 
     @GetMapping("/Unregister")

@@ -19,7 +19,7 @@ public interface BookingRepository {
 
     List<Booking> findBooksByUserId(Long userId);
 
-    @Delete("DELETE FROM booking WHERE user_id = #{userId} AND booking_id = #{bookingId}")
+//    @Delete("DELETE FROM booking WHERE user_id = #{userId} AND booking_id = #{bookingId}")
     int deleteBooking(@Param("userId") String userId, @Param("bookingId") String bookingId);
 
     int bookingCount(Long roomId, LocalDate bookingStartDate, LocalDate bookingEndDate);
