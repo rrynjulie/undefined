@@ -358,3 +358,45 @@ document.addEventListener('DOMContentLoaded', function () {
 //     // 예를 들어, 아래와 같이 할 수 있습니다 (페이지 로드 시 자동으로 값을 채우는 방법):
 //     // 예를 들어, 다음은 예시에 불과합니다:
 // });
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.like-button').forEach(function(button) {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            var form = this.closest('form');
+            var actionUrl = form.getAttribute('action');
+            var formData = new FormData(form);
+            var userId = formData.get('userId');
+            var lodgingId = formData.get('lodgingId');
+            var isLiked = this.classList.contains('liked');
+
+            if (confirm(isLiked ? '좋아요를 취소하시겠습니까?' : '좋아요를 추가하시겠습니까?')) {
+                fetch(actionUrl, {
+                    method: 'POST',
+                    body: new URLSearchParams(formData),
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            if (isLiked) {
+                                this.classList.remove('liked');
+                                this.textContent = '좋아요';
+                                form.setAttribute('action', '/love/add');
+                            } else {
+                                this.classList.add('liked');
+                                this.textContent = '좋아요 취소';
+                                form.setAttribute('action', '/love/remove');
+                            }
+                        } else {
+                            alert('오류가 발생했습니다. 다시 시도해주세요.');
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        });
+    });
+});

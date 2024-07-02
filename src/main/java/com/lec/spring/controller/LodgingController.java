@@ -3,6 +3,8 @@ package com.lec.spring.controller;
 
 import com.lec.spring.domain.*;
 import com.lec.spring.service.*;
+import com.lec.spring.util.U;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.lec.spring.util.U.getLoggedUser;
+
 @Controller
 @RequestMapping("/lodging")
 public class LodgingController {
@@ -24,14 +28,16 @@ public class LodgingController {
     private final PostService postService;
 
     private BookingService bookingService;
+    private LoveService loveService;
 
     @Autowired
-    public LodgingController(LodgingService lodgingService, ProviderService providerService, RoomService roomService, PostService postService, BookingService bookingService) {
+    public LodgingController(LodgingService lodgingService, ProviderService providerService, RoomService roomService, PostService postService, BookingService bookingService, LoveService loveService) {
         this.lodgingService = lodgingService;
         this.providerService = providerService;
         this.roomService = roomService;
         this.postService = postService;
         this.bookingService = bookingService;
+        this.loveService = loveService;
     }
 
     @GetMapping("/LodgingSearch")
@@ -101,10 +107,27 @@ public class LodgingController {
     public String getLodgingDetail(@PathVariable("lodgingId") Long lodgingId,
                                    @RequestParam(value = "bookingStartDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bookingStartDate,
                                    @RequestParam(value = "bookingEndDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bookingEndDate,
-                                   Model model) {
+                                   Model model, HttpSession session) {
+
+        // 현재 로그인한 사용자 정보를 세션에서 가지고온다.
+        User loggedUser = getLoggedUser(); // 로그인된 사용자 정보
+        Long userId = loggedUser.getUserId(); // 사용자 ID
+        System.out.println("세션 userId: " + userId); // userId를 콘솔에 출력
+
+        // 지금 로그인 한 유저 아이디를 userId에 저장
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = getLoggedUser();
+            session.setAttribute("user", user);
+        }
+        model.addAttribute("user", user);
+        System.out.println("user 정보는 :" + user);
+
+        // 숙소 상세 정보를 가지고온다.
         List<Lodging> lodgings = lodgingService.lodgingDetail(lodgingId);
         List<Lodging> lodgingName = lodgingService.lodgingName(lodgingId);
         List<Post> lodgingPost = postService.findPostByLodgingId(lodgingId);
+
 
         for (Lodging lodging : lodgings) {
             Double avgPostGrade = lodgingService.getAvgPostGrade(lodging.getLodgingId());
@@ -120,15 +143,35 @@ public class LodgingController {
             lodging.setAvailable(conflictingBookingCount);
         }
 
+        System.out.println("lodging Id : " + lodgingId);
+        // 사용자가 해당 숙소를 좋아요했는지 여부 확인
+        boolean isLiked = loveService.isUserLikedLodging(userId, lodgingId);
+
+        //모델에 필요한 속성들 추가
         model.addAttribute("lodging", lodgings);
         model.addAttribute("lodgingName", lodgingName);
         model.addAttribute("lodgingPost", lodgingPost);
         model.addAttribute("bookingStartDate", bookingStartDate);
         model.addAttribute("bookingEndDate", bookingEndDate);
+        model.addAttribute("userId", userId); //현재 로그인한 사용자 id를 추가
+        model.addAttribute("hasLove", isLiked); // 좋아요 상태를 모델에 추가
 
 
         return "lodging/LodgingDetail";
     }
+
+    @PostMapping("/addLove")
+    public String addLove(@RequestParam Long userId, @RequestParam Long lodgingId) {
+        loveService.addLove(userId, lodgingId);
+        return "redirect:/LodgingDetail/{lodgingId}";
+    }
+
+    @PostMapping("/removeLove")
+    public String removeLove(@RequestParam Long userId, @RequestParam Long lodgingId) {
+        loveService.removeLove(userId, lodgingId);
+        return "redirect:/LodgingDetail/{lodgingId}";
+    }
+
 
     @GetMapping("/LodgingPostList/{lodgingId}")
     public String postList (@PathVariable("lodgingId") Long lodgingId, Model model) {
