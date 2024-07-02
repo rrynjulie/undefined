@@ -3,9 +3,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
         .then(response => response.text())
         .then(provider => {
             const passwordContainer = document.getElementById('password-container');
+            const nameGroup = document.getElementById('name-group');
+
             if (provider === 'KAKAO' || provider === 'google') {
                 if (passwordContainer) {
                     passwordContainer.style.display = 'none'; // 비밀번호 관련 필드 숨김
+                }
+                if (nameGroup) {
+                    nameGroup.style.display = 'block';
                 }
                 document.getElementById('password').disabled = true;
                 document.getElementById('email').disabled = true;
@@ -15,6 +20,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             } else {
                 if (passwordContainer) {
                     passwordContainer.style.display = 'block'; // 비밀번호 관련 필드 보임
+                }
+                if (nameGroup){
+                    nameGroup.style.display = 'none';
                 }
                 document.getElementById('password').disabled = false;
                 document.getElementById('email').disabled = true;

@@ -9,22 +9,12 @@
 </head>
 <body>
 <!-- 헤더 -->
-<header id="nav-bar"></header>
-<script src="../../../../../../../src/main/resources/static/js/LoadHeader.js"></script>
-<script src="../../../../static/js/common/Header.js"></script>
 
 <main>
-    <!-- 좌측 네비게이션 메뉴 -->
-    <nav class="provider-menu">
-        <ul>
-            <li class="provider-menu-list"><img src="../../../../static/image/mypage/provider/BookingActive.png" alt="" class="provider-menu-icon"><a href="ProvBookingList.html">예약 관리</a></li>
-            <li class="provider-menu-list"><img src="../../../../static/image/mypage/provider/ReviewActive.png" alt="" class="provider-menu-icon"><a href="ProvReviewList.html ">후기 관리</a></li>
-            <li class="provider-menu-list"><img src="../../../../static/image/mypage/provider/LodgingActive.png" alt="" class="provider-menu-icon"><a href="ProvLodgingList.html">숙소 정보</a></li>
-            <li class="provider-menu-list"><img src="../../../../static/image/mypage/provider/RoomActive.png" alt="" class="provider-menu-icon"><a href="ProvRoomList.html">객실 정보</a></li>
-        </ul>
-    </nav>
 
-<!-- 메인 -->
+    <th:block th:insert="~{mypage/provider/ProvNavMenu::prov-nav-menu}"></th:block>
+
+    <!-- 메인 -->
     <div class="container">
         <div class="header">
             <h1>후기 목록</h1>

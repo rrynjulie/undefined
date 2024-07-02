@@ -115,6 +115,8 @@ public class User {
 
     // ROLE_MASTER 권한 여부
     private Boolean hasRoleMaster;
+
+
 }
 
 

@@ -9,25 +9,21 @@
             <img th:src="@{/image/mypage/provider/Booking.png}" alt="" class="provider-menu-icon">
             <p>예약 관리</p>
         </a>
-        <a th:href="@{/mypage/provider/ProvReviewList}">
-            <img th:src="@{/image/mypage/provider/Review.png}" alt="" class="provider-menu-icon">
-            <p>후기 관리</p>
-        </a>
 
-        <a th:href="@{/mypage/provider/ProvLodgingList}">
+        <a th:href="@{/mypage/provider/provlodginglist}">
             <img th:src="@{/image/mypage/provider/Lodging.png}" alt="" class="provider-menu-icon">
             <p>숙소 정보</p>
         </a>
 
-        <a th:href="@{/mypage/provider/ProvRoomList}">
+        <a class="active" th:href="@{'/mypage/provider/ProvRoomList/' + ${user.userId}}">
             <img th:src="@{/image/mypage/provider/Room.png}" alt="" class="provider-menu-icon">
             <p>객실 정보</p>
         </a>
     </nav>
 
     <!-- 모바일 버전 -->
-<!--    <nav class="provider-menu-mobile">-->
-<!--    </nav>-->
+    <!--    <nav class="provider-menu-mobile">-->
+    <!--    </nav>-->
     <script th:src="@{/js/mypage/provider/ProvNavMenu.js}"></script>
 </th:block>
 </html>

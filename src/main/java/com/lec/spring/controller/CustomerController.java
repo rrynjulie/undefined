@@ -11,6 +11,7 @@ import com.lec.spring.service.PostService;
 import com.lec.spring.service.UserService;
 import com.lec.spring.util.AuthenticationUtil;
 import com.lec.spring.util.U;
+import com.lec.spring.util.Util;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -53,12 +54,7 @@ public class CustomerController {
 
     @GetMapping("/ManageAccount")
     public String manageAccount(HttpSession session, Model model) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = getLoggedUser();
-            session.setAttribute("user", user);
-        }
-        model.addAttribute("user", user);
+        User user = Util.getOrSetLoggedUser(session, model);
 
         List<UserAuthority> userAuthorities = userService.getAllUserAuthorities();
         model.addAttribute("userAuthorities", userAuthorities);
@@ -84,12 +80,7 @@ public class CustomerController {
                                 Model model,
                                 RedirectAttributes redirectAttributes,
                                 HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = getLoggedUser();
-            session.setAttribute("user", user);
-        }
-        model.addAttribute("user", user);
+        User user = Util.getOrSetLoggedUser(session, model);
 
         boolean hasErrors = false;
 
@@ -124,27 +115,28 @@ public class CustomerController {
             phone = null;
         }
 ////
-////        // Validate password
-        if (currentPassword == null || currentPassword.isEmpty()) {
-            System.out.println("확인용");
-            redirectAttributes.addFlashAttribute("error_password", "비밀번호를 입력해 주세요.");
-            hasErrors = true;
-        } else if (!userService.checkPassword(user.getUserId(), currentPassword)) {
-            redirectAttributes.addFlashAttribute("error_password", "현재 비밀번호가 일치하지 않습니다.");
-            hasErrors = true;
-        } else if (newPassword != null && !newPassword.isEmpty()) {
-            if (!PASSWORD_PATTERN.matcher(newPassword).matches()) {
-                redirectAttributes.addFlashAttribute("error_newpassword", "비밀번호는 최소 하나 이상의 영문 대소문자, 숫자, 특수문자를 혼합하여 8~20자로 입력하여 주세요.");
+        if (user.getProvider() == null) {
+            if (currentPassword == null || currentPassword.isEmpty()) {
+                System.out.println("확인용");
+                redirectAttributes.addFlashAttribute("error_password", "비밀번호를 입력해 주세요.");
                 hasErrors = true;
-            } else if (newPassword == null || confirmPassword == null || !newPassword.equals(confirmPassword)) {
-                redirectAttributes.addFlashAttribute("error_confirmpassword", "새 비밀번호가 일치하지 않습니다.");
+            } else if (!userService.checkPassword(user.getUserId(), currentPassword)) {
+                redirectAttributes.addFlashAttribute("error_password", "현재 비밀번호가 일치하지 않습니다.");
                 hasErrors = true;
-            } else {
-                password = newPassword;
+            } else if (newPassword != null && !newPassword.isEmpty()) {
+                if (!PASSWORD_PATTERN.matcher(newPassword).matches()) {
+                    redirectAttributes.addFlashAttribute("error_newpassword", "비밀번호는 최소 하나 이상의 영문 대소문자, 숫자, 특수문자를 혼합하여 8~20자로 입력하여 주세요.");
+                    hasErrors = true;
+                } else if (newPassword == null || confirmPassword == null || !newPassword.equals(confirmPassword)) {
+                    redirectAttributes.addFlashAttribute("error_confirmpassword", "새 비밀번호가 일치하지 않습니다.");
+                    hasErrors = true;
+                } else {
+                    password = newPassword;
+                }
             }
+
         }
 
-//
         if (hasErrors) {
             return "redirect:/mypage/customer/ManageAccount";
         }
@@ -162,8 +154,8 @@ public class CustomerController {
 
     @PostMapping("/check-password")
     @ResponseBody
-    public String checkPassword(@RequestParam String currentPassword) {
-        User user = getLoggedUser();
+    public String checkPassword(@RequestParam String currentPassword, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
         if (userService.checkPassword(user.getUserId(), currentPassword)) {
             return "success";
         } else {
@@ -173,35 +165,19 @@ public class CustomerController {
 
     @GetMapping("/getProvider")
     @ResponseBody
-    public String getProvider() {
-        User user = getLoggedUser();
+    public String getProvider(Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
         return user.getProvider();
     }
 
-    private User getLoggedUser() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (principal instanceof PrincipalDetails) {
-            PrincipalDetails principalDetails = (PrincipalDetails) principal;
-            return principalDetails.getUser();
-        } else if (principal instanceof DefaultOAuth2User) {
-            Map<String, Object> attributes = ((DefaultOAuth2User) principal).getAttributes();
-            String nickname = (String) attributes.get("nickname");
-            return userService.findByNickname(nickname);
-        } else if (principal instanceof String) {
-            String username = (String) principal;
-            return userService.findByUsername(username);
-        } else {
-            throw new IllegalStateException("Unknown principal type: " + principal.getClass());
-        }
-    }
 
     @GetMapping("/BookingList/{userId}")
     public String BookingList(
             @PathVariable("userId") Long userId
             , @RequestParam(value = "lodgingType", required = false) String lodgingType
             , @RequestParam(value = "timePeriod", required = false) String timePeriod
-            , Model model) {
+            , Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
 
         List<Booking> books = bookingService.findBooksByUserId(userId);  // 전체 예약 리스트
         List<Booking> booksBefore = new ArrayList<>();  // 이용 전 예약 리스트
@@ -249,23 +225,24 @@ public class CustomerController {
     }
 
     @PostMapping("/{userId}/BookingDelete/{bookingId}")
-    public String deleteReservationByUserId(@PathVariable String userId, @PathVariable String bookingId, Model model) {
+    public String deleteReservationByUserId(@PathVariable String userId, @PathVariable String bookingId, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
         int deleteCount = bookingService.deleteBooking(userId, bookingId);
         model.addAttribute("result", deleteCount > 0 ? 1 : 0); // 1이면 성공, 0이면 실패로 설정
         return "mypage/customer/CancelBookingOk";
     }
 
     @GetMapping("/Unregister")
-    public String unregisterPage(Model model) {
-        User user = getLoggedUser();
+    public String unregisterPage(Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
         model.addAttribute("user", user);
         return "mypage/customer/Unregister";
     }
 
     @PostMapping("/Unregister")
     @ResponseBody()
-    public String unregister(@RequestParam String password) {
-        User user = getLoggedUser();
+    public String unregister(@RequestParam String password, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
         if (userService.checkPassword(user.getUserId(), password)) {
             return "success";
         } else {
@@ -274,8 +251,8 @@ public class CustomerController {
     }
 
     @PostMapping("/UnregisterConfirm")
-    public String unregisterConfirm(RedirectAttributes redirectAttributes) {
-        User user = getLoggedUser();
+    public String unregisterConfirm(RedirectAttributes redirectAttributes, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
         System.out.println("userData: " + user);
         try {
             userService.deleteUserAndReferences(user.getUserId());

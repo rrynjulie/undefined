@@ -5,8 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const nextButton = document.getElementById('next');
     const selectedDate = document.getElementById('selectedDate');
     let currentDate = new Date();
-    let startDate = sessionStorage.getItem('startDate') ? new Date(sessionStorage.getItem('startDate')) : new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
-    let endDate = sessionStorage.getItem('endDate') ? new Date(sessionStorage.getItem('endDate')) : new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
+    let today = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()); //현재날짜 저장
+    let startDate = sessionStorage.getItem('startDate') ? new Date(sessionStorage.getItem('startDate')) : today;
+    let endDate = sessionStorage.getItem('endDate') ? new Date(sessionStorage.getItem('endDate')) : new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
     selectedDate.innerHTML = startDate.getFullYear() + '.' + (startDate.getMonth() + 1) + '.' + startDate.getDate() + ' ~ ' + endDate.getFullYear() + '.' + (endDate.getMonth() + 1) + '.' + (endDate.getDate() + ' (1박)');
     if (!sessionStorage.getItem('startDate')) {
         sessionStorage.setItem('startDate', startDate.toISOString());
@@ -38,6 +39,11 @@ document.addEventListener('DOMContentLoaded', function() {
             cell.textContent = date;
 
             let cellDate = new Date(year, month, date);
+
+            if (cellDate < today) {
+                cell.style.color = 'lightgray'; //과거 날짜 회색표시
+                cell.style.pointerEvents = 'none'; //선택 못하게
+            }
 
             if (startDate && endDate) {
                 const start = new Date(startDate).getTime();

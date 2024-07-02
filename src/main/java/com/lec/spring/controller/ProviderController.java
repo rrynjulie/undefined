@@ -10,6 +10,7 @@ import com.lec.spring.service.ProviderService;
 import com.lec.spring.service.RoomService;
 import com.lec.spring.service.UserService;
 import com.lec.spring.util.U;
+import com.lec.spring.util.Util;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -40,25 +41,17 @@ public class ProviderController {
     private BookingService bookingService;
 
     @GetMapping("/ProvBookingList")
-    public String provBookingList(Model model, Authentication authentication) {
+    public String provBookingList(Model model, Authentication authentication, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = U.getLoggedUser();
+            session.setAttribute("user", user);
+        }
+        model.addAttribute("user", user);
+
         if (authentication == null || !authentication.isAuthenticated()) {
             // 인증되지 않은 사용자 처리
             return "redirect:/user/login"; // 로그인 페이지로 리다이렉트 또는 예외 처리
-        }
-
-        Object principal = authentication.getPrincipal();
-        User user;
-        if (principal instanceof PrincipalDetails) {
-            PrincipalDetails principalDetails = (PrincipalDetails) principal;
-            user = principalDetails.getUser();
-            model.addAttribute("user", user);
-        } else if (principal instanceof String) {
-            String username = (String) principal;
-            user = userService.findByUsername(username);
-            model.addAttribute("user", user);
-        } else {
-            // 다른 타입에 대한 처리
-            throw new IllegalStateException("Unknown principal type: " + principal.getClass());
         }
 
         List<ProvLodging> lodgings = providerService.getLodgings(user.getUserId());
@@ -90,18 +83,22 @@ public class ProviderController {
 //    }
 
     @GetMapping("/provlodginglist")
-    public String provlodginglist(Model model) {
-        User loggedUser = U.getLoggedUser(); // 로그인된 사용자 정보
-        Long userId = loggedUser.getUserId(); // 사용자 ID
-        System.out.println("세션 userId: " + userId); // userId를 콘솔에 출력
+    public String provlodginglist(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = U.getLoggedUser();
+            session.setAttribute("user", user);
+        }
+        model.addAttribute("user", user);
+        System.out.println("세션 userId: " + user.getUserId()); // userId를 콘솔에 출력
 
-        List<ProvLodging> lodgings = providerService.getLodgings(userId);
+        List<ProvLodging> lodgings = providerService.getLodgings(user.getUserId());
         System.out.println("가져온 숙소 목록: " + lodgings);
 
         List<ProvLodging> myLodgings = new ArrayList<>();
         for (ProvLodging item : lodgings) {
             System.out.println("숙소 userId: " + item.getUserId());
-            if (item.getUserId() != null && item.getUserId().equals(userId)) {
+            if (item.getUserId() != null && item.getUserId().equals(user.getUserId())) {
                 myLodgings.add(item);
             }
         }
@@ -121,21 +118,27 @@ public class ProviderController {
     }
 
     @GetMapping("/provlodgingdetail/{lodgingId}")
-    public String provlodgingdetail(@PathVariable Long lodgingId, Model model) {
+    public String provlodgingdetail(@PathVariable Long lodgingId, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
+
         ProvLodging lodging = providerService.getAllDetails(lodgingId);
         model.addAttribute("lodging", lodging);
         return "mypage/provider/ProvLodgingDetail";
     }
 
     @GetMapping("/provlodgingupdate/{lodgingId}")
-    public String provLodgingUpdate(@PathVariable Long lodgingId, Model model) {
+    public String provLodgingUpdate(@PathVariable Long lodgingId, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
+
         ProvLodging lodging = providerService.getAllDetails(lodgingId); // 숙소 정보 가져오기
         model.addAttribute("lodging", lodging); // 모델에 숙소 정보 추가
         return "mypage/provider/ProvLodgingUpdate"; // 숙소 업데이트 페이지로 이동
     }
 
     @PostMapping("/updateLodging")
-    public String updateLodging(@ModelAttribute ProvLodging lodging) {
+    public String updateLodging(@ModelAttribute ProvLodging lodging, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
+
         // lodging 객체에서 lodgingId 추출
         Long lodgingId = lodging.getLodgingId();
 
@@ -144,7 +147,9 @@ public class ProviderController {
     }
 
     @PostMapping("/deleteLodging/{lodgingId}")
-    public String deleteLodging(@PathVariable int lodgingId, Model model) {
+    public String deleteLodging(@PathVariable int lodgingId, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
+
         int result;
         try {
             providerService.deleteLodging(lodgingId);
@@ -158,44 +163,62 @@ public class ProviderController {
 
 
     @GetMapping("/provlodgingregister")
-    public String provlodgingregister() {
+    public String provlodgingregister(Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
+
         return "mypage/provider/ProvLodgingRegister";
     }
 
     @PostMapping("/saveLodging")
-    public String saveLodging(@ModelAttribute ProvLodging lodging) {
+    public String saveLodging(@ModelAttribute ProvLodging lodging, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
+
         providerService.saveLodging(lodging);
         return "redirect:provlodginglist";
     }
 
     @PostMapping("/createRoom")
-    public String createRoom(@ModelAttribute Room room){
+    public String createRoom(@ModelAttribute Room room, Model model, HttpSession session){
+        User user = Util.getOrSetLoggedUser(session, model);
+
         roomService.createRoom(room);
         return "redirect:ProvRoomList";
     }
 
     @GetMapping("/ProvRoomRegister/{lodgingId}")
-    public String provRoomRegister(@PathVariable("lodgingId") Long lodgingId, Model model) {
+    public String provRoomRegister(@PathVariable("lodgingId") Long lodgingId, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
+
         ProvLodging lodging = providerService.getAllDetails(lodgingId);
         model.addAttribute("lodging", lodging);
         return "mypage/provider/ProvRoomRegister";
     }
 
     @PostMapping("/ProvRoomRegister")
-    public String provRoomRegisterOk(Room room, Model model) {
+    public String provRoomRegisterOk(Room room, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
+
         model.addAttribute("result", roomService.createRoom(room));
         return "mypage/provider/ProvRoomRegisterOk";
     }
 
     @GetMapping("/ProvRoomList/{userId}")
-    public String provRoomList(@PathVariable("userId") Long userId, Model model) {
+    public String provRoomList(@PathVariable("userId") Long userId, Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = U.getLoggedUser();
+            session.setAttribute("user", user);
+        }
+        model.addAttribute("user", user);
         List<ProvLodging> roomList = providerService.getLodgingsAndRoomsByUserId(userId);
         model.addAttribute("rooms", roomList);
         return "mypage/provider/ProvRoomList";
     }
 
     @GetMapping("/ProvRoomDetail/{roomId}")
-    public String provRoomDetail(@PathVariable("roomId") Long roomId, Model model) {
+    public String provRoomDetail(@PathVariable("roomId") Long roomId, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
+
         Room room = roomService.findByRoomId(roomId);
         model.addAttribute("room", room);
         return "mypage/provider/ProvRoomDetail";
@@ -205,7 +228,9 @@ public class ProviderController {
 
     // 수정 폼을 보여주는 메서드
     @GetMapping("/ProvRoomUpdate/{roomId}")
-    public String showUpdateForm(@PathVariable Long roomId, Model model) {
+    public String showUpdateForm(@PathVariable Long roomId, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
+
         Room room = roomService.findByRoomId(roomId);
         model.addAttribute("room", room);
         return "mypage/provider/ProvRoomUpdate";
@@ -213,13 +238,17 @@ public class ProviderController {
 
     // 수정 처리를 담당하는 메서드
     @PostMapping("/ProvRoomUpdate")
-    public String provRoomUpdateOk(@ModelAttribute Room room) {
+    public String provRoomUpdateOk(@ModelAttribute Room room, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
+
         roomService.updateRoom(room);
         return "redirect:/mypage/provider/ProvRoomDetail/" + room.getRoomId();
     }
 
     @PostMapping("/deleteRoom/{roomId}")
-    public String deleteRoom(@PathVariable int roomId, Model model) {
+    public String deleteRoom(@PathVariable int roomId, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
+
         int result;
         Long userId = U.getLoggedUser().getUserId();
         try {

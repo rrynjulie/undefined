@@ -26,10 +26,6 @@
 <div class="container mt-3 text-center">
     <!-- 로그인 폼 -->
     <form th:action="@{/user/login}" method="POST">
-        <div id="error-message" class="row mt-5">
-            <!-- 에러 메세지 출력 -->
-            <div class="col-12 text-danger" th:text="${errorMessage}"></div>
-        </div>
         <div class="form-floating">
             <input class="form-control" id="email" name="email">
             <label for="email">Email</label>
@@ -39,6 +35,10 @@
             <input type="password" class="form-control" id="password" name="password">
             <label for="password">Password</label>
             <div id="passwordError" class="text-danger d-none">비밀번호를 입력해 주세요.</div>
+        </div>
+        <div id="error-message" class="row mt-5">
+            <!-- 에러 메세지 출력 -->
+            <div class="col-12 text-danger" th:text="${errorMessage}"></div>
         </div>
         <br>
         <button class="w-100 btn btn-lg btn-primary my-1 custom-btn" type="submit" id="loginButton">로그인</button>
