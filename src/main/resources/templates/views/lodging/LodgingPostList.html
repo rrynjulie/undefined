@@ -15,7 +15,8 @@
 
     <div id="totalDiv">
         <div id="totalStar">&#9733;</div>
-        <div id="avgPostGrade" th:text="${avgPostGrade} + ' / 5'"></div>
+        <span id="avgPostGrade1" th:text="${avgPostGrade}"></span>
+        <span id="avgPostGrade2">/ 5</span>
     </div>
 
     <div id="item-list" th:if="${not #lists.isEmpty(userPosts)}">
@@ -30,6 +31,8 @@
                     <p id="lodgingType" th:text="${userPost.lodgingType}"></p>
                 </div>
                 <div id="div3">
+                    <p id="userName" th:text="${userPost.userName}"></p>
+
                     <div class="stars" th:attr="data-star-count=${userPost.postGrade}">
                         <span class="star" data-value="5">&#9733;</span>
                         <span class="star" data-value="4">&#9733;</span>
@@ -47,9 +50,11 @@
                     </div>
                 </div>
             </div>
-            <div>
+            <div style="display: flex">
                 <div id="postText" th:text="${userPost.postText}"></div>
-                <div id="postPicture" th:text="${userPost.postPicture}"></div>
+                <div id="postPicture">
+                    <img id="picture" th:src="@{${userPost.postPicture}}" />
+                </div>
             </div>
         </div>
     </div>

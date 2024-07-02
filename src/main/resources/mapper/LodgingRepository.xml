@@ -171,9 +171,11 @@
                p.booking_id AS bookingId,
                p.lodging_id AS lodgingId,
                p.room_id AS roomId,
+               u.user_id AS userId,
                b.startDate,
                b.endDate
         FROM post p
+                 JOIN user u ON p.user_id = u.user_id
                  JOIN lodging l ON p.lodging_id = l.lodging_id
                  JOIN room r ON p.room_id = r.room_id
                  LEFT JOIN (
