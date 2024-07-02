@@ -3,6 +3,8 @@ package com.lec.spring.controller;
 
 import com.lec.spring.domain.*;
 import com.lec.spring.service.*;
+import com.lec.spring.util.Util;
+import jakarta.servlet.http.HttpSession;
 import com.lec.spring.util.U;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,18 +111,11 @@ public class LodgingController {
                                    @RequestParam(value = "bookingEndDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bookingEndDate,
                                    Model model, HttpSession session) {
 
-        // 현재 로그인한 사용자 정보를 세션에서 가지고온다.
-        User loggedUser = getLoggedUser(); // 로그인된 사용자 정보
-        Long userId = loggedUser.getUserId(); // 사용자 ID
-        System.out.println("세션 userId: " + userId); // userId를 콘솔에 출력
+        User user = Util.getOrSetLoggedUser(session, model);
 
-        // 지금 로그인 한 유저 아이디를 userId에 저장
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = getLoggedUser();
-            session.setAttribute("user", user);
-        }
-        model.addAttribute("user", user);
+        // 현재 로그인한 사용자 정보를 세션에서 가지고온다.
+        System.out.println("세션 userId: " + user.getUserId()); // userId를 콘솔에 출력
+
         System.out.println("user 정보는 :" + user);
 
         // 숙소 상세 정보를 가지고온다.
@@ -145,7 +140,7 @@ public class LodgingController {
 
         System.out.println("lodging Id : " + lodgingId);
         // 사용자가 해당 숙소를 좋아요했는지 여부 확인
-        boolean isLiked = loveService.isUserLikedLodging(userId, lodgingId);
+        boolean isLiked = loveService.isUserLikedLodging(user.getUserId(), lodgingId);
 
         //모델에 필요한 속성들 추가
         model.addAttribute("lodging", lodgings);
@@ -153,7 +148,7 @@ public class LodgingController {
         model.addAttribute("lodgingPost", lodgingPost);
         model.addAttribute("bookingStartDate", bookingStartDate);
         model.addAttribute("bookingEndDate", bookingEndDate);
-        model.addAttribute("userId", userId); //현재 로그인한 사용자 id를 추가
+        model.addAttribute("userId", user.getUserId()); //현재 로그인한 사용자 id를 추가
         model.addAttribute("hasLove", isLiked); // 좋아요 상태를 모델에 추가
 
 
@@ -161,20 +156,23 @@ public class LodgingController {
     }
 
     @PostMapping("/addLove")
+    @ResponseBody
     public String addLove(@RequestParam Long userId, @RequestParam Long lodgingId) {
         loveService.addLove(userId, lodgingId);
-        return "redirect:/LodgingDetail/{lodgingId}";
+        return "{\"success\": true}";
     }
 
     @PostMapping("/removeLove")
+    @ResponseBody
     public String removeLove(@RequestParam Long userId, @RequestParam Long lodgingId) {
         loveService.removeLove(userId, lodgingId);
-        return "redirect:/LodgingDetail/{lodgingId}";
+        return "{\"success\": true}";
     }
 
-
     @GetMapping("/LodgingPostList/{lodgingId}")
-    public String postList (@PathVariable("lodgingId") Long lodgingId, Model model) {
+    public String postList (@PathVariable("lodgingId") Long lodgingId, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
+
         List<Post> userPosts = postService.findPostByLodgingId(lodgingId);
         Double avgPostGrade = lodgingService.getAvgPostGrade(lodgingId);
         int totalPosts = postService.countAllPostsByLodgingId((long)lodgingId);
@@ -187,7 +185,9 @@ public class LodgingController {
     }
 
     @GetMapping("/RoomDetail/{lodgingId}/{roomId}")
-    public String RoomDetail(@PathVariable("lodgingId") Long lodgingId, @PathVariable("roomId") Long roomId, Model model) {
+    public String RoomDetail(@PathVariable("lodgingId") Long lodgingId, @PathVariable("roomId") Long roomId, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
+
         ProvLodging lodging = providerService.getAllDetails(lodgingId);
         Room room = roomService.findByRoomId(roomId);
         List<Post> postList = postService.findPostByLodgingId(lodgingId);
