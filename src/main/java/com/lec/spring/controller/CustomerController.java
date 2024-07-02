@@ -154,8 +154,8 @@ public class CustomerController {
 
     @PostMapping("/check-password")
     @ResponseBody
-    public String checkPassword(@RequestParam String currentPassword) {
-        User user = getLoggedUser();
+    public String checkPassword(@RequestParam String currentPassword, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
         if (userService.checkPassword(user.getUserId(), currentPassword)) {
             return "success";
         } else {
@@ -165,28 +165,11 @@ public class CustomerController {
 
     @GetMapping("/getProvider")
     @ResponseBody
-    public String getProvider() {
-        User user = getLoggedUser();
+    public String getProvider(Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
         return user.getProvider();
     }
 
-    private User getLoggedUser() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (principal instanceof PrincipalDetails) {
-            PrincipalDetails principalDetails = (PrincipalDetails) principal;
-            return principalDetails.getUser();
-        } else if (principal instanceof DefaultOAuth2User) {
-            Map<String, Object> attributes = ((DefaultOAuth2User) principal).getAttributes();
-            String nickname = (String) attributes.get("nickname");
-            return userService.findByNickname(nickname);
-        } else if (principal instanceof String) {
-            String username = (String) principal;
-            return userService.findByUsername(username);
-        } else {
-            throw new IllegalStateException("Unknown principal type: " + principal.getClass());
-        }
-    }
 
     @GetMapping("/BookingList/{userId}")
     public String BookingList(
@@ -242,23 +225,24 @@ public class CustomerController {
     }
 
     @PostMapping("/{userId}/BookingDelete/{bookingId}")
-    public String deleteReservationByUserId(@PathVariable String userId, @PathVariable String bookingId, Model model) {
+    public String deleteReservationByUserId(@PathVariable String userId, @PathVariable String bookingId, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
         int deleteCount = bookingService.deleteBooking(userId, bookingId);
         model.addAttribute("result", deleteCount > 0 ? 1 : 0); // 1이면 성공, 0이면 실패로 설정
         return "mypage/customer/CancelBookingOk";
     }
 
     @GetMapping("/Unregister")
-    public String unregisterPage(Model model) {
-        User user = getLoggedUser();
+    public String unregisterPage(Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
         model.addAttribute("user", user);
         return "mypage/customer/Unregister";
     }
 
     @PostMapping("/Unregister")
     @ResponseBody()
-    public String unregister(@RequestParam String password) {
-        User user = getLoggedUser();
+    public String unregister(@RequestParam String password, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
         if (userService.checkPassword(user.getUserId(), password)) {
             return "success";
         } else {
@@ -267,8 +251,8 @@ public class CustomerController {
     }
 
     @PostMapping("/UnregisterConfirm")
-    public String unregisterConfirm(RedirectAttributes redirectAttributes) {
-        User user = getLoggedUser();
+    public String unregisterConfirm(RedirectAttributes redirectAttributes, Model model, HttpSession session) {
+        User user = Util.getOrSetLoggedUser(session, model);
         System.out.println("userData: " + user);
         try {
             userService.deleteUserAndReferences(user.getUserId());
