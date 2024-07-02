@@ -8,6 +8,7 @@ import com.lec.spring.service.LodgingService;
 import com.lec.spring.service.LodgingServiceImpl;
 import com.lec.spring.service.UserService;
 import com.lec.spring.util.U;
+import com.lec.spring.util.Util;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -37,13 +38,7 @@ public class HomeController {
 
     @RequestMapping("/Home")
     public void home(HttpSession session, Model model) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = getLoggedUser();
-            session.setAttribute("user", user);
-        }
-        model.addAttribute("user", user);
-
+        User user = Util.getOrSetLoggedUser(session, model);
 
         List<UserAuthority> userAuthorities = userService.getAllUserAuthorities();
         model.addAttribute("userAuthorities", userAuthorities);

@@ -37,12 +37,14 @@
 }
 #avgPostGrade2 {
     color: #6d6d6d;
+    font-size: 18px;
 }
 #userName {
     text-align: right;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: bold;
     margin-right: 2px;
+    color: #3b3b3b;
 }
 .stars {
     height: 30px;

@@ -52,9 +52,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (isRoundTrip && !returnPlandTime) {
             emptyFields.push('도착일');
         }
-        if (!busGradeId) {
-            emptyFields.push('버스 등급');
-        }
+        // if (!busGradeId) {
+        //     emptyFields.push('버스 등급');
+        // }
         // 모든 필수 필드가 채워졌는지 확인
         if (emptyFields.length > 0) {
             event.preventDefault();  // 폼 제출을 막음
