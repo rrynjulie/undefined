@@ -46,7 +46,7 @@
     cursor: pointer;
     color: lightgray;
 }
-.star.highlighted {
+.star.selected {
     color: gold;
 }
 

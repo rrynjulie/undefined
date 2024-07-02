@@ -13,6 +13,7 @@ import com.lec.spring.util.AuthenticationUtil;
 import com.lec.spring.util.U;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Local;
@@ -187,7 +188,13 @@ public class CustomerController {
             @PathVariable("userId") Long userId
             , @RequestParam(value = "lodgingType", required = false) String lodgingType
             , @RequestParam(value = "timePeriod", required = false) String timePeriod
-            , Model model) {
+            , Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = getLoggedUser();
+            session.setAttribute("user", user);
+        }
+        model.addAttribute("user", user);
 
         List<Booking> books = bookingService.findBooksByUserId(userId);  // 전체 예약 리스트
         List<Booking> booksBefore = new ArrayList<>();  // 이용 전 예약 리스트
