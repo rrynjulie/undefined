@@ -10,151 +10,150 @@
 <!-- 헤더 -->
 <th:block th:insert="~{common/Header::header}"></th:block>
 <main>
-<div>
-    <a href="/mypage/provider/provlodginglist">오너 숙소 리스트</a>
-</div>
-<div class="tab-menu">
-    <div class="tab-item active" id="one-way-tab">편도</div>
-    <div class="tab-item" id="round-trip-tab">왕복</div>
-</div>
+    <div>
+        <a href="/mypage/provider/provlodginglist">오너 숙소 리스트</a>
+    </div>
+    <div class="tab-menu">
+        <div class="tab-item active" id="one-way-tab">편도</div>
+        <div class="tab-item" id="round-trip-tab">왕복</div>
+    </div>
     <div class="container">
-<div class="form-container">
-    <form id="ticketForm" action="/fetchBusInfo" method="get">
-            <label class="info-label" for="depTerminalId">출발 터미널<div class="required-dot"></div></label>
-            <input class="ticketcheck-input" type="text" id="depTerminalId" name="depTerminalId" placeholder="출발터미널ID 입력">
+        <div class="form-container">
+            <form id="ticketForm" action="/fetchBusInfo" method="get">
+                <label class="info-label" for="depTerminalId">출발 터미널<div class="required-dot"></div></label>
+                <input class="ticketcheck-input" type="text" id="depTerminalId" name="depTerminalId" placeholder="출발터미널ID 입력">
 
-            <label class="info-label" for="arrTerminalId">도착 터미널<div class="required-dot"></div></label>
-            <input class="ticketcheck-input" type="text" id="arrTerminalId" name="arrTerminalId" placeholder="도착터미널ID 입력">
+                <label class="info-label" for="arrTerminalId">도착 터미널<div class="required-dot"></div></label>
+                <input class="ticketcheck-input" type="text" id="arrTerminalId" name="arrTerminalId" placeholder="도착터미널ID 입력">
 
-            <label class="info-label" for="depPlandTime">출발일<div class="required-dot"></div></label>
-            <input class="ticketcheck-input" type="text" id="depPlandTime" name="depPlandTime" placeholder="출발일(YYYYMMDD) 입력">
+                <label class="info-label" for="depPlandTime">출발일<div class="required-dot1"></div></label>
+                <input class="ticketcheck-input" type="text" id="depPlandTime" name="depPlandTime" placeholder="출발일(YYYYMMDD) 입력">
 
-            <!-- 돌아오는 날짜 입력란 -->
-            <div class="return-date-input" id="return-date-input">
-                <label class="info-label" for="returnPlandTime">도착일<div class="required-dot"></div></label>
-                <input class="ticketcheck-input" type="text" id="returnPlandTime" name="returnPlandTime" placeholder="도착일(YYYYMMDD) 입력">
-            </div>
+                <!-- 돌아오는 날짜 입력란 -->
+                <div class="return-date-input" id="return-date-input">
+                    <label class="info-label" for="returnPlandTime">도착일<div class="required-dot2"></div></label>
+                    <input class="ticketcheck-input" type="text" id="returnPlandTime" name="returnPlandTime" placeholder="도착일(YYYYMMDD) 입력">
+                </div>
 
-            <label class="info-label" for="busGradeId">버스 등급<div class="required-dot"></div></label>
-            <input class="ticketcheck-input" type="text" id="busGradeId" name="busGradeId" placeholder="버스등급 입력">
+                <label class="info-label" for="busGradeId">버스 등급<div class="required-dot3"></div></label>
+                <input class="ticketcheck-input" type="text" id="busGradeId" name="busGradeId" placeholder="버스등급 입력">
 
-        <button class="btn-select" type="submit">승차권 조회</button>
-    </form>
-</div>
+                <button id="select" class="btn-select" type="submit">승차권 조회</button>
+            </form>
+        </div>
         <div class="list-container">
-<div style="text-align: center;">
-    <h1>터미널 목록</h1>
-    <table>
-        <tr>
-            <th>터미널 명</th>
-            <th>터미널 ID</th>
-            <th>터미널 명</th>
-            <th>터미널 ID</th>
-            <th>터미널 명</th>
-            <th>터미널 ID</th>
-            <th>터미널 명</th>
-            <th>터미널 ID</th>
-            <th>터미널 명</th>
-            <th>터미널 ID</th>
-        </tr>
-        <tr>
-            <td>서울경부</td>
-            <td>NAEK010</td>
-            <td>센트럴시티(서울)</td>
-            <td>NAEK020</td>
-            <td>인천</td>
-            <td>NAEK100</td>
-            <td>인천공항T1</td>
-            <td>NAEK105</td>
-            <td>인천공항T2</td>
-            <td>NAEK117</td>
-        </tr>
-        <tr>
-            <td>경주</td>
-            <td>NAEK815</td>
-            <td>부산</td>
-            <td>NAEK700</td>
-            <td>여주</td>
-            <td>NAEK140</td>
-            <td>순천</td>
-            <td>NAEK515</td>
-            <td>천안</td>
-            <td>NAEK310</td>
-        </tr>
-        <tr>
-            <td>수원</td>
-            <td>NAEK110</td>
-            <td>아산온양</td>
-            <td>NAEK340</td>
-            <td>고양화정</td>
-            <td>NAEK115</td>
-            <td>춘천</td>
-            <td>NAEK250</td>
-            <td>용인신갈</td>
-            <td>NAEK111</td>
-        </tr>
-        <tr>
-            <td>강릉</td>
-            <td>NAEK200</td>
-            <td>창원</td>
-            <td>NAEK710</td>
-            <td>대전복합</td>
-            <td>NAEK300</td>
-            <td>김해</td>
-            <td>NAEK735</td>
-            <td>동대구</td>
-            <td>NAEK801</td>
-        </tr>
-        <tr>
-            <td>포항</td>
-            <td>NAEK830</td>
-            <td>울산</td>
-            <td>NAEK715</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-        </tr>
-    </table>
-
-    <br><br>
-
-    <h1>버스 등급 목록</h1>
-    <table>
-        <tr>
-            <th>등급 ID</th>
-            <th>등급 이름</th>
-            <th>등급 ID</th>
-            <th>등급 이름</th>
-            <th>등급 ID</th>
-            <th>등급 이름</th>
-            <th>등급 ID</th>
-            <th>등급 이름</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>우등</td>
-            <td>2</td>
-            <td>고속</td>
-            <td>3</td>
-            <td>심야우등</td>
-            <td>4</td>
-            <td>심야고속</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>일반</td>
-            <td>6</td>
-            <td>일반심야</td>
-            <td>7</td>
-            <td>프리미엄</td>
-            <td>8</td>
-            <td>심야프리미엄</td>
-        </tr>
-    </table>
-</div>
+            <div class="table-wrapper">
+                <h1>터미널 목록</h1>
+                <table>
+                    <tr>
+                        <th>터미널 명</th>
+                        <th>터미널 ID</th>
+                        <th>터미널 명</th>
+                        <th>터미널 ID</th>
+                        <th>터미널 명</th>
+                        <th>터미널 ID</th>
+                    </tr>
+                    <tr>
+                        <td>서울경부</td>
+                        <td>NAEK010</td>
+                        <td>센트럴시티(서울)</td>
+                        <td>NAEK020</td>
+                        <td>인천</td>
+                        <td>NAEK100</td>
+                    </tr>
+                    <tr>
+                        <td>인천공항T1</td>
+                        <td>NAEK105</td>
+                        <td>인천공항T2</td>
+                        <td>NAEK117</td>
+                        <td>경주</td>
+                        <td>NAEK815</td>
+                    </tr>
+                    <tr>
+                        <td>부산</td>
+                        <td>NAEK700</td>
+                        <td>여주</td>
+                        <td>NAEK140</td>
+                        <td>순천</td>
+                        <td>NAEK515</td>
+                    </tr>
+                    <tr>
+                        <td>천안</td>
+                        <td>NAEK310</td>
+                        <td>수원</td>
+                        <td>NAEK110</td>
+                        <td>아산온양</td>
+                        <td>NAEK340</td>
+                    </tr>
+                    <tr>
+                        <td>고양화정</td>
+                        <td>NAEK115</td>
+                        <td>춘천</td>
+                        <td>NAEK250</td>
+                        <td>용인신갈</td>
+                        <td>NAEK111</td>
+                    </tr>
+                    <tr>
+                        <td>강릉</td>
+                        <td>NAEK200</td>
+                        <td>창원</td>
+                        <td>NAEK710</td>
+                        <td>대전복합</td>
+                        <td>NAEK300</td>
+                    </tr>
+                    <tr>
+                        <td>김해</td>
+                        <td>NAEK735</td>
+                        <td>동대구</td>
+                        <td>NAEK801</td>
+                        <td>포항</td>
+                        <td>NAEK830</td>
+                    </tr>
+                    <tr>
+                        <td>울산</td>
+                        <td>NAEK715</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="table-wrapper">
+                <h1>버스 등급 목록</h1>
+                <table>
+                    <tr>
+                        <th>등급 ID</th>
+                        <th>등급 이름</th>
+                        <th>등급 ID</th>
+                        <th>등급 이름</th>
+                        <th>등급 ID</th>
+                        <th>등급 이름</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>우등</td>
+                        <td>2</td>
+                        <td>고속</td>
+                        <td>3</td>
+                        <td>심야우등</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>심야고속</td>
+                        <td>5</td>
+                        <td>일반</td>
+                        <td>6</td>
+                        <td>일반심야</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>프리미엄</td>
+                        <td>8</td>
+                        <td>심야프리미엄</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </main>

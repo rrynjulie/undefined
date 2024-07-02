@@ -106,11 +106,13 @@ public class BookingController {
             throw new IllegalArgumentException("Room not found for roomId: " + roomId);
         }
 
-//        // 중복 예약 체크
-//        int conflictingReservations = bookingService.bookingcount(roomId, bookingStartDate, bookingEndDate);
-//        if (conflictingReservations > 0) {
-//            throw new IllegalArgumentException("예약불가");
-//        }
+        int conflictingReservations = bookingService.bookingCount(roomId, bookingStartDate, bookingEndDate);
+        if (conflictingReservations > 0) {
+            // 예약 불가 메시지를 전달
+            model.addAttribute("error", "이미 예약된 객실입니다.");
+            model.addAttribute("user", user);
+            return "lodging/LodgingBookingError";
+        }
 
         Booking booking = Booking.builder()
                 .visitorName(visitorName)

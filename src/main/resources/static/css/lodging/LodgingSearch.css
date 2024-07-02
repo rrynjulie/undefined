@@ -1,31 +1,94 @@
 .container {
-    width: 60%;
-    margin: auto;
-    margin-top: 40px;
+    padding: 40px 20%;
 }
 
-.days {
-    width: 14.28571428571429%;
-    text-align: center;
-    font-weight: bold;
+#lodging-search {
+    margin-bottom: 20px;
+}
+
+#search-form {
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+#lodging-text {
+    display: flex;
+    border-radius: 7px;
+    padding: 0 15px;
+    background-color: #F5F5F5;
+    outline: none;
     font-size: 20px;
-    height: 40px;
+    width: 100%;
+    height: 100%;
 }
 
-#calendar {
+#location {
+    width: 100%;
     height: 100%;
-    width: 50%;
-    /*margin: 0 0 0 50px;*/
-    border: 1px solid black;
-    border-top: none;
+    font-size: 20px;
+    background-color: #F5F5F5;
+    border: none;
+    outline: none;
 }
-#calendar-text {
-    font-size: 25px;
-    border: 1px solid black;
-    border-left: none;
-    border-right: none;
-    background-color: #FC5185;
-    color: white;
+
+.btn-search-location {
+    border: none;
+    background-color: #F5F5F5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.btn-search-location:hover {
+    transform: scale(1.02);
+}
+
+#search {
+    width: 100%;
+    height: 30px;
+}
+
+.date-and-lineup-select {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    border: 0;
+}
+
+.selected-result, .calendar-and-lineup {
+    display: flex;
+    justify-content: space-between;
+}
+
+.selected-result div {
+    width: 49%;
+    height: 45px;
+    font-size: 20px;"
+    border: none;
+    border-radius: 7px;
+    background-color: #F5F5F5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#calendar, #lineup-select {
+    height: 450px;
+    width: 49%;
+    border: 0;
+    border-radius: 7px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    padding: 15px;
 }
 
 #calendar-header {
@@ -33,13 +96,10 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background-color: #FC5185;
-    color: white;
-    /*border-radius: 5px 5px 0 0;*/
-}
-
-#calendar-header h2 {
-    margin: 0;
+    background-color: white;
+    border-radius: 5px;
+    font-size: 13px;
+    margin-bottom: 10px;
 }
 
 #calendar-header button {
@@ -53,21 +113,33 @@
     border-radius: 15px;
 }
 
-#calendar-header button:hover {
-    /*background-color: #45a049;*/
+#prev:hover, #next:hover {
+    transform: scale(1.02);
+}
+
+.days {
+    width: 14.28571428571429%;
+    text-align: center;
+    font-size: 20px;
+    height: 40px;
+    color: darkgray;
 }
 
 #calendar-body {
     width: 100%;
     border-collapse: collapse;
-    height: 440px;
+    height: 330px;
+    border: 0;
 }
 
 #calendar-body th, #calendar-body td {
     width: 14.28%;
     text-align: center;
-    border: 1px solid #ddd;
+    border: 0;
 }
+
+/* ------------------------------------ */
+
 td {
     background-color: white;
 }
@@ -76,132 +148,54 @@ td {
     background-color: #f1f1f1;
     cursor: pointer;
 }
-.selectedDate {
-    width: 100%;
-    height: 50px;
-    font-size: 20px;"
-    border: none;
-    background-color: #F5F5F5;
+
+/* ------------------------------------ */
+
+.plus-minus-lineup {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 50px 0;
 }
 
+.adult-child {  /* 성인 아동 문구 */
+    width: 57%;
+    font-size: 20px;
+}
 
-.button {
+#increase-btn1, #decrease-btn1, #increase-btn2, #decrease-btn2 {
     width: 30px;
     height: 30px;
     font-size: 20px;
     border: none;
     background-color: #f5f5f5;
-    border-radius: 20px;
+    border-radius: 50%;
     cursor: pointer;
 }
 
 .count {    /* 성인 아동 수 */
     width: 60px;
     height: 30px;
-    font-size: 25px;
+    font-size: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.adult-child {  /* 성인 아동 문구 */
-    width: 57%;
-    font-size: 25px;
-    margin-left: 35px;
-}
-
-.total {    /* 성인 아동 총 인원 */
-    font-size: 20px;
-}
-
-
-#lodging-search {
-    margin-bottom: 20px;
-}
-#lodging-input {
-    width: 100%;
-    height: 50px;
-    border-radius: 20px 20px 0 0;
-    border: 1px solid black;
-    border-bottom: none;
-    display: flex;
-    justify-content: space-between;
-}
-#lodging-text {
-    /*border:none;*/
-    border-radius: 20px 20px 0 0;
-    outline: none;
-    padding-left: 20px;
-    font-size: 20px;
-    width: 93%;
-    height: 100%;
-}
-#location {
-    width: 100%;
-    height: 100%;
-    font-size: 20px;
-    border-radius: 20px 20px 0 0;
-    background-color: white;
-    border: none;
-    outline: none;
-
-}
-#lodging-text1 {
-    width: 100%;
-    height: 100%;
-    font-size: 20px;
-    border-radius: 20px 20px 0 0;
-    border: none;
-    outline: none;
-}
-#lodging-text2 {
-    width: 7%;
-    height: 100%;
-    display: flex;
-    text-align: right; /* 가로로는 맨 오른쪽으로 정렬 */
-    align-items: center; /* 세로로는 가운데 정렬 */
-}
-#search {
-    width: 70%;
-    height: 40px;
-    border-radius: 15px;
-}
-
-.btn-div {
-    padding-right: 30px;
-    display: flex
-}
-
-
 #recently-search-container {
     width: 100%;
     height: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin-bottom: 20px;
 }
+
 #recently-search {
     width: 30%;
     height: 100%;
-    margin: 5px 0;
-    padding: 20px 10px;
+    padding: 20px;
     background-color: #F5F5F5;
-    border-radius: 15px;
-}
-
-.recently-search1 {
-    width: 100%;
-    height:100%;
-    /*padding: 15px;*/
-    border: none;
-    display: flex;
-}
-
-.recently-search2 {
-    background-color: #F5F5F5;
-    border-radius: 15px;
-    width: 100%;
-    height: 100%;
-    /*padding: 10px;*/
-    margin: 0 10px;
+    border-radius: 7px;
 }

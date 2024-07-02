@@ -21,6 +21,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,6 +73,7 @@ public class ProviderController {
         List<Room> rooms = roomService.findRoomsByLodgingId(lodgingId);
         rooms.forEach(room -> {
             room.setBookList(bookingService.findBooksByRoomId(room.getRoomId()));
+            //room.DecimalFormat.getInstance().format(room.getRoomPrice());
         });
         model.addAttribute("rooms", rooms);
 

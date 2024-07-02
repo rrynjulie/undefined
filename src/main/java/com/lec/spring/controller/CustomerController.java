@@ -234,22 +234,11 @@ public class CustomerController {
         return "mypage/customer/BookingList";
     }
 
-    @PostMapping("/CancelBooking/{bookingId}")
-    public String cancelBookingOk(@PathVariable int bookingId, Model model) {
-        int result;
-        Long userId = U.getLoggedUser().getUserId();
-        try {
-            bookingService.deleteBooking(bookingId);
-            result = 1;
-        } catch (Exception e) {
-            result = 0;
-        }
-
-        System.out.println("로그인한 user -> " + userId);
-        System.out.println("삭제 할 bookingId -> " + bookingId);
-        model.addAttribute("result", result);
-        model.addAttribute("userId", userId);
-        return "mypage/customer/CancelBookingOk"; // 뷰 리졸버가 자동으로 경로를 찾도록 수정
+    @PostMapping("/{userId}/BookingDelete/{bookingId}")
+    public String deleteReservationByUserId(@PathVariable String userId, @PathVariable String bookingId, Model model) {
+        int deleteCount = bookingService.deleteBooking(userId, bookingId);
+        model.addAttribute("result", deleteCount > 0 ? 1 : 0); // 1이면 성공, 0이면 실패로 설정
+        return "mypage/customer/CancelBookingOk";
     }
 
     @GetMapping("/Unregister")
