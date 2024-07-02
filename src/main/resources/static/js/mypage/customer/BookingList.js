@@ -35,13 +35,17 @@ document.addEventListener("DOMContentLoaded", function() {
     // 쿼리 매개변수를 확인하여 알림 표시
     const urlParams = new URLSearchParams(window.location.search);
     const alreadyPosted = urlParams.get('alreadyPosted');
-    if (alreadyPosted === 'true') {
+
+    if (alreadyPosted === 'true' && !sessionStorage.getItem('alertShown')) {
         alert("이미 후기를 작성했습니다.");
+        sessionStorage.setItem('alertShown', 'true');
+    } else {
+        sessionStorage.removeItem('alertShown');
     }
 });
 
 function confirmDelete() {
     if (confirm("예약을 취소하시겠습니까?")) {
-    document.getElementById("deleteForm").submit();
+        document.getElementById("deleteForm").submit();
     }
 }
