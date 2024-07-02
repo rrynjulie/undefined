@@ -13,6 +13,7 @@ import com.lec.spring.util.AuthenticationUtil;
 import com.lec.spring.util.U;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Local;
@@ -31,6 +32,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Controller
@@ -50,38 +52,110 @@ public class CustomerController {
     private PostService postService;
 
     @GetMapping("/ManageAccount")
-    public String manageAccount(Model model) {
-        User user = getLoggedUser();
+    public String manageAccount(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = getLoggedUser();
+            session.setAttribute("user", user);
+        }
         model.addAttribute("user", user);
 
         List<UserAuthority> userAuthorities = userService.getAllUserAuthorities();
         model.addAttribute("userAuthorities", userAuthorities);
+        if (user != null) {
+            model.addAttribute("userId", user.getUserId());
+        }
+        AuthenticationUtil.addAuthenticationDetailsToModel(model);
         return "mypage/customer/ManageAccount";
     }
 
+    private static final Pattern PHONENUM_PATTERN = Pattern.compile("^\\d{3}-\\d{4}-\\d{4}$");
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,20}$");
+    private static final Pattern NICKNAME_PATTERN = Pattern.compile("^[A-Za-z0-9가-힣_]{1,12}$");
+
     @PostMapping("/ManageAccount")
-    public String updateAccount(@RequestParam(required = false) String nickname,
-                                @RequestParam(required = false) String password,
-                                @RequestParam(required = false) String email,
-                                @RequestParam(required = false) String phone,
-                                @RequestParam(required = false) String currentPassword,
-                                @RequestParam(required = false) String newPassword,
-                                @RequestParam(required = false) String confirmPassword,
-                                RedirectAttributes redirectAttributes) {
-        User user = getLoggedUser();
+    public String updateAccount(@RequestParam(value = "nickname", required = true) String nickname,
+                                @RequestParam(value = "password", required = false) String password,
+                                @RequestParam(value = "email", required = false) String email,
+                                @RequestParam(value = "phone", required = true) String phone,
+                                @RequestParam(value = "currentPassword", required = false) String currentPassword,
+                                @RequestParam(value = "newPassword", required = false) String newPassword,
+                                @RequestParam(value = "confirmPassword", required = false) String confirmPassword,
+                                Model model,
+                                RedirectAttributes redirectAttributes,
+                                HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = getLoggedUser();
+            session.setAttribute("user", user);
+        }
+        model.addAttribute("user", user);
 
-        if (currentPassword != null && !currentPassword.isEmpty()) {
-            if (newPassword == null || confirmPassword == null || !newPassword.equals(confirmPassword)) {
-                redirectAttributes.addFlashAttribute("error", "새 비밀번호가 일치하지 않습니다.");
-                return "redirect:/mypage/customer/ManageAccount";
+        boolean hasErrors = false;
+
+        // Validate nickname
+        if (nickname == null || nickname.trim().isEmpty()) {
+            redirectAttributes.addFlashAttribute("error_nickname", "닉네임은 필수입니다.");
+            hasErrors = true;
+        } else if (!NICKNAME_PATTERN.matcher(nickname).matches()) {
+            redirectAttributes.addFlashAttribute("error_nickname", "닉네임은 1자리 이상 12자리 이하의 영문자, 숫자, 밑줄(_)만 사용할 수 있습니다.");
+            hasErrors = true;
+        } else if (!nickname.equals(user.getNickname()) && userService.isExistNickname(nickname)) {
+            redirectAttributes.addFlashAttribute("error_nickname", "이미 존재하는 닉네임입니다.");
+            hasErrors = true;
+        }
+
+//        else if (nickname.equals(user.getNickname())) {
+//            hasErrors = false;
+//        }
+//
+//        // Validate phone number
+        if (phone != null && !phone.trim().isEmpty()) {
+            if (!PHONENUM_PATTERN.matcher(phone).matches()) {
+                redirectAttributes.addFlashAttribute("error_phonenum", "올바른 형식(예: 010-1234-5678)의 전화번호를 입력해주세요.");
+                hasErrors = true;
+            } else if (!phone.equals(user.getPhonenum()) && userService.isExistPhonenum(phone)) {
+                redirectAttributes.addFlashAttribute("error_phonenum", "이미 가입된 전화번호입니다.");
+                hasErrors = true;
+            } else if (phone.equals(user.getPhonenum())) {
+//                System.out.println();
             }
+        } else if (phone == null || phone.trim().isEmpty()) {
+            phone = null;
+        }
+////
+////        // Validate password
+        if (currentPassword == null || currentPassword.isEmpty()) {
+            System.out.println("확인용");
+            redirectAttributes.addFlashAttribute("error_password", "비밀번호를 입력해 주세요.");
+            hasErrors = true;
+        } else if (!userService.checkPassword(user.getUserId(), currentPassword)) {
+            redirectAttributes.addFlashAttribute("error_password", "현재 비밀번호가 일치하지 않습니다.");
+            hasErrors = true;
+        } else if (newPassword != null && !newPassword.isEmpty()) {
+            if (!PASSWORD_PATTERN.matcher(newPassword).matches()) {
+                redirectAttributes.addFlashAttribute("error_newpassword", "비밀번호는 최소 하나 이상의 영문 대소문자, 숫자, 특수문자를 혼합하여 8~20자로 입력하여 주세요.");
+                hasErrors = true;
+            } else if (newPassword == null || confirmPassword == null || !newPassword.equals(confirmPassword)) {
+                redirectAttributes.addFlashAttribute("error_confirmpassword", "새 비밀번호가 일치하지 않습니다.");
+                hasErrors = true;
+            } else {
+                password = newPassword;
+            }
+        }
 
-            password = newPassword;
+//
+        if (hasErrors) {
+            return "redirect:/mypage/customer/ManageAccount";
         }
 
         userService.updateUser(user.getUserId(), nickname, password, email, phone);
+        User updatedUser = userService.findUserById(user.getUserId());
+        session.setAttribute("user", updatedUser);
 
         redirectAttributes.addFlashAttribute("success", "수정되었습니다.");
+        AuthenticationUtil.addAuthenticationDetailsToModel(model);
+
 
         return "redirect:/Home";
     }
@@ -153,11 +227,11 @@ public class CustomerController {
             boolean matchesTimePeriod = startDate == null || book.getBookingStartDate().isAfter(startDate);
 
             // 설정한 숙소 타입과 기간에 맞는 예약 리스트만 추리기
-            if(matchesLodgingType && matchesTimePeriod) {
+            if (matchesLodgingType && matchesTimePeriod) {
                 book.setFormattedPay(DecimalFormat.getInstance().format(book.getBookingPay()));
                 book.setDateGap(Period.between(book.getBookingStartDate(), book.getBookingEndDate()).getDays());
 
-                if(book.getBookingStartDate().isAfter(now) || book.getBookingStartDate().isEqual(now)) {
+                if (book.getBookingStartDate().isAfter(now) || book.getBookingStartDate().isEqual(now)) {
                     booksBefore.add(book);
                 } else {
                     booksAfter.add(book);
@@ -216,7 +290,6 @@ public class CustomerController {
             return "redirect:/mypage/customer/Unregister";
         }
     }
-
 
 
 }

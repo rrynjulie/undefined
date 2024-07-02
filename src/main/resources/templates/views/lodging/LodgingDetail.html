@@ -50,7 +50,7 @@
     <!-- 후기가 있는 경우 -->
     <div th:if="${not #lists.isEmpty(lodgingPost)}" id="postDivContainer">
         <div id="postDiv" th:each="lodgingPost, iterStat : ${lodgingPost}" th:if="${iterStat.index < 3}">
-            <div>
+            <div id="div4">
                 <div class="stars" th:attr="data-star-count=${lodgingPost.postGrade}">
                     <span class="star">&#9733;</span>
                     <span class="star">&#9733;</span>
@@ -58,9 +58,12 @@
                     <span class="star">&#9733;</span>
                     <span class="star">&#9733;</span>
                 </div>
-                <div id="postText" th:text="${lodgingPost.postText}"></div>
+                <div id="postText" th:text="${lodgingPost.postText}">
+                </div>
             </div>
-            <div th:text="${lodgingPost.postPicture}"></div>
+            <div id="picture1">
+                <img id="picture2" th:src="@{${lodgingPost.postPicture}}">
+            </div>
         </div>
     </div>
 

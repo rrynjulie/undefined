@@ -20,10 +20,10 @@ public class UserValidator implements Validator {
     private static final Pattern PHONENUM_PATTERN = Pattern.compile(
             "^\\d{3}-\\d{4}-\\d{4}$");
     private static final Pattern PASSWORD_PATTERN = Pattern.compile(
-            "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,20}$");
+            "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,20}$");
 
     private static final Pattern NICKNAME_PATTERN = Pattern.compile(
-            "^[A-Za-z0-9_]{1,12}$");
+            "^[A-Za-z0-9가-힣_]{1,12}$");
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -38,7 +38,7 @@ public class UserValidator implements Validator {
         if (nickname == null || nickname.trim().isEmpty()) {
             errors.rejectValue("nickname", "* 닉네임은 필수입니다.");
         } else if (!NICKNAME_PATTERN.matcher(nickname).matches()){
-            errors.rejectValue("nickname", "* 닉네임은 1자리 이상 12자리 이하의 영문자, 숫자, 밑줄(_)만 사용할 수 있습니다.");
+            errors.rejectValue("nickname", "* 닉네임은 1자리 이상 12자리 이하의 영문자, 한글, 숫자, 밑줄(_)만 사용할 수 있습니다.");
         } else if (userService.isExistNickname(nickname)) {
             errors.rejectValue("nickname", "* 이미 존재하는 닉네임입니다.");
         }
@@ -73,7 +73,7 @@ public class UserValidator implements Validator {
         if (password == null || password.trim().isEmpty()){
             errors.rejectValue("password", "* 비밀번호를 입력해 주세요.");
         } else if (!PASSWORD_PATTERN.matcher(password).matches()) {
-            errors.rejectValue("password", "* 비밀번호는 영문 대소문자, 숫자를 혼합하여 8~20자로 입력하여 주세요.");
+            errors.rejectValue("password", "* 비밀번호는 최소 하나 이상의 영문 대소문자, 숫자, 특수문자를 혼합하여 8~20자로 입력하여 주세요.");
         }
 
 
