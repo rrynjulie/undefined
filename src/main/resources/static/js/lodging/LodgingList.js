@@ -24,6 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
         totalDiv[i].textContent = `인원: 성인 ${adultCount}, 아동 ${childCount}`;
     }
 
+    // 초기로드시 전체 버튼에 스타일 적용
+    document.querySelector('.btn1.ALL').style.backgroundColor = '#FC5185';
+    document.querySelector('.btn1.ALL').style.color = 'white';
+
     // 검색 버튼 클릭 시
     document.getElementById('search').addEventListener('click', function() {
         const location = text.value.trim();
@@ -46,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var type = $(this).text();
         $('.btn1').removeClass('active');
         $(this).addClass('active');
+        sessionStorage.setItem('selectedType', type); // 선택한 타입을 sessionStorage에 저장
         filterLodging(type, this); // 버튼의 타입과 자신을 전달
     });
 
@@ -67,6 +72,17 @@ document.addEventListener('DOMContentLoaded', function () {
         if (btn1) {
             btn1.style.backgroundColor = '#FC5185';
             btn1.style.color = 'white';
+        }
+
+        // sessionStorage에서 선택한 타입 가져오기
+        var selectedType = sessionStorage.getItem('selectedType');
+        if (selectedType) {
+            // 선택한 타입 버튼을 다시 스타일링
+            var activeButton = document.querySelector('.btn1.active');
+            if (activeButton) {
+                activeButton.style.backgroundColor = '#FC5185';
+                activeButton.style.color = 'white';
+            }
         }
 
         // 필터링 로직 추가 (필요한 경우)
