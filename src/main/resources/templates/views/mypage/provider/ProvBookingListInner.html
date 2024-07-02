@@ -24,7 +24,7 @@
                 <td th:text="${bookings.visitorPhoneNum}"></td>
                 <td th:text="${bookings.bookingStartDate}"></td>
                 <td th:text="${bookings.bookingEndDate}"></td>
-                <td th:text="${bookings.bookingPay}"></td>
+                <td th:text="${bookings.formattedPay} + '원'"></td>
             </tr>
         </table>
     </div>

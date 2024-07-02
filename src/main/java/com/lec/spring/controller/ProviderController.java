@@ -73,7 +73,9 @@ public class ProviderController {
         List<Room> rooms = roomService.findRoomsByLodgingId(lodgingId);
         rooms.forEach(room -> {
             room.setBookList(bookingService.findBooksByRoomId(room.getRoomId()));
-            //room.DecimalFormat.getInstance().format(room.getRoomPrice());
+            room.getBookList().forEach(booking -> {
+                booking.setFormattedPay(DecimalFormat.getInstance().format(booking.getBookingPay()));
+            });
         });
         model.addAttribute("rooms", rooms);
 
