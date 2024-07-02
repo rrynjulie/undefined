@@ -13,6 +13,7 @@ import com.lec.spring.util.AuthenticationUtil;
 import com.lec.spring.util.U;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Local;
@@ -51,8 +52,12 @@ public class CustomerController {
     private PostService postService;
 
     @GetMapping("/ManageAccount")
-    public String manageAccount(Model model) {
-        User user = getLoggedUser();
+    public String manageAccount(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = getLoggedUser();
+            session.setAttribute("user", user);
+        }
         model.addAttribute("user", user);
 
         List<UserAuthority> userAuthorities = userService.getAllUserAuthorities();
@@ -77,8 +82,14 @@ public class CustomerController {
                                 @RequestParam(value = "newPassword", required = false) String newPassword,
                                 @RequestParam(value = "confirmPassword", required = false) String confirmPassword,
                                 Model model,
-                                RedirectAttributes redirectAttributes) {
-        User user = U.getLoggedUser();
+                                RedirectAttributes redirectAttributes,
+                                HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = getLoggedUser();
+            session.setAttribute("user", user);
+        }
+        model.addAttribute("user", user);
 
         boolean hasErrors = false;
 
@@ -139,6 +150,9 @@ public class CustomerController {
         }
 
         userService.updateUser(user.getUserId(), nickname, password, email, phone);
+        User updatedUser = userService.findUserById(user.getUserId());
+        session.setAttribute("user", updatedUser);
+
         redirectAttributes.addFlashAttribute("success", "수정되었습니다.");
         AuthenticationUtil.addAuthenticationDetailsToModel(model);
 

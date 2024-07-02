@@ -77,7 +77,13 @@ public class UserServiceImpl implements UserService {
         return user != null;
     }
 
-//    @Override
+    @Override
+    public User findUserById(Long userId) {
+        User user = userRepository.findById(userId);
+        return user;
+    }
+
+    //    @Override
     public boolean isExist(String providerId) {
         User user = findByProviderId(providerId);
         return user != null;

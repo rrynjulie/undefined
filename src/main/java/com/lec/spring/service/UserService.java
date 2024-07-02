@@ -50,4 +50,6 @@ public interface UserService {
     User findByProviderId(String providerId);
 
     boolean emailExists(String email);
+
+    User findUserById(Long userId);
 }
