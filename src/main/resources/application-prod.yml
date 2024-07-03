@@ -1,0 +1,84 @@
+# 서버포트번호
+server:
+  port: 8088
+
+spring:
+  application:
+    name: undefined
+
+  # Thymeleaf 설정
+  thymeleaf:
+    cache: false
+    prefix: classpath:templates/views/
+
+  # datasource 설정
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${rds.hostname}:${rds.port}/${rds.db.name}?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: ${rds.username}
+    password: ${rds.password}
+
+  # 파일 업로드 경로
+  upload:
+    path: src/main/resources/static/image
+
+
+  # security 설정
+  security:
+    #    user:
+    #      name: user
+    #      password: 1234
+    # oauth2 client
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${rds.google.auth.client.id}
+            client-secret: ${rds.google.auth.client.secret}
+            scope:
+              - email
+              - profile
+
+          naver:
+            client-id: ${rds.naver.client.id}
+            client-secret: ${rds.naver.client.secret}
+            scope:
+              - name
+              - email
+            client-name: Naver
+            authorization-grant-type: authorization_code
+            redirect-uri: ${rds.naver.redirect.uri}
+        provider:
+          naver:
+            authorization-uri: https://nid.naver.com/oauth2.0/authorize
+            token-uri: https://nid.naver.com/oauth2.0/token
+            user-info-uri: https://openapi.naver.com/v1/nid/me
+            user-name-attribute: response
+
+# MyBatis 매퍼(mapper) 파일 위치 설정
+# src/main/resources 이하의 경로 지정
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+
+
+# API 키 설정
+app:
+  api-key:
+    bus: ${rds.bus.ticket}
+    google: ${rds.google.map}
+
+  # 파일 업로드 경로
+  upload:
+    path: src/main/resources/static/image
+
+  # OAuth2
+  oauth2:
+
+    password: 1234  # oauth2 인증한 회원에 대한 전용 패스워드, 보안 주의
+
+    # Kakao 로그인 관련 세팅값
+    kakao:
+      client-id: ${rds.kakao.client.id} # REST Api 앱 키
+      redirect-uri: ${rds.kakao.redirect.uri} # Redirect URI
+      token-uri: https://kauth.kakao.com/oauth/token  # access token 요청 URI
+      user-info-uri: https://kapi.kakao.com/v2/user/me  # 사용자 profile 요청 URI
