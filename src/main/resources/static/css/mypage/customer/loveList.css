@@ -1,0 +1,63 @@
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 400;
+    src:
+            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'),
+            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'),
+            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');
+}
+
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+main {
+    display: flex;
+    padding: 40px 20%;
+    height: fit-content;
+    justify-content: space-between;
+    border-top: 1px solid #F5F5F5;
+}
+
+.booking-info {
+    background-color: white;
+    width: 75%;
+    min-height: 588px;
+}
+
+.booking-filter {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.select-label {
+    width: 48%;
+    margin: 10px 0;
+    font-size: 15px;
+    font-weight: bold;
+    color: dimgray;
+}
+
+.select-element {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #EBEBEB;
+    border-radius: 7px;
+    margin-top: 5px;
+    padding: 0 15px;
+    font-size: 17px;
+}
+
+.btn-search {
+    background-color: white;
+    border: 0;
+    margin-left: 30px;
+    padding-top: 35px;
+}
+
+.btn-search:hover {
+    transform: scale(1.02);
+}

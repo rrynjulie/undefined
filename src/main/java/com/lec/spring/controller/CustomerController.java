@@ -1,14 +1,8 @@
 package com.lec.spring.controller;
 
 import com.lec.spring.config.PrincipalDetails;
-import com.lec.spring.domain.Booking;
-import com.lec.spring.domain.Post;
-import com.lec.spring.domain.User;
-import com.lec.spring.domain.UserAuthority;
-import com.lec.spring.service.BookingService;
-import com.lec.spring.service.ManagerService;
-import com.lec.spring.service.PostService;
-import com.lec.spring.service.UserService;
+import com.lec.spring.domain.*;
+import com.lec.spring.service.*;
 import com.lec.spring.util.AuthenticationUtil;
 import com.lec.spring.util.U;
 import com.lec.spring.util.Util;
@@ -53,7 +47,7 @@ public class CustomerController {
     private PostService postService;
 
     @GetMapping("/ManageAccount")
-    public String manageAccount(HttpSession session, Model model) {
+    public String manageAccount(Model model, HttpSession session) {
         User user = Util.getOrSetLoggedUser(session, model);
 
         List<UserAuthority> userAuthorities = userService.getAllUserAuthorities();
@@ -266,6 +260,20 @@ public class CustomerController {
             redirectAttributes.addFlashAttribute("error", "회원 탈퇴 처리 중 오류가 발생했습니다.");
             return "redirect:/mypage/customer/Unregister";
         }
+    }
+
+
+    public LoveService loveService;
+
+    @GetMapping("/loveList")
+    public String loveList(Model model, HttpSession session){
+        User user = Util.getOrSetLoggedUser(session, model);
+
+        List<Lodging> lodgings = loveService.getLodgings(user.getUserId());
+
+        AuthenticationUtil.addAuthenticationDetailsToModel(model);
+        return "mypage/customer/loveList";
+
     }
 
 

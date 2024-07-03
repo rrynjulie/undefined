@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/customer/loveList.css}">
+    <script th:src="@{/js/mypage/customer/loveList.js}"></script>
+    <title>좋아요 목록</title>
+</head>
+<body>
+
+<th:block th:insert="~{common/Header::header}"></th:block>
+
+<main>
+    <div class="container">
+        <th:block th:insert="~{mypage/customer/NavMenu::nav-menu}"></th:block>
+
+        <div class="content">
+            <h1>내 좋아요 목록</h1>
+            <table>
+                <tr th:each="love : ${loves}">
+                    <td>
+                        <div class="accommodation">
+                            <img th:src="@{${lodging.lodgingPicture1}}" alt="사진">
+                            <div class="accommodation-info">
+                                <p>숙소명: <span th:text="${lodging.lodgingName}">호텔 ABC</span></p>
+                                <p>숙소 타입: <span th:text="${lodging.lodgingType}">호텔</span></p>
+                                <p>숙소 주소: <span th:text="${lodging.lodgingAddress}">서울특별시 강남구</span></p>
+                                <p>숙소 연락처: <span th:text="${lodging.lodgingNumber}">02-1234-5678</span></p>
+                                <button class="detail-btn"><a class="view-details" th:href="@{'/mypage/provider/provlodgingdetail/' + ${lodging.lodgingId}}">상세 보기</a></button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <a class="register-btn" href="/mypage/provider/provlodgingregister">숙소 등록</a>
+        </div>
+    </div>
+</main>
+</body>
+</html>

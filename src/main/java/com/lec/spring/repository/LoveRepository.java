@@ -1,11 +1,14 @@
 package com.lec.spring.repository;
 
+import com.lec.spring.domain.Lodging;
 import com.lec.spring.domain.Love;
+import com.lec.spring.domain.ProvLodging;
 import com.lec.spring.domain.User;
 
 import java.util.List;
 
 public interface LoveRepository {
+    List<Lodging> findLodgings(Long userId);
 
     // 모든 사용자 조회
     List<User> findAll();

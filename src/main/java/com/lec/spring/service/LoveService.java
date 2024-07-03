@@ -1,11 +1,14 @@
 package com.lec.spring.service;
 
+import com.lec.spring.domain.Lodging;
 import com.lec.spring.domain.Love;
+import com.lec.spring.domain.ProvLodging;
 import com.lec.spring.domain.User;
 
 import java.util.List;
 
 public interface LoveService {
+    List<Lodging> getLodgings(Long userId);
 
     // 특정 id에 따른 좋아요 누른 상태
     List<Love> getAllUserLove();
