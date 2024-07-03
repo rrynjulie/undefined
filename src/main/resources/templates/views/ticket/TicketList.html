@@ -1,47 +1,52 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/css/ticket/TicketList.css}">
     <script th:src="@{/js/ticket/TicketList.js}"></script>
     <title>버스 목록</title>
 </head>
+
 <body>
 <!-- 헤더 -->
 <th:block th:insert="~{common/Header::header}"></th:block>
+
 <main>
 <div class="container">
 
-    <div class="trip-type">
-        <h1>편도</h1><div class="date" id="currentDate"></div>
-    </div>
-    <table>
-        <thead>
-        <tr>
-            <th>버스등급</th>
-            <th>출발지 → 도착지</th>
-            <th>출발시간</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="bus : ${busInfoList}">
-            <td class="bus-info">
-                <span th:text="${bus['gradeNm']}">버스등급</span>
-            </td>
-            <td class="route">
-                <span th:text="${bus['depPlaceNm']}">출발지</span>
-                <span class="arrow">→</span>
-                <span th:text="${bus['arrPlaceNm']}">도착지</span>
-            </td>
-            <td th:text="${bus['depPlandTime']}">출발시간</td>
-        </tr>
-        <tr th:if="${busInfoList.isEmpty()}">
-            <td colspan="3">No data found</td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="ticket-list-frame">
+        <div class="trip-type">
+            <h1>편도</h1>
+        </div>
 
-    <div th:if="${returnBusInfoList}">
+        <table>
+            <thead>
+            <tr>
+                <th>버스등급</th>
+                <th>출발지 → 도착지</th>
+                <th>출발시간</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="bus : ${busInfoList}">
+                <td class="bus-info">
+                    <span th:text="${bus['gradeNm']}">버스등급</span>
+                </td>
+                <td class="route">
+                    <span th:text="${bus['depPlaceNm']}">출발지</span>
+                    <span class="arrow">→</span>
+                    <span th:text="${bus['arrPlaceNm']}">도착지</span>
+                </td>
+                <td th:text="${bus['depPlandTime']}">출발시간</td>
+            </tr>
+            <tr th:if="${busInfoList.isEmpty()}">
+                <td colspan="3">No data found</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="ticket-list-frame" th:if="${returnBusInfoList}">
         <div class="trip-type">
             <h1>왕복</h1>
         </div>
@@ -71,11 +76,15 @@
             </tbody>
         </table>
     </div>
+    <div class="date" id="currentDate"></div>
+
+    <div class="back-button-frame">
         <button class="back-button" onclick="goBack()">뒤로가기</button>
+    </div>
 </div>
 </main>
+
 <!-- 푸터 -->
 <th:block th:insert="~{common/Footer::footer}"></th:block>
 </body>
-
 </html>

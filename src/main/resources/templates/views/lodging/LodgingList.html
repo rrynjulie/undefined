@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/lodging/LodgingList.css}">
-    <title>Title</title>
+    <title>검색 결과</title>
 </head>
 <!-- 헤더 -->
 <th:block th:insert="~{common/Header::header}"></th:block>
+
 <body>
 <main class="container">
     <div style="margin-top: 20px; padding: 0 0 0 20px; display: flex; justify-content: space-between; height: 50px; background-color: #F5F5F5; border-radius: 10px;">
@@ -88,10 +89,10 @@
         <input type="hidden" name="location" id="location" th:value="${location}">
     </div>
 </main>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script th:src="@{/js/lodging/LodgingList.js}"></script>
-
 
 <!-- 푸터 -->
 <th:block th:insert="~{common/Footer::footer}"></th:block>
