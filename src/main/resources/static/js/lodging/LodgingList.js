@@ -91,7 +91,6 @@ document.addEventListener('DOMContentLoaded', function () {
         var price = $('#priceFilter').val();    // #priceFilter 는 select 요소이고 여기서 .val() 은 select 요소 안에 있는 option 을 말함
         var location = sessionStorage.getItem('searchWord');
         var selectedType = $('.btn1.active').text(); // 현재 선택된 타입 가져오기
-        // var selectedPost = $('#priceFilter').val();
 
         $.ajax({
             type: 'POST',
@@ -100,7 +99,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 location: location,
                 price: price,
                 type: selectedType, // 현재 선택된 타입 전달
-                // post: selectedPost
             },
             success: function(response) {
                 $('#item-list').html(response);

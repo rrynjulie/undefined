@@ -19,8 +19,6 @@ public interface LodgingRepository {
 
     List<Lodging> findLodgingByPriceDESC(String location);
 
-    List<Lodging> findLodgingIdASC(String location);
-
     List<Lodging> findLodgingIdASCByType(String location, String type);
 
     List<Lodging> findLodgingByLocationAndTypeAndPriceASC(String location, String type);

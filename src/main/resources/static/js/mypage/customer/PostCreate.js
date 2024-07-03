@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     const stars = document.querySelectorAll('.star');
     const starsInput = document.getElementById('postGradeInput');

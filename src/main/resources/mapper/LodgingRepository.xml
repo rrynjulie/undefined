@@ -2,89 +2,56 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.lec.spring.repository.LodgingRepository">
 
     <!--    숙소 리스트 쿼리   -->
     <select id="findLodgingsByLocation" resultType="com.lec.spring.domain.Lodging">
         SELECT l.lodging_id AS lodgingId,
-               l.lodging_name AS lodgingName,
-               l.lodging_picture_1 AS lodgingPicture1,
-               l.lodging_type AS lodgingType,
-               l.lodging_address AS lodgingAddress,
-               MIN(r.room_price) AS roomPrice
+        l.lodging_name AS lodgingName,
+        l.lodging_picture_1 AS lodgingPicture1,
+        l.lodging_type AS lodgingType,
+        l.lodging_address AS lodgingAddress,
+        MIN(r.room_price) AS roomPrice
         FROM lodging l
-                 JOIN room r
-                      ON l.lodging_id = r.lodging_id
+        JOIN room r
+        ON l.lodging_id = r.lodging_id
         WHERE l.lodging_location1  LIKE CONCAT('%', #{location}, '%')
-           OR l.lodging_location2  LIKE CONCAT('%', #{location}, '%')
-           OR l.lodging_name LIKE CONCAT('%', #{location}, '%')
-        GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type;
-    </select>
-
-    <select id="findLodgingIdASC" resultType="com.lec.spring.domain.Lodging">
-        SELECT l.lodging_id AS lodgingId,
-               l.lodging_name AS lodgingName,
-               l.lodging_picture_1 AS lodgingPicture1,
-               l.lodging_type AS lodgingType,
-               l.lodging_address AS lodgingAddress,
-               MIN(r.room_price) AS roomPrice
-        FROM lodging l
-                 JOIN room r ON l.lodging_id = r.lodging_id
-        WHERE  l.lodging_location1  LIKE CONCAT('%', #{location}, '%')
-            OR l.lodging_location2  LIKE CONCAT('%', #{location}, '%')
-            OR l.lodging_name LIKE CONCAT('%', #{location}, '%')
-        GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type
-        ORDER BY l.lodging_id ASC
-    </select>
-
-    <!-- location 과 type 으로 필터링하는 쿼리 -->
-    <select id="findLodgingsByLocationAndType" resultType="com.lec.spring.domain.Lodging">
-        SELECT l.lodging_id AS lodgingId,
-               l.lodging_name AS lodgingName,
-               l.lodging_picture_1 AS lodgingPicture1,
-               l.lodging_type AS lodgingType,
-               l.lodging_address AS lodgingAddress,
-               MIN(r.room_price) AS roomPrice
-        FROM lodging l
-                 JOIN room r ON l.lodging_id = r.lodging_id
-        WHERE  l.lodging_location1 LIKE CONCAT('%', #{location}, '%')
-            OR l.lodging_location2 LIKE CONCAT('%', #{location}, '%')
-            OR l.lodging_name LIKE CONCAT('%', #{location}, '%')
-          AND (#{type} = '전체' OR l.lodging_type = #{type})
+        OR l.lodging_location2  LIKE CONCAT('%', #{location}, '%')
+        OR l.lodging_name LIKE CONCAT('%', #{location}, '%')
         GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type;
     </select>
 
     <!-- location 를 price 기준으로 오름차순 필터링하는 쿼리 -->
     <select id="findLodgingByPriceASC" resultType="com.lec.spring.domain.Lodging">
         SELECT l.lodging_id AS lodgingId,
-               l.lodging_name AS lodgingName,
-               l.lodging_picture_1 AS lodgingPicture1,
-               l.lodging_type AS lodgingType,
-               l.lodging_address AS lodgingAddress,
-               MIN(r.room_price) AS roomPrice
+        l.lodging_name AS lodgingName,
+        l.lodging_picture_1 AS lodgingPicture1,
+        l.lodging_type AS lodgingType,
+        l.lodging_address AS lodgingAddress,
+        MIN(r.room_price) AS roomPrice
         FROM lodging l
-                 JOIN room r ON l.lodging_id = r.lodging_id
+        JOIN room r ON l.lodging_id = r.lodging_id
         WHERE l.lodging_location1  LIKE CONCAT('%', #{location}, '%')
-           OR l.lodging_location2  LIKE CONCAT('%', #{location}, '%')
-           OR l.lodging_name LIKE CONCAT('%', #{location}, '%')
+        OR l.lodging_location2  LIKE CONCAT('%', #{location}, '%')
+        OR l.lodging_name LIKE CONCAT('%', #{location}, '%')
         GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type
         ORDER BY roomPrice ASC
     </select>
 
+
     <!-- location 를 price 기준으로 내림차순 필터링하는 쿼리 -->
     <select id="findLodgingByPriceDESC" resultType="com.lec.spring.domain.Lodging">
         SELECT l.lodging_id AS lodgingId,
-               l.lodging_name AS lodgingName,
-               l.lodging_picture_1 AS lodgingPicture1,
-               l.lodging_type AS lodgingType,
-               l.lodging_address AS lodgingAddress,
-               MIN(r.room_price) AS roomPrice
+        l.lodging_name AS lodgingName,
+        l.lodging_picture_1 AS lodgingPicture1,
+        l.lodging_type AS lodgingType,
+        l.lodging_address AS lodgingAddress,
+        MIN(r.room_price) AS roomPrice
         FROM lodging l
-                 JOIN room r ON l.lodging_id = r.lodging_id
+        JOIN room r ON l.lodging_id = r.lodging_id
         WHERE l.lodging_location1  LIKE CONCAT('%', #{location}, '%')
-           OR l.lodging_location2  LIKE CONCAT('%', #{location}, '%')
-           OR l.lodging_name LIKE CONCAT('%', #{location}, '%')
+        OR l.lodging_location2  LIKE CONCAT('%', #{location}, '%')
+        OR l.lodging_name LIKE CONCAT('%', #{location}, '%')
         GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type
         ORDER BY roomPrice DESC
     </select>
@@ -92,54 +59,71 @@
     <!-- location 를 postCount 기준으로 내림차순 필터링하는 쿼리 -->
     <select id="findLodgingByPostCount" resultType="com.lec.spring.domain.Lodging">
         SELECT l.lodging_id AS lodgingId,
-               l.lodging_name AS lodgingName,
-               l.lodging_picture_1 AS lodgingPicture1,
-               l.lodging_type AS lodgingType,
-               l.lodging_address AS lodgingAddress,
-               MIN(r.room_price) AS roomPrice,
-               COALESCE(COUNT(p.post_id), 0) AS postCount
+        l.lodging_name AS lodgingName,
+        l.lodging_picture_1 AS lodgingPicture1,
+        l.lodging_type AS lodgingType,
+        l.lodging_address AS lodgingAddress,
+        MIN(r.room_price) AS roomPrice,
+        COALESCE(COUNT(p.post_id), 0) AS postCount
         FROM lodging l
-                 JOIN room r ON l.lodging_id = r.lodging_id
-                 LEFT JOIN post p ON l.lodging_id = p.lodging_id
+        JOIN room r ON l.lodging_id = r.lodging_id
+        LEFT JOIN post p ON l.lodging_id = p.lodging_id
         WHERE l.lodging_location1  LIKE CONCAT('%', #{location}, '%')
-           OR l.lodging_location2  LIKE CONCAT('%', #{location}, '%')
-           OR l.lodging_name LIKE CONCAT('%', #{location}, '%')
+        OR l.lodging_location2  LIKE CONCAT('%', #{location}, '%')
+        OR l.lodging_name LIKE CONCAT('%', #{location}, '%')
         GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type
         ORDER BY postCount DESC;
+    </select>
+
+    <!-- location 과 type 으로 필터링하는 쿼리 -->
+    <select id="findLodgingsByLocationAndType" resultType="com.lec.spring.domain.Lodging">
+        SELECT l.lodging_id AS lodgingId,
+        l.lodging_name AS lodgingName,
+        l.lodging_picture_1 AS lodgingPicture1,
+        l.lodging_type AS lodgingType,
+        l.lodging_address AS lodgingAddress,
+        MIN(r.room_price) AS roomPrice
+        FROM lodging l
+        JOIN room r ON l.lodging_id = r.lodging_id
+        WHERE  (l.lodging_location1 LIKE CONCAT('%', #{location}, '%')
+        OR l.lodging_location2 LIKE CONCAT('%', #{location}, '%')
+        OR l.lodging_name LIKE CONCAT('%', #{location}, '%'))
+        AND (#{type} = '전체' OR l.lodging_type = #{type})
+        GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type;
     </select>
 
     <!-- location 과 type 으로 오름차순 필터링하는 쿼리 -->
     <select id="findLodgingIdASCByType" resultType="com.lec.spring.domain.Lodging">
         SELECT l.lodging_id AS lodgingId,
-               l.lodging_name AS lodgingName,
-               l.lodging_picture_1 AS lodgingPicture1,
-               l.lodging_type AS lodgingType,
-               l.lodging_address AS lodgingAddress,
-               MIN(r.room_price) AS roomPrice
+        l.lodging_name AS lodgingName,
+        l.lodging_picture_1 AS lodgingPicture1,
+        l.lodging_type AS lodgingType,
+        l.lodging_address AS lodgingAddress,
+        MIN(r.room_price) AS roomPrice
         FROM lodging l
-                 JOIN room r ON l.lodging_id = r.lodging_id
-        WHERE l.lodging_location1  LIKE CONCAT('%', #{location}, '%')
-            OR l.lodging_location2  LIKE CONCAT('%', #{location}, '%')
-            OR l.lodging_name LIKE CONCAT('%', #{location}, '%')
-          AND (#{type} = '전체' OR l.lodging_type = #{type})
+        JOIN room r ON l.lodging_id = r.lodging_id
+        WHERE (l.lodging_location1  LIKE CONCAT('%', #{location}, '%')
+        OR l.lodging_location2  LIKE CONCAT('%', #{location}, '%')
+        OR l.lodging_name LIKE CONCAT('%', #{location}, '%'))
+        AND (#{type} = '전체' OR l.lodging_type = #{type})
         GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type
         ORDER BY l.lodging_id ASC
     </select>
 
-    <!-- location 과 type 으로 오름차순 필터링하는 쿼리 -->
+    <!-- location 과 type 으로 가격 오름차순 필터링하는 쿼리 -->
     <select id="findLodgingByLocationAndTypeAndPriceASC" resultType="com.lec.spring.domain.Lodging">
         SELECT l.lodging_id AS lodgingId,
-               l.lodging_name AS lodgingName,
-               l.lodging_picture_1 AS lodgingPicture1,
-               l.lodging_type AS lodgingType,
-               l.lodging_address AS lodgingAddress,
-               MIN(r.room_price) AS roomPrice
+        l.lodging_name AS lodgingName,
+        l.lodging_picture_1 AS lodgingPicture1,
+        l.lodging_type AS lodgingType,
+        l.lodging_address AS lodgingAddress,
+        MIN(r.room_price) AS roomPrice
         FROM lodging l
-                 JOIN room r ON l.lodging_id = r.lodging_id
-        WHERE l.lodging_location1  LIKE CONCAT('%', #{location}, '%')
-            OR l.lodging_location2  LIKE CONCAT('%', #{location}, '%')
-            OR l.lodging_name LIKE CONCAT('%', #{location}, '%')
-            AND (#{type} = '전체' OR l.lodging_type = #{type})
+        JOIN room r ON l.lodging_id = r.lodging_id
+        WHERE (l.lodging_location1  LIKE CONCAT('%', #{location}, '%')
+        OR l.lodging_location2  LIKE CONCAT('%', #{location}, '%')
+        OR l.lodging_name LIKE CONCAT('%', #{location}, '%'))
+        AND (#{type} = '전체' OR l.lodging_type = #{type})
         GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type
         ORDER BY roomPrice ASC
     </select>
@@ -147,36 +131,37 @@
     <!-- location 과 type 으로 가격 내림차순 필터링하는 쿼리 -->
     <select id="findLodgingByLocationAndTypeAndPriceDESC" resultType="com.lec.spring.domain.Lodging">
         SELECT l.lodging_id AS lodgingId,
-               l.lodging_name AS lodgingName,
-               l.lodging_picture_1 AS lodgingPicture1,
-               l.lodging_type AS lodgingType,
-               l.lodging_address AS lodgingAddress,
-               MIN(r.room_price) AS roomPrice
+        l.lodging_name AS lodgingName,
+        l.lodging_picture_1 AS lodgingPicture1,
+        l.lodging_type AS lodgingType,
+        l.lodging_address AS lodgingAddress,
+        MIN(r.room_price) AS roomPrice
         FROM lodging l
-                 JOIN room r ON l.lodging_id = r.lodging_id
-        WHERE l.lodging_location1  LIKE CONCAT('%', #{location}, '%')
-            OR l.lodging_location2  LIKE CONCAT('%', #{location}, '%')
-            OR l.lodging_name LIKE CONCAT('%', #{location}, '%')
-            AND (#{type} = '전체' OR l.lodging_type = #{type})
+        JOIN room r ON l.lodging_id = r.lodging_id
+        WHERE (l.lodging_location1  LIKE CONCAT('%', #{location}, '%')
+        OR l.lodging_location2  LIKE CONCAT('%', #{location}, '%')
+        OR l.lodging_name LIKE CONCAT('%', #{location}, '%'))
+        AND (#{type} = '전체' OR l.lodging_type = #{type})
         GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type
         ORDER BY roomPrice DESC
     </select>
 
+    <!-- location 과 type 으로 후기 기준 내림차순 필터링하는 쿼리 -->
     <select id="findLodgingByPostCountAndType" resultType="com.lec.spring.domain.Lodging">
         SELECT l.lodging_id AS lodgingId,
-               l.lodging_name AS lodgingName,
-               l.lodging_picture_1 AS lodgingPicture1,
-               l.lodging_type AS lodgingType,
-               l.lodging_address AS lodgingAddress,
-               MIN(r.room_price) AS roomPrice,
-               COALESCE(COUNT(p.post_id), 0) AS postCount
+        l.lodging_name AS lodgingName,
+        l.lodging_picture_1 AS lodgingPicture1,
+        l.lodging_type AS lodgingType,
+        l.lodging_address AS lodgingAddress,
+        MIN(r.room_price) AS roomPrice,
+        COALESCE(COUNT(p.post_id), 0) AS postCount
         FROM lodging l
-                 JOIN room r ON l.lodging_id = r.lodging_id
-            LEFT JOIN post p ON l.lodging_id = p.lodging_id
-        WHERE l.lodging_location1 LIKE CONCAT('%', #{location}, '%')
-            OR l.lodging_location2 LIKE CONCAT('%', #{location}, '%')
-            OR l.lodging_name LIKE CONCAT('%', #{location}, '%')
-            AND (#{type} = '전체' OR l.lodging_type = #{type})
+        JOIN room r ON l.lodging_id = r.lodging_id
+        LEFT JOIN post p ON l.lodging_id = p.lodging_id
+        WHERE (l.lodging_location1 LIKE CONCAT('%', #{location}, '%')
+        OR l.lodging_location2 LIKE CONCAT('%', #{location}, '%')
+        OR l.lodging_name LIKE CONCAT('%', #{location}, '%'))
+        AND (#{type} = '전체' OR l.lodging_type = #{type})
         GROUP BY l.lodging_id, l.lodging_name, l.lodging_picture_1, l.lodging_type
         ORDER BY postCount DESC
         ;
@@ -185,38 +170,38 @@
     <!--    숙소 상세    -->
     <select id="findLodgingById" resultType="com.lec.spring.domain.Lodging">
         SELECT l.lodging_id AS lodgingId,
-               l.lodging_name AS lodgingName,
-               l.lodging_picture_1 AS lodgingPicture1,
-               l.lodging_open AS lodgingOpen,
-               l.lodging_close AS lodgingClose,
-               l.lodging_address AS lodgingAddress,
-               r.room_picture_1 AS roomPicture1,
-               r.room_name AS roomName,
-               r.room_price AS roomPrices,
-               r.room_id AS roomId
+        l.lodging_name AS lodgingName,
+        l.lodging_picture_1 AS lodgingPicture1,
+        l.lodging_open AS lodgingOpen,
+        l.lodging_close AS lodgingClose,
+        l.lodging_address AS lodgingAddress,
+        r.room_picture_1 AS roomPicture1,
+        r.room_name AS roomName,
+        r.room_price AS roomPrices,
+        r.room_id AS roomId
         FROM lodging l
-                 JOIN room r
-                      ON l.lodging_id = r.lodging_id
+        JOIN room r
+        ON l.lodging_id = r.lodging_id
         WHERE l.lodging_id = #{lodgingId}
     </select>
 
     <!--    숙소 상세 1개만 뽑아올 것들    -->
     <select id="findLodgingByName" resultType="com.lec.spring.domain.Lodging">
         SELECT l.lodging_id AS lodgingId,
-               l.lodging_name AS lodgingName,
-               l.lodging_picture_1 AS lodgingPicture1,
-               l.lodging_introduce AS lodgingIntroduce,
-               l.lodging_service AS lodgingService,
-               l.lodging_usingInfo AS lodgingUsingInfo,
-               l.lodging_notice AS lodgingNotice,
-               l.lodging_address AS lodgingAddress,
-               l.lodging_owner_name AS lodgingOwnerName,
-               l.lodging_owner_number AS lodgingOwnerNumber,
-               l.lodging_owner_email AS lodgingOwnerEmail,
-               l.lodging_owner_id AS lodgingOwnerId,
-               r.room_picture_1 AS roomPicture1
+        l.lodging_name AS lodgingName,
+        l.lodging_picture_1 AS lodgingPicture1,
+        l.lodging_introduce AS lodgingIntroduce,
+        l.lodging_service AS lodgingService,
+        l.lodging_usingInfo AS lodgingUsingInfo,
+        l.lodging_notice AS lodgingNotice,
+        l.lodging_address AS lodgingAddress,
+        l.lodging_owner_name AS lodgingOwnerName,
+        l.lodging_owner_number AS lodgingOwnerNumber,
+        l.lodging_owner_email AS lodgingOwnerEmail,
+        l.lodging_owner_id AS lodgingOwnerId,
+        r.room_picture_1 AS roomPicture1
         FROM lodging l
-                JOIN room r ON l.lodging_id = r.lodging_id
+        JOIN room r ON l.lodging_id = r.lodging_id
         WHERE l.lodging_id = #{lodgingId}
         LIMIT 1
     </select>
@@ -225,27 +210,27 @@
     <!--   전체 후기 리스트   -->
     <select id="allPostList" resultType="com.lec.spring.domain.Lodging">
         SELECT r.room_name AS roomName,
-               l.lodging_name AS lodgingName,
-               l.lodging_picture_1 AS lodgingPicture1,
-               l.lodging_type AS lodgingType,
-               p.post_id AS postId,
-               p.post_picture AS postPicture,
-               p.post_text AS postText,
-               p.post_grade AS postGrade,
-               p.user_id AS userId,
-               p.booking_id AS bookingId,
-               p.lodging_id AS lodgingId,
-               p.room_id AS roomId,
-               u.user_id AS userId,
-               b.startDate,
-               b.endDate
+        l.lodging_name AS lodgingName,
+        l.lodging_picture_1 AS lodgingPicture1,
+        l.lodging_type AS lodgingType,
+        p.post_id AS postId,
+        p.post_picture AS postPicture,
+        p.post_text AS postText,
+        p.post_grade AS postGrade,
+        p.user_id AS userId,
+        p.booking_id AS bookingId,
+        p.lodging_id AS lodgingId,
+        p.room_id AS roomId,
+        u.user_id AS userId,
+        b.startDate,
+        b.endDate
         FROM post p
-                 JOIN user u ON p.user_id = u.user_id
-                 JOIN lodging l ON p.lodging_id = l.lodging_id
-                 JOIN room r ON p.room_id = r.room_id
-                 LEFT JOIN (
-            SELECT booking_id, booking_startdate AS startDate, booking_enddate AS endDate
-            FROM booking
+        JOIN user u ON p.user_id = u.user_id
+        JOIN lodging l ON p.lodging_id = l.lodging_id
+        JOIN room r ON p.room_id = r.room_id
+        LEFT JOIN (
+        SELECT booking_id, booking_startdate AS startDate, booking_enddate AS endDate
+        FROM booking
         ) b ON p.booking_id = b.booking_id
         WHERE p.lodging_id = #{lodging_id}
     </select>
@@ -253,8 +238,8 @@
     <select id="avgPostGrade" resultType="java.lang.Double">
         SELECT COALESCE(TRUNCATE(AVG(p.post_grade), 1), 0) AS avgPostGrade
         FROM post p
-                 JOIN lodging l ON p.lodging_id = l.lodging_id
-                 JOIN room r ON p.room_id = r.room_id
+        JOIN lodging l ON p.lodging_id = l.lodging_id
+        JOIN room r ON p.room_id = r.room_id
         WHERE p.lodging_id = #{lodgingId}
         LIMIT 1;
     </select>
@@ -280,46 +265,46 @@
             post : 후기평점 -->
     <select id="countHotelBookingWithRatings" resultType="com.lec.spring.domain.Lodging">
         WITH ranked_lodgings AS (
-            SELECT
-                l.lodging_id AS lodgingId,
-                l.lodging_picture_1 AS lodgingPicture1,
-                l.lodging_name AS lodgingName,
-                l.lodging_type AS lodgingType,
-                r.room_price AS roomPrice,
-                ROUND(AVG(p.post_grade), 2) AS postGrade,
-                COUNT(p.post_id) AS countPostGrade,
-                ROW_NUMBER() OVER (PARTITION BY l.lodging_id ORDER BY r.room_price) AS rn
-            FROM
-                lodging l
-                    LEFT JOIN
-                room r ON l.lodging_id = r.lodging_id
-                    LEFT JOIN
-                booking b ON r.room_id = b.room_id
-                    LEFT JOIN
-                post p ON b.booking_id = p.booking_id
-            WHERE
-                p.post_grade IS NOT NULL
-            GROUP BY
-                l.lodging_id,
-                l.lodging_picture_1,
-                l.lodging_name,
-                l.lodging_type,
-                r.room_price
+        SELECT
+        l.lodging_id AS lodgingId,
+        l.lodging_picture_1 AS lodgingPicture1,
+        l.lodging_name AS lodgingName,
+        l.lodging_type AS lodgingType,
+        r.room_price AS roomPrice,
+        ROUND(AVG(p.post_grade), 2) AS postGrade,
+        COUNT(p.post_id) AS countPostGrade,
+        ROW_NUMBER() OVER (PARTITION BY l.lodging_id ORDER BY r.room_price) AS rn
+        FROM
+        lodging l
+        LEFT JOIN
+        room r ON l.lodging_id = r.lodging_id
+        LEFT JOIN
+        booking b ON r.room_id = b.room_id
+        LEFT JOIN
+        post p ON b.booking_id = p.booking_id
+        WHERE
+        p.post_grade IS NOT NULL
+        GROUP BY
+        l.lodging_id,
+        l.lodging_picture_1,
+        l.lodging_name,
+        l.lodging_type,
+        r.room_price
         )
         SELECT
-            lodgingId,
-            lodgingPicture1,
-            lodgingName,
-            lodgingType,
-            roomPrice,
-            postGrade,
-            countPostGrade
+        lodgingId,
+        lodgingPicture1,
+        lodgingName,
+        lodgingType,
+        roomPrice,
+        postGrade,
+        countPostGrade
         FROM
-            ranked_lodgings
+        ranked_lodgings
         WHERE
-            rn = 1
+        rn = 1
         ORDER BY
-            countPostGrade DESC
+        countPostGrade DESC
         LIMIT 6;
     </select>
 
@@ -327,89 +312,89 @@
     <!-- 예약횟수에 따른 쿼리문 -->
     <select id="countHotelBookingWithRatingsByBookingCount" resultType="com.lec.spring.domain.Lodging">
         WITH room_booking_counts AS (
-            SELECT
-                l.lodging_id AS lodgingId,
-                l.lodging_picture_1 AS lodgingPicture1,
-                l.lodging_name AS lodgingName,
-                l.lodging_type AS lodgingType,
-                r.room_price AS roomPrice,
-                ROUND(AVG(p.post_grade), 2) AS postGrade,
-                r.room_id AS roomId,
-                COUNT(b.booking_id) AS bookingCount,
-                ROW_NUMBER() OVER (PARTITION BY l.lodging_id ORDER BY r.room_price ASC) AS rn
-            FROM
-                lodging l
-                    LEFT JOIN room r ON l.lodging_id = r.lodging_id
-                    LEFT JOIN booking b ON r.room_id = b.room_id
-                    LEFT JOIN post p ON b.booking_id = p.booking_id
-            GROUP BY
-                l.lodging_id,
-                l.lodging_picture_1,
-                l.lodging_name,
-                l.lodging_type,
-                r.room_price,
-                r.room_id
+        SELECT
+        l.lodging_id AS lodgingId,
+        l.lodging_picture_1 AS lodgingPicture1,
+        l.lodging_name AS lodgingName,
+        l.lodging_type AS lodgingType,
+        r.room_price AS roomPrice,
+        ROUND(AVG(p.post_grade), 2) AS postGrade,
+        r.room_id AS roomId,
+        COUNT(b.booking_id) AS bookingCount,
+        ROW_NUMBER() OVER (PARTITION BY l.lodging_id ORDER BY r.room_price ASC) AS rn
+        FROM
+        lodging l
+        LEFT JOIN room r ON l.lodging_id = r.lodging_id
+        LEFT JOIN booking b ON r.room_id = b.room_id
+        LEFT JOIN post p ON b.booking_id = p.booking_id
+        GROUP BY
+        l.lodging_id,
+        l.lodging_picture_1,
+        l.lodging_name,
+        l.lodging_type,
+        r.room_price,
+        r.room_id
         )
         SELECT
-            lodgingId,
-            lodgingPicture1,
-            lodgingName,
-            lodgingType,
-            roomPrice,
-            postGrade,
-            roomId,
-            bookingCount
+        lodgingId,
+        lodgingPicture1,
+        lodgingName,
+        lodgingType,
+        roomPrice,
+        postGrade,
+        roomId,
+        bookingCount
         FROM
-            room_booking_counts
+        room_booking_counts
         WHERE
-            rn = 1
+        rn = 1
         ORDER BY
-            bookingCount DESC
+        bookingCount DESC
         LIMIT 6;
     </select>
 
     <!-- 좋아요 수에 따른 쿼리 -->
     <select id="countHotelBookingWithRatingsByLoveCount" resultType="com.lec.spring.domain.Lodging">
         WITH love_counts AS (
-            SELECT
-                l.lodging_id AS lodgingId,
-                l.lodging_picture_1 AS lodgingPicture1,
-                l.lodging_name AS lodgingName,
-                l.lodging_type AS lodgingType,
-                r.room_price AS roomPrice,
-                ROUND(AVG(p.post_grade), 2) AS postGrade,
-                r.room_id AS roomId,
-                COUNT(love.user_id) AS loveCount,
-                ROW_NUMBER() OVER (PARTITION BY l.lodging_id ORDER BY r.room_price ASC) AS rn
-            FROM
-                lodging l
-                    LEFT JOIN room r ON l.lodging_id = r.lodging_id
-                    LEFT JOIN booking b ON r.room_id = b.room_id
-                    LEFT JOIN post p ON b.booking_id = p.booking_id
-                    LEFT JOIN love ON l.lodging_id = love.lodging_id  -- 좋아요 개수를 계산하기 위해 love 테이블을 조인
-            GROUP BY
-                l.lodging_id,
-                l.lodging_picture_1,
-                l.lodging_name,
-                l.lodging_type,
-                r.room_price,
-                r.room_id
+        SELECT
+        l.lodging_id AS lodgingId,
+        l.lodging_picture_1 AS lodgingPicture1,
+        l.lodging_name AS lodgingName,
+        l.lodging_type AS lodgingType,
+        r.room_price AS roomPrice,
+        ROUND(AVG(p.post_grade), 2) AS postGrade,
+        r.room_id AS roomId,
+        COUNT(love.user_id) AS loveCount,
+        ROW_NUMBER() OVER (PARTITION BY l.lodging_id ORDER BY r.room_price ASC) AS rn
+        FROM
+        lodging l
+        LEFT JOIN room r ON l.lodging_id = r.lodging_id
+        LEFT JOIN booking b ON r.room_id = b.room_id
+        LEFT JOIN post p ON b.booking_id = p.booking_id
+        LEFT JOIN love ON l.lodging_id = love.lodging_id  -- 좋아요 개수를 계산하기 위해 love 테이블을 조인
+        GROUP BY
+        l.lodging_id,
+        l.lodging_picture_1,
+        l.lodging_name,
+        l.lodging_type,
+        r.room_price,
+        r.room_id
         )
         SELECT
-            lodgingId,
-            lodgingPicture1,
-            lodgingName,
-            lodgingType,
-            roomPrice,
-            postGrade,
-            roomId,
-            loveCount
+        lodgingId,
+        lodgingPicture1,
+        lodgingName,
+        lodgingType,
+        roomPrice,
+        postGrade,
+        roomId,
+        loveCount
         FROM
-            love_counts
+        love_counts
         WHERE
-            rn = 1
+        rn = 1
         ORDER BY
-            loveCount DESC
+        loveCount DESC
         LIMIT 6;
     </select>
 

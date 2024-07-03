@@ -45,11 +45,6 @@ public class LodgingServiceImpl implements LodgingService {
     }
 
     @Override
-    public List<Lodging> findLodgingIdASC(String location) {
-        return lodgingRepository.findLodgingIdASC(location);
-    }
-
-    @Override
     public List<Lodging> findLodgingIdASCByType(String location, String type) {
         return lodgingRepository.findLodgingIdASCByType(location, type);
     }

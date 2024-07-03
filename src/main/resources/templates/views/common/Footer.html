@@ -2,6 +2,23 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="footer">
     <link rel="stylesheet" type="text/css" th:href="@{/css/common/Footer.css}">
-    <div class="footer-body"></div>
+    <div class="footer-body">
+        <div class="footer-frame">
+            <div class="company-info">
+                <p>(주)저기어때컴퍼니</p>
+                <p>주소 : 서울특별시 강남구 테헤란로 26길 12 제일비전타워 13층 | 대표이사 : 이재혁 | 사업자등록번호 : 010-4678-3712</p>
+                <p>전자우편주소 : jaehyeok817@gmail.com | 통신판매번호 : 2024-자고싶다-22222 | 전화번호 : 1588-5890</p>
+                <p>(주)여기어때컴퍼니는 통신판매중개자로서 통신판매의 당사자가 아니며, 상품의 예약, 이용 및 환불 등과 관련한 의무와 책임은 각 판매자에게 있습니다.</p>
+            </div>
+            <div class="footer-bottom">
+                <p>Copyright GC COMPANY Corp. All rights reserved.</p>
+                <div class="social-link-frame">
+                    <a href="https://www.facebook.com/"><img th:src="@{/image/common/Facebook.png}" alt="facebook" width="30" height="30"></a>
+                    <a href="https://www.instagram.com/"><img th:src="@{/image/common/Instagram.png}" alt="instagram" width="30" height="30"></a>
+                    <a href="https://x.com/"><img th:src="@{/image/common/Twitter.png}" alt="twitter" width="30" height="30"></a>
+                </div>
+            </div>
+        </div>
+    </div>
 </th:block>
 </html>
