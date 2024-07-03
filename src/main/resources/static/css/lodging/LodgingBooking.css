@@ -105,6 +105,40 @@ form {
     padding-top: 15px;
 }
 
+.payment-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.payment-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24%;
+    height: 50px;
+    border: 1px solid #EBEBEB;
+    box-sizing: border-box;
+    border-radius: 7px;
+    background-color: white;
+
+}
+
+.payment-item:hover,
+.payment-item.active{
+    background-color: #FFEBEF;
+    color: #FC5185;
+    border-color: #FC5185;
+}
+
+
+.payment-item img {
+    max-width: 80%;
+    max-height: 80%;
+}
+
+
+
 .box-pay-info {
     padding: 15px;
     display: flex;
