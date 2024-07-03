@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const bookingForm = document.getElementById('bookingForm');
     const bookingDate = document.getElementById('bookingDate');
     const bookingLineUp = document.getElementById('bookingLineUp');
+    const paymentItems = document.querySelectorAll('.payment-item');
 
     // sessionStorage 에서 데이터 가져오기
     const storedStartDate = sessionStorage.getItem('startDate');
@@ -31,48 +32,56 @@ document.addEventListener('DOMContentLoaded', function () {
     showBookingInfo();
 
     bookingForm.addEventListener('submit', function (event) {
-        // sessionStorage 에서 날짜 가져와서 폼에 추가
-        //폼이 제출될 때 startDate, endDate, adultCount, childCount 값을 히든 필드로 추가
-        if(storedStartDate && storedEndDate) {
-            const startDate = new Date(storedStartDate);
-            const endDate = new Date(storedEndDate);
+        // 결제 수단 선택 확인
+        let paymentSelected = false;
+        paymentItems.forEach(function (item) {
+            if (item.classList.contains('active')) {
+                paymentSelected = true;
+            }
+        });
 
-            startDate.setDate(startDate.getDate() + 1);
-            endDate.setDate(endDate.getDate() + 1);
+        if (!paymentSelected) {
+            alert('결제 수단을 선택해주세요.');
+            event.preventDefault(); // 폼 제출을 중지
+        } else {
+            // sessionStorage 에서 날짜 가져와서 폼에 추가
+            if (storedStartDate && storedEndDate) {
+                const startDate = new Date(storedStartDate);
+                const endDate = new Date(storedEndDate);
+                startDate.setDate(startDate.getDate() + 1);
+                endDate.setDate(endDate.getDate() + 1);
 
-            const hiddenStartDateField = document.createElement('input');
-            hiddenStartDateField.type = 'hidden';
-            hiddenStartDateField.name = 'bookingStartDate';
-            hiddenStartDateField.value = startDate.toISOString().split('T')[0];
-            bookingForm.appendChild(hiddenStartDateField);
+                const hiddenStartDateField = document.createElement('input');
+                hiddenStartDateField.type = 'hidden';
+                hiddenStartDateField.name = 'bookingStartDate';
+                hiddenStartDateField.value = startDate.toISOString().split('T')[0];
+                bookingForm.appendChild(hiddenStartDateField);
 
-            const hiddenEndDateField = document.createElement('input');
-            hiddenEndDateField.type = 'hidden';
-            hiddenEndDateField.name = 'bookingEndDate';
-            hiddenEndDateField.value = endDate.toISOString().split('T')[0];
-            bookingForm.appendChild(hiddenEndDateField);
+                const hiddenEndDateField = document.createElement('input');
+                hiddenEndDateField.type = 'hidden';
+                hiddenEndDateField.name = 'bookingEndDate';
+                hiddenEndDateField.value = endDate.toISOString().split('T')[0];
+                bookingForm.appendChild(hiddenEndDateField);
+            }
+
+            const hiddenAdultCountField = document.createElement('input');
+            hiddenAdultCountField.type = 'hidden';
+            hiddenAdultCountField.name = 'bookingAdult';
+            hiddenAdultCountField.value = storedAdultCount;
+            bookingForm.appendChild(hiddenAdultCountField);
+
+            const hiddenChildCountField = document.createElement('input');
+            hiddenChildCountField.type = 'hidden';
+            hiddenChildCountField.name = 'bookingChild';
+            hiddenChildCountField.value = storedChildCount;
+            bookingForm.appendChild(hiddenChildCountField);
         }
-
-        const hiddenAdultCountField = document.createElement('input');
-        hiddenAdultCountField.type = 'hidden';
-        hiddenAdultCountField.name = 'bookingAdult';
-        hiddenAdultCountField.value = storedAdultCount;
-        bookingForm.appendChild(hiddenAdultCountField);
-
-        const hiddenChildCountField = document.createElement('input');
-        hiddenChildCountField.type = 'hidden';
-        hiddenChildCountField.name = 'bookingChild';
-        hiddenChildCountField.value = storedChildCount;
-        bookingForm.appendChild(hiddenChildCountField);
     });
-});
 
-document.addEventListener('DOMContentLoaded', function() {
-    var paymentItems = document.querySelectorAll('.payment-item');
-
-    paymentItems.forEach(function(item) {
-        item.addEventListener('click', function() {
-            paymentItems.forEach(function(btn) {
+    // 결제 수단 선택 기능
+    paymentItems.forEach(function (item) {
+        item.addEventListener('click', function () {
+            paymentItems.forEach(function (btn) {
                 btn.classList.remove('active');
             });
             item.classList.add('active');
