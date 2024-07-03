@@ -29,6 +29,8 @@ public class Booking {
 
     private String formattedPay;
     private int dateGap;
+
+    private boolean ExistPost;
 }
 
 
