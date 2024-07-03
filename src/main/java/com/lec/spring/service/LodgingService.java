@@ -26,6 +26,10 @@ public interface LodgingService {
 
     List<Lodging> findLodgingByLocationAndTypeAndPriceDESC(String location, String type);
 
+    List<Lodging> findLodgingByPostCountAndType(String location, String type);
+
+    List<Lodging> findLodgingByPostCount(String location);
+
     List<Lodging> lodgingDetail(Long lodgingId);
 
     List<Lodging> lodgingName(Long lodgingId);

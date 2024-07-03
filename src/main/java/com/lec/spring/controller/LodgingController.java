@@ -73,6 +73,7 @@ public class LodgingController {
     public String filterPrice(@RequestParam("location") String location,
                               @RequestParam("price") String price,
                               @RequestParam(value = "type", required = false) String type,
+                              @RequestParam(value = "post", required = false) String post,
                               Model model) {
         List<Lodging> lodgings;
         if (type == null || type.isEmpty() || type.equals("전체")) {
@@ -80,16 +81,21 @@ public class LodgingController {
                 lodgings = lodgingService.findLodgingIdASC(location);
             } else if (price.equals("DESC")) {
                 lodgings = lodgingService.findLodgingByPriceDESC(location);
-            } else {
+            } else if (price.equals("ASC")) {
                 lodgings = lodgingService.findLodgingByPriceASC(location);
+            } else {
+                lodgings = lodgingService.findLodgingByPostCount(location);
             }
         } else {
             if (price.equals("ALL")) {
                 lodgings = lodgingService.findLodgingIdASCByType(location, type);
             } else if (price.equals("DESC")) {
                 lodgings = lodgingService.findLodgingByLocationAndTypeAndPriceDESC(location, type);
-            } else
+            } else if (price.equals("ASC")) {
                 lodgings = lodgingService.findLodgingByLocationAndTypeAndPriceASC(location, type);
+            } else {
+                lodgings = lodgingService.findLodgingByPostCountAndType(location, type);
+            }
         }
         addAdditionalInfoToLodgings(lodgings);
         model.addAttribute("lodging", lodgings);
