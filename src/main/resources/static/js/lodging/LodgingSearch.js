@@ -5,45 +5,50 @@ document.addEventListener('DOMContentLoaded', function() {
     const nextButton = document.getElementById('next');
     const selectedDate = document.getElementById('selectedDate');
     let currentDate = new Date();
-    let today = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()); //현재날짜 저장
-    let startDate = sessionStorage.getItem('startDate') ? new Date(sessionStorage.getItem('startDate')) : today;
-    let endDate = sessionStorage.getItem('endDate') ? new Date(sessionStorage.getItem('endDate')) : new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+    let startDate = sessionStorage.getItem('startDate') ? new Date(sessionStorage.getItem('startDate')) : new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+    let endDate = sessionStorage.getItem('endDate') ? new Date(sessionStorage.getItem('endDate')) : new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
+    // let today = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()); //현재날짜 저장
+    // let startDate = sessionStorage.getItem('startDate') ? new Date(sessionStorage.getItem('startDate')) : new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+    // // 세션에 날짜가 저장되어 있으면 그 값을 startDate 로 세션에 저장되어 있는 값이 없으면 현재 날짜로
+    // let endDate = sessionStorage.getItem('endDate') ? new Date(sessionStorage.getItem('endDate')) : new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
+    // 세션에 날짜가 저장되어 있으면 그 값을 startDate 로 세션에 저장되어 있는 값이 없으면 현재 날짜 + 1 로 저장
     selectedDate.innerHTML = startDate.getFullYear() + '.' + (startDate.getMonth() + 1) + '.' + startDate.getDate() + ' ~ ' + endDate.getFullYear() + '.' + (endDate.getMonth() + 1) + '.' + (endDate.getDate() + ' (1박)');
     if (!sessionStorage.getItem('startDate')) {
         sessionStorage.setItem('startDate', startDate.toISOString());
-    }
+    }   // 날짜 선택을 안했다면 현재 날짜로
     if (!sessionStorage.getItem('endDate')) {
         sessionStorage.setItem('endDate', endDate.toISOString());
-    }
-    let lastClickedCells = [];
+    }   // 날짜 선택을 안했다면 현재날 + 1 로
+    let lastClickedCells = [];  // 선택한 날짜를 배열에 저장
 
     function renderCalendar(date) {
-        const month = date.getMonth();
+        const month = date.getMonth();  // getMonth, getFullYear, getDay, getDate 는 자바에서 지원해주는 객체
         const year = date.getFullYear();
         const firstDate = new Date(year, month, 1).getDay();
         const lastDate = new Date(year, month + 1, 0).getDate();
+        // date 0 은 0번째 날을 의미하므로 ex) 6월 0 이면 5월 마지막날이기 때문에 month 에 + 1
 
-        calendarBody.innerHTML = '';
-        monthYear.textContent = `${year}년 ${month + 1}월`;
+        calendarBody.innerHTML = '';    // 캘린더 초기화
+        monthYear.textContent = `${year}년 ${month + 1}월`;   // 초기화 된 캘린더 monthYear 부분에 년, 월 출력
 
         let row = document.createElement('tr');
 
         for (let i = 0; i < firstDate; i++) {
             let cell = document.createElement('td');
-            row.append(cell);
+            row.append(cell);   // 첫번째 날 전까지 td (빈셀) 생성
         }
 
         for (let date = 1; date <= lastDate; date++) {
             let cell = document.createElement('td');
-            row.append(cell);
-            cell.textContent = date;
+            row.append(cell);   // 빈셀 이후로 마지막 날 까지 td (빈셀) 생성
+            cell.textContent = date;    // 빈 셀에 날짜 데이터 삽입
 
             let cellDate = new Date(year, month, date);
 
-            if (cellDate < today) {
-                cell.style.color = 'lightgray'; //과거 날짜 회색표시
-                cell.style.pointerEvents = 'none'; //선택 못하게
-            }
+            // if (cellDate < today) {
+            //     cell.style.color = 'lightgray'; //과거 날짜 회색표시
+            //     cell.style.pointerEvents = 'none'; //선택 못하게
+            // }
 
             if (startDate && endDate) {
                 const start = new Date(startDate).getTime();
@@ -125,15 +130,18 @@ document.addEventListener('DOMContentLoaded', function() {
     renderCalendar(currentDate);
 });
 
+    // 버튼
 document.addEventListener('DOMContentLoaded', function() {
-    const decreaseBtn1 = document.getElementById('decrease-btn1');
-    const increaseBtn1 = document.getElementById('increase-btn1');
-    const adultCountDiv = document.getElementById('adult-count');
-    const decreaseBtn2 = document.getElementById('decrease-btn2');
-    const increaseBtn2 = document.getElementById('increase-btn2');
-    const childCountDiv = document.getElementById('child-count');
+    const decreaseBtn1 = document.getElementById('decrease-btn1');  // 성인 수 감소 버튼
+    const increaseBtn1 = document.getElementById('increase-btn1');  // 성인 수 증가 버튼
+    const adultCountDiv = document.getElementById('adult-count');   // 성인 수 text
+    const decreaseBtn2 = document.getElementById('decrease-btn2');  // 아동 수 감소 버튼
+    const increaseBtn2 = document.getElementById('increase-btn2');  // 아동 수 증가 버튼
+    const childCountDiv = document.getElementById('child-count');   // 아동 수 text
     let adultCount = parseInt(sessionStorage.getItem('adultCount')) || 1;
+    // 성인 수가 세션에 없다면 1 로 저장 -> 세션은 String 형으로 저장되기 때문에 Int 로 파싱
     let childCount = parseInt(sessionStorage.getItem('childCount')) || 0;
+    // 아동 수가 세션에 없다면 0 으로 저장
     let total = document.getElementById("total");
 
     function updateCount() {
@@ -225,12 +233,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 <br> <span>성인: ${search.adults}명, 아동: ${search.children}명</span>`;
 
             const deleteIcon = searchDiv.querySelector('.delete-icon');
-            deleteIcon.addEventListener('click', function() {
+            deleteIcon.addEventListener('click', function () {
                 // 삭제할 요소를 DOM에서 제거
                 recentlySearchContainer.removeChild(searchDiv);
                 // 해당 검색 기록을 sessionStorage에서도 삭제
-                searchHistory.splice(index, 1);
-                sessionStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+                const index = searchHistory.findIndex(item => item.word === search.word);
+                if (index !== -1) {
+                    searchHistory.splice(index, 1);
+                    sessionStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+                }
             });
             recentlySearchContainer.appendChild(searchDiv);
         });

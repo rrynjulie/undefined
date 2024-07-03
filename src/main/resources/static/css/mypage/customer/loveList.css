@@ -1,0 +1,138 @@
+.container {
+    display: flex;
+    width: 100%;
+    user-select: none;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+}
+
+main {
+    display: flex;
+    padding: 40px 20%;
+    height: fit-content;
+}
+
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 400;
+    src:
+            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'),
+            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'),
+            url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');
+}
+
+.provider-menu-pc {
+    width: 200px;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+}
+
+.provider-menu-pc a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.provider-menu-pc a img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.content {
+    flex: 1;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.accommodation {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.accommodation img {
+    width: 30%;
+    height: auto;
+    background-color: #ddd;
+    margin-right: 20px;
+}
+
+.accommodation-info {
+    flex: 1;
+}
+
+.accommodation-info p {
+    margin: 5px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.register-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #FC5185;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 150px;
+    cursor: pointer;
+}
+
+.detail-btn {
+    height: 50px;
+    width: 150px;
+    border: 0;
+    border-radius: 7px;
+    font-size: 17px;
+    font-weight: bold;
+    background-color: #FC5185;
+    color: white;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-right: -700px;
+}
+
+.detail-btn a {
+    color: white;
+    text-decoration: none;
+}
+
+.register-btn:hover {
+    transform: scale(1.02);
+}
+
+.detail-btn:hover {
+    transform: scale(1.02);
+}

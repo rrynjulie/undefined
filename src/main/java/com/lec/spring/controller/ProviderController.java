@@ -85,12 +85,8 @@ public class ProviderController {
 
     @GetMapping("/provlodginglist")
     public String provlodginglist(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = U.getLoggedUser();
-            session.setAttribute("user", user);
-        }
-        model.addAttribute("user", user);
+        User user = Util.getOrSetLoggedUser(session, model);
+
         System.out.println("세션 userId: " + user.getUserId()); // userId를 콘솔에 출력
 
         List<ProvLodging> lodgings = providerService.getLodgings(user.getUserId());

@@ -21,6 +21,18 @@
         VALUES (#{lodgingId}, #{userId})
     </insert>
 
+    <select id="findLodgings" resultType="com.lec.spring.domain.Lodging">
+        SELECT l.lodging_id AS lodgingId,
+               l.lodging_picture_1 AS lodgingPicture1,
+               l.lodging_name AS lodgingName,
+               l.lodging_type AS lodgingType,
+               l.lodging_address AS lodgingAddress,
+               l.lodging_number AS lodgingNumber,
+               lo.user_id AS userId
+        FROM lodging l JOIN love lo ON l.lodging_id = lo.lodging_id
+        WHERE lo.user_id = #{userId}
+    </select>
+
     <!-- 좋아요를 삭제하는 쿼리 -->
     <delete id="removeLove">
         DELETE FROM love WHERE lodging_id = #{lodgingId} AND user_id = #{userId}

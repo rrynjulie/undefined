@@ -24,7 +24,7 @@
     border-radius: 10px;
     color: inherit;         /* 텍스트 색상 상속 */
     text-decoration: none;
-    padding: 0 10px;
+    padding: 0 0 0 10px;
     background-color: #f5f5f5;
 }
 .item:hover {
@@ -44,22 +44,33 @@
 }
 .item-details {
     width: 50%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     text-align: left;
-    padding: 10px;
+    padding: 10px 0 10px 10px;
     position: relative; /* position relative 추가 */
     margin-left: 5px;
 }
+.titleDiv {
+    height: 32%;
+}
+.addressDiv {
+    height: 20%;
+}
+.typeDiv {
+    height: 18%;
+}
 .item-title {
-    margin-top: 20px;
-    height: 31%;
+    height: 15%;
     font-size: 17px;
     font-weight: bold;
-    margin: 0;
+}
+.item-address {
+    font-size: 11px;
+    color: gray;
 }
 .item-type {
-    margin-top: 40px;
     font-size: 14px;
 }
 .item-rating {
@@ -140,6 +151,7 @@
     border-radius: 30px;
     background-color: #F5F5F5;
     border: none;
+    font-weight: bold;
 }
 .btn1:hover {
     background-color: #FC5185;
@@ -147,6 +159,7 @@
     border: none;
     border-radius: 30px;
     text-decoration: none;
+    cursor: pointer;
 }
 .btn1:hover {
     text-decoration: none;

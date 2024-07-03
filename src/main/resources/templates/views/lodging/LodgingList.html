@@ -44,6 +44,7 @@
                 <option class="custom-option" value="ALL">전체</option>
                 <option class="custom-option" value="DESC">예약가 높은 순</option>
                 <option class="custom-option" value="ASC">예약가 낮은 순</option>
+                <option class="custom-option" value="PostCount">후기 많은 순</option>
             </select>
         </div>
     </div>
@@ -54,26 +55,35 @@
         </div>
 
         <!-- 검색 숙소가 없는 경우 -->
-        <div th:if="${#lists.isEmpty(lodging)}">
-            <p class="post-null">해당 지역에 등록된 숙소가 없습니다</p>
-        </div>
         <div class="item-list" id="item-list">
             <div class="item-list1" th:each="lodging : ${lodging}">
                 <a class="item" th:href="@{'/lodging/LodgingDetail/' + ${lodging.lodgingId}}">
                     <p class="item-img1">
                         <img class="item-img2" th:src="${lodging.lodgingPicture1}" alt="Lodging Picture"/>
                     <div class="item-details">
-                        <div class="item-title" th:text="${lodging.lodgingName}"></div>
-                        <div class="item-type" th:text="${lodging.lodgingType}"></div>
-                        <div class="item-rating" style="display: flex; align-items: center">
-                            <div id="star">&#9733;</div>
-                            <div class="avgPostGrade" th:text="${lodging.avgPostGrade} + '(' + ${lodging.totalPosts} + ')'"></div>
+                        <div class="titleDiv">
+                            <div class="item-title" th:text="${lodging.lodgingName}"></div>
+                        </div>
+                        <div class="addressDiv">
+                            <div class="item-address" th:text="${lodging.lodgingAddress}"></div>
+                        </div>
+                        <div class="typeDiv">
+                            <div class="item-type" th:text="${lodging.lodgingType}"></div>
+                        </div>
+                        <div class="startDiv">
+                            <div class="item-rating">
+                                <div id="star">&#9733;</div>
+                                <div class="avgPostGrade" th:text="${lodging.avgPostGrade} + '(' + ${lodging.totalPosts} + ')'"></div>
+                            </div>
                         </div>
                         <p class="item-price" th:text="${lodging.formattedRoomPrice} + '원 ~'">Room Price</p>
                     </div>
                     </p>
                 </a>
             </div>
+        </div>
+        <div th:if="${#lists.isEmpty(lodging)}">
+            <p class="post-null">해당 지역에 등록된 숙소가 없습니다</p>
         </div>
         <!-- 추가: location 값을 저장하는 hidden input -->
         <input type="hidden" name="location" id="location" th:value="${location}">

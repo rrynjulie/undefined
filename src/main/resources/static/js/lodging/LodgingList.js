@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // 숙소 타입 버튼 클릭 시
     $('.btn1').click(function() {
         var type = $(this).text();
-        $('.btn1').removeClass('active');
+        $('.btn1').removeClass('active');   // class = btn1 을 누르면 active  value 값을 가진 것을 삭제
         $(this).addClass('active');
         sessionStorage.setItem('selectedType', type); // 선택한 타입을 sessionStorage에 저장
         filterLodging(type, this); // 버튼의 타입과 자신을 전달
@@ -69,14 +69,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         // 선택한 버튼의 배경색을 변경
-        if (btn1) {
+        if (btn1) {     // if (btn1) => btn1 이 null, false, nan 등 이 아닌 존재하는 요소면 if 문 진행
             btn1.style.backgroundColor = '#FC5185';
             btn1.style.color = 'white';
         }
 
         // sessionStorage에서 선택한 타입 가져오기
         var selectedType = sessionStorage.getItem('selectedType');
-        if (selectedType) {
+        if (selectedType) {     // 위 if 문과 같이 selectedType 이 존재하는 요소라면 if 문 진행
             // 선택한 타입 버튼을 다시 스타일링
             var activeButton = document.querySelector('.btn1.active');
             if (activeButton) {
@@ -88,9 +88,10 @@ document.addEventListener('DOMContentLoaded', function () {
         // 필터링 로직 추가 (필요한 경우)
         console.log(type);
 
-        var price = $('#priceFilter').val();
+        var price = $('#priceFilter').val();    // #priceFilter 는 select 요소이고 여기서 .val() 은 select 요소 안에 있는 option 을 말함
         var location = sessionStorage.getItem('searchWord');
         var selectedType = $('.btn1.active').text(); // 현재 선택된 타입 가져오기
+        // var selectedPost = $('#priceFilter').val();
 
         $.ajax({
             type: 'POST',
@@ -98,7 +99,8 @@ document.addEventListener('DOMContentLoaded', function () {
             data: {
                 location: location,
                 price: price,
-                type: selectedType // 현재 선택된 타입 전달
+                type: selectedType, // 현재 선택된 타입 전달
+                // post: selectedPost
             },
             success: function(response) {
                 $('#item-list').html(response);

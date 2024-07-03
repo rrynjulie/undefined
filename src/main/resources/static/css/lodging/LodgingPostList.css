@@ -193,5 +193,10 @@ a {
 }
 
 .post-null {
-    height: 423px;
+    color: darkgray;
+    height: 130px;
+    font-size: 30px;
+    text-align: center;
+    align-content: center;
+    margin-bottom: 152px;
 }

@@ -40,6 +40,8 @@ public class Lodging {
     private String postPicture;
     private String postText;
 
+    // 후기 수
+    private int postCount;
     // 후기 평균값
     private double postGrade;
 

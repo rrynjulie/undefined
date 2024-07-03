@@ -56,3 +56,16 @@ document.addEventListener('DOMContentLoaded', function () {
         bookingForm.appendChild(hiddenChildCountField);
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    var paymentItems = document.querySelectorAll('.payment-item');
+
+    paymentItems.forEach(function(item) {
+        item.addEventListener('click', function() {
+            paymentItems.forEach(function(btn) {
+                btn.classList.remove('active');
+            });
+            item.classList.add('active');
+        });
+    });
+});
