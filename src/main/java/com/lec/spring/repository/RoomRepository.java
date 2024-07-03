@@ -15,6 +15,13 @@ public interface  RoomRepository {
 
     void updateRoom(Room room);
 
+    // roomId 관련된 post 삭제
+    void deletePostsByRoomId(int roomId);
+
+    // roomId와 관련된 booking 삭제
+    void deleteBookingsByRoomId(int roomId);
+
+    // roomId와 관련된 room 삭제
     void deleteRoom(int roomId);
 
     List<Room> findRoomsByLodgingId(Long lodgingId);
