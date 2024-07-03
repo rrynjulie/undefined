@@ -39,6 +39,10 @@ public class LodgingServiceImpl implements LodgingService {
     public List<Lodging> findLodgingByPriceDESC(String location) {
         return lodgingRepository.findLodgingByPriceDESC(location);
     }
+    @Override
+    public List<Lodging> findLodgingByPostCount(String location) {
+        return lodgingRepository.findLodgingByPostCount(location);
+    }
 
     @Override
     public List<Lodging> findLodgingIdASC(String location) {
@@ -58,6 +62,11 @@ public class LodgingServiceImpl implements LodgingService {
     @Override
     public List<Lodging> findLodgingByLocationAndTypeAndPriceDESC(String location, String type) {
         return lodgingRepository.findLodgingByLocationAndTypeAndPriceDESC(location, type);
+    }
+
+    @Override
+    public List<Lodging> findLodgingByPostCountAndType(String location, String type) {
+        return lodgingRepository.findLodgingByPostCountAndType(location, type);
     }
 
     @Override
