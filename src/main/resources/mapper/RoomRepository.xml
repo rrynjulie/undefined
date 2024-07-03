@@ -107,6 +107,17 @@
         AND r.room_id = #{roomId}
     </select>
 
+    <!-- roomId와 관련된 post 삭제 -->
+    <delete id="deletePostsByRoomId" parameterType="int">
+        DELETE FROM post WHERE room_id = #{roomId}
+    </delete>
+
+    <!-- roomId와 관련된 booking 삭제 -->
+    <delete id="deleteBookingsByRoomId" parameterType="int">
+        DELETE FROM booking WHERE room_id = #{roomId}
+    </delete>
+
+    <!-- room 삭제 -->
     <delete id="deleteRoom" parameterType="int">
         DELETE FROM room WHERE room_id = #{roomId}
     </delete>

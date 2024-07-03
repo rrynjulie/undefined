@@ -9,6 +9,7 @@ import com.lec.spring.service.BookingService;
 import com.lec.spring.service.ProviderService;
 import com.lec.spring.service.RoomService;
 import com.lec.spring.service.UserService;
+import com.lec.spring.util.AuthenticationUtil;
 import com.lec.spring.util.U;
 import com.lec.spring.util.Util;
 import jakarta.servlet.http.HttpSession;
@@ -84,12 +85,8 @@ public class ProviderController {
 
     @GetMapping("/provlodginglist")
     public String provlodginglist(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = U.getLoggedUser();
-            session.setAttribute("user", user);
-        }
-        model.addAttribute("user", user);
+        User user = Util.getOrSetLoggedUser(session, model);
+
         System.out.println("세션 userId: " + user.getUserId()); // userId를 콘솔에 출력
 
         List<ProvLodging> lodgings = providerService.getLodgings(user.getUserId());
@@ -221,6 +218,7 @@ public class ProviderController {
 
         Room room = roomService.findByRoomId(roomId);
         model.addAttribute("room", room);
+
         return "mypage/provider/ProvRoomDetail";
     }
 
@@ -249,16 +247,30 @@ public class ProviderController {
     public String deleteRoom(@PathVariable int roomId, Model model, HttpSession session) {
         User user = Util.getOrSetLoggedUser(session, model);
 
+        System.out.println("try 들어가기 전에 찍기" + roomId);
         int result;
-        Long userId = U.getLoggedUser().getUserId();
+        Long userId = user.getUserId();
         try {
+            System.out.println("try 들어가서 찍기" + roomId);
+
+            roomService.deletePostsByRoomId(roomId);
+            System.out.println("deletePostsByRoomId: " + roomId);
+            roomService.deleteBookingsByRoomId(roomId);
+            System.out.println("deleteBookingsByRoomId: " + roomId);
             roomService.deleteRoom(roomId);
+            System.out.println("deleteRoom: " + roomId);
             result = 1; // 삭제 성공
         } catch (Exception e) {
             result = 0; // 삭제 실패
         }
         model.addAttribute("result", result);
         model.addAttribute("userId", userId);
+        System.out.println("[result] : " + result);
+        System.out.println("[user] : " + user);
+
+
+
+        AuthenticationUtil.addAuthenticationDetailsToModel(model);
         return "mypage/provider/ProvRoomDeleteOk";
     }
 

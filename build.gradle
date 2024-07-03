@@ -5,12 +5,15 @@ plugins {
 }
 
 group = 'com.lec.spring'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 
 java {
     sourceCompatibility = '17'
 }
 
+jar{
+    enabled=false
+}
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
