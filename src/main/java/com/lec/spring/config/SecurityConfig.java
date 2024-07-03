@@ -62,8 +62,8 @@ public class SecurityConfig {
                  *  만약 .loginPage(url) 가 세팅되어 있지 않으면 '디폴트 로그인' form 페이지가 활성화 된다
                  ********************************************/
                 .formLogin(form -> form
-                                .loginPage("/user/login")
-                                .loginProcessingUrl("/user/login")
+                                .loginPage("/user/Login")
+                                .loginProcessingUrl("/user/Login")
                                 .defaultSuccessUrl("/")
                                 .usernameParameter("email")
                                 .passwordParameter("password")
@@ -111,7 +111,7 @@ public class SecurityConfig {
                  * .oauth2Login(OAuth2LoginConfigurer)
                  ********************************************/
                 .oauth2Login(httpSecurityOAuth2LoginConfigurer -> httpSecurityOAuth2LoginConfigurer
-                        .loginPage("/user/login")    // 로그인 페이지를 기존과 동일한 url 로 지정
+                        .loginPage("/user/Login")    // 로그인 페이지를 기존과 동일한 url 로 지정
                         // ↑ 구글 로그인 완료된 뒤에 후처리가 필요하다!
 
                         // code 를 받아오는 것이 아니라, 'AccessToken' 과 사용자 '프로필정보'를 한번에 받아온다
@@ -142,7 +142,7 @@ public class SecurityConfig {
 //                        authorizeRequests.anyRequest().authenticated()
 //                )
 //                .formLogin(formLogin ->
-//                        formLogin.loginPage("/login").permitAll()
+//                        formLogin.loginPage("/Login").permitAll()
 //                )
 //                .logout(logout ->
 //                        logout.permitAll()

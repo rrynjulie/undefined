@@ -27,7 +27,7 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
         }
         request.getSession().invalidate();   // session invalidate
 
-        String redirecUrl = "/user/login?logoutHandler";
+        String redirecUrl = "/user/Login?logoutHandler";
 
         // ret_url 이 있는 경우 logout 하고 해당 url 로 redirect
         if(request.getParameter("ret_url") != null){
