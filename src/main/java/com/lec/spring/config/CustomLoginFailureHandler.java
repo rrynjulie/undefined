@@ -24,7 +24,7 @@ import java.io.IOException;
  */
 public class CustomLoginFailureHandler implements AuthenticationFailureHandler {
 
-    private final String DEFAULT_FAILURE_FORWARD_URL = "/user/loginError";
+    private final String DEFAULT_FAILURE_FORWARD_URL = "/user/LoginError";
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {

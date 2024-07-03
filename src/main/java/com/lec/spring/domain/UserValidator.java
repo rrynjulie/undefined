@@ -20,7 +20,7 @@ public class UserValidator implements Validator {
     private static final Pattern PHONENUM_PATTERN = Pattern.compile(
             "^\\d{3}-\\d{4}-\\d{4}$");
     private static final Pattern PASSWORD_PATTERN = Pattern.compile(
-            "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,20}$");
+            "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,20}$");
 
     private static final Pattern NICKNAME_PATTERN = Pattern.compile(
             "^[A-Za-z0-9가-힣_]{1,12}$");

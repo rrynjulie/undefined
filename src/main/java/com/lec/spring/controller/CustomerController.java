@@ -63,7 +63,7 @@ public class CustomerController {
     }
 
     private static final Pattern PHONENUM_PATTERN = Pattern.compile("^\\d{3}-\\d{4}-\\d{4}$");
-    private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,20}$");
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,20}$");
     private static final Pattern NICKNAME_PATTERN = Pattern.compile("^[A-Za-z0-9가-힣_]{1,12}$");
 
     @PostMapping("/ManageAccount")
@@ -173,7 +173,8 @@ public class CustomerController {
             @PathVariable("userId") Long userId
             , @RequestParam(value = "lodgingType", required = false) String lodgingType
             , @RequestParam(value = "timePeriod", required = false) String timePeriod
-            , Model model, HttpSession session) {
+            , Model model
+            , HttpSession session) {
         User user = Util.getOrSetLoggedUser(session, model);
 
         List<Booking> books = bookingService.findBooksByUserId(userId);  // 전체 예약 리스트
@@ -203,6 +204,7 @@ public class CustomerController {
             if (matchesLodgingType && matchesTimePeriod) {
                 book.setFormattedPay(DecimalFormat.getInstance().format(book.getBookingPay()));
                 book.setDateGap(Period.between(book.getBookingStartDate(), book.getBookingEndDate()).getDays());
+                book.setExistPost(postService.checkIfUserPosted(userId, book.getBookingId()));
 
                 if (book.getBookingStartDate().isAfter(now) || book.getBookingStartDate().isEqual(now)) {
                     booksBefore.add(book);

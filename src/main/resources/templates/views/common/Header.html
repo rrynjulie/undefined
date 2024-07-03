@@ -24,7 +24,7 @@
                     </div>
                     <p th:text="${user.nickname}"></p>
                 </a>
-                <a class="btn btn-primary" sec:authorize="isAnonymous()" th:href="@{/user/login}" id="btn-login-pc">로그인 / 회원가입</a>
+                <a class="btn btn-primary" sec:authorize="isAnonymous()" th:href="@{/user/Login}" id="btn-login-pc">로그인 / 회원가입</a>
                 <button class="btn btn-danger" type="submit" id="btn-logout-pc" sec:authorize="isAuthenticated()">로그아웃</button>
             </form>
         </ul>
@@ -50,7 +50,7 @@
         <div id="nav-menu">
 <!--            <a id="btn-login-mobile" th:href="@{/user/Login}">로그인 / 회원가입</a>-->
 <!--            <a id="btn-logout-mobile" th:href="@{/user/Login}">로그아웃</a>-->
-            <a class="btn btn-primary" sec:authorize="isAnonymous()" th:href="@{/user/login}" id="btn-login-mobile">로그인 / 회원가입</a>
+            <a class="btn btn-primary" sec:authorize="isAnonymous()" th:href="@{/user/Login}" id="btn-login-mobile">로그인 / 회원가입</a>
             <form th:action="@{/user/logout}" method="POST" sec:authorize="isAuthenticated()" th:with="user=${#authentication.getPrincipal().getUser()}">
                 <span class="d-flex">
                     <span><button class="btn btn-danger" type="submit" id="logout-btn-mobile">로그아웃</button></span>

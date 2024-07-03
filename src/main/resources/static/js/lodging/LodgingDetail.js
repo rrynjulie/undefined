@@ -263,60 +263,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    const bookingForm = document.getElementById('bookingForm');
-    const bookingSDate = document.getElementById('bookingStartDate');
-    const bookingEDate = document.getElementById('bookingEndDate');
-
-    // booking table 에 저장된 객실 예약 날짜 불러오기
-    let bookingStartDateElements = document.querySelectorAll('.dbStartDate');
-    let bookingEndDateElements = document.querySelectorAll('.dbEndDate');
-    let bookingPeopleElements = document.querySelectorAll('.dbBookingPeople');
-    let bookingList = Array.from(bookingStartDateElements).map((startDateElem, index) => {
-        return {
-            bookingStartDate: startDateElem.textContent,
-            bookingEndDate: bookingEndDateElements[index].textContent
-        };
-    });
-    // let peopleList = [];
-    // bookingPeopleElements.forEach(tmp => {
-    //     peopleList.add(tmp.textContent);
-    // });
-
-    // 세션에 있는 정보 불러오기
-    const storedStartDate = sessionStorage.getItem('startDate').split('T')[0];
-    const storedEndDate = sessionStorage.getItem('endDate').split('T')[0];
-    const storedAdultCount = parseInt(sessionStorage.getItem('adultCount')) || 1;
-    const storedChildCount = parseInt(sessionStorage.getItem('childCount')) || 0;
-
-
-
-    function setBookingInfo() {
-        if (storedStartDate) bookingStartDate.value = storedStartDate;
-        if (storedEndDate) bookingEndDate.value = storedEndDate;
-
-        // bookingForm.action = `lodging/LodgingDetail/${lodgingId}`;
-    }
-
-    // isBookingAvailable();
-    setBookingInfo();
-
-    const goBookingBtn = document.getElementById('reserve-btn');
-
-    goBookingBtn.addEventListener('submit', function(event) {
-        event.preventDefault();
-        console.log(document.getElementById('bookingAvailable').textContent);
-        if(document.getElementById('bookingAvailable').textContent == 0)
-            window.location.href = `/lodging/LodgingBooking(lodgingId=${lodge.lodgingId}, roomId=${lodge.roomId}`;
-        else
-            alert('예약이 마감된 객실입니다.');
-    });
-});
-
-
-
-
-
 // 좋아요 버튼 JS
 
 document.addEventListener("DOMContentLoaded", function() {

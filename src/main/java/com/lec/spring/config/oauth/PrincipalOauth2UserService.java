@@ -2,6 +2,7 @@ package com.lec.spring.config.oauth;
 
 import com.lec.spring.config.PrincipalDetails;
 import com.lec.spring.config.oauth.provider.GoogleUserInfo;
+import com.lec.spring.config.oauth.provider.NaverUserInfo;
 import com.lec.spring.config.oauth.provider.OAuth2UserInfo;
 import com.lec.spring.domain.User;
 import com.lec.spring.service.UserService;
@@ -48,7 +49,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
         OAuth2UserInfo oAuth2UserInfo = switch(provider.toLowerCase()){
             case "google" -> new GoogleUserInfo(oAuth2User.getAttributes());
-            case "naver" -> new GoogleUserInfo(oAuth2User.getAttributes());
+            case "naver" -> new NaverUserInfo(oAuth2User.getAttributes());
             default -> null;
         };
 

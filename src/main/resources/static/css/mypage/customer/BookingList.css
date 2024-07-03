@@ -156,7 +156,7 @@ main {
     font-size: 17px;
 }
 
-.btn-booking-cancel, .btn-booking-post {
+.btn-booking-cancel, .btn-booking-post, .btn-booking-post-gray {
     text-decoration: none;
     text-align: center;
     align-content: center;
@@ -171,6 +171,10 @@ main {
 
 .btn-booking-post {
     background-color: #1273E4;
+}
+
+.btn-booking-post-gray {
+    background-color: lightgray;
 }
 
 .btn-booking-cancel:hover, .btn-booking-post:hover  {
