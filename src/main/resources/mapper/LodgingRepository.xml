@@ -205,9 +205,9 @@
         <id property="roomId" column="room_id" />
 
     </resultMap>
-    
-    
-    
+
+
+
     <!--    메인페이지 후기 순서 뽑아내기-->
     <!--    lodging : 숙소 사진, 숙소 이름, 숙소 타입
             room : 객실 가격
@@ -256,5 +256,122 @@
         ORDER BY
             countPostGrade DESC
         LIMIT 6;
+    </select>
+
+
+    <!-- 예약횟수에 따른 쿼리문 -->
+    <select id="countHotelBookingWithRatingsByBookingCount" resultType="com.lec.spring.domain.Lodging">
+        WITH room_booking_counts AS (
+            SELECT
+                l.lodging_id AS lodgingId,
+                l.lodging_picture_1 AS lodgingPicture1,
+                l.lodging_name AS lodgingName,
+                l.lodging_type AS lodgingType,
+                r.room_price AS roomPrice,
+                ROUND(AVG(p.post_grade), 2) AS postGrade,
+                r.room_id AS roomId,
+                COUNT(b.booking_id) AS bookingCount,
+                ROW_NUMBER() OVER (PARTITION BY l.lodging_id ORDER BY r.room_price ASC) AS rn
+            FROM
+                lodging l
+                    LEFT JOIN room r ON l.lodging_id = r.lodging_id
+                    LEFT JOIN booking b ON r.room_id = b.room_id
+                    LEFT JOIN post p ON b.booking_id = p.booking_id
+            GROUP BY
+                l.lodging_id,
+                l.lodging_picture_1,
+                l.lodging_name,
+                l.lodging_type,
+                r.room_price,
+                r.room_id
+        )
+        SELECT
+            lodgingId,
+            lodgingPicture1,
+            lodgingName,
+            lodgingType,
+            roomPrice,
+            postGrade,
+            roomId,
+            bookingCount
+        FROM
+            room_booking_counts
+        WHERE
+            rn = 1
+        ORDER BY
+            bookingCount DESC
+        LIMIT 6;
+    </select>
+
+    <!-- 좋아요 수에 따른 쿼리 -->
+    <select id="countHotelBookingWithRatingsByLoveCount" resultType="com.lec.spring.domain.Lodging">
+        WITH love_counts AS (
+            SELECT
+                l.lodging_id AS lodgingId,
+                l.lodging_picture_1 AS lodgingPicture1,
+                l.lodging_name AS lodgingName,
+                l.lodging_type AS lodgingType,
+                r.room_price AS roomPrice,
+                ROUND(AVG(p.post_grade), 2) AS postGrade,
+                r.room_id AS roomId,
+                COUNT(love.user_id) AS loveCount,
+                ROW_NUMBER() OVER (PARTITION BY l.lodging_id ORDER BY r.room_price ASC) AS rn
+            FROM
+                lodging l
+                    LEFT JOIN room r ON l.lodging_id = r.lodging_id
+                    LEFT JOIN booking b ON r.room_id = b.room_id
+                    LEFT JOIN post p ON b.booking_id = p.booking_id
+                    LEFT JOIN love ON l.lodging_id = love.lodging_id  -- 좋아요 개수를 계산하기 위해 love 테이블을 조인
+            GROUP BY
+                l.lodging_id,
+                l.lodging_picture_1,
+                l.lodging_name,
+                l.lodging_type,
+                r.room_price,
+                r.room_id
+        )
+        SELECT
+            lodgingId,
+            lodgingPicture1,
+            lodgingName,
+            lodgingType,
+            roomPrice,
+            postGrade,
+            roomId,
+            loveCount
+        FROM
+            love_counts
+        WHERE
+            rn = 1
+        ORDER BY
+            loveCount DESC
+        LIMIT 6;
+    </select>
+
+
+    <!-- 모든 사용자의 좋아요 상태를 가져오는 쿼리 -->
+    <select id="findAllUserLove" resultType="com.lec.spring.domain.Love">
+        SELECT * FROM love
+    </select>
+
+    <!-- 모든 좋아요를 포함한 사용자를 가져오는 쿼리 -->
+    <select id="findAllUserWithLove" resultType="com.lec.spring.domain.User">
+        SELECT * FROM user WHERE user_id IN (SELECT user_id FROM love)
+    </select>
+
+    <!-- 좋아요를 추가하는 쿼리 -->
+    <insert id="addLove">
+        INSERT INTO love (lodging_id, user_id)
+        VALUES (#{lodgingId}, #{userId})
+    </insert>
+
+    <!-- 좋아요를 삭제하는 쿼리 -->
+    <delete id="removeLove">
+        DELETE FROM love WHERE lodging_id = #{lodgingId} AND user_id = #{userId}
+    </delete>
+
+    <!-- 특정 사용자가 특정 숙소를 좋아요 했는지 확인하는 쿼리 -->
+    <select id="existsByUserIdAndLodgingId" resultType="boolean">
+        SELECT COUNT(*) FROM love WHERE user_id = #{userId} AND lodging_id = #{lodgingId}
     </select>
 </mapper>

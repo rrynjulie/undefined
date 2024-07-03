@@ -125,8 +125,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 선택한 날짜를 저장
     function saveSelectedDate() {
-        sessionStorage.setItem('startDate', startDate ? startDate.toString() : '');
-        sessionStorage.setItem('endDate', endDate ? endDate.toString() : '');
+        sessionStorage.setItem('startDate', startDate ? startDate.toISOString() : '');
+        sessionStorage.setItem('endDate', endDate ? endDate.toISOString() : '');
     }
 
     // 인원수 업데이트 함수
@@ -310,5 +310,44 @@ document.addEventListener('DOMContentLoaded', function () {
             window.location.href = `/lodging/LodgingBooking(lodgingId=${lodge.lodgingId}, roomId=${lodge.roomId}`;
         else
             alert('예약이 마감된 객실입니다.');
+    });
+});
+
+
+
+
+
+// 좋아요 버튼 JS
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.like-button').forEach(function(button) {
+        button.addEventListener('click', function() {
+            var userId = this.getAttribute('data-user-id');
+            var lodgingId = this.getAttribute('data-lodging-id');
+            var isLiked = this.getAttribute('data-is-liked') === 'true';
+
+            var actionUrl = isLiked ? '/lodging/removeLove' : '/lodging/addLove';
+
+            fetch(actionUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `userId=${userId}&lodgingId=${lodgingId}`
+            })
+                .then(response => {
+                    if (response.ok) {
+                        this.setAttribute('data-is-liked', !isLiked);
+                        this.classList.toggle('liked');
+                        alert(!isLiked ? '좋아요가 추가되었습니다.' : '좋아요가 취소되었습니다.');
+                    } else {
+                        alert('오류가 발생했습니다. 다시 시도해주세요.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('오류가 발생했습니다. 다시 시도해주세요.');
+                });
+        });
     });
 });

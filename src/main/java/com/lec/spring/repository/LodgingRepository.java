@@ -38,4 +38,8 @@ public interface LodgingRepository {
     Integer totalPosts(Long lodgingId);
 
     List<Lodging> countHotelBookingWithRatings();
+
+    List<Lodging> countHotelBookingWithRatingsByBookingCount();
+
+    List<Lodging> countHotelBookingWithRatingsByLoveCount();
 }

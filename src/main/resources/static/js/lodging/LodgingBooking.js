@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     bookingForm.addEventListener('submit', function (event) {
         // sessionStorage 에서 날짜 가져와서 폼에 추가
+        //폼이 제출될 때 startDate, endDate, adultCount, childCount 값을 히든 필드로 추가
         if(storedStartDate && storedEndDate) {
             // 시간 정보 제거 후 히든 필드 생성
             const hiddenStartDateField = document.createElement('input');
