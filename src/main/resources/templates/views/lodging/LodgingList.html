@@ -54,9 +54,6 @@
         </div>
 
         <!-- 검색 숙소가 없는 경우 -->
-        <div th:if="${#lists.isEmpty(lodging)}">
-            <p class="post-null">해당 지역에 등록된 숙소가 없습니다</p>
-        </div>
         <div class="item-list" id="item-list">
             <div class="item-list1" th:each="lodging : ${lodging}">
                 <a class="item" th:href="@{'/lodging/LodgingDetail/' + ${lodging.lodgingId}}">
@@ -74,6 +71,9 @@
                     </p>
                 </a>
             </div>
+        </div>
+        <div th:if="${#lists.isEmpty(lodging)}">
+            <p class="post-null">해당 지역에 등록된 숙소가 없습니다</p>
         </div>
         <!-- 추가: location 값을 저장하는 hidden input -->
         <input type="hidden" name="location" id="location" th:value="${location}">
