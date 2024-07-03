@@ -173,7 +173,8 @@ public class CustomerController {
             @PathVariable("userId") Long userId
             , @RequestParam(value = "lodgingType", required = false) String lodgingType
             , @RequestParam(value = "timePeriod", required = false) String timePeriod
-            , Model model, HttpSession session) {
+            , Model model
+            , HttpSession session) {
         User user = Util.getOrSetLoggedUser(session, model);
 
         List<Booking> books = bookingService.findBooksByUserId(userId);  // 전체 예약 리스트
@@ -203,6 +204,7 @@ public class CustomerController {
             if (matchesLodgingType && matchesTimePeriod) {
                 book.setFormattedPay(DecimalFormat.getInstance().format(book.getBookingPay()));
                 book.setDateGap(Period.between(book.getBookingStartDate(), book.getBookingEndDate()).getDays());
+                book.setExistPost(postService.checkIfUserPosted(userId, book.getBookingId()));
 
                 if (book.getBookingStartDate().isAfter(now) || book.getBookingStartDate().isEqual(now)) {
                     booksBefore.add(book);

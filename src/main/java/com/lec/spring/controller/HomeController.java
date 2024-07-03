@@ -57,7 +57,7 @@ public class HomeController {
         // 좋아요 많은 순위
         List<Lodging> lodgingLove = lodgingService.getCountHotelBookingWithRatingsByLoveCount();
         model.addAttribute("lodgingLove",lodgingLove);
-        System.out.println("좋아요 순위 출력" + lodgingLove);
+//        System.out.println("좋아요 순위 출력" + lodgingLove);
 
     }
 

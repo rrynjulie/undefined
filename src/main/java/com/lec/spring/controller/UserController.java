@@ -79,10 +79,10 @@ public class UserController {
         binder.setValidator(userValidator);
     }
 
-    @GetMapping("/login")
+    @GetMapping("/Login")
     public void login(){}
 
-    @PostMapping("/login")
+    @PostMapping("/Login")
     public String login(String email, String password, Model model) {
         System.out.println("출력 확인 제발");
         try {
@@ -92,13 +92,13 @@ public class UserController {
             return "redirect:/}";
         } catch (UsernameNotFoundException | BadCredentialsException e) {
             model.addAttribute("errorMessage", "이메일 또는 비밀번호가 올바르지 않습니다.");
-            return "user/login";
+            return "user/Login";
         }
     }
 
     @PostMapping("/loginError")
     public String loginError() {
-        return "user/login";
+        return "user/Login";
     }
 
     @RequestMapping("/rejectAuth")

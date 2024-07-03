@@ -57,6 +57,19 @@ public class RoomServiceImpl implements RoomService {
         return roomRepository.findByRoomId(roomId);
     }
 
+    // roomId 관련된 post 삭제
+    @Override
+    public void deletePostsByRoomId(int roomId) {
+        roomRepository.deletePostsByRoomId(roomId);
+    }
+
+    // roomId와 관련된 booking 삭제
+    @Override
+    public void deleteBookingsByRoomId(int roomId) {
+        roomRepository.deleteBookingsByRoomId(roomId);
+    }
+
+    // roomId와 관련된 room 삭제
     @Override
     public void deleteRoom(int roomId) {
         roomRepository.deleteRoom(roomId);
