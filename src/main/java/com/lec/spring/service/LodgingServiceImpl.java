@@ -91,11 +91,25 @@ public class LodgingServiceImpl implements LodgingService {
         return (totalPosts != null) ? totalPosts : 0;
     }
 
-//  홈 페이지에서 후기 목록 가져오기
+    //  후기 많은 순서
     @Override
     public List<Lodging> getCountHotelBookingWithRatings(){
         List<Lodging> lodgings = lodgingRepository.countHotelBookingWithRatings();
 
         return lodgingRepository.countHotelBookingWithRatings();
+    }
+
+    // 예약 많은 순서
+    @Override
+    public List<Lodging> getCountHotelBookingWithRatingsByBookingCount() {
+        List<Lodging> lodgings = lodgingRepository.countHotelBookingWithRatingsByBookingCount();
+        return lodgingRepository.countHotelBookingWithRatingsByBookingCount();
+    }
+
+    // 좋아요 많은 순서
+    @Override
+    public List<Lodging> getCountHotelBookingWithRatingsByLoveCount() {
+        List<Lodging> lodgings = lodgingRepository.countHotelBookingWithRatingsByLoveCount();
+        return lodgingRepository.countHotelBookingWithRatingsByLoveCount();
     }
 }

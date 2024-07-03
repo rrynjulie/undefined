@@ -9,6 +9,7 @@ import com.lec.spring.util.U;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -109,7 +110,13 @@ public class LodgingController {
     public String getLodgingDetail(@PathVariable("lodgingId") Long lodgingId,
                                    @RequestParam(value = "bookingStartDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bookingStartDate,
                                    @RequestParam(value = "bookingEndDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bookingEndDate,
-                                   Model model, HttpSession session) {
+                                   Model model,
+                                   HttpSession session,
+                                   Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            // 인증되지 않은 사용자 처리
+            return "redirect:/user/login"; // 로그인 페이지로 리다이렉트 또는 예외 처리
+        }
 
         User user = Util.getOrSetLoggedUser(session, model);
 
@@ -156,17 +163,18 @@ public class LodgingController {
     }
 
     @PostMapping("/addLove")
+    @ResponseBody
     public String addLove(@RequestParam Long userId, @RequestParam Long lodgingId) {
         loveService.addLove(userId, lodgingId);
-        return "redirect:/LodgingDetail/{lodgingId}";
+        return "{\"success\": true}";
     }
 
     @PostMapping("/removeLove")
+    @ResponseBody
     public String removeLove(@RequestParam Long userId, @RequestParam Long lodgingId) {
         loveService.removeLove(userId, lodgingId);
-        return "redirect:/LodgingDetail/{lodgingId}";
+        return "{\"success\": true}";
     }
-
 
     @GetMapping("/LodgingPostList/{lodgingId}")
     public String postList (@PathVariable("lodgingId") Long lodgingId, Model model, HttpSession session) {

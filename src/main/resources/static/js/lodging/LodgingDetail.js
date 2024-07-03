@@ -125,8 +125,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 선택한 날짜를 저장
     function saveSelectedDate() {
-        sessionStorage.setItem('startDate', startDate ? startDate.toString() : '');
-        sessionStorage.setItem('endDate', endDate ? endDate.toString() : '');
+        sessionStorage.setItem('startDate', startDate ? startDate.toISOString() : '');
+        sessionStorage.setItem('endDate', endDate ? endDate.toISOString() : '');
     }
 
     // 인원수 업데이트 함수
@@ -313,90 +313,41 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// document.addEventListener('DOMContentLoaded', function (){
-//     const storedStartDate = sessionStorage.getItem('startDate')?.split('T')[0];
-//     const storedEndDate = sessionStorage.getItem('endDate')?.split('T')[0];
-//
-//     // 예약 시작일과 종료일을 출력할 요소 가져오기
-//     const bookingStartDateElem = document.getElementById('bookingStartDate');
-//     const bookingEndDateElem = document.getElementById('bookingEndDate');
-//
-//     // 저장된 예약 날짜가 있는 경우에만 출력
-//     if (storedStartDate && storedEndDate) {
-//         bookingStartDateElem.textContent = `예약 체크인: ${storedStartDate.replaceAll('-', '.')}`;
-//         bookingEndDateElem.textContent = `예약 체크아웃: ${storedEndDate.replaceAll('-', '.')}`;
-//     }
-// });
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     const bookingStartDate = sessionStorage.getItem('startDate');
-//     const bookingEndDate = sessionStorage.getItem('endDate');
-//     const bookingForm = document.getElementById('bookingForm');
-//
-//     if (bookingStartDate && bookingEndDate) {
-//         bookingForm.action = `/lodging/LodgingDetail/${lodgingId}?bookingStartDate=${bookingStartDate}&bookingEndDate=${bookingEndDate}`;
-//         bookingForm.submit();
-//     }
-// });
-//
 
-// document.addEventListener('DOMContentLoaded', function () {
-//     const bookingStartDate = document.getElementById('bookingStartDate');
-//     const bookingEndDate = document.getElementById('bookingEndDate');
-//
-//     const storedStartDate = sessionStorage.getItem('startDate')?.split('T')[0];
-//     const storedEndDate = sessionStorage.getItem('endDate')?.split('T')[0];
-//
-//     function setBookingInfo() {
-//         if (storedStartDate) bookingStartDate.value = storedStartDate;
-//         if (storedEndDate) bookingEndDate.value = storedEndDate;
-//     }
-//
-//     setBookingInfo();
-//
-//     // 추가: 폼 제출 이벤트 리스너 대신 자동 설정 방법
-//     // 예를 들어, 아래와 같이 할 수 있습니다 (페이지 로드 시 자동으로 값을 채우는 방법):
-//     // 예를 들어, 다음은 예시에 불과합니다:
-// });
+
+
+// 좋아요 버튼 JS
 
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll('.like-button').forEach(function(button) {
-        button.addEventListener('click', function(event) {
-            event.preventDefault();
+        button.addEventListener('click', function() {
+            var userId = this.getAttribute('data-user-id');
+            var lodgingId = this.getAttribute('data-lodging-id');
+            var isLiked = this.getAttribute('data-is-liked') === 'true';
 
-            var form = this.closest('form');
-            var actionUrl = form.getAttribute('action');
-            var formData = new FormData(form);
-            var userId = formData.get('userId');
-            var lodgingId = formData.get('lodgingId');
-            var isLiked = this.classList.contains('liked');
+            var actionUrl = isLiked ? '/lodging/removeLove' : '/lodging/addLove';
 
-            if (confirm(isLiked ? '좋아요를 취소하시겠습니까?' : '좋아요를 추가하시겠습니까?')) {
-                fetch(actionUrl, {
-                    method: 'POST',
-                    body: new URLSearchParams(formData),
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
+            fetch(actionUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `userId=${userId}&lodgingId=${lodgingId}`
+            })
+                .then(response => {
+                    if (response.ok) {
+                        this.setAttribute('data-is-liked', !isLiked);
+                        this.classList.toggle('liked');
+                        alert(!isLiked ? '좋아요가 추가되었습니다.' : '좋아요가 취소되었습니다.');
+                    } else {
+                        alert('오류가 발생했습니다. 다시 시도해주세요.');
                     }
                 })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            if (isLiked) {
-                                this.classList.remove('liked');
-                                this.textContent = '좋아요';
-                                form.setAttribute('action', '/love/add');
-                            } else {
-                                this.classList.add('liked');
-                                this.textContent = '좋아요 취소';
-                                form.setAttribute('action', '/love/remove');
-                            }
-                        } else {
-                            alert('오류가 발생했습니다. 다시 시도해주세요.');
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
-            }
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('오류가 발생했습니다. 다시 시도해주세요.');
+                });
         });
     });
 });
