@@ -69,7 +69,7 @@ public class TicketController {
                 .queryParam("busGradeId", busGradeId)
                 .queryParam("_type", "json");
 
-        URI uri = builder.build().toUri();
+        URI uri = builder.build().encode().toUri();
 
         logger.info("Request URL: " + uri.toString());
 
