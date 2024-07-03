@@ -163,5 +163,16 @@ a {
 }
 
 .post-null {
-    height: 423px;
+    color: darkgray;
+    height: 130px;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 100px;
+}
+#imgDiv {
+    margin-top: 80px;
+}
+#img {
+    display: flex;
+    justify-content: center;
 }

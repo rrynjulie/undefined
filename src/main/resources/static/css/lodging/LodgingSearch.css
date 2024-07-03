@@ -137,8 +137,9 @@
     text-align: center;
     border: 0;
 }
-
-/* ------------------------------------ */
+#calendar-body td:hover {
+    cursor: pointer;
+}
 
 td {
     background-color: white;
@@ -148,8 +149,6 @@ td {
     background-color: #f1f1f1;
     cursor: pointer;
 }
-
-/* ------------------------------------ */
 
 .plus-minus-lineup {
     display: flex;

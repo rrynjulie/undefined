@@ -55,6 +55,10 @@ public class Lodging {
     // 좋아요 누른 여부
     private Boolean hasLove;
 
+    private int bookingCount;
+
+    private int loveCount;
+
 
     public String getFormattedRoomPrice() {
         NumberFormat numberFormat = NumberFormat.getInstance(Locale.KOREA);

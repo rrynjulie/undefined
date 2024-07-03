@@ -155,6 +155,7 @@
     background-color: #FC5185;
     border-radius: 5px 0 0 5px;
     color: white;
+    cursor: pointer;
 }
 #total:hover {
     background-color: #FC5185;
