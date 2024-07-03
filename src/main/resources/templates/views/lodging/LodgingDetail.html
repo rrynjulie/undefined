@@ -50,7 +50,7 @@
                 <div id="avgPostGrade" th:text="${lodging.avgPostGrade} + '(' + ${lodging.totalPosts} + ')'"></div>
             </div>
             <div class="allClass" th:each="lodgingName : ${lodgingName}">
-            <a class="all" th:href="@{'/lodging/LodgingPostList/' + ${lodgingName.lodgingId}}">전체보기 ></a>
+                <a class="all" th:href="@{'/lodging/LodgingPostList/' + ${lodgingName.lodgingId}}">전체보기 ></a>
             </div>
         </div>
     </div>
@@ -82,7 +82,7 @@
 
     <div class="room">
         <div id="dateTotal">
-            <div id="selectedDate" class="clickable" style="border-right:solid 1px black;">
+            <div id="selectedDate" class="clickable">
                 07/04 ~ 07/05, 1박
             </div>
             <div id="total" class="clickable">
@@ -97,6 +97,15 @@
                 <button id="prev">&lt;</button>
                 <span id="month-year"></span>
                 <button id="next">&gt;</button>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 5px">
+                <div class="days">일</div>
+                <div class="days">월</div>
+                <div class="days">화</div>
+                <div class="days">수</div>
+                <div class="days">목</div>
+                <div class="days">금</div>
+                <div class="days">토</div>
             </div>
             <table id="calendar-body"></table>
         </div>
@@ -121,7 +130,7 @@
                 <button id="increase-btn2">+</button>
             </div>
         </div>
-        <div style="display: flex; justify-content: flex-end; margin-top: 15px">
+        <div style="display: flex; justify-content: flex-end;">
             <button id="savePeopleBtn">확인</button>
             <button id="close2" style="margin-left: 5px;">닫기</button>
         </div>

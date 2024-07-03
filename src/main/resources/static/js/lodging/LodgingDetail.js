@@ -1,27 +1,29 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const selectedDate = document.getElementById('selectedDate');
-    const total = document.getElementById('total');
-    const dateDialog = document.getElementById('dateDialog');
-    const peopleDialog = document.getElementById('peopleDialog');
-    const saveDateBtn = document.getElementById('saveDateBtn');
-    const savePeopleBtn = document.getElementById('savePeopleBtn');
-    const calendarBody = document.querySelector('#calendar-body');
-    const monthYear = document.getElementById('month-year');
-    const prevButton = document.getElementById('prev');
-    const nextButton = document.getElementById('next');
-    const decreaseBtn1 = document.getElementById('decrease-btn1');
-    const increaseBtn1 = document.getElementById('increase-btn1');
-    const adultCountDiv = document.getElementById('adult-count');
-    const decreaseBtn2 = document.getElementById('decrease-btn2');
-    const increaseBtn2 = document.getElementById('increase-btn2');
-    const childCountDiv = document.getElementById('child-count');
+    const selectedDate = document.getElementById('selectedDate');   // 입실일 ~ 퇴실일 n박 div 의 id
+    const total = document.getElementById('total');     // 성인 아동 수 div 의 id
 
-    let currentDate = new Date();
+    const calendarBody = document.querySelector('#calendar-body');
+    const dateDialog = document.getElementById('dateDialog');       // 달력 dialog 의 id
+    const saveDateBtn = document.getElementById('saveDateBtn');     // 달력 저장 버튼
+    const monthYear = document.getElementById('month-year');        // 달력 dialog 안에 년 월
+    const prevButton = document.getElementById('prev');     // 달력 이전 버튼
+    const nextButton = document.getElementById('next');     // 달력 다음 버튼
+    const peopleDialog = document.getElementById('peopleDialog');   // 인원수 변경 dialog 의 id
+    const savePeopleBtn = document.getElementById('savePeopleBtn'); // 인원수 저장 버튼
+    const decreaseBtn1 = document.getElementById('decrease-btn1');  // 성인 수 감소 버튼
+    const increaseBtn1 = document.getElementById('increase-btn1');  // 성인 수 증가 버튼
+    const adultCountDiv = document.getElementById('adult-count');   // 성인 text 의 id
+    const decreaseBtn2 = document.getElementById('decrease-btn2');  // 아동 수 감소 버튼
+    const increaseBtn2 = document.getElementById('increase-btn2');  // 아동 수 증가 버튼
+    const childCountDiv = document.getElementById('child-count');   // 아동 text 의 id
+
+    let currentDate = new Date();   // 현재 시간을 currentDate 변수에 저장
     let startDate = null;
     let endDate = null;
     let lastClickedCells = [];
-    let adultCount = parseInt(sessionStorage.getItem('adultCount')) || 1;
-    let childCount = parseInt(sessionStorage.getItem('childCount')) || 0;
+
+    let adultCount = 1;
+    let childCount = 0;
 
     // 세션 스토리지에서 데이터 가져오기
     function loadData() {
@@ -30,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (storedStartDate && storedEndDate) {
             startDate = new Date(storedStartDate);
             endDate = new Date(storedEndDate);
-            const nights = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+            const nights = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));    // 숙박일 수를 nights 에 저장
             selectedDate.innerHTML = `${startDate.getFullYear()}.${startDate.getMonth() + 1}.${startDate.getDate()} ~ ${endDate.getFullYear()}.${endDate.getMonth() + 1}.${endDate.getDate()}, ${nights}박`;
         }
         adultCount = parseInt(sessionStorage.getItem('adultCount')) || 1;
@@ -44,10 +46,14 @@ document.addEventListener('DOMContentLoaded', function () {
     function renderCalendar(date) {
         const month = date.getMonth();
         const year = date.getFullYear();
+        // 매월 첫 시작일이 언제인지 .getDay() 를 사용해 몇번째 요일에 시작하는지 알기위해서 .getDay() 사용  => 요일은 0 ~ 6 [ 0 = 일요일, 5 = 금요일 ]
         const firstDate = new Date(year, month, 1).getDay();
+        // 매월 마지막 날이 언제인지 .getDate() 를 사용해 몇번째 날짜(date) 에 끝나는지 알기위해서 .getDate() 사용 => date(일) 은 0 이 전 달의 마지막 날을 가르킴
         const lastDate = new Date(year, month + 1, 0).getDate();
 
-        calendarBody.innerHTML = '';
+        // month 와 day 는 배열이 아닌 script 에서 단순히 0부터 저장시키는 것.
+
+        calendarBody.innerHTML = '';    // 달력을 열거나 다음달로 넘길 때 마다 기존 달력을 초기화한 후 로딩
         monthYear.textContent = `${year}년 ${month + 1}월`;
 
         let row = document.createElement('tr');
@@ -65,15 +71,17 @@ document.addEventListener('DOMContentLoaded', function () {
             let cellDate = new Date(year, month, date);
 
             // 입실일과 퇴실일 사이의 날짜 색상 처리
-            if (startDate && endDate) {
+            if (startDate && endDate) {     // 입실일과 퇴실일이 선택되었을 때
                 const start = startDate.getTime();
                 const end = endDate.getTime();
                 const cellTime = cellDate.getTime();
                 if (cellTime > start && cellTime < end) {
-                    cell.style.backgroundColor = '#ff86ab'; // 입실일과 퇴실일 사이의 날짜 색상
+                    cell.style.backgroundColor = '#FFEBEF'; // 입실일과 퇴실일 사이의 날짜 색상
                 }
             }
 
+            // toDateString() 을 이용하는 이유? -> toDateString() 을 사용하지 않고 Date 객체끼리 비교를 하게 되면 시,분,초 를 포함해서 계산해야하지만
+            // toDateString() 메소드를 사용하게 되면 시,분,초 를 계산하지 않아도 될 상황에는 간결하게 코드를 짤 수 있기 때문
             if (startDate && cellDate.toDateString() === startDate.toDateString()) {
                 cell.style.backgroundColor = '#FC5185';
                 lastClickedCells.push(cell);
@@ -85,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
             cell.addEventListener('click', function() {
                 if (!startDate) {
                     lastClickedCells.forEach(function(cell) {
-                        cell.style.backgroundColor = 'white';
+                        cell.style.backgroundColor = 'white';   // 입실일로 선택하지 않은 cell 은 흰색으로
                     });
                     lastClickedCells = [];
                     startDate = new Date(year, month, date);
@@ -96,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (startDate < cellDate) {
                         endDate = new Date(year, month, date);
                         lastClickedCells.push(cell);
-                        renderCalendar(currentDate); // 달력을 다시 렌더링하여 색상을 업데이트합니다.
+                        renderCalendar(currentDate); // 달력을 다시 렌더링하여 색 업데이트
                         saveSelectedDate()
                     }
                     const nights = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
@@ -133,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateCount() {
         adultCountDiv.textContent = `성인: ${adultCount}명`;
         childCountDiv.textContent = `아동: ${childCount}명`;
-        total.innerHTML = `성인 ${adultCount}명, 아동 ${childCount}명`;
+        total.innerHTML = `성인 ${adultCount}, 아동 ${childCount}`;
         sessionStorage.setItem('adultCount', adultCount);
         sessionStorage.setItem('childCount', childCount);
     }
@@ -198,17 +206,19 @@ document.addEventListener('DOMContentLoaded', function () {
         renderCalendar(currentDate);
     }
     // 닫기 버튼 클릭 시 모달 숨기기
-        var closeBtn1 = dateDialog.querySelector("#close1");
+    var closeBtn1 = dateDialog.querySelector("#close1");
     closeBtn1.onclick = function() {
         dateDialog.style.display = "none";
     }
-        var closeBtn2 = peopleDialog.querySelector("#close2");
+    var closeBtn2 = peopleDialog.querySelector("#close2");
     closeBtn2.onclick = function() {
         peopleDialog.style.display = "none";
     }
 
     // 인원수 다이얼로그 열기
     function openPeopleDialog() {
+        let adultCount = parseInt(sessionStorage.getItem('adultCount'));
+        let childCount = parseInt(sessionStorage.getItem('childCount'));
         peopleDialog.style.display = 'block';
         adultCountDiv.textContent = `성인: ${adultCount}명`;
         childCountDiv.textContent = `아동: ${childCount}명`;
