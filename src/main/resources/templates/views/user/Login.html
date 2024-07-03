@@ -40,15 +40,14 @@
             <!-- 에러 메세지 출력 -->
             <div class="col-12 text-danger" th:text="${errorMessage}"></div>
         </div>
-        <br>
         <button class="w-100 btn btn-lg btn-primary my-1 custom-btn" type="submit" id="loginButton">로그인</button>
     </form>
 
-    <div id="choice" class="d-flex justify-content-center align-items-center">
-<!--        <div class="btn" data-bs-toggle="modal" data-bs-target="#resetModal">비밀번호 재설정</div>-->
-<!--        <div> |</div>-->
-        <a class="btn" data-bs-toggle="modal" data-bs-target="#termsModal">이메일로 회원가입 하기 > </a>
-    </div>
+<!--    <div id="choice" class="d-flex justify-content-center align-items-center">-->
+<!--&lt;!&ndash;        <div class="btn" data-bs-toggle="modal" data-bs-target="#resetModal">비밀번호 재설정</div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div> |</div>&ndash;&gt;-->
+<!--        <a class="btn" data-bs-toggle="modal" data-bs-target="#termsModal">이메일로 회원가입 하기 > </a>-->
+<!--    </div>-->
 
     <div class="social-login-mention">
         <hr>
@@ -66,11 +65,24 @@
         </a>
     </div>
     <div class="btn-social-login-frame">
+        <a id="btn-Naver-login" class="btn btn-lg my-1" th:href="@{/oauth2/authorization/naver}">
+            <img th:src="@{/image/user/NaverLogin.svg}">
+            <p>네이버로 시작하기</p>
+        </a>
+    </div>
+    <div class="btn-social-login-frame">
         <a id="btn-google-login" class="btn btn-lg my-1" th:href="@{/oauth2/authorization/google}">
             <img th:src="@{/image/user/GoogleLogin.svg}">
             <p>구글로 시작하기</p>
         </a>
     </div>
+    <div class="btn-social-login-frame">
+        <a id="btn-Email-login" class="btn btn-lg my-1" th:href="@{/user/register}">
+            <img th:src="@{/image/user/EmailLogin.svg}">
+            <p>이메일로 시작하기</p>
+        </a>
+    </div>
+
 </div>
 
 <!-- 비밀번호 재설정 모달 -->

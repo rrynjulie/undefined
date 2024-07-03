@@ -87,7 +87,7 @@ body {
     margin: 10px 0;
 }
 
-#btn-kakao-login, #btn-google-login {
+#btn-kakao-login, #btn-google-login, #btn-Naver-login, #btn-Email-login {
     display: flex;
     justify-content: center;
     font-size: 15px;
@@ -105,7 +105,17 @@ body {
     background-color: #F2F2F2;
 }
 
-#btn-kakao-login:hover, #btn-google-login:hover {
+#btn-Naver-login {
+    background-color: #00c73c;
+    color: white;
+}
+
+#btn-Email-login {
+    background: #f2f8ff;
+    color: #1273e4;
+}
+
+#btn-kakao-login:hover, #btn-google-login:hover, #btn-naver-login:hover, #btn-Email-login:hover {
     transform: scale(1.02);
 }
 
@@ -241,4 +251,20 @@ p {
 
 .form-check .form-check-input {
     margin-left: 0;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #ccc;
+}
+
+.form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #fc5185;
+    outline: 0;
+    box-shadow: none;
 }
