@@ -1,3 +1,27 @@
+.container {
+    display: flex;
+    width: 100%;
+    user-select: none;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+}
+
+main {
+    display: flex;
+    padding: 40px 20%;
+    height: fit-content;
+}
+
 @font-face {
     font-family: 'Noto Sans KR';
     font-style: normal;
@@ -8,56 +32,107 @@
             url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');
 }
 
-* {
-    font-family: 'Noto Sans KR', sans-serif;
-}
-
-main {
+.provider-menu-pc {
+    width: 200px;
+    margin-right: 20px;
     display: flex;
-    padding: 40px 20%;
-    height: fit-content;
-    justify-content: space-between;
-    border-top: 1px solid #F5F5F5;
+    flex-direction: column;
+    margin-top: 40px;
 }
 
-.booking-info {
-    background-color: white;
-    width: 75%;
-    min-height: 588px;
-}
-
-.booking-filter {
+.provider-menu-pc a {
     display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    margin-top: 20px;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
 }
 
-.select-label {
-    width: 48%;
-    margin: 10px 0;
-    font-size: 15px;
-    font-weight: bold;
-    color: dimgray;
+.provider-menu-pc a img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
 }
 
-.select-element {
+table {
     width: 100%;
+    border-collapse: collapse;
+}
+
+.content {
+    flex: 1;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.accommodation {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.accommodation img {
+    width: 30%;
+    height: auto;
+    background-color: #ddd;
+    margin-right: 20px;
+}
+
+.accommodation-info {
+    flex: 1;
+}
+
+.accommodation-info p {
+    margin: 5px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.register-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #FC5185;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 150px;
+    cursor: pointer;
+}
+
+.detail-btn {
     height: 50px;
-    border: 1px solid #EBEBEB;
-    border-radius: 7px;
-    margin-top: 5px;
-    padding: 0 15px;
-    font-size: 17px;
-}
-
-.btn-search {
-    background-color: white;
+    width: 150px;
     border: 0;
-    margin-left: 30px;
-    padding-top: 35px;
+    border-radius: 7px;
+    font-size: 17px;
+    font-weight: bold;
+    background-color: #FC5185;
+    color: white;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-right: -700px;
 }
 
-.btn-search:hover {
+.detail-btn a {
+    color: white;
+    text-decoration: none;
+}
+
+.register-btn:hover {
+    transform: scale(1.02);
+}
+
+.detail-btn:hover {
     transform: scale(1.02);
 }

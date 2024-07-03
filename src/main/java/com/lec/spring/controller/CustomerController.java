@@ -46,6 +46,9 @@ public class CustomerController {
     @Autowired
     private PostService postService;
 
+    @Autowired
+    private LoveService loveService;
+
     @GetMapping("/ManageAccount")
     public String manageAccount(Model model, HttpSession session) {
         User user = Util.getOrSetLoggedUser(session, model);
@@ -262,16 +265,20 @@ public class CustomerController {
         }
     }
 
-
-    public LoveService loveService;
-
     @GetMapping("/loveList")
     public String loveList(Model model, HttpSession session){
         User user = Util.getOrSetLoggedUser(session, model);
+        if (user != null) {
+            model.addAttribute("userId", user.getUserId());
+        }
+
+        System.out.println("user 출력 확인: " + user);
 
         List<Lodging> lodgings = loveService.getLodgings(user.getUserId());
+        System.out.println(lodgings);
 
         AuthenticationUtil.addAuthenticationDetailsToModel(model);
+        model.addAttribute("lodgings", lodgings);
         return "mypage/customer/loveList";
 
     }

@@ -18,6 +18,10 @@
                 <img th:src="@{/image/mypage/customer/Lodging.png}" alt="" class="customer-menu-icon">
                 <p>나의 후기</p>
             </a>
+            <a th:href="@{/mypage/customer/loveList}">
+                <img th:src="@{/image/mypage/customer/loveList.png}" alt="" class="customer-menu-icon">
+                <p>내 좋아요 목록</p>
+            </a>
         </nav>
 
         <a th:if="${authorityIds.contains('PROVIDER')}" class="btn-provider-page" th:href="@{/mypage/provider/ProvBookingList}">판매자 페이지</a>

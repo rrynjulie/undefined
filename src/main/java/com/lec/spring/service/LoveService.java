@@ -7,6 +7,7 @@ import com.lec.spring.domain.User;
 
 import java.util.List;
 
+
 public interface LoveService {
     List<Lodging> getLodgings(Long userId);
 

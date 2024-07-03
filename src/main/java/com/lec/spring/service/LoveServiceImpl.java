@@ -21,7 +21,6 @@ public class LoveServiceImpl implements LoveService {
         this.loveRepository = loveRepository;
     }
 
-    @Override
     public List<Lodging> getLodgings(Long userId) {
         return loveRepository.findLodgings(userId);
     }
