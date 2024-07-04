@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             const passwordContainer = document.getElementById('password-container');
             const nameGroup = document.getElementById('name-group');
 
-            if (provider === 'KAKAO' || provider === 'google') {
+            if (provider === 'kakao' || provider === 'google' || provider === 'Naver') {
                 if (passwordContainer) {
                     passwordContainer.style.display = 'none'; // 비밀번호 관련 필드 숨김
                 }

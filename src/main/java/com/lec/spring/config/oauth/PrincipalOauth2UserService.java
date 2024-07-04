@@ -2,13 +2,13 @@ package com.lec.spring.config.oauth;
 
 import com.lec.spring.config.PrincipalDetails;
 import com.lec.spring.config.oauth.provider.GoogleUserInfo;
+import com.lec.spring.config.oauth.provider.KAKAOUserInfo;
 import com.lec.spring.config.oauth.provider.NaverUserInfo;
 import com.lec.spring.config.oauth.provider.OAuth2UserInfo;
 import com.lec.spring.domain.User;
 import com.lec.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -48,6 +48,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         String provider = userRequest.getClientRegistration().getRegistrationId();
 
         OAuth2UserInfo oAuth2UserInfo = switch(provider.toLowerCase()){
+            case "kakao" -> new KAKAOUserInfo(oAuth2User.getAttributes());
             case "google" -> new GoogleUserInfo(oAuth2User.getAttributes());
             case "naver" -> new NaverUserInfo(oAuth2User.getAttributes());
             default -> null;
@@ -67,14 +68,18 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         User user = userService.findByProviderId(providerId);
 
         if (user == null) {
-            User newUser = User.builder()
+            User.UserBuilder userBuilder = User.builder()
                     .nickname(nickname)
                     .username(name)
-                    .email(email)
                     .password(oauth2Password)
                     .provider(provider)
-                    .providerId(providerId)
-                    .build();
+                    .providerId(providerId);
+
+            if (email != null) {
+                userBuilder.email(email);
+            }
+
+            User newUser = userBuilder.build();
             int cnt = userService.register(newUser);
             if (cnt > 0) {
                 System.out.println("[OAuth2 인증. 회원 가입 성공]");

@@ -67,11 +67,6 @@ public class UserServiceImpl implements UserService {
         return user != null;
     }
 
-//    @Override
-//    public User findByEmail(String email) {
-//        return userRepository.findByEmail(email);
-//    }
-
     public boolean emailExists(String email) {
         User user = userRepository.findByEmail(email);
         return user != null;
@@ -247,12 +242,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUserAndReferences(Long userId) {
         try {
+            userRepository.deleteLoves(userId);
             userRepository.deleteComments(userId);
             userRepository.deletePosts(userId);
             userRepository.deletePostsByBookingId(userId);  // post 테이블의 데이터를 먼저 삭제
             userRepository.deleteBookings(userId);  // 그 다음 booking 테이블의 데이터를 삭제
+            userRepository.deleteBookingByRoomId(userId);
             userRepository.deleteRooms(userId);  // Room 데이터 삭제
-            userRepository.deleteReservationsByUserId(userId); // reservation 테이블의 데이터를 삭제
+            userRepository.deleteRoomByLodgingId(userId);
+//            userRepository.deleteBookingByUserId(userId); // reservation 테이블의 데이터를 삭제
             userRepository.deleteLodging(userId);
             userRepository.deleteUserAuthority(userId);
 //            userRepository.deleteLikes(userId);
