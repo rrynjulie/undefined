@@ -23,4 +23,7 @@ public interface BookingRepository {
     int deleteBooking(@Param("userId") String userId, @Param("bookingId") String bookingId);
 
     int bookingCount(Long roomId, LocalDate bookingStartDate, LocalDate bookingEndDate);
+
+    // roomId와 관련된 booking 삭제
+    void deleteBookingsByRoomId(int roomId);
 }

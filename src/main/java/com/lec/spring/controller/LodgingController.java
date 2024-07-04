@@ -5,8 +5,6 @@ import com.lec.spring.domain.*;
 import com.lec.spring.service.*;
 import com.lec.spring.util.Util;
 import jakarta.servlet.http.HttpSession;
-import com.lec.spring.util.U;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
@@ -16,11 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static com.lec.spring.util.U.getLoggedUser;
 
 @Controller
 @RequestMapping("/lodging")
@@ -202,7 +196,7 @@ public class LodgingController {
         User user = Util.getOrSetLoggedUser(session, model);
 
         ProvLodging lodging = providerService.getAllDetails(lodgingId);
-        Room room = roomService.findByRoomId(roomId);
+        Room room = roomService.findRoomByRoomId(roomId);
         List<Post> postList = postService.findPostByLodgingId(lodgingId);
         int totalPosts = postService.countAllPostsByLodgingId((long)lodgingId);
 
