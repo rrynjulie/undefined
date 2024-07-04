@@ -93,11 +93,7 @@ public class CustomerController {
             hasErrors = true;
         }
 
-//        else if (nickname.equals(user.getNickname())) {
-//            hasErrors = false;
-//        }
-//
-//        // Validate phone number
+        // Validate phone number
         if (phone != null && !phone.trim().isEmpty()) {
             if (!PHONENUM_PATTERN.matcher(phone).matches()) {
                 redirectAttributes.addFlashAttribute("error_phonenum", "올바른 형식(예: 010-1234-5678)의 전화번호를 입력해주세요.");
@@ -106,15 +102,14 @@ public class CustomerController {
                 redirectAttributes.addFlashAttribute("error_phonenum", "이미 가입된 전화번호입니다.");
                 hasErrors = true;
             } else if (phone.equals(user.getPhonenum())) {
-//                System.out.println();
+
             }
         } else if (phone == null || phone.trim().isEmpty()) {
             phone = null;
         }
-////
+
         if (user.getProvider() == null) {
             if (currentPassword == null || currentPassword.isEmpty()) {
-                System.out.println("확인용");
                 redirectAttributes.addFlashAttribute("error_password", "비밀번호를 입력해 주세요.");
                 hasErrors = true;
             } else if (!userService.checkPassword(user.getUserId(), currentPassword)) {
@@ -144,7 +139,6 @@ public class CustomerController {
 
         redirectAttributes.addFlashAttribute("success", "수정되었습니다.");
         AuthenticationUtil.addAuthenticationDetailsToModel(model);
-
 
         return "redirect:/Home";
     }
