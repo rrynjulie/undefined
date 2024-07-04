@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded', function () {
         termsModal.show();
     });
 
+    document.getElementById('btn-Email-login').addEventListener('click', function () {
+        var termsModal = new bootstrap.Modal(document.getElementById('termsModal'));
+        termsModal.show();
+    });
+
     // 모달 닫을 때 이벤트 추가 (약관 동의 모달)
     document.getElementById('termsModal').addEventListener('hidden.bs.modal', function () {
         document.body.classList.remove('modal-open');
