@@ -210,6 +210,7 @@ document.addEventListener("DOMContentLoaded", function() {
             children: parseInt(sessionStorage.getItem('childCount')) || 0
         });
         sessionStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+        // searchHistory 키 안에 위 세션들을 저장
     }
 
 
@@ -222,25 +223,25 @@ document.addEventListener("DOMContentLoaded", function() {
         searchHistory.forEach(search => {
             let searchDiv = document.createElement('div');
             searchDiv.id = `recently-search`;
-            let startDateStr = search.startDate ? new Date(search.startDate).toLocaleDateString() : "";
-            let endDateStr = search.endDate ? new Date(search.endDate).toLocaleDateString() : "";
+            searchDiv.style.backgroundColor = '#F5F5F5';
+            searchDiv.style.boxShadow = '0 2px 16px rgba(0, 0, 0, 0.14)';
             searchDiv.innerHTML =
-                `<div style="display: flex; justify-content: space-between">
-                    <div><span>${search.word}</div> 
-                    <div><span class="delete-icon"><img style="height: 10px; cursor: pointer; font-weight: bold" src="/image/x.png"></span></div>
+                `<div id="recentlyDiv1">
+                    <div id="recentlyDiv2"><span>${search.word}</div> 
+                    <div><span class="delete-icon"><img id="recentlyImg" src="/image/x.png"></span></div>
                 </div>
                 <br> <span>날짜: ${search.startDate ? new Date(search.startDate).toLocaleDateString() : ""} ~ ${search.endDate ? new Date(search.endDate).toLocaleDateString() : ""}</span>
-                <br> <span>성인: ${search.adults}명, 아동: ${search.children}명</span>`;
+                <br> <span>성인 ${search.adults}명, 아동 ${search.children}명</span>`;
 
             const deleteIcon = searchDiv.querySelector('.delete-icon');
             deleteIcon.addEventListener('click', function () {
                 // 삭제할 요소를 DOM에서 제거
                 recentlySearchContainer.removeChild(searchDiv);
                 // 해당 검색 기록을 sessionStorage에서도 삭제
-                const index = searchHistory.findIndex(item => item.word === search.word);
-                if (index !== -1) {
-                    searchHistory.splice(index, 1);
-                    sessionStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+                const index = searchHistory.findIndex(item => item.word === search.word);   // searchHistory 배열에서 search.word 와 일치하는 검색 기록의 인덱스 순회
+                if (index !== -1) {     // search.word 를 찾았다면?
+                    searchHistory.splice(index, 1);     // 첫번째로 일치하는 search.word 에 해당하는 기록들을 삭제
+                    sessionStorage.setItem('searchHistory', JSON.stringify(searchHistory));     // 수정된 배열을 sessionStorage 에 저장
                 }
             });
             recentlySearchContainer.appendChild(searchDiv);

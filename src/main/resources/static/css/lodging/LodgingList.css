@@ -218,3 +218,8 @@
     color: #333;
     cursor: pointer;
 }
+.custom-option:hover {
+    cursor: pointer;
+    background-color: #FFEBEF;
+    color: white;
+}
