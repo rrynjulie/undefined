@@ -1,14 +1,9 @@
 package com.lec.spring.controller;
 
-import com.lec.spring.config.PrincipalDetails;
-import com.lec.spring.domain.Booking;
 import com.lec.spring.domain.ProvLodging;
 import com.lec.spring.domain.Room;
 import com.lec.spring.domain.User;
-import com.lec.spring.service.BookingService;
-import com.lec.spring.service.ProviderService;
-import com.lec.spring.service.RoomService;
-import com.lec.spring.service.UserService;
+import com.lec.spring.service.*;
 import com.lec.spring.util.AuthenticationUtil;
 import com.lec.spring.util.U;
 import com.lec.spring.util.Util;
@@ -19,9 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -40,6 +33,8 @@ public class ProviderController {
     private RoomService roomService;
     @Autowired
     private BookingService bookingService;
+    @Autowired
+    private PostService postService;
 
     @GetMapping("/ProvBookingList")
     public String provBookingList(Model model, Authentication authentication, HttpSession session) {
@@ -216,7 +211,7 @@ public class ProviderController {
     public String provRoomDetail(@PathVariable("roomId") Long roomId, Model model, HttpSession session) {
         User user = Util.getOrSetLoggedUser(session, model);
 
-        Room room = roomService.findByRoomId(roomId);
+        Room room = roomService.findRoomByRoomId(roomId);
         model.addAttribute("room", room);
 
         return "mypage/provider/ProvRoomDetail";
@@ -229,7 +224,7 @@ public class ProviderController {
     public String showUpdateForm(@PathVariable Long roomId, Model model, HttpSession session) {
         User user = Util.getOrSetLoggedUser(session, model);
 
-        Room room = roomService.findByRoomId(roomId);
+        Room room = roomService.findRoomByRoomId(roomId);
         model.addAttribute("room", room);
         return "mypage/provider/ProvRoomUpdate";
     }
@@ -253,9 +248,9 @@ public class ProviderController {
         try {
             System.out.println("try 들어가서 찍기" + roomId);
 
-            roomService.deletePostsByRoomId(roomId);
+            postService.deletePostsByRoomId(roomId);
             System.out.println("deletePostsByRoomId: " + roomId);
-            roomService.deleteBookingsByRoomId(roomId);
+            bookingService.deleteBookingsByRoomId(roomId);
             System.out.println("deleteBookingsByRoomId: " + roomId);
             roomService.deleteRoom(roomId);
             System.out.println("deleteRoom: " + roomId);
