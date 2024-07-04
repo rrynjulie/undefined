@@ -93,6 +93,10 @@
     font-size: 20px;
     color: inherit;
 }
+.all:hover {
+    color: #FC5185;
+    transition: border-bottom 0.1s ease-in-out;
+}
 
 .item-list {
     display: flex;
@@ -150,12 +154,22 @@
     flex: 1;
     align-content: center;;
     text-align: center;
+    border-right:solid 1px black;
 }
 #selectedDate:hover {
     background-color: #FC5185;
     border-radius: 5px 0 0 5px;
     color: white;
     cursor: pointer;
+}
+.days {
+    width: 14.28571428571429%;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    font-size: 20px;
+    height: 40px;
+    color: darkgray;
 }
 #total:hover {
     background-color: #FC5185;
@@ -167,6 +181,7 @@
     flex: 1;
     align-content: center;;
     text-align: center;
+    cursor: pointer;
 }
 .detail1 {
     width: 200px;
@@ -200,7 +215,7 @@
     border: 1px solid #ccc;
     padding: 20px;
     width: 15%;
-    height: 17%;
+    height: 20.5%;
     background-color: #F5F5F5;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -213,7 +228,13 @@
     background-color: #F5F5F5;
     border-radius: 20px;
     cursor: pointer;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#decrease-btn1:hover, #decrease-btn2:hover, #increase-btn1:hover, #increase-btn2:hover {
+    background-color: #fc5185;
+    color: white;
 }
 
 
@@ -230,7 +251,7 @@
     flex-direction: column;
     align-items: center;
     width: 40%;
-    height: 60%;
+    height: 75%;
     font-family: 'Arial', sans-serif;
     background-color: #f2f2f2;
     /*border: 1px solid #ccc;*/
@@ -246,7 +267,8 @@
     width: 100%;
     height: 85%;
     border-collapse: collapse;
-    margin-top: 10px;
+    border: 0;
+    margin-top: 7px;
     background-color: white;
     border-radius: 5px;
     overflow: hidden; /* 내용이 넘칠 경우 처리 */
@@ -254,9 +276,7 @@
 #calendar-body th, #calendar-body td {
     width: 14.28%;
     text-align: center;
-    font-weight: bold;
-    background-color: white;
-    border: 1px solid #ccc;
+    border: 0;
 }
 #controls {
     width: 100%;
@@ -264,6 +284,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
+    border-radius: 5px;
     background-color: #FC5185;
     color: white;
 }
@@ -280,23 +301,44 @@
     border-radius: 20px;
     cursor: pointer;
 }
-#prev {
+#prev{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-left: 10px;
 }
 #next {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-right: 10px;
 }
 .close {
     width: 5%;
     height: 5%;
 }
+#close1, #saveDateBtn {
+    width: 10%;
+    height: 25px;
+    margin-top: 12px;
+    border: none;
+    border-radius: 3px;
+    background-color: #1273E4;
+    color: white;
+}
+#close2, #savePeopleBtn {
+    width: 25%;
+    margin-top: 5px;
+    border: none;
+    border-radius: 3px;
+    background-color: #1273E4;
+    color: white;
+}
 .peopleCounter {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: white;
-    /*border: solid 1px black;*/
-
 }
 .counter {
     display: flex;

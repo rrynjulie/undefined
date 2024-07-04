@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     const stars = document.querySelectorAll('.star');
     const starsInput = document.getElementById('postGradeInput');
@@ -6,10 +5,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function highlightStars(rating) {
         stars.forEach(star => {
-            if (parseInt(star.getAttribute('data-value')) <= rating) {
-                star.classList.add('selected');
+            if (parseInt(star.getAttribute('value')) <= rating) {   // value 가 사용자가 선택한 rating 보다 작거나 같으면 문자열 value 값을 정수형으로 변환
+                star.classList.add('selected');     // value 가 rating 보다 작거나 같으면 selected 클래스 추가
             } else {
-                star.classList.remove('selected');
+                star.classList.remove('selected');  // value 가 rating 보다 크면 selected 클래스 제거
             }
         });
     }
@@ -21,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     stars.forEach(star => {
         star.addEventListener('click', function() {
-            const value = this.getAttribute('data-value');
+            const value = this.getAttribute('value');
             starsInput.value = value;
             highlightStars(value);
         });

@@ -9,8 +9,14 @@
     history.back();
 </script>
 <script th:if="${result == 1}" th:inline="javascript">
-    alert("예약이 취소되었습니다.");
-    location.href = '/mypage/customer/BookingList/' + /*[[${userId}]]*/ '';
+    // alert("예약이 취소되었습니다.");
+    // location.href = '/mypage/customer/BookingList/' + /*[[${userId}]]*/ '';
+    if (confirm("정말 예약을 취소하시겠습니까?")) {
+        alert("예약이 취소되었습니다.");
+        location.href = '/mypage/customer/BookingList/' + /*[[${userId}]]*/ '';
+    } else {
+        history.back(); // 이전 페이지로 이동
+    }
 </script>
 </body>
 </html>

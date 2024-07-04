@@ -184,3 +184,7 @@ main {
 .h3-after-use {
     margin-top: 50px;
 }
+
+.btn-booking-post {
+    cursor: pointer;
+}

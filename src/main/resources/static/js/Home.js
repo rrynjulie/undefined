@@ -1,19 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // 초기 상태 설정: 전체보기 버튼 클릭 상태로 설정
-    filterItems('all');
-    filterItemsBooking('all');
-    filterItemsLove('all');
-
-    // 첫 번째 섹션 가격 형식화
-    formatPrices('.item-price');
-
-    // 두 번째 섹션 가격 형식화
-    formatPrices('.item-price-booking');
-
-    // 세 번째 섹션 가격 형식화
-    formatPrices('.item-price-love');
-});
-
 function logout() {
     fetch('/user/logout', {
         method: 'POST',
@@ -35,8 +19,9 @@ function logout() {
         });
 }
 
-function filterItems(type) {
-    const items = document.querySelectorAll('.item');
+function filterItems(type, section) {
+    const sectionElement = document.getElementById(`${section}-section`);
+    const items = sectionElement.querySelectorAll('.item');
     items.forEach(item => {
         if (type === 'all' || item.getAttribute('data-type') === type) {
             item.style.display = 'flex';
@@ -45,7 +30,7 @@ function filterItems(type) {
         }
     });
 
-    const buttons = document.querySelectorAll('.filter button');
+    const buttons = sectionElement.querySelectorAll('.filter button');
     buttons.forEach(button => {
         if (button.textContent === type || (type === 'all' && button.textContent === '전체보기')) {
             button.classList.add('btn-active');
@@ -53,47 +38,56 @@ function filterItems(type) {
             button.classList.remove('btn-active');
         }
     });
+    // 필터링 후 가격 형식 적용
+    formatPrices(`#${section}-section .item-price`);
 }
 
-function filterItemsBooking(type) {
-    const items = document.querySelectorAll('.item-booking');
-    items.forEach(item => {
-        if (type === 'all' || item.getAttribute('data-type') === type) {
-            item.style.display = 'flex';
-        } else {
-            item.style.display = 'none';
-        }
-    });
-
-    const buttons = document.querySelectorAll('.filter button');
-    buttons.forEach(button => {
-        if (button.textContent === type || (type === 'all' && button.textContent === '전체보기')) {
-            button.classList.add('btn-active');
-        } else {
-            button.classList.remove('btn-active');
-        }
-    });
-}
-
-function filterItemsLove(type) {
-    const items = document.querySelectorAll('.item-love');
-    items.forEach(item => {
-        if (type === 'all' || item.getAttribute('data-type') === type) {
-            item.style.display = 'flex';
-        } else {
-            item.style.display = 'none';
-        }
-    });
-
-    const buttons = document.querySelectorAll('.filter button');
-    buttons.forEach(button => {
-        if (button.textContent === type || (type === 'all' && button.textContent === '전체보기')) {
-            button.classList.add('btn-active');
-        } else {
-            button.classList.remove('btn-active');
-        }
-    });
-}
+// 초기 로드 시 전체보기 필터 적용
+document.addEventListener('DOMContentLoaded', () => {
+    filterItems('all', 'post');
+    filterItems('all', 'booking');
+    filterItems('all', 'love');
+});
+//
+// function filterItemsBooking(type) {
+//     const items = document.querySelectorAll('.item-booking');
+//     items.forEach(item => {
+//         if (type === 'all' || item.getAttribute('data-type') === type) {
+//             item.style.display = 'flex';
+//         } else {
+//             item.style.display = 'none';
+//         }
+//     });
+//
+//     const buttons = document.querySelectorAll('.filter button');
+//     buttons.forEach(button => {
+//         if (button.textContent === type || (type === 'all' && button.textContent === '전체보기')) {
+//             button.classList.add('btn-active');
+//         } else {
+//             button.classList.remove('btn-active');
+//         }
+//     });
+// }
+//
+// function filterItemsLove(type) {
+//     const items = document.querySelectorAll('.item-love');
+//     items.forEach(item => {
+//         if (type === 'all' || item.getAttribute('data-type') === type) {
+//             item.style.display = 'flex';
+//         } else {
+//             item.style.display = 'none';
+//         }
+//     });
+//
+//     const buttons = document.querySelectorAll('.filter button');
+//     buttons.forEach(button => {
+//         if (button.textContent === type || (type === 'all' && button.textContent === '전체보기')) {
+//             button.classList.add('btn-active');
+//         } else {
+//             button.classList.remove('btn-active');
+//         }
+//     });
+// }
 
 function goToLodgingDetail(element) {
     const lodgingId = element.getAttribute('data-id');
@@ -107,7 +101,7 @@ function formatPrice(price) {
 function formatPrices(selector) {
     const prices = document.querySelectorAll(selector);
     prices.forEach(priceElement => {
-        const price = priceElement.parentElement.parentElement.getAttribute('data-price');
+        const price = priceElement.closest('.item').getAttribute('data-price');
         if (price) {
             priceElement.textContent = formatPrice(Number(price)) + '원~';
         }

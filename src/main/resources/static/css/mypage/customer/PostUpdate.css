@@ -28,8 +28,8 @@
 }
 
 .star.highlighted {
-     color: gold;
- }
+    color: gold;
+}
 .dateTime {
     width: 98%;
     font-size: 17px;
@@ -40,6 +40,7 @@
     float: right;
 }
 .stars {
+    margin-top: 30px;
     height: 30px;
 }
 .star {
@@ -48,6 +49,7 @@
     color: lightgray;
     float: right;
     margin-bottom: 30px;
+    cursor: pointer;
 }
 .star.filled {
     color: gold;

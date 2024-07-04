@@ -101,7 +101,7 @@ public class PostController {
 
         AuthenticationUtil.addAuthenticationDetailsToModel(model);
 
-        return "/mypage/customer/PostList";
+        return "mypage/customer/PostList";
     }
 
     @GetMapping("/PostUpdate/{userId}/{postId}")
@@ -109,7 +109,7 @@ public class PostController {
         List<Post> userPostUpdate = postService.allPostUser(userId, postId);
         model.addAttribute("userPostUpdate", userPostUpdate);
         AuthenticationUtil.addAuthenticationDetailsToModel(model);
-        return "/mypage/customer/PostUpdate";
+        return "mypage/customer/PostUpdate";
     }
 
     @PostMapping("/PostUpdate")

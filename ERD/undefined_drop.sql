@@ -12,4 +12,4 @@ DROP TABLE IF EXISTS user_authority;
 DROP TABLE IF EXISTS cancel;
 DROP TABLE IF EXISTS coupon;
 DROP TABLE IF EXISTS authority;
-DROP TABLE if exists reservation;
+DROP TABLE IF EXISTS reservation;

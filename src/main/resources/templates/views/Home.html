@@ -21,7 +21,7 @@
 <main class="container">
     <!-- 메인 이미지 -->
     <section class="main-image">
-        <div class="intro-comment">국내여행은<br>저기어때</div>
+        <div class="intro-comment">국내라면 어디든지<br>여행할때 저기어때</div>
         <div class="shortcut-frame">
             <a class="shortcut-lodging" th:href="@{/lodging/LodgingSearch}" style="text-decoration: none">
                 <!--                <img src="" alt="">-->
@@ -35,20 +35,20 @@
     </section>
 
     <!-- 후기 갯수 TOP -->
-    <section class="ranking-list">
+    <section class="ranking-list" id="post-section">
         <div class="ranking-list-header">
             <h1>숙소 후기 TOP</h1>
             <p>후기 많은 순 추천</p>
         </div>
         <div class="btn-frame">
-            <div class="filter">
-                <button onclick="filterItems('all')">전체보기</button>
-                <button onclick="filterItems('호텔/리조트')">호텔/리조트</button>
-                <button onclick="filterItems('펜션/풀빌라')">펜션/풀빌라</button>
-                <button onclick="filterItems('모텔')">모텔</button>
+            <div class="filter" data-section="post">
+                <button onclick="filterItems('all', 'post')" class="btn-active">전체보기</button>
+                <button onclick="filterItems('호텔/리조트', 'post')">호텔/리조트</button>
+                <button onclick="filterItems('펜션/풀빌라', 'post')">펜션/풀빌라</button>
+                <button onclick="filterItems('모텔', 'post')">모텔</button>
             </div>
         </div>
-        <div class="item-list" id="item-list">
+        <div class="item-list" id="item-list-post">
             <div th:each="lodging : ${lodgings}" class="item" th:data-type="${lodging.lodgingType}" th:data-id="${lodging.lodgingId}" th:data-price="${lodging.roomPrice}" onclick="goToLodgingDetail(this)">
                 <img th:src="@{${lodging.lodgingPicture1}}" alt="호텔 이미지">
                 <div class="item-details">
@@ -56,24 +56,24 @@
                         <p class="item-title" th:text="${lodging.lodgingName}"></p>
                         <p class="item-rating" th:text="'⭐ ' + ${lodging.postGrade} + ' (' + ${lodging.countPostGrade} + ')'"></p>
                     </div>
-                    <p class="item-price"></p>
+                    <p class="item-price" th:text="${lodging.roomPrice} + '원~'"></p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- 숙소 예약 갯수 TOP -->
-    <section class="ranking-list">
+    <section class="ranking-list" id="booking-section">
         <div class="ranking-list-header">
             <h1>숙소 예약 TOP</h1>
             <p>숙소 예약 많은순 추천</p>
         </div>
         <div class="btn-frame">
-            <div class="filter">
-                <button onclick="filterItems('all')">전체보기</button>
-                <button onclick="filterItems('호텔/리조트')">호텔/리조트</button>
-                <button onclick="filterItems('펜션/풀빌라')">펜션/풀빌라</button>
-                <button onclick="filterItems('모텔')">모텔</button>
+            <div class="filter" data-section="booking">
+                <button onclick="filterItems('all', 'booking')" class="btn-active">전체보기</button>
+                <button onclick="filterItems('호텔/리조트', 'booking')">호텔/리조트</button>
+                <button onclick="filterItems('펜션/풀빌라', 'booking')">펜션/풀빌라</button>
+                <button onclick="filterItems('모텔', 'booking')">모텔</button>
             </div>
         </div>
         <div class="item-list" id="item-list-booking">
@@ -91,28 +91,28 @@
     </section>
 
     <!-- 숙소 좋아요 갯수 TOP -->
-    <section class="ranking-list">
+    <section class="ranking-list" id="love-section">
         <div class="ranking-list-header">
             <h1>숙소 좋아요 TOP</h1>
             <p>좋아요 많은 순 추천</p>
         </div>
         <div class="btn-frame">
-            <div class="filter">
-                <button onclick="filterItemsLove('all')">전체보기</button>
-                <button onclick="filterItemsLove('호텔/리조트')">호텔/리조트</button>
-                <button onclick="filterItemsLove('펜션/풀빌라')">펜션/풀빌라</button>
-                <button onclick="filterItemsLove('모텔')">모텔</button>
+            <div class="filter" data-section="love">
+                <button onclick="filterItems('all', 'love')" class="btn-active">전체보기</button>
+                <button onclick="filterItems('호텔/리조트', 'love')">호텔/리조트</button>
+                <button onclick="filterItems('펜션/풀빌라', 'love')">펜션/풀빌라</button>
+                <button onclick="filterItems('모텔', 'love')">모텔</button>
             </div>
         </div>
         <div class="item-list" id="item-list-love">
-            <div th:each="lodging : ${lodgingLove}" class="item item-love" th:data-type="${lodging.lodgingType}" th:data-id="${lodging.lodgingId}" th:data-price="${lodging.roomPrice}" onclick="goToLodgingDetail(this)">
+            <div th:each="lodging : ${lodgingLove}" class="item" th:data-type="${lodging.lodgingType}" th:data-id="${lodging.lodgingId}" th:data-price="${lodging.roomPrice}" onclick="goToLodgingDetail(this)">
                 <img th:src="@{${lodging.lodgingPicture1}}" alt="호텔 이미지">
                 <div class="item-details">
                     <div>
                         <p class="item-title" th:text="${lodging.lodgingName}"></p>
                         <p class="item-rating" th:text="'⭐ ' + ${lodging.postGrade} + ' (' + ${lodging.loveCount} + ' 좋아요)'"></p>
                     </div>
-                    <p class="item-price item-price-love" th:text="${lodging.roomPrice} + '원~'"></p>
+                    <p class="item-price" th:text="${lodging.roomPrice} + '원~'"></p>
                 </div>
             </div>
         </div>
