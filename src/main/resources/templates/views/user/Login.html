@@ -74,7 +74,7 @@
     </div>
     <div class="btn-social-login-frame">
 <!--        <a id="btn-Email-login" class="btn btn-lg my-1" th:href="@{/user/register}">-->
-        <a id="btn-Email-login" class="btn btn-lg my-1">
+        <a id="btn-Email-login" class="btn btn-lg my-1" data-bs-toggle="modal" data-bs-target="#termsModal"  data-bs-backdrop="false">
             <img th:src="@{/image/user/EmailLogin.svg}">
             <p>이메일로 시작하기</p>
         </a>
@@ -132,6 +132,7 @@
                     <label class="form-check-label bold-text" for="agreeAll">
                         전체 동의 (선택 포함)
                     </label>
+                        <span class="checkmark"></span>
                 </div>
                 <ul class="terms-list">
                     <li class="form-check custom-checkbox">
@@ -141,6 +142,7 @@
                             <br>
                             개인정보 수집 및 이용 동의 (필수)
                         </label>
+                        <span class="checkmark"></span>
                         <div class="arrow">&gt;</div>
                     </li>
                     <li class="form-check custom-checkbox">
@@ -148,6 +150,7 @@
                         <label class="form-check-label bold-text" for="agree2">
                             개인정보 수집 및 이용 동의 (선택)
                         </label>
+                        <span class="checkmark"></span>
                         <div class="arrow">&gt;</div>
                     </li>
                     <li class="form-check custom-checkbox">
@@ -155,6 +158,7 @@
                         <label class="form-check-label bold-text" for="agree3">
                             숙소 특가, 쿠폰 등 마케팅 수신 동의 (선택)
                         </label>
+                        <span class="checkmark"></span>
                         <div class="arrow">&gt;</div>
                     </li>
                     <li class="form-check custom-checkbox">
@@ -162,6 +166,7 @@
                         <label class="form-check-label bold-text" for="agree4">
                             위치 정보 이용 약관 동의 (선택)
                         </label>
+                        <span class="checkmark"></span>
                         <div class="arrow">&gt;</div>
                     </li>
                 </ul>
