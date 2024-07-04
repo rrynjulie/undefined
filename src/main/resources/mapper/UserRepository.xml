@@ -74,10 +74,6 @@
         DELETE FROM user_authority WHERE user_id = #{userId}
     </delete>
 
-<!--    <delete id="deleteLikes" parameterType="com.lec.spring.domain.User">-->
-<!--        DELETE FROM `like` WHERE user_id = #{userId}-->
-<!--    </delete>-->
-
     <delete id="deletePosts" flushCache="true">
         DELETE FROM post WHERE user_id = #{userId}
     </delete>
@@ -94,6 +90,10 @@
         DELETE FROM booking WHERE user_id = #{userId}
     </delete>
 
+    <delete id="deleteLoves" flushCache="true">
+        DELETE FROM love WHERE user_id = #{userId}
+    </delete>
+
     <delete id="deleteRooms" parameterType="long">
         DELETE room FROM room
                              JOIN lodging ON room.lodging_id = lodging.lodging_id
@@ -102,6 +102,14 @@
 
     <delete id="deletePostsByBookingId" parameterType="long">
         DELETE FROM post WHERE booking_id IN (SELECT booking_id FROM booking WHERE user_id = #{userId})
+    </delete>
+
+    <delete id="deleteBookingByRoomId" parameterType="long">
+        DELETE FROM booking WHERE room_id IN (SELECT room_id FROM room WHERE user_id = #{userId})
+    </delete>
+
+    <delete id="deleteRoomByLodgingId" parameterType="long">
+        DELETE FROM room WHERE lodging_id IN (SELECT room.lodging_id FROM lodging WHERE user_id = #{userId})
     </delete>
 
     <delete id="deleteReservationsByUserId" parameterType="long">

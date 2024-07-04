@@ -18,18 +18,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-//    @Bean
-//    public PasswordEncoder encoder(){
-//        return new BCryptPasswordEncoder();
-//    }
-
-
-    // ↓ Security 동작 시키지 않기.
-//    @Bean
-//    public WebSecurityCustomizer webSecurityCustomizer(){
-//        return web -> web.ignoring().anyRequest();   // 어떠한 request 도 Security 가 무시함.
-//    }
-
     // OAuth2 Client
     @Autowired
     private PrincipalOauth2UserService principalOauth2UserService;
@@ -106,10 +94,7 @@ public class SecurityConfig {
                         .accessDeniedHandler(new CustomAccessDeniedHandler())
                 )
 
-                /********************************************
-                 * OAuth2 로그인
-                 * .oauth2Login(OAuth2LoginConfigurer)
-                 ********************************************/
+//                 OAuth2 로그인
                 .oauth2Login(httpSecurityOAuth2LoginConfigurer -> httpSecurityOAuth2LoginConfigurer
                         .loginPage("/user/Login")    // 로그인 페이지를 기존과 동일한 url 로 지정
                         // ↑ 구글 로그인 완료된 뒤에 후처리가 필요하다!
@@ -126,57 +111,9 @@ public class SecurityConfig {
 
     } // end filterChain()
 
-
-    //--------------------------------------
     // OAuth 로그인
-    // AuthenticationManager Bean 생성
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-
-
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http.authorizeRequests(authorizeRequests ->
-//                        authorizeRequests.anyRequest().authenticated()
-//                )
-//                .formLogin(formLogin ->
-//                        formLogin.loginPage("/Login").permitAll()
-//                )
-//                .logout(logout ->
-//                        logout.permitAll()
-//                );
-//        return http.build();
-//    }
-
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-//        manager.createUser(User.withDefaultPasswordEncoder()
-//                .username("user")
-//                .password("password")
-//                .roles("USER")
-//                .build());
-//        manager.createUser(User.withDefaultPasswordEncoder()
-//                .username("admin")
-//                .password("admin")
-//                .roles("ADMIN")
-//                .build());
-//        return manager;
-//    }
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-

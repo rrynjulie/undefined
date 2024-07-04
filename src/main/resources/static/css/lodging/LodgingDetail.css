@@ -181,6 +181,7 @@
     flex: 1;
     align-content: center;;
     text-align: center;
+    cursor: pointer;
 }
 .detail1 {
     width: 200px;
@@ -327,7 +328,7 @@
 }
 #close2, #savePeopleBtn {
     width: 25%;
-    margin-top: 10px;
+    margin-top: 5px;
     border: none;
     border-radius: 3px;
     background-color: #1273E4;

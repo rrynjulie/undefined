@@ -25,6 +25,7 @@
 }
 #starLabel, #textLabel, #pictureLabel {
     margin-right: 10px;
+    font-weight: bold;
 }
 #textInput {
     width: 100%;
