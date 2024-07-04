@@ -52,7 +52,7 @@ public class BookingServiceImpl implements BookingService {
         List<Booking> bookingList = bookingRepository.findBooksByUserId(userId);
         bookingList.forEach(booking -> {
             User user = userRepository.findById(userId);
-            Room room = roomRepository.findByRoomId(booking.getRoomId());
+            Room room = roomRepository.findRoomByRoomId(booking.getRoomId());
             ProvLodging lodging = providerRepository.findAllDetails(room.getLodgingId());
             booking.setUser(user);
             booking.setRoom(room);

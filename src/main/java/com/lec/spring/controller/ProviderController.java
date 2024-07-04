@@ -1,7 +1,5 @@
 package com.lec.spring.controller;
 
-import com.lec.spring.config.PrincipalDetails;
-import com.lec.spring.domain.Booking;
 import com.lec.spring.domain.ProvLodging;
 import com.lec.spring.domain.Room;
 import com.lec.spring.domain.User;
@@ -16,9 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -215,7 +211,7 @@ public class ProviderController {
     public String provRoomDetail(@PathVariable("roomId") Long roomId, Model model, HttpSession session) {
         User user = Util.getOrSetLoggedUser(session, model);
 
-        Room room = roomService.findByRoomId(roomId);
+        Room room = roomService.findRoomByRoomId(roomId);
         model.addAttribute("room", room);
 
         return "mypage/provider/ProvRoomDetail";
@@ -228,7 +224,7 @@ public class ProviderController {
     public String showUpdateForm(@PathVariable Long roomId, Model model, HttpSession session) {
         User user = Util.getOrSetLoggedUser(session, model);
 
-        Room room = roomService.findByRoomId(roomId);
+        Room room = roomService.findRoomByRoomId(roomId);
         model.addAttribute("room", room);
         return "mypage/provider/ProvRoomUpdate";
     }

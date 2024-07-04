@@ -1,6 +1,5 @@
 package com.lec.spring.controller;
 
-import com.lec.spring.config.PrincipalDetails;
 import com.lec.spring.domain.*;
 
 import com.lec.spring.service.*;
@@ -13,10 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.print.Book;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.util.List;
 
 @Controller
 public class BookingController {
@@ -58,7 +55,7 @@ public class BookingController {
         Lodging lodging = lodgingService.getLodgingById(lodgingId);
         model.addAttribute("lodging", lodging);
 
-        Room room = roomService.findByRoomId(roomId);
+        Room room = roomService.findRoomByRoomId(roomId);
         model.addAttribute("room", room);
 
         String formattedPay = DecimalFormat.getInstance().format(room.getRoomPrice());
@@ -81,7 +78,7 @@ public class BookingController {
 
         User user = Util.getOrSetLoggedUser(session, model);
 
-        Room room = roomService.findByRoomId(roomId);
+        Room room = roomService.findRoomByRoomId(roomId);
 
         if (room == null) {
             throw new IllegalArgumentException("Room not found for roomId: " + roomId);
