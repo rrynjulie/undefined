@@ -163,4 +163,9 @@
         FROM post
         WHERE user_id = #{userId} AND booking_id = #{bookingId}
     </select>
+
+    <!-- roomId와 관련된 post 삭제 -->
+    <delete id="deletePostsByRoomId" parameterType="int">
+        DELETE FROM post WHERE room_id = #{roomId}
+    </delete>
 </mapper>

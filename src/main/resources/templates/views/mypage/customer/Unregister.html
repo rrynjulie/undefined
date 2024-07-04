@@ -15,22 +15,27 @@
 
 
 <div class="container">
+    <br><br>
     <div class="header">
-        <img id="logo" th:src="@{/image/MainLogo.png}">
-
+        <img th:src="@{/image/common/MainLogo.png}" alt="저기어때" id="logo">
     </div>
+    <br><br>
     <div class="content">
-        <h1>회원탈퇴</h1>
+        <h2>회원탈퇴</h2>
+        <br><br>
         <div class="notice">
             <p id="withdrawal-notice">회원탈퇴를 하시려면 <strong>안내 및 동의</strong>가 필요합니다.</p>
         </div>
         <div class="input-container">
             <label for="password">비밀번호 입력창</label>
-            <input type="password" id="password">
+            <input type="password" id="password" class="form-control">
         </div>
+        <p class="Unregister-guide">* 소셜 로그인 유저의 기본 비밀번호는 1234입니다.</p>
+        <p class="Unregister-guide">* 숙소를 보유하고 있는 유저는 회원 탈퇴가 불가능합니다.</p>
         <div class="submit-container">
-            <button type="button">확인</button>
+            <button type="button" class="btn btn-primary" id="withdrawButton">확인</button>
         </div>
+        <br>
     </div>
 </div>
 
@@ -47,7 +52,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                <button type="button" class="btn btn-danger-custom" id="confirmButton" style="background-color: #fc5185; color: white" >확인</button>
+                <button type="button" class="btn btn-danger-custom" id="confirmButton" style="background-color: #fc5185; color: white">확인</button>
             </div>
         </div>
     </div>

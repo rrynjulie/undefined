@@ -88,7 +88,6 @@ public class UserController {
         try {
             Authentication authentication = userService.authenticate(email, password);
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            System.out.println("-----------------------------" + email);
             return "redirect:/}";
         } catch (UsernameNotFoundException | BadCredentialsException e) {
             model.addAttribute("errorMessage", "이메일 또는 비밀번호가 올바르지 않습니다.");
@@ -96,7 +95,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/loginError")
+    @RequestMapping("/LoginError")
     public String loginError() {
         return "user/Login";
     }

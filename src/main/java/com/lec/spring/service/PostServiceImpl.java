@@ -83,6 +83,9 @@ public class PostServiceImpl implements PostService {
         return postRepository.checkIfUserPosted(userId, bookingId);
     }
 
-
-
+    // roomId 관련된 post 삭제
+    @Override
+    public void deletePostsByRoomId(int roomId) {
+        postRepository.deletePostsByRoomId(roomId);
+    }
 }

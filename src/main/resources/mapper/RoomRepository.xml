@@ -4,16 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.lec.spring.repository.RoomRepository">
-    <insert id="createRoom" flushCache="true" parameterType="com.lec.spring.domain.Room"
-            useGeneratedKeys="true" keyColumn="room_id" keyProperty="roomId">
-        INSERT INTO room
-            (room_picture_1, room_name, room_normal_people, room_max_people
-            , room_price, room_number, room_area, room_bed, room_bed_grade, room_bathroom, room_smoke, lodging_id)
-        VALUES
-            (#{roomPicture1}, #{roomName}, #{roomNormalPeople}, #{roomMaxPeople}, #{roomPrice}, #{roomNumber}
-            , #{roomArea}, #{roomBed}, #{roomBedGrade}, #{roomBathroom}, #{roomSmoke}, #{lodgingId})
-    </insert>
-
     <sql id="SELECT_BASE">
         SELECT r.room_id
              , r.room_picture_1
@@ -50,19 +40,24 @@
         <result column="lodging_id" property="lodgingId"/>
     </resultMap>
 
-    <select id="findAll" resultMap="mapRoom">
-        <include refid="SELECT_BASE"/>
-        ORDER BY r.room_id
-    </select>
+    <insert id="createRoom" flushCache="true" parameterType="com.lec.spring.domain.Room"
+            useGeneratedKeys="true" keyColumn="room_id" keyProperty="roomId">
+        INSERT INTO room
+        (room_picture_1, room_name, room_normal_people, room_max_people
+        , room_price, room_number, room_area, room_bed, room_bed_grade, room_bathroom, room_smoke, lodging_id)
+        VALUES
+            (#{roomPicture1}, #{roomName}, #{roomNormalPeople}, #{roomMaxPeople}, #{roomPrice}, #{roomNumber}
+            , #{roomArea}, #{roomBed}, #{roomBedGrade}, #{roomBathroom}, #{roomSmoke}, #{lodgingId})
+    </insert>
 
-    <select id="findByRoomId" resultMap="mapRoom">
-        <include refid="SELECT_BASE"/>
-        AND r.room_id = #{roomId}
-    </select>
-
-    <select id="findByLodgingId" resultMap="mapRoom">
+    <select id="findRoomsByLodgingId" resultMap="mapRoom" parameterType="java.lang.Long">
         <include refid="SELECT_BASE"/>
         AND l.lodging_id = #{lodgingId}
+    </select>
+
+    <select id="findRoomByRoomId" resultMap="mapRoom">
+        <include refid="SELECT_BASE"/>
+        AND r.room_id = #{roomId}
     </select>
 
     <update id="updateRoom" flushCache="true" parameterType="com.lec.spring.domain.Room">
@@ -81,9 +76,10 @@
         WHERE room_id = #{roomId}
     </update>
 
-<!--    <delete id="delete" flushCache="true" parameterType="com.lec.spring.domain.Room">-->
-<!--        DELETE FROM room WHERE room_id = #{roomId}-->
-<!--    </delete>-->
+    <!-- room 삭제 -->
+    <delete id="deleteRoom" parameterType="int">
+        DELETE FROM room WHERE room_id = #{roomId}
+    </delete>
 
     <!--페이징 용 쿼리-->
 <!--    <select id="selectFromRow" resultMap="mapPost">-->
@@ -95,30 +91,4 @@
 <!--    <select id="countAll" resultType="int">-->
 <!--        SELECT count(*) FROM t5_post;-->
 <!--    </select>-->
-
-    <select id="findRoomsByLodgingId" resultMap="mapRoom" parameterType="java.lang.Long">
-        SELECT room_id, room_name
-        FROM room
-        WHERE lodging_id = #{lodgingId}
-    </select>
-
-    <select id="findById" resultMap="mapRoom">
-        <include refid="SELECT_BASE"/>
-        AND r.room_id = #{roomId}
-    </select>
-
-    <!-- roomId와 관련된 post 삭제 -->
-    <delete id="deletePostsByRoomId" parameterType="int">
-        DELETE FROM post WHERE room_id = #{roomId}
-    </delete>
-
-    <!-- roomId와 관련된 booking 삭제 -->
-    <delete id="deleteBookingsByRoomId" parameterType="int">
-        DELETE FROM booking WHERE room_id = #{roomId}
-    </delete>
-
-    <!-- room 삭제 -->
-    <delete id="deleteRoom" parameterType="int">
-        DELETE FROM room WHERE room_id = #{roomId}
-    </delete>
 </mapper>

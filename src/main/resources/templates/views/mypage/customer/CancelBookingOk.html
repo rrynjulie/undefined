@@ -1,22 +1,18 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>예약 취소 결과</title>
-</head>
-<body>
+<script th:inline="javascript">
+    function confirmCancellation(event) {
+        if (!confirm("정말 예약을 취소하시겠습니까?")) {
+            event.preventDefault();
+            return false;
+        }
+        return true;
+    }
+</script>
+
 <script th:unless="${result == 1}">
     alert("삭제 실패");
     history.back();
 </script>
 <script th:if="${result == 1}" th:inline="javascript">
-    // alert("예약이 취소되었습니다.");
-    // location.href = '/mypage/customer/BookingList/' + /*[[${userId}]]*/ '';
-    if (confirm("정말 예약을 취소하시겠습니까?")) {
-        alert("예약이 취소되었습니다.");
-        location.href = '/mypage/customer/BookingList/' + /*[[${userId}]]*/ '';
-    } else {
-        history.back(); // 이전 페이지로 이동
-    }
+    alert("예약이 취소되었습니다.");
+    location.href = '/mypage/customer/BookingList/' + /*[[${userId}]]*/ '';
 </script>
-</body>
-</html>

@@ -40,7 +40,7 @@ public class ProviderServiceImpl implements ProviderService {
     public List<ProvLodging> getLodgingsAndRoomsByUserId(Long userId) {
         List<ProvLodging> lodgingList = providerRepository.findByUserId(userId);
         lodgingList.forEach(lodging -> {
-            List<Room> roomList = roomRepository.findByLodgingId(lodging.getLodgingId());
+            List<Room> roomList = roomRepository.findRoomsByLodgingId(lodging.getLodgingId());
             lodging.setRoomList(roomList);
         });
         return lodgingList;

@@ -79,7 +79,7 @@
                         <p th:text="${books.formattedPay} + '원'"></p>
                     </label>
 
-                    <form th:action="@{/mypage/customer/{userId}/BookingDelete/{bookingId}(userId=${userId}, bookingId=${books.bookingId})}" method="post">
+                    <form th:action="@{/mypage/customer/{userId}/BookingDelete/{bookingId}(userId=${userId}, bookingId=${books.bookingId})}" method="post" onsubmit="return confirmCancellation(event)">
                         <input type="hidden" name="userId" th:value="${userId}">
                         <input type="hidden" name="bookingId" th:value="${books.bookingId}">
                         <input type="submit" class="btn-booking-cancel" value="예약취소">

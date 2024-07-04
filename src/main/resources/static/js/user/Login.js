@@ -1,9 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // 비밀번호 재설정 모달 열기
-    document.querySelector('[data-bs-target="#resetModal"]').addEventListener('click', function () {
-        var resetModal = new bootstrap.Modal(document.getElementById('resetModal'));
-        resetModal.show();
-    });
 
     // 회원가입 모달 열기
     document.querySelector('[data-bs-target="#termsModal"]').addEventListener('click', function () {
@@ -11,10 +6,9 @@ document.addEventListener('DOMContentLoaded', function () {
         termsModal.show();
     });
 
-    // 모달 닫을 때 이벤트 추가 (비밀번호 재설정 모달)
-    document.getElementById('resetModal').addEventListener('hidden.bs.modal', function () {
-        document.body.classList.remove('modal-open');
-        document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+    document.getElementById('btn-Email-login').addEventListener('click', function () {
+        var termsModal = new bootstrap.Modal(document.getElementById('termsModal'));
+        termsModal.show();
     });
 
     // 모달 닫을 때 이벤트 추가 (약관 동의 모달)
