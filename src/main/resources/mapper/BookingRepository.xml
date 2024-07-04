@@ -68,6 +68,7 @@
     <!--        AND ((booking_startdate &gt;> #{bookingStartDate} AND booking_startdate &lt;< #{bookingEndDate})-->
     <!--        OR (booking_enddate &lt; #{bookingEndDate} AND booking_enddate &gt; #{bookingStartDate}))-->
     <!--    </select>-->
+
     <select id="bookingCount" resultType="int">
         SELECT count(*)
         FROM booking
@@ -76,9 +77,8 @@
             OR booking_enddate &lt;= #{bookingStartDate})
     </select>
 
-
 <!--    &lt;!&ndash; 한 숙소에 예약된 예약 개수&ndash;&gt;-->
-<!--    <select id="countHotelBokking" resultType="int">-->
+<!--    <select id="countHotelBooking" resultType="int">-->
 <!--        SELECT-->
 <!--            l.lodging_id 숙소고유번호,-->
 <!--            l.lodging_name 숙소이름,-->
@@ -95,7 +95,8 @@
 <!--            예약숫자 DESC;-->
 <!--    </select>-->
 
-
-
-
+    <!-- roomId와 관련된 booking 삭제 -->
+    <delete id="deleteBookingsByRoomId" parameterType="int">
+        DELETE FROM booking WHERE room_id = #{roomId}
+    </delete>
 </mapper>

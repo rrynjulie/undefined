@@ -58,7 +58,7 @@ public class BookingController {
         Lodging lodging = lodgingService.getLodgingById(lodgingId);
         model.addAttribute("lodging", lodging);
 
-        Room room = roomService.getRoomById(roomId);
+        Room room = roomService.findByRoomId(roomId);
         model.addAttribute("room", room);
 
         String formattedPay = DecimalFormat.getInstance().format(room.getRoomPrice());

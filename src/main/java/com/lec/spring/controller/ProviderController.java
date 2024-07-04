@@ -5,10 +5,7 @@ import com.lec.spring.domain.Booking;
 import com.lec.spring.domain.ProvLodging;
 import com.lec.spring.domain.Room;
 import com.lec.spring.domain.User;
-import com.lec.spring.service.BookingService;
-import com.lec.spring.service.ProviderService;
-import com.lec.spring.service.RoomService;
-import com.lec.spring.service.UserService;
+import com.lec.spring.service.*;
 import com.lec.spring.util.AuthenticationUtil;
 import com.lec.spring.util.U;
 import com.lec.spring.util.Util;
@@ -40,6 +37,8 @@ public class ProviderController {
     private RoomService roomService;
     @Autowired
     private BookingService bookingService;
+    @Autowired
+    private PostService postService;
 
     @GetMapping("/ProvBookingList")
     public String provBookingList(Model model, Authentication authentication, HttpSession session) {
@@ -253,9 +252,9 @@ public class ProviderController {
         try {
             System.out.println("try 들어가서 찍기" + roomId);
 
-            roomService.deletePostsByRoomId(roomId);
+            postService.deletePostsByRoomId(roomId);
             System.out.println("deletePostsByRoomId: " + roomId);
-            roomService.deleteBookingsByRoomId(roomId);
+            bookingService.deleteBookingsByRoomId(roomId);
             System.out.println("deleteBookingsByRoomId: " + roomId);
             roomService.deleteRoom(roomId);
             System.out.println("deleteRoom: " + roomId);

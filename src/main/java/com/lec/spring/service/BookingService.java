@@ -20,4 +20,6 @@ public interface BookingService {
     int deleteBooking(String userId, String bookingId);
 
     int bookingCount(Long roomId, LocalDate bookingStartDate, LocalDate bookingEndDate);
+
+    void deleteBookingsByRoomId(int roomId);
 }

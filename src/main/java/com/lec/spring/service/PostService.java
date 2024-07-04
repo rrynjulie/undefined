@@ -29,4 +29,5 @@ public interface PostService {
 
     boolean checkIfUserPosted(Long userId, Long bookingId);
 
+    void deletePostsByRoomId(int roomId);
 }

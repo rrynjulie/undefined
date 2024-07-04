@@ -72,5 +72,9 @@ public class BookingServiceImpl implements BookingService {
         return bookingRepository.bookingCount(roomId, bookingStartDate, bookingEndDate);
     }
 
-
+    // roomId와 관련된 booking 삭제
+    @Override
+    public void deleteBookingsByRoomId(int roomId) {
+        bookingRepository.deleteBookingsByRoomId(roomId);
+    }
 }

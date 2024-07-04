@@ -29,4 +29,7 @@ public interface PostRepository {
     int postDelete(Post post);
 
     boolean checkIfUserPosted(@Param("userId") Long userId, @Param("bookingId") Long bookingId);
+
+    // roomId 관련된 post 삭제
+    void deletePostsByRoomId(int roomId);
 }
