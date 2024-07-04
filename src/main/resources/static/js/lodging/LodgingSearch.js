@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", function() {
             searchDiv.innerHTML =
                 `<div style="display: flex; justify-content: space-between">
                     <div><span>${search.word}</div> 
-                    <div><span class="delete-icon"><img style="height: 10px" src="/image/x.png"></span></div>
+                    <div><span class="delete-icon"><img style="height: 10px; cursor: pointer; font-weight: bold" src="/image/x.png"></span></div>
                 </div>
                 <br> <span>날짜: ${search.startDate ? new Date(search.startDate).toLocaleDateString() : ""} ~ ${search.endDate ? new Date(search.endDate).toLocaleDateString() : ""}</span>
                 <br> <span>성인: ${search.adults}명, 아동: ${search.children}명</span>`;

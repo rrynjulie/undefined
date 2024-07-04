@@ -181,6 +181,7 @@
     flex: 1;
     align-content: center;;
     text-align: center;
+    cursor: pointer;
 }
 .detail1 {
     width: 200px;
