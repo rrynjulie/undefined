@@ -78,7 +78,7 @@ public class LodgingController {
         List<Lodging> lodgings;
         if (type == null || type.isEmpty() || type.equals("전체")) {
             if (price.equals("ALL")) {
-                lodgings = lodgingService.findLodgingIdASC(location);
+                lodgings = lodgingService.getLodgingsByLocation(location);
             } else if (price.equals("DESC")) {
                 lodgings = lodgingService.findLodgingByPriceDESC(location);
             } else if (price.equals("ASC")) {

@@ -71,8 +71,8 @@ public class BookingController {
     public String createBooking(@RequestParam("visitorName") String visitorName,
                                 @RequestParam("visitorPhoneNum") String visitorPhoneNum,
                                 @RequestParam("bookingPay") int bookingPay,
-                                @RequestParam("bookingStartDate") LocalDate bookingStartDate,
-                                @RequestParam("bookingEndDate") LocalDate bookingEndDate,
+                                @RequestParam("bookingStartDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) String bookingStartDate,
+                                @RequestParam("bookingEndDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) String bookingEndDate,
                                 @RequestParam("bookingAdult") int bookingAdult,
                                 @RequestParam("bookingChild") int bookingChild,
                                 @RequestParam("roomId") Long roomId,
@@ -87,7 +87,7 @@ public class BookingController {
             throw new IllegalArgumentException("Room not found for roomId: " + roomId);
         }
 
-        int conflictingReservations = bookingService.bookingCount(roomId, bookingStartDate, bookingEndDate);
+        int conflictingReservations = bookingService.bookingCount(roomId, LocalDate.parse(bookingStartDate), LocalDate.parse(bookingEndDate));
         if (conflictingReservations > 0) {
             // 예약 불가 메시지를 전달
             model.addAttribute("error", "이미 예약된 객실입니다.");
@@ -99,8 +99,8 @@ public class BookingController {
                 .visitorName(visitorName)
                 .visitorPhoneNum(visitorPhoneNum)
                 .bookingPay(bookingPay)
-                .bookingStartDate(bookingStartDate)
-                .bookingEndDate(bookingEndDate)
+                .bookingStartDate(LocalDate.parse(bookingStartDate))
+                .bookingEndDate(LocalDate.parse(bookingEndDate))
                 .bookingAdult(bookingAdult)
                 .bookingChild(bookingChild)
                 .userId(userId)

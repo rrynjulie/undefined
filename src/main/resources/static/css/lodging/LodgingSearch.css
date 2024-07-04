@@ -115,6 +115,15 @@
 
 #prev:hover, #next:hover {
     transform: scale(1.02);
+    color: #FC5185;
+    transition: border-bottom 0.1s ease-in-out;
+}
+.button:hover {
+    background-color: #fc5185;
+    color: white;
+}
+#decrease-btn1:hover, #decrease-btn2:hover, #increase-btn1:hover, #increase-btn2:hover {
+    background-color: #fc5185;
 }
 
 .days {
@@ -154,9 +163,13 @@ td {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 50px 0;
+    margin: 50px 20px;
 }
-
+.adultPicture, .childPicture {
+    width: 30px;
+    font-size: 20px;
+    margin-right: 7px;
+}
 .adult-child {  /* 성인 아동 문구 */
     width: 57%;
     font-size: 20px;
