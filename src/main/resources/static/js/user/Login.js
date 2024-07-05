@@ -66,9 +66,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // 동의하고 계속하기 버튼 클릭 시
     agreeButton.addEventListener('click', function (e) {
         if (document.getElementById('agree1').checked) {
-            window.location.href = '../user/register'; // agree1이 체크된 경우에만 이동
+            window.location.href = '../user/register';
         } else {
-            e.preventDefault(); // agree1이 체크되지 않으면 이동하지 않음
+            e.preventDefault();
         }
     });
 
