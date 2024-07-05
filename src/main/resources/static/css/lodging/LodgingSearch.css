@@ -209,5 +209,20 @@ td {
     height: 100%;
     padding: 20px;
     background-color: #F5F5F5;
-    border-radius: 7px;
+    border-radius: 5px;
+}
+#recentlyDiv1 {
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 2px 16px #F5F5F5;
+    background-color: #F5F5F5;
+}
+#recentlyDiv2 {
+    font-weight: bold;
+}
+#recentlyImg {
+    height: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 5px
 }
