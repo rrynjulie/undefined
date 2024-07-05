@@ -61,7 +61,7 @@ public class UserController {
 //                break;
             }
 
-            return "redirect:user/register";
+            return "redirect:register";
         }
         String page = "user/registerOk";
         int cnt = userService.register(user);
