@@ -2,12 +2,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const text = document.getElementById('lodging-text');
     const searchWord = sessionStorage.getItem('searchWord') || '';
 
+    let currentDate = new Date();
     const selectedDate = document.getElementById("selectedDate");
-    const startDate = new Date(sessionStorage.getItem('startDate'));
-    const endDate = new Date(sessionStorage.getItem('endDate'));
+    const startDate = new Date(sessionStorage.getItem('startDate')) || new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getDate());
+    const endDate = new Date(sessionStorage.getItem('endDate')) || new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getDate() + 1);
 
     const totalDiv = document.getElementsByClassName('total');
-    const adultCount = parseInt(sessionStorage.getItem('adultCount')) || 0;
+    const adultCount = parseInt(sessionStorage.getItem('adultCount')) || 1;
     const childCount = parseInt(sessionStorage.getItem('childCount')) || 0;
 
     console.log('searchWord: ' + searchWord);

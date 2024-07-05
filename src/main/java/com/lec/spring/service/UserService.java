@@ -46,6 +46,7 @@ public interface UserService {
     List<UserAuthority> getAllUserAuthorities();
 
     boolean checkPassword(Long userId, String currentPassword);
+    boolean checkingPassword(String nickname, String currentPassword);
 
     User findByProviderId(String providerId);
 
