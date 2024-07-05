@@ -18,8 +18,8 @@
                 <th>체크아웃</th>
                 <th>결제금액</th>
             </tr>
-            <tr th:each="bookings : ${rooms.bookList}">
-                <td th:text="'1'"></td>
+            <tr th:each="bookings, iterStat : ${rooms.bookList}">
+                <td th:text="${iterStat.index + 1}"></td>
                 <td th:text="${bookings.visitorName}"></td>
                 <td th:text="${bookings.visitorPhoneNum}"></td>
                 <td th:text="${bookings.bookingStartDate}"></td>
