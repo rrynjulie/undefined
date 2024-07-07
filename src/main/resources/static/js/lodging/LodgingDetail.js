@@ -18,8 +18,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const childCountDiv = document.getElementById('child-count');   // 아동 text 의 id
 
     let currentDate = new Date();   // 현재 시간을 currentDate 변수에 저장
-    let startDate = null;
+    // let startDate = null;
     let endDate = null;
+    let today = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()); //현재날짜 저장
+    let startDate = sessionStorage.getItem('startDate') ? new Date(sessionStorage.getItem('startDate')) : new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
     let lastClickedCells = [];
 
     let adultCount = 1;
@@ -69,6 +71,11 @@ document.addEventListener('DOMContentLoaded', function () {
             cell.textContent = date;
 
             let cellDate = new Date(year, month, date);
+
+            if (cellDate < today) {
+                cell.style.color = 'lightgray'; //과거 날짜 회색표시
+                cell.style.pointerEvents = 'none'; //선택 못하게
+            }
 
             // 입실일과 퇴실일 사이의 날짜 색상 처리
             if (startDate && endDate) {     // 입실일과 퇴실일이 선택되었을 때
