@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<th:block th:fragment="nav-menu">
+<th:block th:fragment="nav-menu(activePage)">
     <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/customer/NavMenu.css}">
 
     <!-- PC 버전 -->
     <div class="my-page-menu">
         <nav class="customer-menu-pc">
-            <a class="active" th:href="@{'/mypage/customer/BookingList/' + ${userId}}">
-                <img th:src="@{/image/mypage/customer/Booking.png}" alt="" class="customer-menu-icon">
+            <a th:href="@{'/mypage/customer/BookingList/' + ${userId}}" th:classappend="${activePage == 'a' ? 'active' : ''}">
+                <img th:src="@{/image/mypage/customer/BookingList.png}" alt="" class="customer-menu-icon" id="booking-list-btn">
                 <p>예약 내역</p>
             </a>
-            <a th:href="@{/mypage/customer/ManageAccount}">
-                <img th:src="@{/image/privacy.png}" alt="" class="customer-menu-icon">
+            <a th:href="@{/mypage/customer/ManageAccount}" th:classappend="${activePage == 'b' ? 'active' : ''}">
+                <img th:src="@{/image/mypage/customer/ManageAccount.png}" alt="" class="customer-menu-icon" id="manage-account-btn">
                 <p>내 정보 관리</p>
             </a>
-            <a th:href="@{'/mypage/customer/PostList/' + ${userId}}">
-                <img th:src="@{/image/mypage/customer/Lodging.png}" alt="" class="customer-menu-icon">
+            <a th:href="@{'/mypage/customer/PostList/' + ${userId}}" th:classappend="${activePage == 'c' ? 'active' : ''}">
+                <img th:src="@{/image/mypage/customer/PostList.png}" alt="" class="customer-menu-icon" id="post-list-btn">
                 <p>나의 후기</p>
             </a>
-            <a th:href="@{/mypage/customer/loveList}">
-                <img th:src="@{/image/mypage/customer/loveList.png}" alt="" class="customer-menu-icon">
-                <p>내 좋아요 목록</p>
+            <a th:href="@{/mypage/customer/loveList}" th:classappend="${activePage == 'd' ? 'active' : ''}">
+                <img th:src="@{/image/mypage/customer/LoveList.png}" alt="" class="customer-menu-icon" id="love-list-btn">
+                <p>좋아요</p>
             </a>
         </nav>
 

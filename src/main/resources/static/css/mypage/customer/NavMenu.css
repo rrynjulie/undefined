@@ -43,10 +43,30 @@
     color: #FC5185;
 }
 
+.customer-menu-pc p {
+    font-size: 17px;
+}
+
 .customer-menu-icon {
     height: 30px;
     width: 30px;
     margin-right: 30px;
+}
+
+.active #booking-list-btn {
+    content: url('../../../image/mypage/customer/BookingListActive.png');
+}
+
+.active #manage-account-btn {
+    content: url('../../../image/mypage/customer/ManageAccountActive.png');
+}
+
+.active #post-list-btn {
+    content: url('../../../image/mypage/customer/PostListActive.png');
+}
+
+.active #love-list-btn {
+    content: url('../../../image/mypage/customer/LoveListActive.png');
 }
 
 .btn-provider-page, .btn-manager-page {

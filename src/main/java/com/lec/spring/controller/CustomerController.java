@@ -126,7 +126,6 @@ public class CustomerController {
                     password = newPassword;
                 }
             }
-
         }
 
         if (hasErrors) {
@@ -236,7 +235,7 @@ public class CustomerController {
     @ResponseBody()
     public String unregister(@RequestParam String password, Model model, HttpSession session) {
         User user = Util.getOrSetLoggedUser(session, model);
-        if (userService.checkPassword(user.getUserId(), password)) {
+        if (userService.checkingPassword(user.getNickname(), password)) {
             return "success";
         } else {
             return "failure";
@@ -262,7 +261,7 @@ public class CustomerController {
     }
 
     @GetMapping("/loveList")
-    public String loveList(Model model, HttpSession session){
+    public String loveList(Model model, HttpSession session) {
         User user = Util.getOrSetLoggedUser(session, model);
         if (user != null) {
             model.addAttribute("userId", user.getUserId());

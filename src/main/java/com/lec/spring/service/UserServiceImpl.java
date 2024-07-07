@@ -216,7 +216,14 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new IllegalArgumentException("Invalid user ID");
         }
-        // 비밀번호 확인 로직 구현 (예: 암호화된 비밀번호 비교)
+        return passwordEncoder.matches(currentPassword, user.getPassword());
+    }
+
+    public boolean checkingPassword(String nickname, String currentPassword) {
+        User user = userRepository.findByNickname(nickname);
+        if (user == null) {
+            throw new IllegalArgumentException("Invalid user ID");
+        }
         return passwordEncoder.matches(currentPassword, user.getPassword());
     }
 
@@ -245,15 +252,13 @@ public class UserServiceImpl implements UserService {
             userRepository.deleteLoves(userId);
             userRepository.deleteComments(userId);
             userRepository.deletePosts(userId);
-            userRepository.deletePostsByBookingId(userId);  // post 테이블의 데이터를 먼저 삭제
-            userRepository.deleteBookings(userId);  // 그 다음 booking 테이블의 데이터를 삭제
+            userRepository.deletePostsByBookingId(userId);
+            userRepository.deleteBookings(userId);
             userRepository.deleteBookingByRoomId(userId);
-            userRepository.deleteRooms(userId);  // Room 데이터 삭제
+            userRepository.deleteRooms(userId);
             userRepository.deleteRoomByLodgingId(userId);
-//            userRepository.deleteBookingByUserId(userId); // reservation 테이블의 데이터를 삭제
             userRepository.deleteLodging(userId);
             userRepository.deleteUserAuthority(userId);
-//            userRepository.deleteLikes(userId);
             userRepository.deleteUser(userId);
         } catch (Exception e) {
             e.printStackTrace();

@@ -59,13 +59,19 @@ public class ProviderController {
 
     @GetMapping("/ProvBookingList/books")
     public String provBookingListGetBooks(@RequestParam("lodgingId") Long lodgingId, Model model) {
-        List<Room> rooms = roomService.findRoomsByLodgingId(lodgingId);
-        rooms.forEach(room -> {
-            room.setBookList(bookingService.findBooksByRoomId(room.getRoomId()));
-            room.getBookList().forEach(booking -> {
-                booking.setFormattedPay(DecimalFormat.getInstance().format(booking.getBookingPay()));
+        List<Room> rooms;
+        if(lodgingId == null) {
+            rooms = null;
+        } else {
+            rooms = roomService.findRoomsByLodgingId(lodgingId);
+            rooms.forEach(room -> {
+                room.setBookList(bookingService.findBooksByRoomId(room.getRoomId()));
+                room.getBookList().forEach(booking -> {
+                    booking.setFormattedPay(DecimalFormat.getInstance().format(booking.getBookingPay()));
+                });
             });
-        });
+        }
+
         model.addAttribute("rooms", rooms);
 
         return "mypage/provider/ProvBookingListInner :: bookingList";

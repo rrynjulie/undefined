@@ -26,5 +26,5 @@ document.addEventListener('DOMContentLoaded', function() {
 //
 // document.getElementById('myLink').addEventListener('click', function(event) {
 //     event.preventDefault(); // Prevent the default link behavior
-//     document.getElementById('myImage').src = [[${/image/Booking.png}]]; // Change the image source
+//     document.getElementById('myImage').src = [[${/image/provider/BookingList.png}]]; // Change the image source
 // });
