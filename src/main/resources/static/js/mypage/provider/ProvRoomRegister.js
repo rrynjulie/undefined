@@ -6,13 +6,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const requiredFields = [
             { id: 'roomName', label: '객실명' },
+            { id: 'roomPicture1', label: '객실사진' },
             { id: 'roomNormalPeople', label: '객실 기준 인원수' },
             { id: 'roomMaxPeople', label: '객실 최대 인원수' },
             { id: 'roomPrice', label: '객실 가격' },
-            { id: 'roomNumber', label: '객실 호수' },
-            { id: 'roomArea', label: '객실 면적' },
+            // { id: 'roomNumber', label: '객실 호수' },
+            // { id: 'roomArea', label: '객실 면적' },
             { id: 'roomBed', label: '객실 침대 개수' },
-            { id: 'roomBedGrade', label: '객실 침대 유형' },
+            // { id: 'roomBedGrade', label: '객실 침대 타입' },
             { id: 'roomBathroom', label: '객실 욕실 개수' }
             // { id: 'smoke', label: '객실 흡연 여부' },
             // { id: 'notion', label: '숙소 공지사항 및 소개' }

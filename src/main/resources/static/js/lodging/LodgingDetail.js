@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 세션 스토리지에서 데이터 가져오기
     function loadData() {
-        const storedStartDate = sessionStorage.getItem('startDate');
-        const storedEndDate = sessionStorage.getItem('endDate');
+        const storedStartDate = sessionStorage.getItem('startDate') || new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+        const storedEndDate = sessionStorage.getItem('endDate') || new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
         if (storedStartDate && storedEndDate) {
             startDate = new Date(storedStartDate);
             endDate = new Date(storedEndDate);
