@@ -89,6 +89,14 @@ public class ProviderController {
         User user = Util.getOrSetLoggedUser(session, model);
 
         System.out.println("세션 userId: " + user.getUserId()); // userId를 콘솔에 출력
+        System.out.println("세션 userId: " + 6);
+        System.out.println("세션 userId: " + 6);
+        System.out.println("세션 userId: " + 6);
+        System.out.println("세션 userId: " + 6);
+        System.out.println("세션 userId: " + 6);
+        System.out.println("세션 userId: " + 6);
+        System.out.println("세션 userId: " + 6);
+        System.out.println("세션 userId: " + 6);
 
         List<ProvLodging> lodgings = providerService.getLodgings(user.getUserId());
         System.out.println("가져온 숙소 목록: " + lodgings);
@@ -162,8 +170,12 @@ public class ProviderController {
 
     @GetMapping("/provlodgingregister")
     public String provlodgingregister(Model model, HttpSession session) {
-        User user = Util.getOrSetLoggedUser(session, model);
-
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = U.getLoggedUser();
+            session.setAttribute("user", user);
+        }
+        model.addAttribute("user", user);
         return "mypage/provider/ProvLodgingRegister";
     }
 

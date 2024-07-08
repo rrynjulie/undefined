@@ -11,17 +11,17 @@ document.addEventListener("DOMContentLoaded", function() {
             { id: 'region', label: '지역' },
             { id: 'sub-region', label: '하위 지역' },
             { id: 'address', label: '숙소 주소' },
-            { id: 'phone', label: '숙소 전화번호' },
-            { id: 'url', label: '숙소 URL' },
+            // { id: 'phone', label: '숙소 전화번호' },
+            // { id: 'url', label: '숙소 URL' },
             { id: 'checkin', label: '숙소 입실시간' },
             { id: 'checkout', label: '숙소 퇴실시간' },
-            { id: 'description', label: '숙소 소개' },
-            { id: 'facilities', label: '숙소 시설 및 서비스' },
-            { id: 'usinginfo', label: '숙소 이용 안내' },
-            { id: 'notice', label: '숙소 예약 공지' },
+            // { id: 'description', label: '숙소 소개' },
+            // { id: 'facilities', label: '숙소 시설 및 서비스' },
+            // { id: 'usinginfo', label: '숙소 이용 안내' },
+            // { id: 'notice', label: '숙소 예약 공지' },
             { id: 'ownername', label: '담당자 이름' },
             { id: 'ownerphone', label: '담당자 전화번호' },
-            { id: 'owneremail', label: '담당자 이메일' },
+            // { id: 'owneremail', label: '담당자 이메일' },
             { id: 'ownerid', label: '사업자등록번호' },
         ];
 
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         if (invalidFields.length === requiredFields.length) {
-            alert('모든 필수 항목을 입력(선택)해 주세요.');
+            alert('필수 항목을 입력(선택)해 주세요.');
             return;
         }
 
