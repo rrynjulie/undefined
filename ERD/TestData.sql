@@ -14,18 +14,216 @@ SELECT * FROM booking;
 SELECT * FROM love;
 
 # user 테이블 내 데이터 삽입
+# user id 1번을 회원가입, 회원 탈퇴 예정
+# user id 2번
 INSERT INTO user
-VALUES (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', '이재혁', 'jaehyeok817@gmail.com', now(), 'j_hyeok_2', '010-4678-3712', null, null)
-     , (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', '최은정', 'eunjeong0911@naver.com', now(), 'eunjeong', '010-9114-4287', null, null)
-     , (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', '정준영', 'nejunyoung@gmail.com', now(), 'dun', '010-6572-7204', null, null)
-     , (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', '임예나', 'rynjulie0917@gmail.com', now(), 'rrynjulie', '010-4408-0242', null, null)
-     , (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', '최영재', 'dudwo0113@gmail.com', now(), 'dudwo0113', '010-6605-7937', null, null)
-     , (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', '임동준', 'dlaehdwns2020@gmail.com', now(), 'leemdongjoon2267', '010-3703-2267', null, null)
+VALUES (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', '이재혁', 'jaehyeok817@gmail.com', now(), 'j_hyeok_2', '010-4678-3712', null, null),
+        (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', '최은정', 'eunjeong0911@naver.com', now(), 'eunjeong', '010-9114-4287', null, null),
+        (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', '정준영', 'nejunyoung@gmail.com', now(), 'dun', '010-6572-7204', null, null),
+        (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', '임예나', 'rynjulie0917@gmail.com', now(), 'rrynjulie', '010-4408-0242', null, null),
+        (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', '최영재', 'dudwo0113@gmail.com', now(), 'dudwo0113', '010-6605-7937', null, null),
+        (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', '임동준', 'dlaehdwns2020@gmail.com', now(), 'leemdongjoon2267', '010-3703-2267', null, null),
+     # 6번 까지는 오너 권한 부여하기
+
+     #10 번부터 그냥 데이터 생성하기
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user10', 'user10@gmail.com', now(), 'user10', '010-1111-1110', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user11', 'user11@gmail.com', now(), 'user11', '010-1111-1111', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user12', 'user12@gmail.com', now(), 'user12', '010-1111-1112', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user13', 'user13@gmail.com', now(), 'user13', '010-1111-1113', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user14', 'user14@gmail.com', now(), 'user14', '010-1111-1114', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user15', 'user15@gmail.com', now(), 'user15', '010-1111-1115', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user16', 'user16@gmail.com', now(), 'user16', '010-1111-1116', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user17', 'user17@gmail.com', now(), 'user17', '010-1111-1117', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user18', 'user18@gmail.com', now(), 'user18', '010-1111-1118', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user19', 'user19@gmail.com', now(), 'user19', '010-1111-1119', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user20', 'user20@gmail.com', now(), 'user20', '010-1111-1120', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user21', 'user21@gmail.com', now(), 'user21', '010-1111-1121', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user22', 'user22@gmail.com', now(), 'user22', '010-1111-1122', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user23', 'user23@gmail.com', now(), 'user23', '010-1111-1123', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user24', 'user24@gmail.com', now(), 'user24', '010-1111-1124', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user25', 'user25@gmail.com', now(), 'user25', '010-1111-1125', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user26', 'user26@gmail.com', now(), 'user26', '010-1111-1126', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user27', 'user27@gmail.com', now(), 'user27', '010-1111-1127', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user28', 'user28@gmail.com', now(), 'user28', '010-1111-1128', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user29', 'user29@gmail.com', now(), 'user29', '010-1111-1129', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user30', 'user30@gmail.com', now(), 'user30', '010-1111-1130', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user31', 'user31@gmail.com', now(), 'user31', '010-1111-1131', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user32', 'user32@gmail.com', now(), 'user32', '010-1111-1132', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user33', 'user33@gmail.com', now(), 'user33', '010-1111-1133', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user34', 'user34@gmail.com', now(), 'user34', '010-1111-1134', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user35', 'user35@gmail.com', now(), 'user35', '010-1111-1135', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user36', 'user36@gmail.com', now(), 'user36', '010-1111-1136', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user37', 'user37@gmail.com', now(), 'user37', '010-1111-1137', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user38', 'user38@gmail.com', now(), 'user38', '010-1111-1138', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user39', 'user39@gmail.com', now(), 'user39', '010-1111-1139', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user40', 'user40@gmail.com', now(), 'user40', '010-1111-1140', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user41', 'user41@gmail.com', now(), 'user41', '010-1111-1141', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user42', 'user42@gmail.com', now(), 'user42', '010-1111-1142', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user43', 'user43@gmail.com', now(), 'user43', '010-1111-1143', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user44', 'user44@gmail.com', now(), 'user44', '010-1111-1144', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user45', 'user45@gmail.com', now(), 'user45', '010-1111-1145', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user46', 'user46@gmail.com', now(), 'user46', '010-1111-1146', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user47', 'user47@gmail.com', now(), 'user47', '010-1111-1147', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user48', 'user48@gmail.com', now(), 'user48', '010-1111-1148', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user49', 'user49@gmail.com', now(), 'user49', '010-1111-1149', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user50', 'user50@gmail.com', now(), 'user50', '010-1111-1150', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user51', 'user51@gmail.com', now(), 'user51', '010-1111-1151', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user52', 'user52@gmail.com', now(), 'user52', '010-1111-1152', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user53', 'user53@gmail.com', now(), 'user53', '010-1111-1153', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user54', 'user54@gmail.com', now(), 'user54', '010-1111-1154', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user55', 'user55@gmail.com', now(), 'user55', '010-1111-1155', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user56', 'user56@gmail.com', now(), 'user56', '010-1111-1156', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user57', 'user57@gmail.com', now(), 'user57', '010-1111-1157', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user58', 'user58@gmail.com', now(), 'user58', '010-1111-1158', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user59', 'user59@gmail.com', now(), 'user59', '010-1111-1159', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user60', 'user60@gmail.com', now(), 'user60', '010-1111-1160', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user61', 'user61@gmail.com', now(), 'user61', '010-1111-1161', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user62', 'user62@gmail.com', now(), 'user62', '010-1111-1162', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user63', 'user63@gmail.com', now(), 'user63', '010-1111-1163', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user64', 'user64@gmail.com', now(), 'user64', '010-1111-1164', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user65', 'user65@gmail.com', now(), 'user65', '010-1111-1165', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user66', 'user66@gmail.com', now(), 'user66', '010-1111-1166', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user67', 'user67@gmail.com', now(), 'user67', '010-1111-1167', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user68', 'user68@gmail.com', now(), 'user68', '010-1111-1168', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user69', 'user69@gmail.com', now(), 'user69', '010-1111-1169', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user70', 'user70@gmail.com', now(), 'user70', '010-1111-1170', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user71', 'user71@gmail.com', now(), 'user71', '010-1111-1171', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user72', 'user72@gmail.com', now(), 'user72', '010-1111-1172', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user73', 'user73@gmail.com', now(), 'user73', '010-1111-1173', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user74', 'user74@gmail.com', now(), 'user74', '010-1111-1174', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user75', 'user75@gmail.com', now(), 'user75', '010-1111-1175', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user76', 'user76@gmail.com', now(), 'user76', '010-1111-1176', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user77', 'user77@gmail.com', now(), 'user77', '010-1111-1177', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user78', 'user78@gmail.com', now(), 'user78', '010-1111-1178', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user79', 'user79@gmail.com', now(), 'user79', '010-1111-1179', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user80', 'user80@gmail.com', now(), 'user80', '010-1111-1180', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user81', 'user81@gmail.com', now(), 'user81', '010-1111-1181', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user82', 'user82@gmail.com', now(), 'user82', '010-1111-1182', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user83', 'user83@gmail.com', now(), 'user83', '010-1111-1183', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user84', 'user84@gmail.com', now(), 'user84', '010-1111-1184', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user85', 'user85@gmail.com', now(), 'user85', '010-1111-1185', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user86', 'user86@gmail.com', now(), 'user86', '010-1111-1186', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user87', 'user87@gmail.com', now(), 'user87', '010-1111-1187', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user88', 'user88@gmail.com', now(), 'user88', '010-1111-1188', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user89', 'user89@gmail.com', now(), 'user89', '010-1111-1189', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user90', 'user90@gmail.com', now(), 'user90', '010-1111-1190', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user91', 'user91@gmail.com', now(), 'user91', '010-1111-1191', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user92', 'user92@gmail.com', now(), 'user92', '010-1111-1192', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user93', 'user93@gmail.com', now(), 'user93', '010-1111-1193', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user94', 'user94@gmail.com', now(), 'user94', '010-1111-1194', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user95', 'user95@gmail.com', now(), 'user95', '010-1111-1195', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user96', 'user96@gmail.com', now(), 'user96', '010-1111-1196', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user97', 'user97@gmail.com', now(), 'user97', '010-1111-1197', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user98', 'user98@gmail.com', now(), 'user98', '010-1111-1198', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user99', 'user99@gmail.com', now(), 'user99', '010-1111-1199', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user100', 'user100@gmail.com', now(), 'user100', '010-1111-1200', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user101', 'user101@gmail.com', now(), 'user101', '010-1111-1201', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user102', 'user102@gmail.com', now(), 'user102', '010-1111-1202', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user103', 'user103@gmail.com', now(), 'user103', '010-1111-1203', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user104', 'user104@gmail.com', now(), 'user104', '010-1111-1204', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user105', 'user105@gmail.com', now(), 'user105', '010-1111-1205', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user106', 'user106@gmail.com', now(), 'user106', '010-1111-1206', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user107', 'user107@gmail.com', now(), 'user107', '010-1111-1207', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user108', 'user108@gmail.com', now(), 'user108', '010-1111-1208', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user109', 'user109@gmail.com', now(), 'user109', '010-1111-1209', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user110', 'user110@gmail.com', now(), 'user110', '010-1111-1210', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user111', 'user111@gmail.com', now(), 'user111', '010-1111-1211', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user112', 'user112@gmail.com', now(), 'user112', '010-1111-1212', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user113', 'user113@gmail.com', now(), 'user113', '010-1111-1213', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user114', 'user114@gmail.com', now(), 'user114', '010-1111-1214', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user115', 'user115@gmail.com', now(), 'user115', '010-1111-1215', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user116', 'user116@gmail.com', now(), 'user116', '010-1111-1216', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user117', 'user117@gmail.com', now(), 'user117', '010-1111-1217', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user118', 'user118@gmail.com', now(), 'user118', '010-1111-1218', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user119', 'user119@gmail.com', now(), 'user119', '010-1111-1219', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user120', 'user120@gmail.com', now(), 'user120', '010-1111-1220', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user121', 'user121@gmail.com', now(), 'user121', '010-1111-1221', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user122', 'user122@gmail.com', now(), 'user122', '010-1111-1222', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user123', 'user123@gmail.com', now(), 'user123', '010-1111-1223', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user124', 'user124@gmail.com', now(), 'user124', '010-1111-1224', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user125', 'user125@gmail.com', now(), 'user125', '010-1111-1225', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user126', 'user126@gmail.com', now(), 'user126', '010-1111-1226', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user127', 'user127@gmail.com', now(), 'user127', '010-1111-1227', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user128', 'user128@gmail.com', now(), 'user128', '010-1111-1228', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user129', 'user129@gmail.com', now(), 'user129', '010-1111-1229', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user130', 'user130@gmail.com', now(), 'user130', '010-1111-1230', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user131', 'user131@gmail.com', now(), 'user131', '010-1111-1231', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user132', 'user132@gmail.com', now(), 'user132', '010-1111-1232', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user133', 'user133@gmail.com', now(), 'user133', '010-1111-1233', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user134', 'user134@gmail.com', now(), 'user134', '010-1111-1234', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user135', 'user135@gmail.com', now(), 'user135', '010-1111-1235', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user136', 'user136@gmail.com', now(), 'user136', '010-1111-1236', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user137', 'user137@gmail.com', now(), 'user137', '010-1111-1237', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user138', 'user138@gmail.com', now(), 'user138', '010-1111-1238', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user139', 'user139@gmail.com', now(), 'user139', '010-1111-1239', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user140', 'user140@gmail.com', now(), 'user140', '010-1111-1240', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user141', 'user141@gmail.com', now(), 'user141', '010-1111-1241', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user142', 'user142@gmail.com', now(), 'user142', '010-1111-1242', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user143', 'user143@gmail.com', now(), 'user143', '010-1111-1243', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user144', 'user144@gmail.com', now(), 'user144', '010-1111-1244', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user145', 'user145@gmail.com', now(), 'user145', '010-1111-1245', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user146', 'user146@gmail.com', now(), 'user146', '010-1111-1246', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user147', 'user147@gmail.com', now(), 'user147', '010-1111-1247', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user148', 'user148@gmail.com', now(), 'user148', '010-1111-1248', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user149', 'user149@gmail.com', now(), 'user149', '010-1111-1249', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user150', 'user150@gmail.com', now(), 'user150', '010-1111-1250', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user151', 'user151@gmail.com', now(), 'user151', '010-1111-1251', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user152', 'user152@gmail.com', now(), 'user152', '010-1111-1252', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user153', 'user153@gmail.com', now(), 'user153', '010-1111-1253', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user154', 'user154@gmail.com', now(), 'user154', '010-1111-1254', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user155', 'user155@gmail.com', now(), 'user155', '010-1111-1255', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user156', 'user156@gmail.com', now(), 'user156', '010-1111-1256', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user157', 'user157@gmail.com', now(), 'user157', '010-1111-1257', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user158', 'user158@gmail.com', now(), 'user158', '010-1111-1258', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user159', 'user159@gmail.com', now(), 'user159', '010-1111-1259', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user160', 'user160@gmail.com', now(), 'user160', '010-1111-1260', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user161', 'user161@gmail.com', now(), 'user161', '010-1111-1261', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user162', 'user162@gmail.com', now(), 'user162', '010-1111-1262', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user163', 'user163@gmail.com', now(), 'user163', '010-1111-1263', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user164', 'user164@gmail.com', now(), 'user164', '010-1111-1264', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user165', 'user165@gmail.com', now(), 'user165', '010-1111-1265', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user166', 'user166@gmail.com', now(), 'user166', '010-1111-1266', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user167', 'user167@gmail.com', now(), 'user167', '010-1111-1267', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user168', 'user168@gmail.com', now(), 'user168', '010-1111-1268', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user169', 'user169@gmail.com', now(), 'user169', '010-1111-1269', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user170', 'user170@gmail.com', now(), 'user170', '010-1111-1270', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user171', 'user171@gmail.com', now(), 'user171', '010-1111-1271', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user172', 'user172@gmail.com', now(), 'user172', '010-1111-1272', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user173', 'user173@gmail.com', now(), 'user173', '010-1111-1273', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user174', 'user174@gmail.com', now(), 'user174', '010-1111-1274', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user175', 'user175@gmail.com', now(), 'user175', '010-1111-1275', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user176', 'user176@gmail.com', now(), 'user176', '010-1111-1276', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user177', 'user177@gmail.com', now(), 'user177', '010-1111-1277', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user178', 'user178@gmail.com', now(), 'user178', '010-1111-1278', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user179', 'user179@gmail.com', now(), 'user179', '010-1111-1279', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user180', 'user180@gmail.com', now(), 'user180', '010-1111-1280', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user181', 'user181@gmail.com', now(), 'user181', '010-1111-1281', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user182', 'user182@gmail.com', now(), 'user182', '010-1111-1282', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user183', 'user183@gmail.com', now(), 'user183', '010-1111-1283', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user184', 'user184@gmail.com', now(), 'user184', '010-1111-1284', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user185', 'user185@gmail.com', now(), 'user185', '010-1111-1285', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user186', 'user186@gmail.com', now(), 'user186', '010-1111-1286', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user187', 'user187@gmail.com', now(), 'user187', '010-1111-1287', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user188', 'user188@gmail.com', now(), 'user188', '010-1111-1288', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user189', 'user189@gmail.com', now(), 'user189', '010-1111-1289', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user190', 'user190@gmail.com', now(), 'user190', '010-1111-1290', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user191', 'user191@gmail.com', now(), 'user191', '010-1111-1291', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user192', 'user192@gmail.com', now(), 'user192', '010-1111-1292', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user193', 'user193@gmail.com', now(), 'user193', '010-1111-1293', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user194', 'user194@gmail.com', now(), 'user194', '010-1111-1294', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user195', 'user195@gmail.com', now(), 'user195', '010-1111-1295', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user196', 'user196@gmail.com', now(), 'user196', '010-1111-1296', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user197', 'user197@gmail.com', now(), 'user197', '010-1111-1297', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user198', 'user198@gmail.com', now(), 'user198', '010-1111-1298', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user199', 'user199@gmail.com', now(), 'user199', '010-1111-1299', null, null),
+       (DEFAULT, '$2a$10$LWHdaarv5p4IlYBiEnLI3uaxSsGq.o4utXzrX.sU6UbPWCXSAevXS', 'user200', 'user200@gmail.com', now(), 'user200', '010-1111-1300', null, null);
 ;
 
 # 권한 데이터 삽입
+# ( UserId , authorityId )
+
 INSERT INTO user_authority
-VALUES (1, 1), (1, 2), (1, 3), (2, 1), (2, 2), (3, 1), (4, 1), (5, 1), (6, 1);
+VALUES  (1, 2), (1, 3), (2, 2), (2, 3), (3, 2), (4, 2), (5, 2), (6, 2);
 
 
 
@@ -48,7 +246,7 @@ VALUES (1, 'https://yaimg.yanolja.com/v5/2024/02/25/17/1280/65db73d676dfa6.88409
      , (14, 'https://yaimg.yanolja.com/v5/2023/10/25/14/1280/6539273e594015.73457519.jpg', '파르나스', '호텔/리조트', '제주특별자치도', '서귀포시', '제주 서귀포시 중문관광로72번길 100', '064-801-5555', 'https://parnashoteljeju.com', '13:00', '11:00', '호텔 경영의 오랜 노하우에 바탕한 고품격 서비스를 제공합니다.\n오로지 당신만을 위한 새로운 여정을 지금 파르나스 호텔에서 만나보세요.', '온전한 휴식을 누리는 가장 편안한 제주의 품을 선사합니다.\n청정 자연을 그대로 담은 인테리어와 시설로\n눈부신 제주의 편안함을 느껴보세요.', '파르나스호텔㈜은 1985년 출범 이래,\n40여 년에 걸친 호텔 경영 노하우와 럭셔리 서비스 경험을 축적해 온 호텔 전문 기업입니다.', 'Parnas Rewards Getaway Promotion\n\n단 일주일간 파르나스 호텔 제주의 객실을 최대 30% 할인된 가격에 만나보세요.\n천혜의 섬 제주의 푸른 바다와 싱그러운 자연이 어우러진 파르나스 호텔 제주에서\n온전한 쉼을 만끽할 수 있는 기회를 놓치지 마십시오.', '정준영', '010-6572-7204', 'nejunyoung@gmail.com', '694-85-01932', '3')
      , (15, 'https://yaimg.yanolja.com/v5/2023/03/23/15/1280/641c69899fa8b2.39469953.jpg', '포포인츠 바이 쉐라톤', '호텔/리조트', '경기도', '수원시', '경기 수원시 팔달구 효원로307번길 27', '0507-1474-9305', 'https://parnashoteljeju.com', '15:00', '12:00', '최신식 호텔에 머물며 대한민국 수원을 여행하세요.', '자동 판매기\n\n컨시어지 데스크 서비스\n\n호텔 내 엘리베이터 운영\n\n환전\n\n직원이 구사하는 언어:\n영어', null, null, '정준영', '010-6572-7204', 'nejunyoung@gmail.com', '343-32-46563', '3')
      , (16, 'https://yaimg.yanolja.com/v5/2022/06/02/15/1280/6298d6de222858.78336441.jpg', '고양 호텔 유지', '호텔/리조트', '경기도', '고양시', '경기도 고양시 덕양구 충장로 23', '0507-1457-7836', 'https://yujihotel.modoo.at', '15:00', '12:00', '2022년 4월 1일 Grand Open ! 고양 유지 호텔은 네츄럴 컨셉으로 따듯하고 친근하게고객님들을 맞이하겠습니다.\n최고의 컨디션과 최상의 서비스로 편안한 휴식을 얻어갈수 있는 호텔이 되겠습니다.', '주차가능, 객실내PC, 바베큐, 와이파이, 객실금연, 연회장, 어메니티, 24시간데스크, 수화물보관', '트윈룸, 스위트 풀파티테라스룸은 동성만 입실 가능하며, 1객실내 3인이상 혼숙은 불가합니다. (적발 시 강제퇴실 조치됩니다.)', '영유아 포함 최대인원 초과하여 입실불가', '정준영', '010-6572-7204', 'nejunyoung@gmail.com', '1138646757', '3')
-     , (17, 'https://yaimg.yanolja.com/v5/2022/12/14/13/1280/6399d07a7fb5e7.22942736.jpg',  '라마다용인호텔', '호텔/리조트', '경기도', '용인시', '경기 용인시 처인구 포곡읍 마성로 420', '031-8097-6500', 'http://ramadayongin.com', '15:00', '11:00', '세계 최대 호텔 및 객실을 보유한 글로벌 No.1 호텔 체인\n라마다용인호텔은 전 세계적으로 가장 인정받는 호텔 브랜드 중 하나이며, 77개국의 약 8,000개 호텔을 운영하는 윈덤 호텔그룹(Wyndham Hotel Group)의 미드업 스케일 브랜드로 2017년 9월 29일 개관 하였습니다.', '100%\nO8\n\n시그니쳐 뷔페인 ‘딜라이트 바비큐 라운지 뷔페’에서는 호텔 셰프 그룹의 섬세한 터치와 식재료의 특색을 살린 한식, 일식, 중식, 양식 스타일의 다채로운 메뉴를 선보입니다.', '지나친 장난이나 언행 시 강제 퇴장 조치될 수 있습니다.', null, '정준영', '010-6572-7204', 'nejunyoung@gmail.com', '388-39-58483', '3')
+     , (17, 'https://yaimg.yanolja.com/v5/2022/12/14/13/1280/6399d07a7fb5e7.22942736.jpg', '라마다용인호텔', '호텔/리조트', '경기도', '용인시', '경기 용인시 처인구 포곡읍 마성로 420', '031-8097-6500', 'http://ramadayongin.com', '15:00', '11:00', '세계 최대 호텔 및 객실을 보유한 글로벌 No.1 호텔 체인\n라마다용인호텔은 전 세계적으로 가장 인정받는 호텔 브랜드 중 하나이며, 77개국의 약 8,000개 호텔을 운영하는 윈덤 호텔그룹(Wyndham Hotel Group)의 미드업 스케일 브랜드로 2017년 9월 29일 개관 하였습니다.', '100%\nO8\n\n시그니쳐 뷔페인 ‘딜라이트 바비큐 라운지 뷔페’에서는 호텔 셰프 그룹의 섬세한 터치와 식재료의 특색을 살린 한식, 일식, 중식, 양식 스타일의 다채로운 메뉴를 선보입니다.', '지나친 장난이나 언행 시 강제 퇴장 조치될 수 있습니다.', null, '정준영', '010-6572-7204', 'nejunyoung@gmail.com', '388-39-58483', '3')
      , (18, 'https://yaimg.yanolja.com/v5/2022/09/07/14/1280/6318a767a22358.84626439.jpg', '호텔인터내셔널 창원', '호텔/리조트', '경상남도', '창원시', '경남 창원시 성산구 중앙대로 69', '0507-1381-1056', 'https://www.hotelinternational.co.kr/', '14:00', '11:00', '경남을 대표하는 전통과 현대가 어우러진 고객님의 편안한 최고의 휴식 공간', '경남최초 ISO9001인증으로 체계화된 서비스로 정성껏 모실것을 약속 드리겠습니다', null, null, '정준영', '010-6572-7204', 'nejunyoung@gmail.com', '609-81-08341', '3')
      , (19, 'https://yaimg.yanolja.com/v5/2022/08/26/14/1280/6308ddf0c529f3.76910071.jpg', '아이스퀘어호텔', '호텔/리조트', '경상남도', '김해시', '경남 김해시 김해대로 2360', '055-344-5000', 'http://www.isquare-hotel.com/isquare/home/isquare/index.php', '13:00', '12:00', '아이스퀘어 호텔입니다.', 'No service', null, null, '정준영', '010-6572-7204', 'nejunyoung@gmail.com', '615-81-53818', '3')
      , (20, 'https://yaimg.yanolja.com/v5/2024/05/28/19/1280/66562a5d501fa7.31395616.jpg', '리한호텔', '호텔/리조트', '경상남도', '포항시', '경상북도 포항시 북구 삼호로265번길 1 라한호텔 포항', '054-230-7000', 'https://www.lahanhotels.com/pohang/ko/main.do', '14:00', '11:00', '푸른 바다와 하늘이 눈 앞에 펼쳐지는 호텔', null, null, '더 나은 시스템 환경 제공을 위해 홈페이지 업데이트를 실시합니다.\n홈페이지 사이트 점검시간 동안 아래 서비스 이용이 불가하오니\n문의사항은 각 호텔로 문의하여 주시기 바랍니다.', '정준영', '010-6572-7204', 'nejunyoung@gmail.com', '382-87-00956', '3')
@@ -257,6 +455,7 @@ VALUES (DEFAULT, 'https://yaimg.yanolja.com/v5/2024/02/25/17/640/65db73e01b8c85.
      , (DEFAULT, 'https://yaimg.yanolja.com/v5/2019/12/30/16/640/5e09a231ca9442.65361902.jpg', '프리미엄', 2, 2, 100000, null, null, 2, '더블,싱글', 1, DEFAULT, 54)
      , (DEFAULT, 'https://yaimg.yanolja.com/v5/2021/06/03/16/640/60b907f14a3808.76185841.jpg', '스탠다드', 2, 2, 70000, null, null, 1, '더블', 1, DEFAULT, 55)
      , (DEFAULT, 'https://yaimg.yanolja.com/v5/2021/06/03/16/640/60b90841789b04.06860406.jpg', '골드룸', 2, 2, 100000, null, null, 1, '퀸', 1, DEFAULT, 55)
+
      , (DEFAULT, 'https://yaimg.yanolja.com/v5/2021/05/24/17/640/60abdcd110d883.20747511.jpg', '스탠다드 더블', 2, 2, 100000, null, null, 1, '더블', 1, DEFAULT, 56)
      , (DEFAULT, 'https://yaimg.yanolja.com/v5/2020/05/19/10/640/5ec33161de8537.63115648.jpg', '프리미엄 더블', 2, 2, 105000, null, null, 1, '더블', 1, DEFAULT, 56)
      , (DEFAULT, 'https://yaimg.yanolja.com/v5/2017/12/27/12/640/5a431646352962.40079065.jpg', '스탠다드', 2, 2, 77000, null, null, 1, '더블', 1, DEFAULT, 57)
@@ -361,54 +560,54 @@ VALUES (DEFAULT, now(), 4, 2, '이재혁', '010-4678-3712', 80000, '2021-01-01',
        (DEFAULT, now(),3,2,'임예나','010-4408-0242',107000,'2024-06-04','2024-06-05',127,4),
        (DEFAULT, now(),3,2,'임예나','010-4408-0242',352000,'2024-06-10','2024-06-11',99,4),
        (DEFAULT, now(),3,2,'임예나','010-4408-0242',40000,'2024-06-09','2024-06-15',43,4),
-    (DEFAULT, now() ,6,5,'최은정','010-9114-4287',156000,'2024-04-30','2024-05-02',29,2),
-(DEFAULT, now(),6,5,'최은정','010-9114-4287',124100,'2024-04-30','2024-05-02',33,2),
-(DEFAULT, now(),6,5,'최은정','010-9114-4287',53000,'2024-04-30','2024-05-02',46,2),
-(DEFAULT, now(),6,5,'최은정','010-9114-4287',1110000,'2024-04-30','2024-05-02',34,2),
-(DEFAULT, now(),6,5,'최은정','010-9114-4287',53000,'2024-03-06','2024-03-14',53,2),
-(DEFAULT, now(),6,5,'최은정','010-9114-4287',110000,'2024-03-06','2024-03-14',140,2),
-(DEFAULT, now(),6,5,'최은정','010-9114-4287',128000,'2024-03-19','2024-03-20',163,2),
-(DEFAULT, now(),4,4,'최은정','010-9114-4287',669000,'2024-04-30','2024-05-01',167,2),
-(DEFAULT, now(),4,4,'최은정','010-9114-4287',239000,'2024-03-12','2024-03-28',166,2),
-(DEFAULT, now(),4,4,'최은정','010-9114-4287',540000,'2024-03-12','2024-03-28',172,2),
-(DEFAULT, now(),4,4,'최은정','010-9114-4287',928000,'2023-12-07','2023-12-12',173,2),
-(DEFAULT, now(),6,2,'최은정','010-9114-4287',979000,'2024-06-30','2024-07-01',171,2),
-(DEFAULT, now(),6,2,'이재혁','010-4678-3712',53000,'2024-06-21','2024-06-28',53,1),
-(DEFAULT, now(),4,3,'이재혁','010-4678-3712',131000,'2024-05-09','2024-05-10',31,1),
-(DEFAULT, now(),4,3,'이재혁','010-4678-3712',119000,'2024-07-07','2024-07-14',7,1),
-(DEFAULT, now(),4,3,'이재혁','010-4678-3712',199000,'2024-07-15','2024-07-16',8,1),
-(DEFAULT, now(),4,3,'이재혁','010-4678-3712',54000,'2023-09-02','2023-09-05',50,1),
-(DEFAULT, now(),2,0,'이재혁','010-4678-3712',90000,'2024-03-10','2024-03-12', 64,1),
-(DEFAULT, now(),4,2,'이재혁','010-4678-3712',136000,'2024-04-02','2024-04-04',160,1),
-(DEFAULT, now(),4,2,'이재혁','010-4678-3712',1110000,'2024-03-11','2024-03-19',34,1),
-(DEFAULT, now(),4,2,'이재혁','010-4678-3712',156000,'2024-04-03','2024-04-10',29,1),
-(DEFAULT, now(),4,2,'이재혁','010-4678-3712',540000,'2024-05-15','2024-05-22',172,1),
-(DEFAULT, now(),2,2,'임예나','010-4408-0242',299000,'2024-05-09','2024-05-10',170,4),
-(DEFAULT, now(),2,2,'임예나','010-4408-0242',979000,'2024-05-14','2024-05-21',171,4),
-(DEFAULT, now(),2,2,'임예나','010-4408-0242',580000,'2024-04-09','2024-04-18',21,4),
-(DEFAULT, now(),2,2,'임예나','010-4408-0242',115000,'2024-06-19','2024-06-21',78,4),
-(DEFAULT, now(),2,2,'임예나','010-4408-0242',355000,'2024-02-11','2024-02-18',3,4),
-(DEFAULT, now(),6,4,'임예나','010-4408-0242',125000,'2024-04-08','2024-04-09',79,4),
-(DEFAULT, now(),7,4,'임예나','010-4408-0242',239000,'2024-03-06','2024-03-08',166,4),
-(DEFAULT, now(),7,4,'정준영','010-6572-7204',580000,'2024-04-02','2024-04-03',21,3),
-(DEFAULT, now(),2,1,'정준영','010-6572-7204',568700,'2024-05-06','2024-05-07',155,3),
-(DEFAULT, now(),4,1,'정준영','010-6572-7204',399000,'2024-04-02','2024-04-03',154,3),
-(DEFAULT, now(),2,1,'정준영','010-6572-7204',399000,'2024-02-07','2024-02-08',154,3),
-(DEFAULT, now(),2,1,'정준영','010-6572-7204',99000,'2024-04-02','2024-04-03', 77,3),
-(DEFAULT, now(),2,1,'정준영','010-6572-7204',130000,'2024-04-02','2024-04-03',5,3),
-(DEFAULT, now(),2,1,'정준영','010-6572-7204',239000,'2024-07-01','2024-07-02',166,3),
-(DEFAULT, now(),2,1,'정준영','010-6572-7204',399000,'2024-07-01','2024-07-02',154,3),
-(DEFAULT, now(),2,3,'최영재','010-6605-7937',239000,'2024-05-01','2024-05-03',166,5),
-(DEFAULT, now(),2,3,'최영재','010-6605-7937',540000,'2024-05-01','2024-05-03',172,5),
-(DEFAULT, now(),2,3,'최영재','010-6605-7937',125000,'2024-04-10','2024-04-12',79,5),
-(DEFAULT, now(),2,3,'최영재','010-6605-7937',399000,'2024-03-05','2024-03-13',154,5),
-(DEFAULT, now(),2,3,'최영재','010-6605-7937',125000,'2024-03-19','2024-03-20',79,5),
-(DEFAULT, now(),4,1,'최영재','010-6605-7937',70000,'2024-03-28','2024-03-29',63,5),
-(DEFAULT, now(),4,1,'최영재','010-6605-7937',70000,'2024-02-09','2024-02-11',63,5),
-(DEFAULT, now(),4,1,'임동준','010-3703-2267',115000,'2024-06-04','2024-06-06',78,6),
-(DEFAULT, now(),1,1,'임동준','010-3703-2267',131000,'2024-04-07','2024-04-08',31,6),
-(DEFAULT, now(),4,2,'임동준','010-3703-2267',100000,'2024-04-06','2024-04-13',85,6),
-(DEFAULT, now(),4,2,'임동준','010-3703-2267',369000,'2024-04-06','2024-04-13',103,6);
+       (DEFAULT, now() ,6,5,'최은정','010-9114-4287',156000,'2024-04-30','2024-05-02',29,2),
+       (DEFAULT, now(),6,5,'최은정','010-9114-4287',124100,'2024-04-30','2024-05-02',33,2),
+       (DEFAULT, now(),6,5,'최은정','010-9114-4287',53000,'2024-04-30','2024-05-02',46,2),
+       (DEFAULT, now(),6,5,'최은정','010-9114-4287',1110000,'2024-04-30','2024-05-02',34,2),
+       (DEFAULT, now(),6,5,'최은정','010-9114-4287',53000,'2024-03-06','2024-03-14',53,2),
+       (DEFAULT, now(),6,5,'최은정','010-9114-4287',110000,'2024-03-06','2024-03-14',140,2),
+       (DEFAULT, now(),6,5,'최은정','010-9114-4287',128000,'2024-03-19','2024-03-20',163,2),
+       (DEFAULT, now(),4,4,'최은정','010-9114-4287',669000,'2024-04-30','2024-05-01',167,2),
+       (DEFAULT, now(),4,4,'최은정','010-9114-4287',239000,'2024-03-12','2024-03-28',166,2),
+       (DEFAULT, now(),4,4,'최은정','010-9114-4287',540000,'2024-03-12','2024-03-28',172,2),
+       (DEFAULT, now(),4,4,'최은정','010-9114-4287',928000,'2023-12-07','2023-12-12',173,2),
+       (DEFAULT, now(),6,2,'최은정','010-9114-4287',979000,'2024-06-30','2024-07-01',171,2),
+       (DEFAULT, now(),6,2,'이재혁','010-4678-3712',53000,'2024-06-21','2024-06-28',53,1),
+       (DEFAULT, now(),4,3,'이재혁','010-4678-3712',131000,'2024-05-09','2024-05-10',31,1),
+       (DEFAULT, now(),4,3,'이재혁','010-4678-3712',119000,'2024-07-07','2024-07-14',7,1),
+       (DEFAULT, now(),4,3,'이재혁','010-4678-3712',199000,'2024-07-15','2024-07-16',8,1),
+       (DEFAULT, now(),4,3,'이재혁','010-4678-3712',54000,'2023-09-02','2023-09-05',50,1),
+       (DEFAULT, now(),2,0,'이재혁','010-4678-3712',90000,'2024-03-10','2024-03-12', 64,1),
+       (DEFAULT, now(),4,2,'이재혁','010-4678-3712',136000,'2024-04-02','2024-04-04',160,1),
+       (DEFAULT, now(),4,2,'이재혁','010-4678-3712',1110000,'2024-03-11','2024-03-19',34,1),
+       (DEFAULT, now(),4,2,'이재혁','010-4678-3712',156000,'2024-04-03','2024-04-10',29,1),
+       (DEFAULT, now(),4,2,'이재혁','010-4678-3712',540000,'2024-05-15','2024-05-22',172,1),
+       (DEFAULT, now(),2,2,'임예나','010-4408-0242',299000,'2024-05-09','2024-05-10',170,4),
+       (DEFAULT, now(),2,2,'임예나','010-4408-0242',979000,'2024-05-14','2024-05-21',171,4),
+       (DEFAULT, now(),2,2,'임예나','010-4408-0242',580000,'2024-04-09','2024-04-18',21,4),
+       (DEFAULT, now(),2,2,'임예나','010-4408-0242',115000,'2024-06-19','2024-06-21',78,4),
+       (DEFAULT, now(),2,2,'임예나','010-4408-0242',355000,'2024-02-11','2024-02-18',3,4),
+       (DEFAULT, now(),6,4,'임예나','010-4408-0242',125000,'2024-04-08','2024-04-09',79,4),
+       (DEFAULT, now(),7,4,'임예나','010-4408-0242',239000,'2024-03-06','2024-03-08',166,4),
+       (DEFAULT, now(),7,4,'정준영','010-6572-7204',580000,'2024-04-02','2024-04-03',21,3),
+       (DEFAULT, now(),2,1,'정준영','010-6572-7204',568700,'2024-05-06','2024-05-07',155,3),
+       (DEFAULT, now(),4,1,'정준영','010-6572-7204',399000,'2024-04-02','2024-04-03',154,3),
+       (DEFAULT, now(),2,1,'정준영','010-6572-7204',399000,'2024-02-07','2024-02-08',154,3),
+       (DEFAULT, now(),2,1,'정준영','010-6572-7204',99000,'2024-04-02','2024-04-03', 77,3),
+       (DEFAULT, now(),2,1,'정준영','010-6572-7204',130000,'2024-04-02','2024-04-03',5,3),
+       (DEFAULT, now(),2,1,'정준영','010-6572-7204',239000,'2024-07-01','2024-07-02',166,3),
+       (DEFAULT, now(),2,1,'정준영','010-6572-7204',399000,'2024-07-01','2024-07-02',154,3),
+       (DEFAULT, now(),2,3,'최영재','010-6605-7937',239000,'2024-05-01','2024-05-03',166,5),
+       (DEFAULT, now(),2,3,'최영재','010-6605-7937',540000,'2024-05-01','2024-05-03',172,5),
+       (DEFAULT, now(),2,3,'최영재','010-6605-7937',125000,'2024-04-10','2024-04-12',79,5),
+       (DEFAULT, now(),2,3,'최영재','010-6605-7937',399000,'2024-03-05','2024-03-13',154,5),
+       (DEFAULT, now(),2,3,'최영재','010-6605-7937',125000,'2024-03-19','2024-03-20',79,5),
+       (DEFAULT, now(),4,1,'최영재','010-6605-7937',70000,'2024-03-28','2024-03-29',63,5),
+       (DEFAULT, now(),4,1,'최영재','010-6605-7937',70000,'2024-02-09','2024-02-11',63,5),
+       (DEFAULT, now(),4,1,'임동준','010-3703-2267',115000,'2024-06-04','2024-06-06',78,6),
+       (DEFAULT, now(),1,1,'임동준','010-3703-2267',131000,'2024-04-07','2024-04-08',31,6),
+       (DEFAULT, now(),4,2,'임동준','010-3703-2267',100000,'2024-04-06','2024-04-13',85,6),
+       (DEFAULT, now(),4,2,'임동준','010-3703-2267',369000,'2024-04-06','2024-04-13',103,6);
 
 
 
@@ -439,15 +638,110 @@ VALUES (1,'https://yaimg.yanolja.com/v5/2024/06/27/22/667dee1acec522.42385405.jp
        (24,'https://yaimg.yanolja.com/v5/2023/08/07/12/64d0dd8602c951.65802563.jpeg','처음가봤는데 부족함없이 좋았습니다. 주차할 자리없다고 주차어디에 하냐고 전화로 여쭤볼때도 알아보고 전화주실만큼 친절히 대응해주셨습니다',5,5,32,2,4),
        (25,'https://yaimg.yanolja.com/v5/2021/02/05/16/601cf72f909f36.23787768.jpeg','깨끗한게 최고에요ㅜ 잠도 편하게 자고 벌레 하나도 없어요! 주방,화장실 다 너무 깨끗하고 화분도 인테리어 예쁘고 수건도 많이 주세요! 협재해수욕장도 가까워서 걸어다녔어요. 주변에 편의점도 있고 좋았습니다~',5,6,27,4,8),
        (26,'https://yaimg.yanolja.com/v5/2023/04/17/16/643d6e210df8d4.18270810.jpg','좋음 청결하고 침구류 엄청좋고 산책하기 좋고 주차도 편리하고 여행하면서 젤 편하게 쉬다왓습니다',4,6,25,32,63),
-       (27,'https://yaimg.yanolja.com/v5/2021/11/14/22/619191e745e277.99807330.jpeg','객실상태가 정말 깨끗했어요. 뷰, 친절도, 접근성 다 최고입니다!  근처에 간술할 수 있는 먹거리도 많고 친구들과 바베큐 했는데 넘 좋았습니다.',4,6,21,52,116);
+       (27,'https://yaimg.yanolja.com/v5/2021/11/14/22/619191e745e277.99807330.jpeg','객실상태가 정말 깨끗했어요. 뷰, 친절도, 접근성 다 최고입니다!  근처에 간술할 수 있는 먹거리도 많고 친구들과 바베큐 했는데 넘 좋았습니다.',4,6,21,52,116),
+       (28,'https://yaimg.yanolja.com/v5/2023/04/17/16/643d6e210df8d4.18270810.jpg','좋음 청결하고 침구류 엄청좋고 산책하기 좋고 주차도 편리하고 여행하면서 젤 편하게 쉬다왓습니다',4,6,25,32,63),
+       (29,'https://yaimg.yanolja.com/v5/2021/11/14/22/619191e745e277.99807330.jpeg','객실상태가 정말 깨끗했어요. 뷰, 친절도, 접근성 다 최고입니다!  근처에 간술할 수 있는 먹거리도 많고 친구들과 바베큐 했는데 넘 좋았습니다.',4,6,21,52,116);
+
+
 
 
 
 # 좋아요 데이터 삽입
+# (lodgingId, userId)
 INSERT INTO love
-VALUES (1, 1), (1, 2), (1, 3), (2, 4), (2, 5), (2, 6),
-       (7, 1), (8, 2), (9, 3), (10, 4), (11, 5), (12, 6),
-       (25, 1), (26, 2), (27, 3), (28, 4), (29, 5), (30, 6),
-       (45, 1), (46, 2), (47, 3), (48, 4), (49, 5), (50, 6),
-       (60, 1), (61, 2), (62, 3), (63, 4), (64, 5), (65, 6),
-       (75, 1), (76, 2), (77, 3), (78, 4), (79, 5), (80, 6);
+VALUES
+
+    #유저가 누른 좋아요 넣어두기
+
+
+    # 1번 숙소) 서울 명동 더로드펜션 - 펜션
+    (1, 10), (1, 11), (1, 12), (1, 13), (1, 14), (1, 15), (1, 16), (1, 17), (1, 18), (1, 19), (1, 20), (1, 21), (1, 22), (1, 23), (1, 24), (1, 25), (1, 26), (1, 27),
+    (1, 28), (1, 29), (1, 30), (1, 31), (1, 32), (1, 33), (1, 34), (1, 35), (1, 36), (1, 37), (1, 38), (1, 39), (1, 40), (1, 41), (1, 42), (1, 43), (1, 44), (1, 45),
+    (1, 46), (1, 47), (1, 48), (1, 49), (1, 50), (1, 51), (1, 52), (1, 53), (1, 54), (1, 55), (1, 56), (1, 57), (1, 58), (1, 59), (1, 60), (1, 61), (1, 62), (1, 63),
+    (1, 64), (1, 65), (1, 66), (1, 67), (1, 68), (1, 69), (1, 70), (1, 71), (1, 72), (1, 73), (1, 74), (1, 75), (1, 76), (1, 77), (1, 78), (1, 79), (1, 80), (1, 81),
+    (1, 82), (1, 83), (1, 84), (1, 85), (1, 86), (1, 87), (1, 88), (1, 89), (1, 90), (1, 91), (1, 92), (1, 93), (1, 94), (1, 95), (1, 96), (1, 97), (1, 98), (1, 99), (1, 100),
+
+    # 2번 숙소) 부산 시점풀빌라 해운대 = 펜션
+    (2, 10), (2, 11), (2, 12), (2, 13), (2, 14), (2, 15), (2, 16), (2, 17), (2, 18), (2, 19), (2, 20), (2, 21), (2, 22), (2, 23), (2, 24), (2, 25), (2, 26), (2, 27), (2, 28),
+    (2, 29), (2, 30), (2, 31), (2, 32), (2, 33), (2, 34), (2, 35), (2, 36), (2, 37), (2, 38), (2, 39), (2, 40), (2, 41), (2, 42), (2, 43), (2, 44), (2, 45), (2, 46), (2, 47),
+    (2, 48), (2, 49), (2, 50), (2, 51), (2, 52), (2, 53), (2, 54), (2, 55), (2, 56), (2, 57), (2, 58), (2, 59), (2, 60), (2, 61),
+
+    # 3번 숙소) 강화도 바다소리펜션
+    (3, 10), (3, 11), (3, 12), (3, 13), (3, 14), (3, 15), (3, 16), (3, 17), (3, 18), (3, 19), (3, 20), (3, 21), (3, 22), (3, 23), (3, 24), (3, 25), (3, 26), (3, 27), (3, 28),
+    (3, 29), (3, 30), (3, 31), (3, 32), (3, 33), (3, 34), (3, 35), (3, 36), (3, 37), (3, 38), (3, 39), (3, 40), (3, 41), (3, 42), (3, 43), (3, 44), (3, 45), (3, 46), (3, 47),
+    (3, 48), (3, 49), (3, 50), (3, 51), (3, 52), (3, 53), (3, 54), (3, 55), (3, 56), (3, 57), (3, 58), (3, 59), (3, 60), (3, 61), (3, 62), (3, 63), (3, 64), (3, 65), (3, 66),
+    (3, 67), (3, 68), (3, 69), (3, 70), (3, 71), (3, 72), (3, 73), (3, 74), (3, 75), (3, 76), (3, 77), (3, 78), (3, 79), (3, 80), (3, 81), (3, 82), (3, 83), (3, 84), (3, 85),
+    (3, 86), (3, 87), (3, 88), (3, 89), (3, 90), (3, 91), (3, 92), (3, 93), (3, 94), (3, 95), (3, 96), (3, 97), (3, 98), (3, 99), (3, 100), (3, 101), (3, 102), (3, 103), (3, 104),
+    (3, 105), (3, 106), (3, 107), (3, 108), (3, 109), (3, 110), (3, 111), (3, 112), (3, 113), (3, 114), (3, 115), (3, 116), (3, 117), (3, 118), (3, 119), (3, 120), (3, 121), (3, 122),
+    (3, 123), (3, 124), (3, 125), (3, 126), (3, 127), (3, 128), (3, 129), (3, 130), (3, 131), (3, 132), (3, 133), (3, 134), (3, 135), (3, 136), (3, 137), (3, 138), (3, 139), (3, 140),
+    (3, 141), (3, 142), (3, 143), (3, 144), (3, 145), (3, 146), (3, 147), (3, 148), (3, 149), (3, 150),
+
+    # 5번 숙소) 수원 행궁다미
+    (5, 10), (5, 11), (5, 12), (5, 13), (5, 14), (5, 15), (5, 16), (5, 17), (5, 18), (5, 19), (5, 20), (5, 21), (5, 22), (5, 23), (5, 24), (5, 25), (5, 26), (5, 27), (5, 28), (5, 29),
+    (5, 30), (5, 31), (5, 32), (5, 33), (5, 34), (5, 35), (5, 36), (5, 37), (5, 38), (5, 39), (5, 40), (5, 41), (5, 42), (5, 43), (5, 44), (5, 45), (5, 46), (5, 47), (5, 48), (5, 49),
+    (5, 50), (5, 51), (5, 52), (5, 53), (5, 54), (5, 55), (5, 56), (5, 57), (5, 58), (5, 59), (5, 60), (5, 61), (5, 62), (5, 63), (5, 64), (5, 65), (5, 66), (5, 67), (5, 68), (5, 69),
+
+    # 7번 숙소) 용인 에버리움펜션
+    (7, 10), (7, 11), (7, 12), (7, 13), (7, 14), (7, 15), (7, 16), (7, 17), (7, 18), (7, 19), (7, 20), (7, 21), (7, 22), (7, 23), (7, 24), (7, 25), (7, 26), (7, 27), (7, 28), (7, 29),
+    (7, 30), (7, 31), (7, 32), (7, 33), (7, 34), (7, 35), (7, 36), (7, 37), (7, 38), (7, 39), (7, 40), (7, 41), (7, 42), (7, 43), (7, 44), (7, 45), (7, 46), (7, 47), (7, 48), (7, 49),
+    (7, 50), (7, 51), (7, 52), (7, 53), (7, 54), (7, 55), (7, 56), (7, 57), (7, 58), (7, 59), (7, 60), (7, 61), (7, 62), (7, 63), (7, 64), (7, 65), (7, 66), (7, 67), (7, 68), (7, 69),
+    (7, 70), (7, 71), (7, 72), (7, 73), (7, 74), (7, 75), (7, 76), (7, 77), (7, 78), (7, 79), (7, 80), (7, 81), (7, 82), (7, 83), (7, 84), (7, 85), (7, 86), (7, 87), (7, 88), (7, 89),
+    (7, 90), (7, 91), (7, 92), (7, 93), (7, 94), (7, 95), (7, 96), (7, 97), (7, 98), (7, 99), (7, 100), (7, 101), (7, 102), (7, 103), (7, 104), (7, 105),
+
+    # 10번 숙소) 포항 나나힐풀빌라
+    (10, 10), (10, 11), (10, 12), (10, 13), (10, 14), (10, 15), (10, 16), (10, 17), (10, 18), (10, 19), (10, 20), (10, 21), (10, 22), (10, 23), (10, 24), (10, 25), (10, 26), (10, 27),
+    (10, 28), (10, 29),
+
+    # 11번 숙소) 신라호텔
+    (11, 10), (11, 11), (11, 12), (11, 13), (11, 14), (11, 15), (11, 16), (11, 17), (11, 18), (11, 19), (11, 20), (11, 21), (11, 22), (11, 23), (11, 24), (11, 25), (11, 26), (11, 27),
+    (11, 28), (11, 29), (11, 30), (11, 31), (11, 32), (11, 33), (11, 34), (11, 35), (11, 36), (11, 37), (11, 38), (11, 39), (11, 40), (11, 41), (11, 42), (11, 43), (11, 44), (11, 45),
+    (11, 46), (11, 47), (11, 48), (11, 49),
+
+    # 12번 숙소) 시그니엘
+    (12, 10), (12, 11), (12, 12), (12, 13), (12, 14), (12, 15), (12, 16), (12, 17), (12, 18), (12, 19), (12, 20), (12, 21), (12, 22), (12, 23), (12, 24), (12, 25), (12, 26), (12, 27),
+    (12, 28), (12, 29), (12, 30), (12, 31), (12, 32), (12, 33), (12, 34), (12, 35), (12, 36), (12, 37), (12, 38), (12, 39), (12, 40), (12, 41), (12, 42), (12, 43), (12, 44), (12, 45),
+    (12, 46), (12, 47), (12, 48), (12, 49), (12, 50), (12, 51), (12, 52), (12, 53), (12, 54), (12, 55), (12, 56), (12, 57), (12, 58), (12, 59), (12, 60), (12, 61), (12, 62), (12, 63),
+    (12, 64), (12, 65), (12, 66), (12, 67), (12, 68), (12, 69), (12, 70), (12, 71), (12, 72), (12, 73), (12, 74), (12, 75), (12, 76), (12, 77), (12, 78), (12, 79), (12, 80), (12, 81),
+    (12, 82), (12, 83), (12, 84), (12, 85), (12, 86), (12, 87), (12, 88), (12, 89), (12, 90),
+
+    # 13번 숙소) 파라다이스
+    (13, 10), (13, 11), (13, 12), (13, 13), (13, 14), (13, 15), (13, 16), (13, 17), (13, 18), (13, 19), (13, 20), (13, 21), (13, 22), (13, 23), (13, 24), (13, 25), (13, 26), (13, 27),
+    (13, 28), (13, 29), (13, 30), (13, 31), (13, 32), (13, 33), (13, 34), (13, 35), (13, 36), (13, 37), (13, 38), (13, 39), (13, 40), (13, 41), (13, 42), (13, 43), (13, 44), (13, 45),
+
+    # 14번 숙소) 파르나스
+    (14, 10), (14, 11), (14, 12), (14, 13), (14, 14), (14, 15), (14, 16), (14, 17), (14, 18), (14, 19), (14, 20), (14, 21), (14, 22), (14, 23), (14, 24), (14, 25), (14, 26), (14, 27),
+    (14, 28), (14, 29), (14, 30), (14, 31), (14, 32), (14, 33), (14, 34), (14, 35), (14, 36), (14, 37), (14, 38), (14, 39), (14, 40), (14, 41), (14, 42), (14, 43), (14, 44), (14, 45),
+    (14, 46), (14, 47), (14, 48), (14, 49), (14, 50), (14, 51), (14, 52), (14, 53), (14, 54), (14, 55), (14, 56), (14, 57), (14, 58), (14, 59), (14, 60), (14, 61), (14, 62), (14, 63),
+    (14, 64), (14, 65), (14, 66), (14, 67), (14, 68), (14, 69), (14, 70), (14, 71), (14, 72), (14, 73), (14, 74), (14, 75), (14, 76), (14, 77), (14, 78),
+
+    # 15번 숙소) 포포인츠 바이 쉐라톤
+    (15, 10), (15, 11), (15, 12), (15, 13), (15, 14), (15, 15), (15, 16), (15, 17), (15, 18), (15, 19), (15, 20), (15, 21), (15, 22), (15, 23), (15, 24), (15, 25), (15, 26), (15, 27),
+    (15, 28), (15, 29), (15, 30), (15, 31), (15, 32), (15, 33), (15, 34), (15, 35), (15, 36), (15, 37),
+
+    # 16번 숙소) 고양 호텔 유지
+    (16, 10), (16, 11), (16, 12), (16, 13), (16, 14), (16, 15), (16, 16), (16, 17), (16, 18), (16, 19), (16, 20), (16, 21), (16, 22), (16, 23), (16, 24), (16, 25), (16, 26), (16, 27),
+    (16, 28), (16, 29), (16, 30), (16, 31), (16, 32), (16, 33), (16, 34), (16, 35), (16, 36), (16, 37), (16, 38), (16, 39), (16, 40), (16, 41), (16, 42), (16, 43), (16, 44), (16, 45),
+    (16, 46), (16, 47), (16, 48), (16, 49),
+
+    # 21번 숙소) 명동(충무로) JIN FOREST Inn
+    (21, 10), (21, 11), (21, 12), (21, 13), (21, 14), (21, 15), (21, 16), (21, 17), (21, 18), (21, 19), (21, 20), (21, 21), (21, 22), (21, 23),
+
+    #22번 숙소) 부산 재송동 엘루이
+    (22, 10), (22, 11), (22, 12), (22, 13), (22, 14), (22, 15), (22, 16), (22, 17), (22, 18), (22, 19), (22, 20), (22, 21), (22, 22), (22, 23), (22, 24), (22, 25), (22, 26), (22, 27),
+    (22, 28), (22, 29), (22, 30), (22, 31), (22, 32), (22, 33), (22, 34), (22, 35), (22, 36), (22, 37), (22, 38), (22, 39), (22, 40), (22, 41), (22, 42), (22, 43), (22, 44), (22, 45),
+    (22, 46),
+
+    #25번 숙소) 인천(간석동) 파이
+    (23, 10), (23, 11), (23, 12), (23, 13), (23, 14), (23, 15), (23, 16), (23, 17), (23, 18), (23, 19), (23, 20), (23, 21), (23, 22), (23, 23),
+
+    #24번 숙소) 수원 영통 오투
+    (24, 10), (24, 11), (24, 12), (24, 13), (24, 14), (24, 15), (24, 16), (24, 17), (24, 18), (24, 19), (24, 20), (24, 21), (24, 22), (24, 23), (24, 24), (24, 25), (24, 26), (24, 27),
+    (24, 28), (24, 29), (24, 30), (24, 31), (24, 32), (24, 33), (24, 34),
+
+    #26번 숙소) 고양(주교) 트라움
+    (26, 10), (26, 11), (26, 12), (26, 13), (26, 14), (26, 15), (26, 16), (26, 17), (26, 18), (26, 19), (26, 20), (26, 21), (26, 22);
+
+
+
+
+
