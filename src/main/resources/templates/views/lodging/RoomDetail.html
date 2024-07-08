@@ -64,14 +64,14 @@
 
     <div class="post-title">
         <h1>객실 이용 후기</h1>
-        <a class="btn-see-all" href="">전체보기</a>
+        <a class="btn-see-all" th:href="@{'/lodging/LodgingPostList/' + ${lodging.lodgingId}}">전체보기</a>
     </div>
     <div class="post-list" th:if="${totalPosts != 0}">
         <div class="post-frame" th:each="posts : ${postList}">
-            <div class="post-img-frame" th:if="${posts.postPicture} == null"><img class="post-img" th:src="@{/image/NoImage.png}" alt="후기 이미지"></div>
+            <div class="post-img-frame" th:if="${posts.postPicture} == null"><img class="post-img-null" th:src="@{/image/NoImage.png}" alt="후기 이미지"></div>
             <div class="post-img-frame" th:if="${posts.postPicture} != null"><img class="post-img" th:src="${posts.postPicture}" alt="후기 이미지"></div>
             <div class="post-details">
-                <p class="post-rating" th:text="'⭐ ' + ${posts.postGrade} + '(' + ${totalPosts} + ')'"></p>
+                <p class="post-rating" th:text="'⭐ ' + ${posts.postGrade}"></p>
                 <p class="post-contents" th:text="${posts.postText}"></p>
             </div>
         </div>
