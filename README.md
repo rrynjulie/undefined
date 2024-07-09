@@ -13,4 +13,12 @@
 - 최은정 : 예약 CRUD 구현, JavaScript를 이용한 중복 처리, ERD 설계
 
 ### 사용기술
-Notion, HTML5, CSS3, JavaScript, Bootstrap, jQuery, AJAX, GRADLE, Spring Security, Spring Boot3, Mybatis, MySQL, Thymeleaf, AmazonAWS, EC2, RDS, POSTMAN, JAVA-17, Lombok, NAVER OPEN API, KAKAO OPEN API, GOOGLE OPEN API, 공공데이터 API, OAuth2, ERDCloud, JSON
+- 프로젝트 일정 관리 : Notion
+- 코드 버전 관리 : Github, Git
+- 프론트엔드 : HTML5, CSS3, JavaScript, Bootstrap, jQuery, AJAX, Thymeleaf
+- 백엔드 : ERDCloud, MySQL, Mybatis, Spring, Spring Boot3, Spring Security, POSTMAN, JAVA-17, Lombok
+- 배포 : AmazonAWS, EC2, RDS
+- OAuth2, JSON, GRADLE
+
+### 사용한 API
+NAVER OPEN API, KAKAO OPEN API, GOOGLE OPEN API, 공공데이터 API
