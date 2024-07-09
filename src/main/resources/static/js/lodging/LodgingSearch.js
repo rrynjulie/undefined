@@ -5,12 +5,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const nextButton = document.getElementById('next');
     const selectedDate = document.getElementById('selectedDate');
     let currentDate = new Date();
-    let startDate = sessionStorage.getItem('startDate') ? new Date(sessionStorage.getItem('startDate')) : new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
-    let endDate = sessionStorage.getItem('endDate') ? new Date(sessionStorage.getItem('endDate')) : new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
-    let today = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()); //현재날짜 저장
     // let startDate = sessionStorage.getItem('startDate') ? new Date(sessionStorage.getItem('startDate')) : new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
-    // // 세션에 날짜가 저장되어 있으면 그 값을 startDate 로 세션에 저장되어 있는 값이 없으면 현재 날짜로
     // let endDate = sessionStorage.getItem('endDate') ? new Date(sessionStorage.getItem('endDate')) : new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
+    let today = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()); //현재날짜 저장
+    let startDate = sessionStorage.getItem('startDate') ? new Date(sessionStorage.getItem('startDate')) : new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+    // // 세션에 날짜가 저장되어 있으면 그 값을 startDate 로 세션에 저장되어 있는 값이 없으면 현재 날짜로
+    let endDate = sessionStorage.getItem('endDate') ? new Date(sessionStorage.getItem('endDate')) : new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
     // 세션에 날짜가 저장되어 있으면 그 값을 startDate 로 세션에 저장되어 있는 값이 없으면 현재 날짜 + 1 로 저장
     selectedDate.innerHTML = startDate.getFullYear() + '.' + (startDate.getMonth() + 1) + '.' + startDate.getDate() + ' ~ ' + endDate.getFullYear() + '.' + (endDate.getMonth() + 1) + '.' + (endDate.getDate() + ' (1박)');
     if (!sessionStorage.getItem('startDate')) {
@@ -45,10 +45,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let cellDate = new Date(year, month, date);
 
-            // if (cellDate < today) {
-            //     cell.style.color = 'lightgray'; //과거 날짜 회색표시
-            //     cell.style.pointerEvents = 'none'; //선택 못하게
-            // }
+            if (cellDate < today) {
+                cell.style.color = 'lightgray'; //과거 날짜 회색표시
+                cell.style.pointerEvents = 'none'; //선택 못하게
+            }
 
             if (startDate && endDate) {
                 const start = new Date(startDate).getTime();
