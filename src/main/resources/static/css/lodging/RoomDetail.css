@@ -160,6 +160,11 @@
 }
 
 .post-img {
+    width: auto;
+    max-height: 100%;
+}
+
+.post-img-null {
     max-width: 60%;
     height: auto;
 }
