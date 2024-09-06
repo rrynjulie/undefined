@@ -47,7 +47,7 @@
 | 이재혁 | - 🚀 프로젝트 아키텍처 설계 및 개발 총괄<br>- 🎨 전체적인 UI 디자인<br>- ⚙️ AJAX를 이용한 필터 구현<br>- 💾 객실 CRUD 구현<br>- 🌐 EC2와 RDS를 활용한 배포 및 운영 환경 구축 및 관리|
 | 임동준 | - 🧪 공공데이터 API를 이용한 승차권 조회<br>- 💾 숙소 CRUD 구현<br>- 🌐 EC2와 RDS를 활용한 배포 및 운영 환경 구축 및 관리|
 | 임예나 | - 💾 Spring Security를 활용한 OAuth2 구현<br>- 💾 유저 CRUD 구현<br>- 💾 사용자 권한 부여와 권한 기반 접근 제어 및 페이지 표시 관리<br>- 💾 좋아요 기능 조회 구현<br>- 📊 ERD 설계|
-| 정준영 | - 💾 권한 CRUD 구현<br>- 💾 좋아요 CUD 구현<br>- 📊 ERD 설계|
+| 정준영 | - 💾 권한 CRUD 구현<br>- 💾 좋아요 CRUD 구현<br>- 📊 ERD 설계|
 | 최영재 | - 🎨 JavaScript를 이용한 달력 구현<br>- ⚙️ AJAX를 이용한 필터 구현<br>- 💾 숙소 CRUD 구현<br>- 💾 후기 CRUD 구현<br>- 🧪 Google Map API를 이용한 지도 구현|
 | 최은정 | - 🎨 JavaScript를 이용한 중복 처리<br>- 💾 예약 CRUD 구현<br>- 📊 ERD 설계|
 
